@@ -1,53 +1,53 @@
 ---
 name: surprise-me
-描述: Create a delightful, unexpected "wow" experience for the user by dynamically discovering and creatively combining other enabled skills. Triggers when the user says "surprise me" or any request expressing a desire for an unexpected creative showcase. Also triggers when the user is bored, wants inspiration, or asks for "something interesting".
+描述: 通过动态发现和创意组合其他已启用的技能，为用户创造令人愉悦、意想不到的"惊喜"体验。当用户说"surprise me"或任何表达想要意外创意展示的请求时触发。当用户感到无聊、需要灵感或要求"有趣的东西"时也会触发。
 ---
 
-# Surprise Me
+# 惊喜我
 
-Deliver an unexpected, delightful experience by dynamically discovering available skills and combining them creatively.
+通过动态发现可用技能并创意组合，提供意想不到的愉悦体验。
 
-## Workflow
+## 工作流
 
-### Step 1: Discover Available Skills
+### 步骤 1：发现可用技能
 
-Read all the skills listed in the <available_skills>.
+阅读 <available_skills> 中列出的所有技能。
 
-### Step 2: Plan the Surprise
+### 步骤 2：规划惊喜
 
-Select **1 to 3** skills and design a creative mashup. The goal is a single cohesive deliverable, not separate demos.
+选择 **1 到 3 个**技能并设计创意混搭。目标是创建一个连贯的交付物，而不是分开的演示。
 
-**Creative combination principles:**
-- Juxtapose skills in unexpected ways (e.g., a presentation about algorithmic art, a research report turned into a slide deck, a styled doc with canvas-designed illustrations)
-- Incorporate the user's known interests/context from memory if available
-- Prioritize visual impact and emotional delight over information density
-- The output should feel like a gift — polished, surprising, and fun
+**创意组合原则：**
+- 以意想不到的方式并置技能（例如，关于算法艺术的演示文稿、转化为幻灯片的研究报告、带有画布设计插图的样式文档）
+- 如果可用，从记忆中融入用户已知的兴趣/背景
+- 优先考虑视觉冲击和情感愉悦，而非信息密度
+- 输出应该感觉像一份礼物——精致、惊喜且有趣
 
-**Theme ideas (pick or remix):**
-- Something tied to today's date, season, or trending news
-- A mini creative project the user never asked for but would love
-- A playful "what if" concept
-- An aesthetic artifact combining data + design
-- A fun interactive HTML/React experience
+**主题创意（选择或混搭）：**
+- 与今天日期、季节或热门新闻相关的内容
+- 用户从未要求但会喜欢的迷你创意项目
+- 一个有趣的"如果……会怎样"概念
+- 结合数据+设计的美学作品
+- 有趣的交互式 HTML/React 体验
 
-### Step 3: Fallback — No Other Skills Available
+### 步骤 3：回退方案 — 没有其他技能可用
 
-If no other skills are discovered (only surprise-me exists), use one of these fallbacks:
+如果没有发现其他技能（只有 surprise-me 存在），使用以下回退方案之一：
 
-1. **News-based surprise**: Search today's news for a fascinating story, then create a beautifully designed HTML artifact presenting it in a visually striking way
-2. **Interactive HTML experience**: Build a creative single-page web experience — generative art, a mini-game, a visual poem, an animated infographic, or an interactive story
-3. **Personalized artifact**: Use known user context to create something personal and delightful
+1. **基于新闻的惊喜**：搜索今天的新闻找到一个有趣的故事，然后创建一个设计精美的 HTML 作品，以视觉冲击的方式呈现它
+2. **交互式 HTML 体验**：构建创意单页网页体验——生成艺术、迷你游戏、视觉诗歌、动画信息图或交互式故事
+3. **个性化作品**：使用已知的用户背景创建个性化和令人愉悦的内容
 
-### Step 4: Execute
+### 步骤 4：执行
 
-1. Read the full SKILL.md body of each selected skill
-2. Follow each skill's instructions for technical execution
-3. Combine outputs into one cohesive deliverable
-4. Present the result with minimal preamble — let the work speak for itself
+1. 阅读每个选定技能的完整 SKILL.md 内容
+2. 遵循每个技能的技术执行说明
+3. 将输出组合成一个连贯的交付物
+4. 以最少的开场白呈现结果——让作品自己说话
 
-### Step 5: Reveal
+### 步骤 5：揭晓
 
-Present the surprise with minimal spoilers. A short teaser line, then the artifact.
+以最少的剧透呈现惊喜。一句简短的预告，然后是作品。
 
-- **Good reveal:** "I made you something ✨" + [the artifact]
-- **Bad reveal:** "I decided to combine the pptx skill with the canvas-design skill to create a presentation about..." (kills the surprise)
+- **好的揭晓：** "我为你做了一些东西 ✨" + [作品]
+- **不好的揭晓：** "我决定将 pptx 技能与 canvas-design 技能结合，创建一个关于……的演示文稿"（破坏了惊喜）

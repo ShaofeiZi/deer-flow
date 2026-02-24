@@ -1,99 +1,99 @@
 ---
 name: ppt-generation
-描述: Use this skill when the user requests to generate, create, or make presentations (PPT/PPTX). Creates visually rich slides by generating images for each slide and composing them into a PowerPoint file.
+描述: 当用户请求生成、创建或制作演示文稿（PPT/PPTX）时使用此技能。通过为每张幻灯片生成图像并将其组合成 PowerPoint 文件来创建视觉效果丰富的幻灯片。
 ---
 
-# PPT Generation Skill
+# PPT 生成技能
 
 ## 概览
 
-This skill generates professional PowerPoint presentations by creating AI-generated images for each slide and composing them into a PPTX file. The workflow includes planning the presentation structure with a consistent visual style, generating slide images sequentially (using the previous slide as a reference for style consistency), and assembling them into a final presentation.
+本技能通过为每张幻灯片创建 AI 生成的图像并将其组合成 PPTX 文件来生成专业的 PowerPoint 演示文稿。工作流包括规划具有统一视觉风格的演示文稿结构、按顺序生成幻灯片图像（使用前一张幻灯片作为风格一致性的参考），并将它们组装成最终的演示文稿。
 
-## Core Capabilities
+## 核心能力
 
-- Plan and structure multi-slide presentations with unified visual style
-- Support multiple presentation styles: Business, Academic, Minimal, Apple Keynote, Creative
-- Generate unique AI images for each slide using image-generation skill
-- Maintain visual consistency by using previous slide as reference image
-- Compose images into a professional PPTX file
+- 规划和构建具有统一视觉风格的多幻灯片演示文稿
+- 支持多种演示风格：商务、学术、简约、Apple Keynote、创意
+- 使用 image-generation 技能为每张幻灯片生成独特的 AI 图像
+- 通过使用前一张幻灯片作为参考图像来保持视觉一致性
+- 将图像组合成专业的 PPTX 文件
 
-## Presentation Styles
+## 演示风格
 
-Choose one of the following styles when creating the presentation plan:
+创建演示计划时选择以下风格之一：
 
-| Style | 描述 | Best For |
+| 风格 | 描述 | 适用场景 |
 |-------|-------------|----------|
-| **glassmorphism** | Frosted glass panels with blur effects, floating translucent cards, vibrant gradient backgrounds, depth through layering | Tech products, AI/SaaS demos, futuristic pitches |
-| **dark-premium** | Rich black backgrounds (#0a0a0a), luminous accent colors, subtle glow effects, luxury brand aesthetic | Premium products, executive presentations, high-end brands |
-| **gradient-modern** | Bold mesh gradients, fluid color transitions, contemporary typography, vibrant yet sophisticated | Startups, creative agencies, brand launches |
-| **neo-brutalist** | Raw bold typography, high contrast, intentional "ugly" aesthetic, anti-design as design, Memphis-inspired | Edgy brands, Gen-Z targeting, disruptive startups |
-| **3d-isometric** | Clean isometric illustrations, floating 3D elements, soft shadows, tech-forward aesthetic | Tech explainers, product features, SaaS presentations |
-| **editorial** | Magazine-quality layouts, sophisticated typography hierarchy, dramatic photography, Vogue/Bloomberg aesthetic | Annual reports, luxury brands, thought leadership |
-| **minimal-swiss** | Grid-based precision, Helvetica-inspired typography, bold use of negative space, timeless modernism | Architecture, design firms, premium consulting |
-| **keynote** | Apple-inspired aesthetic with bold typography, dramatic imagery, high contrast, cinematic feel | Keynotes, product reveals, inspirational talks |
+| **glassmorphism** | 毛玻璃面板配模糊效果，漂浮的半透明卡片，鲜艳的渐变背景，通过分层创造深度 | 科技产品、AI/SaaS 演示、未来感提案 |
+| **dark-premium** | 深黑色背景（#0a0a0a），发光的强调色，微妙的发光效果，奢侈品牌美学 | 高端产品、高管演示、高端品牌 |
+| **gradient-modern** | 大胆的网格渐变，流畅的色彩过渡，当代排版，鲜艳而精致 | 初创公司、创意机构、品牌发布 |
+| **neo-brutalist** | 原始粗犷的排版，高对比度，故意的"丑陋"美学，反设计即设计，孟菲斯风格启发 | 前卫品牌、Z世代目标、颠覆性初创公司 |
+| **3d-isometric** | 干净的等距插图，漂浮的 3D 元素，柔和阴影，科技前沿美学 | 科技说明、产品功能、SaaS 演示 |
+| **editorial** | 杂志级布局，精致的排版层次，戏剧性的摄影，Vogue/Bloomberg 美学 | 年度报告、奢侈品牌、思想领导力 |
+| **minimal-swiss** | 基于网格的精确性，Helvetica 启发的排版，大胆运用负空间，永恒现代主义 | 建筑、设计公司、高端咨询 |
+| **keynote** | Apple 风格美学，大胆排版，戏剧性图像，高对比度，电影感 | 主题演讲、产品发布、励志演讲 |
 
-## Workflow
+## 工作流
 
-### Step 1: Understand Requirements
+### 第一步：理解需求
 
-When a user requests presentation generation, identify:
+当用户请求生成演示文稿时，确定：
 
-- Topic/subject: What is the presentation about
-- Number of slides: How many slides are needed (default: 5-10)
-- **Style**: business / academic / minimal / keynote / creative
-- Aspect ratio: Standard (16:9) or classic (4:3)
-- Content outline: Key points for each slide
-- You don't need to check the folder under `/mnt/user-data`
+- 主题/题材：演示文稿是关于什么的
+- 幻灯片数量：需要多少张幻灯片（默认：5-10）
+- **风格**：business / academic / minimal / keynote / creative
+- 纵横比：标准（16:9）或经典（4:3）
+- 内容大纲：每张幻灯片的要点
+- 您不需要检查 `/mnt/user-data` 下的文件夹
 
-### Step 2: Create Presentation Plan
+### 第二步：创建演示计划
 
-Create a JSON file in `/mnt/user-data/workspace/` with the presentation structure. **重要**: Include the `style` field to define the overall visual consistency.
+在 `/mnt/user-data/workspace/` 中创建包含演示结构的 JSON 文件。**重要**：包含 `style` 字段来定义整体视觉一致性。
 
 ```json
 {
-  "title": "Presentation Title",
+  "title": "演示标题",
   "style": "keynote",
   "style_guidelines": {
-    "color_palette": "Deep black backgrounds, white text, single accent color (blue or orange)",
-    "typography": "Bold sans-serif headlines, clean body text, dramatic size contrast",
-    "imagery": "High-quality photography, full-bleed images, cinematic composition",
-    "layout": "Generous whitespace, centered focus, minimal elements per slide"
+    "color_palette": "深黑色背景，白色文字，单一强调色（蓝色或橙色）",
+    "typography": "粗体无衬线标题，干净正文，戏剧性的大小对比",
+    "imagery": "高质量摄影，全出血图像，电影构图",
+    "layout": "充足的留白，居中焦点，每张幻灯片最少元素"
   },
   "aspect_ratio": "16:9",
   "slides": [
     {
       "slide_number": 1,
       "type": "title",
-      "title": "Main Title",
-      "subtitle": "Subtitle or tagline",
-      "visual_description": "Detailed description for image generation"
+      "title": "主标题",
+      "subtitle": "副标题或标语",
+      "visual_description": "用于图像生成的详细描述"
     },
     {
       "slide_number": 2,
       "type": "content",
-      "title": "Slide Title",
-      "key_points": ["Point 1", "Point 2", "Point 3"],
-      "visual_description": "Detailed description for image generation"
+      "title": "幻灯片标题",
+      "key_points": ["要点1", "要点2", "要点3"],
+      "visual_description": "用于图像生成的详细描述"
     }
   ]
 }
 ```
 
-### Step 3: Generate Slide Images Sequentially
+### 第三步：按顺序生成幻灯片图像
 
-**IMPORTANT**: Generate slides **strictly one by one, in order**. Do NOT parallelize or batch image generation. Each slide depends on the previous slide's output as a reference image. Generating slides in parallel will break visual consistency and is not allowed.
+**重要**：**严格按顺序一张一张地**生成幻灯片。不要并行或批量生成图像。每张幻灯片都依赖于前一张幻灯片的输出作为参考图像。并行生成幻灯片会破坏视觉一致性，这是不允许的。
 
-1. Read the image-generation skill: `/mnt/skills/public/image-generation/SKILL.md`
+1. 阅读 image-generation 技能：`/mnt/skills/public/image-generation/SKILL.md`
 
-2. **For the FIRST slide (slide 1)**, create a prompt that establishes the visual style:
+2. **对于第一张幻灯片（幻灯片1）**，创建一个建立视觉风格的提示：
 
 ```json
 {
-  "prompt": "Professional presentation slide. [style_guidelines from plan]. Title: 'Your Title'. [visual_description]. This slide establishes the visual language for the entire presentation.",
-  "style": "[Based on chosen style - e.g., Apple Keynote aesthetic, dramatic lighting, cinematic]",
-  "composition": "Clean layout with clear text hierarchy, [style-specific composition]",
-  "color_palette": "[From style_guidelines]",
-  "typography": "[From style_guidelines]"
+  "prompt": "专业演示幻灯片。[计划中的 style_guidelines]。标题：'您的标题'。[visual_description]。这张幻灯片为整个演示建立视觉语言。",
+  "style": "[基于选择的风格 - 例如，Apple Keynote 美学，戏剧性照明，电影感]",
+  "composition": "干净的布局，清晰的文字层次，[风格特定的构图]",
+  "color_palette": "[来自 style_guidelines]",
+  "typography": "[来自 style_guidelines]"
 }
 ```
 
@@ -104,15 +104,15 @@ python /mnt/skills/public/image-generation/scripts/generate.py \
   --aspect-ratio 16:9
 ```
 
-3. **For subsequent slides (slide 2+)**, use the PREVIOUS slide as a reference image:
+3. **对于后续幻灯片（幻灯片2+）**，使用前一张幻灯片作为参考图像：
 
 ```json
 {
-  "prompt": "Professional presentation slide continuing the visual style from the reference image. Maintain the same color palette, typography style, and overall aesthetic. Title: 'Slide Title'. [visual_description]. Keep visual consistency with the reference.",
-  "style": "Match the style of the reference image exactly",
-  "composition": "Similar layout principles as reference, adapted for this content",
-  "color_palette": "Same as reference image",
-  "consistency_note": "This slide must look like it belongs in the same presentation as the reference image"
+  "prompt": "专业演示幻灯片，延续参考图像的视觉风格。保持相同的色彩方案、排版风格和整体美学。标题：'幻灯片标题'。[visual_description]。保持与参考的视觉一致性。",
+  "style": "完全匹配参考图像的风格",
+  "composition": "与参考相似的布局原则，适应此内容",
+  "color_palette": "与参考图像相同",
+  "consistency_note": "这张幻灯片必须看起来与参考图像属于同一个演示文稿"
 }
 ```
 
@@ -124,17 +124,17 @@ python /mnt/skills/public/image-generation/scripts/generate.py \
   --aspect-ratio 16:9
 ```
 
-4. **Continue for all remaining slides**, always referencing the previous slide:
+4. **继续处理所有剩余幻灯片**，始终参考前一张幻灯片：
 
 ```bash
-# Slide 3 references slide 2
+# 幻灯片3参考幻灯片2
 python /mnt/skills/public/image-generation/scripts/generate.py \
   --prompt-file /mnt/user-data/workspace/slide-03-prompt.json \
   --reference-images /mnt/user-data/outputs/slide-02.jpg \
   --output-file /mnt/user-data/outputs/slide-03.jpg \
   --aspect-ratio 16:9
 
-# Slide 4 references slide 3
+# 幻灯片4参考幻灯片3
 python /mnt/skills/public/image-generation/scripts/generate.py \
   --prompt-file /mnt/user-data/workspace/slide-04-prompt.json \
   --reference-images /mnt/user-data/outputs/slide-03.jpg \
@@ -142,9 +142,9 @@ python /mnt/skills/public/image-generation/scripts/generate.py \
   --aspect-ratio 16:9
 ```
 
-### Step 4: Compose PPT
+### 第四步：组合 PPT
 
-After all slide images are generated, call the composition script:
+所有幻灯片图像生成完成后，调用组合脚本：
 
 ```bash
 python /mnt/skills/public/ppt-generation/scripts/generate.py \
@@ -153,33 +153,33 @@ python /mnt/skills/public/ppt-generation/scripts/generate.py \
   --output-file /mnt/user-data/outputs/presentation.pptx
 ```
 
-参数:
+参数：
 
-- `--plan-file`: Absolute path to the presentation plan JSON file (required)
-- `--slide-images`: Absolute paths to slide images in order (required, space-separated)
-- `--output-file`: Absolute path to output PPTX file (required)
+- `--plan-file`：演示计划 JSON 文件的绝对路径（必填）
+- `--slide-images`：按顺序排列的幻灯片图像绝对路径（必填，空格分隔）
+- `--output-file`：输出 PPTX 文件的绝对路径（必填）
 
 [!注意]
-Do NOT read the python file, just call it with the 参数.
+不要读取 Python 文件，只需使用参数调用它。
 
-## Complete 示例: Glassmorphism Style (最现代前卫)
+## 完整示例：Glassmorphism 风格（最现代前卫）
 
-User request: "Create a presentation about AI product launch"
+用户请求："创建一个关于 AI 产品发布的演示文稿"
 
-### Step 1: Create presentation plan
+### 第一步：创建演示计划
 
-Create `/mnt/user-data/workspace/ai-product-plan.json`:
+创建 `/mnt/user-data/workspace/ai-product-plan.json`：
 ```json
 {
   "title": "Introducing Nova AI",
   "style": "glassmorphism",
   "style_guidelines": {
-    "color_palette": "Vibrant purple-to-cyan gradient background (#667eea→#00d4ff), frosted glass panels with 15-20% white opacity, electric accents",
-    "typography": "SF Pro Display style, bold 700 weight white titles with subtle text-shadow, clean 400 weight body text, excellent contrast on glass",
-    "imagery": "Abstract 3D glass spheres, floating translucent geometric shapes, soft luminous orbs, depth through layered transparency",
-    "layout": "Centered frosted glass cards with 32px rounded corners, 48-64px padding, floating above gradient, layered depth with soft shadows",
-    "effects": "Backdrop blur 20-40px on glass panels, subtle white border glow, soft colored shadows matching gradient, light refraction effects",
-    "visual_language": "Apple Vision Pro / visionOS aesthetic, premium depth through transparency, futuristic yet approachable, 2024 design trends"
+    "color_palette": "鲜艳的紫到青渐变背景（#667eea→#00d4ff），毛玻璃面板配15-20%白色透明度，电光强调色",
+    "typography": "SF Pro Display 风格，粗体700字重白色标题配微妙文字阴影，干净400字重正文，玻璃上对比度极佳",
+    "imagery": "抽象3D玻璃球体，漂浮的半透明几何形状，柔和发光球体，通过分层透明度创造深度",
+    "layout": "居中毛玻璃卡片配32px圆角，48-64px内边距，漂浮于渐变之上，柔和阴影创造分层深度",
+    "effects": "玻璃面板上背景模糊20-40px，微妙白色边框发光，匹配渐变的柔和彩色阴影，光线折射效果",
+    "visual_language": "Apple Vision Pro / visionOS 美学，通过透明度创造高端深度感，未来感但平易近人，2024设计趋势"
   },
   "aspect_ratio": "16:9",
   "slides": [
@@ -188,57 +188,57 @@ Create `/mnt/user-data/workspace/ai-product-plan.json`:
       "type": "title",
       "title": "Introducing Nova AI",
       "subtitle": "Intelligence, Reimagined",
-      "visual_description": "Stunning gradient background flowing from deep purple (#667eea) through magenta to cyan (#00d4ff). Center: large frosted glass panel with strong backdrop blur, containing bold white title 'Introducing Nova AI' and lighter subtitle. Floating 3D glass spheres and abstract shapes around the card creating depth. Soft glow emanating from behind the glass panel. Premium visionOS aesthetic. The glass card has subtle white border (1px rgba 255,255,255,0.3) and soft purple-tinted shadow."
+      "visual_description": "令人惊艳的渐变背景从深紫色（#667eea）通过洋红流向青色（#00d4ff）。中央：大型毛玻璃面板配强背景模糊，包含粗体白色标题'Introducing Nova AI'和较轻的副标题。漂浮的3D玻璃球体和抽象形状围绕卡片创造深度。柔和光芒从玻璃面板后方散发。高端visionOS美学。玻璃卡片有微妙白色边框（1px rgba 255,255,255,0.3）和柔和紫色调阴影。"
     },
     {
       "slide_number": 2,
       "type": "content",
       "title": "Why Nova?",
-      "key_points": ["10x faster processing", "Human-like understanding", "Enterprise-grade security"],
-      "visual_description": "Same purple-cyan gradient background. Left side: floating frosted glass card with title 'Why Nova?' in bold white, three key points below with subtle glass pill badges. Right side: abstract 3D visualization of neural network as interconnected glass nodes with soft glow. Floating translucent geometric shapes (icosahedrons, tori) adding depth. Consistent glassmorphism aesthetic with previous slide."
+      "key_points": ["10倍更快的处理速度", "类人理解能力", "企业级安全性"],
+      "visual_description": "相同的紫青渐变背景。左侧：漂浮的毛玻璃卡片配粗体白色标题'Why Nova?'，下方三个要点配微妙玻璃胶囊徽章。右侧：抽象3D神经网络可视化，由相互连接的玻璃节点组成，配柔和发光。漂浮的半透明几何形状（二十面体、环面）增加深度。与前一张幻灯片一致的玻璃态美学。"
     },
     {
       "slide_number": 3,
       "type": "content",
       "title": "How It Works",
-      "key_points": ["Natural language input", "Multi-modal processing", "Instant insights"],
-      "visual_description": "Gradient background consistent with previous slides. Central composition: three stacked frosted glass cards at slight angles showing the workflow steps, connected by soft glowing lines. Each card has an abstract icon. Floating glass orbs and light particles around the composition. Title 'How It Works' in bold white at top. Depth created through card layering and transparency."
+      "key_points": ["自然语言输入", "多模态处理", "即时洞察"],
+      "visual_description": "与前几张幻灯片一致的渐变背景。中央构图：三张略微倾斜的堆叠毛玻璃卡片展示工作流程步骤，由柔和发光线条连接。每张卡片有一个抽象图标。漂浮的玻璃球体和光粒子围绕构图。顶部粗体白色标题'How It Works'。通过卡片分层和透明度创造深度。"
     },
     {
       "slide_number": 4,
       "type": "content",
       "title": "Built for Scale",
-      "key_points": ["1M+ concurrent users", "99.99% uptime", "Global infrastructure"],
-      "visual_description": "Same gradient background. Asymmetric layout: right side features large frosted glass panel with metrics displayed in bold typography. Left side: abstract 3D globe made of glass panels and connection lines, representing global scale. Floating data visualization elements as small glass cards with numbers. Soft ambient glow throughout. Premium tech aesthetic."
+      "key_points": ["100万+并发用户", "99.99%正常运行时间", "全球基础设施"],
+      "visual_description": "相同的渐变背景。不对称布局：右侧大型毛玻璃面板以粗体排版显示指标。左侧：由玻璃面板和连接线组成的抽象3D地球，代表全球规模。漂浮的数据可视化元素作为小型玻璃卡片显示数字。整体柔和环境发光。高端科技美学。"
     },
     {
       "slide_number": 5,
       "type": "conclusion",
       "title": "The Future Starts Now",
       "subtitle": "Join the waitlist",
-      "visual_description": "Dramatic finale slide. Gradient background with slightly increased vibrancy. Central frosted glass card with bold title 'The Future Starts Now' and call-to-action subtitle. Behind the card: burst of soft light rays and floating glass particles creating celebration effect. Multiple layered glass shapes creating depth. The most visually impactful slide while maintaining style consistency."
+      "visual_description": "戏剧性结尾幻灯片。渐变背景略微增加鲜艳度。中央毛玻璃卡片配粗体标题'The Future Starts Now'和行动号召副标题。卡片后方：柔和光线爆发和漂浮玻璃粒子创造庆祝效果。多层玻璃形状创造深度。最具视觉冲击力的幻灯片，同时保持风格一致性。"
     }
   ]
 }
 ```
 
-### Step 2: Read image-generation skill
+### 第二步：阅读 image-generation 技能
 
-Read `/mnt/skills/public/image-generation/SKILL.md` to understand how to generate images.
+阅读 `/mnt/skills/public/image-generation/SKILL.md` 了解如何生成图像。
 
-### Step 3: Generate slide images sequentially with reference chaining
+### 第三步：使用参考链按顺序生成幻灯片图像
 
-**Slide 1 - Title (establishes the visual language):**
+**幻灯片1 - 标题（建立视觉语言）：**
 
-Create `/mnt/user-data/workspace/nova-slide-01.json`:
+创建 `/mnt/user-data/workspace/nova-slide-01.json`：
 ```json
 {
-  "prompt": "Ultra-premium presentation title slide with glassmorphism design. Background: smooth flowing gradient from deep purple (#667eea) through magenta (#f093fb) to cyan (#00d4ff), soft and vibrant. Center: large frosted glass panel with strong backdrop blur effect, rounded corners 32px, containing bold white sans-serif title 'Introducing Nova AI' (72pt, SF Pro Display style, font-weight 700) with subtle text shadow, subtitle 'Intelligence, Reimagined' below in lighter weight. The glass panel has subtle white border (1px rgba 255,255,255,0.25) and soft purple-tinted drop shadow. Floating around the card: 3D glass spheres with refraction, translucent geometric shapes (icosahedrons, abstract blobs), creating depth and dimension. Soft luminous glow emanating from behind the glass panel. Small floating particles of light. Apple Vision Pro / visionOS UI aesthetic. Professional presentation slide, 16:9 aspect ratio. Hyper-modern, premium tech product launch feel.",
+  "prompt": "超高端演示标题幻灯片，玻璃态设计。背景：从深紫色（#667eea）通过洋红（#f093fb）到青色（#00d4ff）的平滑流动渐变，柔和而鲜艳。中央：大型毛玻璃面板配强背景模糊效果，32px圆角，包含粗体白色无衬线标题'Introducing Nova AI'（72pt，SF Pro Display风格，font-weight 700）配微妙文字阴影，下方较轻字重的副标题'Intelligence, Reimagined'。玻璃面板有微妙白色边框（1px rgba 255,255,255,0.25）和柔和紫色调投影。卡片周围漂浮：带折射效果的3D玻璃球体，半透明几何形状（二十面体、抽象团块），创造深度和维度。柔和发光从玻璃面板后方散发。小型漂浮光粒子。Apple Vision Pro / visionOS UI美学。专业演示幻灯片，16:9纵横比。超现代，高端科技产品发布感。",
   "style": "Glassmorphism, visionOS aesthetic, Apple Vision Pro UI style, premium tech, 2024 design trends",
-  "composition": "Centered glass card as focal point, floating 3D elements creating depth at edges, 40% negative space, clear visual hierarchy",
-  "lighting": "Soft ambient glow from gradient, light refraction through glass elements, subtle rim lighting on 3D shapes",
+  "composition": "居中玻璃卡片作为焦点，漂浮3D元素在边缘创造深度，40%负空间，清晰视觉层次",
+  "lighting": "渐变发出的柔和环境光，通过玻璃元素的光线折射，3D形状上的微妙轮廓光",
   "color_palette": "Purple gradient #667eea, magenta #f093fb, cyan #00d4ff, frosted white rgba(255,255,255,0.15), pure white text #ffffff",
-  "effects": "Backdrop blur on glass panels, soft drop shadows with color tint, light refraction, subtle noise texture on glass, floating particles"
+  "effects": "玻璃面板上的背景模糊，带色调的柔和投影，光线折射，玻璃上的微妙噪点纹理，漂浮粒子"
 }
 ```
 
@@ -249,14 +249,14 @@ python /mnt/skills/public/image-generation/scripts/generate.py \
   --aspect-ratio 16:9
 ```
 
-**Slide 2 - Content (MUST reference slide 1 for consistency):**
+**幻灯片2 - 内容（必须参考幻灯片1以保持一致性）：**
 
-Create `/mnt/user-data/workspace/nova-slide-02.json`:
+创建 `/mnt/user-data/workspace/nova-slide-02.json`：
 ```json
 {
-  "prompt": "Presentation slide continuing EXACT visual style from reference image. SAME purple-to-cyan gradient background, SAME glassmorphism aesthetic, SAME typography style. Left side: frosted glass card with backdrop blur containing title 'Why Nova?' in bold white (matching reference font style), three feature points as subtle glass pill badges below. Right side: abstract 3D neural network visualization made of interconnected glass nodes with soft cyan glow, floating in space. Floating translucent geometric shapes (matching style from reference) adding depth. The frosted glass has identical treatment: white border, purple-tinted shadow, same blur intensity. CRITICAL: This slide must look like it belongs in the exact same presentation as the reference image - same colors, same glass treatment, same overall aesthetic.",
+  "prompt": "演示幻灯片，延续参考图像的精确视觉风格。相同的紫到青渐变背景，相同的玻璃态美学，相同的排版风格。左侧：毛玻璃卡片配背景模糊，包含粗体白色标题'Why Nova?'（匹配参考字体风格），下方三个功能点作为微妙玻璃胶囊徽章。右侧：抽象3D神经网络可视化，由相互连接的玻璃节点组成，配柔和青色发光，漂浮在空间中。漂浮的半透明几何形状（匹配参考风格）增加深度。毛玻璃具有相同的处理：白色边框，紫色调阴影，相同的模糊强度。关键：这张幻灯片必须看起来与参考图像属于完全相同的演示文稿 - 相同的颜色，相同的玻璃处理，相同的整体美学。",
   "style": "MATCH REFERENCE EXACTLY - Glassmorphism, visionOS aesthetic, same visual language",
-  "composition": "Asymmetric split: glass card left (40%), 3D visualization right (40%), breathing room between elements",
+  "composition": "不对称分割：玻璃卡片左侧（40%），3D可视化右侧（40%），元素间呼吸空间",
   "color_palette": "EXACTLY match reference: purple #667eea, cyan #00d4ff gradient, same frosted white treatment, same text white",
   "consistency_note": "CRITICAL: Must be visually identical in style to reference image. Same gradient colors, same glass blur intensity, same shadow treatment, same typography weight and style. Viewer should immediately recognize this as the same presentation."
 }
@@ -270,15 +270,15 @@ python /mnt/skills/public/image-generation/scripts/generate.py \
   --aspect-ratio 16:9
 ```
 
-**Slides 3-5: Continue the same pattern, each referencing the previous slide**
+**幻灯片3-5：继续相同模式，每张参考前一张幻灯片**
 
-Key consistency rules for subsequent slides:
-- Always include "continuing EXACT visual style from reference image" in prompt
-- Specify "SAME gradient background", "SAME glass treatment", "SAME typography"
-- Include `consistency_note` emphasizing style matching
-- Reference the immediately previous slide image
+后续幻灯片的关键一致性规则：
+- 始终在提示中包含"延续参考图像的精确视觉风格"
+- 指定"相同的渐变背景"、"相同的玻璃处理"、"相同的排版"
+- 包含 `consistency_note` 强调风格匹配
+- 参考紧邻的前一张幻灯片图像
 
-### Step 4: Compose final PPT
+### 第四步：组合最终 PPT
 
 ```bash
 python /mnt/skills/public/ppt-generation/scripts/generate.py \
@@ -287,177 +287,177 @@ python /mnt/skills/public/ppt-generation/scripts/generate.py \
   --output-file /mnt/user-data/outputs/nova-presentation.pptx
 ```
 
-## Style-Specific Guidelines
+## 风格特定指南
 
-### Glassmorphism Style (推荐 - 最现代前卫)
+### Glassmorphism 风格（推荐 - 最现代前卫）
 ```json
 {
   "style": "glassmorphism",
   "style_guidelines": {
-    "color_palette": "Vibrant gradient backgrounds (purple #667eea to pink #f093fb, or cyan #4facfe to blue #00f2fe), frosted white panels with 20% opacity, accent colors that pop against the gradient",
-    "typography": "SF Pro Display or Inter font style, bold 600-700 weight titles, clean 400 weight body, white text with subtle drop shadow for readability on glass",
-    "imagery": "Abstract 3D shapes floating in space, soft blurred orbs, geometric primitives with glass material, depth through overlapping translucent layers",
-    "layout": "Floating card panels with backdrop-blur effect, generous padding (48-64px), rounded corners (24-32px radius), layered depth with subtle shadows",
-    "effects": "Frosted glass blur (backdrop-filter: blur 20px), subtle white border (1px rgba 255,255,255,0.2), soft glow behind panels, floating elements with drop shadows",
-    "visual_language": "Premium tech aesthetic like Apple Vision Pro UI, depth through transparency, light refracting through glass surfaces"
+    "color_palette": "鲜艳渐变背景（紫色#667eea到粉色#f093fb，或青色#4facfe到蓝色#00f2fe），毛玻璃白色面板配20%透明度，在渐变上突出的强调色",
+    "typography": "SF Pro Display 或 Inter 字体风格，粗体600-700字重标题，干净400字重正文，白色文字配微妙投影以便在玻璃上阅读",
+    "imagery": "漂浮在空间中的抽象3D形状，柔和模糊的球体，玻璃材质的几何原语，通过重叠半透明层创造深度",
+    "layout": "漂浮卡片面板配背景模糊效果，充足内边距（48-64px），圆角（24-32px半径），柔和阴影创造分层深度",
+    "effects": "毛玻璃模糊（backdrop-filter: blur 20px），微妙白色边框（1px rgba 255,255,255,0.2），面板后方柔和发光，带投影的漂浮元素",
+    "visual_language": "Apple Vision Pro UI 等高端科技美学，通过透明度创造深度，光线穿过玻璃表面折射"
   }
 }
 ```
 
-### Dark Premium Style
+### Dark Premium 风格
 ```json
 {
   "style": "dark-premium",
   "style_guidelines": {
-    "color_palette": "Deep black base (#0a0a0a to #121212), luminous accent color (electric blue #00d4ff, neon purple #bf5af2, or gold #ffd700), subtle gray gradients for depth (#1a1a1a to #0a0a0a)",
-    "typography": "Elegant sans-serif (Neue Haas Grotesk or Suisse Int'l style), dramatic size contrast (72pt+ headlines, 18pt body), letter-spacing -0.02em for headlines, pure white (#ffffff) text",
-    "imagery": "Dramatic studio lighting, rim lights and edge glow, cinematic product shots, abstract light trails, premium material textures (brushed metal, matte surfaces)",
-    "layout": "Generous negative space (60%+), asymmetric balance, content anchored to grid but with breathing room, single focal point per slide",
-    "effects": "Subtle ambient glow behind key elements, light bloom effects, grain texture overlay (2-3% opacity), vignette on edges",
-    "visual_language": "Luxury tech brand aesthetic (Bang & Olufsen, Porsche Design), sophistication through restraint, every element intentional"
+    "color_palette": "深黑色基底（#0a0a0a 到 #121212），发光强调色（电光蓝#00d4ff，霓虹紫#bf5af2，或金色#ffd700），微妙灰色渐变创造深度（#1a1a1a 到 #0a0a0a）",
+    "typography": "优雅无衬线（Neue Haas Grotesk 或 Suisse Int'l 风格），戏剧性大小对比（72pt+标题，18pt正文），标题字间距-0.02em，纯白（#ffffff）文字",
+    "imagery": "戏剧性工作室照明，轮廓光和边缘发光，电影感产品拍摄，抽象光线轨迹，高端材质纹理（拉丝金属，哑光表面）",
+    "layout": "充足负空间（60%+），不对称平衡，内容锚定于网格但留有呼吸空间，每张幻灯片单一焦点",
+    "effects": "关键元素后方微妙环境发光，光晕效果，颗粒纹理叠加（2-3%透明度），边缘暗角",
+    "visual_language": "奢侈科技品牌美学（Bang & Olufsen, Porsche Design），通过克制展现精致，每个元素都有意图"
   }
 }
 ```
 
-### Gradient Modern Style
+### Gradient Modern 风格
 ```json
 {
   "style": "gradient-modern",
   "style_guidelines": {
-    "color_palette": "Bold mesh gradients (Stripe/Linear style: purple-pink-orange #7c3aed→#ec4899→#f97316, or cool tones: cyan-blue-purple #06b6d4→#3b82f6→#8b5cf6), white or dark text depending on background intensity",
-    "typography": "Modern geometric sans-serif (Satoshi, General Sans, or Clash Display style), variable font weights, oversized bold headlines (80pt+), comfortable body text (20pt)",
-    "imagery": "Abstract fluid shapes, morphing gradients, 3D rendered abstract objects, soft organic forms, floating geometric primitives",
-    "layout": "Dynamic asymmetric compositions, overlapping elements with blend modes, text integrated with gradient flows, full-bleed backgrounds",
-    "effects": "Smooth gradient transitions, subtle noise texture (3-5% for depth), soft shadows with color tint matching gradient, motion blur suggesting movement",
-    "visual_language": "Contemporary SaaS aesthetic (Stripe, Linear, Vercel), energetic yet professional, forward-thinking tech vibes"
+    "color_palette": "大胆网格渐变（Stripe/Linear 风格：紫-粉-橙 #7c3aed→#ec4899→#f97316，或冷色调：青-蓝-紫 #06b6d4→#3b82f6→#8b5cf6），根据背景强度使用白色或深色文字",
+    "typography": "现代几何无衬线（Satoshi, General Sans, 或 Clash Display 风格），可变字重，超大粗体标题（80pt+），舒适正文（20pt）",
+    "imagery": "抽象流体形状，变形渐变，3D渲染抽象物体，柔和有机形态，漂浮几何原语",
+    "layout": "动态不对称构图，带混合模式的重叠元素，文字与渐变流动融合，全出血背景",
+    "effects": "平滑渐变过渡，微妙噪点纹理（3-5%增加深度），匹配渐变色调的柔和阴影，暗示运动的动态模糊",
+    "visual_language": "当代 SaaS 美学（Stripe, Linear, Vercel），活力而专业，前瞻科技感"
   }
 }
 ```
 
-### Neo-Brutalist Style
+### Neo-Brutalist 风格
 ```json
 {
   "style": "neo-brutalist",
   "style_guidelines": {
-    "color_palette": "High contrast primaries: stark black, pure white, with bold accent (hot pink #ff0080, electric yellow #ffff00, or raw red #ff0000), optional: Memphis-inspired pastels as secondary",
-    "typography": "Ultra-bold condensed type (Impact, Druk, or Bebas Neue style), UPPERCASE headlines, extreme size contrast, intentionally tight or overlapping letter-spacing",
-    "imagery": "Raw unfiltered photography, intentional visual noise, halftone patterns, cut-out collage aesthetic, hand-drawn elements, stickers and stamps",
-    "layout": "Broken grid, overlapping elements, thick black borders (4-8px), visible structure, anti-whitespace (dense but organized chaos)",
-    "effects": "Hard shadows (no blur, offset 8-12px), pixelation accents, scan lines, CRT screen effects, intentional 'mistakes'",
-    "visual_language": "Anti-corporate rebellion, DIY zine aesthetic meets digital, raw authenticity, memorable through boldness"
+    "color_palette": "高对比度原色：纯黑，纯白，配大胆强调色（热粉#ff0080，电黄#ffff00，或原始红#ff0000），可选：孟菲斯风格粉彩作为次要色",
+    "typography": "超粗压缩字体（Impact, Druk, 或 Bebas Neue 风格），大写标题，极端大小对比，故意紧凑或重叠的字间距",
+    "imagery": "原始未过滤摄影，故意视觉噪点，半色调图案，剪贴拼贴美学，手绘元素，贴纸和印章",
+    "layout": "破碎网格，重叠元素，粗黑边框（4-8px），可见结构，反留白（密集但有组织的混乱）",
+    "effects": "硬阴影（无模糊，偏移8-12px），像素化点缀，扫描线，CRT屏幕效果，故意的'错误'",
+    "visual_language": "反企业叛逆，DIY杂志美学遇上数字，原始真实感，通过大胆令人难忘"
   }
 }
 ```
 
-### 3D Isometric Style
+### 3D Isometric 风格
 ```json
 {
   "style": "3d-isometric",
   "style_guidelines": {
-    "color_palette": "Soft contemporary palette: muted purples (#8b5cf6), teals (#14b8a6), warm corals (#fb7185), with cream or light gray backgrounds (#fafafa), consistent saturation across elements",
-    "typography": "Friendly geometric sans-serif (Circular, Gilroy, or Quicksand style), medium weight headlines, excellent readability, comfortable 24pt body text",
-    "imagery": "Clean isometric 3D illustrations, consistent 30° isometric angle, soft clay-render aesthetic, floating platforms and devices, cute simplified objects",
-    "layout": "Central isometric scene as hero, text balanced around 3D elements, clear visual hierarchy, comfortable margins (64px+)",
-    "effects": "Soft drop shadows (20px blur, 30% opacity), ambient occlusion on 3D objects, subtle gradients on surfaces, consistent light source (top-left)",
-    "visual_language": "Friendly tech illustration (Slack, Notion, Asana style), approachable complexity, clarity through simplification"
+    "color_palette": "柔和当代调色板：柔和紫色（#8b5cf6），青色（#14b8a6），温暖珊瑚色（#fb7185），配奶油色或浅灰背景（#fafafa），元素间饱和度一致",
+    "typography": "友好几何无衬线（Circular, Gilroy, 或 Quicksand 风格），中等字重标题，极佳可读性，舒适24pt正文",
+    "imagery": "干净等距3D插图，一致30°等距角度，柔和粘土渲染美学，漂浮平台和设备，可爱简化物体",
+    "layout": "中央等距场景作为主角，文字平衡于3D元素周围，清晰视觉层次，舒适边距（64px+）",
+    "effects": "柔和投影（20px模糊，30%透明度），3D物体上的环境光遮蔽，表面微妙渐变，一致光源（左上）",
+    "visual_language": "友好科技插图（Slack, Notion, Asana 风格），平易近人的复杂性，通过简化实现清晰"
   }
 }
 ```
 
-### Editorial Style
+### Editorial 风格
 ```json
 {
   "style": "editorial",
   "style_guidelines": {
-    "color_palette": "Sophisticated neutrals: off-white (#f5f5f0), charcoal (#2d2d2d), with single accent color (burgundy #7c2d12, forest #14532d, or navy #1e3a5f), occasional full-color photography",
-    "typography": "Refined serif for headlines (Playfair Display, Freight, or Editorial New style), clean sans-serif for body (Söhne, Graphik), dramatic size hierarchy (96pt headlines, 16pt body), generous line-height 1.6",
-    "imagery": "Magazine-quality photography, dramatic crops, full-bleed images, portraits with intentional negative space, editorial lighting (Vogue, Bloomberg Businessweek style)",
-    "layout": "Sophisticated grid system (12-column), intentional asymmetry, pull quotes as design elements, text wrapping around images, elegant margins",
-    "effects": "Minimal effects - let photography and typography shine, subtle image treatments (slight desaturation, film grain), elegant borders and rules",
-    "visual_language": "High-end magazine aesthetic, intellectual sophistication, content elevated through design restraint"
+    "color_palette": "精致中性色：米白（#f5f5f0），炭灰（#2d2d2d），配单一强调色（酒红#7c2d12，森林绿#14532d，或海军蓝#1e3a5f），偶尔全彩摄影",
+    "typography": "精致衬线标题（Playfair Display, Freight, 或 Editorial New 风格），干净无衬线正文（Söhne, Graphik），戏剧性大小层次（96pt标题，16pt正文），充足行高1.6",
+    "imagery": "杂志级摄影，戏剧性裁剪，全出血图像，有意留白的肖像，编辑照明（Vogue, Bloomberg Businessweek 风格）",
+    "layout": "精致网格系统（12列），有意不对称，引用作为设计元素，文字环绕图像，优雅边距",
+    "effects": "最少效果 - 让摄影和排版闪耀，微妙图像处理（轻微去饱和，胶片颗粒），优雅边框和线条",
+    "visual_language": "高端杂志美学，知性精致，通过设计克制提升内容"
   }
 }
 ```
 
-### Minimal Swiss Style
+### Minimal Swiss 风格
 ```json
 {
   "style": "minimal-swiss",
   "style_guidelines": {
-    "color_palette": "Pure white (#ffffff) or off-white (#fafaf9) backgrounds, true black (#000000) text, single bold accent (Swiss red #ff0000, Klein blue #002fa7, or signal yellow #ffcc00)",
-    "typography": "Helvetica Neue or Aktiv Grotesk, strict type scale (12/16/24/48/96), medium weight for body, bold for emphasis only, flush-left ragged-right alignment",
-    "imagery": "Objective photography, geometric shapes, clean iconography, mathematical precision, intentional empty space as compositional element",
-    "layout": "Strict grid adherence (baseline grid visible in spirit), modular compositions, generous whitespace (40%+ of slide), content aligned to invisible grid lines",
-    "effects": "None - purity of form, no shadows, no gradients, no decorative elements, occasional single hairline rules",
-    "visual_language": "International Typographic Style, form follows function, timeless modernism, Dieter Rams-inspired restraint"
+    "color_palette": "纯白（#ffffff）或米白（#fafaf9）背景，纯黑（#000000）文字，单一大胆强调色（瑞士红#ff0000，克莱因蓝#002fa7，或信号黄#ffcc00）",
+    "typography": "Helvetica Neue 或 Aktiv Grotesk，严格字体比例（12/16/24/48/96），正文中等字重，仅强调时使用粗体，左对齐右参差",
+    "imagery": "客观摄影，几何形状，干净图标，数学精确，有意留白作为构图元素",
+    "layout": "严格网格遵守（精神上可见基线网格），模块化构图，充足留白（40%+幻灯片），内容对齐于不可见网格线",
+    "effects": "无 - 形式纯粹，无阴影，无渐变，无装饰元素，偶尔单根细线",
+    "visual_language": "国际排版风格，形式追随功能，永恒现代主义，Dieter Rams启发的克制"
   }
 }
 ```
 
-### Keynote Style (Apple风格)
+### Keynote 风格（Apple风格）
 ```json
 {
   "style": "keynote",
   "style_guidelines": {
-    "color_palette": "Deep blacks (#000000 to #1d1d1f), pure white text, signature blue (#0071e3) or gradient accents (purple-pink for creative, blue-teal for tech)",
-    "typography": "San Francisco Pro Display, extreme weight contrast (bold 80pt+ titles, light 24pt body), negative letter-spacing on headlines (-0.03em), optical alignment",
-    "imagery": "Cinematic photography, shallow depth of field, dramatic lighting (rim lights, spot lighting), product hero shots with reflections, full-bleed imagery",
-    "layout": "Maximum negative space, single powerful image or statement per slide, content centered or dramatically offset, no clutter",
-    "effects": "Subtle gradient overlays, light bloom and glow on key elements, reflection on surfaces, smooth gradient backgrounds",
-    "visual_language": "Apple WWDC keynote aesthetic, confidence through simplicity, every pixel considered, theatrical presentation"
+    "color_palette": "深黑色（#000000 到 #1d1d1f），纯白文字，标志性蓝色（#0071e3）或渐变强调（创意用紫-粉，科技用蓝-青）",
+    "typography": "San Francisco Pro Display，极端字重对比（粗体80pt+标题，轻体24pt正文），标题负字间距（-0.03em），光学对齐",
+    "imagery": "电影感摄影，浅景深，戏剧性照明（轮廓光，聚光照明），产品英雄镜头配反射，全出血图像",
+    "layout": "最大化负空间，每张幻灯片单一强力图像或声明，内容居中或戏剧性偏移，无杂乱",
+    "effects": "微妙渐变叠加，关键元素上的光晕和发光，表面反射，平滑渐变背景",
+    "visual_language": "Apple WWDC 主题演讲美学，通过简洁展现自信，每个像素都经过考量，戏剧性呈现"
   }
 }
 ```
 
-## Output Handling
+## 输出处理
 
-After generation:
+生成完成后：
 
-- The PPTX file is saved in `/mnt/user-data/outputs/`
-- Share the generated presentation with user using `present_files` tool
-- Also share the individual slide images if requested
-- Provide brief 描述 of the presentation
-- Offer to iterate or regenerate specific slides if needed
+- PPTX 文件保存在 `/mnt/user-data/outputs/`
+- 使用 `present_files` 工具与用户分享生成的演示文稿
+- 如有请求，也分享单独的幻灯片图像
+- 提供演示文稿的简要描述
+- 如需要，提供迭代或重新生成特定幻灯片的选项
 
 ## 注意
 
-### Critical Quality Guidelines
+### 关键质量指南
 
-**Prompt Engineering for Professional Results:**
-- Always use English for image prompts regardless of user's language
-- Be EXTREMELY specific about visual details - vague prompts produce generic results
-- Include exact hex color codes (e.g., #667eea not "purple")
-- Specify typography details: font weight (400/700), size hierarchy, letter-spacing
-- Describe effects precisely: "backdrop blur 20px", "drop shadow 8px blur 30% opacity"
-- Reference real design systems: "visionOS aesthetic", "Stripe website style", "Bloomberg Businessweek layout"
+**专业结果的提示工程：**
+- 无论用户使用何种语言，图像提示始终使用英文
+- 对视觉细节极其具体 - 模糊的提示产生通用结果
+- 包含精确的十六进制颜色代码（例如，#667eea 而不是"紫色"）
+- 指定排版细节：字重（400/700），大小层次，字间距
+- 精确描述效果："背景模糊20px"，"投影8px模糊30%透明度"
+- 参考真实设计系统："visionOS 美学"，"Stripe 网站风格"，"Bloomberg Businessweek 布局"
 
-**Visual Consistency (Most 重要):**
-- **Generate slides sequentially** - each slide MUST reference the previous one
-- The first slide is critical - it establishes the visual language for the entire presentation
-- In every subsequent slide prompt, explicitly state: "continuing EXACT visual style from reference image"
-- Use SAME, EXACT, MATCH keywords emphatically in prompts to enforce consistency
-- Include a `consistency_note` field in every JSON prompt after slide 1
-- If a slide looks inconsistent, regenerate it with STRONGER reference emphasis
+**视觉一致性（最重要）：**
+- **按顺序生成幻灯片** - 每张幻灯片必须参考前一张
+- 第一张幻灯片至关重要 - 它为整个演示建立视觉语言
+- 在每张后续幻灯片提示中，明确说明："延续参考图像的精确视觉风格"
+- 在提示中强调使用 SAME、EXACT、MATCH 关键词来强制一致性
+- 在幻灯片1之后的每个 JSON 提示中包含 `consistency_note` 字段
+- 如果幻灯片看起来不一致，用更强的参考强调重新生成
 
-**Design Principles for Modern Aesthetics:**
-- Embrace negative space - 40-60% empty space creates premium feel
-- Limit elements per slide - one focal point, one message
-- Use depth through layering (shadows, transparency, z-depth)
-- Typography hierarchy: massive headlines (72pt+), comfortable body (18-24pt)
-- Color restraint: one primary palette, 1-2 accent colors maximum
+**现代美学的设计原则：**
+- 拥抱负空间 - 40-60%的空白创造高端感
+- 限制每张幻灯片的元素 - 一个焦点，一个信息
+- 通过分层创造深度（阴影，透明度，z深度）
+- 排版层次：巨大标题（72pt+），舒适正文（18-24pt）
+- 颜色克制：一个主要调色板，最多1-2个强调色
 
-**Common Mistakes to Avoid:**
-- ❌ Generic prompts like "professional slide" - be specific
-- ❌ Too many elements/text per slide - cluttered = unprofessional
-- ❌ Inconsistent colors between slides - always reference previous slide
-- ❌ Skipping the reference image 参数 - this breaks visual consistency
-- ❌ Using different design styles within one presentation
-- ❌ Generating slides in parallel - slides MUST be generated one at a time in order (slide 1 → 2 → 3 ...), never concurrently
+**常见错误避免：**
+- ❌ 模糊提示如"专业幻灯片" - 要具体
+- ❌ 每张幻灯片太多元素/文字 - 杂乱=不专业
+- ❌ 幻灯片间颜色不一致 - 始终参考前一张幻灯片
+- ❌ 跳过参考图像参数 - 这会破坏视觉一致性
+- ❌ 在一个演示中使用不同设计风格
+- ❌ 并行生成幻灯片 - 幻灯片必须按顺序一张一张生成（幻灯片1 → 2 → 3...），绝不能同时生成
 
-**Recommended Styles for Different Contexts:**
-- Tech product launch → `glassmorphism` or `gradient-modern`
-- Luxury/premium brand → `dark-premium` or `editorial`
-- Startup pitch → `gradient-modern` or `minimal-swiss`
-- Executive presentation → `dark-premium` or `keynote`
-- Creative agency → `neo-brutalist` or `gradient-modern`
-- Data/analytics → `minimal-swiss` or `3d-isometric`
+**不同场景的推荐风格：**
+- 科技产品发布 → `glassmorphism` 或 `gradient-modern`
+- 奢侈/高端品牌 → `dark-premium` 或 `editorial`
+- 初创公司路演 → `gradient-modern` 或 `minimal-swiss`
+- 高管演示 → `dark-premium` 或 `keynote`
+- 创意机构 → `neo-brutalist` 或 `gradient-modern`
+- 数据/分析 → `minimal-swiss` 或 `3d-isometric`

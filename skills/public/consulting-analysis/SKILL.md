@@ -1,620 +1,354 @@
 ---
 name: consulting-analysis
-描述: Use this skill when the user requests to generate, create, or write professional research reports including but not limited to market analysis, consumer insights, brand analysis, financial analysis, industry research, competitive intelligence, investment due diligence, or any consulting-grade analytical report. This skill operates in two phases — (1) generating a structured analysis framework with chapter skeleton, data query requirements, and analysis logic, and (2) after data collection by other skills, producing the final consulting-grade report with structured narratives, embedded charts, and strategic insights.
+描述: 当用户请求生成、创建或撰写专业研究报告时，请使用本技能，包括但不限于市场分析、消费者洞察、品牌分析、财务分析、行业研究、竞争情报、投资尽职调查或任何咨询级别的分析报告。本技能分两个阶段运行——(1) 生成包含章节框架、数据查询需求和分析逻辑的结构化分析框架，(2) 在其他技能收集数据后，产出包含结构化叙述、嵌入式图表和战略洞察的最终咨询级报告。
 ---
 
-# Professional Research Report Skill
+# 专业研究报告技能
 
 ## 概览
 
-This skill produces professional, consulting-grade research reports in Markdown format, covering domains such as **market analysis, consumer insights, brand strategy, financial analysis, industry research, competitive intelligence, investment research, and macroeconomic analysis**. It operates across two distinct phases:
+本技能以 Markdown 格式产出专业的咨询级研究报告，覆盖**市场分析、消费者洞察、品牌策略、财务分析、行业研究、竞争情报、投资研究、宏观经济分析**等领域。它分两个不同阶段运行：
 
-1. **Phase 1 — Analysis Framework Generation**: Given a research subject, produce a rigorous analysis framework including chapter skeleton, per-chapter data requirements, analysis logic, and visualization plan.
-2. **Phase 2 — Report Generation**: After data has been collected by other skills, synthesize all inputs into a final polished report.
+1. **阶段 1 — 分析框架生成**：给定研究主题，产出严谨的分析框架，包括章节框架、每章数据需求、分析逻辑和可视化计划。
+2. **阶段 2 — 报告生成**：在其他技能收集数据后，将所有输入综合成最终精炼报告。
 
-The output adheres to McKinsey/BCG consulting voice standards. The report language follows the `output_locale` setting (default: `zh_CN` for Chinese).
+输出遵循麦肯锡/BCG 咨询风格标准。报告语言遵循 `output_locale` 设置（默认：`zh_CN` 中文）。
 
-## Core Capabilities
+## 核心能力
 
-- **Design analysis frameworks** from scratch given only a research subject and scope
-- Transform raw data into structured, high-depth research reports
-- Follow the **"Visual Anchor → Data Contrast → Integrated Analysis"** flow per sub-chapter
-- Produce insights following the **"Data → User Psychology → Strategy Implication"** chain
-- Embed pre-generated charts and construct comparison tables
-- Generate inline citations formatted per **GB/T 7714-2015** standards
-- Output reports in the language specified by `output_locale` with professional consulting tone
-- Adapt analytical depth and structure to domain (marketing, finance, industry, etc.)
+- **设计分析框架**：仅给定研究主题和范围，从零开始设计
+- 将原始数据转化为结构化、高深度研究报告
+- 每个子章节遵循**"视觉锚点 → 数据对比 → 综合分析"**流程
+- 产出遵循**"数据 → 用户心理 → 战略启示"**链的洞察
+- 嵌入预生成的图表并构建对比表格
+- 生成符合 **GB/T 7714-2015** 标准的内联引用
+- 以 `output_locale` 指定的语言输出报告，采用专业咨询语气
+- 根据领域（营销、金融、行业等）调整分析深度和结构
 
-## When to Use This Skill
+## 何时使用本技能
 
-**Always load this skill when:**
+**在以下情况始终加载本技能：**
 
-- User asks for a market analysis, consumer insight report, financial analysis, industry research, or any consulting-grade analytical report
-- User provides a research subject and needs a structured analysis framework before data collection
-- User provides data summaries, analysis frameworks, or chart files to be synthesized into a report
-- User needs a professional consulting-style research report
-- The task involves transforming research findings into structured strategic narratives
+- 用户请求市场分析、消费者洞察报告、财务分析、行业研究或任何咨询级分析报告
+- 用户提供研究主题，需要在数据收集前获得结构化分析框架
+- 用户提供数据摘要、分析框架或图表文件需要综合成报告
+- 用户需要专业咨询风格的研究报告
+- 任务涉及将研究发现转化为结构化战略叙述
 
 ---
 
-# Phase 1: Analysis Framework Generation
+# 阶段 1：分析框架生成
 
 ## 目的
 
-Given a **research subject** (e.g., "Gen-Z Skincare Market Analysis", "NEV Industry Competitive Landscape", "Brand X Consumer Profiling"), produce a complete **analysis framework** that serves as the blueprint for downstream data collection and final report generation.
+给定**研究主题**（例如"Z世代护肤市场分析"、"新能源汽车行业竞争格局"、"品牌 X 消费者画像"），产出完整的**分析框架**，作为下游数据收集和最终报告生成的蓝图。
 
-## Phase 1 Inputs
+## 阶段 1 输入
 
-| Input | 描述 | Required |
+| 输入 | 描述 | 必填 |
 |-------|-------------|----------|
-| **Research Subject** | The topic or question to be analyzed | Yes |
-| **Scope / Constraints** | Geographic scope, time range, industry segment, target audience, etc. | Optional |
-| **Specific Angles** | Any particular angles or hypotheses the user wants explored | Optional |
-| **Domain** | The analytical domain: market, finance, industry, brand, consumer, investment, etc. | Inferred |
+| **研究主题** | 要分析的主题或问题 | 是 |
+| **范围/约束** | 地理范围、时间范围、行业细分、目标受众等 | 可选 |
+| **特定角度** | 用户希望探索的任何特定角度或假设 | 可选 |
+| **领域** | 分析领域：市场、金融、行业、品牌、消费者、投资等 | 推断 |
 
-## Phase 1 Workflow
+## 阶段 1 工作流
 
-### Step 1.1: Understand the Research Subject
+### 步骤 1.1：理解研究主题
 
-- Parse the research subject to identify the **core entity** (market, brand, product, industry, consumer segment, financial instrument, etc.)
-- Identify the **analytical domain** (marketing, finance, industry, competitive, consumer, investment, macro, etc.)
-- Determine the **natural analytical dimensions** based on domain:
+- 解析研究主题以识别**核心实体**（市场、品牌、产品、行业、消费群体、金融工具等）
+- 识别**分析领域**（营销、金融、行业、竞争、消费者、投资、宏观等）
+- 根据领域确定**自然分析维度**：
 
-| Domain | Typical Dimensions |
+| 领域 | 典型维度 |
 |--------|--------------------|
-| Market Analysis | Market size, growth trends, market segmentation, growth drivers, competitive landscape, consumer profiling |
-| Brand Analysis | Brand positioning, market share, consumer perception, marketing strategy, competitor comparison |
-| Consumer Insights | Demographic profiling, purchase behavior, decision journey, pain points, scenario analysis |
-| Financial Analysis | Macro environment, industry trends, company fundamentals, financial metrics, valuation, risk assessment |
-| Industry Research | Value chain analysis, market size, competitive landscape, policy environment, technology trends, entry barriers |
-| Investment Due Diligence | Business model, financial health, management assessment, market opportunity, risk factors, exit pathways |
-| Competitive Intelligence | Competitor identification, strategic comparison, SWOT analysis, differentiated positioning, market dynamics |
+| 市场分析 | 市场规模、增长趋势、市场细分、增长驱动因素、竞争格局、消费者画像 |
+| 品牌分析 | 品牌定位、市场份额、消费者认知、营销策略、竞品对比 |
+| 消费者洞察 | 人口统计画像、购买行为、决策旅程、痛点、场景分析 |
+| 财务分析 | 宏观环境、行业趋势、公司基本面、财务指标、估值、风险评估 |
+| 行业研究 | 价值链分析、市场规模、竞争格局、政策环境、技术趋势、进入壁垒 |
+| 投资尽职调查 | 商业模式、财务健康、管理评估、市场机会、风险因素、退出路径 |
+| 竞争情报 | 竞争对手识别、战略比较、SWOT 分析、差异化定位、市场动态 |
 
-### Step 1.2: Select Analysis Frameworks & Models
+### 步骤 1.2：选择分析框架与模型
 
-Based on the identified domain and research subject, select **one or more** professional analysis frameworks to structure the reasoning in each chapter. The chosen frameworks guide the **Analysis Logic** in the chapter skeleton (Step 1.3).
+根据识别的领域和研究主题，选择**一个或多个**专业分析框架来构建每章的推理。所选框架指导章节框架中的**分析逻辑**（步骤 1.3）。
 
-#### Strategic & Environmental Analysis
+#### 战略与环境分析
 
-| Framework | 描述 | Best For |
+| 框架 | 描述 | 最佳用途 |
 |-----------|-------------|----------|
-| **SWOT Analysis** | Strengths, Weaknesses, Opportunities, Threats | Brand assessment, competitive positioning, strategic planning |
-| **PEST / PESTEL Analysis** | Political, Economic, Social, Technological (+ Environmental, Legal) | Macro-environment scanning, market entry assessment, policy impact analysis |
-| **Porter's Five Forces** | Supplier bargaining power, buyer bargaining power, threat of new entrants, threat of substitutes, industry rivalry | Industry competitive landscape, entry barrier assessment, profit margin analysis |
-| **Porter's Diamond Model** | Factor conditions, demand conditions, related industries, firm strategy & structure | National/regional competitive advantage analysis |
-| **VRIO Analysis** | Value, Rarity, Imitability, Organization | Core competency assessment, resource advantage analysis |
+| **SWOT 分析** | 优势、劣势、机会、威胁 | 品牌评估、竞争定位、战略规划 |
+| **PEST / PESTEL 分析** | 政治、经济、社会、技术（+环境、法律） | 宏观环境扫描、市场进入评估、政策影响分析 |
+| **波特五力模型** | 供应商议价能力、买方议价能力、新进入者威胁、替代品威胁、行业竞争 | 行业竞争格局、进入壁垒评估、利润率分析 |
+| **波特钻石模型** | 要素条件、需求条件、相关产业、企业战略与结构 | 国家/区域竞争优势分析 |
+| **VRIO 分析** | 价值、稀缺性、不可模仿性、组织 | 核心竞争力评估、资源优势分析 |
 
-#### Market & Growth Analysis
+#### 市场与增长分析
 
-| Framework | 描述 | Best For |
+| 框架 | 描述 | 最佳用途 |
 |-----------|-------------|----------|
-| **STP Analysis** | Segmentation, Targeting, Positioning | Market segmentation, target market selection, brand positioning |
-| **BCG Matrix (Growth-Share Matrix)** | Stars, Cash Cows, Question Marks, Dogs | Product portfolio management, resource allocation decisions |
-| **Ansoff Matrix** | Market penetration, market development, product development, diversification | Growth strategy selection |
-| **Product Life Cycle (PLC)** | 简介, growth, maturity, decline | Product strategy formulation, market timing decisions |
-| **TAM-SAM-SOM** | Total / Serviceable / Obtainable Market | Market sizing, opportunity quantification |
-| **Technology Adoption Lifecycle** | Innovators → Early Adopters → Early Majority → Late Majority → Laggards | Emerging technology/category penetration analysis |
+| **STP 分析** | 市场细分、目标市场选择、市场定位 | 市场细分、目标市场选择、品牌定位 |
+| **BCG 矩阵（增长-份额矩阵）** | 明星、金牛、问题、瘦狗 | 产品组合管理、资源配置决策 |
+| **安索夫矩阵** | 市场渗透、市场开发、产品开发、多元化 | 增长战略选择 |
+| **产品生命周期（PLC）** | 导入期、成长期、成熟期、衰退期 | 产品战略制定、市场时机决策 |
+| **TAM-SAM-SOM** | 总潜在市场、可服务市场、可获得市场 | 市场规模测算、机会量化 |
+| **技术采用生命周期** | 创新者 → 早期采用者 → 早期大众 → 晚期大众 → 落后者 | 新兴技术/品类渗透分析 |
 
-#### Consumer & Behavioral Analysis
+#### 消费者与行为分析
 
-| Framework | 描述 | Best For |
+| 框架 | 描述 | 最佳用途 |
 |-----------|-------------|----------|
-| **Consumer Decision Journey** | Awareness → Consideration → Evaluation → Purchase → Loyalty | Consumer behavior path mapping, touchpoint optimization |
-| **AARRR Funnel (Pirate Metrics)** | Acquisition, Activation, Retention, Revenue, Referral | User growth analysis, conversion rate optimization |
-| **RFM Model** | Recency, Frequency, Monetary | Customer value segmentation, precision marketing |
-| **Maslow's Hierarchy of Needs** | Physiological → Safety → Social → Esteem → Self-actualization | Consumer psychology analysis, product value proposition |
-| **Jobs-to-be-Done (JTBD)** | The "job" a user needs to accomplish in a specific context | Demand insight, product innovation direction |
+| **消费者决策旅程** | 认知 → 考虑 → 评估 → 购买 → 忠诚 | 消费者行为路径映射、触点优化 |
+| **AARRR 漏斗（海盗指标）** | 获取、激活、留存、收入、推荐 | 用户增长分析、转化率优化 |
+| **RFM 模型** | 最近购买时间、购买频率、消费金额 | 客户价值细分、精准营销 |
+| **马斯洛需求层次** | 生理 → 安全 → 社交 → 尊重 → 自我实现 | 消费者心理分析、产品价值主张 |
+| **待办任务（JTBD）** | 用户在特定情境下需要完成的"任务" | 需求洞察、产品创新方向 |
 
-#### Financial & Valuation Analysis
+#### 财务与估值分析
 
-| Framework | 描述 | Best For |
+| 框架 | 描述 | 最佳用途 |
 |-----------|-------------|----------|
-| **DuPont Analysis** | ROE = Net Profit Margin × Asset Turnover × Equity Multiplier | Profitability decomposition, financial health diagnosis |
-| **DCF (Discounted Cash Flow)** | Free cash flow discounting | Enterprise/project valuation |
-| **Comparable Company Analysis** | PE, PB, PS, EV/EBITDA multiples comparison | Relative valuation, peer benchmarking |
-| **EVA (Economic Value Added)** | After-tax operating profit - Cost of capital | Value creation capability assessment |
+| **杜邦分析** | ROE = 净利润率 × 资产周转率 × 权益乘数 | 盈利能力分解、财务健康诊断 |
+| **DCF（现金流折现）** | 自由现金流折现 | 企业/项目估值 |
+| **可比公司分析** | PE、PB、PS、EV/EBITDA 倍数比较 | 相对估值、同行对标 |
+| **EVA（经济增加值）** | 税后营业利润 - 资本成本 | 价值创造能力评估 |
 
-#### Competitive & Strategic Positioning
+#### 竞争与战略定位
 
-| Framework | 描述 | Best For |
+| 框架 | 描述 | 最佳用途 |
 |-----------|-------------|----------|
-| **Benchmarking** | Key performance indicator item-by-item comparison | Competitor gap analysis, best practice identification |
-| **Strategic Group Mapping** | Cluster competitors along two key dimensions | Competitive landscape visualization, white-space identification |
-| **Value Chain Analysis** | Primary activities + support activities value decomposition | Cost advantage sources, differentiation opportunity identification |
-| **Blue Ocean Strategy** | Value curve, four-action framework (Eliminate-Reduce-Raise-Create) | Differentiated innovation, new market space creation |
-| **Perceptual Mapping** | Plot brand positions along two consumer-perceived dimensions | Brand positioning analysis, market gap discovery |
+| **对标分析** | 关键绩效指标逐项比较 | 竞争对手差距分析、最佳实践识别 |
+| **战略群组图** | 沿两个关键维度聚类竞争对手 | 竞争格局可视化、空白空间识别 |
+| **价值链分析** | 基本活动 + 支持活动价值分解 | 成本优势来源、差异化机会识别 |
+| **蓝海战略** | 价值曲线、四步动作框架（剔除-减少-提升-创造） | 差异化创新、新市场空间创造 |
+| **感知图** | 沿两个消费者感知维度绘制品牌位置 | 品牌定位分析、市场空白发现 |
 
-#### Industry & Supply Chain Analysis
+#### 行业与供应链分析
 
-| Framework | 描述 | Best For |
+| 框架 | 描述 | 最佳用途 |
 |-----------|-------------|----------|
-| **Industry Value Chain** | Upstream → Midstream → Downstream decomposition | Industry structure understanding, profit distribution analysis |
-| **Gartner Hype Cycle** | Technology Trigger → Peak of Inflated Expectations → Trough of Disillusionment → Slope of Enlightenment → Plateau of Productivity | Emerging technology maturity assessment |
-| **GE-McKinsey Matrix** | Industry Attractiveness × Competitive Strength | Business portfolio prioritization, investment decisions |
+| **行业价值链** | 上游 → 中游 → 下游分解 | 行业结构理解、利润分布分析 |
+| **Gartner 炒作周期** | 技术触发 → 期望膨胀峰值 → 泡沫破裂低谷 → 启蒙爬坡 → 生产 plateau | 新兴技术成熟度评估 |
+| **GE-麦肯锡矩阵** | 行业吸引力 × 竞争实力 | 业务组合优先级、投资决策 |
 
-#### Selection Principles
+#### 选择原则
 
-1. **Domain-First**: Based on the domain identified in Step 1.1, select **2-4** most relevant frameworks from the toolkit above
-2. **Complementary**: Choose complementary rather than overlapping frameworks (e.g., macro-level with PESTEL + micro-level with Porter's Five Forces)
-3. **Depth over Breadth**: Better to deeply apply 2 frameworks than superficially stack 6
-4. **Data-Feasible**: Selected frameworks must be supportable by downstream data collection skills — if the data required by a framework cannot be reasonably obtained, downgrade or substitute
-5. **Explicit Mapping**: In the chapter skeleton, explicitly annotate which framework each chapter uses and how it is applied
+1. **领域优先**：根据步骤 1.1 识别的领域，从上述工具包中选择 **2-4 个**最相关的框架
+2. **互补性**：选择互补而非重叠的框架（例如宏观层面用 PESTEL + 微观层面用波特五力）
+3. **深度优于广度**：深入应用 2 个框架优于肤浅堆砌 6 个
+4. **数据可行性**：所选框架必须能被下游数据收集技能支持——如果框架所需数据无法合理获取，则降级或替换
+5. **明确映射**：在章节框架中，明确标注每章使用哪个框架以及如何应用
 
-#### Framework Selection Output Format
+### 步骤 1.3：设计章节框架
 
-```markdown
-## Framework Selection
+产出层级章节结构。每章必须包含：
 
-| Chapter | Selected Framework(s) | Application |
-|---------|----------------------|-------------|
-| Market Size & Growth Trends | TAM-SAM-SOM + Product Life Cycle | TAM-SAM-SOM to quantify market space, PLC to determine market stage |
-| Competitive Landscape Assessment | Porter's Five Forces + Strategic Group Mapping | Five Forces to assess industry competition intensity, Group Mapping to visualize competitive positioning |
-| Consumer Profiling | RFM + Consumer Decision Journey | RFM to segment customer value, Decision Journey to identify key conversion nodes |
-| Brand Strategy Recommendations | SWOT + Blue Ocean Strategy | SWOT to summarize overall landscape, Blue Ocean to guide differentiation direction |
-```
+1. **章节标题** — 专业、简洁、基于主题（遵循格式部分中的标题约束）
+2. **分析目标** — 本章旨在揭示什么
+3. **分析逻辑** — 推理链或框架（必须引用步骤 1.2 中选择的框架）
+4. **核心假设** — 待数据验证或反驳的初步假设
 
-### Step 1.3: Design Chapter Skeleton
+### 步骤 1.4：定义每章数据查询需求
 
-Produce a hierarchical chapter structure. Each chapter must include:
+对于每章，明确**需要收集什么数据**。这是与下游数据收集技能的桥梁。
 
-1. **Chapter Title** — Professional, concise, subject-based (follow titling constraints in Formatting section)
-2. **Analysis Objective** — What this chapter aims to reveal
-3. **Analysis Logic** — The reasoning chain or framework (must reference the frameworks selected in Step 1.2)
-4. **Core Hypothesis** — Preliminary hypotheses to be validated or refuted by data
+每个数据需求条目必须包含：
 
-#### Chapter Skeleton Output Format
-
-```markdown
-## Analysis Framework
-
-### Chapter 1: [Title]
-- **Analysis Objective**: [This chapter aims to...]
-- **Analysis Logic**: [Framework or reasoning chain used]
-- **Core Hypothesis**: [Hypotheses to validate]
-- **Data Requirements**: (see Step 1.4)
-- **Visualization Plan**: (see Step 1.5)
-
-### Chapter 2: [Title]
-...
-```
-
-### Step 1.4: Define Data Query Requirements Per Chapter
-
-For each chapter, specify **exactly what data needs to be collected**. This is the bridge to downstream data collection skills.
-
-Each data requirement entry must include:
-
-| Field | 描述 |
+| 字段 | 描述 |
 |-------|-------------|
-| **Data Metric** | The specific metric or data point needed (e.g., "China skincare market size 2020-2025 (in billion CNY)") |
-| **Data Type** | Quantitative, Qualitative, or Mixed |
-| **Suggested Sources** | Suggested source categories: Industry reports, financial statements, government statistics, social media, e-commerce platforms, survey data, news |
-| **Search Keywords** | Suggested search queries for data collection agents |
-| **Priority** | P0 (Required) / P1 (重要) / P2 (Supplementary) |
-| **Time Range** | The time period the data should cover |
+| **数据指标** | 需要的具体指标或数据点（例如"中国护肤市场规模 2020-2025（亿元）"） |
+| **数据类型** | 定量、定性或混合 |
+| **建议来源** | 建议的来源类别：行业报告、财务报表、政府统计、社交媒体、电商平台、调研数据、新闻 |
+| **搜索关键词** | 数据收集代理的建议搜索查询 |
+| **优先级** | P0（必填）/ P1（重要）/ P2（补充） |
+| **时间范围** | 数据应覆盖的时间段 |
 
-#### Data Requirements Output Format (per chapter)
+### 步骤 1.5：定义每章可视化与内容结构
 
-```markdown
-#### Data Requirements
+对于每章，指定**计划的可视化**和**内容结构**：
 
-| # | Data Metric | Data Type | Suggested Sources | Search Keywords | Priority | Time Range |
-|---|-------------|-----------|-------------------|-----------------|----------|------------|
-| 1 | Market size (billion CNY) | Quantitative | Industry reports, government statistics | "China skincare market size 2024" | P0 | 2020-2025 |
-| 2 | CAGR | Quantitative | Industry reports | "skincare CAGR growth rate" | P0 | 2020-2025 |
-| 3 | Sub-category share | Quantitative | E-commerce platforms, industry reports | "skincare category share cream serum sunscreen" | P1 | Latest |
-| 4 | Policy & regulatory updates | Qualitative | Government announcements, news | "cosmetics regulation 2024" | P2 | Past 1 year |
-```
-
-### Step 1.5: Define Visualization & Content Structure Per Chapter
-
-For each chapter, specify the **planned visualization** and **content structure** for the final report:
-
-| Field | 描述 |
+| 字段 | 描述 |
 |-------|-------------|
-| **Visualization Type** | Chart type: Line chart, bar chart, pie chart, scatter plot, radar chart, heatmap, Sankey diagram, comparison table, etc. |
-| **Visualization Title** | Descriptive title for the chart |
-| **Visualization Data Mapping** | Which data indicators map to X/Y axes or segments |
-| **Comparison Table Design** | Column headers and comparison dimensions for the data contrast table |
-| **参数 Structure** | The planned "What → Why → So What" narrative outline |
+| **可视化类型** | 图表类型：折线图、柱状图、饼图、散点图、雷达图、热力图、桑基图、对比表等 |
+| **可视化标题** | 图表的描述性标题 |
+| **可视化数据映射** | 哪些数据指标映射到 X/Y 轴或分段 |
+| **对比表设计** | 数据对比表的列标题和比较维度 |
+| **论证结构** | 计划的"是什么 → 为什么 → 意味着什么"叙述大纲 |
 
-#### Visualization Plan Output Format (per chapter)
+### 步骤 1.6：输出完整分析框架
 
-```markdown
-#### Visualization & Content Plan
+将所有输出组装成单一、结构化的**分析框架文档**。
 
-**Chart 1**: [Type] — [Title]
-- X-axis: [Dimension], Y-axis: [Metric]
-- Data source: Corresponds to Data Requirement #1, #2
+## 阶段 1 质量检查清单
 
-**Comparison Table**:
-| Dimension | Item A | Item B | Item C |
-|-----------|--------|--------|--------|
-
-**Argument Structure**:
-1. **Observation (What)**: [Surface phenomenon revealed by data]
-2. **Attribution (Why)**: [Driving factors or underlying causes]
-3. **Implication (So What)**: [Strategic implications or recommended actions]
-```
-
-### Step 1.6: Output Complete Analysis Framework
-
-Assemble all outputs into a single, structured **Analysis Framework Document**:
-
-```markdown
-# [Research Subject] Analysis Framework
-
-## Research 概述
-- **Research Subject**: [...]
-- **Scope**: [Geography, time range, industry segment]
-- **Analysis Domain**: [Market / Finance / Industry / Brand / Consumer / ...]
-- **Core Research Questions**: [1-3 key questions]
-
-## Framework Selection
-
-| Chapter | Selected Framework(s) | Application |
-|---------|----------------------|-------------|
-| ... | ... | ... |
-
-## Chapter Skeleton
-
-### 1. [Chapter Title]
-- **Analysis Objective**: [...]
-- **Analysis Logic**: [...]
-- **Core Hypothesis**: [...]
-
-#### Data Requirements
-| # | Data Metric | Data Type | Suggested Sources | Search Keywords | Priority | Time Range |
-|---|-------------|-----------|-------------------|-----------------|----------|------------|
-| ... | ... | ... | ... | ... | ... | ... |
-
-#### Visualization & Content Plan
-[Chart plan + Comparison table design + Argument structure]
-
-### 2. [Chapter Title]
-...
-
-### N. [Chapter Title]
-...
-
-## Data Collection Task List
-[Consolidate all P0/P1 data requirements across chapters into a structured task list for downstream data collection skills to execute]
-```
-
-## Phase 1 Quality Checklist
-
-- [ ] Analysis framework covers all natural dimensions for the identified domain
-- [ ] 2-4 professional analysis frameworks are selected and explicitly mapped to chapters
-- [ ] Selected frameworks are complementary (not overlapping) and data-feasible
-- [ ] Each chapter has clear Analysis Objective, Analysis Logic (referencing chosen framework), and Core Hypothesis
-- [ ] Data requirements are specific, measurable, and include search keywords
-- [ ] Every chapter has at least one visualization plan
-- [ ] Data priorities (P0/P1/P2) are assigned realistically
-- [ ] The framework is actionable — a data collection agent can execute on the Search Keywords directly
-- [ ] Data Collection Task List is comprehensive and deduplicated
+- [ ] 分析框架覆盖识别领域的所有自然维度
+- [ ] 选择 2-4 个专业分析框架并明确映射到章节
+- [ ] 所选框架互补（不重叠）且数据可行
+- [ ] 每章有明确的分析目标、分析逻辑（引用所选框架）和核心假设
+- [ ] 数据需求具体、可衡量，包含搜索关键词
+- [ ] 每章至少有一个可视化计划
+- [ ] 数据优先级（P0/P1/P2）分配合理
+- [ ] 框架可执行——数据收集代理可直接执行搜索关键词
+- [ ] 数据收集任务列表全面且去重
 
 ---
 
-# Phase 1→2 Handoff: Data Collection & Chart Generation
+# 阶段 1→2 交接：数据收集与图表生成
 
-After the analysis framework is generated, it is handed off to **other data collection skills** (e.g., deep-research, data-analysis, web search agents) to:
+分析框架生成后，交接给**其他数据收集技能**（如 deep-research、data-analysis、web 搜索代理）以：
 
-1. Execute the **Search Keywords** from each chapter's data requirements
-2. Collect quantitative data, qualitative insights, and source URLs
-3. Generate charts based on the **Visualization & Content Plan**
-4. 返回 a **Data Package** containing:
-   - **Data Summary**: Raw numbers, metrics, and qualitative findings per chapter
-   - **Chart Files**: Generated chart images with local file paths
-   - **External Search Findings**: Source URLs and summaries for citations
+1. 执行每章数据需求中的**搜索关键词**
+2. 收集定量数据、定性洞察和来源 URL
+3. 根据**可视化与内容计划**生成图表
+4. 返回包含以下内容的**数据包**：
+   - **数据摘要**：每章的原始数字、指标和定性发现
+   - **图表文件**：生成的图表图像及本地文件路径
+   - **外部搜索发现**：用于引用的来源 URL 和摘要
 
-> **This skill does NOT perform data collection.** It only produces the framework (Phase 1) and the final report (Phase 2).
+> **本技能不执行数据收集。** 它只产出框架（阶段 1）和最终报告（阶段 2）。
 >
-> **Chart Generation**: If a visualization/charting skill is available (e.g., data-analysis, image-generation), chart generation can be deferred to the beginning of Phase 2 — see Step 2.3.
+> **图表生成**：如果可视化/图表技能可用（如 data-analysis、image-generation），图表生成可推迟到阶段 2 开始时——见步骤 2.3。
 
 ---
 
-# Phase 2: Report Generation
+# 阶段 2：报告生成
 
 ## 目的
 
-Receive the completed **Analysis Framework** and **Data Package** from upstream, and synthesize them into a final consulting-grade report.
+接收上游完成的**分析框架**和**数据包**，将其综合成最终咨询级报告。
 
-## Phase 2 Inputs
+## 阶段 2 输入
 
-| Input | 描述 | Required |
+| 输入 | 描述 | 必填 |
 |-------|-------------|----------|
-| **Analysis Framework** | The framework document produced in Phase 1 | Yes |
-| **Data Summary** | Collected data organized per chapter from the data collection phase | Yes |
-| **Chart Files** | Local file paths for generated chart images. If not provided, will be generated in Step 2.3 using available visualization skills | Optional |
-| **External Search Findings** | URLs and summaries for inline citations | Optional |
+| **分析框架** | 阶段 1 产出的框架文档 | 是 |
+| **数据摘要** | 数据收集阶段按章组织的收集数据 | 是 |
+| **图表文件** | 生成的图表图像本地文件路径。如未提供，将在步骤 2.3 使用可用可视化技能生成 | 可选 |
+| **外部搜索发现** | 用于内联引用的 URL 和摘要 | 可选 |
 
-## Phase 2 Workflow
+## 阶段 2 工作流
 
-### Step 2.1: Receive and Validate Inputs
+### 步骤 2.1：接收并验证输入
 
-Verify that all required inputs are present:
+验证所有必需输入是否存在：
 
-1. **Analysis Framework** — Confirm it contains chapter skeleton, data requirements, and visualization plans
-2. **Data Summary** — Confirm it contains data organized per chapter, cross-reference against P0 requirements
-3. **Chart Files** — Confirm file paths are valid local paths
+1. **分析框架** — 确认包含章节框架、数据需求和可视化计划
+2. **数据摘要** — 确认包含按章组织的数据，与 P0 需求交叉核对
+3. **图表文件** — 确认文件路径是有效的本地路径
 
-If any P0 data is missing, 注意 it in the report and flag for the user.
+如任何 P0 数据缺失，在报告中注意并向用户标记。
 
-### Step 2.2: Map Report Structure
+### 步骤 2.2：映射报告结构
 
-Map the final report structure from the Analysis Framework:
+从分析框架映射最终报告结构：
 
-1. **Abstract** — Executive summary with key takeaways
-2. **简介** — Background, objectives, methodology
-3. **Main Body Chapters (2...N)** — Mapped from the Framework's chapter skeleton
-4. **Conclusion** — Pure, objective synthesis
-5. **References** — GB/T 7714-2015 formatted references
+1. **摘要** — 包含关键要点的执行摘要
+2. **引言** — 背景、目标、方法论
+3. **主体章节（2...N）** — 从框架的章节框架映射
+4. **结论** — 纯客观综合
+5. **参考文献** — GB/T 7714-2015 格式参考文献
 
-### Step 2.3: Generate Chapter Charts (Pre-Report Visualization)
+### 步骤 2.3：生成章节图表（报告前可视化）
 
-Before writing the report, generate all planned charts from the Analysis Framework's **Visualization & Content Plan**. This step ensures every sub-chapter has its "Visual Anchor" ready before narrative writing begins.
+在撰写报告前，根据分析框架的**可视化与内容计划**生成所有计划图表。此步骤确保每个子章节在叙述写作开始前都有其"视觉锚点"。
 
-#### When to Execute This Step
+#### 何时执行此步骤
 
-- **Chart Files already provided**: Skip this step — proceed directly to Step 2.4.
-- **Chart Files NOT provided but a visualization skill is available**: Execute this step to generate all charts first.
-- **No Chart Files and no visualization skill available**: Skip this step — use comparison tables as the primary visual anchor in Step 2.4, and 注意 the absence of charts.
+- **已提供图表文件**：跳过此步骤——直接进入步骤 2.4。
+- **未提供图表文件但有可视化技能可用**：执行此步骤先生成所有图表。
+- **无图表文件且无可视化技能可用**：跳过此步骤——在步骤 2.4 中使用对比表作为主要视觉锚点，并注意缺少图表。
 
-#### Chart Generation Workflow
+### 步骤 2.4：撰写报告
 
-1. **Extract Chart Tasks**: Parse all `Visualization & Content Plan` entries from the Analysis Framework to build a chart generation task list:
+对于每个子章节，遵循**"视觉锚点 → 数据对比 → 综合分析"**流程：
 
-| # | Chapter | Chart Type | Chart Title | Data Mapping | Data Source |
-|---|---------|------------|-------------|--------------|-------------|
-| 1 | 2.1 | Line chart | Market Size Trend 2020-2025 | X: Year, Y: Market Size (billion CNY) | Data Requirement #1, #2 |
-| 2 | 3.1 | Pie chart | Consumer Age Distribution | Segments: Age groups, Values: Share % | Data Requirement #5 |
-| ... | ... | ... | ... | ... | ... |
+1. **视觉证据块**：使用 `![图像描述](实际文件路径)` 嵌入图表——使用步骤 2.3 收集的文件路径
+2. **数据对比表**：为关键指标创建 Markdown 对比表
+3. **综合叙述分析**：按照"是什么 → 为什么 → 意味着什么"撰写分析文本
 
-2. **Prepare Chart Data**: For each chart task, extract the corresponding data points from the **Data Summary** and structure them into the format required by the visualization skill (e.g., CSV, JSON, or tabular format).
+每个子章节必须以稳健的分析段落结束（至少 200 字），该段落：
+- 综合冲突或相互印证的数据点
+- 揭示潜在的用户张力或机会
+- 可选地以引用块（`>`）中的有力"一句话真相"结尾
 
-3. **Delegate to Visualization Skill**: Invoke the available visualization/charting skill (e.g., `data-analysis`) for each chart task with:
-   - Chart type and title
-   - Structured data
-   - Axis labels and formatting preferences
-   - Output file path convention: `charts/chapter_{N}_{chart_index}.png`
+### 步骤 2.5：最终结构自检
 
-4. **Collect Chart File Paths**: Record all generated chart file paths for embedding in Step 2.4:
-
-```markdown
-## Generated Charts
-| # | Chapter | Chart Title | File Path |
-|---|---------|-------------|-----------|
-| 1 | 2.1 | Market Size Trend 2020-2025 | charts/chapter_2_1.png |
-| 2 | 3.1 | Consumer Age Distribution | charts/chapter_3_1.png |
-```
-
-5. **Validate**: Confirm all P0-priority charts have been generated. If any chart generation fails, 注意 it and fall back to comparison tables for that sub-chapter.
-
-> **Principle**: Complete ALL chart generation before starting report writing. This ensures a consistent visual narrative and avoids interleaving generation with writing.
-
-### Step 2.4: Write the Report
-
-For each sub-chapter, follow the **"Visual Anchor → Data Contrast → Integrated Analysis"** flow:
-
-1. **Visual Evidence Block**: Embed charts using `![Image 描述](Actual_File_Path)` — use the file paths collected in Step 2.3
-2. **Data Contrast Table**: Create a Markdown comparison table for key metrics
-3. **Integrated Narrative Analysis**: Write analytical text following "What → Why → So What"
-
-Each sub-chapter must end with a robust analytical paragraph (min. 200 words) that:
-- Synthesizes conflicting or reinforcing data points
-- Reveals the underlying user tension or opportunity
-- Optionally ends with a punchy "One-Liner Truth" in a blockquote (`>`)
-
-### Step 2.5: Final Structure Self-Check
-
-Before outputting, confirm the report contains **all sections in order**:
+输出前，确认报告包含**所有章节且顺序正确**：
 
 ```
-Abstract → 1. Introduction → 2...N. Body Chapters → N+1. Conclusion → N+2. References
+摘要 → 1. 引言 → 2...N. 主体章节 → N+1. 结论 → N+2. 参考文献
 ```
 
-Additionally verify:
-- All charts generated in Step 2.3 are embedded in the correct sub-chapters
-- Chart file paths in `![](path)` references are valid
-- Sub-chapters without charts have comparison tables as visual anchors
+额外验证：
+- 步骤 2.3 生成的所有图表都嵌入到正确的子章节中
+- `![](path)` 引用中的图表文件路径有效
+- 没有图表的子章节有对比表作为视觉锚点
 
-The report **MUST NOT** stop after the Conclusion — it **MUST** include References as the final section.
+报告**不得**在结论后停止——**必须**包含参考文献作为最后一节。
 
-## Formatting & Tone Standards
+## 格式与语气标准
 
-### Consulting Voice
-- **Tone**: McKinsey/BCG — Authoritative, Objective, Professional
-- **Language**: All headings and content in the language specified by `output_locale`
-- **Number Formatting**: Use English commas for thousands separators (`1,000` not `1，000`)
-- **Data emphasis**: **Bold** important viewpoints and key numbers
+### 咨询语气
+- **语气**：麦肯锡/BCG——权威、客观、专业
+- **语言**：所有标题和内容使用 `output_locale` 指定的语言
+- **数字格式**：千位分隔符使用英文逗号（`1,000` 而非 `1，000`）
+- **数据强调**：**加粗**重要观点和关键数字
 
-### Titling Constraints
-- **Numbering**: Use standard numbering (`1.`, `1.1`) directly followed by the title
-- **Forbidden Prefixes**: Do NOT use "Chapter", "Part", "Section" as prefixes
-- **Allowed Tone Words**: Analysis, Profiling, 概览, Insights, Assessment
-- **Forbidden Words**: "Decoding", "DNA", "Secrets", "Mindscape", "Solar System", "Unlocking"
+### 标题约束
+- **编号**：使用标准编号（`1.`、`1.1`）直接后跟标题
+- **禁止前缀**：不要使用"第X章"、"部分"、"节"作为前缀
+- **允许语气词**：分析、画像、概览、洞察、评估
+- **禁用词**："解码"、"DNA"、"秘密"、"心智图"、"太阳系"、"解锁"
 
-### Sub-Chapter Conclusions
-- **Requirement**: End each sub-chapter with a robust analytical paragraph (min. 200 words).
-- **Narrative Flow**: This paragraph must look like a natural continuation of the text. It must synthesize the section's findings into a strategic judgment.
-- **Content Logic**:
-    1.  Synthesize the conflicting or reinforcing data points above.
-    2.  Reveal the *underlying* user tension or opportunity.
-    3.  Key Insight: **Optional**: Only if you have a concise, punchy "One-Liner Truth", place it at the very end using a **Blockquote** (`>`) to anchor the section.
+### 子章节结论
+- **要求**：每个子章节以稳健的分析段落结束（至少 200 字）。
+- **叙述流**：此段落必须看起来像是文本的自然延续。它必须将该节的发现综合为战略判断。
+- **内容逻辑**：
+    1. 综合上述冲突或相互印证的数据点。
+    2. 揭示*潜在*的用户张力或机会。
+    3. 关键洞察：**可选**：如果你有简洁、有力的"一句话真相"，放在最后使用**引用块**（`>`）锚定该节。
 
-### Insight Depth (The "So What" Chain)
+### 洞察深度（"意味着什么"链）
 
-Every insight must connect **Data → User Psychology → Strategy Implication**:
-
-```
-❌ Bad: "Females are 60%. Strategy: Target females."
-
-✅ Good: "Females constitute 60% with a high TGI of 180. **This suggests**
-   the purchase decision is driven by aesthetic and social validation
-   rather than pure utility. **Consequently**, media spend should pivot
-   towards visual-heavy platforms (e.g., RED/Instagram) to maximize CTR,
-   treating male audiences only as a secondary gift-giving segment."
-```
-
-### References
-- **Inline**: Use markdown links for sources (e.g. `[Source Title](URL)`) when using External Search Findings
-- **References section**: Formatted strictly per **GB/T 7714-2015**
-
-### Markdown Rules
-- **Immediate Start**: Begin directly with `# Report Title` — no introductory text
-- **No Separators**: Do NOT use horizontal rules (`---`)
-
-## Report Structure Template
-
-```markdown
-# [Report Title]
-
-## Abstract
-[Executive summary with key takeaways]
-
-## 1. Introduction
-[Background, objectives, methodology]
-
-## 2. [Body Chapter Title]
-### 2.1 [Sub-chapter Title]
-![Chart 描述](chart_file_path)
-
-| Metric | Brand A | Brand B |
-|--------|---------|--------|
-| ... | ... | ... |
-
-[Integrated narrative analysis: What → Why → So What, min. 200 words]
-
-> [Optional: One-liner strategic truth]
-
-### 2.2 [Sub-chapter Title]
-...
-
-## N+1. Conclusion
-[Pure objective synthesis, NO bullet points, neutral tone]
-[Para 1: The fundamental nature of the group/market]
-[Para 2: Core tension or behavior pattern]
-[Final: One or two sentences stating the objective truth]
-
-## N+2. References
-[1] Author. Title[EB/OL]. URL, Date.
-[2] ...
-```
-
-## Complete 示例
-
-### Phase 1 示例: Framework Generation
-
-User provides: Research subject "Gen-Z Skincare Market Analysis"
-
-**Phase 1 output (Analysis Framework):**
-
-```markdown
-# Gen-Z Skincare Market Analysis Framework
-
-## Research 概述
-- **Research Subject**: Gen-Z Skincare Market Deep Analysis
-- **Scope**: China market, 2020-2025, consumers aged 18-27
-- **Analysis Domain**: Market Analysis + Consumer Insights
-- **Core Research Questions**:
-  1. What is the size and growth momentum of the Gen-Z skincare market?
-  2. What is unique about Gen-Z consumer skincare behavior patterns?
-  3. How can brands effectively reach and convert Gen-Z consumers?
-
-## Chapter Skeleton
-
-### 1. Market Size & Growth Trends
-- **Analysis Objective**: Quantify Gen-Z skincare market size and identify growth drivers
-- **Analysis Logic**: Total market → Segmentation → Growth rate → Driver decomposition
-- **Core Hypothesis**: Gen-Z is becoming the core engine of skincare consumption growth
-
-#### Data Requirements
-| # | Data Metric | Data Type | Suggested Sources | Search Keywords | Priority | Time Range |
-|---|-------------|-----------|-------------------|-----------------|----------|------------|
-| 1 | China skincare market total size | Quantitative | Industry reports | "China skincare market size 2024 2025" | P0 | 2020-2025 |
-| 2 | Gen-Z skincare spending share | Quantitative | Industry reports, e-commerce platforms | "Gen-Z skincare spending share youth" | P0 | Latest |
-
-#### Visualization & Content Plan
-**Chart 1**: Line chart — China Skincare Market Size Trend 2020-2025
-**Argument Structure**:
-1. What: Quantified status of market size and Gen-Z share
-2. Why: Consumption upgrade, ingredient-conscious consumers, social media driven
-3. So What: Brands should prioritize building youth-oriented product lines
-
-### 2. Consumer Profiling & Behavioral Insights
-...
-
-## Data Collection Task List
-[Consolidated P0/P1 tasks]
-```
-
-### Phase 2 示例: Report Generation
-
-After data collection, user provides: Analysis Framework + Data Summary with brand metrics + chart file paths.
-
-**Phase 2 output (Final Report) follows this flow:**
-
-1. Start with `# Gen-Z Skincare Market Deep Analysis Report`
-2. Abstract — 3-5 key takeaways in executive summary form
-3. 1. 简介 — Market context, research scope, data sources
-4. 2. Market Size & Growth Trend Analysis — Embed trend charts, comparison tables, strategic narrative
-5. 3. Consumer Profiling & Behavioral Insights — Demographics, purchase drivers, "So What" analysis
-6. 4. Brand Competitive Landscape Assessment — Brand positioning, share analysis, competitive dynamics
-7. 5. Marketing Strategy & Channel Insights — Channel effectiveness, content strategy implications
-8. 6. Conclusion — Objective synthesis in flowing prose (no bullets)
-9. 7. References — GB/T 7714-2015 formatted list
-
----
-
-## Quality Checklists
-
-### Phase 1 Quality Checklist (Analysis Framework)
-
-- [ ] Framework covers all natural analytical dimensions for the identified domain
-- [ ] Each chapter has clear Analysis Objective, Analysis Logic, and Core Hypothesis
-- [ ] Data requirements are specific, measurable, and include actionable Search Keywords
-- [ ] Every chapter has at least one visualization plan with chart type and data mapping
-- [ ] Data priorities (P0/P1/P2) are assigned — P0 items are essential for core 参数
-- [ ] Data Collection Task List is comprehensive, deduplicated, and ready for downstream execution
-- [ ] Framework adapts to the correct domain (market/finance/industry/consumer/etc.)
-
-### Phase 2 Quality Checklist (Final Report)
-
-- [ ] All planned charts generated before report writing (Step 2.3 completed first)
-- [ ] All sections present in correct order (Abstract → 简介 → Body → Conclusion → References)
-- [ ] Every sub-chapter follows "Visual Anchor → Data Contrast → Integrated Analysis"
-- [ ] Every sub-chapter ends with a min. 200-word analytical paragraph
-- [ ] All insights follow the "Data → User Psychology → Strategy Implication" chain
-- [ ] All headings use proper numbering (no "Chapter/Part/Section" prefixes)
-- [ ] Charts are embedded with `![描述](path)` syntax
-- [ ] Numbers use English commas for thousands separators
-- [ ] Inline references use markdown links where applicable
-- [ ] References section follows GB/T 7714-2015
-- [ ] No horizontal rules (`---`) in the document
-- [ ] Conclusion uses flowing prose — no bullet points
-- [ ] Report starts directly with `#` title — no preamble
-- [ ] Missing P0 data is explicitly flagged in the report
-
-## Output Format
-
-- **Phase 1**: Output the complete Analysis Framework in **Markdown** format
-- **Phase 2**: Output the complete Report in **Markdown** format
-
-## Settings
+每个洞察必须连接**数据 → 用户心理 → 战略启示**：
 
 ```
-output_locale = zh_CN  # configurable per user request
+❌ 错误："女性占 60%。策略：针对女性。"
+
+✅ 正确："女性占 60%，TGI 高达 180。**这表明**购买决策由审美和社交验证驱动，
+   而非纯粹实用。**因此**，媒体支出应转向视觉重度平台（如小红书/Instagram）
+   以最大化点击率，将男性受众仅作为次要的送礼群体。"
+```
+
+### 参考文献
+- **内联**：使用外部搜索发现时使用 markdown 链接作为来源（例如 `[来源标题](URL)`）
+- **参考文献节**：严格按 **GB/T 7714-2015** 格式
+
+### Markdown 规则
+- **立即开始**：直接以 `# 报告标题` 开始——无介绍性文本
+- **无分隔符**：不要使用水平线（`---`）
+
+## 输出格式
+
+- **阶段 1**：以 **Markdown** 格式输出完整分析框架
+- **阶段 2**：以 **Markdown** 格式输出完整报告
+
+## 设置
+
+```
+output_locale = zh_CN  # 可根据用户请求配置
 reasoning_locale = en
 ```
 
-## 注意
+## 注意事项
 
-- This skill operates in **two phases** of a multi-step agentic workflow:
-  - **Phase 1** produces the analysis framework and data collection requirements
-  - **Data collection** is performed by other skills (deep-research, data-analysis, etc.)
-  - **Phase 2** receives the collected data and produces the final report
-- Dynamic titling: **Rewrite** topics from the Framework into professional, concise subject-based headers
-- The Conclusion section must contain **NO** detailed recommendations — those belong in the preceding body chapters
-- Each statement in the report must be supported by data points from the input Data Summary
-- The framework should adapt its analytical dimensions and depth to the specific domain (financial analysis uses different frameworks than consumer insights)
-- When the research subject is ambiguous, default to the broadest reasonable scope and 注意 assumptions
+- 本技能在多步骤代理工作流的**两个阶段**中运行：
+  - **阶段 1** 产出分析框架和数据收集需求
+  - **数据收集**由其他技能执行（deep-research、data-analysis 等）
+  - **阶段 2** 接收收集的数据并产出最终报告
+- 动态标题：将框架中的主题**重写**为专业、简洁的基于主题的标题
+- 结论节必须**不**包含详细建议——那些属于前面的主体章节
+- 报告中的每项陈述必须由输入数据摘要中的数据点支持
+- 框架应根据特定领域调整其分析维度和深度（财务分析使用与消费者洞察不同的框架）
+- 当研究主题模糊时，默认使用最广泛的合理范围并注意假设

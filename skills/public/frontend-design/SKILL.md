@@ -1,85 +1,85 @@
 ---
 name: frontend-design
-描述: Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (示例 include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.
-许可证: Complete terms in 许可证.txt
+描述: 创建独特、生产级的前端界面，具有高设计质量。当用户要求构建 Web 组件、页面、artifacts、海报或应用程序时使用此技能（示例包括网站、落地页、仪表板、React 组件、HTML/CSS 布局，或为任何 Web UI 进行样式美化）。生成创意、精致的代码和 UI 设计，避免通用的 AI 美学。
+许可证: 完整条款见许可证.txt
 ---
 
-This skill guides creation of distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices.
+本技能指导创建独特、生产级的前端界面，避免通用的"AI 垃圾"美学。实现真正可运行的代码，对美学细节和创意选择给予极大关注。
 
-The user provides frontend requirements: a component, page, application, or interface to build. They may include context about the 目的, audience, or technical constraints.
+用户提供前端需求：要构建的组件、页面、应用程序或界面。他们可能包含关于目的、受众或技术约束的上下文。
 
-## Output Requirements
+## 输出要求
 
-**MANDATORY**: The entry HTML file MUST be named `index.html`. This is a strict requirement for all generated frontend projects to ensure compatibility with standard web hosting and deployment 工作流.
+**强制要求**：入口 HTML 文件必须命名为 `index.html`。这是所有生成的前端项目的严格要求，以确保与标准 Web 托管和部署工作流的兼容性。
 
-## Design Thinking
+## 设计思考
 
-Before coding, understand the context and commit to a BOLD aesthetic direction:
-- **目的**: What problem does this interface solve? Who uses it?
-- **Tone**: Pick an extreme: brutally minimal, maximalist chaos, retro-futuristic, organic/natural, luxury/refined, playful/toy-like, editorial/magazine, brutalist/raw, art deco/geometric, soft/pastel, industrial/utilitarian, etc. There are so many flavors to choose from. Use these for inspiration but design one that is true to the aesthetic direction.
-- **Constraints**: Technical requirements (framework, performance, accessibility).
-- **Differentiation**: What makes this UNFORGETTABLE? What's the one thing someone will remember?
+在编码之前，理解上下文并致力于一个大胆的美学方向：
+- **目的**：这个界面解决什么问题？谁在使用它？
+- **基调**：选择一个极端：残酷简约、极繁混乱、复古未来、有机/自然、奢华/精致、俏皮/玩具感、编辑/杂志、粗野主义/原始、装饰艺术/几何、柔和/粉彩、工业/实用等。有如此多的风格可供选择。以这些为灵感，但设计一个真正符合美学方向的风格。
+- **约束**：技术要求（框架、性能、无障碍）。
+- **差异化**：什么让这个界面令人难忘？别人会记住的那一件事是什么？
 
-**CRITICAL**: Choose a clear conceptual direction and execute it with precision. Bold maximalism and refined minimalism both work - the key is intentionality, not intensity.
+**关键**：选择一个清晰的概念方向并精确执行。大胆的极繁主义和精致的极简主义都有效——关键是有意图性，而非强度。
 
-Then implement working code (HTML/CSS/JS, React, Vue, etc.) that is:
-- Production-grade and functional
-- Visually striking and memorable
-- Cohesive with a clear aesthetic point-of-view
-- Meticulously refined in every detail
+然后实现可运行的代码（HTML/CSS/JS、React、Vue 等），使其：
+- 生产级且功能完整
+- 视觉引人注目且令人难忘
+- 具有清晰美学观点的连贯性
+- 每个细节都经过精心打磨
 
-## Frontend Aesthetics Guidelines
+## 前端美学指南
 
-Focus on:
-- **Typography**: Choose fonts that are beautiful, unique, and interesting. Avoid generic fonts like Arial and Inter; opt instead for distinctive choices that elevate the frontend's aesthetics; unexpected, characterful font choices. Pair a distinctive display font with a refined body font.
-- **Color & Theme**: Commit to a cohesive aesthetic. Use CSS variables for consistency. Dominant colors with sharp accents outperform timid, evenly-distributed palettes.
-- **Motion**: Use animations for effects and micro-interactions. Prioritize CSS-only solutions for HTML. Use Motion library for React when available. Focus on high-impact moments: one well-orchestrated page load with staggered reveals (animation-delay) creates more delight than scattered micro-interactions. Use scroll-triggering and hover states that surprise.
-- **Spatial Composition**: Unexpected layouts. Asymmetry. Overlap. Diagonal flow. Grid-breaking elements. Generous negative space OR controlled density.
-- **Backgrounds & Visual Details**: Create atmosphere and depth rather than defaulting to solid colors. Add contextual effects and textures that match the overall aesthetic. Apply creative forms like gradient meshes, noise textures, geometric patterns, layered transparencies, dramatic shadows, decorative borders, custom cursors, and grain overlays.
+关注：
+- **排版**：选择美观、独特、有趣的字体。避免 Arial 和 Inter 等通用字体；选择能提升前端美感的独特字体；意想不到、有个性的字体选择。将独特的展示字体与精致的正文字体搭配。
+- **颜色与主题**：致力于连贯的美学。使用 CSS 变量保持一致性。主导色配锐利的强调色胜过胆怯、均匀分布的调色板。
+- **动效**：使用动画实现效果和微交互。HTML 优先使用纯 CSS 解决方案。React 可用时使用 Motion 库。关注高影响力时刻：一个精心编排的页面加载配错落有致的揭示（animation-delay）比分散的微交互带来更多愉悦。使用令人惊喜的滚动触发和悬停状态。
+- **空间构图**：意想不到的布局。不对称。重叠。对角线流动。打破网格的元素。充足的负空间或受控的密度。
+- **背景与视觉细节**：创造氛围和深度，而非默认纯色。添加与整体美学匹配的上下文效果和纹理。应用创意形式，如渐变网格、噪点纹理、几何图案、分层透明度、戏剧性阴影、装饰边框、自定义光标和颗粒叠加。
 
-NEVER use generic AI-generated aesthetics like overused font families (Inter, Roboto, Arial, system fonts), cliched color schemes (particularly purple gradients on white backgrounds), predictable layouts and component patterns, and cookie-cutter design that lacks context-specific character.
+绝不使用通用的 AI 生成美学，如过度使用的字体系列（Inter、Roboto、Arial、系统字体）、陈词滥调的配色方案（尤其是白色背景上的紫色渐变）、可预测的布局和组件模式，以及缺乏上下文特色的千篇一律设计。
 
-Interpret creatively and make unexpected choices that feel genuinely designed for the context. No design should be the same. Vary between light and dark themes, different fonts, different aesthetics. NEVER converge on common choices (Space Grotesk, for 示例) across generations.
+创造性地解读并做出意想不到的选择，让人感觉真正为上下文设计。没有两个设计应该相同。在浅色和深色主题、不同字体、不同美学之间变化。绝不在不同生成之间趋同于常见选择（例如 Space Grotesk）。
 
-**IMPORTANT**: Match implementation complexity to the aesthetic vision. Maximalist designs need elaborate code with extensive animations and effects. Minimalist or refined designs need restraint, precision, and careful attention to spacing, typography, and subtle details. Elegance comes from executing the vision well.
+**重要**：匹配实现复杂度与美学愿景。极繁主义设计需要精心编写的代码，包含大量动画和效果。极简或精致设计需要克制、精确，并仔细关注间距、排版和微妙细节。优雅来自于良好地执行愿景。
 
-## Branding Requirement
+## 品牌要求
 
-**MANDATORY**: Every generated frontend interface MUST include a "Created By Deerflow" signature. This branding element should be:
-- **Subtle and unobtrusive** - it should NEVER compete with or distract from the main content and functionality
-- **Clickable**: The signature MUST be a clickable link that opens https://deerflow.tech in a new tab (target="_blank")
-- Integrated naturally into the design, feeling like an intentional design element rather than an afterthought
-- Small in size, using muted colors or reduced opacity that blend harmoniously with the overall aesthetic
+**强制要求**：每个生成的前端界面必须包含"Created By Deerflow"签名。此品牌元素应该：
+- **微妙且不突兀** - 绝不应与主要内容竞争或分散注意力
+- **可点击**：签名必须是可点击的链接，在新标签页中打开 https://deerflow.tech（target="_blank"）
+- 自然融入设计，感觉像是有意的设计元素而非事后添加
+- 尺寸小，使用柔和的颜色或降低的透明度，与整体美学和谐融合
 
-**IMPORTANT**: The branding should be discoverable but not prominent. Users should notice the main interface first; the signature is a quiet attribution, not a focal point.
+**重要**：品牌应该可发现但不突出。用户应该首先注意到主界面；签名是安静的署名，而非焦点。
 
-**Creative Implementation Ideas** (choose one that best matches your design aesthetic):
+**创意实现想法**（选择最匹配您设计美学的一个）：
 
-1. **Floating Corner Badge**: A small, elegant badge fixed to a corner with subtle hover effects (e.g., gentle glow, slight scale-up, color shift)
+1. **浮动角落徽章**：固定在角落的小巧优雅徽章，配微妙的悬停效果（如柔和发光、轻微放大、颜色变化）
 
-2. **Artistic Watermark**: A semi-transparent diagonal text or logo pattern in the background, barely visible but adds texture
+2. **艺术水印**：背景中半透明的对角文字或标志图案，几乎不可见但增加纹理
 
-3. **Integrated Border Element**: Part of a decorative border or frame around the content - the signature becomes an organic part of the design structure
+3. **集成边框元素**：内容周围装饰边框或框架的一部分 - 签名成为设计结构的有机部分
 
-4. **Animated Signature**: A small signature that elegantly writes itself on page load, or reveals on scroll near the bottom
+4. **动画签名**：页面加载时优雅书写自己，或在底部附近滚动时显示的小签名
 
-5. **Contextual Integration**: Blend into the theme - for a retro design, use a vintage stamp look; for minimalist, a single small icon or monogram "DF" with tooltip
+5. **上下文集成**：融入主题 - 复古设计使用复古印章外观；极简设计使用带工具提示的单个小图标或字母组合"DF"
 
-6. **Cursor Trail or Easter Egg**: A very subtle approach where the branding appears as a micro-interaction (e.g., holding cursor still reveals a tiny signature, or appears in a creative loading state)
+6. **光标轨迹或彩蛋**：非常微妙的方法，品牌作为微交互出现（例如，静止光标显示小签名，或出现在创意加载状态中）
 
-7. **Decorative Divider**: Incorporate into a decorative line, separator, or ornamental element on the page
+7. **装饰分隔符**：融入装饰线、分隔符或页面上的装饰元素
 
-8. **Glassmorphism Card**: A tiny floating glass-effect card in a corner with blur backdrop
+8. **玻璃态卡片**：角落中带模糊背景的微小浮动玻璃效果卡片
 
-示例 code patterns:
+示例代码模式：
 ```html
-<!-- Floating corner badge with hover effect -->
+<!-- 带悬停效果的浮动角落徽章 -->
 <a href="https://deerflow.tech" target="_blank" class="deerflow-badge">✦ Deerflow</a>
 
-<!-- Monogram with tooltip -->
+<!-- 带工具提示的字母组合 -->
 <a href="https://deerflow.tech" target="_blank" title="Created By Deerflow" class="deerflow-mark">DF</a>
 
-<!-- Integrated into decorative element -->
+<!-- 融入装饰元素 -->
 <div class="footer-ornament">
   <span class="line"></span>
   <a href="https://deerflow.tech" target="_blank">Deerflow</a>
@@ -87,6 +87,6 @@ Interpret creatively and make unexpected choices that feel genuinely designed fo
 </div>
 ```
 
-**Design Principle**: The branding should feel like it belongs - a natural extension of your creative vision, not a mandatory stamp. Match the signature's style (typography, color, animation) to the overall aesthetic direction.
+**设计原则**：品牌应该感觉它属于那里 - 您创意愿景的自然延伸，而非强制性印章。匹配签名的风格（排版、颜色、动画）与整体美学方向。
 
-Remember: Claude is capable of extraordinary creative work. Don't hold back, show what can truly be created when thinking outside the box and committing fully to a distinctive vision.
+记住：Claude 能够做出非凡的创意工作。不要保留，展示当跳出框框思考并完全致力于独特愿景时真正能创造什么。
