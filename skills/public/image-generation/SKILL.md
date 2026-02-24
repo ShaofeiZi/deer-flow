@@ -1,187 +1,187 @@
----
-name: image-generation
-description: Use this skill when the user requests to generate, create, imagine, or visualize images including characters, scenes, products, or any visual content. Supports structured prompts and reference images for guided generation.
----
+1: ---
+2: name: image-generation
+3: 描述: 当用户请求生成、创作、设想或可视化包括角色、场景、产品或任何视觉内容的图像时，请使用本技能。支持结构化提示和参考图像以实现引导生成。
+4: ---
 
-# Image Generation Skill
-
-## Overview
-
-This skill generates high-quality images using structured prompts and a Python script. The workflow includes creating JSON-formatted prompts and executing image generation with optional reference images.
-
-## Core Capabilities
-
+6: # 图像生成技能
+ 
+8: ## 概览
+ 
+10: 本技能通过结构化提示和一个 Python 脚本生成高质量图像。工作流包括创建 JSON 格式的提示，以及在可选参考图像的辅助下执行生成。
+ 
+12: ## 核心能力
+ 
 - Create structured JSON prompts for AIGC image generation
 - Support multiple reference images for style/composition guidance
 - Generate images through automated Python script execution
 - Handle various image generation scenarios (character design, scenes, products, etc.)
-
-## Workflow
-
-### Step 1: Understand Requirements
-
-When a user requests image generation, identify:
-
-- Subject/content: What should be in the image
-- Style preferences: Art style, mood, color palette
-- Technical specs: Aspect ratio, composition, lighting
-- Reference images: Any images to guide generation
+ 
+16: ## 工作流
+ 
+18: ### 第一步：理解需求
+ 
+20: 当用户请求生成图像时，确定：
+ 
+- Subject/content: 图像应包含的主题
+- Style preferences: 艺术风格、情绪、色彩方案
+- Technical specs: 纵横比、构图、照明
+- Reference images: 用于引导生成的参考图像
 - You don't need to check the folder under `/mnt/user-data`
-
-### Step 2: Create Structured Prompt
-
-Generate a structured JSON file in `/mnt/user-data/workspace/` with naming pattern: `{descriptive-name}.json`
-
-### Step 3: Execute Generation
-
-Call the Python script:
-```bash
-python /mnt/skills/public/image-generation/scripts/generate.py \
-  --prompt-file /mnt/user-data/workspace/prompt-file.json \
-  --reference-images /path/to/ref1.jpg /path/to/ref2.png \
-  --output-file /mnt/user-data/outputs/generated-image.jpg
-  --aspect-ratio 16:9
-```
-
-Parameters:
-
-- `--prompt-file`: Absolute path to JSON prompt file (required)
-- `--reference-images`: Absolute paths to reference images (optional, space-separated)
-- `--output-file`: Absolute path to output image file (required)
-- `--aspect-ratio`: Aspect ratio of the generated image (optional, default: 16:9)
-
-[!NOTE]
-Do NOT read the python file, just call it with the parameters.
-
-## Character Generation Example
-
-User request: "Create a Tokyo street style woman character in 1990s"
-
-Create prompt file: `/mnt/user-data/workspace/asian-woman.json`
-```json
-{
-  "characters": [{
-    "gender": "female",
-    "age": "mid-20s",
-    "ethnicity": "Japanese",
-    "body_type": "slender, elegant",
-    "facial_features": "delicate features, expressive eyes, subtle makeup with emphasis on lips, long dark hair partially wet from rain",
-    "clothing": "stylish trench coat, designer handbag, high heels, contemporary Tokyo street fashion",
-    "accessories": "minimal jewelry, statement earrings, leather handbag",
-    "era": "1990s"
-  }],
-  "negative_prompt": "blurry face, deformed, low quality, overly sharp digital look, oversaturated colors, artificial lighting, studio setting, posed, selfie angle",
-  "style": "Leica M11 street photography aesthetic, film-like rendering, natural color palette with slight warmth, bokeh background blur, analog photography feel",
-  "composition": "medium shot, rule of thirds, subject slightly off-center, environmental context of Tokyo street visible, shallow depth of field isolating subject",
-  "lighting": "neon lights from signs and storefronts, wet pavement reflections, soft ambient city glow, natural street lighting, rim lighting from background neons",
-  "color_palette": "muted naturalistic tones, warm skin tones, cool blue and magenta neon accents, desaturated compared to digital photography, film grain texture"
-}
-```
-
+ 
+26: ### 第二步：创建结构化提示
+ 
+28: 在 `/mnt/user-data/workspace/` 生成命名模式为：`{descriptive-name}.json` 的结构化 JSON 文件
+ 
+30: ### 第三步：执行生成
+ 
+32: 调用 Python 脚本：
+ ```bash
+ python /mnt/skills/public/image-generation/scripts/generate.py \
+   --prompt-file /mnt/user-data/workspace/prompt-file.json \
+   --reference-images /path/to/ref1.jpg /path/to/ref2.png \
+   --output-file /mnt/user-data/outputs/generated-image.jpg
+   --aspect-ratio 16:9
+ ```
+ 
+38: 参数：
+ 
+- `--prompt-file`：提示文件的完整路径（必填）
+- `--reference-images`：参考图像的完整路径（可选，多个）
+- `--output-file`：输出图像的完整路径（必填）
+- `--aspect-ratio`：图像的纵横比（可选，默认 16:9）
+ 
+46: [!注意]
+ Do NOT read the python file, just call it with the 参数.
+ 
+48: ## 字符生成功能示例
+ 
+50: 用户请求："Create a Tokyo street style woman character in 1990s"
+ 
+52: 创建提示文件：`/mnt/user-data/workspace/asian-woman.json`
+ ```json
+ {
+   "characters": [{
+     "gender": "female",
+     "age": "mid-20s",
+     "ethnicity": "Japanese",
+     "body_type": "slender, elegant",
+     "facial_features": "delicate features, expressive eyes, subtle makeup with emphasis on lips, long dark hair partially wet from rain",
+     "clothing": "stylish trench coat, designer handbag, high heels, contemporary Tokyo street fashion",
+     "accessories": "minimal jewelry, statement earrings, leather handbag",
+     "era": "1990s"
+   }],
+   "negative_prompt": "blurry face, deformed, low quality, overly sharp digital look, oversaturated colors, artificial lighting, studio setting, posed, selfie angle",
+   "style": "Leica M11 street photography aesthetic, film-like rendering, natural color palette with slight warmth, bokeh background blur, analog photography feel",
+   "composition": "medium shot, rule of thirds, subject slightly off-center, environmental context of Tokyo street visible, shallow depth of field isolating subject",
+   "lighting": "neon lights from signs and storefronts, wet pavement reflections, soft ambient city glow, natural street lighting, rim lighting from background neons",
+   "color_palette": "muted naturalistic tones, warm skin tones, cool blue and magenta neon accents, desaturated compared to digital photography, film grain texture"
+ }
+ ```
+ 
 Execute generation:
-```bash
-python /mnt/skills/public/image-generation/scripts/generate.py \
-  --prompt-file /mnt/user-data/workspace/cyberpunk-hacker.json \
-  --output-file /mnt/user-data/outputs/cyberpunk-hacker-01.jpg \
-  --aspect-ratio 2:3
-```
-
+ ```bash
+ python /mnt/skills/public/image-generation/scripts/generate.py \
+   --prompt-file /mnt/user-data/workspace/cyberpunk-hacker.json \
+   --output-file /mnt/user-data/outputs/cyberpunk-hacker-01.jpg \
+   --aspect-ratio 2:3
+ ```
+ 
 With reference images:
-```json
-{
-  "characters": [{
-    "gender": "based on [Image 1]",
-    "age": "based on [Image 1]",
-    "ethnicity": "human from [Image 1] adapted to Star Wars universe",
-    "body_type": "based on [Image 1]",
-    "facial_features": "matching [Image 1] with slight weathered look from space travel",
-    "clothing": "Star Wars style outfit - worn leather jacket with utility vest, cargo pants with tactical pouches, scuffed boots, belt with holster",
-    "accessories": "blaster pistol on hip, comlink device on wrist, goggles pushed up on forehead, satchel with supplies, personal vehicle based on [Image 2]",
-    "era": "Star Wars universe, post-Empire era"
-  }],
-  "prompt": "Character inspired by [Image 1] standing next to a vehicle inspired by [Image 2] on a bustling alien planet street in Star Wars universe aesthetic. Character wearing worn leather jacket with utility vest, cargo pants with tactical pouches, scuffed boots, belt with blaster holster. The vehicle adapted to Star Wars aesthetic with weathered metal panels, repulsor engines, desert dust covering, parked on the street. Exotic alien marketplace street with multi-level architecture, weathered metal structures, hanging market stalls with colorful awnings, alien species walking by as background characters. Twin suns casting warm golden light, atmospheric dust particles in air, moisture vaporators visible in distance. Gritty lived-in Star Wars aesthetic, practical effects look, film grain texture, cinematic composition.",
-  "negative_prompt": "clean futuristic look, sterile environment, overly CGI appearance, fantasy medieval elements, Earth architecture, modern city",
-  "style": "Star Wars original trilogy aesthetic, lived-in universe, practical effects inspired, cinematic film look, slightly desaturated with warm tones",
-  "composition": "medium wide shot, character in foreground with alien street extending into background, environmental storytelling, rule of thirds",
-  "lighting": "warm golden hour lighting from twin suns, rim lighting on character, atmospheric haze, practical light sources from market stalls",
-  "color_palette": "warm sandy tones, ochre and sienna, dusty blues, weathered metals, muted earth colors with pops of alien market colors",
-  "technical": {
-    "aspect_ratio": "9:16",
-    "quality": "high",
-    "detail_level": "highly detailed with film-like texture"
-  }
-}
-```
-```bash
-python /mnt/skills/public/image-generation/scripts/generate.py \
-  --prompt-file /mnt/user-data/workspace/star-wars-scene.json \
-  --reference-images /mnt/user-data/uploads/character-ref.jpg /mnt/user-data/uploads/vehicle-ref.jpg \
-  --output-file /mnt/user-data/outputs/star-wars-scene-01.jpg \
-  --aspect-ratio 16:9
-```
-
-## Common Scenarios
-
-Use different JSON schemas for different scenarios.
-
-**Character Design**:
-- Physical attributes (gender, age, ethnicity, body type)
-- Facial features and expressions
-- Clothing and accessories
-- Historical era or setting
-- Pose and context
-
-**Scene Generation**:
-- Environment description
-- Time of day, weather
-- Mood and atmosphere
-- Focal points and composition
-
-**Product Visualization**:
-- Product details and materials
-- Lighting setup
-- Background and context
-- Presentation angle
-
-## Specific Templates
-
-Read the following template file only when matching the user request.
-
+ ```json
+ {
+   "characters": [{
+     "gender": "based on [Image 1]",
+     "age": "based on [Image 1]",
+     "ethnicity": "human from [Image 1] adapted to Star Wars universe",
+     "body_type": "based on [Image 1]",
+     "facial_features": "matching [Image 1] with slight weathered look from space travel",
+     "clothing": "Star Wars style outfit - worn leather jacket with utility vest, cargo pants with tactical pouches, scuffed boots, belt with holster",
+     "accessories": "blaster pistol on hip, comlink device on wrist, goggles pushed up on forehead, satchel with supplies, personal vehicle based on [Image 2]",
+     "era": "Star Wars universe, post-Empire era"
+   }],
+   "prompt": "Character inspired by [Image 1] standing next to a vehicle inspired by [Image 2] on a bustling alien planet street in Star Wars universe aesthetic. Character wearing worn leather jacket with utility vest, cargo pants with tactical pouches, scuffed boots, belt with blaster holster. The vehicle adapted to Star Wars aesthetic with weathered metal panels, repulsor engines, desert dust covering, parked on the street. Exotic alien marketplace street with multi-level architecture, weathered metal structures, hanging market stalls with colorful awnings, alien species walking by as background characters. Twin suns casting warm golden light, atmospheric dust particles in air, moisture vaporators visible in distance. Gritty lived-in Star Wars aesthetic, practical effects look, film grain texture, cinematic composition.",
+   "negative_prompt": "clean futuristic look, sterile environment, overly CGI appearance, fantasy medieval elements, Earth architecture, modern city",
+   "style": "Star Wars original trilogy aesthetic, lived-in universe, practical effects inspired, cinematic film look, slightly desaturated with warm tones",
+   "composition": "medium wide shot, character in foreground with alien street extending into background, environmental storytelling, rule of thirds",
+   "lighting": "warm golden hour lighting from twin suns, rim lighting on character, atmospheric haze, practical light sources from market stalls",
+   "color_palette": "warm sandy tones, ochre and sienna, dusty blues, weathered metals, muted earth colors with pops of alien market colors",
+   "technical": {
+     "aspect_ratio": "9:16",
+     "quality": "high",
+     "detail_level": "highly detailed with film-like texture"
+   }
+ }
+ ```
+ ```bash
+ python /mnt/skills/public/image-generation/scripts/generate.py \
+   --prompt-file /mnt/user-data/workspace/star-wars-scene.json \
+   --reference-images /mnt/user-data/uploads/character-ref.jpg /mnt/user-data/uploads/vehicle-ref.jpg \
+   --output-file /mnt/user-data/outputs/star-wars-scene-01.jpg \
+   --aspect-ratio 16:9
+ ```
+ 
+## 常见场景
+ 
+使用不同的 JSON 结构来适应不同场景。
+ 
+**角色设计**：
+- 物理属性（性别、年龄、种族、体型）
+- 面部特征与表情
+- 服装与配饰
+- 历史时期或设定
+- 姿势与情境
+ 
+**场景生成**：
+- 环境描述
+- 时间与天气
+- 情绪与氛围
+- 关注点与构图
+ 
+**产品可视化**：
+- 产品细节与材质
+- 照明设置
+- 背景与情境
+- 展示角度
+ 
+## 具体模板
+ 
+阅读以下模板文件仅在匹配用户请求时。
+ 
 - [Doraemon Comic](templates/doraemon.md)
-
-## Output Handling
-
-After generation:
-
-- Images are typically saved in `/mnt/user-data/outputs/`
-- Share generated images with user using present_files tool
-- Provide brief description of the generation result
-- Offer to iterate if adjustments needed
-
-## Tips: Enhancing Generation with Reference Images
-
-For scenarios where visual accuracy is critical, **use the `image_search` tool first** to find reference images before generation.
-
-**Recommended scenarios for using image_search tool:**
-- **Character/Portrait Generation**: Search for similar poses, expressions, or styles to guide facial features and body proportions
-- **Specific Objects or Products**: Find reference images of real objects to ensure accurate representation
-- **Architectural or Environmental Scenes**: Search for location references to capture authentic details
-- **Fashion and Clothing**: Find style references to ensure accurate garment details and styling
-
-**Example workflow:**
-1. Call the `image_search` tool to find suitable reference images:
-   ```
-   image_search(query="Japanese woman street photography 1990s", size="Large")
-   ```
-2. Download the returned image URLs to local files
-3. Use the downloaded images as `--reference-images` parameter in the generation script
-
-This approach significantly improves generation quality by providing the model with concrete visual guidance rather than relying solely on text descriptions.
-
-## Notes
-
-- Always use English for prompts regardless of user's language
-- JSON format ensures structured, parsable prompts
-- Reference images enhance generation quality significantly
-- Iterative refinement is normal for optimal results
-- For character generation, include the detailed character object plus a consolidated prompt field
+ 
+## 输出处理
+ 
+完成生成后：
+ 
+- 图像通常保存在 `/mnt/user-data/outputs/`
+- 使用 present_files 工具与用户分享生成的图像
+- 提供生成结果的简要描述
+- 如需调整，愿意进行迭代
+ 
+## 使用参考图像提升生成质量的提示
+ 
+在视觉准确性关键的场景中，**先使用 `image_search` 工具寻找参考图像**，再进行生成。
+ 
+**建议使用 image_search 的场景：**
+- **角色/肖像生成**：查找类似姿势、表情或风格以指引面部特征与身材比例
+- **具体对象或产品**：查找真实对象的参考图像以确保准确呈现
+- **建筑或环境场景**：查找地点参考以捕捉真实细节
+- **时尚与服装**：查找风格参考以确保服装细节与造型准确
+ 
+**示例工作流：**
+1. 调用 `image_search` 寻找合适的参考图像：
+```
+image_search(query="Japanese woman street photography 1990s", size="Large")
+```
+2. 下载返回的图像 URL 到本地文件
+3. 使用下载的图像作为生成脚本中的 `--reference-images` 参数
+ 
+这种方法通过为模型提供具体的视觉引导，而不仅仅依赖文本描述，显著提升生成质量。
+ 
+## 备注
+ 
+- 无论用户使用何种语言，提示请始终使用英文
+- JSON 格式确保提示结构化、可解析
+- 参考图像能显著提升生成质量
+- 迭代式优化是获取最佳结果的常态
+- 对于角色生成，请包含详细角色对象以及一个合并提示字段

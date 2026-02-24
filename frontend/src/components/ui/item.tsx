@@ -5,6 +5,9 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
 
+/**
+ * 【函数功能描述】
+ */
 function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -16,6 +19,9 @@ function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function ItemSeparator({
   className,
   ...props
@@ -51,6 +57,9 @@ const itemVariants = cva(
   }
 )
 
+/**
+ * 【函数功能描述】
+ */
 function Item({
   className,
   variant = "default",
@@ -88,6 +97,9 @@ const itemMediaVariants = cva(
   }
 )
 
+/**
+ * 【函数功能描述】
+ */
 function ItemMedia({
   className,
   variant = "default",
@@ -103,6 +115,9 @@ function ItemMedia({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function ItemContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -116,6 +131,9 @@ function ItemContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -129,6 +147,9 @@ function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function ItemDescription({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <p
@@ -143,6 +164,9 @@ function ItemDescription({ className, ...props }: React.ComponentProps<"p">) {
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function ItemActions({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -153,6 +177,9 @@ function ItemActions({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function ItemHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -166,6 +193,9 @@ function ItemHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function ItemFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div

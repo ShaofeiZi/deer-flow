@@ -1,11 +1,11 @@
 ---
 name: ppt-generation
-description: Use this skill when the user requests to generate, create, or make presentations (PPT/PPTX). Creates visually rich slides by generating images for each slide and composing them into a PowerPoint file.
+描述: Use this skill when the user requests to generate, create, or make presentations (PPT/PPTX). Creates visually rich slides by generating images for each slide and composing them into a PowerPoint file.
 ---
 
 # PPT Generation Skill
 
-## Overview
+## 概览
 
 This skill generates professional PowerPoint presentations by creating AI-generated images for each slide and composing them into a PPTX file. The workflow includes planning the presentation structure with a consistent visual style, generating slide images sequentially (using the previous slide as a reference for style consistency), and assembling them into a final presentation.
 
@@ -21,7 +21,7 @@ This skill generates professional PowerPoint presentations by creating AI-genera
 
 Choose one of the following styles when creating the presentation plan:
 
-| Style | Description | Best For |
+| Style | 描述 | Best For |
 |-------|-------------|----------|
 | **glassmorphism** | Frosted glass panels with blur effects, floating translucent cards, vibrant gradient backgrounds, depth through layering | Tech products, AI/SaaS demos, futuristic pitches |
 | **dark-premium** | Rich black backgrounds (#0a0a0a), luminous accent colors, subtle glow effects, luxury brand aesthetic | Premium products, executive presentations, high-end brands |
@@ -47,7 +47,7 @@ When a user requests presentation generation, identify:
 
 ### Step 2: Create Presentation Plan
 
-Create a JSON file in `/mnt/user-data/workspace/` with the presentation structure. **Important**: Include the `style` field to define the overall visual consistency.
+Create a JSON file in `/mnt/user-data/workspace/` with the presentation structure. **重要**: Include the `style` field to define the overall visual consistency.
 
 ```json
 {
@@ -153,16 +153,16 @@ python /mnt/skills/public/ppt-generation/scripts/generate.py \
   --output-file /mnt/user-data/outputs/presentation.pptx
 ```
 
-Parameters:
+参数:
 
 - `--plan-file`: Absolute path to the presentation plan JSON file (required)
 - `--slide-images`: Absolute paths to slide images in order (required, space-separated)
 - `--output-file`: Absolute path to output PPTX file (required)
 
-[!NOTE]
-Do NOT read the python file, just call it with the parameters.
+[!注意]
+Do NOT read the python file, just call it with the 参数.
 
-## Complete Example: Glassmorphism Style (最现代前卫)
+## Complete 示例: Glassmorphism Style (最现代前卫)
 
 User request: "Create a presentation about AI product launch"
 
@@ -416,10 +416,10 @@ After generation:
 - The PPTX file is saved in `/mnt/user-data/outputs/`
 - Share the generated presentation with user using `present_files` tool
 - Also share the individual slide images if requested
-- Provide brief description of the presentation
+- Provide brief 描述 of the presentation
 - Offer to iterate or regenerate specific slides if needed
 
-## Notes
+## 注意
 
 ### Critical Quality Guidelines
 
@@ -431,7 +431,7 @@ After generation:
 - Describe effects precisely: "backdrop blur 20px", "drop shadow 8px blur 30% opacity"
 - Reference real design systems: "visionOS aesthetic", "Stripe website style", "Bloomberg Businessweek layout"
 
-**Visual Consistency (Most Important):**
+**Visual Consistency (Most 重要):**
 - **Generate slides sequentially** - each slide MUST reference the previous one
 - The first slide is critical - it establishes the visual language for the entire presentation
 - In every subsequent slide prompt, explicitly state: "continuing EXACT visual style from reference image"
@@ -450,7 +450,7 @@ After generation:
 - ❌ Generic prompts like "professional slide" - be specific
 - ❌ Too many elements/text per slide - cluttered = unprofessional
 - ❌ Inconsistent colors between slides - always reference previous slide
-- ❌ Skipping the reference image parameter - this breaks visual consistency
+- ❌ Skipping the reference image 参数 - this breaks visual consistency
 - ❌ Using different design styles within one presentation
 - ❌ Generating slides in parallel - slides MUST be generated one at a time in order (slide 1 → 2 → 3 ...), never concurrently
 

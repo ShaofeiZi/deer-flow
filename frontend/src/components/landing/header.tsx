@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { NumberTicker } from "@/components/ui/number-ticker";
 import { env } from "@/env";
 
+/**
+ * 【函数功能描述】
+ */
 export function Header() {
   return (
     <header className="container-md fixed top-0 right-0 left-0 z-20 mx-auto flex h-16 items-center justify-between backdrop-blur-xs">

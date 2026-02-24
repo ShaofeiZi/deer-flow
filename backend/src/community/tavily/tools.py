@@ -1,62 +1,100 @@
+"""Tavily 社区 web_search/web_fetch 工具封装。
+
+Tavily 为可选依赖，因此采用运行时动态导入。
+"""
+
+# pyright: reportMissingImports=false, reportUnknownVariableType=false, reportUnknownMemberType=false, reportUnknownParameterType=false, reportUnknownArgumentType=false, reportOptionalMemberAccess=false, reportOperatorIssue=false
+
+import importlib
 import json
+from collections.abc import Callable
+from typing import cast
 
 from langchain.tools import tool
-from tavily import TavilyClient
 
 from src.config import get_app_config
 
 
-def _get_tavily_client() -> TavilyClient:
+def _get_tavily_client() -> object:
+    """
+    【函数功能描述】
+    
+    参数:
+        【参数名】: 【参数描述】
+    
+    返回:
+        【返回值描述】
+    """
+
     config = get_app_config().get_tool_config("web_search")
-    api_key = None
-    if config is not None and "api_key" in config.model_extra:
-        api_key = config.model_extra.get("api_key")
-    return TavilyClient(api_key=api_key)
+    extra = cast(dict[str, object], config.model_extra or {}) if config is not None else {}
+    api_key = extra.get("api_key")
+
+    tavily_mod = importlib.import_module("tavily")
+    tavily_client_cls = cast(Callable[..., object], getattr(tavily_mod, "TavilyClient"))
+    return tavily_client_cls(api_key=api_key)
 
 
 @tool("web_search", parse_docstring=True)
 def web_search_tool(query: str) -> str:
-    """Search the web.
+    """搜索网页。"""
 
-    Args:
-        query: The query to search for.
-    """
     config = get_app_config().get_tool_config("web_search")
-    max_results = 5
-    if config is not None and "max_results" in config.model_extra:
-        max_results = config.model_extra.get("max_results")
+    extra = cast(dict[str, object], config.model_extra or {}) if config is not None else {}
+    raw_max_results = extra.get("max_results")
+    if isinstance(raw_max_results, int):
+        max_results = raw_max_results
+    elif isinstance(raw_max_results, str) and raw_max_results.isdigit():
+        max_results = int(raw_max_results)
+    else:
+        max_results = 5
 
     client = _get_tavily_client()
-    res = client.search(query, max_results=max_results)
-    normalized_results = [
-        {
-            "title": result["title"],
-            "url": result["url"],
-            "snippet": result["content"],
-        }
-        for result in res["results"]
-    ]
-    json_results = json.dumps(normalized_results, indent=2, ensure_ascii=False)
-    return json_results
+    search_fn = cast(Callable[..., object], getattr(client, "search"))
+    res = cast(dict[str, object], search_fn(query, max_results=max_results))
+    results = cast(list[object], res.get("results") or [])
+
+    normalized_results: list[dict[str, str]] = []
+    for item in results:
+        if isinstance(item, dict):
+            normalized_results.append(
+                {
+                    "title": str(item.get("title", "")),
+                    "url": str(item.get("url", "")),
+                    "snippet": str(item.get("content", "")),
+                }
+            )
+
+    return json.dumps(normalized_results, indent=2, ensure_ascii=False)
 
 
 @tool("web_fetch", parse_docstring=True)
 def web_fetch_tool(url: str) -> str:
-    """Fetch the contents of a web page at a given URL.
-    Only fetch EXACT URLs that have been provided directly by the user or have been returned in results from the web_search and web_fetch tools.
-    This tool can NOT access content that requires authentication, such as private Google Docs or pages behind login walls.
-    Do NOT add www. to URLs that do NOT have them.
-    URLs must include the schema: https://example.com is a valid URL while example.com is an invalid URL.
+    """抓取指定 URL 的网页内容。
 
-    Args:
-        url: The URL to fetch the contents of.
+    仅抓取：用户直接提供的 URL，或 web_search/web_fetch 返回的 URL。
+    该工具无法访问需要认证的内容（例如私有 Google Docs 或登录后页面）。
+    URL 必须包含 schema：例如 https://example.com。
     """
+
     client = _get_tavily_client()
-    res = client.extract([url])
-    if "failed_results" in res and len(res["failed_results"]) > 0:
-        return f"Error: {res['failed_results'][0]['error']}"
-    elif "results" in res and len(res["results"]) > 0:
-        result = res["results"][0]
-        return f"# {result['title']}\n\n{result['raw_content'][:4096]}"
-    else:
-        return "Error: No results found"
+    extract_fn = cast(Callable[..., object], getattr(client, "extract"))
+    res = cast(dict[str, object], extract_fn([url]))
+
+    failed_results = cast(list[object], res.get("failed_results") or [])
+    if failed_results:
+        first = failed_results[0]
+        if isinstance(first, dict):
+            return f"Error: {first.get('error', '')}"
+        return "Error: fetch failed"
+
+    results = cast(list[object], res.get("results") or [])
+    if results:
+        first = results[0]
+        if isinstance(first, dict):
+            title = str(first.get("title", ""))
+            raw_content = str(first.get("raw_content", ""))
+            return f"# {title}\n\n{raw_content[:4096]}"
+        return "Error: Invalid result format"
+
+    return "Error: No results found"

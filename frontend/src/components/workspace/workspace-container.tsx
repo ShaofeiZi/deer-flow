@@ -18,6 +18,9 @@ import { cn } from "@/lib/utils";
 import { GithubIcon } from "./github-icon";
 import { Tooltip } from "./tooltip";
 
+/**
+ * 【函数功能描述】
+ */
 export function WorkspaceContainer({
   className,
   children,
@@ -30,6 +33,9 @@ export function WorkspaceContainer({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 export function WorkspaceHeader({
   className,
   children,
@@ -106,6 +112,9 @@ export function WorkspaceHeader({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 export function WorkspaceBody({
   className,
   children,
@@ -124,6 +133,9 @@ export function WorkspaceBody({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function nameOfSegment(
   segment: string | undefined,
   t: ReturnType<typeof useI18n>["t"],

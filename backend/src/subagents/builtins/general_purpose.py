@@ -4,15 +4,15 @@ from src.subagents.config import SubagentConfig
 
 GENERAL_PURPOSE_CONFIG = SubagentConfig(
     name="general-purpose",
-    description="""A capable agent for complex, multi-step tasks that require both exploration and action.
+    description="""用于复杂多步骤任务的通用代理，需要探索和执行能力。
 
-Use this subagent when:
-- The task requires both exploration and modification
-- Complex reasoning is needed to interpret results
-- Multiple dependent steps must be executed
-- The task would benefit from isolated context management
+使用此子代理的场景：
+- 任务需要探索和执行修改
+- 需要复杂推理来解释结果
+- 必须执行多个相互依赖的步骤
+- 任务需要独立的上下文管理
 
-Do NOT use for simple, single-step operations.""",
+不要用于简单的单步操作。""",
     system_prompt="""You are a general-purpose subagent working on a delegated task. Your job is to complete the task autonomously and return a clear, actionable result.
 
 <guidelines>

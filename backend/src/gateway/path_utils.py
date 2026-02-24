@@ -1,4 +1,4 @@
-"""Shared path resolution for thread virtual paths (e.g. mnt/user-data/outputs/...)."""
+"""用于线程虚拟路径解析的共享路径解析器（如 mnt/user-data/outputs/...）。"""
 
 import os
 from pathlib import Path
@@ -12,18 +12,18 @@ VIRTUAL_PATH_PREFIX = "mnt/user-data"
 
 
 def resolve_thread_virtual_path(thread_id: str, virtual_path: str) -> Path:
-    """Resolve a virtual path to the actual filesystem path under thread user-data.
+    """将虚拟路径解析为线程 user-data 下的实际文件系统路径。
 
-    Args:
-        thread_id: The thread ID.
-        virtual_path: The virtual path (e.g., mnt/user-data/outputs/file.txt).
-                      Leading slashes are stripped.
+    参数:
+        thread_id: 线程 ID。
+        virtual_path: 虚拟路径（示例：mnt/user-data/outputs/file.txt），
+                      其中前导斜杠将被去除。
 
-    Returns:
-        The resolved filesystem path.
+    返回:
+        解析得到的实际文件系统路径 Path 对象。
 
-    Raises:
-        HTTPException: If the path is invalid or outside allowed directories.
+    抛出:
+        HTTPException: 当路径无效或超出允许访问的目录时抛出。
     """
     virtual_path = virtual_path.lstrip("/")
     if not virtual_path.startswith(VIRTUAL_PATH_PREFIX):

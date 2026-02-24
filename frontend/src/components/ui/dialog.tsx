@@ -6,30 +6,45 @@ import { XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * 【函数功能描述】
+ */
 function Dialog({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DialogTrigger({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
   return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DialogPortal({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Portal>) {
   return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DialogClose({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Close>) {
   return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DialogOverlay({
   className,
   ...props
@@ -46,6 +61,9 @@ function DialogOverlay({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DialogContent({
   className,
   children,
@@ -80,6 +98,9 @@ function DialogContent({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -90,6 +111,9 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -103,6 +127,9 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DialogTitle({
   className,
   ...props
@@ -116,6 +143,9 @@ function DialogTitle({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DialogDescription({
   className,
   ...props

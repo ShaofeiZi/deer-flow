@@ -1,5 +1,8 @@
 import { cn } from "@/lib/utils";
 
+/**
+ * 【函数功能描述】
+ */
 export function Section({
   className,
   title,

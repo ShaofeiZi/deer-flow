@@ -5,6 +5,9 @@ import { useInView, useMotionValue, useSpring } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * 【接口描述】
+ */
 interface NumberTickerProps extends ComponentPropsWithoutRef<"span"> {
   value: number;
   startValue?: number;

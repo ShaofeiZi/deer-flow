@@ -29,6 +29,9 @@ import { env } from "@/env";
 
 import { SettingsSection } from "./settings-section";
 
+/**
+ * 【函数功能描述】
+ */
 export function SkillSettingsPage({ onClose }: { onClose?: () => void } = {}) {
   const { t } = useI18n();
   const { skills, isLoading, error } = useSkills();
@@ -48,6 +51,9 @@ export function SkillSettingsPage({ onClose }: { onClose?: () => void } = {}) {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SkillSettingsList({
   skills,
   onClose,
@@ -114,6 +120,9 @@ function SkillSettingsList({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function EmptySkill({ onCreateSkill }: { onCreateSkill: () => void }) {
   const { t } = useI18n();
   return (

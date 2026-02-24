@@ -252,7 +252,7 @@
  │   ├── api/                # API client & data fetching
  │   ├── artifacts/          # Artifact management
 -│   ├── citations/          # Citation handling
- │   ├── config/              # App configuration
+ │   ├── config/              # App 配置
  │   ├── i18n/               # Internationalization
 ```
 
@@ -320,7 +320,7 @@
 ```diff
 @@ -92,22 +81,13 @@ export function ArtifactFileDetail({
    const previewable = useMemo(() => {
-     return (language === "html" && !isWriteFile) || language === "markdown";
+     返回 (language === "html" && !isWriteFile) || language === "markdown";
    }, [isWriteFile, language]);
 -  const { thread } = useThread();
    const { content } = useArtifactContent({
@@ -408,7 +408,7 @@
 -      citationMap,
 -      syntheticExternal: true,
 -    });
-     return (
+     返回 (
        <div className="size-full px-4">
 -        <Streamdown
 -          className="size-full"
@@ -518,12 +518,12 @@
 -      path?.toLowerCase().endsWith(".md") ||
 -      path?.toLowerCase().endsWith(".markdown");
 -
-     return (
+     返回 (
 -      <>
 -        <ChainOfThoughtStep
 -          key={id}
 -          className="cursor-pointer"
--          label={description}
+-          label={描述}
 -          icon={NotebookPenIcon}
 -          onClick={() => {
 -            select(
@@ -551,7 +551,7 @@
 +      <ChainOfThoughtStep
 +        key={id}
 +        className="cursor-pointer"
-+        label={description}
++        label={描述}
 +        icon={NotebookPenIcon}
 +        onClick={() => {
 +          select(
@@ -610,7 +610,7 @@
          </div>
        </MessageToolbar>
 @@ -154,7 +153,7 @@ function MessageContent_({
-   return (
+   返回 (
      <AIElementMessageContent className={className}>
        {filesList}
 -      <SafeCitationContent
@@ -638,14 +638,14 @@
 @@ -69,7 +69,7 @@ export function MessageList({
              const message = group.messages[0];
              if (message && hasContent(message)) {
-               return (
+               返回 (
 -                <SafeCitationContent
 +                <MarkdownContent
                    key={group.id}
                    content={extractContentFromMessage(message)}
                    isLoading={thread.isLoading}
 @@ -89,7 +89,7 @@ export function MessageList({
-             return (
+             返回 (
                <div className="w-full" key={group.id}>
                  {group.messages[0] && hasContent(group.messages[0]) && (
 -                  <SafeCitationContent
@@ -718,9 +718,9 @@ export function MarkdownContent({
   remarkPlugins = streamdownPlugins.remarkPlugins,
   img,
 }: MarkdownContentProps) {
-  if (!content) return null;
+  if (!content) 返回 null;
   const components = img ? { img } : undefined;
-  return (
+  返回 (
     <MessageResponse
       className={className}
       remarkPlugins={remarkPlugins}
@@ -840,7 +840,7 @@ export function MarkdownContent({
 ```diff
 @@ -147,5 +147,5 @@ Save report as: `research_{topic}_{YYYYMMDD}.md`
  3. **Triangulate claims** - 2+ independent sources
- 4. **Note conflicting info** - Don't hide contradictions
+ 4. **注意 conflicting info** - Don't hide contradictions
  5. **Distinguish fact vs opinion** - Label speculation clearly
 -6. **Cite inline** - Reference sources near claims
 +6. **Reference sources** - Add source references near claims where applicable

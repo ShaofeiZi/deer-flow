@@ -1,11 +1,11 @@
 ---
 name: data-analysis
-description: Use this skill when the user uploads Excel (.xlsx/.xls) or CSV files and wants to perform data analysis, generate statistics, create summaries, pivot tables, SQL queries, or any form of structured data exploration. Supports multi-sheet Excel workbooks, aggregation, filtering, joins, and exporting results to CSV/JSON/Markdown.
+描述: Use this skill when the user uploads Excel (.xlsx/.xls) or CSV files and wants to perform data analysis, generate statistics, create summaries, pivot tables, SQL queries, or any form of structured data exploration. Supports multi-sheet Excel workbooks, aggregation, filtering, joins, and exporting results to CSV/JSON/Markdown.
 ---
 
 # Data Analysis Skill
 
-## Overview
+## 概览
 
 This skill analyzes user-uploaded Excel/CSV files using DuckDB — an in-process analytical SQL engine. It supports schema inspection, SQL-based querying, statistical summaries, and result export, all through a single Python script.
 
@@ -39,7 +39,7 @@ python /mnt/skills/public/data-analysis/scripts/analyze.py \
   --action inspect
 ```
 
-This returns:
+This 返回:
 - Sheet names (for Excel) or filename (for CSV)
 - Column names, data types, and non-null counts
 - Row count per sheet/file
@@ -67,7 +67,7 @@ python /mnt/skills/public/data-analysis/scripts/analyze.py \
   --table Sheet1
 ```
 
-This returns for each numeric column: count, mean, std, min, 25%, 50%, 75%, max, null_count.
+This 返回 for each numeric column: count, mean, std, min, 25%, 50%, 75%, max, null_count.
 For string columns: count, unique, top value, frequency, null_count.
 
 #### Export Results
@@ -85,9 +85,9 @@ Supported output formats (auto-detected from extension):
 - `.json` — JSON array of records
 - `.md` — Markdown table
 
-### Parameters
+### 参数
 
-| Parameter | Required | Description |
+| 参数 | Required | 描述 |
 |-----------|----------|-------------|
 | `--files` | Yes | Space-separated paths to Excel/CSV files |
 | `--action` | Yes | One of: `inspect`, `query`, `summary` |
@@ -95,8 +95,8 @@ Supported output formats (auto-detected from extension):
 | `--table` | For `summary` | Table/sheet name to summarize |
 | `--output-file` | No | Path to export results (CSV/JSON/MD) |
 
-> [!NOTE]
-> Do NOT read the Python file, just call it with the parameters.
+> [!注意]
+> Do NOT read the Python file, just call it with the 参数.
 
 ## Table Naming Rules
 
@@ -166,7 +166,7 @@ FROM Sales
 GROUP BY category
 ```
 
-## Complete Example
+## Complete 示例
 
 User uploads `sales_2024.xlsx` (with sheets: `Orders`, `Products`, `Customers`) and asks: "Analyze my sales data — show top products by revenue and monthly trends."
 
@@ -208,7 +208,7 @@ python /mnt/skills/public/data-analysis/scripts/analyze.py \
 
 Present results to the user with clear explanations of findings, trends, and actionable insights.
 
-## Multi-file Example
+## Multi-file 示例
 
 User uploads `orders.csv` and `customers.xlsx` and asks: "Which region has the highest average order value?"
 
@@ -236,11 +236,11 @@ The script automatically caches loaded data to avoid re-parsing files on every c
 - On first load, files are parsed and stored in a persistent DuckDB database under `/mnt/user-data/workspace/.data-analysis-cache/`
 - The cache key is a SHA256 hash of all input file contents — if files change, a new cache is created
 - Subsequent calls with the same files will use the cached database directly (near-instant startup)
-- Cache is transparent — no extra parameters needed
+- Cache is transparent — no extra 参数 needed
 
 This is especially useful when running multiple queries against the same data files (inspect → query → summary).
 
-## Notes
+## 注意
 
 - DuckDB supports full SQL including window functions, CTEs, subqueries, and advanced aggregations
 - Excel date columns are automatically parsed; use DuckDB date functions (`DATE_TRUNC`, `EXTRACT`, etc.)

@@ -1,12 +1,28 @@
 import type { LucideIcon } from "lucide-react";
 
+/**
+ * 【翻译资源结构定义】
+ *
+ * 约定：每种语言（Locale）都需要提供一份满足该接口的翻译对象，
+ * 以保证 UI 文案在不同语言下的字段一致性与类型安全。
+ */
 export interface Translations {
   // Locale meta
+  /**
+   * 【语言元信息】
+   */
   locale: {
+    /**
+     * 【本地化名称】
+     * 例如：中文环境显示“简体中文”，英文环境显示“English”。
+     */
     localName: string;
   };
 
   // Common
+  /**
+   * 【通用文案】
+   */
   common: {
     home: string;
     settings: string;
@@ -35,6 +51,9 @@ export interface Translations {
   };
 
   // Welcome
+  /**
+   * 【欢迎页相关文案】
+   */
   welcome: {
     greeting: string;
     description: string;
@@ -43,6 +62,9 @@ export interface Translations {
   };
 
   // Clipboard
+  /**
+   * 【剪贴板相关文案】
+   */
   clipboard: {
     copyToClipboard: string;
     copiedToClipboard: string;
@@ -51,6 +73,9 @@ export interface Translations {
   };
 
   // Input Box
+  /**
+   * 【输入框相关文案】
+   */
   inputBox: {
     placeholder: string;
     createSkillPrompt: string;
@@ -70,8 +95,19 @@ export interface Translations {
     suggestions: {
       suggestion: string;
       prompt: string;
+      /**
+       * 【建议项图标】
+       * 使用 lucide-react 的图标组件类型。
+       */
       icon: LucideIcon;
     }[];
+    /**
+     * 【创建建议列表】
+     *
+     * 该数组允许两种元素：
+     * - 普通建议项：包含 suggestion/prompt/icon
+     * - 分隔符：{ type: "separator" }
+     */
     suggestionsCreate: (
       | {
           suggestion: string;
@@ -85,6 +121,9 @@ export interface Translations {
   };
 
   // Sidebar
+  /**
+   * 【侧边栏相关文案】
+   */
   sidebar: {
     recentChats: string;
     newChat: string;
@@ -93,12 +132,18 @@ export interface Translations {
   };
 
   // Breadcrumb
+  /**
+   * 【面包屑导航文案】
+   */
   breadcrumb: {
     workspace: string;
     chats: string;
   };
 
   // Workspace
+  /**
+   * 【工作区顶部/菜单相关文案】
+   */
   workspace: {
     officialWebsite: string;
     githubTooltip: string;
@@ -110,17 +155,26 @@ export interface Translations {
   };
 
   // Conversation
+  /**
+   * 【会话区（消息列表）文案】
+   */
   conversation: {
     noMessages: string;
     startConversation: string;
   };
 
   // Chats
+  /**
+   * 【聊天列表文案】
+   */
   chats: {
     searchChats: string;
   };
 
   // Page titles (document title)
+  /**
+   * 【页面标题（document.title）文案】
+   */
   pages: {
     appName: string;
     chats: string;
@@ -129,17 +183,45 @@ export interface Translations {
   };
 
   // Tool calls
+  /**
+   * 【工具调用相关文案】
+   */
   toolCalls: {
+    /**
+     * 【更多步骤提示】
+     * @param count - 【剩余步骤数】
+     * @returns 【提示文案】
+     */
     moreSteps: (count: number) => string;
     lessSteps: string;
     executeCommand: string;
     presentFiles: string;
     needYourHelp: string;
+    /**
+     * 【使用某工具】
+     * @param toolName - 【工具名称】
+     * @returns 【提示文案】
+     */
     useTool: (toolName: string) => string;
     searchForRelatedInfo: string;
     searchForRelatedImages: string;
+    /**
+     * 【搜索提示】
+     * @param query - 【搜索关键词】
+     * @returns 【提示文案】
+     */
     searchFor: (query: string) => string;
+    /**
+     * 【搜索相关图片提示】
+     * @param query - 【搜索关键词】
+     * @returns 【提示文案】
+     */
     searchForRelatedImagesFor: (query: string) => string;
+    /**
+     * 【在 Web 上搜索提示】
+     * @param query - 【搜索关键词】
+     * @returns 【提示文案】
+     */
     searchOnWebFor: (query: string) => string;
     viewWebPage: string;
     listFolder: string;
@@ -151,8 +233,16 @@ export interface Translations {
   };
 
   // Subtasks
+  /**
+   * 【子任务状态文案】
+   */
   subtasks: {
     subtask: string;
+    /**
+     * 【执行中提示】
+     * @param count - 【执行中的数量】
+     * @returns 【提示文案】
+     */
     executing: (count: number) => string;
     in_progress: string;
     completed: string;
@@ -160,6 +250,9 @@ export interface Translations {
   };
 
   // Settings
+  /**
+   * 【设置页文案】
+   */
   settings: {
     title: string;
     description: string;

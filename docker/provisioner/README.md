@@ -32,7 +32,7 @@ The **Sandbox Provisioner** is a FastAPI service that dynamically manages sandbo
 
 3. **Service Creation**: A NodePort Service is created to expose the Pod, with Kubernetes auto-allocating a port from the NodePort range (typically 30000-32767).
 
-4. **Access URL**: The provisioner returns `http://host.docker.internal:{NodePort}` to the backend, which the backend containers can reach directly.
+4. **Access URL**: The provisioner 返回 `http://host.docker.internal:{NodePort}` to the backend, which the backend containers can reach directly.
 
 5. **Cleanup**: When the session ends, `DELETE /api/sandboxes/{sandbox_id}` removes both the Pod and Service.
 
@@ -83,7 +83,7 @@ Create a new sandbox Pod + Service.
 }
 ```
 
-**Idempotent**: Calling with the same `sandbox_id` returns the existing sandbox info.
+**Idempotent**: Calling with the same `sandbox_id` 返回 the existing sandbox info.
 
 ### `GET /api/sandboxes/{sandbox_id}`
 Get status and URL of a specific sandbox.
@@ -127,11 +127,11 @@ List all sandboxes currently managed.
 }
 ```
 
-## Configuration
+## 配置
 
 The provisioner is configured via environment variables (set in [docker-compose-dev.yaml](../docker-compose-dev.yaml)):
 
-| Variable | Default | Description |
+| Variable | Default | 描述 |
 |----------|---------|-------------|
 | `K8S_NAMESPACE` | `deer-flow` | Kubernetes namespace for sandbox resources |
 | `SANDBOX_IMAGE` | `enterprise-public-cn-beijing.cr.volces.com/vefaas-public/all-in-one-sandbox:latest` | Container image for sandbox Pods |

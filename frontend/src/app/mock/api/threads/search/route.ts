@@ -1,6 +1,9 @@
 import fs from "fs";
 import path from "path";
 
+/**
+ * 【函数功能描述】
+ */
 export function POST() {
   const threadsDir = fs.readdirSync(
     path.resolve(process.cwd(), "public/demo/threads"),

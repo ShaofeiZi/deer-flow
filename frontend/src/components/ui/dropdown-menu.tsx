@@ -6,12 +6,18 @@ import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenu({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
   return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuPortal({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Portal>) {
@@ -20,6 +26,9 @@ function DropdownMenuPortal({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuTrigger({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>) {
@@ -31,6 +40,9 @@ function DropdownMenuTrigger({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuContent({
   className,
   sideOffset = 4,
@@ -51,6 +63,9 @@ function DropdownMenuContent({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuGroup({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Group>) {
@@ -59,6 +74,9 @@ function DropdownMenuGroup({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuItem({
   className,
   inset,
@@ -82,6 +100,9 @@ function DropdownMenuItem({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuCheckboxItem({
   className,
   children,
@@ -108,6 +129,9 @@ function DropdownMenuCheckboxItem({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuRadioGroup({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>) {
@@ -119,6 +143,9 @@ function DropdownMenuRadioGroup({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuRadioItem({
   className,
   children,
@@ -143,6 +170,9 @@ function DropdownMenuRadioItem({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuLabel({
   className,
   inset,
@@ -163,6 +193,9 @@ function DropdownMenuLabel({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuSeparator({
   className,
   ...props
@@ -176,6 +209,9 @@ function DropdownMenuSeparator({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuShortcut({
   className,
   ...props
@@ -192,12 +228,18 @@ function DropdownMenuShortcut({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuSub({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Sub>) {
   return <DropdownMenuPrimitive.Sub data-slot="dropdown-menu-sub" {...props} />
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuSubTrigger({
   className,
   inset,
@@ -222,6 +264,9 @@ function DropdownMenuSubTrigger({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function DropdownMenuSubContent({
   className,
   ...props

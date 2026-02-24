@@ -18,13 +18,18 @@ from src.sandbox.middleware import SandboxMiddleware
 
 
 def _create_summarization_middleware() -> SummarizationMiddleware | None:
-    """Create and configure the summarization middleware from config."""
+    """从配置创建并配置 SummarizationMiddleware。
+
+    根据摘要配置创建中间件实例。如果摘要功能未启用，则返回 None。
+
+    Returns:
+        配置好的 SummarizationMiddleware 实例，或 None（如果未启用）。
+    """
     config = get_summarization_config()
 
     if not config.enabled:
         return None
 
-    # Prepare trigger parameter
     trigger = None
     if config.trigger is not None:
         if isinstance(config.trigger, list):
@@ -32,18 +37,13 @@ def _create_summarization_middleware() -> SummarizationMiddleware | None:
         else:
             trigger = config.trigger.to_tuple()
 
-    # Prepare keep parameter
     keep = config.keep.to_tuple()
 
-    # Prepare model parameter
     if config.model_name:
         model = config.model_name
     else:
-        # Use a lightweight model for summarization to save costs
-        # Falls back to default model if not explicitly specified
         model = create_chat_model(thinking_enabled=False)
 
-    # Prepare kwargs
     kwargs = {
         "model": model,
         "trigger": trigger,
@@ -60,163 +60,158 @@ def _create_summarization_middleware() -> SummarizationMiddleware | None:
 
 
 def _create_todo_list_middleware(is_plan_mode: bool) -> TodoListMiddleware | None:
-    """Create and configure the TodoList middleware.
+    """创建并配置 TodoList 中间件。
 
     Args:
-        is_plan_mode: Whether to enable plan mode with TodoList middleware.
+        is_plan_mode: 是否启用计划模式（带 TodoList 中间件）。
 
     Returns:
-        TodoListMiddleware instance if plan mode is enabled, None otherwise.
+        如果计划模式启用，返回 TodoListMiddleware 实例，否则返回 None。
     """
     if not is_plan_mode:
         return None
 
-    # Custom prompts matching DeerFlow's style
     system_prompt = """
 <todo_list_system>
-You have access to the `write_todos` tool to help you manage and track complex multi-step objectives.
+你可以使用 `write_todos` 工具来帮助管理和跟踪复杂的多步骤目标。
 
-**CRITICAL RULES:**
-- Mark todos as completed IMMEDIATELY after finishing each step - do NOT batch completions
-- Keep EXACTLY ONE task as `in_progress` at any time (unless tasks can run in parallel)
-- Update the todo list in REAL-TIME as you work - this gives users visibility into your progress
-- DO NOT use this tool for simple tasks (< 3 steps) - just complete them directly
+**关键规则：**
+- 完成每个步骤后立即将待办事项标记为已完成 - 不要批量完成
+- 任何时候只保持一个任务为 `in_progress`（除非任务可以并行运行）
+- 在工作时实时更新待办列表 - 这让用户可以了解你的进度
+- 不要将此工具用于简单任务（< 3 步）- 直接完成即可
 
-**When to Use:**
-This tool is designed for complex objectives that require systematic tracking:
-- Complex multi-step tasks requiring 3+ distinct steps
-- Non-trivial tasks needing careful planning and execution
-- User explicitly requests a todo list
-- User provides multiple tasks (numbered or comma-separated list)
-- The plan may need revisions based on intermediate results
+**何时使用：**
+此工具专为需要系统跟踪的复杂目标设计：
+- 需要 3 个以上不同步骤的复杂多步骤任务
+- 需要仔细规划和执行的非平凡任务
+- 用户明确要求待办列表
+- 用户提供多个任务（编号或逗号分隔的列表）
+- 计划可能需要根据中间结果进行修订
 
-**When NOT to Use:**
-- Single, straightforward tasks
-- Trivial tasks (< 3 steps)
-- Purely conversational or informational requests
-- Simple tool calls where the approach is obvious
+**何时不使用：**
+- 单一、直接的任务
+- 琐碎任务（< 3 步）
+- 纯对话或信息请求
+- 方法显而易见的简单工具调用
 
-**Best Practices:**
-- Break down complex tasks into smaller, actionable steps
-- Use clear, descriptive task names
-- Remove tasks that become irrelevant
-- Add new tasks discovered during implementation
-- Don't be afraid to revise the todo list as you learn more
+**最佳实践：**
+- 将复杂任务分解为更小的、可操作的步骤
+- 使用清晰、描述性的任务名称
+- 删除不再相关的任务
+- 添加在实现过程中发现的新任务
+- 不要害怕随着了解更多而修改待办列表
 
-**Task Management:**
-Writing todos takes time and tokens - use it when helpful for managing complex problems, not for simple requests.
+**任务管理：**
+编写待办事项需要时间和令牌 - 在有助于管理复杂问题时使用，而不是用于简单请求。
 </todo_list_system>
 """
 
-    tool_description = """Use this tool to create and manage a structured task list for complex work sessions.
+    tool_description = """使用此工具为复杂工作会话创建和管理结构化任务列表。
 
-**IMPORTANT: Only use this tool for complex tasks (3+ steps). For simple requests, just do the work directly.**
+**重要：仅将此工具用于复杂任务（3 步以上）。对于简单请求，直接执行工作即可。**
 
-## When to Use
+## 何时使用
 
-Use this tool in these scenarios:
-1. **Complex multi-step tasks**: When a task requires 3 or more distinct steps or actions
-2. **Non-trivial tasks**: Tasks requiring careful planning or multiple operations
-3. **User explicitly requests todo list**: When the user directly asks you to track tasks
-4. **Multiple tasks**: When users provide a list of things to be done
-5. **Dynamic planning**: When the plan may need updates based on intermediate results
+在以下场景使用此工具：
+1. **复杂多步骤任务**：当任务需要 3 个或更多不同步骤或操作时
+2. **非平凡任务**：需要仔细规划或多个操作的任务
+3. **用户明确要求待办列表**：当用户直接要求你跟踪任务时
+4. **多个任务**：当用户提供要完成的事项列表时
+5. **动态规划**：当计划可能需要根据中间结果更新时
 
-## When NOT to Use
+## 何时不使用
 
-Skip this tool when:
-1. The task is straightforward and takes less than 3 steps
-2. The task is trivial and tracking provides no benefit
-3. The task is purely conversational or informational
-4. It's clear what needs to be done and you can just do it
+在以下情况跳过此工具：
+1. 任务简单直接，少于 3 步
+2. 任务琐碎，跟踪没有好处
+3. 任务纯对话或信息性质
+4. 很清楚需要做什么，可以直接执行
 
-## How to Use
+## 如何使用
 
-1. **Starting a task**: Mark it as `in_progress` BEFORE beginning work
-2. **Completing a task**: Mark it as `completed` IMMEDIATELY after finishing
-3. **Updating the list**: Add new tasks, remove irrelevant ones, or update descriptions as needed
-4. **Multiple updates**: You can make several updates at once (e.g., complete one task and start the next)
+1. **开始任务**：在开始工作前将其标记为 `in_progress`
+2. **完成任务**：完成后立即将其标记为 `completed`
+3. **更新列表**：根据需要添加新任务、删除不相关的任务或更新描述
+4. **多次更新**：可以一次进行多次更新（例如，完成一个任务并开始下一个）
 
-## Task States
+## 任务状态
 
-- `pending`: Task not yet started
-- `in_progress`: Currently working on (can have multiple if tasks run in parallel)
-- `completed`: Task finished successfully
+- `pending`：任务尚未开始
+- `in_progress`：当前正在处理（如果任务可以并行运行，可以有多个）
+- `completed`：任务已成功完成
 
-## Task Completion Requirements
+## 任务完成要求
 
-**CRITICAL: Only mark a task as completed when you have FULLY accomplished it.**
+**关键：只有在完全完成任务后才将任务标记为已完成。**
 
-Never mark a task as completed if:
-- There are unresolved issues or errors
-- Work is partial or incomplete
-- You encountered blockers preventing completion
-- You couldn't find necessary resources or dependencies
-- Quality standards haven't been met
+如果有以下情况，永远不要将任务标记为已完成：
+- 存在未解决的问题或错误
+- 工作部分或不完整
+- 遇到阻止完成的障碍
+- 无法找到必要的资源或依赖
+- 质量标准未达到
 
-If blocked, keep the task as `in_progress` and create a new task describing what needs to be resolved.
+如果被阻止，保持任务为 `in_progress` 并创建一个新任务描述需要解决的问题。
 
-## Best Practices
+## 最佳实践
 
-- Create specific, actionable items
-- Break complex tasks into smaller, manageable steps
-- Use clear, descriptive task names
-- Update task status in real-time as you work
-- Mark tasks complete IMMEDIATELY after finishing (don't batch completions)
-- Remove tasks that are no longer relevant
-- **IMPORTANT**: When you write the todo list, mark your first task(s) as `in_progress` immediately
-- **IMPORTANT**: Unless all tasks are completed, always have at least one task `in_progress` to show progress
+- 创建具体、可操作的项目
+- 将复杂任务分解为更小的、可管理的步骤
+- 使用清晰、描述性的任务名称
+- 在工作时实时更新任务状态
+- 完成后立即标记任务完成（不要批量完成）
+- 删除不再相关的任务
+- **重要**：编写待办列表时，立即将第一个任务标记为 `in_progress`
+- **重要**：除非所有任务都已完成，否则始终至少有一个任务为 `in_progress` 以显示进度
 
-Being proactive with task management demonstrates thoroughness and ensures all requirements are completed successfully.
+主动进行任务管理体现了全面性，并确保所有要求都能成功完成。
 
-**Remember**: If you only need a few tool calls to complete a task and it's clear what to do, it's better to just do the task directly and NOT use this tool at all.
+**记住**：如果只需要几次工具调用就能完成任务，而且很清楚该做什么，最好直接执行任务，根本不使用此工具。
 """
 
     return TodoListMiddleware(system_prompt=system_prompt, tool_description=tool_description)
 
 
-# ThreadDataMiddleware must be before SandboxMiddleware to ensure thread_id is available
-# UploadsMiddleware should be after ThreadDataMiddleware to access thread_id
-# DanglingToolCallMiddleware patches missing ToolMessages before model sees the history
-# SummarizationMiddleware should be early to reduce context before other processing
-# TodoListMiddleware should be before ClarificationMiddleware to allow todo management
-# TitleMiddleware generates title after first exchange
-# MemoryMiddleware queues conversation for memory update (after TitleMiddleware)
-# ViewImageMiddleware should be before ClarificationMiddleware to inject image details before LLM
-# ClarificationMiddleware should be last to intercept clarification requests after model calls
 def _build_middlewares(config: RunnableConfig):
-    """Build middleware chain based on runtime configuration.
+    """根据运行时配置构建中间件链。
+
+    中间件顺序说明：
+    - ThreadDataMiddleware 必须在 SandboxMiddleware 之前，以确保 thread_id 可用
+    - UploadsMiddleware 应在 ThreadDataMiddleware 之后以访问 thread_id
+    - DanglingToolCallMiddleware 在模型看到历史记录之前修补缺失的 ToolMessages
+    - SummarizationMiddleware 应该早执行，以在其他处理之前减少上下文
+    - TodoListMiddleware 应在 ClarificationMiddleware 之前，以允许待办管理
+    - TitleMiddleware 在首次交流后生成标题
+    - MemoryMiddleware 将对话排队等待内存更新（在 TitleMiddleware 之后）
+    - ViewImageMiddleware 应在 ClarificationMiddleware 之前，在 LLM 之前注入图像详情
+    - ClarificationMiddleware 应该最后执行，以在模型调用后拦截澄清请求
 
     Args:
-        config: Runtime configuration containing configurable options like is_plan_mode.
+        config: 包含可配置选项（如 is_plan_mode）的运行时配置。
 
     Returns:
-        List of middleware instances.
+        中间件实例列表。
     """
     middlewares = [ThreadDataMiddleware(), UploadsMiddleware(), SandboxMiddleware(), DanglingToolCallMiddleware()]
 
-    # Add summarization middleware if enabled
     summarization_middleware = _create_summarization_middleware()
     if summarization_middleware is not None:
         middlewares.append(summarization_middleware)
 
-    # Add TodoList middleware if plan mode is enabled
     is_plan_mode = config.get("configurable", {}).get("is_plan_mode", False)
     todo_list_middleware = _create_todo_list_middleware(is_plan_mode)
     if todo_list_middleware is not None:
         middlewares.append(todo_list_middleware)
 
-    # Add TitleMiddleware
     middlewares.append(TitleMiddleware())
 
-    # Add MemoryMiddleware (after TitleMiddleware)
     middlewares.append(MemoryMiddleware())
 
-    # Add ViewImageMiddleware only if the current model supports vision
     model_name = config.get("configurable", {}).get("model_name") or config.get("configurable", {}).get("model")
     from src.config import get_app_config
 
     app_config = get_app_config()
-    # If no model_name specified, use the first model (default)
     if model_name is None and app_config.models:
         model_name = app_config.models[0].name
 
@@ -224,19 +219,26 @@ def _build_middlewares(config: RunnableConfig):
     if model_config is not None and model_config.supports_vision:
         middlewares.append(ViewImageMiddleware())
 
-    # Add SubagentLimitMiddleware to truncate excess parallel task calls
     subagent_enabled = config.get("configurable", {}).get("subagent_enabled", False)
     if subagent_enabled:
         max_concurrent_subagents = config.get("configurable", {}).get("max_concurrent_subagents", 3)
         middlewares.append(SubagentLimitMiddleware(max_concurrent=max_concurrent_subagents))
 
-    # ClarificationMiddleware should always be last
     middlewares.append(ClarificationMiddleware())
     return middlewares
 
 
 def make_lead_agent(config: RunnableConfig):
-    # Lazy import to avoid circular dependency
+    """创建主导代理实例。
+
+    根据配置创建并配置主导代理，包括模型、工具、中间件和系统提示。
+
+    Args:
+        config: 运行时配置，包含模型名称、思考模式、计划模式等设置。
+
+    Returns:
+        配置好的代理实例。
+    """
     from src.tools import get_available_tools
 
     thinking_enabled = config.get("configurable", {}).get("thinking_enabled", True)
@@ -245,17 +247,18 @@ def make_lead_agent(config: RunnableConfig):
     subagent_enabled = config.get("configurable", {}).get("subagent_enabled", False)
     max_concurrent_subagents = config.get("configurable", {}).get("max_concurrent_subagents", 3)
     print(f"thinking_enabled: {thinking_enabled}, model_name: {model_name}, is_plan_mode: {is_plan_mode}, subagent_enabled: {subagent_enabled}, max_concurrent_subagents: {max_concurrent_subagents}")
-    
-    # Inject run metadata for LangSmith trace tagging
+
     if "metadata" not in config:
         config["metadata"] = {}
-    config["metadata"].update({
-        "model_name": model_name or "default",
-        "thinking_enabled": thinking_enabled,
-        "is_plan_mode": is_plan_mode,
-        "subagent_enabled": subagent_enabled,
-    })
-    
+    config["metadata"].update(
+        {
+            "model_name": model_name or "default",
+            "thinking_enabled": thinking_enabled,
+            "is_plan_mode": is_plan_mode,
+            "subagent_enabled": subagent_enabled,
+        }
+    )
+
     return create_agent(
         model=create_chat_model(name=model_name, thinking_enabled=thinking_enabled),
         tools=get_available_tools(model_name=model_name, subagent_enabled=subagent_enabled),

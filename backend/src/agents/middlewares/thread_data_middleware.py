@@ -76,6 +76,16 @@ class ThreadDataMiddleware(AgentMiddleware[ThreadDataMiddlewareState]):
 
     @override
     def before_agent(self, state: ThreadDataMiddlewareState, runtime: Runtime) -> dict | None:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         thread_id = runtime.context.get("thread_id")
         if thread_id is None:
             raise ValueError("Thread ID is required in the context")

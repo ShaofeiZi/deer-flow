@@ -62,7 +62,7 @@ IGNORE_PATTERNS = [
 
 
 def _should_ignore(name: str) -> bool:
-    """Check if a file/directory name matches any ignore pattern."""
+    """检查文件/目录名称是否匹配任意忽略模式。"""
     for pattern in IGNORE_PATTERNS:
         if fnmatch.fnmatch(name, pattern):
             return True
@@ -70,18 +70,7 @@ def _should_ignore(name: str) -> bool:
 
 
 def list_dir(path: str, max_depth: int = 2) -> list[str]:
-    """
-    List files and directories up to max_depth levels deep.
-
-    Args:
-        path: The root directory path to list.
-        max_depth: Maximum depth to traverse (default: 2).
-                   1 = only direct children, 2 = children + grandchildren, etc.
-
-    Returns:
-        A list of absolute paths for files and directories,
-        excluding items matching IGNORE_PATTERNS.
-    """
+    """按最大深度列出目录中的文件与子目录（树状结构）。"""
     result: list[str] = []
     root_path = Path(path).resolve()
 

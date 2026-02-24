@@ -34,10 +34,30 @@ class SubagentLimitMiddleware(AgentMiddleware[AgentState]):
     """
 
     def __init__(self, max_concurrent: int = MAX_CONCURRENT_SUBAGENTS):
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         super().__init__()
         self.max_concurrent = _clamp_subagent_limit(max_concurrent)
 
     def _truncate_task_calls(self, state: AgentState) -> dict | None:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         messages = state.get("messages", [])
         if not messages:
             return None
@@ -68,6 +88,16 @@ class SubagentLimitMiddleware(AgentMiddleware[AgentState]):
 
     @override
     def after_model(self, state: AgentState, runtime: Runtime) -> dict | None:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         return self._truncate_task_calls(state)
 
     @override

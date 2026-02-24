@@ -5,6 +5,9 @@ import * as ProgressPrimitive from "@radix-ui/react-progress"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * 【函数功能描述】
+ */
 function Progress({
   className,
   value,

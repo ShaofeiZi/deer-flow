@@ -12,6 +12,9 @@ import {
 } from "@/components/ui/sidebar";
 import { useI18n } from "@/core/i18n/hooks";
 
+/**
+ * 【函数功能描述】
+ */
 export function WorkspaceNavChatList() {
   const { t } = useI18n();
   const pathname = usePathname();

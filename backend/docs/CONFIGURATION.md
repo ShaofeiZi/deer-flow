@@ -1,8 +1,8 @@
-# Configuration Guide
+# 配置 Guide
 
 This guide explains how to configure DeerFlow for your environment.
 
-## Configuration Sections
+## 配置 Sections
 
 ### Models
 
@@ -100,7 +100,7 @@ sandbox:
 
 When using Docker development (`make docker-start`), DeerFlow starts the `provisioner` service only if this provisioner mode is configured. In local or plain Docker sandbox modes, `provisioner` is skipped.
 
-See [Provisioner Setup Guide](docker/provisioner/README.md) for detailed configuration, prerequisites, and troubleshooting.
+See [Provisioner Setup Guide](docker/provisioner/自述.md) for detailed 配置, prerequisites, and troubleshooting.
 
 Choose between local execution or Docker-based isolation:
 
@@ -172,15 +172,15 @@ models:
 - `TAVILY_API_KEY` - Tavily search API key
 - `DEER_FLOW_CONFIG_PATH` - Custom config file path
 
-## Configuration Location
+## 配置 Location
 
-The configuration file should be placed in the **project root directory** (`deer-flow/config.yaml`), not in the backend directory.
+The 配置 file should be placed in the **project root directory** (`deer-flow/config.yaml`), not in the backend directory.
 
-## Configuration Priority
+## 配置 Priority
 
-DeerFlow searches for configuration in this order:
+DeerFlow searches for 配置 in this order:
 
-1. Path specified in code via `config_path` argument
+1. Path specified in code via `config_path` 参数
 2. Path from `DEER_FLOW_CONFIG_PATH` environment variable
 3. `config.yaml` in current working directory (typically `backend/` when running)
 4. `config.yaml` in parent directory (project root: `deer-flow/`)
@@ -191,7 +191,7 @@ DeerFlow searches for configuration in this order:
 2. **Never commit `config.yaml`** - It's already in `.gitignore`
 3. **Use environment variables for secrets** - Don't hardcode API keys
 4. **Keep `config.example.yaml` updated** - Document all new options
-5. **Test configuration changes locally** - Before deploying
+5. **Test 配置 changes locally** - Before deploying
 6. **Use Docker sandbox for production** - Better isolation and security
 
 ## Troubleshooting
@@ -208,13 +208,13 @@ DeerFlow searches for configuration in this order:
 ### "Skills not loading"
 - Check that `deer-flow/skills/` directory exists
 - Verify skills have valid `SKILL.md` files
-- Check `skills.path` configuration if using custom path
+- Check `skills.path` 配置 if using custom path
 
 ### "Docker sandbox fails to start"
 - Ensure Docker is running
 - Check port 8080 (or configured port) is available
 - Verify Docker image is accessible
 
-## Examples
+## 示例
 
-See `config.example.yaml` for complete examples of all configuration options.
+See `config.example.yaml` for complete 示例 of all 配置 options.

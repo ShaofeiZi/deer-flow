@@ -49,6 +49,16 @@ class FileSandboxStateStore(SandboxStateStore):
         return self._base_dir / self._threads_subdir / thread_id
 
     def save(self, thread_id: str, info: SandboxInfo) -> None:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         thread_dir = self._thread_dir(thread_id)
         os.makedirs(thread_dir, exist_ok=True)
         state_file = thread_dir / SANDBOX_STATE_FILE
@@ -59,6 +69,16 @@ class FileSandboxStateStore(SandboxStateStore):
             logger.warning(f"Failed to save sandbox state for thread {thread_id}: {e}")
 
     def load(self, thread_id: str) -> SandboxInfo | None:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         state_file = self._thread_dir(thread_id) / SANDBOX_STATE_FILE
         if not state_file.exists():
             return None
@@ -70,6 +90,16 @@ class FileSandboxStateStore(SandboxStateStore):
             return None
 
     def remove(self, thread_id: str) -> None:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         state_file = self._thread_dir(thread_id) / SANDBOX_STATE_FILE
         try:
             if state_file.exists():

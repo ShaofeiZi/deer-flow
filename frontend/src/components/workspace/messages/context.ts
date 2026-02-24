@@ -12,6 +12,9 @@ export const ThreadContext = createContext<ThreadContextType | undefined>(
   undefined,
 );
 
+/**
+ * 【函数功能描述】
+ */
 export function useThread() {
   const context = useContext(ThreadContext);
   if (context === undefined) {

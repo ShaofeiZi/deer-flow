@@ -6,6 +6,9 @@ import { AnimatePresence, motion, type MotionProps } from "motion/react";
 import { cn } from "@/lib/utils";
 import { AuroraText } from "./aurora-text";
 
+/**
+ * 【接口描述】
+ */
 interface WordRotateProps {
   words: string[];
   duration?: number;

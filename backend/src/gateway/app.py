@@ -1,3 +1,12 @@
+"""DeerFlow Gateway FastAPI 应用入口。
+
+本模块负责创建 Gateway API 的 FastAPI 应用实例，并注册各业务路由（models / mcp / memory / skills / artifacts / uploads）。
+
+说明：
+- Gateway 是独立进程，向前端提供 REST API。
+- LangGraph Server 通过 nginx 反向代理（/api/langgraph/*），与 Gateway 分离。
+- MCP 工具的初始化不在此处进行：MCP tools 由 LangGraph Server 的 Agents 使用，且两者缓存独立。"""
+
 import logging
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
@@ -19,24 +28,31 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
-    """Application lifespan handler."""
+    """应用生命周期（lifespan）处理器。
+
+    Args:
+        app: FastAPI 应用实例（由框架注入）。
+
+    Yields:
+        None
+    """
     config = get_gateway_config()
     logger.info(f"Starting API Gateway on {config.host}:{config.port}")
 
-    # NOTE: MCP tools initialization is NOT done here because:
-    # 1. Gateway doesn't use MCP tools - they are used by Agents in the LangGraph Server
-    # 2. Gateway and LangGraph Server are separate processes with independent caches
-    # MCP tools are lazily initialized in LangGraph Server when first needed
+    # 注意：这里不初始化 MCP tools，原因：
+    # 1) Gateway 本身不直接使用 MCP tools，它们由 LangGraph Server 中的 Agents 使用。
+    # 2) Gateway 与 LangGraph Server 是两个独立进程，缓存互不共享。
+    # 因此 MCP tools 会在 LangGraph Server 侧首次需要时再延迟初始化。
 
     yield
     logger.info("Shutting down API Gateway")
 
 
 def create_app() -> FastAPI:
-    """Create and configure the FastAPI application.
+    """创建并配置 FastAPI 应用。
 
     Returns:
-        Configured FastAPI application instance.
+        已完成配置与路由注册的 FastAPI 应用实例。
     """
 
     app = FastAPI(
@@ -44,21 +60,21 @@ def create_app() -> FastAPI:
         description="""
 ## DeerFlow API Gateway
 
-API Gateway for DeerFlow - A LangGraph-based AI agent backend with sandbox execution capabilities.
+DeerFlow 的 API Gateway：基于 LangGraph 的 AI Agent 后端（含 sandbox 执行能力）的配套 REST API。
 
-### Features
+### 功能
 
-- **Models Management**: Query and retrieve available AI models
-- **MCP Configuration**: Manage Model Context Protocol (MCP) server configurations
-- **Memory Management**: Access and manage global memory data for personalized conversations
-- **Skills Management**: Query and manage skills and their enabled status
-- **Artifacts**: Access thread artifacts and generated files
-- **Health Monitoring**: System health check endpoints
+- **Models Management**：查询并获取可用 AI 模型列表
+- **MCP Configuration**：管理 Model Context Protocol (MCP) server 配置
+- **Memory Management**：读取/刷新全局 memory 数据，用于个性化对话
+- **Skills Management**：查询与管理 skills 及其启用状态
+- **Artifacts**：访问 thread 产出的 artifacts / 文件
+- **Health Monitoring**：健康检查接口
 
-### Architecture
+### 架构
 
-LangGraph requests are handled by nginx reverse proxy.
-This gateway provides custom endpoints for models, MCP configuration, skills, and artifacts.
+LangGraph 相关请求由 nginx 反向代理处理；
+本 Gateway 提供 models、MCP、skills、artifacts、uploads 等自定义端点。
         """,
         version="0.1.0",
         lifespan=lifespan,
@@ -120,10 +136,10 @@ This gateway provides custom endpoints for models, MCP configuration, skills, an
 
     @app.get("/health", tags=["health"])
     async def health_check() -> dict:
-        """Health check endpoint.
+        """健康检查接口。
 
         Returns:
-            Service health status information.
+            服务健康状态信息。
         """
         return {"status": "healthy", "service": "deer-flow-gateway"}
 

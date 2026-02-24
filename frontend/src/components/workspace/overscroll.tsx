@@ -2,6 +2,9 @@
 
 import { useEffect } from "react";
 
+/**
+ * 【函数功能描述】
+ */
 export function Overscroll({
   behavior,
   overflow = "hidden",

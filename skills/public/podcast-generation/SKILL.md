@@ -1,17 +1,17 @@
 ---
 name: podcast-generation
-description: Use this skill when the user requests to generate, create, or produce podcasts from text content. Converts written content into a two-host conversational podcast audio format with natural dialogue.
+描述: Use this skill when the user requests to generate, create, or produce podcasts from text content. Converts written content into a two-host conversational podcast audio format with natural dialogue.
 ---
 
 # Podcast Generation Skill
 
-## Overview
+## 概览
 
 This skill generates high-quality podcast audio from text content. The workflow includes creating a structured JSON script (conversational dialogue) and executing audio generation through text-to-speech synthesis.
 
 ## Core Capabilities
 
-- Convert any text content (articles, reports, documentation) into podcast scripts
+- Convert any text content (articles, reports, 文档) into podcast scripts
 - Generate natural two-host conversational dialogue (male and female hosts)
 - Synthesize speech audio using text-to-speech
 - Mix audio chunks into a final podcast MP3 file
@@ -53,7 +53,7 @@ python /mnt/skills/public/podcast-generation/scripts/generate.py \
   --transcript-file /mnt/user-data/outputs/generated-podcast-transcript.md
 ```
 
-Parameters:
+参数:
 
 - `--script-file`: Absolute path to JSON script file (required)
 - `--output-file`: Absolute path to output MP3 file (required)
@@ -62,7 +62,7 @@ Parameters:
 > [!IMPORTANT]
 > - Execute the script in one complete call. Do NOT split the workflow into separate steps.
 > - The script handles all TTS API calls and audio generation internally.
-> - Do NOT read the Python file, just call it with the parameters.
+> - Do NOT read the Python file, just call it with the 参数.
 > - Always include `--transcript-file` to generate a readable transcript for the user.
 
 ## Script JSON Format
@@ -112,7 +112,7 @@ When creating the script JSON, follow these guidelines:
 - Make content engaging and accessible for audio-only listeners
 - Exclude meta information like dates, author names, or document structure
 
-## Podcast Generation Example
+## Podcast Generation 示例
 
 User request: "Generate a podcast about the history of artificial intelligence"
 
@@ -149,7 +149,7 @@ This will generate:
 
 Read the following template file only when matching the user request.
 
-- [Tech Explainer](templates/tech-explainer.md) - For converting technical documentation and tutorials
+- [Tech Explainer](templates/tech-explainer.md) - For converting technical 文档 and tutorials
 
 ## Output Format
 
@@ -166,7 +166,7 @@ After generation:
 
 - Podcasts and transcripts are saved in `/mnt/user-data/outputs/`
 - Share both the podcast MP3 and transcript MD with user using `present_files` tool
-- Provide brief description of the generation result (topic, duration, hosts)
+- Provide brief 描述 of the generation result (topic, duration, hosts)
 - Offer to regenerate if adjustments needed
 
 ## Requirements
@@ -176,7 +176,7 @@ The following environment variables must be set:
 - `VOLCENGINE_TTS_ACCESS_TOKEN`: Volcengine TTS access token
 - `VOLCENGINE_TTS_CLUSTER`: Volcengine TTS cluster (optional, defaults to "volcano_tts")
 
-## Notes
+## 注意
 
 - **Always execute the full pipeline in one call** - no need to test individual steps or worry about timeouts
 - The script JSON should match the content language (en or zh)

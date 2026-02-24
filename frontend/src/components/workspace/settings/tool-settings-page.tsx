@@ -15,6 +15,9 @@ import { env } from "@/env";
 
 import { SettingsSection } from "./settings-section";
 
+/**
+ * 【函数功能描述】
+ */
 export function ToolSettingsPage() {
   const { t } = useI18n();
   const { config, isLoading, error } = useMCPConfig();
@@ -34,6 +37,9 @@ export function ToolSettingsPage() {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function MCPServerList({
   servers,
 }: {

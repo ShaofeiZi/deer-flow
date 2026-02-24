@@ -7,16 +7,32 @@ router = APIRouter(prefix="/api", tags=["models"])
 
 
 class ModelResponse(BaseModel):
-    """Response model for model information."""
+    """技能模型信息的响应模型。
 
-    name: str = Field(..., description="Unique identifier for the model")
-    display_name: str | None = Field(None, description="Human-readable name")
-    description: str | None = Field(None, description="Model description")
-    supports_thinking: bool = Field(default=False, description="Whether model supports thinking mode")
+    该模型用于表示单个 AI 模型的详细信息，包括名称、显示名称、
+    描述以及是否支持思考模式等属性。
+
+    Attributes:
+        name: 模型的唯一标识符。
+        display_name: 模型的可读名称。
+        description: 模型描述。
+        supports_thinking: 模型是否支持思考模式。
+    """
+
+    name: str = Field(..., description="模型的唯一标识符")
+    display_name: str | None = Field(None, description="模型的可读名称")
+    description: str | None = Field(None, description="模型描述")
+    supports_thinking: bool = Field(default=False, description="模型是否支持思考模式")
 
 
 class ModelsListResponse(BaseModel):
-    """Response model for listing all models."""
+    """列出所有模型的响应模型。
+
+    该模型用于表示模型列表的响应结构。
+
+    Attributes:
+        models: 模型响应对象列表。
+    """
 
     models: list[ModelResponse]
 
@@ -24,37 +40,16 @@ class ModelsListResponse(BaseModel):
 @router.get(
     "/models",
     response_model=ModelsListResponse,
-    summary="List All Models",
-    description="Retrieve a list of all available AI models configured in the system.",
+    summary="列出所有模型",
+    description="检索系统中配置的所有可用 AI 模型列表。",
 )
 async def list_models() -> ModelsListResponse:
-    """List all available models from configuration.
+    """列出系统中所有可用的模型及其元数据。
 
-    Returns model information suitable for frontend display,
-    excluding sensitive fields like API keys and internal configuration.
+    从应用配置中获取所有已配置的模型信息，并返回模型列表。
 
     Returns:
-        A list of all configured models with their metadata.
-
-    Example Response:
-        ```json
-        {
-            "models": [
-                {
-                    "name": "gpt-4",
-                    "display_name": "GPT-4",
-                    "description": "OpenAI GPT-4 model",
-                    "supports_thinking": false
-                },
-                {
-                    "name": "claude-3-opus",
-                    "display_name": "Claude 3 Opus",
-                    "description": "Anthropic Claude 3 Opus model",
-                    "supports_thinking": true
-                }
-            ]
-        }
-        ```
+        ModelsListResponse: 包含所有模型列表的响应对象。
     """
     config = get_app_config()
     models = [
@@ -72,35 +67,27 @@ async def list_models() -> ModelsListResponse:
 @router.get(
     "/models/{model_name}",
     response_model=ModelResponse,
-    summary="Get Model Details",
-    description="Retrieve detailed information about a specific AI model by its name.",
+    summary="获取模型详情",
+    description="按名称检索特定 AI 模型的详细信息。",
 )
 async def get_model(model_name: str) -> ModelResponse:
-    """Get a specific model by name.
+    """按名称检索特定模型的详细信息。
+
+    根据模型名称查找并返回该模型的详细配置信息。
 
     Args:
-        model_name: The unique name of the model to retrieve.
+        model_name: 要获取的模型名称。
 
     Returns:
-        Model information if found.
+        ModelResponse: 模型详细信息响应对象。
 
     Raises:
-        HTTPException: 404 if model not found.
-
-    Example Response:
-        ```json
-        {
-            "name": "gpt-4",
-            "display_name": "GPT-4",
-            "description": "OpenAI GPT-4 model",
-            "supports_thinking": false
-        }
-        ```
+        HTTPException: 模型不存在时抛出 404 错误。
     """
     config = get_app_config()
     model = config.get_model_config(model_name)
     if model is None:
-        raise HTTPException(status_code=404, detail=f"Model '{model_name}' not found")
+        raise HTTPException(status_code=404, detail=f"未找到模型 '{model_name}'")
 
     return ModelResponse(
         name=model.name,

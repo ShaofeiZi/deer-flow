@@ -6,6 +6,9 @@ import { cn } from "@/lib/utils";
 
 import { Section } from "../section";
 
+/**
+ * 【函数功能描述】
+ */
 export function CaseStudySection({ className }: { className?: string }) {
   const caseStudies = [
     {

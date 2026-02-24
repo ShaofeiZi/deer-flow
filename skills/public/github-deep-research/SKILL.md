@@ -1,6 +1,6 @@
 ---
 name: github-deep-research
-description: Conduct multi-round deep research on any GitHub Repo. Use when users request comprehensive analysis, timeline reconstruction, competitive analysis, or in-depth investigation of GitHub. Produces structured markdown reports with executive summaries, chronological timelines, metrics analysis, and Mermaid diagrams. Triggers on Github repository URL or open source projects.
+描述: Conduct multi-round deep research on any GitHub Repo. Use when users request comprehensive analysis, timeline reconstruction, competitive analysis, or in-depth investigation of GitHub. Produces structured markdown reports with executive summaries, chronological timelines, metrics analysis, and Mermaid diagrams. Triggers on Github repository URL or open source projects.
 ---
 
 # GitHub Deep Research Skill
@@ -44,10 +44,10 @@ python /path/to/skill/scripts/github_api.py <owner> <repo> readme
 python /path/to/skill/scripts/github_api.py <owner> <repo> tree
 ```
 
-**Available commands (the last argument of `github_api.py`):**
+**Available commands (the last 参数 of `github_api.py`):**
 - summary
 - info
-- readme
+- 自述
 - tree
 - languages
 - contributors
@@ -57,7 +57,7 @@ python /path/to/skill/scripts/github_api.py <owner> <repo> tree
 - releases
 
 **Round 2 - Discovery (3-5 web_search)**
-- Get overview and identify key terms
+- Get 概览 and identify key terms
 - Find official website/repo
 - Identify main players/competitors
 
@@ -77,7 +77,7 @@ python /path/to/skill/scripts/github_api.py <owner> <repo> tree
 Follow template in `assets/report_template.md`:
 
 1. **Metadata Block** - Date, confidence level, subject
-2. **Executive Summary** - 2-3 sentence overview with key metrics
+2. **Executive Summary** - 2-3 sentence 概览 with key metrics
 3. **Chronological Timeline** - Phased breakdown with dates
 4. **Key Analysis Sections** - Topic-specific deep dives
 5. **Metrics & Comparisons** - Tables, growth charts
@@ -137,15 +137,15 @@ Save report as: `research_{topic}_{YYYYMMDD}.md`
 - Chinese content: Use full-width punctuation（，。：；！？）
 - Technical terms: Provide Wiki/doc URL on first mention
 - Tables: Use for metrics, comparisons
-- Code blocks: For technical examples
+- Code blocks: For technical 示例
 - Mermaid: For architecture, timelines, flows
 
-## Best Practices
+## 最佳实践
 
 1. **Start with official sources** - Repo, docs, company blog
 2. **Verify dates from commits/PRs** - More reliable than articles
 3. **Triangulate claims** - 2+ independent sources
-4. **Note conflicting info** - Don't hide contradictions
+4. **注意 conflicting info** - Don't hide contradictions
 5. **Distinguish fact vs opinion** - Label speculation clearly
 6. **Reference sources** - Add source references near claims where applicable
 7. **Update as you go** - Don't wait until end to synthesize

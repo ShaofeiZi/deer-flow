@@ -22,6 +22,16 @@ class SandboxInfo:
     created_at: float = field(default_factory=time.time)
 
     def to_dict(self) -> dict:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         return {
             "sandbox_id": self.sandbox_id,
             "sandbox_url": self.sandbox_url,
@@ -32,6 +42,16 @@ class SandboxInfo:
 
     @classmethod
     def from_dict(cls, data: dict) -> SandboxInfo:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         return cls(
             sandbox_id=data["sandbox_id"],
             sandbox_url=data.get("sandbox_url", data.get("base_url", "")),

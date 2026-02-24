@@ -9,6 +9,9 @@ import {
 } from "@/components/ui/hover-card";
 import { cn } from "@/lib/utils";
 
+/**
+ * 【函数功能描述】
+ */
 export function CitationLink({ 
   href, 
   children,
@@ -73,6 +76,9 @@ export function CitationLink({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function extractDomain(url: string): string {
   try {
     return new URL(url).hostname.replace(/^www\./i, "");

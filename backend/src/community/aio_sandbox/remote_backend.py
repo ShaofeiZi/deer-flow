@@ -52,6 +52,16 @@ class RemoteSandboxBackend(SandboxBackend):
 
     @property
     def provisioner_url(self) -> str:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         return self._provisioner_url
 
     # ── SandboxBackend interface ──────────────────────────────────────────

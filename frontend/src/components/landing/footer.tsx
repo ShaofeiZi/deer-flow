@@ -1,5 +1,8 @@
 import { useMemo } from "react";
 
+/**
+ * 【函数功能描述】
+ */
 export function Footer() {
   const year = useMemo(() => new Date().getFullYear(), []);
   return (

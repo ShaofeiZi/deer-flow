@@ -1,5 +1,8 @@
 import { cn } from "@/lib/utils"
 
+/**
+ * 【函数功能描述】
+ */
 function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div

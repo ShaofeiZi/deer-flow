@@ -43,6 +43,9 @@ import { Tooltip } from "../tooltip";
 
 import { useArtifacts } from "./context";
 
+/**
+ * 【函数功能描述】
+ */
 export function ArtifactFileDetail({
   className,
   filepath: filepathFromProps,
@@ -260,6 +263,9 @@ export function ArtifactFileDetail({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 export function ArtifactFilePreview({
   filepath,
   threadId,

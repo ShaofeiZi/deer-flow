@@ -1,10 +1,10 @@
-# DeerFlow Backend
+# DeerFlow 后端
 
-DeerFlow is a LangGraph-based AI super agent with sandbox execution, persistent memory, and extensible tool integration. The backend enables AI agents to execute code, browse the web, manage files, delegate tasks to subagents, and retain context across conversations - all in isolated, per-thread environments.
+DeerFlow 是一个基于 LangGraph 的 AI 超级代理，具备沙箱执行、持久内存以及可扩展的工具集成能力。后端使 AI 代理能够执行代码、浏览网页、管理文件、将任务委派给子代理，并在对话之间保持上下文——全部在隔离的逐线程执行环境中完成。
 
 ---
 
-## Architecture
+## 架构
 
 ```
                         ┌──────────────────────────────────────┐
@@ -34,124 +34,124 @@ DeerFlow is a LangGraph-based AI super agent with sandbox execution, persistent 
                └────────────────────┘
 ```
 
-**Request Routing** (via Nginx):
-- `/api/langgraph/*` → LangGraph Server - agent interactions, threads, streaming
-- `/api/*` (other) → Gateway API - models, MCP, skills, memory, artifacts, uploads
-- `/` (non-API) → Frontend - Next.js web interface
+**请求路由**（通过 Nginx）：
+- `/api/langgraph/*` → LangGraph 服务器 - 代理交互、线程、流式传输
+- `/api/*`（其他） → Gateway API - 模型、MCP、技能、内存、工件、上传
+- `/`（非 API 请求） → Frontend - Next.js Web 界面
 
 ---
 
-## Core Components
+## 核心组件
 
-### Lead Agent
+### Lead Agent（主代理）
 
-The single LangGraph agent (`lead_agent`) is the runtime entry point, created via `make_lead_agent(config)`. It combines:
+单一的 LangGraph 代理（`lead_agent`）是运行时入口，通过 `make_lead_agent(config)` 创建。它整合了：
 
-- **Dynamic model selection** with thinking and vision support
-- **Middleware chain** for cross-cutting concerns (9 middlewares)
-- **Tool system** with sandbox, MCP, community, and built-in tools
-- **Subagent delegation** for parallel task execution
-- **System prompt** with skills injection, memory context, and working directory guidance
+- **带有推理与视觉支持的动态模型选择**
+- **用于横向关注点处理的中间件链（9 个中间件）**
+- **工具系统**，包含沙箱、MCP、社区工具和内置工具
+- **用于并行任务执行的子代理委派**
+- **系统提示**，含技能注入、内存上下文和工作目录指引
 
-### Middleware Chain
+### 中间件链
 
-Middlewares execute in strict order, each handling a specific concern:
+中间件按严格顺序执行，每个中间件处理一个特定关注点：
 
 | # | Middleware | Purpose |
 |---|-----------|---------|
-| 1 | **ThreadDataMiddleware** | Creates per-thread isolated directories (workspace, uploads, outputs) |
-| 2 | **UploadsMiddleware** | Injects newly uploaded files into conversation context |
-| 3 | **SandboxMiddleware** | Acquires sandbox environment for code execution |
-| 4 | **SummarizationMiddleware** | Reduces context when approaching token limits (optional) |
-| 5 | **TodoListMiddleware** | Tracks multi-step tasks in plan mode (optional) |
-| 6 | **TitleMiddleware** | Auto-generates conversation titles after first exchange |
-| 7 | **MemoryMiddleware** | Queues conversations for async memory extraction |
-| 8 | **ViewImageMiddleware** | Injects image data for vision-capable models (conditional) |
-| 9 | **ClarificationMiddleware** | Intercepts clarification requests and interrupts execution (must be last) |
+| 1 | **ThreadDataMiddleware** | 为每个线程创建隔离工作区/上传/输出目录 |
+| 2 | **UploadsMiddleware** | 将新上传的文件注入到对话上下文 |
+| 3 | **SandboxMiddleware** | 获取用于代码执行的沙箱环境 |
+| 4 | **SummarizationMiddleware** | 在接近 token 限制时缩减上下文（可选） |
+| 5 | **TodoListMiddleware** | 在计划模式下跟踪多步骤任务（可选） |
+| 6 | **TitleMiddleware** | 在首次交换后自动生成对话标题 |
+| 7 | **MemoryMiddleware** | 将对话排队以供异步内存提取 |
+| 8 | **ViewImageMiddleware** | 为具备视觉能力的模型注入图像数据（有条件） |
+| 9 | **ClarificationMiddleware** | 拦截澄清请求并在执行结束时中断执行（必须放在最后） |
 
-### Sandbox System
+### 沙箱系统
 
-Per-thread isolated execution with virtual path translation:
+逐线程的隔离执行，带有虚拟路径转换：
 
-- **Abstract interface**: `execute_command`, `read_file`, `write_file`, `list_dir`
-- **Providers**: `LocalSandboxProvider` (filesystem) and `AioSandboxProvider` (Docker, in community/)
-- **Virtual paths**: `/mnt/user-data/{workspace,uploads,outputs}` → thread-specific physical directories
-- **Skills path**: `/mnt/skills` → `deer-flow/skills/` directory
-- **Tools**: `bash`, `ls`, `read_file`, `write_file`, `str_replace`
+- **抽象接口**：`execute_command`、`read_file`、`write_file`、`list_dir`
+- **提供者**：`LocalSandboxProvider`（文件系统）和 `AioSandboxProvider`（Docker，在 community/）
+- **虚拟路径**：`/mnt/user-data/{workspace,uploads,outputs}` → 线程特定的物理目录
+- **Skills 路径**：`/mnt/skills` → `deer-flow/skills/` 目录
+- **工具**：`bash`、`ls`、`read_file`、`write_file`、`str_replace`
 
-### Subagent System
+### 子代理系统
 
 Async task delegation with concurrent execution:
 
-- **Built-in agents**: `general-purpose` (full toolset) and `bash` (command specialist)
-- **Concurrency**: Max 3 subagents per turn, 15-minute timeout
-- **Execution**: Background thread pools with status tracking and SSE events
-- **Flow**: Agent calls `task()` tool → executor runs subagent in background → polls for completion → returns result
+- **内置代理**：`general-purpose`（完整工具集）和 `bash`（命令专家）
+- **并发性**：每轮最多 3 个子代理，15 分钟超时
+- **执行**：带状态跟踪和 SSE 事件的后台线程池
+- **流程**：代理调用 `task()` 工具 → 执行器在后台运行子代理 → 轮询完成情况 → 返回结果
 
-### Memory System
+### 内存系统
 
-LLM-powered persistent context retention across conversations:
+基于 LLM 的跨对话持久上下文保留：
 
-- **Automatic extraction**: Analyzes conversations for user context, facts, and preferences
-- **Structured storage**: User context (work, personal, top-of-mind), history, and confidence-scored facts
-- **Debounced updates**: Batches updates to minimize LLM calls (configurable wait time)
-- **System prompt injection**: Top facts + context injected into agent prompts
-- **Storage**: JSON file with mtime-based cache invalidation
+- **自动提取**：分析对话中的用户上下文、事实与偏好
+- **结构化存储**：用户上下文（工作、个人、记忆要点）、历史记录，以及基于置信度的事实
+- **去抖更新**：聚合更新以最小化对 LLm 的调用（可配置等待时间）
+- **系统提示注入**：将关键信息和上下文注入代理提示
+- **存储**：具有基于 mtime 的缓存失效策略的 JSON 文件
 
-### Tool Ecosystem
+### 工具生态系统
 
-| Category | Tools |
+| 分类 | 工具 |
 |----------|-------|
-| **Sandbox** | `bash`, `ls`, `read_file`, `write_file`, `str_replace` |
-| **Built-in** | `present_files`, `ask_clarification`, `view_image`, `task` (subagent) |
-| **Community** | Tavily (web search), Jina AI (web fetch), Firecrawl (scraping), DuckDuckGo (image search) |
-| **MCP** | Any Model Context Protocol server (stdio, SSE, HTTP transports) |
-| **Skills** | Domain-specific workflows injected via system prompt |
+| **沙箱** | `bash`, `ls`, `read_file`, `write_file`, `str_replace` |
+| **内置** | `present_files`, `ask_clarification`, `view_image`, `task` (subagent) |
+| **社区** | Tavily (网络检索), Jina AI (网页抓取), Firecrawl (抓取), DuckDuckGo (图片检索) |
+| **MCP** | 任何 Model Context Protocol 服务器（stdio、SSE、HTTP 传输） |
+| **Skills** | 通过系统提示注入的领域特定工作流 |
 
 ### Gateway API
 
-FastAPI application providing REST endpoints for frontend integration:
+FastAPI 应用，提供用于前端集成的 REST 端点：
 
-| Route | Purpose |
+| 路由 | 目的 |
 |-------|---------|
-| `GET /api/models` | List available LLM models |
-| `GET/PUT /api/mcp/config` | Manage MCP server configurations |
-| `GET/PUT /api/skills` | List and manage skills |
-| `POST /api/skills/install` | Install skill from `.skill` archive |
-| `GET /api/memory` | Retrieve memory data |
-| `POST /api/memory/reload` | Force memory reload |
-| `GET /api/memory/config` | Memory configuration |
-| `GET /api/memory/status` | Combined config + data |
-| `POST /api/threads/{id}/uploads` | Upload files (auto-converts PDF/PPT/Excel/Word to Markdown) |
-| `GET /api/threads/{id}/uploads/list` | List uploaded files |
-| `GET /api/threads/{id}/artifacts/{path}` | Serve generated artifacts |
+| `GET /api/models` | 列出可用的 LLM 模型 |
+| `GET/PUT /api/mcp/config` | 管理 MCP 服务器配置 |
+| `GET/PUT /api/skills` | 列出并管理技能 |
+| `POST /api/skills/install` | 从 `.skill` 档安装技能 |
+| `GET /api/memory` | 检索内存数据 |
+| `POST /api/memory/reload` | 强制内存重载 |
+| `GET /api/memory/config` | 内存配置 |
+| `GET /api/memory/status` | 配置 + 数据的综合状态 |
+| `POST /api/threads/{id}/uploads` | 上传文件（自动将 PDF/PPT/Excel/Word 转换为 Markdown） |
+| `GET /api/threads/{id}/uploads/list` | 列出上传的文件 |
+| `GET /api/threads/{id}/artifacts/{path}` | 提供生成的工件 |
 
 ---
 
-## Quick Start
+## 快速开始
 
-### Prerequisites
+### 前提条件
 
-- Python 3.12+
-- [uv](https://docs.astral.sh/uv/) package manager
-- API keys for your chosen LLM provider
+- Python 3.12+ 
+- [uv](https://docs.astral.sh/uv/) 包管理器
+- 你所选 LLM 提供商的 API 密钥
 
-### Installation
+### 安装
 
 ```bash
 cd deer-flow
 
-# Copy configuration files
+# 复制配置文件
 cp config.example.yaml config.yaml
 
-# Install backend dependencies
+# 安装后端依赖
 cd backend
 make install
 ```
 
 ### Configuration
 
-Edit `config.yaml` in the project root:
+在项目根目录编辑 `config.yaml`：
 
 ```yaml
 models:
@@ -164,23 +164,23 @@ models:
     supports_vision: true
 ```
 
-Set your API keys:
+设置你的 API 密钥：
 
 ```bash
 export OPENAI_API_KEY="your-api-key-here"
 ```
 
-### Running
+### 运行
 
-**Full Application** (from project root):
+**完整应用程序**（从项目根目录）：
 
 ```bash
 make dev  # Starts LangGraph + Gateway + Frontend + Nginx
 ```
 
-Access at: http://localhost:2026
+访问地址： http://localhost:2026
 
-**Backend Only** (from backend directory):
+**仅后端**（来自 backend 目录）：
 
 ```bash
 # Terminal 1: LangGraph server
@@ -190,11 +190,11 @@ make dev
 make gateway
 ```
 
-Direct access: LangGraph at http://localhost:2024, Gateway at http://localhost:8001
+直接访问：LangGraph 在 http://localhost:2024，Gateway 在 http://localhost:8001
 
 ---
 
-## Project Structure
+## 项目结构
 
 ```
 backend/
@@ -234,24 +234,24 @@ backend/
 
 ---
 
-## Configuration
+## 配置
 
-### Main Configuration (`config.yaml`)
+### 主要配置（`config.yaml`）
 
-Place in project root. Config values starting with `$` resolve as environment variables.
+放在项目根目录。以 `$` 开头的配置值将解析为环境变量。
 
-Key sections:
-- `models` - LLM configurations with class paths, API keys, thinking/vision flags
-- `tools` - Tool definitions with module paths and groups
-- `tool_groups` - Logical tool groupings
-- `sandbox` - Execution environment provider
-- `skills` - Skills directory paths
-- `title` - Auto-title generation settings
-- `summarization` - Context summarization settings
-- `subagents` - Subagent system (enabled/disabled)
-- `memory` - Memory system settings (enabled, storage, debounce, facts limits)
+关键部分：
+- `models` - LLM 配置，包含类路径、API 密钥、思考/视觉标志
+- `tools` - 工具定义，包含模块路径与分组
+- `tool_groups` - 逻辑工具分组
+- `sandbox` - 执行环境提供者
+- `skills` - 技能目录路径
+- `title` - 自动标题生成设置
+- `summarization` - 上下文摘要设置
+- `subagents` - 子代理系统（启用/禁用）
+- `memory` - 内存系统设置（启用、存储、去抖、事实限制）
 
-### Extensions Configuration (`extensions_config.json`)
+### Extensions 配置 (`extensions_config.json`)
 
 MCP servers and skill states in a single file:
 
@@ -272,18 +272,18 @@ MCP servers and skill states in a single file:
 }
 ```
 
-### Environment Variables
+### 环境变量
 
-- `DEER_FLOW_CONFIG_PATH` - Override config.yaml location
-- `DEER_FLOW_EXTENSIONS_CONFIG_PATH` - Override extensions_config.json location
-- Model API keys: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `DEEPSEEK_API_KEY`, etc.
-- Tool API keys: `TAVILY_API_KEY`, `GITHUB_TOKEN`, etc.
+- `DEER_FLOW_CONFIG_PATH` - 覆盖 config.yaml 的位置
+- `DEER_FLOW_EXTENSIONS_CONFIG_PATH` - 覆盖 extensions_config.json 的位置
+- 模型 API 密钥：`OPENAI_API_KEY`、`ANTHROPIC_API_KEY`、`DEEPSEEK_API_KEY` 等
+- 工具 API 密钥：`TAVILY_API_KEY`、`GITHUB_TOKEN` 等
 
 ---
 
-## Development
+## 开发
 
-### Commands
+### 命令
 
 ```bash
 make install    # Install dependencies
@@ -293,15 +293,15 @@ make lint       # Run linter (ruff)
 make format     # Format code (ruff)
 ```
 
-### Code Style
+### 代码风格
 
-- **Linter/Formatter**: `ruff`
-- **Line length**: 240 characters
-- **Python**: 3.12+ with type hints
-- **Quotes**: Double quotes
-- **Indentation**: 4 spaces
+- **Linter/Formatter**：`ruff`
+- **行长**：240 字符
+- **Python**：3.12+，带类型提示
+- **引号**：双引号
+- **缩进**：4 个空格
 
-### Testing
+### 测试
 
 ```bash
 uv run pytest
@@ -309,28 +309,28 @@ uv run pytest
 
 ---
 
-## Technology Stack
+## 技术栈
 
-- **LangGraph** (1.0.6+) - Agent framework and multi-agent orchestration
-- **LangChain** (1.2.3+) - LLM abstractions and tool system
-- **FastAPI** (0.115.0+) - Gateway REST API
-- **langchain-mcp-adapters** - Model Context Protocol support
-- **agent-sandbox** - Sandboxed code execution
-- **markitdown** - Multi-format document conversion
-- **tavily-python** / **firecrawl-py** - Web search and scraping
+- **LangGraph**（1.0.6+）- 代理框架与多代理编排
+- **LangChain**（1.2.3+）- LLM 抽象与工具系统
+- **FastAPI**（0.115.0+）- Gateway REST API
+- **langchain-mcp-adapters** - 模型上下文协议支持
+- **agent-sandbox** - 沙箱化代码执行
+- **markitdown** - 多格式文档转换
+- **tavily-python** / **firecrawl-py** - 网络搜索与抓取
 
 ---
 
-## Documentation
+## 文档
 
-- [Configuration Guide](docs/CONFIGURATION.md)
-- [Architecture Details](docs/ARCHITECTURE.md)
-- [API Reference](docs/API.md)
-- [File Upload](docs/FILE_UPLOAD.md)
-- [Path Examples](docs/PATH_EXAMPLES.md)
-- [Context Summarization](docs/summarization.md)
-- [Plan Mode](docs/plan_mode_usage.md)
-- [Setup Guide](docs/SETUP.md)
+- [配置指南](docs/CONFIGURATION.md)
+- [体系架构详情](docs/ARCHITECTURE.md)
+- [API 参考](docs/API.md)
+- [文件上传](docs/FILE_UPLOAD.md)
+- [路径示例](docs/PATH_EXAMPLES.md)
+- [上下文摘要](docs/summarization.md)
+- [Plan 模式用法](docs/plan_mode_usage.md)
+- [设置指南](docs/SETUP.md)
 
 ---
 
@@ -338,6 +338,6 @@ uv run pytest
 
 See the [LICENSE](../LICENSE) file in the project root.
 
-## Contributing
+## 贡献
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+请参阅 [CONTRIBUTING.md](CONTRIBUTING.md) 了解贡献指南。

@@ -17,6 +17,9 @@ const ToggleGroupContext = React.createContext<
   spacing: 0,
 });
 
+/**
+ * 【函数功能描述】
+ */
 function ToggleGroup({
   className,
   variant,
@@ -48,6 +51,9 @@ function ToggleGroup({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function ToggleGroupItem({
   className,
   children,

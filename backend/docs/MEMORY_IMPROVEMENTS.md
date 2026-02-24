@@ -2,7 +2,7 @@
 
 This document describes recent improvements to the memory system's fact injection mechanism.
 
-## Overview
+## 概览
 
 Two major improvements have been made to the `format_memory_for_injection` function:
 
@@ -31,14 +31,14 @@ final_score = (similarity × 0.6) + (confidence × 0.4)
 - **Balanced**: Considers both relevance and reliability
 - **Fallback**: Gracefully degrades to confidence-only ranking if context is unavailable
 
-### Example
+### 示例
 Given facts about Python, React, and Docker:
 - User asks: *"How should I write Python tests?"*
   - Prioritizes: Python testing, type hints, pytest
 - User asks: *"How to optimize my Next.js app?"*
   - Prioritizes: React/Next.js experience, performance optimization
 
-### Configuration
+### 配置
 Customize weights in `config.yaml` (optional):
 ```yaml
 memory:
@@ -46,7 +46,7 @@ memory:
   confidence_weight: 0.4  # Weight for confidence score (0-1)
 ```
 
-**Note**: Weights should sum to 1.0 for best results.
+**注意**: Weights should sum to 1.0 for best results.
 
 ## 2. Accurate Token Counting
 
@@ -82,7 +82,7 @@ def _count_tokens(text: str, encoding_name: str = "cl100k_base") -> int:
 - **No Overflows**: Prevents exceeding `max_injection_tokens` limit
 - **Better Planning**: Each section's token cost is known precisely
 
-### Example
+### 示例
 ```python
 text = "This is a test string to count tokens accurately using tiktoken."
 
@@ -112,13 +112,13 @@ def format_memory_for_injection(
 ) -> str:
 ```
 
-**New Parameter**:
+**New 参数**:
 - `current_context`: Optional string containing recent conversation messages for similarity calculation
 
 ### Backward Compatibility
 The function remains **100% backward compatible**:
 - If `current_context` is `None` or empty, falls back to confidence-only ranking
-- Existing callers without the parameter work exactly as before
+- Existing callers without the 参数 work exactly as before
 - Token counting is always accurate (transparent improvement)
 
 ### Integration Point
@@ -210,9 +210,9 @@ class MemoryMiddleware:
 - **LangChain Native**: Uses built-in dynamic system prompt support
 - **Runtime Flexibility**: Memory regenerated for each agent invocation
 
-## Dependencies
+## 依赖
 
-New dependencies added to `pyproject.toml`:
+New 依赖 added to `pyproject.toml`:
 ```toml
 dependencies = [
     # ... existing dependencies ...
@@ -221,7 +221,7 @@ dependencies = [
 ]
 ```
 
-Install with:
+安装 with:
 ```bash
 cd backend
 uv sync
@@ -250,7 +250,7 @@ Expected output shows:
   - Faster than the old character-counting approach
   - Minimal overhead compared to LLM inference
 
-### Memory Usage
+### Memory 用法
 - **TF-IDF Vectorizer**: ~1-5MB for typical vocabulary
   - Instantiated once per injection call
   - Garbage collected after use
@@ -272,7 +272,7 @@ Expected output shows:
 | Token Counting | `len(text) // 4` | `tiktoken.encode(text)` |
 | Context Awareness | None | TF-IDF cosine similarity |
 | Accuracy | ±25% token estimate | Exact token count |
-| Configuration | Fixed weights | Customizable similarity/confidence weights |
+| 配置 | Fixed weights | Customizable similarity/confidence weights |
 
 These improvements result in:
 - **More relevant** facts injected into context

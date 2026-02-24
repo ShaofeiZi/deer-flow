@@ -1,5 +1,8 @@
 import { FlipDisplay } from "./flip-display";
 
+/**
+ * 【函数功能描述】
+ */
 export function ThreadTitle({
   threadTitle,
 }: {

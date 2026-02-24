@@ -29,6 +29,9 @@ import { FlipDisplay } from "../flip-display";
 
 import { MarkdownContent } from "./markdown-content";
 
+/**
+ * 【函数功能描述】
+ */
 export function SubtaskCard({
   className,
   taskId,

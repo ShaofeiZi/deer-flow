@@ -1,6 +1,6 @@
-# Architecture Overview
+# Architecture 概览
 
-This document provides a comprehensive overview of the DeerFlow backend architecture.
+This document provides a comprehensive 概览 of the DeerFlow backend architecture.
 
 ## System Architecture
 
@@ -58,13 +58,13 @@ The LangGraph server is the core agent runtime, built on LangGraph for robust mu
 **Entry Point**: `src/agents/lead_agent/agent.py:make_lead_agent`
 
 **Key Responsibilities**:
-- Agent creation and configuration
+- Agent creation and 配置
 - Thread state management
 - Middleware chain execution
 - Tool execution orchestration
 - SSE streaming for real-time responses
 
-**Configuration**: `langgraph.json`
+**配置**: `langgraph.json`
 
 ```json
 {
@@ -83,7 +83,7 @@ FastAPI application providing REST endpoints for non-agent operations.
 
 **Routers**:
 - `models.py` - `/api/models` - Model listing and details
-- `mcp.py` - `/api/mcp` - MCP server configuration
+- `mcp.py` - `/api/mcp` - MCP server 配置
 - `skills.py` - `/api/skills` - Skills management
 - `uploads.py` - `/api/threads/{id}/uploads` - File upload
 - `artifacts.py` - `/api/threads/{id}/artifacts` - Artifact serving
@@ -404,7 +404,7 @@ SKILL.md Format:
    - Agent can access via virtual_path
 ```
 
-### Configuration Reload
+### 配置 Reload
 
 ```
 1. Client updates MCP config
@@ -448,7 +448,7 @@ SKILL.md Format:
 ### Caching
 
 - MCP tools cached with file mtime invalidation
-- Configuration loaded once, reloaded on file change
+- 配置 loaded once, reloaded on file change
 - Skills parsed once at startup, cached in memory
 
 ### Streaming

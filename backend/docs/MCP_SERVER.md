@@ -1,4 +1,4 @@
-# MCP (Model Context Protocol) Configuration
+# MCP (Model Context Protocol) 配置
 
 DeerFlow supports configurable MCP servers and skills to extend its capabilities, which are loaded from a dedicated `extensions_config.json` file in the project root directory.
 
@@ -11,14 +11,14 @@ DeerFlow supports configurable MCP servers and skills to extend its capabilities
    ```
    
 2. Enable the desired MCP servers or skills by setting `"enabled": true`.
-3. Configure each server’s command, arguments, and environment variables as needed.
+3. Configure each server’s command, 参数, and environment variables as needed.
 4. Restart the application to load and register MCP tools.
 
 ## How It Works
 
 MCP servers expose tools that are automatically discovered and integrated into DeerFlow’s agent system at runtime. Once enabled, these tools become available to agents without additional code changes.
 
-## Example Capabilities
+## 示例 Capabilities
 
 MCP servers can provide access to:
 
@@ -30,5 +30,5 @@ MCP servers can provide access to:
 
 ## Learn More
 
-For detailed documentation about the Model Context Protocol, visit:  
+For detailed 文档 about the Model Context Protocol, visit:  
 https://modelcontextprotocol.io

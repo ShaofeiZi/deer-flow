@@ -45,6 +45,20 @@ DEFAULT_IDLE_TIMEOUT = 600  # 10 minutes in seconds
 IDLE_CHECK_INTERVAL = 60  # Check every 60 seconds
 
 
+class SandboxProviderConfig(TypedDict):
+    """AioSandboxProvider 的配置结构（从 app config 解析）。"""
+
+    image: str
+    port: int
+    base_url: str | None
+    auto_start: bool
+    container_prefix: str
+    idle_timeout: int
+    mounts: list[object]
+    environment: dict[str, str]
+    provisioner_url: str
+
+
 class AioSandboxProvider(SandboxProvider):
     """Sandbox provider that manages containers running the AIO sandbox.
 
@@ -73,26 +87,27 @@ class AioSandboxProvider(SandboxProvider):
     """
 
     def __init__(self):
-        self._lock = threading.Lock()
+        """初始化 provider，加载配置并创建 backend/state store。"""
+        self._lock: threading.Lock = threading.Lock()
         self._sandboxes: dict[str, AioSandbox] = {}  # sandbox_id -> AioSandbox instance
         self._sandbox_infos: dict[str, SandboxInfo] = {}  # sandbox_id -> SandboxInfo (for destroy)
         self._thread_sandboxes: dict[str, str] = {}  # thread_id -> sandbox_id
         self._thread_locks: dict[str, threading.Lock] = {}  # thread_id -> in-process lock
         self._last_activity: dict[str, float] = {}  # sandbox_id -> last activity timestamp
-        self._shutdown_called = False
-        self._idle_checker_stop = threading.Event()
+        self._shutdown_called: bool = False
+        self._idle_checker_stop: threading.Event = threading.Event()
         self._idle_checker_thread: threading.Thread | None = None
 
-        self._config = self._load_config()
+        self._config: SandboxProviderConfig = self._load_config()
         self._backend: SandboxBackend = self._create_backend()
         self._state_store: SandboxStateStore = self._create_state_store()
 
         # Register shutdown handler
-        atexit.register(self.shutdown)
+        _ = atexit.register(self.shutdown)
         self._register_signal_handlers()
 
         # Start idle checker if enabled
-        if self._config.get("idle_timeout", DEFAULT_IDLE_TIMEOUT) > 0:
+        if self._config["idle_timeout"] > 0:
             self._start_idle_checker()
 
     # ── Factory methods ──────────────────────────────────────────────────
@@ -139,27 +154,28 @@ class AioSandboxProvider(SandboxProvider):
 
     # ── Configuration ────────────────────────────────────────────────────
 
-    def _load_config(self) -> dict:
-        """Load sandbox configuration from app config."""
+    def _load_config(self) -> SandboxProviderConfig:
+        """从 app config 加载 sandbox provider 配置。"""
         config = get_app_config()
         sandbox_config = config.sandbox
 
-        return {
+        resolved = {
             "image": sandbox_config.image or DEFAULT_IMAGE,
             "port": sandbox_config.port or DEFAULT_PORT,
             "base_url": sandbox_config.base_url,
             "auto_start": sandbox_config.auto_start if sandbox_config.auto_start is not None else True,
             "container_prefix": sandbox_config.container_prefix or DEFAULT_CONTAINER_PREFIX,
             "idle_timeout": getattr(sandbox_config, "idle_timeout", None) or DEFAULT_IDLE_TIMEOUT,
-            "mounts": sandbox_config.mounts or [],
-            "environment": self._resolve_env_vars(sandbox_config.environment or {}),
+            "mounts": getattr(sandbox_config, "mounts", None) or [],
+            "environment": self._resolve_env_vars(getattr(sandbox_config, "environment", None) or {}),
             # provisioner URL for dynamic pod management (e.g. http://provisioner:8002)
             "provisioner_url": getattr(sandbox_config, "provisioner_url", None) or "",
         }
+        return cast(SandboxProviderConfig, cast(object, resolved))
 
     @staticmethod
-    def _resolve_env_vars(env_config: dict[str, str]) -> dict[str, str]:
-        """Resolve environment variable references (values starting with $)."""
+    def _resolve_env_vars(env_config: dict[str, object]) -> dict[str, str]:
+        """解析 environment 变量引用（以 $ 开头的值）。"""
         resolved = {}
         for key, value in env_config.items():
             if isinstance(value, str) and value.startswith("$"):
@@ -244,6 +260,16 @@ class AioSandboxProvider(SandboxProvider):
         logger.info(f"Started idle checker thread (timeout: {self._config.get('idle_timeout', DEFAULT_IDLE_TIMEOUT)}s)")
 
     def _idle_checker_loop(self) -> None:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         idle_timeout = self._config.get("idle_timeout", DEFAULT_IDLE_TIMEOUT)
         while not self._idle_checker_stop.wait(timeout=IDLE_CHECK_INTERVAL):
             try:
@@ -252,6 +278,16 @@ class AioSandboxProvider(SandboxProvider):
                 logger.error(f"Error in idle checker loop: {e}")
 
     def _cleanup_idle_sandboxes(self, idle_timeout: float) -> None:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         current_time = time.time()
         sandboxes_to_release = []
 
@@ -277,6 +313,16 @@ class AioSandboxProvider(SandboxProvider):
         self._original_sigint = signal.getsignal(signal.SIGINT)
 
         def signal_handler(signum, frame):
+            """
+            【函数功能描述】
+            
+            参数:
+                【参数名】: 【参数描述】
+            
+            返回:
+                【返回值描述】
+            """
+
             self.shutdown()
             original = self._original_sigterm if signum == signal.SIGTERM else self._original_sigint
             if callable(original):

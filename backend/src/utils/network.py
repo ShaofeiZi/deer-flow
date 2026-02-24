@@ -29,6 +29,16 @@ class PortAllocator:
     """
 
     def __init__(self):
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         self._lock = threading.Lock()
         self._reserved_ports: set[int] = set()
 

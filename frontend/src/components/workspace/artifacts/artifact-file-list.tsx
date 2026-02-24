@@ -22,6 +22,9 @@ import { cn } from "@/lib/utils";
 
 import { useArtifacts } from "./context";
 
+/**
+ * 【函数功能描述】
+ */
 export function ArtifactFileList({
   className,
   files,

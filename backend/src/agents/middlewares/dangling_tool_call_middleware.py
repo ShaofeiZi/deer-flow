@@ -28,6 +28,16 @@ class DanglingToolCallMiddleware(AgentMiddleware[AgentState]):
     """
 
     def _fix_dangling_tool_calls(self, state: AgentState) -> dict | None:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         messages = state.get("messages", [])
         if not messages:
             return None
@@ -67,6 +77,16 @@ class DanglingToolCallMiddleware(AgentMiddleware[AgentState]):
 
     @override
     def before_model(self, state: AgentState, runtime: Runtime) -> dict | None:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         return self._fix_dangling_tool_calls(state)
 
     @override

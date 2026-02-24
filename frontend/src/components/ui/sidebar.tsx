@@ -44,6 +44,9 @@ type SidebarContextProps = {
 
 const SidebarContext = React.createContext<SidebarContextProps | null>(null);
 
+/**
+ * 【函数功能描述】
+ */
 function useSidebar() {
   const context = React.useContext(SidebarContext);
   if (!context) {
@@ -53,6 +56,9 @@ function useSidebar() {
   return context;
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarProvider({
   defaultOpen = true,
   open: openProp,
@@ -151,6 +157,9 @@ function SidebarProvider({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function Sidebar({
   side = "left",
   variant = "sidebar",
@@ -253,6 +262,9 @@ function Sidebar({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarTrigger({
   className,
   onClick,
@@ -279,6 +291,9 @@ function SidebarTrigger({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
   const { toggleSidebar } = useSidebar();
 
@@ -304,6 +319,9 @@ function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarInset({ className, ...props }: React.ComponentProps<"main">) {
   return (
     <main
@@ -318,6 +336,9 @@ function SidebarInset({ className, ...props }: React.ComponentProps<"main">) {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarInput({
   className,
   ...props
@@ -332,6 +353,9 @@ function SidebarInput({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -343,6 +367,9 @@ function SidebarHeader({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -354,6 +381,9 @@ function SidebarFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarSeparator({
   className,
   ...props
@@ -368,6 +398,9 @@ function SidebarSeparator({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -382,6 +415,9 @@ function SidebarContent({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -393,6 +429,9 @@ function SidebarGroup({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarGroupLabel({
   className,
   asChild = false,
@@ -414,6 +453,9 @@ function SidebarGroupLabel({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarGroupAction({
   className,
   asChild = false,
@@ -437,6 +479,9 @@ function SidebarGroupAction({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarGroupContent({
   className,
   ...props
@@ -451,6 +496,9 @@ function SidebarGroupContent({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarMenu({ className, ...props }: React.ComponentProps<"ul">) {
   return (
     <ul
@@ -462,6 +510,9 @@ function SidebarMenu({ className, ...props }: React.ComponentProps<"ul">) {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
   return (
     <li
@@ -495,6 +546,9 @@ const sidebarMenuButtonVariants = cva(
   },
 );
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarMenuButton({
   asChild = false,
   isActive = false,
@@ -545,6 +599,9 @@ function SidebarMenuButton({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarMenuAction({
   className,
   asChild = false,
@@ -577,6 +634,9 @@ function SidebarMenuAction({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarMenuBadge({
   className,
   ...props
@@ -599,6 +659,9 @@ function SidebarMenuBadge({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarMenuSkeleton({
   className,
   showIcon = false,
@@ -637,6 +700,9 @@ function SidebarMenuSkeleton({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarMenuSub({ className, ...props }: React.ComponentProps<"ul">) {
   return (
     <ul
@@ -652,6 +718,9 @@ function SidebarMenuSub({ className, ...props }: React.ComponentProps<"ul">) {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarMenuSubItem({
   className,
   ...props
@@ -666,6 +735,9 @@ function SidebarMenuSubItem({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SidebarMenuSubButton({
   asChild = false,
   size = "md",

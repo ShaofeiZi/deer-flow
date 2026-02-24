@@ -2,6 +2,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const STAGGER_MS = 60;
 
+/**
+ * 【函数功能描述】
+ */
 function SkeletonBar({
   className,
   style,
@@ -21,6 +24,9 @@ function SkeletonBar({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 export function MessageListSkeleton() {
   let index = 0;
   return (

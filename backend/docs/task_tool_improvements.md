@@ -1,14 +1,14 @@
 # Task Tool Improvements
 
-## Overview
+## 概览
 
 The task tool has been improved to eliminate wasteful LLM polling. Previously, when using background tasks, the LLM had to repeatedly call `task_status` to poll for completion, causing unnecessary API requests.
 
 ## Changes Made
 
-### 1. Removed `run_in_background` Parameter
+### 1. Removed `run_in_background` 参数
 
-The `run_in_background` parameter has been removed from the `task` tool. All subagent tasks now run asynchronously by default, but the tool handles completion automatically.
+The `run_in_background` 参数 has been removed from the `task` tool. All subagent tasks now run asynchronously by default, but the tool handles completion automatically.
 
 **Before:**
 ```python
@@ -43,7 +43,7 @@ The `task_tool` now:
 - Starts the subagent task asynchronously
 - Polls for completion in the backend (every 2 seconds)
 - Blocks the tool call until completion
-- Returns the final result directly
+- 返回 the final result directly
 
 This means:
 - ✅ LLM makes only ONE tool call
@@ -55,10 +55,10 @@ This means:
 
 The `task_status_tool` is no longer exposed to the LLM. It's kept in the codebase for potential internal/debugging use, but the LLM cannot call it.
 
-### 4. Updated Documentation
+### 4. Updated 文档
 
 - Updated `SUBAGENT_SECTION` in `prompt.py` to remove all references to background tasks and polling
-- Simplified usage examples
+- Simplified 用法 示例
 - Made it clear that the tool automatically waits for completion
 
 ## Implementation Details
@@ -93,7 +93,7 @@ while True:
 
 In addition to polling timeout, subagent execution now has a built-in timeout mechanism:
 
-**Configuration** (`src/subagents/config.py`):
+**配置** (`src/subagents/config.py`):
 ```python
 @dataclass
 class SubagentConfig:
@@ -107,12 +107,12 @@ To avoid nested thread pools and resource waste, we use two dedicated thread poo
 
 1. **Scheduler Pool** (`_scheduler_pool`):
    - Max workers: 4
-   - Purpose: Orchestrates background task execution
+   - 目的: Orchestrates background task execution
    - Runs `run_task()` function that manages task lifecycle
 
 2. **Execution Pool** (`_execution_pool`):
    - Max workers: 8 (larger to avoid blocking)
-   - Purpose: Actual subagent execution with timeout support
+   - 目的: Actual subagent execution with timeout support
    - Runs `execute()` method that invokes the agent
 
 **How it works**:
@@ -153,7 +153,7 @@ To verify the changes work correctly:
 3. Verify the result is returned directly
 4. Verify no `task_status` calls are made
 
-Example test scenario:
+示例 test scenario:
 ```python
 # This should block for ~10 seconds then return result
 result = task(
@@ -164,11 +164,11 @@ result = task(
 # result should contain "Done"
 ```
 
-## Migration Notes
+## Migration 注意
 
 For users/code that previously used `run_in_background=True`:
-- Simply remove the parameter
+- Simply remove the 参数
 - Remove any polling logic
 - The tool will automatically wait for completion
 
-No other changes needed - the API is backward compatible (minus the removed parameter).
+No other changes needed - the API is backward compatible (minus the removed 参数).

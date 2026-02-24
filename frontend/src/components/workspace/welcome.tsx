@@ -10,6 +10,9 @@ import { AuroraText } from "../ui/aurora-text";
 
 let waved = false;
 
+/**
+ * 【函数功能描述】
+ */
 export function Welcome({
   className,
   mode,

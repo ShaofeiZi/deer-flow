@@ -40,6 +40,9 @@ import {
 import { pathOfThread, titleOfThread } from "@/core/threads/utils";
 import { env } from "@/env";
 
+/**
+ * 【函数功能描述】
+ */
 export function RecentChatList() {
   const { t } = useI18n();
   const router = useRouter();

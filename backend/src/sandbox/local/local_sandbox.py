@@ -7,28 +7,25 @@ from src.sandbox.sandbox import Sandbox
 
 
 class LocalSandbox(Sandbox):
-    def __init__(self, id: str, path_mappings: dict[str, str] | None = None):
-        """
-        Initialize local sandbox with optional path mappings.
+    """
+    【类功能描述】
+    """
 
-        Args:
-            id: Sandbox identifier
-            path_mappings: Dictionary mapping container paths to local paths
-                          Example: {"/mnt/skills": "/absolute/path/to/skills"}
-        """
+    def __init__(self, id: str, path_mappings: dict[str, str] | None = None):
+        """初始化本地 sandbox，支持可选的路径映射。"""
+
+        # 参数：
+        #   id: Sandbox 标识符
+        #   path_mappings: 将容器路径映射到本地路径的字典，例如：{"/mnt/skills": "/absolute/path/to/skills"}
         super().__init__(id)
         self.path_mappings = path_mappings or {}
 
     def _resolve_path(self, path: str) -> str:
-        """
-        Resolve container path to actual local path using mappings.
+        """使用映射将容器路径解析为实际的本地路径。"""
 
-        Args:
-            path: Path that might be a container path
-
-        Returns:
-            Resolved local path
-        """
+        # 参数：
+        #   path: 可能是容器路径的路径字符串
+        # 返回：解析后的本地路径
         path_str = str(path)
 
         # Try each mapping (longest prefix first for more specific matches)
@@ -43,15 +40,11 @@ class LocalSandbox(Sandbox):
         return path_str
 
     def _reverse_resolve_path(self, path: str) -> str:
-        """
-        Reverse resolve local path back to container path using mappings.
+        """将本地路径反向映射回容器路径（使用映射）。"""
 
-        Args:
-            path: Local path that might need to be mapped to container path
-
-        Returns:
-            Container path if mapping exists, otherwise original path
-        """
+        # 参数：
+        #   path: 本地路径
+        # 返回：若存在映射则得到容器路径，否则返回原始路径
         path_str = str(Path(path).resolve())
 
         # Try each mapping (longest local path first for more specific matches)
@@ -67,15 +60,11 @@ class LocalSandbox(Sandbox):
         return path_str
 
     def _reverse_resolve_paths_in_output(self, output: str) -> str:
-        """
-        Reverse resolve local paths back to container paths in output string.
+        """在输出中将本地路径反向解析为容器路径。"""
 
-        Args:
-            output: Output string that may contain local paths
-
-        Returns:
-            Output with local paths resolved to container paths
-        """
+        # 参数：
+        #   output: 可能包含本地路径的输出字符串
+        # 返回：将本地路径解析为容器路径后的输出
         import re
 
         # Sort mappings by local path length (longest first) for correct prefix matching
@@ -95,6 +84,16 @@ class LocalSandbox(Sandbox):
             pattern = re.compile(escaped_local + r"(?:/[^\s\"';&|<>()]*)?")
 
             def replace_match(match: re.Match) -> str:
+                """
+                【函数功能描述】
+                
+                参数:
+                    【参数名】: 【参数描述】
+                
+                返回:
+                    【返回值描述】
+                """
+
                 matched_path = match.group(0)
                 return self._reverse_resolve_path(matched_path)
 
@@ -103,15 +102,11 @@ class LocalSandbox(Sandbox):
         return result
 
     def _resolve_paths_in_command(self, command: str) -> str:
-        """
-        Resolve container paths to local paths in a command string.
+        """在命令字符串中将容器路径解析为本地路径。"""
 
-        Args:
-            command: Command string that may contain container paths
-
-        Returns:
-            Command with container paths resolved to local paths
-        """
+        # 参数：
+        #   command: 可能包含容器路径的命令字符串
+        # 返回：将容器路径解析为本地路径后的命令
         import re
 
         # Sort mappings by length (longest first) for correct prefix matching
@@ -127,12 +122,32 @@ class LocalSandbox(Sandbox):
         pattern = re.compile("|".join(f"({p})" for p in patterns))
 
         def replace_match(match: re.Match) -> str:
+            """
+            【函数功能描述】
+            
+            参数:
+                【参数名】: 【参数描述】
+            
+            返回:
+                【返回值描述】
+            """
+
             matched_path = match.group(0)
             return self._resolve_path(matched_path)
 
         return pattern.sub(replace_match, command)
 
     def execute_command(self, command: str) -> str:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         # Resolve container paths in command before execution
         resolved_command = self._resolve_paths_in_command(command)
 
@@ -155,17 +170,47 @@ class LocalSandbox(Sandbox):
         return self._reverse_resolve_paths_in_output(final_output)
 
     def list_dir(self, path: str, max_depth=2) -> list[str]:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         resolved_path = self._resolve_path(path)
         entries = list_dir(resolved_path, max_depth)
         # Reverse resolve local paths back to container paths in output
         return [self._reverse_resolve_paths_in_output(entry) for entry in entries]
 
     def read_file(self, path: str) -> str:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         resolved_path = self._resolve_path(path)
         with open(resolved_path) as f:
             return f.read()
 
     def write_file(self, path: str, content: str, append: bool = False) -> None:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         resolved_path = self._resolve_path(path)
         dir_path = os.path.dirname(resolved_path)
         if dir_path:
@@ -175,6 +220,16 @@ class LocalSandbox(Sandbox):
             f.write(content)
 
     def update_file(self, path: str, content: bytes) -> None:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         resolved_path = self._resolve_path(path)
         dir_path = os.path.dirname(resolved_path)
         if dir_path:

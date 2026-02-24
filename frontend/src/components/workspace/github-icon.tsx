@@ -1,3 +1,6 @@
+/**
+ * 【函数功能描述】
+ */
 export function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg

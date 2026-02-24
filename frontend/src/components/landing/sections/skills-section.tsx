@@ -5,6 +5,9 @@ import { cn } from "@/lib/utils";
 import ProgressiveSkillsAnimation from "../progressive-skills-animation";
 import { Section } from "../section";
 
+/**
+ * 【函数功能描述】
+ */
 export function SkillsSection({ className }: { className?: string }) {
   return (
     <Section

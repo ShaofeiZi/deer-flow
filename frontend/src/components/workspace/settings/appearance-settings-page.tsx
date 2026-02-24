@@ -23,6 +23,9 @@ const languageOptions: { value: Locale; label: string }[] = [
   { value: "zh-CN", label: zhCN.locale.localName },
 ];
 
+/**
+ * 【函数功能描述】
+ */
 export function AppearanceSettingsPage() {
   const { t, locale, changeLocale } = useI18n();
   const { theme, setTheme, systemTheme } = useTheme();
@@ -107,6 +110,9 @@ export function AppearanceSettingsPage() {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function ThemePreviewCard({
   icon: Icon,
   label,

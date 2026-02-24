@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button";
 
 import { Section } from "../section";
 
+/**
+ * 【函数功能描述】
+ */
 export function CommunitySection() {
   return (
     <Section

@@ -1,6 +1,13 @@
+"""图片搜索（Image Search）工具。
+
+基于 DuckDuckGo/`ddgs` 搜索图片，用于在 image generation 前获取参考图。
 """
-Image Search Tool - Search images using DuckDuckGo for reference in image generation.
-"""
+
+# pyright: reportMissingImports=false, reportMissingTypeArgument=false, reportUnknownVariableType=false, reportUnknownMemberType=false, reportUnknownParameterType=false, reportUnknownArgumentType=false, reportOptionalMemberAccess=false, reportOperatorIssue=false
+
+import importlib
+from collections.abc import Callable, Iterable
+from typing import cast
 
 import json
 import logging
@@ -22,7 +29,7 @@ def _search_images(
     type_image: str | None = None,
     layout: str | None = None,
     license_image: str | None = None,
-) -> list[dict]:
+) -> list[dict[str, object]]:
     """
     Execute image search using DuckDuckGo.
 
@@ -41,15 +48,17 @@ def _search_images(
         List of search results
     """
     try:
-        from ddgs import DDGS
-    except ImportError:
+        ddgs_mod = importlib.import_module("ddgs")
+        ddgs_cls = cast(object, getattr(ddgs_mod, "DDGS"))
+    except Exception:
         logger.error("ddgs library not installed. Run: pip install ddgs")
         return []
 
-    ddgs = DDGS(timeout=30)
+    ddgs_ctor = cast(Callable[..., object], ddgs_cls)
+    ddgs = ddgs_ctor(timeout=30)
 
     try:
-        kwargs = {
+        kwargs: dict[str, object] = {
             "region": region,
             "safesearch": safesearch,
             "max_results": max_results,
@@ -66,8 +75,15 @@ def _search_images(
         if license_image:
             kwargs["license_image"] = license_image
 
-        results = ddgs.images(query, **kwargs)
-        return list(results) if results else []
+        images_fn = cast(Callable[..., object], getattr(ddgs, "images"))
+        results_obj = images_fn(query, **kwargs)
+        if results_obj is None:
+            return []
+        if isinstance(results_obj, list):
+            return cast(list[dict[str, object]], results_obj)
+        if isinstance(results_obj, Iterable):
+            return cast(list[dict[str, object]], list(results_obj))
+        return []
 
     except Exception as e:
         logger.error(f"Failed to search images: {e}")
@@ -101,9 +117,12 @@ def image_search_tool(
     """
     config = get_app_config().get_tool_config("image_search")
 
-    # Override max_results from config if set
-    if config is not None and "max_results" in config.model_extra:
-        max_results = config.model_extra.get("max_results", max_results)
+    extra = cast(dict[str, object], config.model_extra or {}) if config is not None else {}
+    raw_max_results = extra.get("max_results")
+    if isinstance(raw_max_results, int):
+        max_results = raw_max_results
+    elif isinstance(raw_max_results, str) and raw_max_results.isdigit():
+        max_results = int(raw_max_results)
 
     results = _search_images(
         query=query,
@@ -118,9 +137,9 @@ def image_search_tool(
 
     normalized_results = [
         {
-            "title": r.get("title", ""),
-            "image_url": r.get("thumbnail", ""),
-            "thumbnail_url": r.get("thumbnail", ""),
+            "title": str(r.get("title", "")),
+            "image_url": str(r.get("thumbnail", "")),
+            "thumbnail_url": str(r.get("thumbnail", "")),
         }
         for r in results
     ]

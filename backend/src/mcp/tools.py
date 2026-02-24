@@ -1,4 +1,4 @@
-"""Load MCP tools using langchain-mcp-adapters."""
+"""使用 langchain-mcp-adapters 加载 MCP 工具。"""
 
 import logging
 
@@ -11,39 +11,38 @@ logger = logging.getLogger(__name__)
 
 
 async def get_mcp_tools() -> list[BaseTool]:
-    """Get all tools from enabled MCP servers.
+    """从已启用的 MCP 服务器获取所有工具。
 
     Returns:
-        List of LangChain tools from all enabled MCP servers.
+        来自所有已启用 MCP 服务器的 LangChain 工具列表。
     """
     try:
         from langchain_mcp_adapters.client import MultiServerMCPClient
     except ImportError:
-        logger.warning("langchain-mcp-adapters not installed. Install it to enable MCP tools: pip install langchain-mcp-adapters")
+        logger.warning("未安装 langchain-mcp-adapters。请安装以启用 MCP 工具：pip install langchain-mcp-adapters")
         return []
 
-    # NOTE: We use ExtensionsConfig.from_file() instead of get_extensions_config()
-    # to always read the latest configuration from disk. This ensures that changes
-    # made through the Gateway API (which runs in a separate process) are immediately
-    # reflected when initializing MCP tools.
+    # 注意：我们使用 ExtensionsConfig.from_file() 而不是 get_extensions_config()
+    # 以始终从磁盘读取最新配置。这确保通过 Gateway API（在独立进程中运行）
+    # 所做的更改在初始化 MCP 工具时立即生效。
     extensions_config = ExtensionsConfig.from_file()
     servers_config = build_servers_config(extensions_config)
 
     if not servers_config:
-        logger.info("No enabled MCP servers configured")
+        logger.info("未配置已启用的 MCP 服务器")
         return []
 
     try:
-        # Create the multi-server MCP client
-        logger.info(f"Initializing MCP client with {len(servers_config)} server(s)")
+        # 创建多服务器 MCP 客户端
+        logger.info(f"正在初始化 MCP 客户端，共 {len(servers_config)} 个服务器")
         client = MultiServerMCPClient(servers_config)
 
-        # Get all tools from all servers
+        # 从所有服务器获取所有工具
         tools = await client.get_tools()
-        logger.info(f"Successfully loaded {len(tools)} tool(s) from MCP servers")
+        logger.info(f"成功从 MCP 服务器加载 {len(tools)} 个工具")
 
         return tools
 
     except Exception as e:
-        logger.error(f"Failed to load MCP tools: {e}", exc_info=True)
+        logger.error(f"加载 MCP 工具失败：{e}", exc_info=True)
         return []

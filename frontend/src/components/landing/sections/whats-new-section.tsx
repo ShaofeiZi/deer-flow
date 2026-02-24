@@ -48,6 +48,9 @@ const features: BentoCardProps[] = [
   },
 ];
 
+/**
+ * 【函数功能描述】
+ */
 export function WhatsNewSection({ className }: { className?: string }) {
   return (
     <Section

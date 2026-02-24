@@ -2,9 +2,9 @@
 
 Quick setup instructions for DeerFlow.
 
-## Configuration Setup
+## 配置 Setup
 
-DeerFlow uses a YAML configuration file that should be placed in the **project root directory**.
+DeerFlow uses a YAML 配置 file that should be placed in the **project root directory**.
 
 ### Steps
 
@@ -13,12 +13,12 @@ DeerFlow uses a YAML configuration file that should be placed in the **project r
    cd /path/to/deer-flow
    ```
 
-2. **Copy example configuration**:
+2. **Copy 示例 配置**:
    ```bash
    cp config.example.yaml config.yaml
    ```
 
-3. **Edit configuration**:
+3. **Edit 配置**:
    ```bash
    # Option A: Set environment variables (recommended)
    export OPENAI_API_KEY="your-key-here"
@@ -27,19 +27,19 @@ DeerFlow uses a YAML configuration file that should be placed in the **project r
    vim config.yaml  # or your preferred editor
    ```
 
-4. **Verify configuration**:
+4. **Verify 配置**:
    ```bash
    cd backend
    python -c "from src.config import get_app_config; print('✓ Config loaded:', get_app_config().models[0].name)"
    ```
 
-## Important Notes
+## Important 注意
 
 - **Location**: `config.yaml` should be in `deer-flow/` (project root), not `deer-flow/backend/`
 - **Git**: `config.yaml` is automatically ignored by git (contains secrets)
 - **Priority**: If both `backend/config.yaml` and `../config.yaml` exist, backend version takes precedence
 
-## Configuration File Locations
+## 配置 File Locations
 
 The backend searches for `config.yaml` in this order:
 
@@ -88,5 +88,5 @@ chmod 600 ../config.yaml  # Protect sensitive configuration
 
 ## See Also
 
-- [Configuration Guide](docs/CONFIGURATION.md) - Detailed configuration options
-- [Architecture Overview](CLAUDE.md) - System architecture
+- [配置 Guide](docs/配置.md) - Detailed 配置 options
+- [Architecture 概览](CLAUDE.md) - System architecture

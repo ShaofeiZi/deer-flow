@@ -10,6 +10,9 @@ import { useLocalSettings } from "@/core/settings";
 
 import { SettingsSection } from "./settings-section";
 
+/**
+ * 【函数功能描述】
+ */
 export function NotificationSettingsPage() {
   const { t } = useI18n();
   const { permission, isSupported, requestPermission, showNotification } =

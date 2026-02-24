@@ -34,6 +34,9 @@ const customLightTheme = basicLightInit({
   },
 });
 
+/**
+ * 【函数功能描述】
+ */
 export function CodeEditor({
   className,
   placeholder,

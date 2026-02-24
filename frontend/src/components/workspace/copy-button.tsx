@@ -6,6 +6,9 @@ import { useI18n } from "@/core/i18n/hooks";
 
 import { Tooltip } from "./tooltip";
 
+/**
+ * 【函数功能描述】
+ */
 export function CopyButton({
   clipboardData,
   ...props

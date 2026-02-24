@@ -4,9 +4,9 @@ from src.subagents.config import SubagentConfig
 
 BASH_AGENT_CONFIG = SubagentConfig(
     name="bash",
-    description="""Command execution specialist for running bash commands in a separate context.
+    description="""命令执行专家，用于在独立上下文中运行 bash 命令。
 
-Use this subagent when:
+使用此子代理的场景：
 - You need to run a series of related bash commands
 - Terminal operations like git, npm, docker, etc.
 - Command output is verbose and would clutter main context

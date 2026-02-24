@@ -2,6 +2,9 @@ import { AnimatePresence, motion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * 【函数功能描述】
+ */
 export function FlipDisplay({
   uniqueKey,
   children,

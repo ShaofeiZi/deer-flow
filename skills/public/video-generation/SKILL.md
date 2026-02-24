@@ -1,11 +1,11 @@
 ---
 name: video-generation
-description: Use this skill when the user requests to generate, create, or imagine videos. Supports structured prompts and reference image for guided generation.
+描述: Use this skill when the user requests to generate, create, or imagine videos. Supports structured prompts and reference image for guided generation.
 ---
 
 # Video Generation Skill
 
-## Overview
+## 概览
 
 This skill generates high-quality videos using structured prompts and a Python script. The workflow includes creating JSON-formatted prompts and executing video generation with optional reference image.
 
@@ -48,17 +48,17 @@ python /mnt/skills/public/video-generation/scripts/generate.py \
   --aspect-ratio 16:9
 ```
 
-Parameters:
+参数:
 
 - `--prompt-file`: Absolute path to JSON prompt file (required)
 - `--reference-images`: Absolute paths to reference image (optional)
 - `--output-file`: Absolute path to output image file (required)
 - `--aspect-ratio`: Aspect ratio of the generated image (optional, default: 16:9)
 
-[!NOTE]
-Do NOT read the python file, instead just call it with the parameters.
+[!注意]
+Do NOT read the python file, instead just call it with the 参数.
 
-## Video Generation Example
+## Video Generation 示例
 
 User request: "Generate a short video clip depicting the opening scene from "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe"
 
@@ -120,7 +120,7 @@ python /mnt/skills/public/video-generation/scripts/generate.py \
   --output-file /mnt/user-data/outputs/narnia-farewell-scene-01.mp4 \
   --aspect-ratio 16:9
 ```
-> Do NOT read the python file, just call it with the parameters.
+> Do NOT read the python file, just call it with the 参数.
 
 ## Output Handling
 
@@ -128,10 +128,10 @@ After generation:
 
 - Videos are typically saved in `/mnt/user-data/outputs/`
 - Share generated videos (come first) with user as well as generated image if applicable, using `present_files` tool
-- Provide brief description of the generation result
+- Provide brief 描述 of the generation result
 - Offer to iterate if adjustments needed
 
-## Notes
+## 注意
 
 - Always use English for prompts regardless of user's language
 - JSON format ensures structured, parsable prompts

@@ -1,4 +1,4 @@
-"""Regression tests for docker sandbox mode detection logic."""
+"""Docker 沙箱模式检测逻辑的回归测试。"""
 
 from __future__ import annotations
 
@@ -11,7 +11,14 @@ SCRIPT_PATH = REPO_ROOT / "scripts" / "docker.sh"
 
 
 def _detect_mode_with_config(config_content: str) -> str:
-    """Write config content into a temp project root and execute detect_sandbox_mode."""
+    """将配置内容写入临时项目根目录并执行 detect_sandbox_mode。
+
+    Args:
+        config_content: 要写入 config.yaml 的配置内容。
+
+    Returns:
+        检测到的沙箱模式字符串。
+    """
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp_root = Path(tmpdir)
         (tmp_root / "config.yaml").write_text(config_content)
@@ -31,7 +38,7 @@ def _detect_mode_with_config(config_content: str) -> str:
 
 
 def test_detect_mode_defaults_to_local_when_config_missing():
-    """No config file should default to local mode."""
+    """配置文件不存在时应默认为本地模式。"""
     with tempfile.TemporaryDirectory() as tmpdir:
         command = (
             f"source '{SCRIPT_PATH}' && "
@@ -44,7 +51,7 @@ def test_detect_mode_defaults_to_local_when_config_missing():
 
 
 def test_detect_mode_local_provider():
-    """Local sandbox provider should map to local mode."""
+    """本地沙箱提供者应映射为本地模式。"""
     config = """
 sandbox:
   use: src.sandbox.local:LocalSandboxProvider
@@ -54,7 +61,7 @@ sandbox:
 
 
 def test_detect_mode_aio_without_provisioner_url():
-    """AIO sandbox without provisioner_url should map to aio mode."""
+    """没有 provisioner_url 的 AIO 沙箱应映射为 aio 模式。"""
     config = """
 sandbox:
   use: src.community.aio_sandbox:AioSandboxProvider
@@ -64,7 +71,7 @@ sandbox:
 
 
 def test_detect_mode_provisioner_with_url():
-    """AIO sandbox with provisioner_url should map to provisioner mode."""
+    """有 provisioner_url 的 AIO 沙箱应映射为 provisioner 模式。"""
     config = """
 sandbox:
   use: src.community.aio_sandbox:AioSandboxProvider
@@ -75,7 +82,7 @@ sandbox:
 
 
 def test_detect_mode_ignores_commented_provisioner_url():
-    """Commented provisioner_url should not activate provisioner mode."""
+    """注释掉的 provisioner_url 不应激活 provisioner 模式。"""
     config = """
 sandbox:
   use: src.community.aio_sandbox:AioSandboxProvider
@@ -86,7 +93,7 @@ sandbox:
 
 
 def test_detect_mode_unknown_provider_falls_back_to_local():
-    """Unknown sandbox provider should default to local mode."""
+    """未知的沙箱提供者应默认为本地模式。"""
     config = """
 sandbox:
   use: custom.module:UnknownProvider

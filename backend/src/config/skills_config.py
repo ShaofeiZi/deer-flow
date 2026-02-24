@@ -4,46 +4,48 @@ from pydantic import BaseModel, Field
 
 
 class SkillsConfig(BaseModel):
-    """Configuration for skills system"""
+    """技能系统配置。
+
+    该类用于配置技能系统的路径和容器挂载路径。
+
+    Attributes:
+        path: 技能目录的路径。如果未指定，默认为 backend 目录的 ../skills。
+        container_path: 技能在沙箱容器中挂载的路径。
+    """
 
     path: str | None = Field(
         default=None,
-        description="Path to skills directory. If not specified, defaults to ../skills relative to backend directory",
+        description="技能目录的路径。如果未指定，默认为 backend 目录的 ../skills",
     )
     container_path: str = Field(
         default="/mnt/skills",
-        description="Path where skills are mounted in the sandbox container",
+        description="技能在沙箱容器中挂载的路径",
     )
 
     def get_skills_path(self) -> Path:
-        """
-        Get the resolved skills directory path.
+        """获取解析后的技能目录路径。
 
         Returns:
-            Path to the skills directory
+            技能目录的路径。
         """
         if self.path:
-            # Use configured path (can be absolute or relative)
             path = Path(self.path)
             if not path.is_absolute():
-                # If relative, resolve from current working directory
                 path = Path.cwd() / path
             return path.resolve()
         else:
-            # Default: ../skills relative to backend directory
             from src.skills.loader import get_skills_root_path
 
             return get_skills_root_path()
 
     def get_skill_container_path(self, skill_name: str, category: str = "public") -> str:
-        """
-        Get the full container path for a specific skill.
+        """获取特定技能的完整容器路径。
 
         Args:
-            skill_name: Name of the skill (directory name)
-            category: Category of the skill (public or custom)
+            skill_name: 技能名称（目录名称）。
+            category: 技能类别（public 或 custom）。
 
         Returns:
-            Full path to the skill in the container
+            技能在容器中的完整路径。
         """
         return f"{self.container_path}/{category}/{skill_name}"

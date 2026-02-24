@@ -2,6 +2,9 @@ import { useState, useEffect, useCallback, useRef } from "react";
 
 import { useLocalSettings } from "../settings";
 
+/**
+ * 【接口描述】
+ */
 interface NotificationOptions {
   body?: string;
   icon?: string;
@@ -12,6 +15,9 @@ interface NotificationOptions {
   silent?: boolean;
 }
 
+/**
+ * 【接口描述】
+ */
 interface UseNotificationReturn {
   permission: NotificationPermission;
   isSupported: boolean;

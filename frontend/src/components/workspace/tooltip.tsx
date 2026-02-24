@@ -6,6 +6,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
+/**
+ * 【函数功能描述】
+ */
 export function Tooltip({
   children,
   content,

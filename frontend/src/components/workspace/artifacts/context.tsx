@@ -21,10 +21,16 @@ const ArtifactsContext = createContext<ArtifactsContextType | undefined>(
   undefined,
 );
 
+/**
+ * 【接口描述】
+ */
 interface ArtifactsProviderProps {
   children: ReactNode;
 }
 
+/**
+ * 【函数功能描述】
+ */
 export function ArtifactsProvider({ children }: ArtifactsProviderProps) {
   const [artifacts, setArtifacts] = useState<string[]>([]);
   const [selectedArtifact, setSelectedArtifact] = useState<string | null>(null);
@@ -77,6 +83,9 @@ export function ArtifactsProvider({ children }: ArtifactsProviderProps) {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 export function useArtifacts() {
   const context = useContext(ArtifactsContext);
   if (context === undefined) {

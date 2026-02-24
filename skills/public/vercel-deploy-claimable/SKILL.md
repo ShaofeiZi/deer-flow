@@ -1,6 +1,6 @@
 ---
 name: vercel-deploy
-description: Deploy applications and websites to Vercel. Use this skill when the user requests deployment actions such as "Deploy my app", "Deploy this to production", "Create a preview deployment", "Deploy and give me the link", or "Push this live". No authentication required - returns preview URL and claimable deployment link.
+描述: Deploy applications and websites to Vercel. Use this skill when the user requests deployment actions such as "Deploy my app", "Deploy this to production", "Create a preview deployment", "Deploy and give me the link", or "Push this live". No authentication required - 返回 preview URL and claimable deployment link.
 metadata:
   author: vercel
   version: "1.0.0"
@@ -15,18 +15,18 @@ Deploy any project to Vercel instantly. No authentication required.
 1. Packages your project into a tarball (excludes `node_modules` and `.git`)
 2. Auto-detects framework from `package.json`
 3. Uploads to deployment service
-4. Returns **Preview URL** (live site) and **Claim URL** (transfer to your Vercel account)
+4. 返回 **Preview URL** (live site) and **Claim URL** (transfer to your Vercel account)
 
-## Usage
+## 用法
 
 ```bash
 bash /mnt/skills/user/vercel-deploy/scripts/deploy.sh [path]
 ```
 
-**Arguments:**
+**参数:**
 - `path` - Directory to deploy, or a `.tgz` file (defaults to current directory)
 
-**Examples:**
+**示例:**
 
 ```bash
 # Deploy current directory

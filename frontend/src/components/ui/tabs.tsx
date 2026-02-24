@@ -6,6 +6,9 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * 【函数功能描述】
+ */
 function Tabs({
   className,
   orientation = "horizontal",
@@ -40,6 +43,9 @@ const tabsListVariants = cva(
   }
 )
 
+/**
+ * 【函数功能描述】
+ */
 function TabsList({
   className,
   variant = "default",
@@ -56,6 +62,9 @@ function TabsList({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function TabsTrigger({
   className,
   ...props
@@ -75,6 +84,9 @@ function TabsTrigger({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function TabsContent({
   className,
   ...props

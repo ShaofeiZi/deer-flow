@@ -39,6 +39,9 @@ import { Tooltip } from "../tooltip";
 
 import { MarkdownContent } from "./markdown-content";
 
+/**
+ * 【函数功能描述】
+ */
 export function MessageGroup({
   className,
   messages,
@@ -183,6 +186,9 @@ export function MessageGroup({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function ToolCall({
   id,
   messageId,
@@ -422,16 +428,25 @@ function ToolCall({
   }
 }
 
+/**
+ * 【接口描述】
+ */
 interface GenericCoTStep<T extends string = string> {
   id?: string;
   messageId?: string;
   type: T;
 }
 
+/**
+ * 【接口描述】
+ */
 interface CoTReasoningStep extends GenericCoTStep<"reasoning"> {
   reasoning: string | null;
 }
 
+/**
+ * 【接口描述】
+ */
 interface CoTToolCallStep extends GenericCoTStep<"toolCall"> {
   name: string;
   args: Record<string, unknown>;
@@ -440,6 +455,9 @@ interface CoTToolCallStep extends GenericCoTStep<"toolCall"> {
 
 type CoTStep = CoTReasoningStep | CoTToolCallStep;
 
+/**
+ * 【函数功能描述】
+ */
 function convertToSteps(messages: Message[]): CoTStep[] {
   const steps: CoTStep[] = [];
   for (const message of messages) {

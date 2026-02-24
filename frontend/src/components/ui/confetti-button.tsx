@@ -5,6 +5,9 @@ import confetti from "canvas-confetti";
 
 import { Button } from "@/components/ui/button";
 
+/**
+ * 【接口描述】
+ */
 interface ConfettiButtonProps extends React.ComponentProps<typeof Button> {
   angle?: number;
   particleCount?: number;

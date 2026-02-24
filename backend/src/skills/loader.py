@@ -5,35 +5,33 @@ from .types import Skill
 
 
 def get_skills_root_path() -> Path:
-    """
-    Get the root path of the skills directory.
+    """获取技能目录的根路径。
 
     Returns:
-        Path to the skills directory (deer-flow/skills)
+        技能目录的路径（deer-flow/skills）
     """
-    # backend directory is current file's parent's parent's parent
+    # backend 目录是当前文件的父目录的父目录的父目录
     backend_dir = Path(__file__).resolve().parent.parent.parent
-    # skills directory is sibling to backend directory
+    # skills 目录是 backend 目录的兄弟目录
     skills_dir = backend_dir.parent / "skills"
     return skills_dir
 
 
 def load_skills(skills_path: Path | None = None, use_config: bool = True, enabled_only: bool = False) -> list[Skill]:
-    """
-    Load all skills from the skills directory.
+    """从技能目录加载所有技能。
 
-    Scans both public and custom skill directories, parsing SKILL.md files
-    to extract metadata. The enabled state is determined by the skills_state_config.json file.
+    扫描公共和自定义技能目录，解析 SKILL.md 文件以提取元数据。
+    启用状态由 skills_state_config.json 文件决定。
 
     Args:
-        skills_path: Optional custom path to skills directory.
-                     If not provided and use_config is True, uses path from config.
-                     Otherwise defaults to deer-flow/skills
-        use_config: Whether to load skills path from config (default: True)
-        enabled_only: If True, only return enabled skills (default: False)
+        skills_path: 可选的自定义技能目录路径。
+                     如果未提供且 use_config 为 True，则使用配置中的路径。
+                     否则默认为 deer-flow/skills
+        use_config: 是否从配置加载技能路径（默认：True）
+        enabled_only: 如果为 True，只返回已启用的技能（默认：False）
 
     Returns:
-        List of Skill objects, sorted by name
+        按名称排序的 Skill 对象列表
     """
     if skills_path is None:
         if use_config:
@@ -43,7 +41,7 @@ def load_skills(skills_path: Path | None = None, use_config: bool = True, enable
                 config = get_app_config()
                 skills_path = config.skills.get_skills_path()
             except Exception:
-                # Fallback to default if config fails
+                # 如果配置失败则回退到默认值
                 skills_path = get_skills_root_path()
         else:
             skills_path = get_skills_root_path()
@@ -53,13 +51,13 @@ def load_skills(skills_path: Path | None = None, use_config: bool = True, enable
 
     skills = []
 
-    # Scan public and custom directories
+    # 扫描 public 和 custom 目录
     for category in ["public", "custom"]:
         category_path = skills_path / category
         if not category_path.exists() or not category_path.is_dir():
             continue
 
-        # Each subdirectory is a potential skill
+        # 每个子目录都是一个潜在的技能
         for skill_dir in category_path.iterdir():
             if not skill_dir.is_dir():
                 continue
@@ -72,11 +70,10 @@ def load_skills(skills_path: Path | None = None, use_config: bool = True, enable
             if skill:
                 skills.append(skill)
 
-    # Load skills state configuration and update enabled status
-    # NOTE: We use ExtensionsConfig.from_file() instead of get_extensions_config()
-    # to always read the latest configuration from disk. This ensures that changes
-    # made through the Gateway API (which runs in a separate process) are immediately
-    # reflected in the LangGraph Server when loading skills.
+    # 加载技能状态配置并更新启用状态
+    # 注意：我们使用 ExtensionsConfig.from_file() 而不是 get_extensions_config()
+    # 以始终从磁盘读取最新配置。这确保通过 Gateway API（在独立进程中运行）
+    # 所做的更改在加载技能时立即反映到 LangGraph Server 中。
     try:
         from src.config.extensions_config import ExtensionsConfig
 
@@ -84,14 +81,14 @@ def load_skills(skills_path: Path | None = None, use_config: bool = True, enable
         for skill in skills:
             skill.enabled = extensions_config.is_skill_enabled(skill.name, skill.category)
     except Exception as e:
-        # If config loading fails, default to all enabled
-        print(f"Warning: Failed to load extensions config: {e}")
+        # 如果配置加载失败，默认全部启用
+        print(f"警告：加载扩展配置失败：{e}")
 
-    # Filter by enabled status if requested
+    # 如果请求，按启用状态过滤
     if enabled_only:
         skills = [skill for skill in skills if skill.enabled]
 
-    # Sort by name for consistent ordering
+    # 按名称排序以保持一致顺序
     skills.sort(key=lambda s: s.name)
 
     return skills

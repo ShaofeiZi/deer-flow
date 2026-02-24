@@ -7,7 +7,21 @@ logger = logging.getLogger(__name__)
 
 
 class JinaClient:
+    """
+    【类功能描述】
+    """
+
     def crawl(self, url: str, return_format: str = "html", timeout: int = 10) -> str:
+        """
+        【函数功能描述】
+        
+        参数:
+            【参数名】: 【参数描述】
+        
+        返回:
+            【返回值描述】
+        """
+
         headers = {
             "Content-Type": "application/json",
             "X-Return-Format": return_format,

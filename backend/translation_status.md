@@ -1,0 +1,9 @@
+- Task: Translate English docstrings to Chinese in Python configuration modules
+- Target files:
+  - backend/src/config/memory_config.py
+- Translated docstrings count: 3
+- Summary of changes:
+  - memory_config.get_memory_config: "Get the current memory configuration." -> "获取当前内存配置。"
+  - memory_config.set_memory_config: "Set the memory configuration." -> "设置内存配置。"
+  - memory_config.load_memory_config_from_dict: "Load memory configuration from a dictionary." -> "从字典加载内存配置。"
+- Errors / warnings: None

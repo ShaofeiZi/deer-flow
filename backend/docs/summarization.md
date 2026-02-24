@@ -2,7 +2,7 @@
 
 DeerFlow includes automatic conversation summarization to handle long conversations that approach model token limits. When enabled, the system automatically condenses older messages while preserving recent context.
 
-## Overview
+## 概览
 
 The summarization feature uses LangChain's `SummarizationMiddleware` to monitor conversation history and trigger summarization based on configurable thresholds. When activated, it:
 
@@ -12,7 +12,7 @@ The summarization feature uses LangChain's `SummarizationMiddleware` to monitor 
 4. Maintains AI/Tool message pairs together for context continuity
 5. Injects the summary back into the conversation
 
-## Configuration
+## 配置
 
 Summarization is configured in `config.yaml` under the `summarization` key:
 
@@ -43,22 +43,22 @@ summarization:
   summary_prompt: null
 ```
 
-### Configuration Options
+### 配置 Options
 
 #### `enabled`
 - **Type**: Boolean
 - **Default**: `false`
-- **Description**: Enable or disable automatic summarization
+- **描述**: Enable or disable automatic summarization
 
 #### `model_name`
 - **Type**: String or null
 - **Default**: `null` (uses default model)
-- **Description**: Model to use for generating summaries. Recommended to use a lightweight, cost-effective model like `gpt-4o-mini` or equivalent.
+- **描述**: Model to use for generating summaries. Recommended to use a lightweight, cost-effective model like `gpt-4o-mini` or equivalent.
 
 #### `trigger`
 - **Type**: Single `ContextSize` or list of `ContextSize` objects
 - **Required**: At least one trigger must be specified when enabled
-- **Description**: Thresholds that trigger summarization. Uses OR logic - summarization runs when ANY threshold is met.
+- **描述**: Thresholds that trigger summarization. Uses OR logic - summarization runs when ANY threshold is met.
 
 **ContextSize Types:**
 
@@ -76,7 +76,7 @@ summarization:
      value: 50
    ```
 
-3. **Fraction-based trigger**: Activates when token usage reaches a percentage of the model's maximum input tokens
+3. **Fraction-based trigger**: Activates when token 用法 reaches a percentage of the model's maximum input tokens
    ```yaml
    trigger:
      type: fraction
@@ -95,9 +95,9 @@ trigger:
 #### `keep`
 - **Type**: `ContextSize` object
 - **Default**: `{type: messages, value: 20}`
-- **Description**: Specifies how much recent conversation history to preserve after summarization.
+- **描述**: Specifies how much recent conversation history to preserve after summarization.
 
-**Examples:**
+**示例:**
 ```yaml
 # Keep most recent 20 messages
 keep:
@@ -118,19 +118,19 @@ keep:
 #### `trim_tokens_to_summarize`
 - **Type**: Integer or null
 - **Default**: `4000`
-- **Description**: Maximum tokens to include when preparing messages for the summarization call itself. Set to `null` to skip trimming (not recommended for very long conversations).
+- **描述**: Maximum tokens to include when preparing messages for the summarization call itself. Set to `null` to skip trimming (not recommended for very long conversations).
 
 #### `summary_prompt`
 - **Type**: String or null
 - **Default**: `null` (uses LangChain's default prompt)
-- **Description**: Custom prompt template for generating summaries. The prompt should guide the model to extract the most important context.
+- **描述**: Custom prompt template for generating summaries. The prompt should guide the model to extract the most important context.
 
 **Default Prompt Behavior:**
 The default LangChain prompt instructs the model to:
 - Extract highest quality/most relevant context
 - Focus on information critical to the overall goal
 - Avoid repeating completed actions
-- Return only the extracted context
+- 返回 only the extracted context
 
 ## How It Works
 
@@ -159,7 +159,7 @@ The default LangChain prompt instructs the model to:
 
 The middleware intelligently preserves message context:
 
-- **Recent Messages**: Always kept intact based on `keep` configuration
+- **Recent Messages**: Always kept intact based on `keep` 配置
 - **AI/Tool Pairs**: Never split - if a cutoff point falls within tool messages, the system adjusts to keep the entire AI + Tool message sequence together
 - **Summary Format**: Summary is injected as a HumanMessage with the format:
   ```
@@ -174,15 +174,15 @@ The middleware intelligently preserves message context:
 
 1. **Token-based triggers**: Recommended for most use cases
    - Set to 60-80% of your model's context window
-   - Example: For 8K context, use 4000-6000 tokens
+   - 示例: For 8K context, use 4000-6000 tokens
 
 2. **Message-based triggers**: Useful for controlling conversation length
    - Good for applications with many short messages
-   - Example: 50-100 messages depending on average message length
+   - 示例: 50-100 messages depending on average message length
 
 3. **Fraction-based triggers**: Ideal when using multiple models
    - Automatically adapts to each model's capacity
-   - Example: 0.8 (80% of model's max input tokens)
+   - 示例: 0.8 (80% of model's max input tokens)
 
 ### Choosing Retention Policy (`keep`)
 
@@ -201,7 +201,7 @@ The middleware intelligently preserves message context:
 ### Model Selection
 
 - **Recommended**: Use a lightweight, cost-effective model for summaries
-  - Examples: `gpt-4o-mini`, `claude-haiku`, or equivalent
+  - 示例: `gpt-4o-mini`, `claude-haiku`, or equivalent
   - Summaries don't require the most powerful models
   - Significant cost savings on high-volume applications
 
@@ -232,7 +232,7 @@ The middleware intelligently preserves message context:
    trim_tokens_to_summarize: 4000  # Prevents expensive summarization calls
    ```
 
-4. **Monitor and iterate**: Track summary quality and adjust configuration
+4. **Monitor and iterate**: Track summary quality and adjust 配置
 
 ## Troubleshooting
 
@@ -269,7 +269,7 @@ The middleware intelligently preserves message context:
 
 ### Code Structure
 
-- **Configuration**: `src/config/summarization_config.py`
+- **配置**: `src/config/summarization_config.py`
 - **Integration**: `src/agents/lead_agent/agent.py`
 - **Middleware**: Uses `langchain.agents.middleware.SummarizationMiddleware`
 
@@ -285,13 +285,13 @@ Summarization runs after ThreadData and Sandbox initialization but before Title 
 
 ### State Management
 
-- Summarization is stateless - configuration is loaded once at startup
+- Summarization is stateless - 配置 is loaded once at startup
 - Summaries are added as regular messages in the conversation history
 - The checkpointer persists the summarized history automatically
 
-## Example Configurations
+## 示例 配置
 
-### Minimal Configuration
+### Minimal 配置
 ```yaml
 summarization:
   enabled: true
@@ -303,7 +303,7 @@ summarization:
     value: 20
 ```
 
-### Production Configuration
+### Production 配置
 ```yaml
 summarization:
   enabled: true
@@ -319,7 +319,7 @@ summarization:
   trim_tokens_to_summarize: 5000
 ```
 
-### Multi-Model Configuration
+### Multi-Model 配置
 ```yaml
 summarization:
   enabled: true
@@ -333,7 +333,7 @@ summarization:
   trim_tokens_to_summarize: 4000
 ```
 
-### Conservative Configuration (High Quality)
+### Conservative 配置 (High Quality)
 ```yaml
 summarization:
   enabled: true
@@ -349,5 +349,5 @@ summarization:
 
 ## References
 
-- [LangChain Summarization Middleware Documentation](https://docs.langchain.com/oss/python/langchain/middleware/built-in#summarization)
+- [LangChain Summarization Middleware 文档](https://docs.langchain.com/oss/python/langchain/middleware/built-in#summarization)
 - [LangChain Source Code](https://github.com/langchain-ai/langchain)

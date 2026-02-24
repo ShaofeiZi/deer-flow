@@ -13,6 +13,9 @@ import { motion, type MotionProps, useInView } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * 【接口描述】
+ */
 interface SequenceContextValue {
   completeItem: (index: number) => void;
   activeIndex: number;
@@ -26,6 +29,9 @@ const useSequence = () => useContext(SequenceContext);
 const ItemIndexContext = createContext<number | null>(null);
 const useItemIndex = () => useContext(ItemIndexContext);
 
+/**
+ * 【接口描述】
+ */
 interface AnimatedSpanProps extends MotionProps {
   children: React.ReactNode;
   delay?: number;
@@ -79,6 +85,9 @@ export const AnimatedSpan = ({
   );
 };
 
+/**
+ * 【接口描述】
+ */
 interface TypingAnimationProps extends MotionProps {
   children: string;
   className?: string;
@@ -181,6 +190,9 @@ export const TypingAnimation = ({
   );
 };
 
+/**
+ * 【接口描述】
+ */
 interface TerminalProps {
   children: React.ReactNode;
   className?: string;

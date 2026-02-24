@@ -15,19 +15,19 @@ from src.sandbox.sandbox_provider import get_sandbox_provider
 
 
 def replace_virtual_path(path: str, thread_data: ThreadDataState | None) -> str:
-    """Replace virtual /mnt/user-data paths with actual thread data paths.
+    """将虚拟路径 /mnt/user-data 替换为实际的线程数据路径。
 
-    Mapping:
-        /mnt/user-data/workspace/* -> thread_data['workspace_path']/*
-        /mnt/user-data/uploads/* -> thread_data['uploads_path']/*
-        /mnt/user-data/outputs/* -> thread_data['outputs_path']/*
+    映射关系：
+      /mnt/user-data/workspace/* -> thread_data['workspace_path']/*
+      /mnt/user-data/uploads/* -> thread_data['uploads_path']/*
+      /mnt/user-data/outputs/* -> thread_data['outputs_path']/*
 
     Args:
-        path: The path that may contain virtual path prefix.
-        thread_data: The thread data containing actual paths.
+        path: 可能包含虚拟路径前缀的路径。
+        thread_data: 包含实际路径的线程数据。
 
     Returns:
-        The path with virtual prefix replaced by actual path.
+        将虚拟前缀替换为实际路径后的路径。
     """
     if not path.startswith(VIRTUAL_PATH_PREFIX):
         return path
@@ -35,19 +35,19 @@ def replace_virtual_path(path: str, thread_data: ThreadDataState | None) -> str:
     if thread_data is None:
         return path
 
-    # Map virtual subdirectories to thread_data keys
+    # 映射虚拟子目录到 thread_data 键
     path_mapping = {
         "workspace": thread_data.get("workspace_path"),
         "uploads": thread_data.get("uploads_path"),
         "outputs": thread_data.get("outputs_path"),
     }
 
-    # Extract the subdirectory after /mnt/user-data/
+    # 提取 /mnt/user-data/ 后的子目录
     relative_path = path[len(VIRTUAL_PATH_PREFIX) :].lstrip("/")
     if not relative_path:
         return path
 
-    # Find which subdirectory this path belongs to
+    # 确定此路径属于哪个子目录
     parts = relative_path.split("/", 1)
     subdir = parts[0]
     rest = parts[1] if len(parts) > 1 else ""
@@ -62,14 +62,14 @@ def replace_virtual_path(path: str, thread_data: ThreadDataState | None) -> str:
 
 
 def replace_virtual_paths_in_command(command: str, thread_data: ThreadDataState | None) -> str:
-    """Replace all virtual /mnt/user-data paths in a command string.
+    """在命令字符串中替换所有虚拟 /mnt/user-data 路径。
 
     Args:
-        command: The command string that may contain virtual paths.
-        thread_data: The thread data containing actual paths.
+        command: 可能包含虚拟路径的命令字符串。
+        thread_data: 包含实际路径的线程数据。
 
     Returns:
-        The command with all virtual paths replaced.
+        替换所有虚拟路径后的命令字符串。
     """
     if VIRTUAL_PATH_PREFIX not in command:
         return command
@@ -77,10 +77,11 @@ def replace_virtual_paths_in_command(command: str, thread_data: ThreadDataState 
     if thread_data is None:
         return command
 
-    # Pattern to match /mnt/user-data followed by path characters
+    # 匹配 /mnt/user-data 后跟路径字符的模式
     pattern = re.compile(rf"{re.escape(VIRTUAL_PATH_PREFIX)}(/[^\s\"';&|<>()]*)?")
 
     def replace_match(match: re.Match) -> str:
+        # 替换匹配到的本地路径为容器路径
         full_path = match.group(0)
         return replace_virtual_path(full_path, thread_data)
 
@@ -88,7 +89,14 @@ def replace_virtual_paths_in_command(command: str, thread_data: ThreadDataState 
 
 
 def get_thread_data(runtime: ToolRuntime[ContextT, ThreadState] | None) -> ThreadDataState | None:
-    """Extract thread_data from runtime state."""
+    """从运行时状态提取 thread_data。
+
+    Args:
+        runtime: 工具运行时。
+
+    Returns:
+        线程数据状态，如果不存在则返回 None。
+    """
     if runtime is None:
         return None
     if runtime.state is None:
@@ -97,10 +105,15 @@ def get_thread_data(runtime: ToolRuntime[ContextT, ThreadState] | None) -> Threa
 
 
 def is_local_sandbox(runtime: ToolRuntime[ContextT, ThreadState] | None) -> bool:
-    """Check if the current sandbox is a local sandbox.
+    """检查当前的 sandbox 是否为本地 sandbox。
 
-    Path replacement is only needed for local sandbox since aio sandbox
-    already has /mnt/user-data mounted in the container.
+    路径替换仅在本地 sandbox 需要，因为 aio sandbox 已在容器中挂载 /mnt/user-data。
+
+    Args:
+        runtime: 工具运行时。
+
+    Returns:
+        如果是本地 sandbox 返回 True，否则返回 False。
     """
     if runtime is None:
         return False
@@ -113,56 +126,65 @@ def is_local_sandbox(runtime: ToolRuntime[ContextT, ThreadState] | None) -> bool
 
 
 def sandbox_from_runtime(runtime: ToolRuntime[ContextT, ThreadState] | None = None) -> Sandbox:
-    """Extract sandbox instance from tool runtime.
+    """从工具运行时提取 sandbox 实例。
 
-    DEPRECATED: Use ensure_sandbox_initialized() for lazy initialization support.
-    This function assumes sandbox is already initialized and will raise error if not.
+    已弃用：请使用 ensure_sandbox_initialized() 进行惰性初始化。
+
+    Args:
+        runtime: 工具运行时。
+
+    Returns:
+        Sandbox 实例。
 
     Raises:
-        SandboxRuntimeError: If runtime is not available or sandbox state is missing.
-        SandboxNotFoundError: If sandbox with the given ID cannot be found.
+        SandboxRuntimeError: 运行时不可用时抛出。
+        SandboxNotFoundError: Sandbox 未找到时抛出。
     """
+    # 已弃用：请使用 ensure_sandbox_initialized() 进行惰性初始化。
+    DEPRECATED_MSG = (
+        "本函数已弃用，请使用 ensure_sandbox_initialized() 进行惰性初始化。"
+    )
     if runtime is None:
-        raise SandboxRuntimeError("Tool runtime not available")
+        raise SandboxRuntimeError("工具运行时不可用")
     if runtime.state is None:
-        raise SandboxRuntimeError("Tool runtime state not available")
+        raise SandboxRuntimeError("工具运行时状态不可用")
     sandbox_state = runtime.state.get("sandbox")
     if sandbox_state is None:
-        raise SandboxRuntimeError("Sandbox state not initialized in runtime")
+        raise SandboxRuntimeError("运行时中未初始化 Sandbox 状态")
     sandbox_id = sandbox_state.get("sandbox_id")
     if sandbox_id is None:
-        raise SandboxRuntimeError("Sandbox ID not found in state")
+        raise SandboxRuntimeError("状态中未找到 Sandbox ID")
     sandbox = get_sandbox_provider().get(sandbox_id)
     if sandbox is None:
-        raise SandboxNotFoundError(f"Sandbox with ID '{sandbox_id}' not found", sandbox_id=sandbox_id)
+        raise SandboxNotFoundError(f"未找到 ID 为 '{sandbox_id}' 的 Sandbox", sandbox_id=sandbox_id)
     return sandbox
 
 
 def ensure_sandbox_initialized(runtime: ToolRuntime[ContextT, ThreadState] | None = None) -> Sandbox:
-    """Ensure sandbox is initialized, acquiring lazily if needed.
+    """确保 sandbox 已初始化，必要时进行延迟获取。
 
-    On first call, acquires a sandbox from the provider and stores it in runtime state.
-    Subsequent calls return the existing sandbox.
+    首次调用时，从提供者获取 sandbox 并存储到运行时状态中。
+    后续调用返回已有的 sandbox。
 
-    Thread-safety is guaranteed by the provider's internal locking mechanism.
+    线程安全性由提供者的内部锁机制保证。
 
     Args:
-        runtime: Tool runtime containing state and context.
+        runtime: 包含状态和上下文的工具运行时。
 
     Returns:
-        Initialized sandbox instance.
+        已初始化的 sandbox 实例。
 
     Raises:
-        SandboxRuntimeError: If runtime is not available or thread_id is missing.
-        SandboxNotFoundError: If sandbox acquisition fails.
+        SandboxRuntimeError: 运行时不可用或缺少 thread_id 时抛出。
+        SandboxNotFoundError: Sandbox 获取失败时抛出。
     """
     if runtime is None:
-        raise SandboxRuntimeError("Tool runtime not available")
+        raise SandboxRuntimeError("工具运行时不可用")
 
     if runtime.state is None:
-        raise SandboxRuntimeError("Tool runtime state not available")
+        raise SandboxRuntimeError("工具运行时状态不可用")
 
-    # Check if sandbox already exists in state
+    # 检查状态中是否已存在 sandbox
     sandbox_state = runtime.state.get("sandbox")
     if sandbox_state is not None:
         sandbox_id = sandbox_state.get("sandbox_id")
@@ -170,42 +192,42 @@ def ensure_sandbox_initialized(runtime: ToolRuntime[ContextT, ThreadState] | Non
             sandbox = get_sandbox_provider().get(sandbox_id)
             if sandbox is not None:
                 return sandbox
-            # Sandbox was released, fall through to acquire new one
+            # Sandbox 已释放，继续获取新的
 
-    # Lazy acquisition: get thread_id and acquire sandbox
+    # 延迟获取：获取 thread_id 并获取 sandbox
     thread_id = runtime.context.get("thread_id")
     if thread_id is None:
-        raise SandboxRuntimeError("Thread ID not available in runtime context")
+        raise SandboxRuntimeError("运行时上下文中没有可用的 Thread ID")
 
     provider = get_sandbox_provider()
-    print(f"Lazy acquiring sandbox for thread {thread_id}")
+    print(f"正在为线程 {thread_id} 延迟获取 sandbox")
     sandbox_id = provider.acquire(thread_id)
 
-    # Update runtime state - this persists across tool calls
+    # 更新运行时状态 - 这会在工具调用之间持久化
     runtime.state["sandbox"] = {"sandbox_id": sandbox_id}
 
-    # Retrieve and return the sandbox
+    # 获取并返回 sandbox
     sandbox = provider.get(sandbox_id)
     if sandbox is None:
-        raise SandboxNotFoundError("Sandbox not found after acquisition", sandbox_id=sandbox_id)
+        raise SandboxNotFoundError("获取后未找到 Sandbox", sandbox_id=sandbox_id)
 
     return sandbox
 
 
 def ensure_thread_directories_exist(runtime: ToolRuntime[ContextT, ThreadState] | None) -> None:
-    """Ensure thread data directories (workspace, uploads, outputs) exist.
+    """确保线程数据目录（workspace、uploads、outputs）存在。
 
-    This function is called lazily when any sandbox tool is first used.
-    For local sandbox, it creates the directories on the filesystem.
-    For other sandboxes (like aio), directories are already mounted in the container.
+    此函数在任何 sandbox 工具首次使用时延迟调用。
+    对于本地 sandbox，它在文件系统上创建目录。
+    对于其他 sandbox（如 aio），目录已在容器中挂载。
 
     Args:
-        runtime: Tool runtime containing state and context.
+        runtime: 包含状态和上下文的工具运行时。
     """
     if runtime is None:
         return
 
-    # Only create directories for local sandbox
+    # 仅在本地 sandbox 创建目录
     if not is_local_sandbox(runtime):
         return
 
@@ -213,11 +235,11 @@ def ensure_thread_directories_exist(runtime: ToolRuntime[ContextT, ThreadState] 
     if thread_data is None:
         return
 
-    # Check if directories have already been created
+    # 检查目录是否已创建
     if runtime.state.get("thread_directories_created"):
         return
 
-    # Create the three directories
+    # 创建三个目录
     import os
 
     for key in ["workspace_path", "uploads_path", "outputs_path"]:
@@ -225,21 +247,20 @@ def ensure_thread_directories_exist(runtime: ToolRuntime[ContextT, ThreadState] 
         if path:
             os.makedirs(path, exist_ok=True)
 
-    # Mark as created to avoid redundant operations
+    # 标记为已创建，避免重复操作
     runtime.state["thread_directories_created"] = True
 
 
 @tool("bash", parse_docstring=True)
 def bash_tool(runtime: ToolRuntime[ContextT, ThreadState], description: str, command: str) -> str:
-    """Execute a bash command in a Linux environment.
+    """在 Linux 环境中执行 bash 命令。
 
-
-    - Use `python` to run Python code.
-    - Use `pip install` to install Python packages.
+    - 使用 `python` 运行 Python 代码。
+    - 使用 `pip install` 安装 Python 包。
 
     Args:
-        description: Explain why you are running this command in short words. ALWAYS PROVIDE THIS PARAMETER FIRST.
-        command: The bash command to execute. Always use absolute paths for files and directories.
+        description: 简要说明执行此命令的原因。始终将此参数放在第一位。
+        command: 要执行的 bash 命令。文件和目录始终使用绝对路径。
     """
     try:
         sandbox = ensure_sandbox_initialized(runtime)
@@ -249,18 +270,18 @@ def bash_tool(runtime: ToolRuntime[ContextT, ThreadState], description: str, com
             command = replace_virtual_paths_in_command(command, thread_data)
         return sandbox.execute_command(command)
     except SandboxError as e:
-        return f"Error: {e}"
+        return f"错误：{e}"
     except Exception as e:
-        return f"Error: Unexpected error executing command: {type(e).__name__}: {e}"
+        return f"错误：执行命令时发生意外错误：{type(e).__name__}: {e}"
 
 
 @tool("ls", parse_docstring=True)
 def ls_tool(runtime: ToolRuntime[ContextT, ThreadState], description: str, path: str) -> str:
-    """List the contents of a directory up to 2 levels deep in tree format.
+    """以树形格式列出目录内容，最多 2 层深度。
 
     Args:
-        description: Explain why you are listing this directory in short words. ALWAYS PROVIDE THIS PARAMETER FIRST.
-        path: The **absolute** path to the directory to list.
+        description: 简要说明列出此目录的原因。始终将此参数放在第一位。
+        path: 要列出的目录的**绝对**路径。
     """
     try:
         sandbox = ensure_sandbox_initialized(runtime)
@@ -270,16 +291,16 @@ def ls_tool(runtime: ToolRuntime[ContextT, ThreadState], description: str, path:
             path = replace_virtual_path(path, thread_data)
         children = sandbox.list_dir(path)
         if not children:
-            return "(empty)"
+            return "(空)"
         return "\n".join(children)
     except SandboxError as e:
-        return f"Error: {e}"
+        return f"错误：{e}"
     except FileNotFoundError:
-        return f"Error: Directory not found: {path}"
+        return f"错误：未找到目录：{path}"
     except PermissionError:
-        return f"Error: Permission denied: {path}"
+        return f"错误：权限被拒绝：{path}"
     except Exception as e:
-        return f"Error: Unexpected error listing directory: {type(e).__name__}: {e}"
+        return f"错误：列出目录时发生意外错误：{type(e).__name__}: {e}"
 
 
 @tool("read_file", parse_docstring=True)
@@ -290,13 +311,13 @@ def read_file_tool(
     start_line: int | None = None,
     end_line: int | None = None,
 ) -> str:
-    """Read the contents of a text file. Use this to examine source code, configuration files, logs, or any text-based file.
+    """读取文本文件的内容。用于查看源代码、配置文件、日志或任何基于文本的文件。
 
     Args:
-        description: Explain why you are reading this file in short words. ALWAYS PROVIDE THIS PARAMETER FIRST.
-        path: The **absolute** path to the file to read.
-        start_line: Optional starting line number (1-indexed, inclusive). Use with end_line to read a specific range.
-        end_line: Optional ending line number (1-indexed, inclusive). Use with start_line to read a specific range.
+        description: 简要说明读取此文件的原因。始终将此参数放在第一位。
+        path: 要读取的文件的**绝对**路径。
+        start_line: 可选的起始行号（从 1 开始，包含）。与 end_line 一起使用以读取特定范围。
+        end_line: 可选的结束行号（从 1 开始，包含）。与 start_line 一起使用以读取特定范围。
     """
     try:
         sandbox = ensure_sandbox_initialized(runtime)
@@ -306,20 +327,20 @@ def read_file_tool(
             path = replace_virtual_path(path, thread_data)
         content = sandbox.read_file(path)
         if not content:
-            return "(empty)"
+            return "(空)"
         if start_line is not None and end_line is not None:
             content = "\n".join(content.splitlines()[start_line - 1 : end_line])
         return content
     except SandboxError as e:
-        return f"Error: {e}"
+        return f"错误：{e}"
     except FileNotFoundError:
-        return f"Error: File not found: {path}"
+        return f"错误：未找到文件：{path}"
     except PermissionError:
-        return f"Error: Permission denied reading file: {path}"
+        return f"错误：读取文件权限被拒绝：{path}"
     except IsADirectoryError:
-        return f"Error: Path is a directory, not a file: {path}"
+        return f"错误：路径是目录，不是文件：{path}"
     except Exception as e:
-        return f"Error: Unexpected error reading file: {type(e).__name__}: {e}"
+        return f"错误：读取文件时发生意外错误：{type(e).__name__}: {e}"
 
 
 @tool("write_file", parse_docstring=True)
@@ -330,12 +351,12 @@ def write_file_tool(
     content: str,
     append: bool = False,
 ) -> str:
-    """Write text content to a file.
+    """将文本内容写入文件。
 
     Args:
-        description: Explain why you are writing to this file in short words. ALWAYS PROVIDE THIS PARAMETER FIRST.
-        path: The **absolute** path to the file to write to. ALWAYS PROVIDE THIS PARAMETER SECOND.
-        content: The content to write to the file. ALWAYS PROVIDE THIS PARAMETER THIRD.
+        description: 简要说明写入此文件的原因。始终将此参数放在第一位。
+        path: 要写入的文件的**绝对**路径。始终将此参数放在第二位。
+        content: 要写入文件的内容。始终将此参数放在第三位。
     """
     try:
         sandbox = ensure_sandbox_initialized(runtime)
@@ -346,15 +367,15 @@ def write_file_tool(
         sandbox.write_file(path, content, append)
         return "OK"
     except SandboxError as e:
-        return f"Error: {e}"
+        return f"错误：{e}"
     except PermissionError:
-        return f"Error: Permission denied writing to file: {path}"
+        return f"错误：写入文件权限被拒绝：{path}"
     except IsADirectoryError:
-        return f"Error: Path is a directory, not a file: {path}"
+        return f"错误：路径是目录，不是文件：{path}"
     except OSError as e:
-        return f"Error: Failed to write file '{path}': {e}"
+        return f"错误：写入文件 '{path}' 失败：{e}"
     except Exception as e:
-        return f"Error: Unexpected error writing file: {type(e).__name__}: {e}"
+        return f"错误：写入文件时发生意外错误：{type(e).__name__}: {e}"
 
 
 @tool("str_replace", parse_docstring=True)
@@ -366,15 +387,15 @@ def str_replace_tool(
     new_str: str,
     replace_all: bool = False,
 ) -> str:
-    """Replace a substring in a file with another substring.
-    If `replace_all` is False (default), the substring to replace must appear **exactly once** in the file.
+    """将文件中的子字符串替换为另一个子字符串。
+    如果 `replace_all` 为 False（默认），要替换的子字符串必须在文件中**恰好出现一次**。
 
     Args:
-        description: Explain why you are replacing the substring in short words. ALWAYS PROVIDE THIS PARAMETER FIRST.
-        path: The **absolute** path to the file to replace the substring in. ALWAYS PROVIDE THIS PARAMETER SECOND.
-        old_str: The substring to replace. ALWAYS PROVIDE THIS PARAMETER THIRD.
-        new_str: The new substring. ALWAYS PROVIDE THIS PARAMETER FOURTH.
-        replace_all: Whether to replace all occurrences of the substring. If False, only the first occurrence will be replaced. Default is False.
+        description: 简要说明替换子字符串的原因。始终将此参数放在第一位。
+        path: 要替换子字符串的文件的**绝对**路径。始终将此参数放在第二位。
+        old_str: 要替换的子字符串。始终将此参数放在第三位。
+        new_str: 新的子字符串。始终将此参数放在第四位。
+        replace_all: 是否替换所有匹配的子字符串。如果为 False，只替换第一个匹配项。默认为 False。
     """
     try:
         sandbox = ensure_sandbox_initialized(runtime)
@@ -386,7 +407,7 @@ def str_replace_tool(
         if not content:
             return "OK"
         if old_str not in content:
-            return f"Error: String to replace not found in file: {path}"
+            return f"错误：文件中未找到要替换的字符串：{path}"
         if replace_all:
             content = content.replace(old_str, new_str)
         else:
@@ -394,10 +415,10 @@ def str_replace_tool(
         sandbox.write_file(path, content)
         return "OK"
     except SandboxError as e:
-        return f"Error: {e}"
+        return f"错误：{e}"
     except FileNotFoundError:
-        return f"Error: File not found: {path}"
+        return f"错误：未找到文件：{path}"
     except PermissionError:
-        return f"Error: Permission denied accessing file: {path}"
+        return f"错误：访问文件权限被拒绝：{path}"
     except Exception as e:
-        return f"Error: Unexpected error replacing string: {type(e).__name__}: {e}"
+        return f"错误：替换字符串时发生意外错误：{type(e).__name__}: {e}"

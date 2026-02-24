@@ -1,11 +1,11 @@
 ---
 name: find-skills
-description: Helps users discover and install agent skills when they ask questions like "how do I do X", "find a skill for X", "is there a skill that can...", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.
+描述: Helps users discover and 安装 agent skills when they ask questions like "how do I do X", "find a skill for X", "is there a skill that can...", or express interest in extending capabilities. 此技能应用于 when the user is looking for functionality that might exist as an installable skill.
 ---
 
 # Find Skills
 
-This skill helps you discover and install skills from the open agent skills ecosystem.
+This skill helps you discover and 安装 skills from the open agent skills ecosystem.
 
 ## When to Use This Skill
 
@@ -15,12 +15,12 @@ Use this skill when the user:
 - Says "find a skill for X" or "is there a skill for X"
 - Asks "can you do X" where X is a specialized capability
 - Expresses interest in extending agent capabilities
-- Wants to search for tools, templates, or workflows
+- Wants to search for tools, templates, or 工作流
 - Mentions they wish they had help with a specific domain (design, testing, deployment, etc.)
 
 ## What is the Skills CLI?
 
-The Skills CLI (`npx skills`) is the package manager for the open agent skills ecosystem. Skills are modular packages that extend agent capabilities with specialized knowledge, workflows, and tools.
+The Skills CLI (`npx skills`) is the package manager for the open agent skills ecosystem. Skills are modular packages that extend agent capabilities with 专业知识, 工作流, and tools.
 
 **Key commands:**
 
@@ -48,13 +48,13 @@ Run the find command with a relevant query:
 npx skills find [query]
 ```
 
-For example:
+For 示例:
 
 - User asks "how do I make my React app faster?" → `npx skills find react performance`
 - User asks "can you help me with PR reviews?" → `npx skills find pr review`
 - User asks "I need to create a changelog" → `npx skills find changelog`
 
-The command will return results like:
+The command will 返回 results like:
 
 ```
 Install with bash /path/to/skill/scripts/install-skill.sh vercel-labs/agent-skills@vercel-react-best-practices
@@ -68,10 +68,10 @@ vercel-labs/agent-skills@vercel-react-best-practices
 When you find relevant skills, present them to the user with:
 
 1. The skill name and what it does
-2. The install command they can run
+2. The 安装 command they can run
 3. A link to learn more at skills.sh
 
-Example response:
+示例 response:
 
 ```
 I found a skill that might help! The "vercel-react-best-practices" skill provides
@@ -83,32 +83,32 @@ bash /path/to/skill/scripts/install-skill.sh vercel-labs/agent-skills@vercel-rea
 Learn more: https://skills.sh/vercel-labs/agent-skills/vercel-react-best-practices
 ```
 
-### Step 4: Install the Skill
+### Step 4: 安装 the Skill
 
-If the user wants to proceed, use the `install-skill.sh` script to install the skill and automatically link it to the project:
+If the user wants to proceed, use the `install-skill.sh` script to 安装 the skill and automatically link it to the project:
 
 ```bash
 bash /path/to/skill/scripts/install-skill.sh <owner/repo@skill-name>
 ```
 
-For example, if the user wants to install `vercel-react-best-practices`:
+For 示例, if the user wants to 安装 `vercel-react-best-practices`:
 
 ```bash
 bash /path/to/skill/scripts/install-skill.sh vercel-labs/agent-skills@vercel-react-best-practices
 ```
 
-The script will install the skill globally to `skills/custom/`
+The script will 安装 the skill globally to `skills/custom/`
 
 ## Common Skill Categories
 
 When searching, consider these common categories:
 
-| Category        | Example Queries                          |
+| Category        | 示例 Queries                          |
 | --------------- | ---------------------------------------- |
 | Web Development | react, nextjs, typescript, css, tailwind |
 | Testing         | testing, jest, playwright, e2e           |
 | DevOps          | deploy, docker, kubernetes, ci-cd        |
-| Documentation   | docs, readme, changelog, api-docs        |
+| 文档   | docs, 自述, changelog, api-docs        |
 | Code Quality    | review, lint, refactor, best-practices   |
 | Design          | ui, ux, design-system, accessibility     |
 | Productivity    | workflow, automation, git                |
@@ -127,7 +127,7 @@ If no relevant skills exist:
 2. Offer to help with the task directly using your general capabilities
 3. Suggest the user could create their own skill with `npx skills init`
 
-Example:
+示例:
 
 ```
 I searched for skills related to "xyz" but didn't find any matches.

@@ -1,13 +1,26 @@
+"""LangSmith 追踪配置。"""
+
 import logging
 import os
-from pydantic import BaseModel, Field
 import threading
+
+from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)
 _config_lock = threading.Lock()
 
+
 class TracingConfig(BaseModel):
-    """Configuration for LangSmith tracing."""
+    """LangSmith 追踪配置。
+
+    该类用于配置 LangSmith 追踪的启用状态、API 密钥、项目和端点。
+
+    Attributes:
+        enabled: 是否启用追踪。
+        api_key: LangSmith API 密钥。
+        project: LangSmith 项目名称。
+        endpoint: LangSmith API 端点。
+    """
 
     enabled: bool = Field(...)
     api_key: str | None = Field(...)
@@ -16,7 +29,11 @@ class TracingConfig(BaseModel):
 
     @property
     def is_configured(self) -> bool:
-        """Check if tracing is fully configured (enabled and has API key)."""
+        """检查追踪是否完全配置（已启用且有 API 密钥）。
+
+        Returns:
+            如果追踪已启用且有 API 密钥则返回 True。
+        """
         return self.enabled and bool(self.api_key)
 
 
@@ -24,15 +41,16 @@ _tracing_config: TracingConfig | None = None
 
 
 def get_tracing_config() -> TracingConfig:
-    """Get the current tracing configuration from environment variables.
+    """从环境变量获取当前追踪配置。
+
     Returns:
-        TracingConfig with current settings.
+        包含当前设置的 TracingConfig 实例。
     """
     global _tracing_config
     if _tracing_config is not None:
         return _tracing_config
     with _config_lock:
-        if _tracing_config is not None:  # Double-check after acquiring lock
+        if _tracing_config is not None:
             return _tracing_config
         _tracing_config = TracingConfig(
             enabled=os.environ.get("LANGSMITH_TRACING", "").lower() == "true",
@@ -41,11 +59,12 @@ def get_tracing_config() -> TracingConfig:
             endpoint=os.environ.get("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com"),
         )
         return _tracing_config
-    
+
+
 def is_tracing_enabled() -> bool:
-    """Check if LangSmith tracing is enabled and configured.
+    """检查 LangSmith 追踪是否已启用并配置。
+
     Returns:
-        True if tracing is enabled and has an API key.
+        如果追踪已启用且有 API 密钥则返回 True。
     """
     return get_tracing_config().is_configured
-

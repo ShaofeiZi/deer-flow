@@ -2,7 +2,7 @@
 
 DeerFlow now supports Apple Container as the preferred container runtime on macOS, with automatic fallback to Docker.
 
-## Overview
+## 概览
 
 Starting with this version, DeerFlow automatically detects and uses Apple Container on macOS when available, falling back to Docker when:
 - Apple Container is not installed
@@ -14,13 +14,13 @@ This provides better performance on Apple Silicon Macs while maintaining compati
 
 ### On Apple Silicon Macs with Apple Container:
 - **Better Performance**: Native ARM64 execution without Rosetta 2 translation
-- **Lower Resource Usage**: Lighter weight than Docker Desktop
+- **Lower Resource 用法**: Lighter weight than Docker Desktop
 - **Native Integration**: Uses macOS Virtualization.framework
 
 ### Fallback to Docker:
 - Full backward compatibility
 - Works on all platforms (macOS, Linux, Windows)
-- No configuration changes needed
+- No 配置 changes needed
 
 ## Requirements
 
@@ -86,9 +86,9 @@ The implementation is in `backend/src/community/aio_sandbox/aio_sandbox_provider
 - `_start_container()`: Uses detected runtime, skips Docker-specific options for Apple Container
 - `_stop_container()`: Uses appropriate stop command for the runtime
 
-## Configuration
+## 配置
 
-No configuration changes are needed! The system works automatically.
+No 配置 changes are needed! The system works automatically.
 
 However, you can verify the runtime in use by checking the logs:
 
@@ -153,7 +153,7 @@ The project includes a unified cleanup script that handles both runtimes:
 
 **Script:** `scripts/cleanup-containers.sh`
 
-**Usage:**
+**用法:**
 ```bash
 # Clean up all DeerFlow sandbox containers
 ./scripts/cleanup-containers.sh deer-flow-sandbox
@@ -234,5 +234,5 @@ This will:
 ## References
 
 - [Apple Container GitHub](https://github.com/apple/container)
-- [Apple Container Documentation](https://github.com/apple/container/blob/main/docs/)
+- [Apple Container 文档](https://github.com/apple/container/blob/main/docs/)
 - [OCI Image Spec](https://github.com/opencontainers/image-spec)

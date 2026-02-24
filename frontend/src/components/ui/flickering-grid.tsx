@@ -10,6 +10,9 @@ import React, {
 
 import { cn } from "@/lib/utils";
 
+/**
+ * 【接口描述】
+ */
 interface FlickeringGridProps extends React.HTMLAttributes<HTMLDivElement> {
   squareSize?: number;
   gridGap?: number;

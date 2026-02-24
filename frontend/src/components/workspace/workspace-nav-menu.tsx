@@ -30,6 +30,9 @@ import { useI18n } from "@/core/i18n/hooks";
 import { GithubIcon } from "./github-icon";
 import { SettingsDialog } from "./settings";
 
+/**
+ * 【函数功能描述】
+ */
 function NavMenuButtonContent({
   isSidebarOpen,
   t,
@@ -50,6 +53,9 @@ function NavMenuButtonContent({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 export function WorkspaceNavMenu() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [settingsDefaultSection, setSettingsDefaultSection] = useState<

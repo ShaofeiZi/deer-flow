@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
+/**
+ * 【函数功能描述】
+ */
 function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -57,6 +60,9 @@ const inputGroupAddonVariants = cva(
   },
 );
 
+/**
+ * 【函数功能描述】
+ */
 function InputGroupAddon({
   className,
   align = "inline-start",
@@ -97,6 +103,9 @@ const inputGroupButtonVariants = cva(
   },
 );
 
+/**
+ * 【函数功能描述】
+ */
 function InputGroupButton({
   className,
   type = "button",
@@ -116,6 +125,9 @@ function InputGroupButton({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
@@ -128,6 +140,9 @@ function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function InputGroupInput({
   className,
   ...props
@@ -144,6 +159,9 @@ function InputGroupInput({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function InputGroupTextarea({
   className,
   ...props

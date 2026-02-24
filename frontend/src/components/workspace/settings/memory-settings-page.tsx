@@ -11,6 +11,9 @@ import { formatTimeAgo } from "@/core/utils/datetime";
 
 import { SettingsSection } from "./settings-section";
 
+/**
+ * 【函数功能描述】
+ */
 function confidenceToLevelKey(confidence: unknown): {
   key: "veryHigh" | "high" | "normal" | "unknown";
   value?: number;
@@ -31,6 +34,9 @@ function confidenceToLevelKey(confidence: unknown): {
   return { key: "normal", value };
 }
 
+/**
+ * 【函数功能描述】
+ */
 function formatMemorySection(
   title: string,
   summary: string,
@@ -51,6 +57,9 @@ function formatMemorySection(
     .join("\n");
 }
 
+/**
+ * 【函数功能描述】
+ */
 function memoryToMarkdown(
   memory: UserMemory,
   t: ReturnType<typeof useI18n>["t"],
@@ -155,6 +164,9 @@ function memoryToMarkdown(
   return out.join("\n");
 }
 
+/**
+ * 【函数功能描述】
+ */
 export function MemorySettingsPage() {
   const { t } = useI18n();
   const { memory, isLoading, error } = useMemory();
@@ -185,6 +197,9 @@ export function MemorySettingsPage() {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function upperFirst(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }

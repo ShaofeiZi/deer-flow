@@ -1,10 +1,9 @@
-"""Patched ChatDeepSeek that preserves reasoning_content in multi-turn conversations.
+"""修复版的 ChatDeepSeek，在多轮对话中保留 reasoning_content。
 
-This module provides a patched version of ChatDeepSeek that properly handles
-reasoning_content when sending messages back to the API. The original implementation
-stores reasoning_content in additional_kwargs but doesn't include it when making
-subsequent API calls, which causes errors with APIs that require reasoning_content
-on all assistant messages when thinking mode is enabled.
+此模块提供 ChatDeepSeek 的修复版本，正确处理发送回 API 时的
+reasoning_content。原始实现将 reasoning_content 存储在 additional_kwargs 中，
+但在进行后续 API 调用时不包含它，这会导致启用思考模式时要求所有助手消息
+都包含 reasoning_content 的 API 出现错误。
 """
 
 from typing import Any
@@ -15,12 +14,11 @@ from langchain_deepseek import ChatDeepSeek
 
 
 class PatchedChatDeepSeek(ChatDeepSeek):
-    """ChatDeepSeek with proper reasoning_content preservation.
+    """正确保留 reasoning_content 的 ChatDeepSeek。
 
-    When using thinking/reasoning enabled models, the API expects reasoning_content
-    to be present on ALL assistant messages in multi-turn conversations. This patched
-    version ensures reasoning_content from additional_kwargs is included in the
-    request payload.
+    使用思考/推理启用的模型时，API 期望多轮对话中的所有助手消息
+    都包含 reasoning_content。此修复版本确保 additional_kwargs 中的
+    reasoning_content 被包含在请求负载中。
     """
 
     def _get_request_payload(
@@ -30,22 +28,22 @@ class PatchedChatDeepSeek(ChatDeepSeek):
         stop: list[str] | None = None,
         **kwargs: Any,
     ) -> dict:
-        """Get request payload with reasoning_content preserved.
+        """获取保留 reasoning_content 的请求负载。
 
-        Overrides the parent method to inject reasoning_content from
-        additional_kwargs into assistant messages in the payload.
+        重写父类方法，将 additional_kwargs 中的 reasoning_content
+        注入到负载中的助手消息中。
         """
-        # Get the original messages before conversion
+        # 在转换之前获取原始消息
         original_messages = self._convert_input(input_).to_messages()
 
-        # Call parent to get the base payload
+        # 调用父类获取基础负载
         payload = super()._get_request_payload(input_, stop=stop, **kwargs)
 
-        # Match payload messages with original messages to restore reasoning_content
+        # 将负载消息与原始消息匹配以恢复 reasoning_content
         payload_messages = payload.get("messages", [])
 
-        # The payload messages and original messages should be in the same order
-        # Iterate through both and match by position
+        # 负载消息和原始消息应该按相同顺序排列
+        # 遍历两者并按位置匹配
         if len(payload_messages) == len(original_messages):
             for payload_msg, orig_msg in zip(payload_messages, original_messages):
                 if payload_msg.get("role") == "assistant" and isinstance(orig_msg, AIMessage):
@@ -53,7 +51,7 @@ class PatchedChatDeepSeek(ChatDeepSeek):
                     if reasoning_content is not None:
                         payload_msg["reasoning_content"] = reasoning_content
         else:
-            # Fallback: match by counting assistant messages
+            # 回退：通过计数助手消息来匹配
             ai_messages = [m for m in original_messages if isinstance(m, AIMessage)]
             assistant_payloads = [(i, m) for i, m in enumerate(payload_messages) if m.get("role") == "assistant"]
 

@@ -63,6 +63,9 @@ import {
 import { ModeHoverGuide } from "./mode-hover-guide";
 import { Tooltip } from "./tooltip";
 
+/**
+ * 【函数功能描述】
+ */
 export function InputBox({
   className,
   disabled,
@@ -419,6 +422,9 @@ export function InputBox({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SuggestionList() {
   const { t } = useI18n();
   const { textInput } = usePromptInputController();
@@ -488,6 +494,9 @@ function SuggestionList() {
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function AddAttachmentsButton({ className }: { className?: string }) {
   const { t } = useI18n();
   const attachments = usePromptInputAttachments();

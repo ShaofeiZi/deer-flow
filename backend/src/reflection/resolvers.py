@@ -8,64 +8,64 @@ def resolve_variable[T](
     variable_path: str,
     expected_type: type[T] | tuple[type, ...] | None = None,
 ) -> T:
-    """Resolve a variable from a path.
+    """从路径解析变量。
 
     Args:
-        variable_path: The path to the variable (e.g. "parent_package_name.sub_package_name.module_name:variable_name").
-        expected_type: Optional type or tuple of types to validate the resolved variable against.
-            If provided, uses isinstance() to check if the variable is an instance of the expected type(s).
+        variable_path: 变量的路径（例如 "parent_package_name.sub_package_name.module_name:variable_name"）。
+        expected_type: 可选的类型或类型元组，用于验证解析后的变量。
+            如果提供，使用 isinstance() 检查变量是否为预期类型的实例。
 
     Returns:
-        The resolved variable.
+        解析后的变量。
 
     Raises:
-        ImportError: If the module path is invalid or the attribute doesn't exist.
-        ValueError: If the resolved variable doesn't pass the validation checks.
+        ImportError: 如果模块路径无效或属性不存在。
+        ValueError: 如果解析后的变量未通过验证检查。
     """
     try:
         module_path, variable_name = variable_path.rsplit(":", 1)
     except ValueError as err:
-        raise ImportError(f"{variable_path} doesn't look like a variable path. Example: parent_package_name.sub_package_name.module_name:variable_name") from err
+        raise ImportError(f"{variable_path} 不是有效的变量路径。示例：parent_package_name.sub_package_name.module_name:variable_name") from err
 
     try:
         module = import_module(module_path)
     except ImportError as err:
-        raise ImportError(f"Could not import module {module_path}") from err
+        raise ImportError(f"无法导入模块 {module_path}") from err
 
     try:
         variable = getattr(module, variable_name)
     except AttributeError as err:
-        raise ImportError(f"Module {module_path} does not define a {variable_name} attribute/class") from err
+        raise ImportError(f"模块 {module_path} 未定义 {variable_name} 属性/类") from err
 
-    # Type validation
+    # 类型验证
     if expected_type is not None:
         if not isinstance(variable, expected_type):
-            type_name = expected_type.__name__ if isinstance(expected_type, type) else " or ".join(t.__name__ for t in expected_type)
-            raise ValueError(f"{variable_path} is not an instance of {type_name}, got {type(variable).__name__}")
+            type_name = expected_type.__name__ if isinstance(expected_type, type) else " 或 ".join(t.__name__ for t in expected_type)
+            raise ValueError(f"{variable_path} 不是 {type_name} 的实例，实际为 {type(variable).__name__}")
 
     return variable
 
 
 def resolve_class[T](class_path: str, base_class: type[T] | None = None) -> type[T]:
-    """Resolve a class from a module path and class name.
+    """从模块路径和类名解析类。
 
     Args:
-        class_path: The path to the class (e.g. "langchain_openai:ChatOpenAI").
-        base_class: The base class to check if the resolved class is a subclass of.
+        class_path: 类的路径（例如 "langchain_openai:ChatOpenAI"）。
+        base_class: 基类，用于检查解析后的类是否为其子类。
 
     Returns:
-        The resolved class.
+        解析后的类。
 
     Raises:
-        ImportError: If the module path is invalid or the attribute doesn't exist.
-        ValueError: If the resolved object is not a class or not a subclass of base_class.
+        ImportError: 如果模块路径无效或属性不存在。
+        ValueError: 如果解析后的对象不是类或不是 base_class 的子类。
     """
     model_class = resolve_variable(class_path, expected_type=type)
 
     if not isinstance(model_class, type):
-        raise ValueError(f"{class_path} is not a valid class")
+        raise ValueError(f"{class_path} 不是有效的类")
 
     if base_class is not None and not issubclass(model_class, base_class):
-        raise ValueError(f"{class_path} is not a subclass of {base_class.__name__}")
+        raise ValueError(f"{class_path} 不是 {base_class.__name__} 的子类")
 
     return model_class

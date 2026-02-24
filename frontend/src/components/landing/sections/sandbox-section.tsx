@@ -8,6 +8,9 @@ import {
 
 import { Section } from "../section";
 
+/**
+ * 【函数功能描述】
+ */
 export function SandboxSection({ className }: { className?: string }) {
   return (
     <Section

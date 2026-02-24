@@ -324,6 +324,9 @@ export type MessageAttachmentProps = HTMLAttributes<HTMLDivElement> & {
   onRemove?: () => void;
 };
 
+/**
+ * 【函数功能描述】
+ */
 export function MessageAttachment({
   data,
   className,
@@ -404,6 +407,9 @@ export function MessageAttachment({
 
 export type MessageAttachmentsProps = ComponentProps<"div">;
 
+/**
+ * 【函数功能描述】
+ */
 export function MessageAttachments({
   children,
   className,

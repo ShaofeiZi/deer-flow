@@ -13,6 +13,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 
+/**
+ * 【函数功能描述】
+ */
 function Command({
   className,
   ...props
@@ -29,6 +32,9 @@ function Command({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function CommandDialog({
   title = "Command Palette",
   description = "Search for a command to run...",
@@ -60,6 +66,9 @@ function CommandDialog({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function CommandInput({
   className,
   ...props
@@ -82,6 +91,9 @@ function CommandInput({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function CommandList({
   className,
   ...props
@@ -98,6 +110,9 @@ function CommandList({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function CommandEmpty({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Empty>) {
@@ -110,6 +125,9 @@ function CommandEmpty({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function CommandGroup({
   className,
   ...props
@@ -126,6 +144,9 @@ function CommandGroup({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function CommandSeparator({
   className,
   ...props
@@ -139,6 +160,9 @@ function CommandSeparator({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function CommandItem({
   className,
   ...props
@@ -155,6 +179,9 @@ function CommandItem({
   )
 }
 
+/**
+ * 【函数功能描述】
+ */
 function CommandShortcut({
   className,
   ...props

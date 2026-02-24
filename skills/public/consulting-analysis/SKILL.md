@@ -1,11 +1,11 @@
 ---
 name: consulting-analysis
-description: Use this skill when the user requests to generate, create, or write professional research reports including but not limited to market analysis, consumer insights, brand analysis, financial analysis, industry research, competitive intelligence, investment due diligence, or any consulting-grade analytical report. This skill operates in two phases — (1) generating a structured analysis framework with chapter skeleton, data query requirements, and analysis logic, and (2) after data collection by other skills, producing the final consulting-grade report with structured narratives, embedded charts, and strategic insights.
+描述: Use this skill when the user requests to generate, create, or write professional research reports including but not limited to market analysis, consumer insights, brand analysis, financial analysis, industry research, competitive intelligence, investment due diligence, or any consulting-grade analytical report. This skill operates in two phases — (1) generating a structured analysis framework with chapter skeleton, data query requirements, and analysis logic, and (2) after data collection by other skills, producing the final consulting-grade report with structured narratives, embedded charts, and strategic insights.
 ---
 
 # Professional Research Report Skill
 
-## Overview
+## 概览
 
 This skill produces professional, consulting-grade research reports in Markdown format, covering domains such as **market analysis, consumer insights, brand strategy, financial analysis, industry research, competitive intelligence, investment research, and macroeconomic analysis**. It operates across two distinct phases:
 
@@ -39,13 +39,13 @@ The output adheres to McKinsey/BCG consulting voice standards. The report langua
 
 # Phase 1: Analysis Framework Generation
 
-## Purpose
+## 目的
 
 Given a **research subject** (e.g., "Gen-Z Skincare Market Analysis", "NEV Industry Competitive Landscape", "Brand X Consumer Profiling"), produce a complete **analysis framework** that serves as the blueprint for downstream data collection and final report generation.
 
 ## Phase 1 Inputs
 
-| Input | Description | Required |
+| Input | 描述 | Required |
 |-------|-------------|----------|
 | **Research Subject** | The topic or question to be analyzed | Yes |
 | **Scope / Constraints** | Geographic scope, time range, industry segment, target audience, etc. | Optional |
@@ -76,7 +76,7 @@ Based on the identified domain and research subject, select **one or more** prof
 
 #### Strategic & Environmental Analysis
 
-| Framework | Description | Best For |
+| Framework | 描述 | Best For |
 |-----------|-------------|----------|
 | **SWOT Analysis** | Strengths, Weaknesses, Opportunities, Threats | Brand assessment, competitive positioning, strategic planning |
 | **PEST / PESTEL Analysis** | Political, Economic, Social, Technological (+ Environmental, Legal) | Macro-environment scanning, market entry assessment, policy impact analysis |
@@ -86,18 +86,18 @@ Based on the identified domain and research subject, select **one or more** prof
 
 #### Market & Growth Analysis
 
-| Framework | Description | Best For |
+| Framework | 描述 | Best For |
 |-----------|-------------|----------|
 | **STP Analysis** | Segmentation, Targeting, Positioning | Market segmentation, target market selection, brand positioning |
 | **BCG Matrix (Growth-Share Matrix)** | Stars, Cash Cows, Question Marks, Dogs | Product portfolio management, resource allocation decisions |
 | **Ansoff Matrix** | Market penetration, market development, product development, diversification | Growth strategy selection |
-| **Product Life Cycle (PLC)** | Introduction, growth, maturity, decline | Product strategy formulation, market timing decisions |
+| **Product Life Cycle (PLC)** | 简介, growth, maturity, decline | Product strategy formulation, market timing decisions |
 | **TAM-SAM-SOM** | Total / Serviceable / Obtainable Market | Market sizing, opportunity quantification |
 | **Technology Adoption Lifecycle** | Innovators → Early Adopters → Early Majority → Late Majority → Laggards | Emerging technology/category penetration analysis |
 
 #### Consumer & Behavioral Analysis
 
-| Framework | Description | Best For |
+| Framework | 描述 | Best For |
 |-----------|-------------|----------|
 | **Consumer Decision Journey** | Awareness → Consideration → Evaluation → Purchase → Loyalty | Consumer behavior path mapping, touchpoint optimization |
 | **AARRR Funnel (Pirate Metrics)** | Acquisition, Activation, Retention, Revenue, Referral | User growth analysis, conversion rate optimization |
@@ -107,7 +107,7 @@ Based on the identified domain and research subject, select **one or more** prof
 
 #### Financial & Valuation Analysis
 
-| Framework | Description | Best For |
+| Framework | 描述 | Best For |
 |-----------|-------------|----------|
 | **DuPont Analysis** | ROE = Net Profit Margin × Asset Turnover × Equity Multiplier | Profitability decomposition, financial health diagnosis |
 | **DCF (Discounted Cash Flow)** | Free cash flow discounting | Enterprise/project valuation |
@@ -116,7 +116,7 @@ Based on the identified domain and research subject, select **one or more** prof
 
 #### Competitive & Strategic Positioning
 
-| Framework | Description | Best For |
+| Framework | 描述 | Best For |
 |-----------|-------------|----------|
 | **Benchmarking** | Key performance indicator item-by-item comparison | Competitor gap analysis, best practice identification |
 | **Strategic Group Mapping** | Cluster competitors along two key dimensions | Competitive landscape visualization, white-space identification |
@@ -126,7 +126,7 @@ Based on the identified domain and research subject, select **one or more** prof
 
 #### Industry & Supply Chain Analysis
 
-| Framework | Description | Best For |
+| Framework | 描述 | Best For |
 |-----------|-------------|----------|
 | **Industry Value Chain** | Upstream → Midstream → Downstream decomposition | Industry structure understanding, profit distribution analysis |
 | **Gartner Hype Cycle** | Technology Trigger → Peak of Inflated Expectations → Trough of Disillusionment → Slope of Enlightenment → Plateau of Productivity | Emerging technology maturity assessment |
@@ -184,13 +184,13 @@ For each chapter, specify **exactly what data needs to be collected**. This is t
 
 Each data requirement entry must include:
 
-| Field | Description |
+| Field | 描述 |
 |-------|-------------|
 | **Data Metric** | The specific metric or data point needed (e.g., "China skincare market size 2020-2025 (in billion CNY)") |
 | **Data Type** | Quantitative, Qualitative, or Mixed |
 | **Suggested Sources** | Suggested source categories: Industry reports, financial statements, government statistics, social media, e-commerce platforms, survey data, news |
 | **Search Keywords** | Suggested search queries for data collection agents |
-| **Priority** | P0 (Required) / P1 (Important) / P2 (Supplementary) |
+| **Priority** | P0 (Required) / P1 (重要) / P2 (Supplementary) |
 | **Time Range** | The time period the data should cover |
 
 #### Data Requirements Output Format (per chapter)
@@ -210,13 +210,13 @@ Each data requirement entry must include:
 
 For each chapter, specify the **planned visualization** and **content structure** for the final report:
 
-| Field | Description |
+| Field | 描述 |
 |-------|-------------|
 | **Visualization Type** | Chart type: Line chart, bar chart, pie chart, scatter plot, radar chart, heatmap, Sankey diagram, comparison table, etc. |
 | **Visualization Title** | Descriptive title for the chart |
 | **Visualization Data Mapping** | Which data indicators map to X/Y axes or segments |
 | **Comparison Table Design** | Column headers and comparison dimensions for the data contrast table |
-| **Argument Structure** | The planned "What → Why → So What" narrative outline |
+| **参数 Structure** | The planned "What → Why → So What" narrative outline |
 
 #### Visualization Plan Output Format (per chapter)
 
@@ -244,7 +244,7 @@ Assemble all outputs into a single, structured **Analysis Framework Document**:
 ```markdown
 # [Research Subject] Analysis Framework
 
-## Research Overview
+## Research 概述
 - **Research Subject**: [...]
 - **Scope**: [Geography, time range, industry segment]
 - **Analysis Domain**: [Market / Finance / Industry / Brand / Consumer / ...]
@@ -302,7 +302,7 @@ After the analysis framework is generated, it is handed off to **other data coll
 1. Execute the **Search Keywords** from each chapter's data requirements
 2. Collect quantitative data, qualitative insights, and source URLs
 3. Generate charts based on the **Visualization & Content Plan**
-4. Return a **Data Package** containing:
+4. 返回 a **Data Package** containing:
    - **Data Summary**: Raw numbers, metrics, and qualitative findings per chapter
    - **Chart Files**: Generated chart images with local file paths
    - **External Search Findings**: Source URLs and summaries for citations
@@ -315,13 +315,13 @@ After the analysis framework is generated, it is handed off to **other data coll
 
 # Phase 2: Report Generation
 
-## Purpose
+## 目的
 
 Receive the completed **Analysis Framework** and **Data Package** from upstream, and synthesize them into a final consulting-grade report.
 
 ## Phase 2 Inputs
 
-| Input | Description | Required |
+| Input | 描述 | Required |
 |-------|-------------|----------|
 | **Analysis Framework** | The framework document produced in Phase 1 | Yes |
 | **Data Summary** | Collected data organized per chapter from the data collection phase | Yes |
@@ -338,14 +338,14 @@ Verify that all required inputs are present:
 2. **Data Summary** — Confirm it contains data organized per chapter, cross-reference against P0 requirements
 3. **Chart Files** — Confirm file paths are valid local paths
 
-If any P0 data is missing, note it in the report and flag for the user.
+If any P0 data is missing, 注意 it in the report and flag for the user.
 
 ### Step 2.2: Map Report Structure
 
 Map the final report structure from the Analysis Framework:
 
 1. **Abstract** — Executive summary with key takeaways
-2. **Introduction** — Background, objectives, methodology
+2. **简介** — Background, objectives, methodology
 3. **Main Body Chapters (2...N)** — Mapped from the Framework's chapter skeleton
 4. **Conclusion** — Pure, objective synthesis
 5. **References** — GB/T 7714-2015 formatted references
@@ -358,7 +358,7 @@ Before writing the report, generate all planned charts from the Analysis Framewo
 
 - **Chart Files already provided**: Skip this step — proceed directly to Step 2.4.
 - **Chart Files NOT provided but a visualization skill is available**: Execute this step to generate all charts first.
-- **No Chart Files and no visualization skill available**: Skip this step — use comparison tables as the primary visual anchor in Step 2.4, and note the absence of charts.
+- **No Chart Files and no visualization skill available**: Skip this step — use comparison tables as the primary visual anchor in Step 2.4, and 注意 the absence of charts.
 
 #### Chart Generation Workflow
 
@@ -388,7 +388,7 @@ Before writing the report, generate all planned charts from the Analysis Framewo
 | 2 | 3.1 | Consumer Age Distribution | charts/chapter_3_1.png |
 ```
 
-5. **Validate**: Confirm all P0-priority charts have been generated. If any chart generation fails, note it and fall back to comparison tables for that sub-chapter.
+5. **Validate**: Confirm all P0-priority charts have been generated. If any chart generation fails, 注意 it and fall back to comparison tables for that sub-chapter.
 
 > **Principle**: Complete ALL chart generation before starting report writing. This ensures a consistent visual narrative and avoids interleaving generation with writing.
 
@@ -396,7 +396,7 @@ Before writing the report, generate all planned charts from the Analysis Framewo
 
 For each sub-chapter, follow the **"Visual Anchor → Data Contrast → Integrated Analysis"** flow:
 
-1. **Visual Evidence Block**: Embed charts using `![Image Description](Actual_File_Path)` — use the file paths collected in Step 2.3
+1. **Visual Evidence Block**: Embed charts using `![Image 描述](Actual_File_Path)` — use the file paths collected in Step 2.3
 2. **Data Contrast Table**: Create a Markdown comparison table for key metrics
 3. **Integrated Narrative Analysis**: Write analytical text following "What → Why → So What"
 
@@ -431,7 +431,7 @@ The report **MUST NOT** stop after the Conclusion — it **MUST** include Refere
 ### Titling Constraints
 - **Numbering**: Use standard numbering (`1.`, `1.1`) directly followed by the title
 - **Forbidden Prefixes**: Do NOT use "Chapter", "Part", "Section" as prefixes
-- **Allowed Tone Words**: Analysis, Profiling, Overview, Insights, Assessment
+- **Allowed Tone Words**: Analysis, Profiling, 概览, Insights, Assessment
 - **Forbidden Words**: "Decoding", "DNA", "Secrets", "Mindscape", "Solar System", "Unlocking"
 
 ### Sub-Chapter Conclusions
@@ -477,7 +477,7 @@ Every insight must connect **Data → User Psychology → Strategy Implication**
 
 ## 2. [Body Chapter Title]
 ### 2.1 [Sub-chapter Title]
-![Chart Description](chart_file_path)
+![Chart 描述](chart_file_path)
 
 | Metric | Brand A | Brand B |
 |--------|---------|--------|
@@ -501,9 +501,9 @@ Every insight must connect **Data → User Psychology → Strategy Implication**
 [2] ...
 ```
 
-## Complete Example
+## Complete 示例
 
-### Phase 1 Example: Framework Generation
+### Phase 1 示例: Framework Generation
 
 User provides: Research subject "Gen-Z Skincare Market Analysis"
 
@@ -512,7 +512,7 @@ User provides: Research subject "Gen-Z Skincare Market Analysis"
 ```markdown
 # Gen-Z Skincare Market Analysis Framework
 
-## Research Overview
+## Research 概述
 - **Research Subject**: Gen-Z Skincare Market Deep Analysis
 - **Scope**: China market, 2020-2025, consumers aged 18-27
 - **Analysis Domain**: Market Analysis + Consumer Insights
@@ -548,7 +548,7 @@ User provides: Research subject "Gen-Z Skincare Market Analysis"
 [Consolidated P0/P1 tasks]
 ```
 
-### Phase 2 Example: Report Generation
+### Phase 2 示例: Report Generation
 
 After data collection, user provides: Analysis Framework + Data Summary with brand metrics + chart file paths.
 
@@ -556,7 +556,7 @@ After data collection, user provides: Analysis Framework + Data Summary with bra
 
 1. Start with `# Gen-Z Skincare Market Deep Analysis Report`
 2. Abstract — 3-5 key takeaways in executive summary form
-3. 1. Introduction — Market context, research scope, data sources
+3. 1. 简介 — Market context, research scope, data sources
 4. 2. Market Size & Growth Trend Analysis — Embed trend charts, comparison tables, strategic narrative
 5. 3. Consumer Profiling & Behavioral Insights — Demographics, purchase drivers, "So What" analysis
 6. 4. Brand Competitive Landscape Assessment — Brand positioning, share analysis, competitive dynamics
@@ -574,19 +574,19 @@ After data collection, user provides: Analysis Framework + Data Summary with bra
 - [ ] Each chapter has clear Analysis Objective, Analysis Logic, and Core Hypothesis
 - [ ] Data requirements are specific, measurable, and include actionable Search Keywords
 - [ ] Every chapter has at least one visualization plan with chart type and data mapping
-- [ ] Data priorities (P0/P1/P2) are assigned — P0 items are essential for core arguments
+- [ ] Data priorities (P0/P1/P2) are assigned — P0 items are essential for core 参数
 - [ ] Data Collection Task List is comprehensive, deduplicated, and ready for downstream execution
 - [ ] Framework adapts to the correct domain (market/finance/industry/consumer/etc.)
 
 ### Phase 2 Quality Checklist (Final Report)
 
 - [ ] All planned charts generated before report writing (Step 2.3 completed first)
-- [ ] All sections present in correct order (Abstract → Introduction → Body → Conclusion → References)
+- [ ] All sections present in correct order (Abstract → 简介 → Body → Conclusion → References)
 - [ ] Every sub-chapter follows "Visual Anchor → Data Contrast → Integrated Analysis"
 - [ ] Every sub-chapter ends with a min. 200-word analytical paragraph
 - [ ] All insights follow the "Data → User Psychology → Strategy Implication" chain
 - [ ] All headings use proper numbering (no "Chapter/Part/Section" prefixes)
-- [ ] Charts are embedded with `![Description](path)` syntax
+- [ ] Charts are embedded with `![描述](path)` syntax
 - [ ] Numbers use English commas for thousands separators
 - [ ] Inline references use markdown links where applicable
 - [ ] References section follows GB/T 7714-2015
@@ -607,7 +607,7 @@ output_locale = zh_CN  # configurable per user request
 reasoning_locale = en
 ```
 
-## Notes
+## 注意
 
 - This skill operates in **two phases** of a multi-step agentic workflow:
   - **Phase 1** produces the analysis framework and data collection requirements
@@ -617,4 +617,4 @@ reasoning_locale = en
 - The Conclusion section must contain **NO** detailed recommendations — those belong in the preceding body chapters
 - Each statement in the report must be supported by data points from the input Data Summary
 - The framework should adapt its analytical dimensions and depth to the specific domain (financial analysis uses different frameworks than consumer insights)
-- When the research subject is ambiguous, default to the broadest reasonable scope and note assumptions
+- When the research subject is ambiguous, default to the broadest reasonable scope and 注意 assumptions

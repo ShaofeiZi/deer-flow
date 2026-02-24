@@ -3,11 +3,17 @@
 import React, { useRef } from "react";
 import "./spotlight-card.css";
 
+/**
+ * 【接口描述】
+ */
 interface Position {
   x: number;
   y: number;
 }
 
+/**
+ * 【接口描述】
+ */
 interface SpotlightCardProps extends React.PropsWithChildren {
   className?: string;
   spotlightColor?: `rgba(${number}, ${number}, ${number}, ${number})`;

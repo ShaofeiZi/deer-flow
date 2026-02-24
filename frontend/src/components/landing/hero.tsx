@@ -9,6 +9,9 @@ import Galaxy from "@/components/ui/galaxy";
 import { WordRotate } from "@/components/ui/word-rotate";
 import { cn } from "@/lib/utils";
 
+/**
+ * 【函数功能描述】
+ */
 export function Hero({ className }: { className?: string }) {
   return (
     <div

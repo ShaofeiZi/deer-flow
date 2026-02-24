@@ -6,24 +6,36 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * 【函数功能描述】
+ */
 function Select({
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Root>) {
   return <SelectPrimitive.Root data-slot="select" {...props} />;
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SelectGroup({
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Group>) {
   return <SelectPrimitive.Group data-slot="select-group" {...props} />;
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SelectValue({
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Value>) {
   return <SelectPrimitive.Value data-slot="select-value" {...props} />;
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SelectTrigger({
   className,
   size = "default",
@@ -50,6 +62,9 @@ function SelectTrigger({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SelectContent({
   className,
   children,
@@ -87,6 +102,9 @@ function SelectContent({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SelectLabel({
   className,
   ...props
@@ -100,6 +118,9 @@ function SelectLabel({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SelectItem({
   className,
   children,
@@ -127,6 +148,9 @@ function SelectItem({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SelectSeparator({
   className,
   ...props
@@ -140,6 +164,9 @@ function SelectSeparator({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SelectScrollUpButton({
   className,
   ...props
@@ -158,6 +185,9 @@ function SelectScrollUpButton({
   );
 }
 
+/**
+ * 【函数功能描述】
+ */
 function SelectScrollDownButton({
   className,
   ...props

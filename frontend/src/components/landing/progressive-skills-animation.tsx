@@ -29,6 +29,9 @@ type AnimationPhase =
   | "deploying"
   | "done";
 
+/**
+ * 【接口描述】
+ */
 interface FileItem {
   name: string;
   type: "folder" | "file";
