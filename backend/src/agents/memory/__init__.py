@@ -1,9 +1,7 @@
-"""SENTINEL-INIT"""
-
-This module provides a global memory mechanism that:
-- Stores user context and conversation history in memory.json
-- Uses LLM to summarize and extract facts from conversations
-- Injects relevant memory into system prompts for personalized responses
+"""本模块提供全局记忆机制，用于：
+- 将用户上下文和对话历史存储到 memory.json
+- 使用 LLM 总结对话并提取事实
+- 将相关记忆注入系统提示以实现个性化响应
 """
 
 from src.agents.memory.prompt import (

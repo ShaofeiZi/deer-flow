@@ -16,6 +16,7 @@ class ModelConfig(BaseModel):
         supports_thinking: 模型是否支持思考模式。
         when_thinking_enabled: 启用思考模式时传递给模型的额外设置。
         supports_vision: 模型是否支持视觉/图像输入。
+        custom_endpoint: 自定义 API 端点 URL，用于将请求转发到非标准 API。
     """
 
     name: str = Field(..., description="模型的唯一名称")
@@ -33,3 +34,7 @@ class ModelConfig(BaseModel):
         description="启用思考模式时传递给模型的额外设置",
     )
     supports_vision: bool = Field(default_factory=lambda: False, description="模型是否支持视觉/图像输入")
+    custom_endpoint: str | None = Field(
+        default_factory=lambda: None,
+        description="自定义 API 端点 URL，用于将请求转发到非标准 API",
+    )

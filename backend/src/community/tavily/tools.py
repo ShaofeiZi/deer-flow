@@ -16,15 +16,7 @@ from src.config import get_app_config
 
 
 def _get_tavily_client() -> object:
-    """
-    【函数功能描述】
-    
-    参数:
-        【参数名】: 【参数描述】
-    
-    返回:
-        【返回值描述】
-    """
+    """获取 Tavily 客户端实例。"""
 
     config = get_app_config().get_tool_config("web_search")
     extra = cast(dict[str, object], config.model_extra or {}) if config is not None else {}
@@ -37,7 +29,11 @@ def _get_tavily_client() -> object:
 
 @tool("web_search", parse_docstring=True)
 def web_search_tool(query: str) -> str:
-    """搜索网页。"""
+    """搜索网页。
+
+    Args:
+        query: 搜索查询字符串。
+    """
 
     config = get_app_config().get_tool_config("web_search")
     extra = cast(dict[str, object], config.model_extra or {}) if config is not None else {}
@@ -75,6 +71,9 @@ def web_fetch_tool(url: str) -> str:
     仅抓取：用户直接提供的 URL，或 web_search/web_fetch 返回的 URL。
     该工具无法访问需要认证的内容（例如私有 Google Docs 或登录后页面）。
     URL 必须包含 schema：例如 https://example.com。
+
+    Args:
+        url: 要抓取的网页 URL。
     """
 
     client = _get_tavily_client()
