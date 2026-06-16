@@ -1,15 +1,22 @@
 """update_agent tool — let a custom agent persist updates to its own SOUL.md / config.
+update_agent 工具——让自定义代理持久化更新其自身的 SOUL.md / 配置。
 
 Bound to the lead agent only when ``runtime.context['agent_name']`` is set
 (i.e. inside an existing custom agent's chat). The default agent does not see
 this tool, and the bootstrap flow continues to use ``setup_agent`` for the
 initial creation handshake.
+仅在 ``runtime.context['agent_name']`` 设置时（即在现有自定义代理的聊天中）绑定到主代理。
+默认代理看不到此工具，引导流程继续使用 ``setup_agent`` 进行初始创建握手。
 
 The tool writes back to ``{base_dir}/users/{user_id}/agents/{agent_name}/{config.yaml,SOUL.md}``
 so an agent created by one user is never visible to (or mutable by) another.
 Writes are staged into temp files first; both files are renamed into place only
 after both temp files are successfully written, so a partial failure cannot leave
 config.yaml updated while SOUL.md still holds stale content.
+工具写回到 ``{base_dir}/users/{user_id}/agents/{agent_name}/{config.yaml,SOUL.md}``，
+因此一个用户创建的代理永远不会被另一个用户看到（或修改）。
+写入首先暂存到临时文件；只有在两个临时文件都成功写入后，才会将两个文件重命名到位，
+因此部分失败不会导致 config.yaml 已更新而 SOUL.md 仍保留旧内容。
 """
 
 from __future__ import annotations
@@ -38,9 +45,12 @@ _NULLISH_STRINGS = frozenset({"null", "none", "undefined"})
 
 def _stage_temp(path: Path, text: str) -> Path:
     """Write ``text`` into a sibling temp file and return its path.
+    将 ``text`` 写入同级临时文件并返回其路径。
 
     The caller is responsible for ``Path.replace``-ing the temp into the target
     once every staged file is ready, or for unlinking it on failure.
+    调用者负责在所有暂存文件准备好后，通过 ``Path.replace`` 将临时文件替换到目标位置，
+    或在失败时取消链接。
     """
     path.parent.mkdir(parents=True, exist_ok=True)
     fd = tempfile.NamedTemporaryFile(
@@ -62,7 +72,8 @@ def _stage_temp(path: Path, text: str) -> Path:
 
 
 def _cleanup_temps(temps: list[Path]) -> None:
-    """Best-effort removal of staged temp files."""
+    """Best-effort removal of staged temp files.
+    尽力删除暂存的临时文件。"""
     for tmp in temps:
         try:
             tmp.unlink(missing_ok=True)
@@ -92,18 +103,26 @@ def update_agent(
     model: OptionalText = None,
 ) -> Command:
     """Persist updates to the current custom agent's SOUL.md and config.yaml.
+    持久化更新当前自定义代理的 SOUL.md 和 config.yaml。
 
     Use this when the user asks to refine the agent's identity, description,
     skill whitelist, tool-group whitelist, or default model. Only the fields
     you explicitly pass are updated; omitted fields keep their existing values.
+    当用户要求优化代理的身份、描述、技能白名单、工具组白名单或默认模型时使用此工具。
+    仅更新你显式传递的字段；省略的字段保留其现有值。
 
     Pass ``soul`` as the FULL replacement SOUL.md content — there is no patch
     semantics, so always start from the current SOUL and apply your edits.
+    将 ``soul`` 作为完整的替换 SOUL.md 内容传递——没有补丁语义，
+    因此始终从当前 SOUL 开始并应用你的编辑。
 
     Pass ``skills=[]`` to disable all skills for this agent. Omit ``skills``
     entirely to keep the existing whitelist. Do not pass literal strings like
     ``"null"`` / ``"none"`` / ``"undefined"`` for unchanged fields; omit those
     fields instead.
+    传递 ``skills=[]`` 以禁用此代理的所有技能。完全省略 ``skills`` 以保留现有白名单。
+    不要为未更改的字段传递 ``"null"`` / ``"none"`` / ``"undefined"`` 等字面字符串；
+    而是省略这些字段。
 
     Args:
         soul: Optional full replacement SOUL.md content.
@@ -141,11 +160,18 @@ def update_agent(
     # creating an agent and later refining it always touches the same files,
     # even if the contextvar gets lost across an async/thread boundary
     # (issue #2782 / #2862 class of bugs).
+    # 解析活跃用户，使更新仅影响此用户的代理。
+    # ``resolve_runtime_user_id`` 优先使用 ``runtime.context["user_id"]``（由网关
+    # 从认证验证的请求中设置），然后回退到 contextvar，最后是 DEFAULT_USER_ID。
+    # 这与 setup_agent 匹配，因此创建代理并随后优化它的用户始终操作相同的文件，
+    # 即使 contextvar 在异步/线程边界丢失（issue #2782 / #2862 类 bug）。
     user_id = resolve_runtime_user_id(runtime)
 
     # Reject an unknown ``model`` *before* touching the filesystem. Otherwise
     # ``_resolve_model_name`` silently falls back to the default at runtime
     # and the user sees confusing repeated warnings on every later turn.
+    # 在接触文件系统*之前*拒绝未知的 ``model``。否则 ``_resolve_model_name``
+    # 会在运行时静默回退到默认值，用户会在每个后续回合看到令人困惑的重复警告。
     if model is not None and get_app_config().get_model_config(model) is None:
         return _err(f"Unknown model '{model}'. Pass a model name that exists in config.yaml's models section.")
 
@@ -168,6 +194,8 @@ def update_agent(
 
     # Force the on-disk ``name`` to match the directory we are writing into,
     # even if ``existing_cfg.name`` had drifted (e.g. from manual yaml edits).
+    # 强制磁盘上的 ``name`` 与我们写入的目录匹配，
+    # 即使 ``existing_cfg.name`` 已经偏离（例如由于手动 yaml 编辑）。
     config_data: dict[str, Any] = {"name": agent_name}
     new_description = description if description is not None else existing_cfg.description
     config_data["description"] = new_description
@@ -197,6 +225,8 @@ def update_agent(
     # Stage every file we intend to rewrite into a temp sibling. Only after
     # *all* temp files exist do we rename them into place — so a failure on
     # SOUL.md cannot leave config.yaml already replaced.
+    # 将每个我们打算重写的文件暂存到临时同级文件中。只有在*所有*临时文件都存在后，
+    # 我们才将它们重命名到位——这样 SOUL.md 上的失败不会导致 config.yaml 已被替换。
     pending: list[tuple[Path, Path]] = []
     staged_temps: list[Path] = []
 
@@ -222,6 +252,10 @@ def update_agent(
         # reported. The remaining failure mode is a crash *between* two
         # ``replace`` calls, which is reported via the partial-write error
         # branch below so the caller knows which files are now on disk.
+        # 提交阶段。``Path.replace`` 在 POSIX/NTFS 上对每个文件是原子操作，
+        # 上述暂存步骤意味着任何更早的失败已经被报告。剩余的失败模式是在两个
+        # ``replace`` 调用*之间*崩溃，这通过下面的部分写入错误分支报告，
+        # 以便调用者知道哪些文件现在在磁盘上。
         committed: list[Path] = []
         try:
             for tmp, target in pending:

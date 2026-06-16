@@ -24,6 +24,12 @@ import { sanitizeRunStreamOptions } from "./stream-mode";
  * path and the direct REST endpoints in ``fetcher.ts:fetchWithAuth``
  * share :func:`readCsrfCookie` and :const:`STATE_CHANGING_METHODS` so
  * the contract stays in lockstep.
+ * SDK ``onRequest`` 钩子，在每次出站 fetch 之前从实时的 ``csrf_token`` cookie 生成 ``X-CSRF-Token`` 头。
+ *
+ * 每次请求读取 cookie（而不是在构造时将其烘焙到 SDK 的 ``defaultHeaders`` 中）可以透明地处理
+ * 登录/登出/密码更改的 cookie 轮换。``/api/langgraph/*`` SDK 路径和 ``fetcher.ts:fetchWithAuth``
+ * 中的直接 REST 端点共享 :func:`readCsrfCookie` 和 :const:`STATE_CHANGING_METHODS`，
+ * 使契约保持同步。
  */
 function injectCsrfHeader(_url: URL, init: RequestInit): RequestInit {
   if (!isStateChangingMethod(init.method ?? "GET")) {
@@ -55,6 +61,8 @@ export function isInactiveRunStreamError(error: unknown): boolean {
   // Match the gateway's store-only run response in
   // backend/app/gateway/routers/thread_runs.py until the API exposes a
   // structured error code for inactive run streams.
+  // 匹配网关在 backend/app/gateway/routers/thread_runs.py 中的仅存储运行响应，
+  // 直到 API 为非活动运行流暴露结构化的错误码。
   return (
     (status === 409 || message.includes("HTTP 409")) &&
     message.includes("not active on this worker") &&
@@ -76,6 +84,7 @@ export function clearReconnectRun(
     }
   } catch {
     // Ignore storage access failures so reconnect cleanup never throws.
+    // 忽略存储访问失败，使重连清理永远不会抛出异常。
   }
 }
 

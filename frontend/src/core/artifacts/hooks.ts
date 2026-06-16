@@ -32,6 +32,7 @@ export function useArtifactContent({
     },
     enabled,
     // Cache artifact content for 5 minutes to avoid repeated fetches (especially for .skill ZIP extraction)
+    // 缓存 artifact 内容 5 分钟以避免重复获取（特别是对于 .skill ZIP 解压）
     staleTime: 5 * 60 * 1000,
   });
   return {

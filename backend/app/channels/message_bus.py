@@ -1,4 +1,7 @@
-"""MessageBus — async pub/sub hub that decouples channels from the agent dispatcher."""
+"""MessageBus — async pub/sub hub that decouples channels from the agent dispatcher.
+
+MessageBus — 异步发布/订阅中心，解耦 channels 和 agent 调度器。
+"""
 
 from __future__ import annotations
 
@@ -19,11 +22,15 @@ RESOLVED_FROM_PENDING_CLARIFICATION_METADATA_KEY = "resolved_from_pending_clarif
 
 # ---------------------------------------------------------------------------
 # Message types
+# | 消息类型
 # ---------------------------------------------------------------------------
 
 
 class InboundMessageType(StrEnum):
-    """Types of messages arriving from IM channels."""
+    """Types of messages arriving from IM channels.
+
+    从 IM channels 到达的消息类型。
+    """
 
     CHAT = "chat"
     COMMAND = "command"
@@ -47,6 +54,23 @@ class InboundMessage:
         files: Optional list of file attachments (platform-specific dicts).
         metadata: Arbitrary extra data from the channel.
         created_at: Unix timestamp when the message was created.
+
+    从 IM channel 到达 agent 调度器的消息。
+
+    属性:
+        channel_name: 源 channel 名称（例如 "feishu"、"slack"）。
+        chat_id: 平台特定的聊天/对话标识符。
+        user_id: 平台特定的用户标识符。
+        text: 消息文本。
+        msg_type: 是常规聊天消息还是命令。
+        thread_ts: 可选的平台线程标识符（用于线程回复）。
+        topic_id: 用于映射到 DeerFlow 线程的对话主题标识符。
+            在同一个 ``chat_id`` 内共享相同 ``topic_id`` 的消息将
+            重用同一个 DeerFlow 线程。当为 ``None`` 时，每条消息
+            创建新线程（一次性问答）。
+        files: 可选的文件附件列表（平台特定的 dict）。
+        metadata: 来自 channel 的任意额外数据。
+        created_at: 消息创建时的 Unix 时间戳。
     """
 
     channel_name: str
@@ -72,6 +96,16 @@ class ResolvedAttachment:
         mime_type: MIME type (e.g. "application/pdf").
         size: File size in bytes.
         is_image: True for image/* MIME types (platforms may handle images differently).
+
+    已解析到主机文件系统路径的文件附件，准备上传。
+
+    属性:
+        virtual_path: 原始虚拟路径（例如 /mnt/user-data/outputs/report.pdf）。
+        actual_path: 解析后的主机文件系统路径。
+        filename: 文件的基本名称。
+        mime_type: MIME 类型（例如 "application/pdf"）。
+        size: 文件大小（字节）。
+        is_image: 对于 image/* MIME 类型为 True（平台可能以不同方式处理图像）。
     """
 
     virtual_path: str
@@ -96,6 +130,19 @@ class OutboundMessage:
         thread_ts: Optional platform thread identifier for threaded replies.
         metadata: Arbitrary extra data.
         created_at: Unix timestamp.
+
+    从 agent 调度器返回到 channel 的消息。
+
+    属性:
+        channel_name: 目标 channel 名称（用于路由）。
+        chat_id: 目标聊天/对话标识符。
+        thread_id: 产生此响应的 DeerFlow 线程 ID。
+        text: 响应文本。
+        artifacts: agent 产生的 artifact 路径列表。
+        is_final: 这是否是响应流中的最后一条消息。
+        thread_ts: 可选的平台线程标识符（用于线程回复）。
+        metadata: 任意额外数据。
+        created_at: Unix 时间戳。
     """
 
     channel_name: str
@@ -112,6 +159,7 @@ class OutboundMessage:
 
 # ---------------------------------------------------------------------------
 # MessageBus
+# | MessageBus
 # ---------------------------------------------------------------------------
 
 OutboundCallback = Callable[[OutboundMessage], Coroutine[Any, Any, None]]
@@ -123,6 +171,10 @@ class MessageBus:
     Channels publish inbound messages; the dispatcher consumes them.
     The dispatcher publishes outbound messages; channels receive them
     via registered callbacks.
+
+    异步发布/订阅中心，连接 channels 和 agent 调度器。
+    Channels 发布入站消息；调度器消费它们。
+    调度器发布出站消息；channels 通过注册的回调接收它们。
     """
 
     def __init__(self) -> None:
@@ -130,9 +182,13 @@ class MessageBus:
         self._outbound_listeners: list[OutboundCallback] = []
 
     # -- inbound -----------------------------------------------------------
+    # | 入站
 
     async def publish_inbound(self, msg: InboundMessage) -> None:
-        """Enqueue an inbound message from a channel."""
+        """Enqueue an inbound message from a channel.
+
+        将来自 channel 的入站消息入队。
+        """
         await self._inbound_queue.put(msg)
         logger.info(
             "[Bus] inbound enqueued: channel=%s, chat_id=%s, type=%s, queue_size=%d",
@@ -143,7 +199,10 @@ class MessageBus:
         )
 
     async def get_inbound(self) -> InboundMessage:
-        """Block until the next inbound message is available."""
+        """Block until the next inbound message is available.
+
+        阻塞直到下一条入站消息可用。
+        """
         return await self._inbound_queue.get()
 
     @property

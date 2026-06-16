@@ -31,25 +31,35 @@ class SuggestionsResponse(BaseModel):
     suggestions: list[str] = Field(default_factory=list, description="Suggested follow-up questions")
 
 
-# Matches a complete <think>...</think> block (case-insensitive, spans newlines).
+# Matches a complete  thinking... response block (case-insensitive, spans newlines).
+# | 匹配完整的  thinking... response 块（不区分大小写，跨行）。
 _THINK_BLOCK_RE = re.compile(r"<think\b[^>]*>.*?</think\s*>", re.IGNORECASE | re.DOTALL)
-# Matches a dangling, unclosed <think> (model truncated at max_tokens mid-thought).
+# Matches a dangling, unclosed  thinking (model truncated at max_tokens mid-thought).
+# | 匹配悬空的、未闭合的  thinking（模型在 max_tokens 处截断，思考中断）。
 _OPEN_THINK_RE = re.compile(r"<think\b[^>]*>", re.IGNORECASE)
 
 
 def _strip_think_blocks(text: str) -> str:
-    """Remove reasoning-model ``<think>...</think>`` blocks from the response.
+    """Remove reasoning-model `` thinking... response`` blocks from the response.
 
     Reasoning models such as MiniMax-M3 inline their chain-of-thought into the
-    message ``content`` wrapped in ``<think>...</think>`` (``reasoning_split``
+    message ``content`` wrapped in `` thinking... response`` (``reasoning_split``
     defaults to false), rather than exposing a separate ``reasoning_content``
     field. The thinking text frequently contains ``[`` / ``]`` characters, which
     corrupted the downstream ``find('[')`` / ``rfind(']')`` JSON extraction and
     produced empty suggestions. We strip the reasoning before parsing so only
     the actual answer remains.
+    | 从响应中移除推理模型的 `` thinking... response`` 块。
+
+    推理模型（如 MiniMax-M3）将其思维链内联到消息 ``content`` 中，
+    包裹在 `` thinking... response`` 内（``reasoning_split`` 默认为 false），
+    而不是暴露单独的 ``reasoning_content`` 字段。思维文本经常包含 ``[`` / ``]`` 字符，
+    这会破坏下游的 ``find('[')`` / ``rfind(']')`` JSON 提取并产生空建议。
+    我们在解析前剥离推理内容，只保留实际答案。
     """
     text = _THINK_BLOCK_RE.sub("", text)
-    # Drop any unclosed <think> (and everything after it) left by truncation.
+    # Drop any unclosed  thinking (and everything after it) left by truncation.
+    # | 丢弃由截断留下的任何未闭合的  thinking（及其后的所有内容）。
     open_match = _OPEN_THINK_RE.search(text)
     if open_match:
         text = text[: open_match.start()]

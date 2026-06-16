@@ -11,6 +11,7 @@ export async function detectLocaleServer(): Promise<Locale> {
       locale = decodeURIComponent(locale);
     } catch {
       // Keep raw cookie value when decoding fails.
+      // 解码失败时保留原始 cookie 值。
     }
   }
 

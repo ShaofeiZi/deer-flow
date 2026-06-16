@@ -41,6 +41,7 @@ export function normalizeLocale(locale: string | null | undefined): Locale {
 }
 
 // Helper function to detect browser locale
+// 检测浏览器 locale 的辅助函数
 export function detectLocale(): Locale {
   if (typeof window === "undefined") {
     return DEFAULT_LOCALE;
