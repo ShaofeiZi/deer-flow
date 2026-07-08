@@ -35,7 +35,7 @@ flowchart TD
 |-|-|
 | 收益 | 平台差异被限制在 adapter 内，运行层只处理统一消息和附件结构。 |
 | 代价 | 每个平台的鉴权、长连接、thread/topic、文件上传能力不同，adapter 需要分别处理。 |
-| 重点代码 | `backend/app/channels/telegram.py`、`dingtalk.py`、`discord.py`、`base.py`、`message_bus.py`、`manager.py`。 |
+| 重点代码 | `backend/app/channels/telegram.py`、`backend/app/channels/dingtalk.py`、`backend/app/channels/discord.py`、`backend/app/channels/base.py`、`backend/app/channels/message_bus.py`、`backend/app/channels/manager.py`。 |
 | 阅读路径 | 先看 channel 如何产生 InboundMessage，再看 ChannelManager 如何启动 run，最后看 OutboundMessage 如何回到平台。 |
 
 ```mermaid

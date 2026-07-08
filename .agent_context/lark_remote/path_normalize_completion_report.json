@@ -1,0 +1,284 @@
+{
+  "goal": "Normalize source paths in local and Feishu DeerFlow docs to repo-relative paths from deer-flow root",
+  "changed_docs_count": 45,
+  "feishu_updated_count": 45,
+  "feishu_verify_checked": 45,
+  "feishu_verify_problems": 0,
+  "workflow_script": "deerflow-doc-path-normalize-audit.workflow.js",
+  "workflow_journal": ".workflow-journal/deerflow-doc-path-normalize-audit.workflow.jsonl",
+  "key_example": "02 Gateway map now uses backend/app/gateway/app.py",
+  "changed_docs": [
+    "02｜Gateway 与 LangGraph 运行时详解.md",
+    "05｜Skills_MCP 与 Memory 详解.md",
+    "07｜Frontend Settings_Models_Artifacts 数据流详解.md",
+    "109｜Tracing_TokenUsage_ACP 配置文件详解.md",
+    "11｜Gateway Routers API 模块逐项详解.md",
+    "14｜Frontend Core Hooks 与 UI 模块逐项详解.md",
+    "166｜claude-to-deerflow Public Skill 详解.md",
+    "180｜Backend Blocking IO Tests 详解.md",
+    "186｜Label Sync _ Triage _ Container Workflow 详解.md",
+    "199｜docs_superpowers Specs 与 Plans 详解.md",
+    "202｜test_auth _ auth_middleware _ csrf 测试详解.md",
+    "203｜Run API _ Runs Endpoint 测试详解.md",
+    "204｜Threads _ Uploads _ Artifacts Router 测试详解.md",
+    "208｜README _ Install _ Contributing 深入详解.md",
+    "213｜backend_docs_FILE_UPLOAD.md 详解.md",
+    "219｜Backend RFC Docs 详解.md",
+    "21｜Run 与 Thread Router 文件级详解.md",
+    "22｜管理类 Router 文件级详解_Models_MCP_Skills_Memory_Agents.md",
+    "238｜Frontend Blog Posts 与 Tags 文档详解.md",
+    "23｜文件类 Router 详解_Uploads_Artifacts_Feedback_Suggestions.md",
+    "280｜ChannelService 与 ChannelManager 单文件详解.md",
+    "281｜Gateway Auth 子模块详解.md",
+    "282｜Gateway LocalAuthProvider _ SQLiteUserRepository 详解.md",
+    "285｜Frontend Core Todos _ Tasks _ Tools 详解.md",
+    "286｜auth_jwt_password_errors 单文件详解.md",
+    "287｜auth_config_models_providers 单文件详解.md",
+    "290｜Telegram_DingTalk_Discord Channel 单文件详解.md",
+    "307｜Workspace Account_Appearance_Notification_About 页面细节.md",
+    "308｜Workspace Tool_Skill_Memory Settings 页面细节.md",
+    "322｜Backend Model Provider Patch Tests 深拆.md",
+    "326｜Wizard Steps LLM_Search_Execution 深拆.md",
+    "327｜Wizard UI _ Writer _ Providers 深拆.md",
+    "346｜I18n Locale Detection 与 Provider 详解.md",
+    "347｜I18n Locales 与 Translations 详解.md",
+    "43｜Frontend Message Utils 与 Artifacts Hooks 详解.md",
+    "47｜Frontend Settings 页面文件详解.md",
+    "49｜Gateway MCP_Skills_Memory Router 深入详解.md",
+    "59｜Frontend Artifact Components 单文件详解.md",
+    "63｜feedback_suggestions_channels Router 详解.md",
+    "65｜Frontend Core Settings_Models_MCP_Skills_Memory API 层详解.md",
+    "66｜Frontend Uploads_Notification_Tasks Core 详解.md",
+    "67｜Frontend Agents_Blog_I18n_Static Mode 模块详解.md",
+    "68｜Channels Service 与 ChannelManager 详解.md",
+    "72｜Frontend Landing_Docs_Blog 页面详解.md",
+    "73｜Frontend Auth_Login_Setup 页面详解.md"
+  ],
+  "feishu_docs": [
+    {
+      "name": "02｜Gateway 与 LangGraph 运行时详解.md",
+      "token": "Dcvkdjf3KopJmsxZa9QmEQPWyic",
+      "url": "https://bytedance.my.larkoffice.com/docx/Dcvkdjf3KopJmsxZa9QmEQPWyic"
+    },
+    {
+      "name": "05｜Skills_MCP 与 Memory 详解.md",
+      "token": "U50Ldy2sxoHbOAxo58vmNMUiyef",
+      "url": "https://bytedance.my.larkoffice.com/docx/U50Ldy2sxoHbOAxo58vmNMUiyef"
+    },
+    {
+      "name": "07｜Frontend Settings_Models_Artifacts 数据流详解.md",
+      "token": "JFD3dRkmvoRYgHxlJD1mbEUUyeb",
+      "url": "https://bytedance.my.larkoffice.com/docx/JFD3dRkmvoRYgHxlJD1mbEUUyeb"
+    },
+    {
+      "name": "109｜Tracing_TokenUsage_ACP 配置文件详解.md",
+      "token": "Nzmidco1BoEK70xxO9xm9xUUy2g",
+      "url": "https://bytedance.my.larkoffice.com/docx/Nzmidco1BoEK70xxO9xm9xUUy2g"
+    },
+    {
+      "name": "11｜Gateway Routers API 模块逐项详解.md",
+      "token": "ObtfdmyjXo7OYpxM0i1mnRVZyAh",
+      "url": "https://bytedance.my.larkoffice.com/docx/ObtfdmyjXo7OYpxM0i1mnRVZyAh"
+    },
+    {
+      "name": "14｜Frontend Core Hooks 与 UI 模块逐项详解.md",
+      "token": "W0cHd2o13oeVMSx2ucomr8N7yqc",
+      "url": "https://bytedance.my.larkoffice.com/docx/W0cHd2o13oeVMSx2ucomr8N7yqc"
+    },
+    {
+      "name": "166｜claude-to-deerflow Public Skill 详解.md",
+      "token": "TjB5dinPno2umfxVCMxmyN3ByKY",
+      "url": "https://bytedance.my.larkoffice.com/docx/TjB5dinPno2umfxVCMxmyN3ByKY"
+    },
+    {
+      "name": "180｜Backend Blocking IO Tests 详解.md",
+      "token": "Flz4daeKQoknccxEUlvmG9Rzy3b",
+      "url": "https://bytedance.my.larkoffice.com/docx/Flz4daeKQoknccxEUlvmG9Rzy3b"
+    },
+    {
+      "name": "186｜Label Sync _ Triage _ Container Workflow 详解.md",
+      "token": "GWTCdlNfLon05KxCVMXm0XCPyHh",
+      "url": "https://bytedance.my.larkoffice.com/docx/GWTCdlNfLon05KxCVMXm0XCPyHh"
+    },
+    {
+      "name": "199｜docs_superpowers Specs 与 Plans 详解.md",
+      "token": "OjF7dbZv9oB1mAxCzmim9i50yxJ",
+      "url": "https://bytedance.my.larkoffice.com/docx/OjF7dbZv9oB1mAxCzmim9i50yxJ"
+    },
+    {
+      "name": "202｜test_auth _ auth_middleware _ csrf 测试详解.md",
+      "token": "Ct03dPYhEoIgJxxLvG5mCCJoyKd",
+      "url": "https://bytedance.my.larkoffice.com/docx/Ct03dPYhEoIgJxxLvG5mCCJoyKd"
+    },
+    {
+      "name": "203｜Run API _ Runs Endpoint 测试详解.md",
+      "token": "KAD8dRD4aoKkUix8wNVmF4K9yoe",
+      "url": "https://bytedance.my.larkoffice.com/docx/KAD8dRD4aoKkUix8wNVmF4K9yoe"
+    },
+    {
+      "name": "204｜Threads _ Uploads _ Artifacts Router 测试详解.md",
+      "token": "D9lxdFWHloLMWlxGT6KmcBbPykd",
+      "url": "https://bytedance.my.larkoffice.com/docx/D9lxdFWHloLMWlxGT6KmcBbPykd"
+    },
+    {
+      "name": "208｜README _ Install _ Contributing 深入详解.md",
+      "token": "HD7CdYzTXoFkkwxM0BwmartoyLd",
+      "url": "https://bytedance.my.larkoffice.com/docx/HD7CdYzTXoFkkwxM0BwmartoyLd"
+    },
+    {
+      "name": "213｜backend_docs_FILE_UPLOAD.md 详解.md",
+      "token": "O2CqdHMwyofyrRxUSRHmMRZZynb",
+      "url": "https://bytedance.my.larkoffice.com/docx/O2CqdHMwyofyrRxUSRHmMRZZynb"
+    },
+    {
+      "name": "219｜Backend RFC Docs 详解.md",
+      "token": "CremdpVhaokfGaxAEj7mzm4ayPN",
+      "url": "https://bytedance.my.larkoffice.com/docx/CremdpVhaokfGaxAEj7mzm4ayPN"
+    },
+    {
+      "name": "21｜Run 与 Thread Router 文件级详解.md",
+      "token": "XBu1d292ioMiS1xPPgGmIfayybg",
+      "url": "https://bytedance.my.larkoffice.com/docx/XBu1d292ioMiS1xPPgGmIfayybg"
+    },
+    {
+      "name": "22｜管理类 Router 文件级详解_Models_MCP_Skills_Memory_Agents.md",
+      "token": "XgSYdKk4goj6hXxiChvmPQX4yPc",
+      "url": "https://bytedance.my.larkoffice.com/docx/XgSYdKk4goj6hXxiChvmPQX4yPc"
+    },
+    {
+      "name": "238｜Frontend Blog Posts 与 Tags 文档详解.md",
+      "token": "PjCsdy7BbokflSxHhpFmYr52y0d",
+      "url": "https://bytedance.my.larkoffice.com/docx/PjCsdy7BbokflSxHhpFmYr52y0d"
+    },
+    {
+      "name": "23｜文件类 Router 详解_Uploads_Artifacts_Feedback_Suggestions.md",
+      "token": "Ms9CdobALoYwXxxIolSmjnYhydh",
+      "url": "https://bytedance.my.larkoffice.com/docx/Ms9CdobALoYwXxxIolSmjnYhydh"
+    },
+    {
+      "name": "280｜ChannelService 与 ChannelManager 单文件详解.md",
+      "token": "SKKodkGNWoEHNfx9FdrmWS7byPb",
+      "url": "https://bytedance.my.larkoffice.com/docx/SKKodkGNWoEHNfx9FdrmWS7byPb"
+    },
+    {
+      "name": "281｜Gateway Auth 子模块详解.md",
+      "token": "HMYDdvXZuoeJxNx8f64mClbVyUh",
+      "url": "https://bytedance.my.larkoffice.com/docx/HMYDdvXZuoeJxNx8f64mClbVyUh"
+    },
+    {
+      "name": "282｜Gateway LocalAuthProvider _ SQLiteUserRepository 详解.md",
+      "token": "UBGDdvmMFod8hex3BJpm467syFd",
+      "url": "https://bytedance.my.larkoffice.com/docx/UBGDdvmMFod8hex3BJpm467syFd"
+    },
+    {
+      "name": "285｜Frontend Core Todos _ Tasks _ Tools 详解.md",
+      "token": "KY7IdLhSioPH5WxOoANmDGYtysh",
+      "url": "https://bytedance.my.larkoffice.com/docx/KY7IdLhSioPH5WxOoANmDGYtysh"
+    },
+    {
+      "name": "286｜auth_jwt_password_errors 单文件详解.md",
+      "token": "INBIdBtxeo2bhux5fpCmv4GTy3d",
+      "url": "https://bytedance.my.larkoffice.com/docx/INBIdBtxeo2bhux5fpCmv4GTy3d"
+    },
+    {
+      "name": "287｜auth_config_models_providers 单文件详解.md",
+      "token": "FrXYd3OjaoYnKpx1Z3NmqXFEyZd",
+      "url": "https://bytedance.my.larkoffice.com/docx/FrXYd3OjaoYnKpx1Z3NmqXFEyZd"
+    },
+    {
+      "name": "290｜Telegram_DingTalk_Discord Channel 单文件详解.md",
+      "token": "OlyudMCLXorg5kxYOumm804vyzf",
+      "url": "https://bytedance.my.larkoffice.com/docx/OlyudMCLXorg5kxYOumm804vyzf"
+    },
+    {
+      "name": "307｜Workspace Account_Appearance_Notification_About 页面细节.md",
+      "token": "XjARdfJHmoq8bvxDXejm3j6Dyqf",
+      "url": "https://bytedance.my.larkoffice.com/docx/XjARdfJHmoq8bvxDXejm3j6Dyqf"
+    },
+    {
+      "name": "308｜Workspace Tool_Skill_Memory Settings 页面细节.md",
+      "token": "A1SjdgFxKoBrcMxPbMLmMQ0iyGf",
+      "url": "https://bytedance.my.larkoffice.com/docx/A1SjdgFxKoBrcMxPbMLmMQ0iyGf"
+    },
+    {
+      "name": "322｜Backend Model Provider Patch Tests 深拆.md",
+      "token": "RxLad0zzOoRGSRxfeklmtAgayUd",
+      "url": "https://bytedance.my.larkoffice.com/docx/RxLad0zzOoRGSRxfeklmtAgayUd"
+    },
+    {
+      "name": "326｜Wizard Steps LLM_Search_Execution 深拆.md",
+      "token": "NjQad5V2noof1qxry3Dm5NxPyud",
+      "url": "https://bytedance.my.larkoffice.com/docx/NjQad5V2noof1qxry3Dm5NxPyud"
+    },
+    {
+      "name": "327｜Wizard UI _ Writer _ Providers 深拆.md",
+      "token": "DFAjdJAJxo4cTgxzMg1mKBYayrh",
+      "url": "https://bytedance.my.larkoffice.com/docx/DFAjdJAJxo4cTgxzMg1mKBYayrh"
+    },
+    {
+      "name": "346｜I18n Locale Detection 与 Provider 详解.md",
+      "token": "A94QdQWSnolx8wxq6e7mVmAaysh",
+      "url": "https://bytedance.my.larkoffice.com/docx/A94QdQWSnolx8wxq6e7mVmAaysh"
+    },
+    {
+      "name": "347｜I18n Locales 与 Translations 详解.md",
+      "token": "MyjodrFq4oBsG3xJFHqmWAscyRh",
+      "url": "https://bytedance.my.larkoffice.com/docx/MyjodrFq4oBsG3xJFHqmWAscyRh"
+    },
+    {
+      "name": "43｜Frontend Message Utils 与 Artifacts Hooks 详解.md",
+      "token": "LKNFdYQDFob1Pnxz0nTmHIRDy5b",
+      "url": "https://bytedance.my.larkoffice.com/docx/LKNFdYQDFob1Pnxz0nTmHIRDy5b"
+    },
+    {
+      "name": "47｜Frontend Settings 页面文件详解.md",
+      "token": "YBAWdQHf5o5XE0xFWanm7TZJyua",
+      "url": "https://bytedance.my.larkoffice.com/docx/YBAWdQHf5o5XE0xFWanm7TZJyua"
+    },
+    {
+      "name": "49｜Gateway MCP_Skills_Memory Router 深入详解.md",
+      "token": "GvzAdygTVoxdSkx5ccJmq0LLyei",
+      "url": "https://bytedance.my.larkoffice.com/docx/GvzAdygTVoxdSkx5ccJmq0LLyei"
+    },
+    {
+      "name": "59｜Frontend Artifact Components 单文件详解.md",
+      "token": "NcqBdQyhgomSFNxnWvYmL4KFyrv",
+      "url": "https://bytedance.my.larkoffice.com/docx/NcqBdQyhgomSFNxnWvYmL4KFyrv"
+    },
+    {
+      "name": "63｜feedback_suggestions_channels Router 详解.md",
+      "token": "EemWdDNmiovWWlxz6Y3mqSt7y6e",
+      "url": "https://bytedance.my.larkoffice.com/docx/EemWdDNmiovWWlxz6Y3mqSt7y6e"
+    },
+    {
+      "name": "65｜Frontend Core Settings_Models_MCP_Skills_Memory API 层详解.md",
+      "token": "Xfm2d6pOMotWZixrSDcm22bsyic",
+      "url": "https://bytedance.my.larkoffice.com/docx/Xfm2d6pOMotWZixrSDcm22bsyic"
+    },
+    {
+      "name": "66｜Frontend Uploads_Notification_Tasks Core 详解.md",
+      "token": "IdEZdZcDeoADdIxMfjWmETbEyLb",
+      "url": "https://bytedance.my.larkoffice.com/docx/IdEZdZcDeoADdIxMfjWmETbEyLb"
+    },
+    {
+      "name": "67｜Frontend Agents_Blog_I18n_Static Mode 模块详解.md",
+      "token": "GZsrdYiLLoT05sxERhNmH1v1ycb",
+      "url": "https://bytedance.my.larkoffice.com/docx/GZsrdYiLLoT05sxERhNmH1v1ycb"
+    },
+    {
+      "name": "68｜Channels Service 与 ChannelManager 详解.md",
+      "token": "EH0IdtUGuoPKQfxql2UmiuiGylu",
+      "url": "https://bytedance.my.larkoffice.com/docx/EH0IdtUGuoPKQfxql2UmiuiGylu"
+    },
+    {
+      "name": "72｜Frontend Landing_Docs_Blog 页面详解.md",
+      "token": "Wc80dFkogouhcuxbpIOmzcBPyIb",
+      "url": "https://bytedance.my.larkoffice.com/docx/Wc80dFkogouhcuxbpIOmzcBPyIb"
+    },
+    {
+      "name": "73｜Frontend Auth_Login_Setup 页面详解.md",
+      "token": "P0ybdryeloBAZsxsrWWm1iOQyjF",
+      "url": "https://bytedance.my.larkoffice.com/docx/P0ybdryeloBAZsxsrWWm1iOQyjF"
+    }
+  ]
+}

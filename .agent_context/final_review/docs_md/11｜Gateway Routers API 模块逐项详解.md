@@ -8,16 +8,16 @@
 
 | Router | 主要职责 | 典型接口 |
 |-|-|-|
-| `thread_runs.py` | thread scoped run 创建、stream、wait、cancel、messages、events、token usage | `/api/threads/{id}/runs/stream` |
-| `threads.py` | thread 创建、搜索、state、history、删除 | `/api/threads/{id}/state` |
-| `runs.py` | 无预存 thread 的 stateless stream/wait | `/api/runs/stream` |
-| `models.py` | 暴露已配置模型和 token usage 开关 | `/api/models` |
-| `mcp.py` | 读取/更新 MCP server 配置，mask secrets | `/api/mcp/config` |
-| `skills.py` | 列出、启停、安装、编辑 custom skills | `/api/skills` |
-| `memory.py` | 读取、清空、导入导出 memory 和 facts CRUD | `/api/memory` |
-| `uploads.py` | 上传、列出、删除文件，返回 virtual path | `/api/threads/{id}/uploads` |
-| `artifacts.py` | 安全地服务 sandbox 产物和 .skill 内部文件 | `/api/threads/{id}/artifacts/{path}` |
-| `agents.py` | custom agents CRUD 和用户 profile | `/api/agents` |
+| `backend/app/gateway/routers/thread_runs.py` | thread scoped run 创建、stream、wait、cancel、messages、events、token usage | `/api/threads/{id}/runs/stream` |
+| `backend/app/gateway/routers/threads.py` | thread 创建、搜索、state、history、删除 | `/api/threads/{id}/state` |
+| `backend/app/gateway/routers/runs.py` | 无预存 thread 的 stateless stream/wait | `/api/runs/stream` |
+| `backend/app/gateway/routers/models.py` | 暴露已配置模型和 token usage 开关 | `/api/models` |
+| `backend/app/gateway/routers/mcp.py` | 读取/更新 MCP server 配置，mask secrets | `/api/mcp/config` |
+| `backend/app/gateway/routers/skills.py` | 列出、启停、安装、编辑 custom skills | `/api/skills` |
+| `backend/app/gateway/routers/memory.py` | 读取、清空、导入导出 memory 和 facts CRUD | `/api/memory` |
+| `backend/app/gateway/routers/uploads.py` | 上传、列出、删除文件，返回 virtual path | `/api/threads/{id}/uploads` |
+| `backend/app/gateway/routers/artifacts.py` | 安全地服务 sandbox 产物和 .skill 内部文件 | `/api/threads/{id}/artifacts/{path}` |
+| `backend/app/gateway/routers/agents.py` | custom agents CRUD 和用户 profile | `/api/agents` |
 
 # 2. Router 到服务层的关系
 
@@ -38,12 +38,12 @@ flowchart TD
 
 | 前端模块 | 调用 API | 后端 router |
 |-|-|-|
-| `core/models/api.ts` | `GET /api/models` | `models.py` |
-| `core/mcp/api.ts` | `GET/PUT /api/mcp/config` | `mcp.py` |
-| `core/skills/api.ts` | `GET /api/skills`、install、enable | `skills.py` |
-| `core/memory/api.ts` | memory/facts/import/export | `memory.py` |
-| `core/uploads/api.ts` | upload/list/delete files | `uploads.py` |
-| `core/artifacts/hooks.ts` | artifact content | `artifacts.py` |
+| `frontend/src/core/models/api.ts` | `GET /api/models` | `backend/app/gateway/routers/models.py` |
+| `frontend/src/core/mcp/api.ts` | `GET/PUT /api/mcp/config` | `backend/app/gateway/routers/mcp.py` |
+| `frontend/src/core/skills/api.ts` | `GET /api/skills`、install、enable | `backend/app/gateway/routers/skills.py` |
+| `frontend/src/core/memory/api.ts` | memory/facts/import/export | `backend/app/gateway/routers/memory.py` |
+| `frontend/src/core/uploads/api.ts` | upload/list/delete files | `backend/app/gateway/routers/uploads.py` |
+| `frontend/src/core/artifacts/hooks.ts` | artifact content | `backend/app/gateway/routers/artifacts.py` |
 
 # 4. 修改原则
 

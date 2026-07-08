@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "document": {
+      "content": "<title>109｜Tracing、TokenUsage、ACP 配置文件详解</title>\n\n<callout emoji=\"✅\">\n**本章目标：**单独讲解该模块职责、输入输出和运行逻辑。\n</callout>\n\n| 模块点 | 说明 |\n|-|-|\n| tracing_config.py | 从环境变量读取 LangSmith/Langfuse 开关、key、project/endpoint/host，并缓存为 tracing singleton。 |\n| token_usage_config.py | token usage display/tracking 开关。 |\n| `backend/packages/harness/deerflow/config/acp_config.py` 配置段 | 从 `config.yaml` 的 `acp_agents` 加载外部 ACP agent 配置，非空时注入 `invoke_acp_agent` 工具。 |\n| `backend/packages/harness/deerflow/config/agents_api_config.py` 配置段 | 从 `config.yaml` 的 `agents_api.enabled` 控制 `/api/agents` 管理路由是否允许访问。 |\n| skill_evolution_config.py | 任务结束后 skill 自演化提示开关。 |\n\n---\n\n# 补充：设计取舍、重点代码与阅读路径\n\n<callout emoji=\"💡\">\n**设计目的：**前端按 route、core 数据层、业务组件、UI primitive 分层，是为了降低组件耦合。\n</callout>\n\n| 维度 | 说明 |\n|-|-|\n| 收益 | 收益是展示层和数据请求分离，组件更容易复用。 |\n| 代价 | 代价是一次用户交互常跨页面、hook、缓存、上下文和组件。 |\n| 重点代码 | 重点代码在 `frontend/src/app`、`frontend/src/core`、`frontend/src/components` 对应模块。 |\n| 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |\n\n```mermaid\nflowchart TD\n  A[设计目的] --> B[解决的问题]\n  B --> C[收益]\n  B --> D[代价]\n  C --> E[重点代码]\n  D --> E\n  E --> F[阅读路径]\n```",
+      "document_id": "Nzmidco1BoEK70xxO9xm9xUUy2g",
+      "revision_id": 22
+    }
+  }
+}

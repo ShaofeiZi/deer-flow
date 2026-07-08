@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "document": {
+      "content": "<title>22｜管理类 Router 文件级详解：Models、MCP、Skills、Memory、Agents</title>\n\n<callout emoji=\"✅\">\n**本章目标：**聚焦 Settings 和管理页面背后的后端 router。\n</callout>\n\n# 1. 管理 API 总览\n\n| Router | 接口 | 前端调用方 | 注意事项 |\n|-|-|-|-|\n| `backend/app/gateway/routers/models.py` | `GET /api/models` | InputBox ModelSelector | 不能返回 api_key。 |\n| `backend/app/gateway/routers/mcp.py` | `GET/PUT /api/mcp/config` | Tools Settings | stdio command allowlist，secret mask。 |\n| `backend/app/gateway/routers/skills.py` | `GET/PUT /api/skills`、custom CRUD | Skills Settings、Artifact .skill install | 写入 custom skill 前做安全扫描。 |\n| `backend/app/gateway/routers/memory.py` | memory/facts/import/export | Memory Settings | per-user/per-agent memory。 |\n| `backend/app/gateway/routers/agents.py` | custom agents CRUD | Agents gallery/new agent | 校验 agent name，读写 SOUL/config。 |\n\n# 2. Settings 到 Router 数据流\n\n```mermaid\nflowchart TD\n  Settings[SettingsDialog] --> Models[ModelSelector]\n  Settings --> Tools[ToolSettingsPage]\n  Settings --> Skills[SkillSettingsPage]\n  Settings --> Memory[MemorySettingsPage]\n  Models --> ModelsAPI[models.py]\n  Tools --> MCPAPI[mcp.py]\n  Skills --> SkillsAPI[skills.py]\n  Memory --> MemoryAPI[memory.py]\n  AgentsUI[Agent Gallery] --> AgentsAPI[agents.py]\n  MCPAPI --> Extensions[extensions_config.json]\n  SkillsAPI --> SkillStorage[skills storage]\n  MemoryAPI --> MemoryStorage[memory.json]\n  AgentsAPI --> AgentFiles[agents config and SOUL]\n```\n\n# 3. 修改建议\n\n- 新增 Settings 配置项：需要前端 core API、hook、页面，以及后端 router/schema。\n- MCP 配置改动后要 reset tools cache/session pool。\n- Skills custom 写入要保留 history，支持 rollback。\n\n---\n\n# 补充：设计取舍、重点代码与阅读路径\n\n<callout emoji=\"💡\">\n**设计目的：**该文档用于把模块职责、运行逻辑、关键代码和阅读路径固定下来，帮助读者从源码验证行为。\n</callout>\n\n| 维度 | 说明 |\n|-|-|\n| 收益 | 读者可以按文档快速定位模块入口和上下游关系。 |\n| 代价 | 文档需要随源码变更持续校准，避免模板化描述掩盖真实行为。 |\n| 重点代码 | 标题对应的源码、测试或文档入口。 |\n| 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |\n\n```mermaid\nflowchart TD\n  A[设计目的] --> B[模块职责]\n  B --> C[收益]\n  B --> D[代价]\n  C --> E[重点代码]\n  D --> E\n  E --> F[阅读路径]\n```",
+      "document_id": "XgSYdKk4goj6hXxiChvmPQX4yPc",
+      "revision_id": 21
+    }
+  }
+}

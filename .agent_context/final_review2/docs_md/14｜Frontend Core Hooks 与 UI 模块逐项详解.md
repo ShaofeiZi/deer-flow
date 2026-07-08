@@ -8,12 +8,12 @@
 
 | Core 模块 | 职责 | 关键函数 |
 |-|-|-|
-| `core/threads/hooks.ts` | LangGraph stream、thread list、history、runs、token usage、delete/rename | `useThreadStream`、`useInfiniteThreads` |
-| `core/messages/utils.ts` | 消息分组、reasoning 提取、隐藏控制消息、附件解析 | `getMessageGroups`、`extractContentFromMessage` |
-| `core/artifacts/*` | artifact URL、内容加载、预览类型 | `useArtifactContent` |
-| `core/uploads/*` | 上传/列出/删除文件 | `uploadFiles` |
-| `core/settings/*` | localStorage 与 thread model override | `useThreadSettings` |
-| `core/models/mcp/skills/memory` | Settings/API 数据层 | load/update hooks |
+| `frontend/src/core/threads/hooks.ts` | LangGraph stream、thread list、history、runs、token usage、delete/rename | `useThreadStream`、`useInfiniteThreads` |
+| `frontend/src/core/messages/utils.ts` | 消息分组、reasoning 提取、隐藏控制消息、附件解析 | `getMessageGroups`、`extractContentFromMessage` |
+| `frontend/src/core/artifacts/*` | artifact URL、内容加载、预览类型 | `useArtifactContent` |
+| `frontend/src/core/uploads/*` | 上传/列出/删除文件 | `uploadFiles` |
+| `frontend/src/core/settings/*` | localStorage 与 thread model override | `useThreadSettings` |
+| `frontend/src/core/{models,mcp,skills,memory}` | Settings/API 数据层 | load/update hooks |
 
 # 2. UI 模块地图
 

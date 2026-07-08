@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "document": {
+      "content": "<title>16｜Subagents、Task Tool 与并发执行详解</title>\n\n<callout emoji=\"✅\">\n**本章目标：**讲清 ultra mode 下 task tool 如何创建子代理、如何并发、如何回传状态。\n</callout>\n\n# 1. Subagent 组件\n\n| 模块 | 职责 |\n|-|-|\n| `subagents/registry.py` | 注册 built-in 和 custom subagent 配置。 |\n| `subagents/executor.py` | 后台执行、线程池、状态存储、超时取消、token 采集。 |\n| `tools/builtins/task_tool.py` | 暴露给 lead_agent 的 task 工具。 |\n| `subagents/status_contract.py` | 把子代理结果转成 UI 可识别 additional_kwargs。 |\n| `SubagentLimitMiddleware` | 限制同轮并发 task 调用数量。 |\n\n# 2. task tool 调用流程\n\n```mermaid\nsequenceDiagram\n  participant Lead as lead_agent\n  participant Tool as task tool\n  participant Exec as SubagentExecutor\n  participant Pool as ThreadPool/EventLoop\n  participant Sub as subagent graph\n  participant UI as Frontend SubtaskCard\n  Lead->>Tool: task(subagent_type, prompt)\n  Tool->>Exec: submit background task\n  Exec->>Pool: schedule execution\n  Pool->>Sub: create_agent with filtered tools\n  Sub-->>Exec: progress and final result\n  Exec-->>Tool: SubagentResult\n  Tool-->>Lead: ToolMessage with status contract\n  Lead-->>UI: streamed messages/custom events\n```\n\n# 3. 状态机\n\n```mermaid\nstateDiagram-v2\n  [*] --> pending\n  pending --> running\n  running --> completed\n  running --> failed\n  running --> timed_out\n  running --> cancelled\n  completed --> [*]\n  failed --> [*]\n  timed_out --> [*]\n  cancelled --> [*]\n```\n\n# 4. 调试建议\n\n- 子任务不出现：检查 `subagent_enabled` 是否为 true，通常 ultra mode 才开启。\n- 并发被截断：检查 `max_concurrent_subagents` 和 SubagentLimitMiddleware。\n- 结果 UI 异常：检查 status_contract 和前端 `parseSubtaskResult`。\n\n---\n\n# 补充：设计取舍、重点代码与阅读路径\n\n<callout emoji=\"💡\">\n**设计目的：**Subagent 通过 task tool 异步执行，是为了让复杂任务并行分解。\n</callout>\n\n| 维度 | 说明 |\n|-|-|\n| 收益 | 收益是吞吐和专业化更好；代价是状态、超时、token 归因复杂。 |\n| 代价 | 见收益说明中的代价部分；此章节采用收益与代价合并描述。 |\n| 重点代码 | 重点代码：`backend/packages/harness/deerflow/tools/builtins/task_tool.py`、`backend/packages/harness/deerflow/subagents/executor.py`。 |\n| 阅读路径 | 阅读路径：task tool 是入口，executor 是调度器。 |\n\n```mermaid\nflowchart TD\n  A[设计目的] --> B[模块职责]\n  B --> C[收益]\n  B --> D[代价]\n  C --> E[重点代码]\n  D --> E\n  E --> F[阅读路径]\n```",
+      "document_id": "T2nWdcV6OoO2xBxBjB2mBIFOyJd",
+      "revision_id": 14
+    }
+  }
+}

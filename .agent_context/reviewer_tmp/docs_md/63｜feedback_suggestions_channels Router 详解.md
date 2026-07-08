@@ -8,9 +8,9 @@
 
 | 对象 | 说明 |
 |-|-|
-| `feedback.py` | run feedback CRUD、upsert、stats。 |
-| `suggestions.py` | 根据最近对话生成 follow-up suggestions。 |
-| `channels.py` | 查询/重启 IM channel service。 |
+| `backend/app/gateway/routers/feedback.py` | run feedback CRUD、upsert、stats。 |
+| `backend/app/gateway/routers/suggestions.py` | 根据最近对话生成 follow-up suggestions。 |
+| `backend/app/gateway/routers/channels.py` | 查询/重启 IM channel service。 |
 | `feedback stats` | 按 run 汇总反馈。 |
 | `think block strip` | suggestions 解析前剥离 reasoning <think>。 |
 
@@ -18,13 +18,13 @@
 
 ```mermaid
 flowchart TD
-  FeedbackUI[Feedback UI] --> FeedbackRouter[feedback.py]
+  FeedbackUI[Feedback UI] --> FeedbackRouter[backend/app/gateway/routers/feedback.py]
   FeedbackRouter --> Repo[FeedbackRepository]
-  ChatUI[Chat UI] --> Suggest[suggestions.py]
+  ChatUI[Chat UI] --> Suggest[backend/app/gateway/routers/suggestions.py]
   Suggest --> Strip[strip think blocks]
   Strip --> Model[LLM generate JSON list]
   Model --> Parse[parse suggestions]
-  Admin[Admin UI] --> Channels[channels.py]
+  Admin[Admin UI] --> Channels[backend/app/gateway/routers/channels.py]
   Channels --> Service[channel service status restart]
 ```
 

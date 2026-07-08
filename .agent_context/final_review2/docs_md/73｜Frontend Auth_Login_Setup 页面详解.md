@@ -11,7 +11,7 @@
 | `app/(auth)/layout.tsx` | 根据 getServerSideUser 判断跳转或渲染。 |
 | `login/page.tsx` | 登录/注册表单，调用 auth API。 |
 | `setup/page.tsx` | 首次初始化 admin 或强制改密码。 |
-| `core/auth/*` | AuthProvider、server user、proxy policy、types。 |
+| `frontend/src/core/auth/*` | AuthProvider、server user、proxy policy、types。 |
 
 # 2. 运行逻辑图
 

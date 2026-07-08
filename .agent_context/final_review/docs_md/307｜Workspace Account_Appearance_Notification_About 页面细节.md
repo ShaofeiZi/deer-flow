@@ -36,7 +36,7 @@ flowchart TD
 |-|-|
 | 收益 | 每个设置页面只负责自己的表单状态和副作用，SettingsDialog 只负责 section 切换。 |
 | 代价 | 账号、主题、通知、语言分别依赖 auth API、next-themes、browser permission、i18n cookie/context。 |
-| 重点代码 | `account-settings-page.tsx`、`appearance-settings-page.tsx`、`notification-settings-page.tsx`、`about-settings-page.tsx`。 |
+| 重点代码 | `frontend/src/components/workspace/settings/account-settings-page.tsx`、`frontend/src/components/workspace/settings/appearance-settings-page.tsx`、`frontend/src/components/workspace/settings/notification-settings-page.tsx`、`frontend/src/components/workspace/settings/about-settings-page.tsx`。 |
 | 阅读路径 | 先看 SettingsDialog 如何选择 section，再分别追每个页面的状态、提交和错误提示。 |
 
 ```mermaid
@@ -53,7 +53,7 @@ flowchart TD
 
 | 页面 | 状态/动作 | 源码入口 |
 |-|-|-|
-| Account | `currentPassword/newPassword/confirmPassword` -> CSRF POST `/api/v1/auth/change-password` -> success/error message -> optional logout | `account-settings-page.tsx` |
-| Appearance | theme card -> `next-themes.setTheme()`；language select -> `changeLocale()` -> cookie/context update | `appearance-settings-page.tsx`、`core/i18n/hooks.ts` |
-| Notification | browser support check -> permission `default/denied/granted` -> local setting `notification.enabled` -> test notification | `notification-settings-page.tsx`、`core/settings/local.ts` |
-| About | static markdown -> `ClipboardSafeStreamdown` | `about-settings-page.tsx`、`about-content.ts` |
+| Account | `currentPassword/newPassword/confirmPassword` -> CSRF POST `/api/v1/auth/change-password` -> success/error message -> optional logout | `frontend/src/components/workspace/settings/account-settings-page.tsx` |
+| Appearance | theme card -> `next-themes.setTheme()`；language select -> `changeLocale()` -> cookie/context update | `frontend/src/components/workspace/settings/appearance-settings-page.tsx`、`frontend/src/core/i18n/hooks.ts` |
+| Notification | browser support check -> permission `default/denied/granted` -> local setting `notification.enabled` -> test notification | `frontend/src/components/workspace/settings/notification-settings-page.tsx`、`frontend/src/core/settings/local.ts` |
+| About | static markdown -> `ClipboardSafeStreamdown` | `frontend/src/components/workspace/settings/about-settings-page.tsx`、`frontend/src/components/workspace/settings/about-content.ts` |

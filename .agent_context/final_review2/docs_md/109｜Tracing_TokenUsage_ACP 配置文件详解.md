@@ -8,8 +8,8 @@
 |-|-|
 | tracing_config.py | 从环境变量读取 LangSmith/Langfuse 开关、key、project/endpoint/host，并缓存为 tracing singleton。 |
 | token_usage_config.py | token usage display/tracking 开关。 |
-| acp_config.py | 从 `config.yaml` 的 `acp_agents` 加载外部 ACP agent 配置，非空时注入 `invoke_acp_agent` 工具。 |
-| agents_api_config.py | 从 `config.yaml` 的 `agents_api.enabled` 控制 `/api/agents` 管理路由是否允许访问。 |
+| `backend/packages/harness/deerflow/config/acp_config.py` 配置段 | 从 `config.yaml` 的 `acp_agents` 加载外部 ACP agent 配置，非空时注入 `invoke_acp_agent` 工具。 |
+| `backend/packages/harness/deerflow/config/agents_api_config.py` 配置段 | 从 `config.yaml` 的 `agents_api.enabled` 控制 `/api/agents` 管理路由是否允许访问。 |
 | skill_evolution_config.py | 任务结束后 skill 自演化提示开关。 |
 
 ```mermaid

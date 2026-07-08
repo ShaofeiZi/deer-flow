@@ -6,12 +6,12 @@
 
 | 页面文件 | 职责 | 数据源 |
 |-|-|-|
-| `settings-dialog.tsx` | 设置弹窗总入口和 section 切换 | local UI state |
-| `tool-settings-page.tsx` | MCP server 列表和 enabled 开关 | `/api/mcp/config` |
-| `skill-settings-page.tsx` | skills 列表、启停、创建 skill 入口 | `/api/skills` |
-| `memory-settings-page.tsx` | memory summaries/facts、CRUD、导入导出 | `/api/memory` |
-| `notification-settings-page.tsx` | 通知偏好 | localStorage |
-| `appearance-settings-page.tsx` | 主题外观 | localStorage/theme |
+| `frontend/src/components/workspace/settings/settings-dialog.tsx` | 设置弹窗总入口和 section 切换 | local UI state |
+| `frontend/src/components/workspace/settings/tool-settings-page.tsx` | MCP server 列表和 enabled 开关 | `/api/mcp/config` |
+| `frontend/src/components/workspace/settings/skill-settings-page.tsx` | skills 列表、启停、创建 skill 入口 | `/api/skills` |
+| `frontend/src/components/workspace/settings/memory-settings-page.tsx` | memory summaries/facts、CRUD、导入导出 | `/api/memory` |
+| `frontend/src/components/workspace/settings/notification-settings-page.tsx` | 通知偏好 | localStorage |
+| `frontend/src/components/workspace/settings/appearance-settings-page.tsx` | 主题外观 | localStorage/theme |
 
 ```mermaid
 flowchart TD
@@ -43,7 +43,7 @@ flowchart TD
 | 收益 | 设置入口统一，页面组件只消费 hooks 暴露的状态和 mutation。 |
 | 代价 | 同一个弹窗同时跨 React Query、localStorage、theme provider 和多个后端管理 API。 |
 | 重点代码 | `frontend/src/components/workspace/settings/`、`frontend/src/core/mcp/`、`frontend/src/core/skills/`、`frontend/src/core/memory/`、`frontend/src/core/settings/`。 |
-| 阅读路径 | 先看 `settings-dialog.tsx` 的 section 切换，再分别追 tool/skill/memory page 到对应 core hook 和 API。 |
+| 阅读路径 | 先看 `frontend/src/components/workspace/settings/settings-dialog.tsx` 的 section 切换，再分别追 tool/skill/memory page 到对应 core hook 和 API。 |
 
 ```mermaid
 flowchart TD

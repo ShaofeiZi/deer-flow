@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "document": {
+      "content": "<title>347｜I18n Locales 与 Translations 详解</title>\n\n<callout emoji=\"✅\">\n**本章目标：**继续细化前端 UI/Landing/I18n 模块。\n</callout>\n\n| 模块点 | 说明 |\n|-|-|\n| locales/en-US.ts | 英文文案。 |\n| locales/zh-CN.ts | 中文文案。 |\n| locales/types.ts | 翻译类型。 |\n| translations.ts | 聚合翻译。 |\n| locales/index.ts | 导出。 |\n\n```mermaid\nflowchart TD\n  EnUS --> Translations\n  ZhCN --> Translations\n  Types --> Translations\n  Translations --> I18nProvider\n  I18nProvider --> useI18n\n  useI18n --> UIStrings\n  LocaleSwitch --> I18nProvider\n```\n\n---\n\n# 补充：设计取舍、重点代码与阅读路径\n\n<callout emoji=\"💡\">\n**设计目的：**i18n locales/translations 把所有前端文案集中成类型化对象，`I18nProvider` 根据当前 locale 选择 `translations[locale]` 并通过 `useI18n()` 暴露给组件。\n</callout>\n\n| 维度 | 说明 |\n|-|-|\n| 收益 | 组件不直接硬编码多语言文案，新增语言时能按 `Translations` 类型补齐。 |\n| 代价 | 新增字段必须同步 `frontend/src/core/i18n/locales/types.ts`、`frontend/src/core/i18n/locales/en-US.ts`、`frontend/src/core/i18n/locales/zh-CN.ts`，否则运行时取文案会缺失或类型检查失败。 |\n| 重点代码 | `frontend/src/core/i18n/locales/types.ts`、`frontend/src/core/i18n/locales/en-US.ts`、`frontend/src/core/i18n/locales/zh-CN.ts`、`frontend/src/core/i18n/translations.ts`、`frontend/src/core/i18n/context.tsx`、`frontend/src/core/i18n/hooks.ts`。 |\n| 阅读路径 | 先看 `Translations` 类型，再看两个 locale 文件如何实现，最后看 `useI18n()` 如何把 `t` 提供给页面和设置弹窗。 |\n\n```mermaid\nflowchart TD\n  A[设计目的] --> B[解决的问题]\n  B --> C[收益]\n  B --> D[代价]\n  C --> E[重点代码]\n  D --> E\n  E --> F[阅读路径]\n```",
+      "document_id": "MyjodrFq4oBsG3xJFHqmWAscyRh",
+      "revision_id": 22
+    }
+  }
+}

@@ -36,7 +36,7 @@ flowchart TD
 |-|-|
 | 收益 | MCP、Skills、Memory 的列表、启停、CRUD、导入导出都有统一 UI 入口。 |
 | 代价 | 每页都跨前端 hook、Gateway API、缓存失效和静态站点禁用分支。 |
-| 重点代码 | `tool-settings-page.tsx`、`skill-settings-page.tsx`、`memory-settings-page.tsx`、`frontend/src/core/mcp/`、`frontend/src/core/skills/`、`frontend/src/core/memory/`。 |
+| 重点代码 | `frontend/src/components/workspace/settings/tool-settings-page.tsx`、`frontend/src/components/workspace/settings/skill-settings-page.tsx`、`frontend/src/components/workspace/settings/memory-settings-page.tsx`、`frontend/src/core/mcp/`、`frontend/src/core/skills/`、`frontend/src/core/memory/`。 |
 | 阅读路径 | 先看页面如何调用 hook，再看 hook 如何调用 API 和更新 React Query cache。 |
 
 ```mermaid

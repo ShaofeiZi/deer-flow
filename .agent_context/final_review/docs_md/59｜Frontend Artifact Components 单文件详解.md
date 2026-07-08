@@ -12,7 +12,7 @@
 | `artifact-trigger.tsx` | 打开 artifacts 面板。 |
 | `artifact-file-list.tsx` | 文件列表、下载、安装 skill。 |
 | `artifact-file-detail.tsx` | 代码/预览/下载详情。 |
-| `core/artifacts/hooks.ts` | 拉取 artifact 内容。 |
+| `frontend/src/core/artifacts/hooks.ts` | 拉取 artifact 内容。 |
 
 # 2. 运行逻辑图
 

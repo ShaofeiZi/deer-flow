@@ -8,11 +8,11 @@
 
 | Router | 接口 | 前端调用方 | 注意事项 |
 |-|-|-|-|
-| `models.py` | `GET /api/models` | InputBox ModelSelector | 不能返回 api_key。 |
-| `mcp.py` | `GET/PUT /api/mcp/config` | Tools Settings | stdio command allowlist，secret mask。 |
-| `skills.py` | `GET/PUT /api/skills`、custom CRUD | Skills Settings、Artifact .skill install | 写入 custom skill 前做安全扫描。 |
-| `memory.py` | memory/facts/import/export | Memory Settings | per-user/per-agent memory。 |
-| `agents.py` | custom agents CRUD | Agents gallery/new agent | 校验 agent name，读写 SOUL/config。 |
+| `backend/app/gateway/routers/models.py` | `GET /api/models` | InputBox ModelSelector | 不能返回 api_key。 |
+| `backend/app/gateway/routers/mcp.py` | `GET/PUT /api/mcp/config` | Tools Settings | stdio command allowlist，secret mask。 |
+| `backend/app/gateway/routers/skills.py` | `GET/PUT /api/skills`、custom CRUD | Skills Settings、Artifact .skill install | 写入 custom skill 前做安全扫描。 |
+| `backend/app/gateway/routers/memory.py` | memory/facts/import/export | Memory Settings | per-user/per-agent memory。 |
+| `backend/app/gateway/routers/agents.py` | custom agents CRUD | Agents gallery/new agent | 校验 agent name，读写 SOUL/config。 |
 
 # 2. Settings 到 Router 数据流
 

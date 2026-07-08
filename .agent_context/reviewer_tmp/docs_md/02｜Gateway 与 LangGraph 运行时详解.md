@@ -36,13 +36,13 @@ flowchart TD
 
 | 文件/模块 | 职责 | 重点函数 |
 |-|-|-|
-| `app.py` | FastAPI app、lifespan、middleware、router 注册 | create_app、lifespan、\_ensure_admin_user |
-| `deps.py` | 运行时单例初始化和依赖获取 | langgraph_runtime、get_run_context、get_config |
-| `services.py` | run lifecycle 业务层 | start_run、build_run_config、sse_consumer |
-| `thread_runs.py` | thread scoped runs API | create_run、stream_run、wait_run、join |
-| `runs.py` | stateless runs API | stateless_stream、stateless_wait |
-| `threads.py` | thread CRUD/state/history | create/search/get state/history/delete |
-| `models/mcp/skills/memory/uploads/artifacts routers` | 管理 API | 前端 settings 和 artifact 面板调用 |
+| `backend/app/gateway/app.py` | FastAPI app、lifespan、middleware、router 注册 | create_app、lifespan、\_ensure_admin_user |
+| `backend/app/gateway/deps.py` | 运行时单例初始化和依赖获取 | langgraph_runtime、get_run_context、get_config |
+| `backend/app/gateway/services.py` | run lifecycle 业务层 | start_run、build_run_config、sse_consumer |
+| `backend/app/gateway/routers/thread_runs.py` | thread scoped runs API | create_run、stream_run、wait_run、join |
+| `backend/app/gateway/routers/runs.py` | stateless runs API | stateless_stream、stateless_wait |
+| `backend/app/gateway/routers/threads.py` | thread CRUD/state/history | create/search/get state/history/delete |
+| `backend/app/gateway/routers/{models,mcp,skills,memory,uploads,artifacts}.py` | 管理 API | 前端 settings 和 artifact 面板调用 |
 
 # 2. Runtime 初始化逻辑
 
@@ -119,7 +119,7 @@ POST /api/langgraph/threads/{thread_id}/runs/stream
 
 # 6. 修改建议
 
-- 改 API 形状：先看 router 的 Pydantic model，再看 `services.py` 是否需要同步。
+- 改 API 形状：先看 router 的 Pydantic model，再看 `backend/app/gateway/services.py` 是否需要同步。
 - 改运行时生命周期：先看 `deps.py::langgraph_runtime`，确认是否属于 startup-only 配置。
 - 改 SSE：同时检查后端 `format_sse/sse_consumer` 和前端 `useThreadStream` 回调。
 

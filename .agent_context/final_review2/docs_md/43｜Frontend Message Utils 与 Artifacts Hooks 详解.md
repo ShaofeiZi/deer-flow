@@ -6,10 +6,10 @@
 
 | 文件 | 职责 |
 |-|-|
-| `core/messages/utils.ts` | getMessageGroups、reasoning 提取、hidden message 过滤、uploaded files 解析。 |
+| `frontend/src/core/messages/utils.ts` | getMessageGroups、reasoning 提取、hidden message 过滤、uploaded files 解析。 |
 | `components/workspace/messages/message-list.tsx` | 按 MessageGroup 渲染普通消息、processing、subagent、present files。 |
-| `core/artifacts/utils.ts` | 构造 artifact URL、判断文件类型。 |
-| `core/artifacts/hooks.ts` | useArtifactContent 拉取 artifact 内容。 |
+| `frontend/src/core/artifacts/utils.ts` | 构造 artifact URL、判断文件类型。 |
+| `frontend/src/core/artifacts/hooks.ts` | useArtifactContent 拉取 artifact 内容。 |
 | `components/workspace/artifacts/*` | 列表、详情、触发器、预览和安装 .skill。 |
 
 ```mermaid

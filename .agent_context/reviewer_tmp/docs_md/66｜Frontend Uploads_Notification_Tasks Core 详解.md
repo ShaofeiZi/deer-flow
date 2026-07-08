@@ -8,11 +8,11 @@
 
 | 对象 | 说明 |
 |-|-|
-| `core/uploads/api.ts` | upload/list/delete uploaded files。 |
-| `core/uploads/prompt-input-files.ts` | PromptInput file part 转 File。 |
-| `core/notification/hooks.ts` | 浏览器通知。 |
-| `core/tasks/context.tsx` | SubtasksProvider 状态。 |
-| `core/tasks/subtask-result.ts` | 解析 task tool result。 |
+| `frontend/src/core/uploads/api.ts` | upload/list/delete uploaded files。 |
+| `frontend/src/core/uploads/prompt-input-files.ts` | PromptInput file part 转 File。 |
+| `frontend/src/core/notification/hooks.ts` | 浏览器通知。 |
+| `frontend/src/core/tasks/context.tsx` | SubtasksProvider 状态。 |
+| `frontend/src/core/tasks/subtask-result.ts` | 解析 task tool result。 |
 
 # 2. 运行逻辑图
 

@@ -35,7 +35,7 @@ flowchart TD
 |-|-|
 | 收益 | 好处是前后端契约清晰，接口可独立演进。 |
 | 代价 | 坏处是一次功能可能跨 router、service、repository 和前端 hook。 |
-| 重点代码 | 重点代码在 `backend/app/gateway/routers/`、`backend/app/gateway/auth*` 或对应前端 `core/*/api.ts`。 |
+| 重点代码 | 重点代码在 `backend/app/gateway/routers/`、`backend/app/gateway/auth/*` 或对应前端 `frontend/src/core/*/api.ts`。 |
 | 阅读路径 | 阅读路径：从 URL/API 入口往内追 service，再看数据落到哪里。 |
 
 ```mermaid

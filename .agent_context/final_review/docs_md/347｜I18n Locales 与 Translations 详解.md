@@ -34,8 +34,8 @@ flowchart TD
 | 维度 | 说明 |
 |-|-|
 | 收益 | 组件不直接硬编码多语言文案，新增语言时能按 `Translations` 类型补齐。 |
-| 代价 | 新增字段必须同步 `types.ts`、`en-US.ts`、`zh-CN.ts`，否则运行时取文案会缺失或类型检查失败。 |
-| 重点代码 | `frontend/src/core/i18n/locales/types.ts`、`locales/en-US.ts`、`locales/zh-CN.ts`、`translations.ts`、`context.tsx`、`hooks.ts`。 |
+| 代价 | 新增字段必须同步 `frontend/src/core/i18n/locales/types.ts`、`frontend/src/core/i18n/locales/en-US.ts`、`frontend/src/core/i18n/locales/zh-CN.ts`，否则运行时取文案会缺失或类型检查失败。 |
+| 重点代码 | `frontend/src/core/i18n/locales/types.ts`、`frontend/src/core/i18n/locales/en-US.ts`、`frontend/src/core/i18n/locales/zh-CN.ts`、`frontend/src/core/i18n/translations.ts`、`frontend/src/core/i18n/context.tsx`、`frontend/src/core/i18n/hooks.ts`。 |
 | 阅读路径 | 先看 `Translations` 类型，再看两个 locale 文件如何实现，最后看 `useI18n()` 如何把 `t` 提供给页面和设置弹窗。 |
 
 ```mermaid

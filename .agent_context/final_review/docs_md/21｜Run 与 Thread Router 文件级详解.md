@@ -8,10 +8,10 @@
 
 | 文件 | 接口组 | 职责 |
 |-|-|-|
-| `thread_runs.py` | `/api/threads/{thread_id}/runs*` | 有 thread 的 run create/stream/wait/cancel/join/messages/events/token usage。 |
-| `runs.py` | `/api/runs/*` | stateless stream/wait，自动创建或复用 thread。 |
-| `threads.py` | `/api/threads*` | thread create/search/patch/get/state/history/delete。 |
-| `assistants_compat.py` | `/api/assistants*` | 满足 LangGraph SDK 初始化需要，assistant_id 映射到 lead_agent。 |
+| `backend/app/gateway/routers/thread_runs.py` | `/api/threads/{thread_id}/runs*` | 有 thread 的 run create/stream/wait/cancel/join/messages/events/token usage。 |
+| `backend/app/gateway/routers/runs.py` | `/api/runs/*` | stateless stream/wait，自动创建或复用 thread。 |
+| `backend/app/gateway/routers/threads.py` | `/api/threads*` | thread create/search/patch/get/state/history/delete。 |
+| `backend/app/gateway/routers/assistants_compat.py` | `/api/assistants*` | 满足 LangGraph SDK 初始化需要，assistant_id 映射到 lead_agent。 |
 
 # 2. Thread 与 Run 关系图
 

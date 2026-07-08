@@ -81,11 +81,11 @@ flowchart TD
 
 | 模块 | 前端文件 | 后端 API/存储 |
 |-|-|-|
-| Models | `core/models/api.ts`、`input-box.tsx` | `GET /api/models` |
-| MCP Tools | `settings/tool-settings-page.tsx`、`core/mcp/*` | `GET/PUT /api/mcp/config` |
-| Skills | `settings/skill-settings-page.tsx`、`core/skills/*` | `GET /api/skills`、`PUT /api/skills/{name}` |
-| Memory | `settings/memory-settings-page.tsx`、`core/memory/*` | `GET/DELETE /api/memory`、facts CRUD |
-| Local Settings | `core/settings/*` | localStorage |
+| Models | `frontend/src/core/models/api.ts`、`frontend/src/components/workspace/input-box.tsx` | `GET /api/models` |
+| MCP Tools | `frontend/src/components/workspace/settings/tool-settings-page.tsx`、`frontend/src/core/mcp/*` | `GET/PUT /api/mcp/config` |
+| Skills | `frontend/src/components/workspace/settings/skill-settings-page.tsx`、`frontend/src/core/skills/*` | `GET /api/skills`、`PUT /api/skills/{name}` |
+| Memory | `frontend/src/components/workspace/settings/memory-settings-page.tsx`、`frontend/src/core/memory/*` | `GET/DELETE /api/memory`、facts CRUD |
+| Local Settings | `frontend/src/core/settings/*` | localStorage |
 
 # 5. 调试建议
 

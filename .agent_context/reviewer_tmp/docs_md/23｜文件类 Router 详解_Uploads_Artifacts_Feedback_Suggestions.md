@@ -8,10 +8,10 @@
 
 | Router | 职责 | 关键安全点 |
 |-|-|-|
-| `uploads.py` | 上传、列出、删除文件；自动转换文档为 Markdown | 文件数/大小限制、防路径穿越、防 symlink。 |
-| `artifacts.py` | 服务 sandbox 产物、.skill 内部文件预览 | HTML/SVG/XHTML 强制下载，防同源主动内容执行。 |
-| `feedback.py` | run feedback CRUD 和统计 | owner check，避免跨用户读取反馈。 |
-| `suggestions.py` | 根据最近对话生成 follow-up suggestions | 剥离 think block，稳健 JSON list 解析。 |
+| `backend/app/gateway/routers/uploads.py` | 上传、列出、删除文件；自动转换文档为 Markdown | 文件数/大小限制、防路径穿越、防 symlink。 |
+| `backend/app/gateway/routers/artifacts.py` | 服务 sandbox 产物、.skill 内部文件预览 | HTML/SVG/XHTML 强制下载，防同源主动内容执行。 |
+| `backend/app/gateway/routers/feedback.py` | run feedback CRUD 和统计 | owner check，避免跨用户读取反馈。 |
+| `backend/app/gateway/routers/suggestions.py` | 根据最近对话生成 follow-up suggestions | 剥离 think block，稳健 JSON list 解析。 |
 
 # 2. Uploads 与 Artifacts 合流
 

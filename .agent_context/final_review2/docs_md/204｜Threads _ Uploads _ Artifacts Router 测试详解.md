@@ -35,7 +35,7 @@ flowchart TD
 |-|-|
 | 收益 | 浏览器/API 客户端依赖的状态码、响应字段、owner check 和路径安全行为可稳定回归。 |
 | 代价 | 一个请求可能同时经过 authz、router、manager/repository、filesystem helper 和 runtime state。 |
-| 重点代码 | `backend/app/gateway/routers/threads.py`、`uploads.py`、`artifacts.py`、`feedback.py`、`suggestions.py`，以及对应 `backend/tests/test_*_router.py`。 |
+| 重点代码 | `backend/app/gateway/routers/threads.py`、`backend/app/gateway/routers/uploads.py`、`backend/app/gateway/routers/artifacts.py`、`backend/app/gateway/routers/feedback.py`、`backend/app/gateway/routers/suggestions.py`，以及对应 `backend/tests/test_*_router.py`。 |
 | 阅读路径 | 先看 route path 与 response model，再追 manager/repository/filesystem helper，最后核对测试中的 status code、owner isolation 和安全断言。 |
 
 ```mermaid

@@ -61,9 +61,9 @@ sequenceDiagram
 
 | 模块 | 核心价值 | 关键文件 | 前端入口 |
 |-|-|-|-|
-| Skills | 把稳定工作流写成可复用说明 | `backend/packages/harness/deerflow/skills/*` | `settings/skill-settings-page.tsx` |
-| MCP | 接入外部工具和服务 | `backend/packages/harness/deerflow/mcp/*` | `settings/tool-settings-page.tsx` |
-| Memory | 保存用户偏好和长期事实 | `backend/packages/harness/deerflow/agents/memory/*` | `settings/memory-settings-page.tsx` |
+| Skills | 把稳定工作流写成可复用说明 | `backend/packages/harness/deerflow/skills/*` | `frontend/src/components/workspace/settings/skill-settings-page.tsx` |
+| MCP | 接入外部工具和服务 | `backend/packages/harness/deerflow/mcp/*` | `frontend/src/components/workspace/settings/tool-settings-page.tsx` |
+| Memory | 保存用户偏好和长期事实 | `backend/packages/harness/deerflow/agents/memory/*` | `frontend/src/components/workspace/settings/memory-settings-page.tsx` |
 
 # 5. 常见修改路径
 

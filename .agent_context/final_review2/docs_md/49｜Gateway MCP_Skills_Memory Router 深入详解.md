@@ -8,9 +8,9 @@
 
 | Router | 前端入口 | 后端职责 |
 |-|-|-|
-| `mcp.py` | Tool settings | 管理 MCP server config、状态和工具发现。 |
-| `skills.py` | Skill settings | 列出 public/custom skills，启停、安装、编辑 custom skill。 |
-| `memory.py` | Memory settings | memory status、facts CRUD、import/export/reload/clear。 |
+| `backend/app/gateway/routers/mcp.py` | Tool settings | 管理 MCP server config、状态和工具发现。 |
+| `backend/app/gateway/routers/skills.py` | Skill settings | 列出 public/custom skills，启停、安装、编辑 custom skill。 |
+| `backend/app/gateway/routers/memory.py` | Memory settings | memory status、facts CRUD、import/export/reload/clear。 |
 
 <callout emoji="💡">
 这些 API 是 Settings 页的数据来源；但真正影响一次对话的是 `thread.submit` 的 context、lead_agent 装配和 middleware 注入。

@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "document": {
+      "content": "<title>94｜Frontend AI Elements Primitives 详解</title>\n\n<callout emoji=\"✅\">\n**本章目标：**讲清 components/ai-elements 对聊天消息、prompt、artifact、reasoning 的支撑。\n</callout>\n\n| 模块点 | 说明 |\n|-|-|\n| prompt-input | 输入框、footer、submit、textarea。 |\n| conversation/message | 会话容器和基础消息布局。 |\n| reasoning/chain-of-thought | reasoning 和工具过程展示。 |\n| artifact/canvas/image/web-preview | 产物、多媒体和网页预览。 |\n| task/sources/suggestion | 任务、来源、建议问题。 |\n\n```mermaid\nflowchart TD\n  AI[ai-elements] --> Prompt[PromptInput]\n  AI --> Conversation[Conversation primitives]\n  AI --> Reasoning[Reasoning and CoT]\n  AI --> Artifact[Artifact primitives]\n  AI --> Task[Task element]\n  Prompt --> InputBox\n  Conversation --> MessageList\n  Reasoning --> MessageGroup\n  Artifact --> ArtifactPanel\n  Task --> SubtaskCard\n```\n\n---\n\n# 补充：设计取舍、重点代码与阅读路径\n\n<callout emoji=\"💡\">\n**设计目的：**AI Elements 提供可复用的聊天、输入、reasoning、artifact 和 task UI primitive，让 workspace 业务组件不用重复实现基础交互和布局。\n</callout>\n\n| 维度 | 说明 |\n|-|-|\n| 收益 | 消息展示、输入控制、reasoning 展开、artifact 预览等能力可在 workspace 内复用。 |\n| 代价 | primitive 本身不应持有过多业务状态；实际数据仍来自 workspace messages、threads hooks 和 chat box。 |\n| 重点代码 | `frontend/src/components/ai-elements/message.tsx`、`conversation.tsx`、`prompt-input.tsx`、`reasoning.tsx`、`artifact.tsx`、`task.tsx`。 |\n| 阅读路径 | 先看 primitive props，再看 workspace 组件如何把 thread/message/task/artifact 状态传入。 |\n\n```mermaid\nflowchart TD\n  A[设计目的] --> B[解决的问题]\n  B --> C[收益]\n  B --> D[代价]\n  C --> E[重点代码]\n  D --> E\n  E --> F[阅读路径]\n```",
+      "document_id": "DjOOd6VXKohlpIxaJaum2Z2TyjI",
+      "revision_id": 18
+    }
+  }
+}

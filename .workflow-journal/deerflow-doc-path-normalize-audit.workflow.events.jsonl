@@ -1,0 +1,4 @@
+{"t":1783495131965,"type":"start","id":"e7279a24f226e50c#0","label":"path-auditor","phase":"Canonical path audit","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783495499319,"type":"end","id":"e7279a24f226e50c#0","label":"path-auditor","phase":"Canonical path audit","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":2206053,"ms":367354}
+{"t":1783495499321,"type":"start","id":"d359eed65cebdcd2#0","label":"patch-plan","phase":"Verification plan","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783495544003,"type":"end","id":"d359eed65cebdcd2#0","label":"patch-plan","phase":"Verification plan","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":55231,"ms":44682}

@@ -8,11 +8,11 @@
 
 | 对象 | 说明 |
 |-|-|
-| `core/settings/*` | local settings、thread model override、hooks。 |
-| `core/models/*` | loadModels 与 token usage enabled。 |
-| `core/mcp/*` | load/update MCP config。 |
-| `core/skills/*` | load/enable/install skills。 |
-| `core/memory/*` | memory/facts CRUD、import/export。 |
+| `frontend/src/core/settings/*` | local settings、thread model override、hooks。 |
+| `frontend/src/core/models/*` | loadModels 与 token usage enabled。 |
+| `frontend/src/core/mcp/*` | load/update MCP config。 |
+| `frontend/src/core/skills/*` | load/enable/install skills。 |
+| `frontend/src/core/memory/*` | memory/facts CRUD、import/export。 |
 
 # 2. 运行逻辑图
 

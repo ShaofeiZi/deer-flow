@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "document": {
+      "content": "<title>245｜Backend Replay Provider / Seed / Support 测试模块详解</title>\n\n<callout emoji=\"✅\">\n**本章目标：**继续拆测试 helper、fixtures、frontend content 支持模块。\n</callout>\n\n| 模块点 | 说明 |\n|-|-|\n| replay_provider.py | replay provider 测试支持。 |\n| seed_runs_router.py | run router seed 数据。 |\n| support/\\_\\_init\\_\\_.py | 测试 support package。 |\n| blocking_io/conftest.py | 阻塞 IO 测试 fixture。 |\n\n```mermaid\nflowchart TD\n  ReplayTests --> ReplayProvider\n  RouterTests --> SeedRuns\n  BlockingTests --> BlockingConftest\n  SupportPackage --> SharedUtils\n  ReplayProvider --> Fixtures\n  SeedRuns --> TestDB\n  BlockingConftest --> BlockbusterGate\n```\n\n---\n\n# 补充：设计取舍、重点代码与阅读路径\n\n<callout emoji=\"💡\">\n**设计目的：**该模块为 replay E2E、test-only seeding、共享测试 support 和 blocking IO runtime gate 提供后端测试基础设施。\n</callout>\n\n| 维度 | 说明 |\n|-|-|\n| 收益 | replay provider 保证无 key 回放；seed router 能构造真实 run/event store 场景；Blockbuster gate 防止阻塞 IO 回归。 |\n| 代价 | test-only router 必须只在 replay/test 环境挂载，blocking gate 需要和实际异步边界保持同步。 |\n| 重点代码 | `backend/tests/replay_provider.py`、`backend/tests/seed_runs_router.py`、`backend/tests/support/`、`backend/tests/blocking_io/conftest.py`、`backend/scripts/run_replay_gateway.py`。 |\n| 阅读路径 | 先从 replay gateway 如何挂载 provider/seed router 入手，再看 provider 的 hash 匹配，最后看 blocking_io conftest 如何启用 strict gate。 |\n\n```mermaid\nflowchart TD\n  A[设计目的] --> B[解决的问题]\n  B --> C[收益]\n  B --> D[代价]\n  C --> E[重点代码]\n  D --> E\n  E --> F[阅读路径]\n```\n\n```mermaid\nflowchart TD\n  ReplayGateway[run_replay_gateway.py] --> ReplayProvider[ReplayChatModel]\n  ReplayGateway --> SeedRouter[test-only seed_runs_router]\n  ReplayProvider --> Fixture[replay fixture]\n  SeedRouter --> RunStore[run and event stores]\n  BlockingTests --> BlockingConftest[blocking_io conftest]\n  BlockingConftest --> BlockbusterGate[strict runtime gate]\n```",
+      "document_id": "RZ5DdbNuQoOs5DxOcF0mTVG8y2e",
+      "revision_id": 18
+    }
+  }
+}

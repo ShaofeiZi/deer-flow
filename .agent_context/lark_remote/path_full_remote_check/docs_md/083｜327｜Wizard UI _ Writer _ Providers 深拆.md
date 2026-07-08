@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "identity": "user",
+  "data": {
+    "document": {
+      "content": "<title>327｜Wizard UI / Writer / Providers 深拆</title>\n\n<callout emoji=\"✅\">\n**本章目标：**继续拆 backend tests、frontend pages、docker/provisioner、wizard step 模块。\n</callout>\n\n| 模块点 | 说明 |\n|-|-|\n| ui.py | 交互 UI 组件。 |\n| writer.py | 配置写入逻辑。 |\n| providers.py | 模型/搜索 provider 定义。 |\n| setup_wizard.py | 总入口编排。 |\n\n```mermaid\nflowchart TD\n  User --> SetupWizard\n  SetupWizard --> UI\n  UI --> Providers\n  UI --> Steps\n  Steps --> Writer\n  Providers --> Writer\n  Writer --> ConfigYaml\n  ConfigYaml --> MakeDev\n```\n\n---\n\n# 补充：设计取舍、重点代码与阅读路径\n\n<callout emoji=\"💡\">\n**设计目的：**Wizard UI/Writer/Providers 把终端输入、provider 目录和配置落盘分开：`scripts/wizard/ui.py` 只负责交互，`scripts/wizard/providers.py` 只描述候选项，`scripts/wizard/writer.py` 才负责合并 `.env` 与 `config.yaml`。\n</callout>\n\n| 维度 | 说明 |\n|-|-|\n| 收益 | 新增 provider 或调整写盘逻辑时边界清晰，不需要改动所有 step。 |\n| 代价 | 一次配置结果跨 `scripts/setup_wizard.py`、step result、provider extra_config 和 writer 合并逻辑，需要按数据流追。 |\n| 重点代码 | `scripts/wizard/ui.py` 的 `ask_choice/ask_text/ask_secret`，`scripts/wizard/providers.py` 的 provider dataclass/catalogue，以及 `scripts/wizard/writer.py` 的 `write_env_file/write_config_yaml/build_config_yaml`。 |\n| 阅读路径 | 先看 `scripts/wizard/providers.py` 数据结构，再看 `scripts/wizard/ui.py` 如何收集选择，最后看 `scripts/wizard/writer.py` 如何保留已有注释并更新 key。 |\n\n```mermaid\nflowchart TD\n  A[设计目的] --> B[解决的问题]\n  B --> C[收益]\n  B --> D[代价]\n  C --> E[重点代码]\n  D --> E\n  E --> F[阅读路径]\n```\n\n```mermaid\nflowchart TD\n  SetupWizard --> Providers[provider catalog dataclasses]\n  SetupWizard --> UI[terminal UI helpers]\n  UI --> MenuSupport{arrow menu supported}\n  MenuSupport -->|yes| ArrowMenu[termios cbreak arrow selection]\n  MenuSupport -->|no| NumberMenu[numbered input fallback]\n  ArrowMenu --> StepResult[LLM/Search/Execution result]\n  NumberMenu --> StepResult\n  Providers --> StepResult\n  StepResult --> Writer[writer.py]\n  Writer --> MergeEnv[preserve comments update .env keys]\n  Writer --> BuildYaml[deepcopy base config and build minimal YAML]\n  BuildYaml --> ConfigYaml[config.yaml]\n  MergeEnv --> EnvFile[.env]\n```",
+      "document_id": "DFAjdJAJxo4cTgxzMg1mKBYayrh",
+      "revision_id": 22
+    }
+  }
+}

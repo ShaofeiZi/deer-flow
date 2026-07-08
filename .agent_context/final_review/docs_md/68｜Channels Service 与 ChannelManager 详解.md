@@ -8,10 +8,10 @@
 
 | 模块 | 说明 |
 |-|-|
-| `service.py` | 启动/停止 ChannelService，按 config 初始化 channels。 |
-| `manager.py` | 统一处理 inbound message、slash skill、attachments、artifact delivery。 |
-| `message_bus.py` | InboundMessage/OutboundMessage 数据结构和 MessageBus。 |
-| `store.py` | channel 状态存储。 |
+| `backend/app/channels/service.py` | 启动/停止 ChannelService，按 config 初始化 channels。 |
+| `backend/app/channels/manager.py` | 统一处理 inbound message、slash skill、attachments、artifact delivery。 |
+| `backend/app/channels/message_bus.py` | InboundMessage/OutboundMessage 数据结构和 MessageBus。 |
+| `backend/app/channels/store.py` | channel 状态存储。 |
 
 # 2. 运行逻辑图
 
@@ -43,7 +43,7 @@ flowchart TD
 |-|-|
 | 收益 | 新平台只需实现 `Channel.start/stop/send` 并注册到 `_CHANNEL_REGISTRY`；Manager 复用 thread 映射、slash skill、附件和 artifact 发送逻辑。 |
 | 代价 | 不同平台的长连接、文件下载、markdown/card 能力差异很大；运行路径还会按 `supports_streaming` 分成 stream 与 wait 两类。 |
-| 重点代码 | `backend/app/channels/service.py`、`manager.py`、`base.py`、各平台 channel 文件。 |
+| 重点代码 | `backend/app/channels/service.py`、`backend/app/channels/manager.py`、`backend/app/channels/base.py`、各平台 channel 文件。 |
 | 阅读路径 | 先看 `_CHANNEL_REGISTRY` 和 `_CHANNEL_CREDENTIAL_KEYS`，再看 `CHANNEL_CAPABILITIES`，最后追踪 Manager 的 inbound -> run -> outbound。 |
 
 ```mermaid

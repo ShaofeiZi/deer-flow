@@ -8,11 +8,11 @@
 
 | 对象 | 说明 |
 |-|-|
-| `core/agents/*` | custom agents API 和 hooks。 |
+| `frontend/src/core/agents/*` | custom agents API 和 hooks。 |
 | `app/workspace/agents/*` | agent gallery/new agent 创建流程。 |
-| `core/i18n/*` | 语言检测、上下文、翻译 hooks。 |
+| `frontend/src/core/i18n/*` | 语言检测、上下文、翻译 hooks。 |
 | `app/[lang]/docs` | Nextra docs 路由。 |
-| `core/static-mode.ts` | 静态演示模式和 mock thread。 |
+| `frontend/src/core/static-mode.ts` | 静态演示模式和 mock thread。 |
 
 # 2. 运行逻辑图
 
