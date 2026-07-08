@@ -69,6 +69,10 @@ interface TokenUsageAttribution {
 // The frontend fallback intentionally stays generic so we do not duplicate
 // backend/packages/harness/deerflow/agents/middlewares/token_usage_middleware.py
 //::_build_todo_actions and risk the two diffing algorithms drifting apart.
+// 精确的 write_todos 标签来自后端归因负载。
+// 前端回退有意保持通用，这样我们就不会重复
+// backend/packages/harness/deerflow/agents/middlewares/token_usage_middleware.py
+//::_build_todo_actions 并冒两个差异化算法偏离的风险。
 
 export function getTokenUsageViewPreset(
   preferences: TokenUsagePreferences,

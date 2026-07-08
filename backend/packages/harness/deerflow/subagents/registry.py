@@ -1,4 +1,7 @@
-"""Subagent registry for managing available subagents."""
+"""Subagent registry for managing available subagents.
+
+用于管理可用子代理的子代理注册表。
+"""
 
 import logging
 from dataclasses import replace
@@ -28,6 +31,15 @@ def _build_custom_subagent_config(name: str, *, app_config: Any | None = None) -
 
     Returns:
         SubagentConfig if found in custom_agents, None otherwise.
+
+    从 config.yaml 的 custom_agents 节构建 SubagentConfig。
+
+    Args:
+        name: 自定义子代理的名称。
+        app_config: 可选的 AppConfig 或 SubagentsAppConfig 用于解析。
+
+    Returns:
+        如果在 custom_agents 中找到则返回 SubagentConfig，否则返回 None。
     """
     subagents_config = _resolve_subagents_app_config(app_config)
     custom = subagents_config.custom_agents.get(name)
@@ -61,8 +73,23 @@ def get_subagent_config(name: str, *, app_config: Any | None = None) -> Subagent
 
     Returns:
         SubagentConfig if found (with any config.yaml overrides applied), None otherwise.
+
+    按名称获取子代理配置，应用 config.yaml 中的覆盖。
+
+    解析顺序（镜像 Codex 的配置分层）：
+    1. 内置子代理（general-purpose、bash）
+    2. config.yaml custom_agents 节中的自定义子代理
+    3. config.yaml agents 节中的每个代理覆盖（timeout、max_turns、model、skills）
+
+    Args:
+        name: 子代理的名称。
+        app_config: 可选的 AppConfig 或 SubagentsAppConfig 用于解析覆盖。
+
+    Returns:
+        如果找到则返回 SubagentConfig（应用了任何 config.yaml 覆盖），否则返回 None。
     """
     # Step 1: Look up built-in, then fall back to custom_agents
+    # 步骤 1：查找内置，然后回退到 custom_agents
     config = BUILTIN_SUBAGENTS.get(name)
     if config is None:
         config = _build_custom_subagent_config(name, app_config=app_config)
@@ -74,6 +101,9 @@ def get_subagent_config(name: str, *, app_config: Any | None = None) -> Subagent
     # (timeout_seconds, max_turns at the top level) apply to built-in agents
     # but must NOT override custom agents' own values — custom agents define
     # their own defaults in the custom_agents section.
+    # 步骤 2：应用 config.yaml agents 节中的每个代理覆盖。
+    # 此处仅应用显式的每个代理覆盖。全局默认值（顶层的 timeout_seconds、max_turns）适用于内置代理，
+    # 但不得覆盖自定义代理自身的值 — 自定义代理在 custom_agents 节中定义自己的默认值。
     subagents_config = _resolve_subagents_app_config(app_config)
     is_builtin = name in BUILTIN_SUBAGENTS
     agent_override = subagents_config.agents.get(name)
@@ -81,6 +111,7 @@ def get_subagent_config(name: str, *, app_config: Any | None = None) -> Subagent
     overrides = {}
 
     # Timeout: per-agent override > global default (builtins only) > config's own value
+    # 超时：每个代理覆盖 > 全局默认值（仅内置） > 配置自身的值
     if agent_override is not None and agent_override.timeout_seconds is not None:
         if agent_override.timeout_seconds != config.timeout_seconds:
             logger.debug("Subagent '%s': timeout overridden (%ss -> %ss)", name, config.timeout_seconds, agent_override.timeout_seconds)
@@ -90,6 +121,7 @@ def get_subagent_config(name: str, *, app_config: Any | None = None) -> Subagent
         overrides["timeout_seconds"] = subagents_config.timeout_seconds
 
     # Max turns: per-agent override > global default (builtins only) > config's own value
+    # 最大轮次：每个代理覆盖 > 全局默认值（仅内置） > 配置自身的值
     if agent_override is not None and agent_override.max_turns is not None:
         if agent_override.max_turns != config.max_turns:
             logger.debug("Subagent '%s': max_turns overridden (%s -> %s)", name, config.max_turns, agent_override.max_turns)
@@ -99,12 +131,14 @@ def get_subagent_config(name: str, *, app_config: Any | None = None) -> Subagent
         overrides["max_turns"] = subagents_config.max_turns
 
     # Model: per-agent override only (no global default for model)
+    # 模型：仅每个代理覆盖（模型没有全局默认值）
     effective_model = subagents_config.get_model_for(name)
     if effective_model is not None and effective_model != config.model:
         logger.debug("Subagent '%s': model overridden (%s -> %s)", name, config.model, effective_model)
         overrides["model"] = effective_model
 
     # Skills: per-agent override only (no global default for skills)
+    # 技能：仅每个代理覆盖（技能没有全局默认值）
     effective_skills = subagents_config.get_skills_for(name)
     if effective_skills is not None and effective_skills != config.skills:
         logger.debug("Subagent '%s': skills overridden (%s -> %s)", name, config.skills, effective_skills)
@@ -121,6 +155,11 @@ def list_subagents(*, app_config: Any | None = None) -> list[SubagentConfig]:
 
     Returns:
         List of all registered SubagentConfig instances (built-in + custom).
+
+    列出所有可用的子代理配置（应用 config.yaml 覆盖）。
+
+    Returns:
+        所有已注册的 SubagentConfig 实例列表（内置 + 自定义）。
     """
     configs = []
     for name in get_subagent_names(app_config=app_config):
@@ -135,10 +174,16 @@ def get_subagent_names(*, app_config: Any | None = None) -> list[str]:
 
     Returns:
         List of subagent names.
+
+    获取所有可用的子代理名称（内置 + 自定义）。
+
+    Returns:
+        子代理名称列表。
     """
     names = list(BUILTIN_SUBAGENTS.keys())
 
     # Merge custom_agents from config.yaml
+    # 合并 config.yaml 中的 custom_agents
     subagents_config = _resolve_subagents_app_config(app_config)
     for custom_name in subagents_config.custom_agents:
         if custom_name not in names:
@@ -152,6 +197,11 @@ def get_available_subagent_names(*, app_config: Any | None = None) -> list[str]:
 
     Returns:
         List of subagent names visible to the current sandbox configuration.
+
+    获取应暴露给活动运行时的子代理名称。
+
+    Returns:
+        当前沙箱配置可见的子代理名称列表。
     """
     names = get_subagent_names(app_config=app_config)
     try:

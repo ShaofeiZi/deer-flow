@@ -1,4 +1,7 @@
-"""In-memory run registry with optional persistent RunStore backing."""
+"""In-memory run registry with optional persistent RunStore backing.
+
+内存运行注册表，可选持久化 RunStore 支持。
+"""
 
 from __future__ import annotations
 
@@ -38,6 +41,11 @@ def _is_retryable_persistence_error(exc: BaseException) -> bool:
     or SQLAlchemy wrappers.  The short bounded retry here protects run status
     finalization from transient writer pressure without hiding permanent
     failures forever.
+
+    对于瞬时的 SQLite 持久化失败返回 True。
+
+    SQLite 锁竞争通常通过 sqlite3 异常或 SQLAlchemy 包装器表现出来。此处的短时有界重试可以保护运行状态
+    终结免受瞬时写入压力的影响，同时不会永久隐藏永久性失败。
     """
 
     pending: list[BaseException] = [exc]
@@ -63,7 +71,10 @@ def _is_retryable_persistence_error(exc: BaseException) -> bool:
 
 @dataclass(frozen=True)
 class PersistenceRetryPolicy:
-    """Bounded retry policy for short run-store writes."""
+    """Bounded retry policy for short run-store writes.
+
+    短时运行存储写入的有界重试策略。
+    """
 
     max_attempts: int = 5
     initial_delay: float = 0.05
@@ -73,7 +84,10 @@ class PersistenceRetryPolicy:
 
 @dataclass
 class RunRecord:
-    """Mutable record for a single run."""
+    """Mutable record for a single run.
+
+    单次运行的可变记录。
+    """
 
     run_id: str
     thread_id: str
@@ -109,6 +123,11 @@ class RunManager:
     All mutations are protected by an asyncio lock. When a ``store`` is
     provided, serializable metadata is also persisted to the store so
     that run history survives process restarts.
+
+    内存运行注册表，可选持久化 RunStore 支持。
+
+    所有变更均受 asyncio 锁保护。当提供 ``store`` 时，可序列化的元数据也会持久化到存储中，
+    以便运行历史在进程重启后仍然存在。
     """
 
     def __init__(
@@ -142,7 +161,10 @@ class RunManager:
         run_id: str,
         operation: Callable[[], Awaitable[Any]],
     ) -> Any:
-        """Run a short store operation with bounded retries for SQLite pressure."""
+        """Run a short store operation with bounded retries for SQLite pressure.
+
+        运行短时存储操作，针对 SQLite 压力进行有界重试。
+        """
         policy = self._persistence_retry_policy
         attempt = 1
         delay = policy.initial_delay
@@ -167,7 +189,10 @@ class RunManager:
                 attempt += 1
 
     async def _persist_snapshot_to_store(self, run_id: str, payload: dict[str, Any]) -> bool:
-        """Best-effort persist a previously captured run snapshot."""
+        """Best-effort persist a previously captured run snapshot.
+
+        尽力持久化先前捕获的运行快照。
+        """
         if self._store is None:
             return True
         try:
@@ -189,6 +214,11 @@ class RunManager:
         Unlike follow-up status/model updates, failures are propagated so the
         caller can treat creation as failed. Rollback is the caller's
         responsibility after inserting the record into ``_runs``.
+
+        将新创建的运行记录持久化到后端存储。
+
+        初始运行创建是运行可见性边界的一部分：调用者不应在内存中观察到运行，除非其后端存储行存在。
+        与后续状态/模型更新不同，失败会被传播，以便调用者可以将创建视为失败。回滚是调用者在将记录插入 ``_runs`` 后的责任。
         """
         if self._store is None:
             return
@@ -199,14 +229,20 @@ class RunManager:
         )
 
     async def _persist_to_store(self, record: RunRecord, *, error: str | None = None) -> bool:
-        """Best-effort persist run record to backing store."""
+        """Best-effort persist run record to backing store.
+
+        尽力将运行记录持久化到后端存储。
+        """
         return await self._persist_snapshot_to_store(
             record.run_id,
             self._store_put_payload(record, error=error),
         )
 
     async def _persist_status(self, record: RunRecord, status: RunStatus, *, error: str | None = None) -> bool:
-        """Best-effort persist a status transition to the backing store."""
+        """Best-effort persist a status transition to the backing store.
+
+        尽力将状态转换持久化到后端存储。
+        """
         if self._store is None:
             return True
         row_recovery_payload = self._store_put_payload(record, error=error)
@@ -229,6 +265,10 @@ class RunManager:
 
         NULL status/on_disconnect columns (e.g. from rows written before those
         columns were added) default to ``pending`` and ``cancel`` respectively.
+
+        从序列化的存储行构建只读运行时记录。
+
+        NULL 的 status/on_disconnect 列（例如来自在添加这些列之前写入的行）分别默认为 ``pending`` 和 ``cancel``。
         """
         return RunRecord(
             run_id=row["run_id"],
@@ -257,7 +297,10 @@ class RunManager:
         )
 
     async def update_run_completion(self, run_id: str, **kwargs) -> None:
-        """Persist token usage and completion data to the backing store."""
+        """Persist token usage and completion data to the backing store.
+
+        将 token 使用量和完成数据持久化到后端存储。
+        """
         row_recovery_payload: dict[str, Any] | None = None
         async with self._lock:
             record = self._runs.get(run_id)
@@ -294,7 +337,10 @@ class RunManager:
             logger.warning("Failed to persist run completion for %s", run_id, exc_info=True)
 
     async def update_run_progress(self, run_id: str, **kwargs) -> None:
-        """Persist a running token/message snapshot without changing status."""
+        """Persist a running token/message snapshot without changing status.
+
+        持久化运行中的 token/消息快照，不更改状态。
+        """
         should_persist = True
         async with self._lock:
             record = self._runs.get(run_id)
@@ -321,7 +367,10 @@ class RunManager:
         kwargs: dict | None = None,
         multitask_strategy: str = "reject",
     ) -> RunRecord:
-        """Create a new pending run and register it."""
+        """Create a new pending run and register it.
+
+        创建新的待处理运行并注册它。
+        """
         run_id = str(uuid.uuid4())
         now = _now_iso()
         record = RunRecord(
@@ -347,6 +396,7 @@ class RunManager:
                 raise
             finally:
                 # Also covers cancellation, which bypasses ``except Exception``.
+                # 也覆盖了取消操作，取消操作会绕过 ``except Exception``。
                 if not persisted:
                     self._runs.pop(run_id, None)
         logger.info("Run created: run_id=%s thread_id=%s", run_id, thread_id)
@@ -358,6 +408,12 @@ class RunManager:
         Args:
             run_id: The run ID to look up.
             user_id: Optional user ID for permission filtering when hydrating from store.
+
+        通过 ID 返回运行记录，或返回 ``None``。
+
+        Args:
+            run_id: 要查找的运行 ID。
+            user_id: 从存储中恢复时用于权限过滤的可选用户 ID。
         """
         async with self._lock:
             record = self._runs.get(run_id)
@@ -372,6 +428,7 @@ class RunManager:
             return None
         # Re-check after store await: a concurrent create() may have inserted the
         # in-memory record while the store call was in flight.
+        # 在 store await 后重新检查：并发的 create() 可能在存储调用进行中时插入了内存记录。
         async with self._lock:
             record = self._runs.get(run_id)
         if record is not None:
@@ -388,6 +445,10 @@ class RunManager:
         """Return a run record by ID, checking the persistent store as fallback.
 
         Alias for :meth:`get` for backward compatibility.
+
+        通过 ID 返回运行记录，将持久化存储作为后备检查。
+
+        为了向后兼容，是 :meth:`get` 的别名。
         """
         return await self.get(run_id, user_id=user_id)
 
@@ -402,9 +463,20 @@ class RunManager:
             thread_id: The thread ID to filter by.
             user_id: Optional user ID for permission filtering when hydrating from store.
             limit: Maximum number of runs to return.
+
+        返回给定线程的运行记录，按最新优先排序，最多 ``limit`` 条记录。
+
+        只有当相同的 ``run_id`` 同时存在于内存和后端存储中时，内存中的运行才优先。合并结果按 ``created_at`` 最新优先排序，
+        并裁剪到 ``limit``（默认 100）。
+
+        Args:
+            thread_id: 要过滤的线程 ID。
+            user_id: 从存储中恢复时用于权限过滤的可选用户 ID。
+            limit: 返回的最大运行记录数。
         """
         async with self._lock:
             # Dict insertion order gives deterministic results when timestamps tie.
+            # 字典插入顺序在时间戳相同时提供确定性结果。
             memory_records = [r for r in self._runs.values() if r.thread_id == thread_id]
         if self._store is None:
             return sorted(memory_records, key=lambda r: r.created_at, reverse=True)[:limit]
@@ -425,7 +497,10 @@ class RunManager:
         return sorted(records_by_id.values(), key=lambda record: record.created_at, reverse=True)[:limit]
 
     async def set_status(self, run_id: str, status: RunStatus, *, error: str | None = None) -> None:
-        """Transition a run to a new status."""
+        """Transition a run to a new status.
+
+        将运行转换到新状态。
+        """
         async with self._lock:
             record = self._runs.get(run_id)
             if record is None:
@@ -439,7 +514,10 @@ class RunManager:
         logger.info("Run %s -> %s", run_id, status.value)
 
     async def _persist_model_name(self, run_id: str, model_name: str | None) -> None:
-        """Best-effort persist model_name update to the backing store."""
+        """Best-effort persist model_name update to the backing store.
+
+        尽力将 model_name 更新持久化到后端存储。
+        """
         if self._store is None:
             return
         try:
@@ -452,7 +530,10 @@ class RunManager:
             logger.warning("Failed to persist model_name update for run %s", run_id, exc_info=True)
 
     async def update_model_name(self, run_id: str, model_name: str | None) -> None:
-        """Update the model name for a run."""
+        """Update the model name for a run.
+
+        更新运行的模型名称。
+        """
         async with self._lock:
             record = self._runs.get(run_id)
             if record is None:
@@ -475,13 +556,23 @@ class RunManager:
         interrupted (idempotent — a second cancel is a no-op success).
         Returns ``False`` only when the run is unknown to this worker or has
         reached a terminal state other than interrupted (completed, failed, etc.).
+
+        请求取消运行。
+
+        Args:
+            run_id: 要取消的运行 ID。
+            action: "interrupt" 保留检查点，"rollback" 回滚到运行前状态。
+
+        使用操作原因设置中止事件并取消 asyncio 任务。
+        如果取消已启动 **或** 运行已被中断（幂等 — 第二次取消是无操作成功），则返回 ``True``。
+        仅当运行对此工作器未知或已达到除 interrupted 之外的终止状态（completed、failed 等）时返回 ``False``。
         """
         async with self._lock:
             record = self._runs.get(run_id)
             if record is None:
                 return False
             if record.status == RunStatus.interrupted:
-                return True  # idempotent — already cancelled on this worker
+                return True  # idempotent — already cancelled on this worker | 幂等 — 已在此工作器上取消
             if record.status not in (RunStatus.pending, RunStatus.running):
                 return False
             record.abort_action = action
@@ -513,6 +604,13 @@ class RunManager:
 
         This method holds the lock across both the check and the insert,
         eliminating the TOCTOU race in separate ``has_inflight`` + ``create``.
+
+        原子性地检查进行中的运行并创建新的运行。
+
+        对于 ``reject`` 策略，如果线程已有 pending/running 运行，则抛出 ``ConflictError``。
+        对于 ``interrupt``/``rollback``，在创建之前取消进行中的运行。
+
+        此方法在检查和插入之间持有锁，消除了分离的 ``has_inflight`` + ``create`` 中的 TOCTOU 竞争。
         """
         run_id = str(uuid.uuid4())
         now = _now_iso()
@@ -560,6 +658,7 @@ class RunManager:
                 raise
             finally:
                 # Also covers cancellation, which bypasses ``except Exception``.
+                # 也覆盖了取消操作，取消操作会绕过 ``except Exception``。
                 if not persisted:
                     self._runs.pop(run_id, None)
 
@@ -592,6 +691,12 @@ class RunManager:
         startup cannot still have a local worker.  This recovery step turns that
         ambiguous state into an explicit error instead of letting the UI show an
         indefinite active run.
+
+        当没有本地任务拥有持久化的活动运行时，将其标记为失败。
+
+        网关运行是进程本地的：asyncio 任务和中止事件存在于内存中，而运行行是持久的。
+        在 SQLite 支持的网关重启后，任何在启动前创建的持久化 ``pending`` 或 ``running`` 行不可能仍有本地工作器。
+        此恢复步骤将这种模糊状态转换为显式错误，而不是让 UI 显示一个无限期的活动运行。
         """
         if self._store is None:
             return []
@@ -633,12 +738,18 @@ class RunManager:
         return recovered
 
     async def has_inflight(self, thread_id: str) -> bool:
-        """Return ``True`` if *thread_id* has a pending or running run."""
+        """Return ``True`` if *thread_id* has a pending or running run.
+
+        如果 *thread_id* 有 pending 或 running 运行，则返回 ``True``。
+        """
         async with self._lock:
             return any(r.thread_id == thread_id and r.status in (RunStatus.pending, RunStatus.running) for r in self._runs.values())
 
     async def cleanup(self, run_id: str, *, delay: float = 300) -> None:
-        """Remove a run record after an optional delay."""
+        """Remove a run record after an optional delay.
+
+        在可选延迟后移除运行记录。
+        """
         if delay > 0:
             await asyncio.sleep(delay)
         async with self._lock:
@@ -671,6 +782,22 @@ class RunManager:
         precondition for the signal-reentrancy deadlock guarded by
         ``app.gateway.app._SHUTDOWN_HOOK_TIMEOUT_SECONDS``. Runs still active
         after ``timeout`` are logged and may still race teardown.
+
+        在进程关闭时取消并有界等待所有进行中的运行。
+
+        聊天运行在 fire-and-forget 后台 ``asyncio`` 任务中执行，通过共享的 checkpointer 写入检查点。
+        在关闭时，checkpointer 的资源（例如网关 ``AsyncExitStack`` 拥有的 postgres 连接池）被拆除；
+        如果此时运行任务仍在图中执行，langgraph 的
+        ``AsyncPregelLoop._checkpointer_put_after_previous`` 会在已关闭的连接池上运行其
+        ``finally: await checkpointer.aput(...)``。由于该 put 在 langgraph 内部任务中运行（不在 ``run_agent`` 的调用栈上），
+        产生的 ``psycopg_pool.PoolClosed`` 无法被工作器捕获，并在 ``asyncio.run()`` 关闭期间表现为未处理的异常
+        （bytedance/deer-flow issue #3373）。
+
+        在 checkpointer 关闭*之前*排空进行中的运行，可以让每个在 ``timeout`` 内完成的运行在资源仍然开放时刷新其最终检查点。
+        只有**没有**自行完成的运行才会被标记为 ``interrupted`` — 在排空期间完成（例如 ``success``）的运行保留其真实的终止状态，
+        而不是被统一覆盖。整个排空过程（包括尾随的状态持久化）受 ``timeout`` 限制，因此卡在清理中的运行
+        （或数据库压力下的慢速存储）无法挂起工作器关闭 — 这是 ``app.gateway.app._SHUTDOWN_HOOK_TIMEOUT_SECONDS``
+        所防护的信号重入死锁的前提条件。在 ``timeout`` 后仍然活动的运行会被记录日志，并可能仍与拆除过程竞争。
         """
         loop = asyncio.get_running_loop()
         deadline = loop.time() + timeout
@@ -683,6 +810,7 @@ class RunManager:
                 record.task.cancel()  # type: ignore[union-attr]  # filtered above
                 # Status is decided AFTER the drain (below), not here: a run that
                 # completes on its own during the drain must keep its real status.
+                # 状态在排空之后（下方）决定，而不是在这里：在排空期间自行完成的运行必须保留其真实状态。
 
         if not inflight:
             return
@@ -693,6 +821,8 @@ class RunManager:
         # Only mark/persist ``interrupted`` for runs that did not settle on their
         # own (still pending after the timeout, or ended cancelled). A run that
         # finished normally during the drain keeps the status it set for itself.
+        # 仅对未自行完成的运行（超时后仍为 pending，或已取消）标记/持久化 ``interrupted``。
+        # 在排空期间正常完成的运行保留其自行设置的状态。
         to_persist: list[RunRecord] = []
         async with self._lock:
             for record in inflight:
@@ -701,6 +831,7 @@ class RunManager:
                     # Completed on its own — retrieve any surfaced exception so it
                     # is not reported as "never retrieved", and keep its status.
                     task.exception()  # type: ignore[union-attr]  # done & not cancelled
+                    # 自行完成 — 检索任何已浮现的异常，使其不会被报告为"从未检索"，并保留其状态。
                     continue
                 if record.status in (RunStatus.pending, RunStatus.running):
                     record.status = RunStatus.interrupted
@@ -710,6 +841,8 @@ class RunManager:
         # Bound the trailing status persistence within the remaining budget so a
         # slow store (``_call_store_with_retry`` can back off under DB pressure)
         # cannot push shutdown past ``timeout``.
+        # 将尾随的状态持久化限制在剩余预算内，以便慢速存储（``_call_store_with_retry`` 可在数据库压力下退避）
+        # 不会将关闭推迟到 ``timeout`` 之后。
         if to_persist:
             remaining = deadline - loop.time()
             if remaining <= 0:
@@ -727,6 +860,8 @@ class RunManager:
                     # own failures, returning ``False``. Inspect the aggregate so a
                     # partial failure is surfaced at shutdown level (with the
                     # run_id) instead of being silently swallowed by the gather.
+                    # ``_persist_status`` 是尽力而为的：它捕获并记录自身的失败，返回 ``False``。
+                    # 检查聚合结果，以便部分失败在关闭级别上被暴露（带有 run_id），而不是被 gather 静默吞没。
                     for record, result in zip(to_persist, results):
                         if isinstance(result, Exception):
                             logger.warning("Unexpected error persisting interrupted status for run %s during shutdown: %r", record.run_id, result)
@@ -739,8 +874,14 @@ class RunManager:
 
 
 class ConflictError(Exception):
-    """Raised when multitask_strategy=reject and thread has inflight runs."""
+    """Raised when multitask_strategy=reject and thread has inflight runs.
+
+    当 multitask_strategy=reject 且线程有进行中的运行时抛出。
+    """
 
 
 class UnsupportedStrategyError(Exception):
-    """Raised when a multitask_strategy value is not yet implemented."""
+    """Raised when a multitask_strategy value is not yet implemented.
+
+    当 multitask_strategy 值尚未实现时抛出。
+    """

@@ -24,6 +24,7 @@ export function useI18n() {
   };
 
   // Initialize locale on mount
+  // 在挂载时初始化 locale
   useEffect(() => {
     const saved = getLocaleFromCookie();
     if (saved) {

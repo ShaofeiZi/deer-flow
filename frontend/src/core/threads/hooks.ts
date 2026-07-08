@@ -93,6 +93,8 @@ function dedupeMessagesByIdentity(messages: Message[]): Message[] {
   // treated as control messages for this merged view; hidden messages carrying
   // independent tracing/task semantics should use a distinct id or a custom
   // stream/state channel instead of relying on message dedupe preservation.
+  // 这是一个 UI 显示去重规则，而非通用的 LangChain 消息流契约。与可见消息共享标识的隐藏消息在此合并视图中被视为控制消息；
+  // 携带独立追踪/任务语义的隐藏消息应使用不同的 id 或自定义的流/状态通道，而不是依赖消息去重保留机制。
   messages.forEach((message, index) => {
     const identity = messageIdentity(message);
     if (identity) {
@@ -200,6 +202,8 @@ export function mergeMessages(
   // are UI control messages in this path, not observability records; any hidden
   // message that must survive as task/tracing data should use custom events or a
   // separate state channel instead of participating in this overlap heuristic.
+  // 仅可见的实时消息应裁剪重叠的历史记录。隐藏消息在此路径中是 UI 控制消息，而非可观测性记录；
+  // 任何必须作为任务/追踪数据保留的隐藏消息应使用自定义事件或独立的状态通道，而不是参与此重叠启发式算法。
   const threadMessageIds = new Set(
     threadMessages
       .filter((message) => !isHiddenFromUIMessage(message))
@@ -210,6 +214,8 @@ export function mergeMessages(
   // The overlap is a contiguous suffix of historyMessages (newest history == oldest thread).
   // Scan from the end: shrink cutoff while messages are already in thread, stop as soon as
   // we hit one that isn't — everything before that point is non-overlapping.
+  // 重叠部分是 historyMessages 的连续后缀（最新的历史 == 最旧的线程消息）。
+  // 从末尾扫描：当消息已在线程中时缩小截断点，一旦遇到不在线程中的消息就停止——该点之前的所有内容都是非重叠的。
   let cutoff = historyMessages.length;
   for (let i = historyMessages.length - 1; i >= 0; i--) {
     const msg = historyMessages[i];
@@ -409,6 +415,7 @@ export function useThreadStream({
   const currentViewThreadIdRef = useRef(currentViewThreadId);
   currentViewThreadIdRef.current = currentViewThreadId;
   // Optimistic messages shown before the server stream responds.
+  // 在服务器流响应之前显示的乐观消息。
   const [optimisticMessages, setOptimisticMessages] = useState<Message[]>([]);
   const [optimisticThreadId, setOptimisticThreadId] = useState<string | null>(
     null,
@@ -418,9 +425,11 @@ export function useThreadStream({
   >(null);
   const [isUploading, setIsUploading] = useState(false);
   // Track the thread ID that is currently streaming to handle thread changes during streaming
+  // 跟踪当前正在流式传输的线程 ID，以处理流式传输期间的线程切换
   const [onStreamThreadId, setOnStreamThreadId] = useState(() => threadId);
   // Ref to track current thread ID across async callbacks without causing re-renders,
   // and to allow access to the current thread id in onUpdateEvent
+  // Ref 用于在异步回调中跟踪当前线程 ID 而不触发重新渲染，并允许在 onUpdateEvent 中访问当前线程 ID
   const threadIdRef = useRef<string | null>(threadId ?? null);
   const startedRef = useRef(false);
   const pendingUsageBaselineMessageIdsRef = useRef<Set<string>>(new Set());
@@ -440,6 +449,7 @@ export function useThreadStream({
   } = useThreadHistory(onStreamThreadId ?? "", { enabled: !isMock });
 
   // Keep listeners ref updated with latest callbacks
+  // 保持 listeners ref 与最新的回调同步
   useEffect(() => {
     listeners.current = { onSend, onStart, onFinish, onToolEnd };
   }, [onSend, onStart, onFinish, onToolEnd]);
@@ -448,6 +458,7 @@ export function useThreadStream({
     const normalizedThreadId = threadId ?? null;
     if (!normalizedThreadId) {
       // Reset when the UI moves back to a brand new unsaved thread.
+      // 当 UI 返回到一个全新的未保存线程时重置。
       startedRef.current = false;
       setOnStreamThreadId(normalizedThreadId);
     } else {
@@ -705,6 +716,8 @@ export function useThreadStream({
   // messages before the server's human message arrives (e.g. when AI messages
   // from "messages-tuple" events arrive before the input human message from
   // "values" events).
+  // 在发送前跟踪人类消息计数，以防止在服务器的人类消息到达之前清除乐观消息
+  // （例如，当来自 "messages-tuple" 事件的 AI 消息在来自 "values" 事件的输入人类消息之前到达时）。
   const prevHumanMsgCountRef = useRef(humanMessageCount);
 
   latestMessageCountsRef.current = { humanMessageCount };
@@ -712,6 +725,7 @@ export function useThreadStream({
 
   // Reset thread-local pending UI state when switching between threads so
   // optimistic messages and in-flight guards do not leak across chat views.
+  // 在切换线程时重置线程本地的待处理 UI 状态，使乐观消息和进行中的防护不会跨聊天视图泄漏。
   useEffect(() => {
     startedRef.current = false;
     sendInFlightRef.current = false;
@@ -735,6 +749,8 @@ export function useThreadStream({
   // When streaming starts without a baseline (e.g. reconnection, run started
   // from another client, or page reload mid-stream), snapshot the current
   // messages so only *new* messages are treated as "pending" for token usage.
+  // 当流式传输在没有基线的情况下启动时（例如重连、从另一个客户端启动运行、或流式传输中途刷新页面），
+  // 快照当前消息，使只有 *新* 消息被视为 token 使用的"待处理"消息。
   useEffect(() => {
     if (
       thread.isLoading &&
@@ -753,6 +769,9 @@ export function useThreadStream({
   // human message has arrived to avoid clearing before the input message
   // appears in the stream (the input message may arrive via "values" events
   // after individual "messages-tuple" events for AI messages).
+  // 当服务器消息到达时清除乐观消息。
+  // 对于有人类乐观消息的消息，等待服务器的人类消息到达后再清除，
+  // 以避免在输入消息出现在流中之前清除（输入消息可能通过 "values" 事件在 AI 消息的各个 "messages-tuple" 事件之后到达）。
   const optimisticMessageCount = optimisticMessages.length;
   const hasHumanOptimistic = optimisticMessages.some((m) => m.type === "human");
   useEffect(() => {
@@ -782,6 +801,7 @@ export function useThreadStream({
 
       // Capture the current human message count before showing optimistic
       // messages so we can wait for the server's copy of the user input.
+      // 在显示乐观消息之前捕获当前的人类消息计数，以便等待服务器端的用户输入副本。
       prevHumanMsgCountRef.current = humanMessageCount;
       pendingUsageBaselineMessageIdsRef.current = new Set(
         persistedMessages
@@ -790,6 +810,7 @@ export function useThreadStream({
       );
 
       // Build optimistic files list with uploading status
+      // 构建带有上传状态的乐观文件列表
       const optimisticFiles: FileInMessage[] = (message.files ?? []).map(
         (f) => ({
           filename: f.filename ?? "",
@@ -816,6 +837,7 @@ export function useThreadStream({
 
       if (optimisticFiles.length > 0 && !hideFromUI) {
         // Mock AI message while files are being uploaded
+        // 文件上传期间模拟 AI 消息
         newOptimistic.push({
           type: "ai",
           id: `opt-ai-${Date.now()}`,
@@ -833,6 +855,7 @@ export function useThreadStream({
 
       try {
         // Upload files first if any
+        // 如果有文件，先上传
         if (message.files && message.files.length > 0) {
           setIsUploading(true);
           try {
@@ -861,6 +884,7 @@ export function useThreadStream({
               uploadedFileInfo = uploadResponse.files;
 
               // Update optimistic human message with uploaded status + paths
+              // 用上传状态和路径更新乐观人类消息
               const uploadedFiles: FileInMessage[] = uploadedFileInfo.map(
                 (info) => ({
                   filename: info.filename,
@@ -899,6 +923,7 @@ export function useThreadStream({
         }
 
         // Build files metadata for submission (included in additional_kwargs)
+        // 构建用于提交的文件元数据（包含在 additional_kwargs 中）
         const filesForSubmit: FileInMessage[] = uploadedFileInfo.map(
           (info) => ({
             filename: info.filename,
@@ -980,6 +1005,7 @@ export function useThreadStream({
 
   // Cache the latest thread messages in a ref to compare against incoming history messages for deduplication,
   // and to allow access to the full message list in onUpdateEvent without causing re-renders.
+  // 将最新的线程消息缓存到 ref 中，用于与传入的历史消息进行去重比较，并允许在 onUpdateEvent 中访问完整消息列表而不触发重新渲染。
   if (persistedMessages.length >= messagesRef.current.length) {
     messagesRef.current = persistedMessages;
   }
@@ -1004,6 +1030,8 @@ export function useThreadStream({
 
   // Merge history, live stream, and optimistic messages for display
   // History messages may overlap with thread.messages; thread.messages take precedence
+  // 合并历史、实时流和乐观消息用于显示
+  // 历史消息可能与 thread.messages 重叠；thread.messages 优先
   const mergedThread = {
     ...thread,
     values: hasVisibleStreamState ? thread.values : EMPTY_THREAD_VALUES,
@@ -1218,6 +1246,7 @@ export function useThreads(
 
       // Preserve prior semantics: if a non-positive limit is explicitly provided,
       // delegate to a single search call with the original parameters.
+      // 保留先前的语义：如果显式提供了非正数的 limit，则使用原始参数委托给单次搜索调用。
       if (maxResults !== undefined && maxResults <= 0) {
         const response =
           await apiClient.threads.search<AgentThreadState>(params);

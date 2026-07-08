@@ -3,6 +3,10 @@
 These endpoints auto-create a temporary thread when no ``thread_id`` is
 supplied in the request body.  When a ``thread_id`` **is** provided, it
 is reused so that conversation history is preserved across calls.
+| 无状态运行端点 -- 在没有预先存在的线程时进行流式传输和等待。
+
+当请求体中未提供 ``thread_id`` 时，这些端点会自动创建临时线程。
+当提供了 ``thread_id`` 时，会复用它以便跨调用保留对话历史。
 """
 
 from __future__ import annotations
@@ -25,7 +29,7 @@ router = APIRouter(prefix="/api/runs", tags=["runs"])
 
 
 def _resolve_thread_id(body: RunCreateRequest) -> str:
-    """Return the thread_id from the request body, or generate a new one."""
+    """Return the thread_id from the request body, or generate a new one. | 从请求体返回 thread_id，或生成一个新的。"""
     thread_id = (body.config or {}).get("configurable", {}).get("thread_id")
     if thread_id:
         return str(thread_id)
@@ -39,6 +43,10 @@ async def stateless_stream(body: RunCreateRequest, request: Request) -> Streamin
     If ``config.configurable.thread_id`` is provided, the run is created
     on the given thread so that conversation history is preserved.
     Otherwise a new temporary thread is created.
+    | 创建运行并通过 SSE 流式传输事件。
+
+    如果提供了 ``config.configurable.thread_id``，则在给定线程上创建运行，
+    以便保留对话历史。否则创建新的临时线程。
     """
     thread_id = _resolve_thread_id(body)
     bridge = get_stream_bridge(request)
@@ -64,6 +72,10 @@ async def stateless_wait(body: RunCreateRequest, request: Request) -> dict:
     If ``config.configurable.thread_id`` is provided, the run is created
     on the given thread so that conversation history is preserved.
     Otherwise a new temporary thread is created.
+    | 创建运行并阻塞直到完成。
+
+    如果提供了 ``config.configurable.thread_id``，则在给定线程上创建运行，
+    以便保留对话历史。否则创建新的临时线程。
     """
     thread_id = _resolve_thread_id(body)
     bridge = get_stream_bridge(request)
@@ -90,12 +102,12 @@ async def stateless_wait(body: RunCreateRequest, request: Request) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Run-scoped read endpoints
+# Run-scoped read endpoints | 运行范围的读取端点
 # ---------------------------------------------------------------------------
 
 
 async def _resolve_run(run_id: str, request: Request) -> dict:
-    """Fetch run by run_id with user ownership check. Raises 404 if not found."""
+    """Fetch run by run_id with user ownership check. Raises 404 if not found. | 通过 run_id 获取运行并进行用户所有权检查。如果未找到则抛出 404。"""
     run_store = get_run_store(request)
     record = await run_store.get(run_id)  # user_id=AUTO filters by contextvar
     if record is None:
@@ -120,6 +132,14 @@ async def run_messages(
     - neither: latest messages
 
     Response: { data: [...], has_more: bool }
+    | 返回运行的分页消息（基于游标）。
+
+    分页：
+    - after_seq: seq > after_seq 的消息（向前）
+    - before_seq: seq < before_seq 的消息（向后）
+    - 两者都不指定：最新消息
+
+    响应：{ data: [...], has_more: bool }
     """
     run = await _resolve_run(run_id, request)
     event_store = get_run_event_store(request)
@@ -137,7 +157,7 @@ async def run_messages(
 @router.get("/{run_id}/feedback")
 @require_permission("runs", "read")
 async def run_feedback(run_id: str, request: Request) -> list[dict]:
-    """Return all feedback for a run."""
+    """Return all feedback for a run. | 返回运行的所有反馈。"""
     run = await _resolve_run(run_id, request)
     feedback_repo = get_feedback_repo(request)
     return await feedback_repo.list_by_run(run["thread_id"], run_id)

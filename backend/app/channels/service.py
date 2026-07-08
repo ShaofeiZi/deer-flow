@@ -1,4 +1,7 @@
-"""ChannelService — manages the lifecycle of all IM channels."""
+"""ChannelService — manages the lifecycle of all IM channels.
+
+ChannelService — 管理所有 IM channels 的生命周期。
+"""
 
 from __future__ import annotations
 
@@ -17,6 +20,7 @@ if TYPE_CHECKING:
     from deerflow.config.app_config import AppConfig
 
 # Channel name → import path for lazy loading
+# | Channel 名称 → 导入路径（用于延迟加载）
 _CHANNEL_REGISTRY: dict[str, str] = {
     "dingtalk": "app.channels.dingtalk:DingTalkChannel",
     "discord": "app.channels.discord:DiscordChannel",
@@ -28,6 +32,7 @@ _CHANNEL_REGISTRY: dict[str, str] = {
 }
 
 # Keys that indicate a user has configured credentials for a channel.
+# | 表示用户已为某个 channel 配置了凭据的键。
 _CHANNEL_CREDENTIAL_KEYS: dict[str, list[str]] = {
     "dingtalk": ["client_id", "client_secret"],
     "discord": ["bot_token"],
@@ -57,6 +62,10 @@ class ChannelService:
 
     Reads configuration from ``config.yaml`` under the ``channels`` key,
     instantiates enabled channels, and starts the ChannelManager dispatcher.
+
+    管理所有已配置 IM channels 的生命周期。
+    从 ``config.yaml`` 的 ``channels`` 键下读取配置，
+    实例化已启用的 channels，并启动 ChannelManager 调度器。
     """
 
     def __init__(self, channels_config: dict[str, Any] | None = None) -> None:
@@ -76,25 +85,33 @@ class ChannelService:
             channel_sessions=channel_sessions,
         )
         self._channels: dict[str, Any] = {}  # name -> Channel instance
+        # | name -> Channel 实例
         self._config = config
         self._running = False
 
     @classmethod
     def from_app_config(cls, app_config: AppConfig | None = None) -> ChannelService:
-        """Create a ChannelService from the application config."""
+        """Create a ChannelService from the application config.
+
+        从应用程序配置创建 ChannelService。
+        """
         if app_config is None:
             from deerflow.config.app_config import get_app_config
 
             app_config = get_app_config()
         channels_config = {}
         # extra fields are allowed by AppConfig (extra="allow")
+        # | AppConfig 允许额外字段（extra="allow"）
         extra = app_config.model_extra or {}
         if "channels" in extra:
             channels_config = extra["channels"]
         return cls(channels_config=channels_config)
 
     async def start(self) -> None:
-        """Start the manager and all enabled channels."""
+        """Start the manager and all enabled channels.
+
+        启动 manager 和所有已启用的 channels。
+        """
         if self._running:
             return
 
@@ -122,7 +139,10 @@ class ChannelService:
         logger.info("ChannelService started with channels: %s", list(self._channels.keys()))
 
     async def stop(self) -> None:
-        """Stop all channels and the manager."""
+        """Stop all channels and the manager.
+
+        停止所有 channels 和 manager。
+        """
         for name, channel in list(self._channels.items()):
             try:
                 await channel.stop()
@@ -136,7 +156,10 @@ class ChannelService:
         logger.info("ChannelService stopped")
 
     async def restart_channel(self, name: str) -> bool:
-        """Restart a specific channel. Returns True if successful."""
+        """Restart a specific channel. Returns True if successful.
+
+        重启指定的 channel。成功返回 True。
+        """
         if name in self._channels:
             try:
                 await self._channels[name].stop()
@@ -152,7 +175,10 @@ class ChannelService:
         return await self._start_channel(name, config)
 
     async def _start_channel(self, name: str, config: dict[str, Any]) -> bool:
-        """Instantiate and start a single channel."""
+        """Instantiate and start a single channel.
+
+        实例化并启动单个 channel。
+        """
         import_path = _CHANNEL_REGISTRY.get(name)
         if not import_path:
             logger.warning("Unknown channel type: %s", name)
@@ -184,7 +210,10 @@ class ChannelService:
             return False
 
     def get_status(self) -> dict[str, Any]:
-        """Return status information for all channels."""
+        """Return status information for all channels.
+
+        返回所有 channels 的状态信息。
+        """
         channels_status = {}
         for name in _CHANNEL_REGISTRY:
             config = self._config.get(name, {})
@@ -200,22 +229,32 @@ class ChannelService:
         }
 
     def get_channel(self, name: str) -> Channel | None:
-        """Return a running channel instance by name when available."""
+        """Return a running channel instance by name when available.
+
+        按名称返回正在运行的 channel 实例（如果可用）。
+        """
         return self._channels.get(name)
 
 
 # -- singleton access -------------------------------------------------------
+# | 单例访问
 
 _channel_service: ChannelService | None = None
 
 
 def get_channel_service() -> ChannelService | None:
-    """Get the singleton ChannelService instance (if started)."""
+    """Get the singleton ChannelService instance (if started).
+
+    获取单例 ChannelService 实例（如果已启动）。
+    """
     return _channel_service
 
 
 async def start_channel_service(app_config: AppConfig | None = None) -> ChannelService:
-    """Create and start the global ChannelService from app config."""
+    """Create and start the global ChannelService from app config.
+
+    从 app config 创建并启动全局 ChannelService。
+    """
     global _channel_service
     if _channel_service is not None:
         return _channel_service
@@ -225,7 +264,10 @@ async def start_channel_service(app_config: AppConfig | None = None) -> ChannelS
 
 
 async def stop_channel_service() -> None:
-    """Stop the global ChannelService."""
+    """Stop the global ChannelService.
+
+    停止全局 ChannelService。
+    """
     global _channel_service
     if _channel_service is not None:
         await _channel_service.stop()
