@@ -1,0 +1,15 @@
+{
+  "local_docs": 356,
+  "local_issues": 0,
+  "issue_sample": [],
+  "remote_records": 355,
+  "remote_snapshot_docs": 356,
+  "verify_core_md": 99,
+  "failure_files": {
+    "p1_update_failures.json": 0,
+    "p1_missed_failures.json": 0,
+    "static_cleanup_update_failures.json": 0,
+    "final_static_update_failures.json": 0
+  },
+  "sync_ledger_entries": 225
+}

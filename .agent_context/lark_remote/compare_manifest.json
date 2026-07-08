@@ -1,0 +1,2502 @@
+{
+  "remote_count": 355,
+  "local_count": 356,
+  "matched_count": 355,
+  "local_not_remote": [
+    {
+      "path": ".agent_context/final_review/docs_md/355｜只会 JS 的前端学习 DeerFlow 路线图.md",
+      "name": "355｜只会 JS 的前端学习 DeerFlow 路线图",
+      "title": "355｜只会 JS 的前端学习 DeerFlow 路线图",
+      "sha256": "788a647a0138a89ff3a7b434609ee7c4c6a2fb30b2569691b661825c8f0f5bea",
+      "chars": 9540
+    }
+  ],
+  "remote_not_local": [],
+  "changed_matched": [
+    {
+      "local": ".agent_context/final_review/docs_md/01｜DeerFlow 整体架构与分层总览.md",
+      "remote": ".agent_context/lark_remote/docs_md/01｜DeerFlow 整体架构与分层总览.md",
+      "local_chars": 2919,
+      "remote_chars": 3773,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/02｜Gateway 与 LangGraph 运行时详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/02｜Gateway 与 LangGraph 运行时详解.md",
+      "local_chars": 3142,
+      "remote_chars": 3988,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/03｜Lead Agent_Prompt_Tools 与 Middleware 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/03｜Lead Agent、Prompt、Tools 与 Middleware 详解.md",
+      "local_chars": 3395,
+      "remote_chars": 4300,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/04｜Tools_Sandbox_Uploads 与 Artifacts 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/04｜Tools、Sandbox、Uploads 与 Artifacts 详解.md",
+      "local_chars": 2983,
+      "remote_chars": 3932,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/05｜Skills_MCP 与 Memory 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/05｜Skills、MCP 与 Memory 详解.md",
+      "local_chars": 3041,
+      "remote_chars": 3883,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/06｜Frontend Workspace 与 Chat 主链路详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/06｜Frontend Workspace 与 Chat 主链路详解.md",
+      "local_chars": 2235,
+      "remote_chars": 3197,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/07｜Frontend Settings_Models_Artifacts 数据流详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/07｜Frontend Settings、Models、Artifacts 数据流详解.md",
+      "local_chars": 2087,
+      "remote_chars": 3020,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/08｜配置_部署_测试与排障详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/08｜配置、部署、测试与排障详解.md",
+      "local_chars": 3054,
+      "remote_chars": 3803,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/09｜Auth_CSRF_权限与 IM Channels 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/09｜Auth、CSRF、权限与 IM Channels 详解.md",
+      "local_chars": 2442,
+      "remote_chars": 2442,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/100｜AI Elements Message_Conversation_PromptInput 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/100｜AI Elements Message、Conversation、PromptInput 详解.md",
+      "local_chars": 1013,
+      "remote_chars": 1756,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/101｜AI Elements Reasoning_Task_Artifact 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/101｜AI Elements Reasoning、Task、Artifact 详解.md",
+      "local_chars": 1029,
+      "remote_chars": 1029,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/102｜UI Layout Primitives_Sidebar_Resizable_ScrollArea_Dialog 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/102｜UI Layout Primitives：Sidebar、Resizable、ScrollArea、Dialog 详解.md",
+      "local_chars": 1017,
+      "remote_chars": 1017,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/103｜UI Input_Command_Select_Dropdown Primitives 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/103｜UI Input、Command、Select、Dropdown Primitives 详解.md",
+      "local_chars": 856,
+      "remote_chars": 856,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/104｜AI Elements CodeBlock_WebPreview_Canvas_Image 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/104｜AI Elements CodeBlock、WebPreview、Canvas、Image 详解.md",
+      "local_chars": 978,
+      "remote_chars": 978,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/105｜AI Elements ModelSelector_Loader_Suggestion_Sources 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/105｜AI Elements ModelSelector、Loader、Suggestion、Sources 详解.md",
+      "local_chars": 1057,
+      "remote_chars": 1057,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/106｜UI Feedback_Display Primitives 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/106｜UI Feedback_Display Primitives 详解.md",
+      "local_chars": 1011,
+      "remote_chars": 1011,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/107｜UI Navigation_Overlay Primitives 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/107｜UI Navigation_Overlay Primitives 详解.md",
+      "local_chars": 1020,
+      "remote_chars": 1020,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/108｜Claude_vLLM_MindIE_OpenAI Codex Provider 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/108｜Claude、vLLM、MindIE、OpenAI Codex Provider 详解.md",
+      "local_chars": 1062,
+      "remote_chars": 1062,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/109｜Tracing_TokenUsage_ACP 配置文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/109｜Tracing、TokenUsage、ACP 配置文件详解.md",
+      "local_chars": 1244,
+      "remote_chars": 1244,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/10｜Models_Tracing_Persistence 与 Token Usage 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/10｜Models、Tracing、Persistence 与 Token Usage 详解.md",
+      "local_chars": 2553,
+      "remote_chars": 2553,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/110｜Frontend Streamdown_MDX_Markdown 渲染详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/110｜Frontend Streamdown、MDX、Markdown 渲染详解.md",
+      "local_chars": 1168,
+      "remote_chars": 1168,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/111｜AI Elements Conversation 与 Message 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/111｜AI Elements Conversation 与 Message 详解.md",
+      "local_chars": 908,
+      "remote_chars": 908,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/112｜AI Elements PromptInput 与 Controls 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/112｜AI Elements PromptInput 与 Controls 详解.md",
+      "local_chars": 1003,
+      "remote_chars": 1003,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/113｜AI Elements Artifact_Panel_OpenInChat 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/113｜AI Elements Artifact、Panel、OpenInChat 详解.md",
+      "local_chars": 866,
+      "remote_chars": 866,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/114｜AI Elements Node_Edge_Checkpoint 图元素详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/114｜AI Elements Node、Edge、Checkpoint 图元素详解.md",
+      "local_chars": 940,
+      "remote_chars": 940,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/115｜UI Form Primitives_Button_Input_Textarea_Switch_Toggle 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/115｜UI Form Primitives：Button、Input、Textarea、Switch、Toggle 详解.md",
+      "local_chars": 1038,
+      "remote_chars": 1038,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/116｜UI Data Display Primitives_Card_Avatar_Item_Table-like 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/116｜UI Data Display Primitives：Card、Avatar、Item、Table-like 详解.md",
+      "local_chars": 977,
+      "remote_chars": 977,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/117｜UI Visual Effects Primitives_MagicBento_Aurora_Shine_Spotlight 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/117｜UI Visual Effects Primitives：MagicBento、Aurora、Shine、Spotlight 详解.md",
+      "local_chars": 1077,
+      "remote_chars": 1077,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/118｜Workspace Welcome 与 AgentWelcome 组件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/118｜Workspace Welcome 与 AgentWelcome 组件详解.md",
+      "local_chars": 910,
+      "remote_chars": 910,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/119｜ThreadTitle_TokenUsageIndicator_ExportTrigger 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/119｜ThreadTitle、TokenUsageIndicator、ExportTrigger 详解.md",
+      "local_chars": 998,
+      "remote_chars": 998,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/11｜Gateway Routers API 模块逐项详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/11｜Gateway Routers API 模块逐项详解.md",
+      "local_chars": 2470,
+      "remote_chars": 2470,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/120｜TodoList_CopyButton_Citations 组件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/120｜TodoList、CopyButton、Citations 组件详解.md",
+      "local_chars": 935,
+      "remote_chars": 935,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/121｜Gateway Offline Banner_Fallback 组件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/121｜Gateway Offline Banner_Fallback 组件详解.md",
+      "local_chars": 1082,
+      "remote_chars": 1082,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/122｜AgentGallery_AgentCard 与 NewAgent Page 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/122｜AgentGallery、AgentCard 与 NewAgent Page 详解.md",
+      "local_chars": 1164,
+      "remote_chars": 1164,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/123｜WorkspaceContainer_Header_Overscroll 组件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/123｜WorkspaceContainer、Header、Overscroll 组件详解.md",
+      "local_chars": 1056,
+      "remote_chars": 1056,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/124｜CodeEditor 与 Artifact Detail 交互详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/124｜CodeEditor 与 Artifact Detail 交互详解.md",
+      "local_chars": 1100,
+      "remote_chars": 1100,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/125｜SettingsDialog 与 SettingsSection 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/125｜SettingsDialog 与 SettingsSection 详解.md",
+      "local_chars": 1034,
+      "remote_chars": 1034,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/126｜Tool_Skill_Memory Settings Pages 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/126｜Tool、Skill、Memory Settings Pages 详解.md",
+      "local_chars": 1195,
+      "remote_chars": 1195,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/127｜Account_Appearance_Notification_About Settings Pages 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/127｜Account、Appearance、Notification、About Settings Pages 详解.md",
+      "local_chars": 1112,
+      "remote_chars": 1112,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/128｜Artifacts Context_Trigger_List_Detail 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/128｜Artifacts Context、Trigger、List、Detail 详解.md",
+      "local_chars": 1176,
+      "remote_chars": 1176,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/129｜Messages List_Item_Group_Subtask 组件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/129｜Messages List、Item、Group、Subtask 组件详解.md",
+      "local_chars": 1041,
+      "remote_chars": 1041,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/12｜Runtime RunManager_StreamBridge_Journal 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/12｜Runtime RunManager、StreamBridge、Journal 详解.md",
+      "local_chars": 2343,
+      "remote_chars": 2343,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/130｜Core Threads Stream_History_Cache 函数组详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/130｜Core Threads Stream、History、Cache 函数组详解.md",
+      "local_chars": 1093,
+      "remote_chars": 1093,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/131｜Core Threads Runs_Delete_Rename_Token Usage Hooks 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/131｜Core Threads Runs、Delete、Rename、Token Usage Hooks 详解.md",
+      "local_chars": 1143,
+      "remote_chars": 1143,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/132｜Backend Tests 测试体系详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/132｜Backend Tests 测试体系详解.md",
+      "local_chars": 1108,
+      "remote_chars": 1835,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/133｜Frontend Tests 与 Playwright E2E 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/133｜Frontend Tests 与 Playwright E2E 详解.md",
+      "local_chars": 1082,
+      "remote_chars": 1824,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/134｜GitHub Workflows CI 流水线详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/134｜GitHub Workflows CI 流水线详解.md",
+      "local_chars": 1109,
+      "remote_chars": 1109,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/135｜Scripts Setup_Dev_Deploy 脚本详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/135｜Scripts Setup_Dev_Deploy 脚本详解.md",
+      "local_chars": 1096,
+      "remote_chars": 1096,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/136｜Scripts Diagnostics_Maintenance 脚本详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/136｜Scripts Diagnostics_Maintenance 脚本详解.md",
+      "local_chars": 1182,
+      "remote_chars": 1182,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/137｜Docker Compose_Nginx_Provisioner 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/137｜Docker Compose、Nginx、Provisioner 详解.md",
+      "local_chars": 1172,
+      "remote_chars": 1172,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/138｜Public Skills 分类与运行逻辑详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/138｜Public Skills 分类与运行逻辑详解.md",
+      "local_chars": 1351,
+      "remote_chars": 1351,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/139｜Research_Review Public Skills 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/139｜Research_Review Public Skills 详解.md",
+      "local_chars": 1106,
+      "remote_chars": 1106,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/13｜Backend Middleware 模块逐项详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/13｜Backend Middleware 模块逐项详解.md",
+      "local_chars": 2279,
+      "remote_chars": 2279,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/140｜Media Generation Public Skills 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/140｜Media Generation Public Skills 详解.md",
+      "local_chars": 1143,
+      "remote_chars": 1143,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/141｜Development_Deploy Public Skills 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/141｜Development_Deploy Public Skills 详解.md",
+      "local_chars": 1163,
+      "remote_chars": 1163,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/142｜Analysis_Consulting Public Skills 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/142｜Analysis_Consulting Public Skills 详解.md",
+      "local_chars": 1070,
+      "remote_chars": 1070,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/143｜Meta_Bootstrap Public Skills 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/143｜Meta_Bootstrap Public Skills 详解.md",
+      "local_chars": 1035,
+      "remote_chars": 1035,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/144｜Skills Package Tests 与脚本详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/144｜Skills Package Tests 与脚本详解.md",
+      "local_chars": 1213,
+      "remote_chars": 1213,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/145｜deep-research Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/145｜deep-research Public Skill 详解.md",
+      "local_chars": 1056,
+      "remote_chars": 1056,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/146｜github-deep-research Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/146｜github-deep-research Public Skill 详解.md",
+      "local_chars": 1125,
+      "remote_chars": 1125,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/147｜academic-paper-review Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/147｜academic-paper-review Public Skill 详解.md",
+      "local_chars": 1110,
+      "remote_chars": 1110,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/148｜systematic-literature-review Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/148｜systematic-literature-review Public Skill 详解.md",
+      "local_chars": 1142,
+      "remote_chars": 1142,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/149｜frontend-design Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/149｜frontend-design Public Skill 详解.md",
+      "local_chars": 1067,
+      "remote_chars": 1067,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/14｜Frontend Core Hooks 与 UI 模块逐项详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/14｜Frontend Core Hooks 与 UI 模块逐项详解.md",
+      "local_chars": 2373,
+      "remote_chars": 2373,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/150｜web-design-guidelines Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/150｜web-design-guidelines Public Skill 详解.md",
+      "local_chars": 1114,
+      "remote_chars": 1114,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/151｜data-analysis Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/151｜data-analysis Public Skill 详解.md",
+      "local_chars": 1063,
+      "remote_chars": 1063,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/152｜chart-visualization Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/152｜chart-visualization Public Skill 详解.md",
+      "local_chars": 1107,
+      "remote_chars": 1107,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/153｜image-generation Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/153｜image-generation Public Skill 详解.md",
+      "local_chars": 1088,
+      "remote_chars": 1088,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/154｜skill-creator Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/154｜skill-creator Public Skill 详解.md",
+      "local_chars": 1069,
+      "remote_chars": 1069,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/155｜music-generation Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/155｜music-generation Public Skill 详解.md",
+      "local_chars": 1081,
+      "remote_chars": 1081,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/156｜video-generation Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/156｜video-generation Public Skill 详解.md",
+      "local_chars": 1081,
+      "remote_chars": 1081,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/157｜podcast-generation Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/157｜podcast-generation Public Skill 详解.md",
+      "local_chars": 1097,
+      "remote_chars": 1097,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/158｜ppt-generation Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/158｜ppt-generation Public Skill 详解.md",
+      "local_chars": 1085,
+      "remote_chars": 1085,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/159｜newsletter-generation Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/159｜newsletter-generation Public Skill 详解.md",
+      "local_chars": 1130,
+      "remote_chars": 1130,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/15｜Config_Paths 与 Hot Reload 边界详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/15｜Config、Paths 与 Hot Reload 边界详解.md",
+      "local_chars": 2738,
+      "remote_chars": 2738,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/160｜find-skills Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/160｜find-skills Public Skill 详解.md",
+      "local_chars": 1060,
+      "remote_chars": 1060,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/161｜bootstrap Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/161｜bootstrap Public Skill 详解.md",
+      "local_chars": 1039,
+      "remote_chars": 1039,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/162｜surprise-me Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/162｜surprise-me Public Skill 详解.md",
+      "local_chars": 1052,
+      "remote_chars": 1052,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/163｜vercel-deploy-claimable Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/163｜vercel-deploy-claimable Public Skill 详解.md",
+      "local_chars": 1114,
+      "remote_chars": 1114,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/164｜code-documentation Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/164｜code-documentation Public Skill 详解.md",
+      "local_chars": 1099,
+      "remote_chars": 1099,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/165｜consulting-analysis Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/165｜consulting-analysis Public Skill 详解.md",
+      "local_chars": 1109,
+      "remote_chars": 1109,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/166｜claude-to-deerflow Public Skill 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/166｜claude-to-deerflow Public Skill 详解.md",
+      "local_chars": 1110,
+      "remote_chars": 1110,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/167｜Backend Router Tests 分类详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/167｜Backend Router Tests 分类详解.md",
+      "local_chars": 1068,
+      "remote_chars": 1068,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/168｜Backend Runtime_Run_Stream Tests 分类详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/168｜Backend Runtime_Run_Stream Tests 分类详解.md",
+      "local_chars": 1243,
+      "remote_chars": 1243,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/169｜Backend Agent_Middleware Tests 分类详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/169｜Backend Agent_Middleware Tests 分类详解.md",
+      "local_chars": 1192,
+      "remote_chars": 1192,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/16｜Subagents_Task Tool 与并发执行详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/16｜Subagents、Task Tool 与并发执行详解.md",
+      "local_chars": 2092,
+      "remote_chars": 2092,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/170｜Backend Sandbox_MCP_Memory Tests 分类详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/170｜Backend Sandbox_MCP_Memory Tests 分类详解.md",
+      "local_chars": 1186,
+      "remote_chars": 1186,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/171｜Frontend E2E Specs 分类详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/171｜Frontend E2E Specs 分类详解.md",
+      "local_chars": 1013,
+      "remote_chars": 1013,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/172｜GitHub Workflow 文件逐项详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/172｜GitHub Workflow 文件逐项详解.md",
+      "local_chars": 1138,
+      "remote_chars": 1138,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/173｜Setup Wizard Scripts 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/173｜Setup Wizard Scripts 详解.md",
+      "local_chars": 1156,
+      "remote_chars": 1156,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/174｜Backend_Frontend Unit Test Workflows 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/174｜Backend_Frontend Unit Test Workflows 详解.md",
+      "local_chars": 1060,
+      "remote_chars": 1060,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/175｜E2E_Replay_Container Workflows 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/175｜E2E、Replay、Container Workflows 详解.md",
+      "local_chars": 1054,
+      "remote_chars": 1054,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/176｜check.py_doctor.py_configure.py_config-upgrade 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/176｜check.py、doctor.py、configure.py、config-upgrade 详解.md",
+      "local_chars": 1086,
+      "remote_chars": 1086,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/177｜serve.sh_docker.sh_deploy.sh 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/177｜serve.sh、docker.sh、deploy.sh 详解.md",
+      "local_chars": 1204,
+      "remote_chars": 1204,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/178｜Frontend E2E Chat_Sidebar_Artifacts Specs 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/178｜Frontend E2E Chat_Sidebar_Artifacts Specs 详解.md",
+      "local_chars": 1159,
+      "remote_chars": 1159,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/179｜Frontend E2E History_Landing_Real Backend Specs 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/179｜Frontend E2E History_Landing_Real Backend Specs 详解.md",
+      "local_chars": 1122,
+      "remote_chars": 1122,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/17｜Model Provider Factory 与模型适配详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/17｜Model Provider Factory 与模型适配详解.md",
+      "local_chars": 1975,
+      "remote_chars": 1975,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/180｜Backend Blocking IO Tests 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/180｜Backend Blocking IO Tests 详解.md",
+      "local_chars": 1183,
+      "remote_chars": 1183,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/181｜Auth _ Owner Isolation Tests 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/181｜Auth _ Owner Isolation Tests 详解.md",
+      "local_chars": 1072,
+      "remote_chars": 1072,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/182｜Upload _ Artifact _ File Conversion Tests 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/182｜Upload _ Artifact _ File Conversion Tests 详解.md",
+      "local_chars": 1224,
+      "remote_chars": 1224,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/183｜Model _ Provider _ Config Tests 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/183｜Model _ Provider _ Config Tests 详解.md",
+      "local_chars": 1156,
+      "remote_chars": 1156,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/184｜Skills _ Tools _ Deferred Tests 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/184｜Skills _ Tools _ Deferred Tests 详解.md",
+      "local_chars": 1218,
+      "remote_chars": 1218,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/185｜Channels _ Community Provider Tests 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/185｜Channels _ Community Provider Tests 详解.md",
+      "local_chars": 1125,
+      "remote_chars": 1125,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/186｜Label Sync _ Triage _ Container Workflow 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/186｜Label Sync _ Triage _ Container Workflow 详解.md",
+      "local_chars": 1121,
+      "remote_chars": 1121,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/187｜OAuth _ Memory _ Sandbox _ Detection Scripts 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/187｜OAuth _ Memory _ Sandbox _ Detection Scripts 详解.md",
+      "local_chars": 1211,
+      "remote_chars": 1211,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/188｜docker_provisioner_app.py 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/188｜docker_provisioner_app.py 单文件详解.md",
+      "local_chars": 1026,
+      "remote_chars": 1026,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/189｜docker-compose 与 nginx 配置单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/189｜docker-compose 与 nginx 配置单文件详解.md",
+      "local_chars": 982,
+      "remote_chars": 982,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/18｜Persistence_Database_ThreadMeta 与 Feedback 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/18｜Persistence、Database、ThreadMeta 与 Feedback 详解.md",
+      "local_chars": 2256,
+      "remote_chars": 2256,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/190｜run-with-git-bash_wait-for-port_cleanup 脚本详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/190｜run-with-git-bash、wait-for-port、cleanup 脚本详解.md",
+      "local_chars": 1059,
+      "remote_chars": 1059,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/191｜Client E2E _ Live Tests 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/191｜Client E2E _ Live Tests 详解.md",
+      "local_chars": 1067,
+      "remote_chars": 1067,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/192｜ThreadState _ Reducers _ Serialization Tests 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/192｜ThreadState _ Reducers _ Serialization Tests 详解.md",
+      "local_chars": 1212,
+      "remote_chars": 1212,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/193｜Tracing _ Token Usage Tests 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/193｜Tracing _ Token Usage Tests 详解.md",
+      "local_chars": 1123,
+      "remote_chars": 1123,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/194｜Setup_Update Agent E2E Tests 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/194｜Setup_Update Agent E2E Tests 详解.md",
+      "local_chars": 1207,
+      "remote_chars": 1207,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/195｜Sandbox Provider 深层测试族详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/195｜Sandbox Provider 深层测试族详解.md",
+      "local_chars": 1119,
+      "remote_chars": 1119,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/196｜MCP _ Deferred _ ToolSearch 测试族详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/196｜MCP _ Deferred _ ToolSearch 测试族详解.md",
+      "local_chars": 1136,
+      "remote_chars": 1136,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/197｜Memory _ Title _ Summarization 测试族详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/197｜Memory _ Title _ Summarization 测试族详解.md",
+      "local_chars": 1119,
+      "remote_chars": 1119,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/198｜Frontend Unit 与 Real Backend Tests 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/198｜Frontend Unit 与 Real Backend Tests 详解.md",
+      "local_chars": 1096,
+      "remote_chars": 1096,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/199｜docs_superpowers Specs 与 Plans 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/199｜docs_superpowers Specs 与 Plans 详解.md",
+      "local_chars": 1061,
+      "remote_chars": 1061,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/19｜Middleware 基建类文件详解_ThreadData_Uploads_Sandbox_ToolOutputBudget.md",
+      "remote": ".agent_context/lark_remote/docs_md/19｜Middleware 基建类文件详解：ThreadData、Uploads、Sandbox、ToolOutputBudget.md",
+      "local_chars": 2062,
+      "remote_chars": 2062,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/200｜Backend Docs Architecture_API_Config 文档详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/200｜Backend Docs Architecture_API_Config 文档详解.md",
+      "local_chars": 1028,
+      "remote_chars": 1028,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/201｜Root Docs_Install_Contributing_Security 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/201｜Root Docs、Install、Contributing、Security 详解.md",
+      "local_chars": 1108,
+      "remote_chars": 1108,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/202｜test_auth _ auth_middleware _ csrf 测试详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/202｜test_auth _ auth_middleware _ csrf 测试详解.md",
+      "local_chars": 1091,
+      "remote_chars": 1091,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/203｜Run API _ Runs Endpoint 测试详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/203｜Run API _ Runs Endpoint 测试详解.md",
+      "local_chars": 1134,
+      "remote_chars": 1134,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/204｜Threads _ Uploads _ Artifacts Router 测试详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/204｜Threads _ Uploads _ Artifacts Router 测试详解.md",
+      "local_chars": 1110,
+      "remote_chars": 1110,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/205｜MiniMax Generation Providers Specs_Plans 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/205｜MiniMax Generation Providers Specs_Plans 详解.md",
+      "local_chars": 1081,
+      "remote_chars": 1081,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/206｜Event Store _ History Specs_Plans 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/206｜Event Store _ History Specs_Plans 详解.md",
+      "local_chars": 1062,
+      "remote_chars": 1062,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/207｜Summarize Marker _ Langfuse Tracing Plans 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/207｜Summarize Marker _ Langfuse Tracing Plans 详解.md",
+      "local_chars": 1059,
+      "remote_chars": 1059,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/208｜README _ Install _ Contributing 深入详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/208｜README _ Install _ Contributing 深入详解.md",
+      "local_chars": 1002,
+      "remote_chars": 1002,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/209｜backend_docs_API.md 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/209｜backend_docs_API.md 详解.md",
+      "local_chars": 1083,
+      "remote_chars": 1083,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/20｜Middleware 上下文与 UX 类文件详解_Dynamic_Skill_Summary_Todo_Title_Memory.md",
+      "remote": ".agent_context/lark_remote/docs_md/20｜Middleware 上下文与 UX 类文件详解：Dynamic、Skill、Summary、Todo、Title、Memory.md",
+      "local_chars": 1690,
+      "remote_chars": 1690,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/210｜backend_docs_CONFIGURATION.md 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/210｜backend_docs_CONFIGURATION.md 详解.md",
+      "local_chars": 1032,
+      "remote_chars": 1032,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/211｜backend_docs_MCP_SERVER.md 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/211｜backend_docs_MCP_SERVER.md 详解.md",
+      "local_chars": 981,
+      "remote_chars": 981,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/212｜backend_docs_STREAMING.md 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/212｜backend_docs_STREAMING.md 详解.md",
+      "local_chars": 1004,
+      "remote_chars": 1004,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/213｜backend_docs_FILE_UPLOAD.md 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/213｜backend_docs_FILE_UPLOAD.md 详解.md",
+      "local_chars": 1150,
+      "remote_chars": 1150,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/214｜backend_docs_AUTH_DESIGN _ AUTH_UPGRADE 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/214｜backend_docs_AUTH_DESIGN _ AUTH_UPGRADE 详解.md",
+      "local_chars": 989,
+      "remote_chars": 989,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/215｜backend_docs_GUARDRAILS 与 PATH_EXAMPLES 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/215｜backend_docs_GUARDRAILS 与 PATH_EXAMPLES 详解.md",
+      "local_chars": 1053,
+      "remote_chars": 1053,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/216｜Memory Improvements _ Settings Docs 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/216｜Memory Improvements _ Settings Docs 详解.md",
+      "local_chars": 1064,
+      "remote_chars": 1064,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/217｜Title Generation Docs 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/217｜Title Generation Docs 详解.md",
+      "local_chars": 1041,
+      "remote_chars": 1041,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/218｜Replay _ Setup _ TODO _ Plan Mode Docs 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/218｜Replay _ Setup _ TODO _ Plan Mode Docs 详解.md",
+      "local_chars": 1030,
+      "remote_chars": 1030,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/219｜Backend RFC Docs 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/219｜Backend RFC Docs 详解.md",
+      "local_chars": 1108,
+      "remote_chars": 1108,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/21｜Run 与 Thread Router 文件级详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/21｜Run 与 Thread Router 文件级详解.md",
+      "local_chars": 2009,
+      "remote_chars": 2009,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/220｜Apple Container _ Auth Docker Gap Docs 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/220｜Apple Container _ Auth Docker Gap Docs 详解.md",
+      "local_chars": 1026,
+      "remote_chars": 1026,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/221｜CODE_CHANGE_SUMMARY 与 SKILL_NAME_CONFLICT_FIX 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/221｜CODE_CHANGE_SUMMARY 与 SKILL_NAME_CONFLICT_FIX 详解.md",
+      "local_chars": 1010,
+      "remote_chars": 1010,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/222｜docs_pr-evidence 证据材料详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/222｜docs_pr-evidence 证据材料详解.md",
+      "local_chars": 907,
+      "remote_chars": 907,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/223｜AUTO_TITLE _ TITLE_GENERATION 文档单独详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/223｜AUTO_TITLE _ TITLE_GENERATION 文档单独详解.md",
+      "local_chars": 883,
+      "remote_chars": 883,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/224｜REPLAY_E2E 文档单独详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/224｜REPLAY_E2E 文档单独详解.md",
+      "local_chars": 1062,
+      "remote_chars": 1062,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/225｜OpenAPI _ Setup _ Guardrails 相关文档详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/225｜OpenAPI _ Setup _ Guardrails 相关文档详解.md",
+      "local_chars": 943,
+      "remote_chars": 943,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/226｜docs_superpowers 全部 Specs_Plans 总览详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/226｜docs_superpowers 全部 Specs_Plans 总览详解.md",
+      "local_chars": 926,
+      "remote_chars": 926,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/227｜Frontend Content Introduction_Harness 文档分类详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/227｜Frontend Content Introduction_Harness 文档分类详解.md",
+      "local_chars": 1050,
+      "remote_chars": 1050,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/228｜Frontend Content Reference_Application_Tutorials 分类详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/228｜Frontend Content Reference_Application_Tutorials 分类详解.md",
+      "local_chars": 954,
+      "remote_chars": 954,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/229｜docs_plans 与 Root Docs 规划文档详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/229｜docs_plans 与 Root Docs 规划文档详解.md",
+      "local_chars": 1019,
+      "remote_chars": 1019,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/22｜管理类 Router 文件级详解_Models_MCP_Skills_Memory_Agents.md",
+      "remote": ".agent_context/lark_remote/docs_md/22｜管理类 Router 文件级详解：Models、MCP、Skills、Memory、Agents.md",
+      "local_chars": 1951,
+      "remote_chars": 1951,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/230｜Frontend Content Introduction Docs 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/230｜Frontend Content Introduction Docs 详解.md",
+      "local_chars": 1004,
+      "remote_chars": 1004,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/231｜Frontend Content Harness _ Reference Docs 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/231｜Frontend Content Harness _ Reference Docs 详解.md",
+      "local_chars": 1021,
+      "remote_chars": 1021,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/232｜Frontend Content Application _ Tutorials _ Posts 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/232｜Frontend Content Application _ Tutorials _ Posts 详解.md",
+      "local_chars": 993,
+      "remote_chars": 993,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/233｜MiniMax Provider Spec_Plan 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/233｜MiniMax Provider Spec_Plan 单文件详解.md",
+      "local_chars": 952,
+      "remote_chars": 952,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/234｜Event Store History Plan 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/234｜Event Store History Plan 单文件详解.md",
+      "local_chars": 968,
+      "remote_chars": 968,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/235｜Summarize Marker Spec 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/235｜Summarize Marker Spec 单文件详解.md",
+      "local_chars": 912,
+      "remote_chars": 912,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/236｜backend_docs_summarization.md 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/236｜backend_docs_summarization.md 单文件详解.md",
+      "local_chars": 1056,
+      "remote_chars": 1056,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/237｜Frontend Reference Model Providers 文档详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/237｜Frontend Reference Model Providers 文档详解.md",
+      "local_chars": 966,
+      "remote_chars": 966,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/238｜Frontend Blog Posts 与 Tags 文档详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/238｜Frontend Blog Posts 与 Tags 文档详解.md",
+      "local_chars": 990,
+      "remote_chars": 990,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/239｜OpenAPI _ SSE _ Streaming Contract 文档详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/239｜OpenAPI _ SSE _ Streaming Contract 文档详解.md",
+      "local_chars": 990,
+      "remote_chars": 990,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/23｜文件类 Router 详解_Uploads_Artifacts_Feedback_Suggestions.md",
+      "remote": ".agent_context/lark_remote/docs_md/23｜文件类 Router 详解：Uploads、Artifacts、Feedback、Suggestions.md",
+      "local_chars": 2121,
+      "remote_chars": 2121,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/240｜Sandbox Memory Profiling _ Blocking IO Docs 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/240｜Sandbox Memory Profiling _ Blocking IO Docs 详解.md",
+      "local_chars": 1100,
+      "remote_chars": 1100,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/241｜Skill Manage PR Evidence 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/241｜Skill Manage PR Evidence 详解.md",
+      "local_chars": 913,
+      "remote_chars": 913,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/242｜CODE_CHANGE_SUMMARY_BY_FILE 单文档详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/242｜CODE_CHANGE_SUMMARY_BY_FILE 单文档详解.md",
+      "local_chars": 957,
+      "remote_chars": 957,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/243｜SKILL_NAME_CONFLICT_FIX 单文档详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/243｜SKILL_NAME_CONFLICT_FIX 单文档详解.md",
+      "local_chars": 975,
+      "remote_chars": 975,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/244｜Backend Test Helpers _ Fixtures 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/244｜Backend Test Helpers _ Fixtures 详解.md",
+      "local_chars": 1146,
+      "remote_chars": 1146,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/245｜Backend Replay Provider _ Seed _ Support 测试模块详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/245｜Backend Replay Provider _ Seed _ Support 测试模块详解.md",
+      "local_chars": 1077,
+      "remote_chars": 1077,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/246｜Frontend MDX Components 与 Content Meta 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/246｜Frontend MDX Components 与 Content Meta 详解.md",
+      "local_chars": 1015,
+      "remote_chars": 1015,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/247｜Frontend Core Blog 与 I18n 细节详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/247｜Frontend Core Blog 与 I18n 细节详解.md",
+      "local_chars": 1082,
+      "remote_chars": 1082,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/248｜Frontend Core Utils 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/248｜Frontend Core Utils 详解.md",
+      "local_chars": 979,
+      "remote_chars": 979,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/249｜Frontend Env_Config_Static Mode 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/249｜Frontend Env、Config、Static Mode 详解.md",
+      "local_chars": 1109,
+      "remote_chars": 1109,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/24｜ThreadDataMiddleware 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/24｜ThreadDataMiddleware 单文件详解.md",
+      "local_chars": 1442,
+      "remote_chars": 1442,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/250｜Frontend Rehype _ Streamdown _ Mermaid 细节详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/250｜Frontend Rehype _ Streamdown _ Mermaid 细节详解.md",
+      "local_chars": 981,
+      "remote_chars": 981,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/251｜Persistence Run_Thread_Feedback Models 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/251｜Persistence Run_Thread_Feedback Models 详解.md",
+      "local_chars": 1008,
+      "remote_chars": 1008,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/252｜Persistence Repository Implementations 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/252｜Persistence Repository Implementations 详解.md",
+      "local_chars": 1052,
+      "remote_chars": 1052,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/253｜Runtime Checkpointer _ Store _ Events Store 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/253｜Runtime Checkpointer _ Store _ Events Store 详解.md",
+      "local_chars": 1092,
+      "remote_chars": 1092,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/254｜Runtime UserContext_Converters_Serialization 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/254｜Runtime UserContext、Converters、Serialization 详解.md",
+      "local_chars": 1132,
+      "remote_chars": 1132,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/255｜Frontend Styles_Env_Typings 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/255｜Frontend Styles、Env、Typings 详解.md",
+      "local_chars": 1020,
+      "remote_chars": 1020,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/256｜Frontend Build_Test Configs 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/256｜Frontend Build_Test Configs 详解.md",
+      "local_chars": 1000,
+      "remote_chars": 1000,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/257｜Root Config Files 详解_config.yaml_extensions_env.md",
+      "remote": ".agent_context/lark_remote/docs_md/257｜Root Config Files 详解：config.yaml、extensions、env.md",
+      "local_chars": 1026,
+      "remote_chars": 1026,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/258｜Persistence Engine _ Base _ JSON Compat 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/258｜Persistence Engine _ Base _ JSON Compat 详解.md",
+      "local_chars": 938,
+      "remote_chars": 938,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/259｜RunRow _ RunRepository 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/259｜RunRow _ RunRepository 单文件详解.md",
+      "local_chars": 1000,
+      "remote_chars": 1000,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/25｜UploadsMiddleware 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/25｜UploadsMiddleware 单文件详解.md",
+      "local_chars": 1438,
+      "remote_chars": 1438,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/260｜ThreadMetaRow _ ThreadMetaRepository 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/260｜ThreadMetaRow _ ThreadMetaRepository 详解.md",
+      "local_chars": 1050,
+      "remote_chars": 1050,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/261｜Feedback _ User _ RunEvent Persistence 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/261｜Feedback _ User _ RunEvent Persistence 详解.md",
+      "local_chars": 1096,
+      "remote_chars": 1096,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/262｜Runtime Checkpointer Provider 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/262｜Runtime Checkpointer Provider 详解.md",
+      "local_chars": 1131,
+      "remote_chars": 1131,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/263｜Runtime Store Provider 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/263｜Runtime Store Provider 详解.md",
+      "local_chars": 1140,
+      "remote_chars": 1140,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/264｜Runtime Events Store Provider 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/264｜Runtime Events Store Provider 详解.md",
+      "local_chars": 948,
+      "remote_chars": 948,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/265｜runtime_runs_worker.py 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/265｜runtime_runs_worker.py 单文件详解.md",
+      "local_chars": 1126,
+      "remote_chars": 1126,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/266｜runtime_runs_manager.py 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/266｜runtime_runs_manager.py 单文件详解.md",
+      "local_chars": 971,
+      "remote_chars": 971,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/267｜runtime_runs_naming.py 与 schemas.py 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/267｜runtime_runs_naming.py 与 schemas.py 详解.md",
+      "local_chars": 974,
+      "remote_chars": 974,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/268｜subagents_executor.py 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/268｜subagents_executor.py 单文件详解.md",
+      "local_chars": 1021,
+      "remote_chars": 1021,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/269｜subagents registry_config_status_token_collector 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/269｜subagents registry_config_status_token_collector 详解.md",
+      "local_chars": 1187,
+      "remote_chars": 1187,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/26｜SandboxMiddleware 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/26｜SandboxMiddleware 单文件详解.md",
+      "local_chars": 1356,
+      "remote_chars": 1356,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/270｜Built-in Tools_task_present_files_clarification 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/270｜Built-in Tools：task_present_files_clarification 详解.md",
+      "local_chars": 1098,
+      "remote_chars": 1098,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/271｜Built-in Tools_view_image_tool_search_invoke_acp 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/271｜Built-in Tools：view_image_tool_search_invoke_acp 详解.md",
+      "local_chars": 1167,
+      "remote_chars": 1167,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/272｜tools_tools.py 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/272｜tools_tools.py 单文件详解.md",
+      "local_chars": 1064,
+      "remote_chars": 1064,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/273｜skill_manage_tool _ sync _ mcp_metadata _ types 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/273｜skill_manage_tool _ sync _ mcp_metadata _ types 详解.md",
+      "local_chars": 944,
+      "remote_chars": 944,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/274｜reflection_resolvers.py 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/274｜reflection_resolvers.py 单文件详解.md",
+      "local_chars": 973,
+      "remote_chars": 973,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/275｜utils_file_conversion 与 readability 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/275｜utils_file_conversion 与 readability 详解.md",
+      "local_chars": 1055,
+      "remote_chars": 1055,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/276｜utils_messages_network_time 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/276｜utils_messages、network、time 详解.md",
+      "local_chars": 923,
+      "remote_chars": 923,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/277｜uploads_manager.py 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/277｜uploads_manager.py 单文件详解.md",
+      "local_chars": 1042,
+      "remote_chars": 1042,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/278｜tracing_factory 与 metadata 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/278｜tracing_factory 与 metadata 详解.md",
+      "local_chars": 1060,
+      "remote_chars": 1060,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/279｜Channel Base _ MessageBus _ Store 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/279｜Channel Base _ MessageBus _ Store 单文件详解.md",
+      "local_chars": 965,
+      "remote_chars": 965,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/27｜ToolOutputBudgetMiddleware 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/27｜ToolOutputBudgetMiddleware 单文件详解.md",
+      "local_chars": 1342,
+      "remote_chars": 1342,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/280｜ChannelService 与 ChannelManager 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/280｜ChannelService 与 ChannelManager 单文件详解.md",
+      "local_chars": 1138,
+      "remote_chars": 1138,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/281｜Gateway Auth 子模块详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/281｜Gateway Auth 子模块详解.md",
+      "local_chars": 1081,
+      "remote_chars": 1081,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/282｜Gateway LocalAuthProvider _ SQLiteUserRepository 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/282｜Gateway LocalAuthProvider _ SQLiteUserRepository 详解.md",
+      "local_chars": 1093,
+      "remote_chars": 1093,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/283｜Frontend Core Auth 文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/283｜Frontend Core Auth 文件详解.md",
+      "local_chars": 1084,
+      "remote_chars": 1084,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/284｜Frontend Core Uploads _ Agents _ Notification 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/284｜Frontend Core Uploads _ Agents _ Notification 详解.md",
+      "local_chars": 1080,
+      "remote_chars": 1080,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/285｜Frontend Core Todos _ Tasks _ Tools 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/285｜Frontend Core Todos _ Tasks _ Tools 详解.md",
+      "local_chars": 1077,
+      "remote_chars": 1077,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/286｜auth_jwt_password_errors 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/286｜auth_jwt、password、errors 单文件详解.md",
+      "local_chars": 1018,
+      "remote_chars": 1018,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/287｜auth_config_models_providers 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/287｜auth_config、models、providers 单文件详解.md",
+      "local_chars": 1042,
+      "remote_chars": 1042,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/288｜auth repository_credential_file_reset_admin 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/288｜auth repository、credential_file、reset_admin 详解.md",
+      "local_chars": 917,
+      "remote_chars": 917,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/289｜Feishu 与 Slack Channel 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/289｜Feishu 与 Slack Channel 单文件详解.md",
+      "local_chars": 991,
+      "remote_chars": 991,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/28｜DynamicContextMiddleware 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/28｜DynamicContextMiddleware 单文件详解.md",
+      "local_chars": 1434,
+      "remote_chars": 1434,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/290｜Telegram_DingTalk_Discord Channel 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/290｜Telegram、DingTalk、Discord Channel 单文件详解.md",
+      "local_chars": 1067,
+      "remote_chars": 1067,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/291｜WeCom 与 Wechat Channel 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/291｜WeCom 与 Wechat Channel 单文件详解.md",
+      "local_chars": 1053,
+      "remote_chars": 1053,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/292｜Frontend Agents_Uploads_Notification Core 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/292｜Frontend Agents、Uploads、Notification Core 单文件详解.md",
+      "local_chars": 1107,
+      "remote_chars": 1107,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/293｜Frontend Core Models 文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/293｜Frontend Core Models 文件详解.md",
+      "local_chars": 994,
+      "remote_chars": 994,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/294｜Frontend Core MCP 文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/294｜Frontend Core MCP 文件详解.md",
+      "local_chars": 1025,
+      "remote_chars": 1025,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/295｜Frontend Core Skills 文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/295｜Frontend Core Skills 文件详解.md",
+      "local_chars": 1047,
+      "remote_chars": 1047,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/296｜Frontend Core Memory 文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/296｜Frontend Core Memory 文件详解.md",
+      "local_chars": 1051,
+      "remote_chars": 1051,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/297｜Frontend Core Settings 文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/297｜Frontend Core Settings 文件详解.md",
+      "local_chars": 1088,
+      "remote_chars": 1088,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/298｜Frontend Core API Feedback _ StreamMode 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/298｜Frontend Core API Feedback _ StreamMode 详解.md",
+      "local_chars": 992,
+      "remote_chars": 992,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/299｜Frontend Core Threads Types _ Utils _ Export 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/299｜Frontend Core Threads Types _ Utils _ Export 详解.md",
+      "local_chars": 1134,
+      "remote_chars": 1134,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/29｜SkillActivationMiddleware 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/29｜SkillActivationMiddleware 单文件详解.md",
+      "local_chars": 1293,
+      "remote_chars": 1293,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/300｜Chat Page_Layout_Providers 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/300｜Chat Page、Layout、Providers 单文件详解.md",
+      "local_chars": 1097,
+      "remote_chars": 1097,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/301｜Chat Hooks 与 ChatBox 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/301｜Chat Hooks 与 ChatBox 单文件详解.md",
+      "local_chars": 1035,
+      "remote_chars": 1035,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/302｜Artifact File List _ Detail _ Trigger 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/302｜Artifact File List _ Detail _ Trigger 单文件详解.md",
+      "local_chars": 1047,
+      "remote_chars": 1047,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/303｜MessageList 组件族细节详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/303｜MessageList 组件族细节详解.md",
+      "local_chars": 1050,
+      "remote_chars": 1050,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/304｜MarkdownContent_TokenUsage_SubtaskCard 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/304｜MarkdownContent、TokenUsage、SubtaskCard 详解.md",
+      "local_chars": 1048,
+      "remote_chars": 1048,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/305｜WorkspaceSidebar_NavChatList_RecentChatList 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/305｜WorkspaceSidebar、NavChatList、RecentChatList 详解.md",
+      "local_chars": 1078,
+      "remote_chars": 1078,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/306｜CommandPalette_GithubIcon_Tooltip 组件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/306｜CommandPalette、GithubIcon、Tooltip 组件详解.md",
+      "local_chars": 1018,
+      "remote_chars": 1018,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/307｜Workspace Account_Appearance_Notification_About 页面细节.md",
+      "remote": ".agent_context/lark_remote/docs_md/307｜Workspace Account_Appearance_Notification_About 页面细节.md",
+      "local_chars": 1125,
+      "remote_chars": 1125,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/308｜Workspace Tool_Skill_Memory Settings 页面细节.md",
+      "remote": ".agent_context/lark_remote/docs_md/308｜Workspace Tool_Skill_Memory Settings 页面细节.md",
+      "local_chars": 1084,
+      "remote_chars": 1084,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/309｜Remaining UI Form_Display Primitives 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/309｜Remaining UI Form_Display Primitives 详解.md",
+      "local_chars": 950,
+      "remote_chars": 950,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/30｜Todo_Title_Memory Middleware 文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/30｜Todo、Title、Memory Middleware 文件详解.md",
+      "local_chars": 1342,
+      "remote_chars": 1342,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/310｜Remaining UI Overlay_Input Primitives 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/310｜Remaining UI Overlay_Input Primitives 详解.md",
+      "local_chars": 936,
+      "remote_chars": 936,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/311｜Remaining Scripts Ops 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/311｜Remaining Scripts Ops 详解.md",
+      "local_chars": 977,
+      "remote_chars": 977,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/312｜Backend Misc Tests 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/312｜Backend Misc Tests 详解.md",
+      "local_chars": 1045,
+      "remote_chars": 1045,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/313｜Frontend Misc Tests _ Configs 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/313｜Frontend Misc Tests _ Configs 详解.md",
+      "local_chars": 968,
+      "remote_chars": 968,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/314｜Config _ Doctor _ Setup Wizard Tests 单文件族详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/314｜Config _ Doctor _ Setup Wizard Tests 单文件族详解.md",
+      "local_chars": 1085,
+      "remote_chars": 1085,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/315｜Safety _ Guardrails _ Sandbox Audit Tests 单文件族详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/315｜Safety _ Guardrails _ Sandbox Audit Tests 单文件族详解.md",
+      "local_chars": 1119,
+      "remote_chars": 1119,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/316｜Settings Dialog 单文件族详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/316｜Settings Dialog 单文件族详解.md",
+      "local_chars": 933,
+      "remote_chars": 933,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/317｜Artifact Loader _ Hooks _ Preview 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/317｜Artifact Loader _ Hooks _ Preview 单文件详解.md",
+      "local_chars": 1037,
+      "remote_chars": 1037,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/318｜Generation Skill Scripts 单文件族详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/318｜Generation Skill Scripts 单文件族详解.md",
+      "local_chars": 1004,
+      "remote_chars": 1004,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/319｜Skill Creator Scripts 单文件族详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/319｜Skill Creator Scripts 单文件族详解.md",
+      "local_chars": 1056,
+      "remote_chars": 1056,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/31｜LLMErrorHandlingMiddleware 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/31｜LLMErrorHandlingMiddleware 单文件详解.md",
+      "local_chars": 1328,
+      "remote_chars": 1328,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/320｜Claude_Vercel_Find Skills Scripts 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/320｜Claude_Vercel_Find Skills Scripts 详解.md",
+      "local_chars": 1018,
+      "remote_chars": 1018,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/321｜Backend AppConfig _ Runtime Paths Tests 深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/321｜Backend AppConfig _ Runtime Paths Tests 深拆.md",
+      "local_chars": 1056,
+      "remote_chars": 1056,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/322｜Backend Model Provider Patch Tests 深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/322｜Backend Model Provider Patch Tests 深拆.md",
+      "local_chars": 1166,
+      "remote_chars": 1166,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/323｜Frontend Root_Auth_Workspace Page Layout 深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/323｜Frontend Root_Auth_Workspace Page Layout 深拆.md",
+      "local_chars": 1197,
+      "remote_chars": 1197,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/324｜Frontend Docs_Blog Routes 深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/324｜Frontend Docs_Blog Routes 深拆.md",
+      "local_chars": 1105,
+      "remote_chars": 1105,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/325｜Docker Provisioner Kubernetes Flow 深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/325｜Docker Provisioner Kubernetes Flow 深拆.md",
+      "local_chars": 958,
+      "remote_chars": 958,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/326｜Wizard Steps LLM_Search_Execution 深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/326｜Wizard Steps LLM_Search_Execution 深拆.md",
+      "local_chars": 1145,
+      "remote_chars": 1145,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/327｜Wizard UI _ Writer _ Providers 深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/327｜Wizard UI _ Writer _ Providers 深拆.md",
+      "local_chars": 956,
+      "remote_chars": 956,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/328｜Frontend Agents New Route 深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/328｜Frontend Agents New Route 深拆.md",
+      "local_chars": 1075,
+      "remote_chars": 1075,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/329｜Frontend Chats List Route 深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/329｜Frontend Chats List Route 深拆.md",
+      "local_chars": 1062,
+      "remote_chars": 1062,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/32｜LoopDetectionMiddleware 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/32｜LoopDetectionMiddleware 单文件详解.md",
+      "local_chars": 1338,
+      "remote_chars": 1338,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/330｜Frontend Landing_Blog_Docs Route 文件深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/330｜Frontend Landing_Blog_Docs Route 文件深拆.md",
+      "local_chars": 1081,
+      "remote_chars": 1081,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/331｜Frontend Content _meta.ts 文件深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/331｜Frontend Content _meta.ts 文件深拆.md",
+      "local_chars": 1006,
+      "remote_chars": 1006,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/332｜Docker Provisioner README_Dockerfile 深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/332｜Docker Provisioner README_Dockerfile 深拆.md",
+      "local_chars": 933,
+      "remote_chars": 933,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/333｜configure.py 与 config-upgrade.sh 深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/333｜configure.py 与 config-upgrade.sh 深拆.md",
+      "local_chars": 917,
+      "remote_chars": 917,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/334｜serve.sh 服务生命周期深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/334｜serve.sh 服务生命周期深拆.md",
+      "local_chars": 952,
+      "remote_chars": 952,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/335｜deploy_docker_cleanup scripts 深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/335｜deploy_docker_cleanup scripts 深拆.md",
+      "local_chars": 937,
+      "remote_chars": 937,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/336｜static detection scripts 深拆.md",
+      "remote": ".agent_context/lark_remote/docs_md/336｜static detection scripts 深拆.md",
+      "local_chars": 910,
+      "remote_chars": 910,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/337｜Backend Makefile _ pyproject _ langgraph.json 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/337｜Backend Makefile _ pyproject _ langgraph.json 详解.md",
+      "local_chars": 1073,
+      "remote_chars": 1073,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/338｜Frontend package_Docker_Makefile 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/338｜Frontend package_Docker_Makefile 详解.md",
+      "local_chars": 962,
+      "remote_chars": 962,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/339｜backend_docs README _ Index 文档详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/339｜backend_docs README _ Index 文档详解.md",
+      "local_chars": 965,
+      "remote_chars": 965,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/33｜SandboxAuditMiddleware 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/33｜SandboxAuditMiddleware 单文件详解.md",
+      "local_chars": 1179,
+      "remote_chars": 1179,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/340｜Gateway Runtime Lifecycle _ Shutdown Tests 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/340｜Gateway Runtime Lifecycle _ Shutdown Tests 详解.md",
+      "local_chars": 1132,
+      "remote_chars": 1132,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/341｜Tooling _ Scripts Tests 单文件族详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/341｜Tooling _ Scripts Tests 单文件族详解.md",
+      "local_chars": 1123,
+      "remote_chars": 1123,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/342｜Landing Header _ Footer _ Section 组件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/342｜Landing Header _ Footer _ Section 组件详解.md",
+      "local_chars": 919,
+      "remote_chars": 919,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/343｜Landing Hero 与 ProgressiveSkillsAnimation 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/343｜Landing Hero 与 ProgressiveSkillsAnimation 详解.md",
+      "local_chars": 984,
+      "remote_chars": 984,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/344｜Landing CaseStudy _ Skills _ Sandbox Sections 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/344｜Landing CaseStudy _ Skills _ Sandbox Sections 详解.md",
+      "local_chars": 1104,
+      "remote_chars": 1104,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/345｜Landing WhatsNew _ Community Sections 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/345｜Landing WhatsNew _ Community Sections 详解.md",
+      "local_chars": 989,
+      "remote_chars": 989,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/346｜I18n Locale Detection 与 Provider 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/346｜I18n Locale Detection 与 Provider 详解.md",
+      "local_chars": 985,
+      "remote_chars": 985,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/347｜I18n Locales 与 Translations 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/347｜I18n Locales 与 Translations 详解.md",
+      "local_chars": 973,
+      "remote_chars": 973,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/348｜ThemeProvider 与 Global Layout 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/348｜ThemeProvider 与 Global Layout 详解.md",
+      "local_chars": 844,
+      "remote_chars": 844,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/349｜文档集导航指南_300_ 章节阅读路径.md",
+      "remote": ".agent_context/lark_remote/docs_md/349｜文档集导航指南：300+ 章节阅读路径.md",
+      "local_chars": 2217,
+      "remote_chars": 2159,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/34｜DeferredToolFilterMiddleware 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/34｜DeferredToolFilterMiddleware 单文件详解.md",
+      "local_chars": 1236,
+      "remote_chars": 1236,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/350｜模块覆盖矩阵与验收说明.md",
+      "remote": ".agent_context/lark_remote/docs_md/350｜模块覆盖矩阵与验收说明.md",
+      "local_chars": 1059,
+      "remote_chars": 1576,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/351｜文档集维护指南_新增模块后的补文档方法.md",
+      "remote": ".agent_context/lark_remote/docs_md/351｜文档集维护指南：新增模块后的补文档方法.md",
+      "local_chars": 1011,
+      "remote_chars": 1597,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/352｜可视化风格指南_运行逻辑图绘制规范.md",
+      "remote": ".agent_context/lark_remote/docs_md/352｜可视化风格指南：运行逻辑图绘制规范.md",
+      "local_chars": 970,
+      "remote_chars": 1749,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/353｜新同学源码走读检查清单.md",
+      "remote": ".agent_context/lark_remote/docs_md/353｜新同学源码走读检查清单.md",
+      "local_chars": 1713,
+      "remote_chars": 1993,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/354｜最终验收摘要与证据索引.md",
+      "remote": ".agent_context/lark_remote/docs_md/354｜最终验收摘要与证据索引.md",
+      "local_chars": 3433,
+      "remote_chars": 3681,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/35｜SafetyFinishReasonMiddleware 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/35｜SafetyFinishReasonMiddleware 单文件详解.md",
+      "local_chars": 1182,
+      "remote_chars": 1182,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/36｜ViewImage_DanglingToolCall_SubagentLimit_TokenUsage Middleware 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/36｜ViewImage、DanglingToolCall、SubagentLimit、TokenUsage Middleware 详解.md",
+      "local_chars": 1392,
+      "remote_chars": 1392,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/37｜Sandbox Tools 单文件详解_bash_ls_glob_grep_read_write_str_replace.md",
+      "remote": ".agent_context/lark_remote/docs_md/37｜Sandbox Tools 单文件详解：bash_ls_glob_grep_read_write_str_replace.md",
+      "local_chars": 1189,
+      "remote_chars": 1189,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/38｜LocalSandbox 与 AioSandbox Provider 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/38｜LocalSandbox 与 AioSandbox Provider 详解.md",
+      "local_chars": 1394,
+      "remote_chars": 1394,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/39｜MCP Cache_Session Pool 与 OAuth 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/39｜MCP Cache、Session Pool 与 OAuth 详解.md",
+      "local_chars": 1437,
+      "remote_chars": 1437,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/40｜Memory Queue_Updater_Storage 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/40｜Memory Queue、Updater、Storage 单文件详解.md",
+      "local_chars": 1486,
+      "remote_chars": 1486,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/41｜Skills Parser_Installer_Security Scanner 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/41｜Skills Parser、Installer、Security Scanner 详解.md",
+      "local_chars": 1370,
+      "remote_chars": 1370,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/42｜Frontend useThreadStream 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/42｜Frontend useThreadStream 单文件详解.md",
+      "local_chars": 1472,
+      "remote_chars": 1472,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/43｜Frontend Message Utils 与 Artifacts Hooks 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/43｜Frontend Message Utils 与 Artifacts Hooks 详解.md",
+      "local_chars": 1468,
+      "remote_chars": 1468,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/44｜Config 配置类目录详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/44｜Config 配置类目录详解.md",
+      "local_chars": 1488,
+      "remote_chars": 1488,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/45｜Models Provider Patch 文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/45｜Models Provider Patch 文件详解.md",
+      "local_chars": 1321,
+      "remote_chars": 1321,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/46｜Persistence Repository 文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/46｜Persistence Repository 文件详解.md",
+      "local_chars": 1517,
+      "remote_chars": 1517,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/47｜Frontend Settings 页面文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/47｜Frontend Settings 页面文件详解.md",
+      "local_chars": 1672,
+      "remote_chars": 1672,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/48｜Gateway Auth Router 与认证模块详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/48｜Gateway Auth Router 与认证模块详解.md",
+      "local_chars": 1405,
+      "remote_chars": 1405,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/49｜Gateway MCP_Skills_Memory Router 深入详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/49｜Gateway MCP、Skills、Memory Router 深入详解.md",
+      "local_chars": 1401,
+      "remote_chars": 1401,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/50｜Frontend ChatPage 与 InputBox 文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/50｜Frontend ChatPage 与 InputBox 文件详解.md",
+      "local_chars": 1471,
+      "remote_chars": 1471,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/51｜thread_runs.py Router 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/51｜thread_runs.py Router 单文件详解.md",
+      "local_chars": 1474,
+      "remote_chars": 1474,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/52｜threads.py Router 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/52｜threads.py Router 单文件详解.md",
+      "local_chars": 1414,
+      "remote_chars": 1414,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/53｜uploads.py Router 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/53｜uploads.py Router 单文件详解.md",
+      "local_chars": 1320,
+      "remote_chars": 1320,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/54｜artifacts.py Router 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/54｜artifacts.py Router 单文件详解.md",
+      "local_chars": 1416,
+      "remote_chars": 1416,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/55｜skills.py Router 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/55｜skills.py Router 单文件详解.md",
+      "local_chars": 1419,
+      "remote_chars": 1419,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/56｜memory.py Router 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/56｜memory.py Router 单文件详解.md",
+      "local_chars": 1353,
+      "remote_chars": 1353,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/57｜mcp.py Router 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/57｜mcp.py Router 单文件详解.md",
+      "local_chars": 1321,
+      "remote_chars": 1321,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/58｜Frontend Message Components 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/58｜Frontend Message Components 单文件详解.md",
+      "local_chars": 1365,
+      "remote_chars": 1365,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/59｜Frontend Artifact Components 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/59｜Frontend Artifact Components 单文件详解.md",
+      "local_chars": 1424,
+      "remote_chars": 1424,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/60｜Frontend Sidebar 与 Navigation 组件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/60｜Frontend Sidebar 与 Navigation 组件详解.md",
+      "local_chars": 1346,
+      "remote_chars": 1346,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/61｜auth.py Router 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/61｜auth.py Router 单文件详解.md",
+      "local_chars": 1368,
+      "remote_chars": 1368,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/62｜agents.py Router 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/62｜agents.py Router 单文件详解.md",
+      "local_chars": 1344,
+      "remote_chars": 1344,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/63｜feedback_suggestions_channels Router 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/63｜feedback、suggestions、channels Router 详解.md",
+      "local_chars": 1438,
+      "remote_chars": 1438,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/64｜Frontend API Client 与 Fetcher 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/64｜Frontend API Client 与 Fetcher 详解.md",
+      "local_chars": 1460,
+      "remote_chars": 1460,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/65｜Frontend Core Settings_Models_MCP_Skills_Memory API 层详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/65｜Frontend Core Settings_Models_MCP_Skills_Memory API 层详解.md",
+      "local_chars": 1519,
+      "remote_chars": 1519,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/66｜Frontend Uploads_Notification_Tasks Core 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/66｜Frontend Uploads、Notification、Tasks Core 详解.md",
+      "local_chars": 1444,
+      "remote_chars": 1444,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/67｜Frontend Agents_Blog_I18n_Static Mode 模块详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/67｜Frontend Agents、Blog、I18n、Static Mode 模块详解.md",
+      "local_chars": 1287,
+      "remote_chars": 1287,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/68｜Channels Service 与 ChannelManager 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/68｜Channels Service 与 ChannelManager 详解.md",
+      "local_chars": 1314,
+      "remote_chars": 1314,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/69｜Feishu_Slack_Telegram_WeCom_DingTalk_Wechat Channel 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/69｜Feishu_Slack_Telegram_WeCom_DingTalk_Wechat Channel 详解.md",
+      "local_chars": 1159,
+      "remote_chars": 1159,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/70｜Community Search_Fetch_Image Tools 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/70｜Community Search_Fetch_Image Tools 详解.md",
+      "local_chars": 1323,
+      "remote_chars": 1323,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/71｜AioSandbox Community Backend 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/71｜AioSandbox Community Backend 详解.md",
+      "local_chars": 1421,
+      "remote_chars": 1421,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/72｜Frontend Landing_Docs_Blog 页面详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/72｜Frontend Landing、Docs、Blog 页面详解.md",
+      "local_chars": 1346,
+      "remote_chars": 1346,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/73｜Frontend Auth_Login_Setup 页面详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/73｜Frontend Auth_Login_Setup 页面详解.md",
+      "local_chars": 1317,
+      "remote_chars": 1317,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/74｜Frontend AI Elements 与 UI 基础组件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/74｜Frontend AI Elements 与 UI 基础组件详解.md",
+      "local_chars": 1187,
+      "remote_chars": 1187,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/75｜FeishuChannel 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/75｜FeishuChannel 单文件详解.md",
+      "local_chars": 1067,
+      "remote_chars": 1067,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/76｜Slack 与 Telegram Channel 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/76｜Slack 与 Telegram Channel 详解.md",
+      "local_chars": 1215,
+      "remote_chars": 1215,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/77｜DingTalk_WeCom_Wechat Channel 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/77｜DingTalk、WeCom、Wechat Channel 详解.md",
+      "local_chars": 1178,
+      "remote_chars": 1178,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/78｜Tavily_Firecrawl_Exa_Serper Web Search Provider 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/78｜Tavily、Firecrawl、Exa、Serper Web Search Provider 详解.md",
+      "local_chars": 1173,
+      "remote_chars": 1173,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/79｜Jina_DDG_InfoQuest_Image Search Provider 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/79｜Jina、DDG、InfoQuest、Image Search Provider 详解.md",
+      "local_chars": 1146,
+      "remote_chars": 1146,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/80｜Landing Page Sections 组件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/80｜Landing Page Sections 组件详解.md",
+      "local_chars": 1056,
+      "remote_chars": 1056,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/81｜Nextra Docs_Content 与 Blog 渲染详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/81｜Nextra Docs、Content 与 Blog 渲染详解.md",
+      "local_chars": 1175,
+      "remote_chars": 1175,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/82｜Tavily 与 Firecrawl Provider 单模块详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/82｜Tavily 与 Firecrawl Provider 单模块详解.md",
+      "local_chars": 1259,
+      "remote_chars": 1259,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/83｜Exa 与 Serper Provider 单模块详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/83｜Exa 与 Serper Provider 单模块详解.md",
+      "local_chars": 1184,
+      "remote_chars": 1184,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/84｜Jina_DDG_InfoQuest Provider 单模块详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/84｜Jina、DDG、InfoQuest Provider 单模块详解.md",
+      "local_chars": 1120,
+      "remote_chars": 1120,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/85｜Feishu Channel 深入运行逻辑.md",
+      "remote": ".agent_context/lark_remote/docs_md/85｜Feishu Channel 深入运行逻辑.md",
+      "local_chars": 1150,
+      "remote_chars": 1150,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/86｜Slack Channel 深入运行逻辑.md",
+      "remote": ".agent_context/lark_remote/docs_md/86｜Slack Channel 深入运行逻辑.md",
+      "local_chars": 1070,
+      "remote_chars": 1070,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/87｜Telegram_DingTalk_WeCom Channel 深入运行逻辑.md",
+      "remote": ".agent_context/lark_remote/docs_md/87｜Telegram、DingTalk、WeCom Channel 深入运行逻辑.md",
+      "local_chars": 1224,
+      "remote_chars": 1224,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/88｜Model_Sandbox_Memory_Tool Config 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/88｜Model_Sandbox_Memory_Tool Config 单文件详解.md",
+      "local_chars": 1409,
+      "remote_chars": 2646,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/89｜Landing Sections 深入组件逻辑.md",
+      "remote": ".agent_context/lark_remote/docs_md/89｜Landing Sections 深入组件逻辑.md",
+      "local_chars": 1038,
+      "remote_chars": 1491,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/90｜AppConfig_Runtime Paths_Reload Boundary 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/90｜AppConfig、Runtime Paths、Reload Boundary 单文件详解.md",
+      "local_chars": 1205,
+      "remote_chars": 2311,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/91｜Database_Checkpointer_RunEvents Config 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/91｜Database、Checkpointer、RunEvents Config 详解.md",
+      "local_chars": 1109,
+      "remote_chars": 2466,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/92｜Subagents_Summarization_Title_Tracing Config 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/92｜Subagents、Summarization、Title、Tracing Config 详解.md",
+      "local_chars": 1272,
+      "remote_chars": 1272,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/93｜Frontend UI Primitives 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/93｜Frontend UI Primitives 单文件详解.md",
+      "local_chars": 1152,
+      "remote_chars": 1152,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/94｜Frontend AI Elements Primitives 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/94｜Frontend AI Elements Primitives 详解.md",
+      "local_chars": 1244,
+      "remote_chars": 1244,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/95｜Patched Model Providers 深入详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/95｜Patched Model Providers 深入详解.md",
+      "local_chars": 1212,
+      "remote_chars": 2704,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/96｜ACP_Guardrails_Safety Config 详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/96｜ACP、Guardrails、Safety Config 详解.md",
+      "local_chars": 1347,
+      "remote_chars": 1347,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/97｜model_config_tool_config_tool_output_config_tool_search_config 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/97｜model_config、tool_config、tool_output_config、tool_search_config 单文件详解.md",
+      "local_chars": 1143,
+      "remote_chars": 1143,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/98｜memory_config_sandbox_config_skills_config 单文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/98｜memory_config、sandbox_config、skills_config 单文件详解.md",
+      "local_chars": 1067,
+      "remote_chars": 2336,
+      "same_sha": false
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/99｜agents_subagents_guardrails_loop_safety 配置文件详解.md",
+      "remote": ".agent_context/lark_remote/docs_md/99｜agents_subagents_guardrails_loop_safety 配置文件详解.md",
+      "local_chars": 1235,
+      "remote_chars": 1235,
+      "same_sha": true
+    },
+    {
+      "local": ".agent_context/final_review/docs_md/DeerFlow 2.0 源码分层详解_章节目录.md",
+      "remote": ".agent_context/lark_remote/docs_md/DeerFlow 2.0 源码分层详解：章节目录.md",
+      "local_chars": 48876,
+      "remote_chars": 49367,
+      "same_sha": false
+    }
+  ]
+}

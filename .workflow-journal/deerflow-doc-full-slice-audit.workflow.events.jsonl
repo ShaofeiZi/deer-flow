@@ -1,0 +1,6 @@
+{"t":1783481931839,"type":"start","id":"1cdc649457940116#0","label":"001-050-core-backend-frontend","phase":"Slice Audit","effort":"high","model":"gpt-5.5-2026-04-24"}
+{"t":1783481931840,"type":"start","id":"51b5842a97235d55#0","label":"051-100-api-config-providers","phase":"Slice Audit","effort":"high","model":"gpt-5.5-2026-04-24"}
+{"t":1783481931842,"type":"start","id":"7e2b813cf474c328#0","label":"101-150-ui-ai-elements-skills","phase":"Slice Audit","effort":"high","model":"gpt-5.5-2026-04-24"}
+{"t":1783481931845,"type":"start","id":"20da169707c22222#0","label":"151-220-skills-tests-docs","phase":"Slice Audit","effort":"high","model":"gpt-5.5-2026-04-24"}
+{"t":1783481931846,"type":"start","id":"05cdb60d31401c42#0","label":"221-290-runtime-persistence-tools","phase":"Slice Audit","effort":"high","model":"gpt-5.5-2026-04-24"}
+{"t":1783481931848,"type":"start","id":"22922a1a29dc9d10#0","label":"291-355-frontend-scripts-maintenance","phase":"Slice Audit","effort":"high","model":"gpt-5.5-2026-04-24"}

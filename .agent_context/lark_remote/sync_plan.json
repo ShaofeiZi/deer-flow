@@ -1,0 +1,240 @@
+{
+  "canonicalPolicy": "Use `.agent_context/final_review/docs_md/` as the canonical local source tree, but do not blindly overwrite the 24 drifted remote docs. Treat doc 355 as a missing canonical document that must be created remotely. For drifted docs, perform source-backed, section-aware merges: preserve useful remote-only `# 可视化增强` sections unless they conflict with source truth, then push merged local Markdown to Lark. Do not rewrite all 355 existing remote docs; update only the missing doc, learner/navigation/evidence docs, source-truth correction docs, and high-drift docs listed below.",
+  "executiveSummary": "Execution should proceed in four phases: first fix and publish the missing JS-only learner guide 355; second update the navigation/checklist/evidence docs so learners can enter the corpus through doc 355 with accurate links; third correct source-truth inaccuracies in the frontend/backend/runtime/config docs that the learner path depends on; fourth merge remote visual enhancements into the remaining high-drift docs and synchronize only those. The most important accuracy corrections are: frontend is a Next.js App Router workspace, not a pure SPA; chat submit flow is `InputBox -> ChatPage.handleSubmit -> useThreadStream.sendMessage -> LangGraph SDK thread.submit -> merged messages -> MessageList`; `/api/langgraph/*` is browser/nginx-facing and rewrites to Gateway `/api/*`; artifacts come from `thread.values.artifacts` and Gateway artifact URLs, not automatic sandbox discovery; middleware/runtime/config docs must reflect current source order and startup-vs-request reload boundaries.",
+  "larkSyncPlan": [
+    "Create a new remote Lark doc for local `355｜只会 JS 的前端学习 DeerFlow 路线图.md` after local P0 edits. Capture its docx token, URL, title, and post-create fetched SHA into a sync ledger.",
+    "Immediately update Lark doc 349 `EZT2d2U0gowj7uxQdl6meV8Hynh` so the JS learner route becomes the first-class entry and links to the newly created doc 355 URL.",
+    "Update Lark chapter directory `OOKTdDOiRokb7wx2rFRmQShcyrI` so it includes doc 355 with the new token/URL and a short learner-route description.",
+    "Update Lark doc 353 `EDuHdMZnPoOQXOx9U4rmuR3hy6f` so the checklist matches the corrected frontend submit flow, Gateway/runtime path, middleware order, artifact model, and doc 355 learning path.",
+    "Update Lark doc 354 `JlDEdsqEWo9iOsxSEL8mljXYyVf` last among P0 docs, after doc 355 exists. Replace stale completion claims with exact state: remote 355 created, remote/local counts, drift status, known caveats, and verification evidence.",
+    "For high-drift technical docs 95 `WHTodguJQoLMdLxHrN4mQbruy0f`, 88 `Cxsnd5I1UoQEbcxAfthmRthyy0c`, 91 `Qp22dl4NqoC0LfxmskNmfXqcyLb`, 98 `DR6ndS7z8oDKx1xgLqImWMN1ywg`, 90 `InLIdtvS0oK111x7crnm1lueyJd`, and 06 `IvEydJu3Poud6vx4mR0mThL1y4f`, merge remote visual enhancement sections into local source-accurate Markdown before updating Lark.",
+    "For docs 350, 351, and 352, preserve their remote visual/process material and promote them into the operating manual for future docset sync: coverage matrix, maintenance workflow, visual style, merge policy, and validation commands.",
+    "After each Lark create/update, refetch that doc to Markdown, compute SHA/char count, and compare against the intended post-import Markdown. Record token, URL, local SHA, fetched SHA, timestamp, and sync direction in a durable ledger keyed by sequence number plus token, not filename."
+  ],
+  "risks": [
+    "Blind local-to-remote overwrite would likely delete 23 remote-only `# 可视化增强` sections and reduce visual learning quality.",
+    "Doc 354 currently risks overclaiming completion because remote doc 355 does not yet exist; update it only after 355 is created.",
+    "Filename/title normalization is fragile: punctuation differs between local filenames and remote titles, especially doc 88. Use sequence number and remote token as join keys.",
+    "Some local docs contain invalid or nonportable path claims such as root `mcp/*`, compound code spans, and `/Users/bytedance/deer-flow/...`; these must be corrected before publication.",
+    "Markdown/Feishu import rendering was not validated in the audit. Mermaid, callouts, tables, and title tags need an import/render smoke test before broad publishing.",
+    "Remote snapshots may be stale because the audit used existing fetched snapshots, not a live Lark refetch on July 7, 2026.",
+    "Backend/runtime and middleware source truth is detailed and order-sensitive. Simplified diagrams are useful, but tables must not teach a false execution order.",
+    "Generated boilerplate appears in many docs. Do not attempt a 355-doc rewrite now; remove boilerplate only in high-leverage learner and high-drift docs first."
+  ],
+  "updateBatches": [
+    {
+      "batch": "P0-A: Prepare and create missing JS learner guide 355",
+      "edits": [
+        "Add `<title>355｜只会 JS 的前端学习 DeerFlow 路线图</title>` as the first line to match the rest of the corpus.",
+        "Change frontend mental model wording from `Next.js + React 单页工作台` to `Next.js App Router / React web workspace`, noting it includes workspace, auth/setup, docs/blog, and other routes.",
+        "Replace invalid `mcp/*` and broad path clusters with exact existing paths, e.g. `backend/app/gateway/routers/mcp.py` if present, `frontend/src/core/mcp/*` if present, `backend/packages/harness/deerflow/sandbox`, `backend/packages/harness/deerflow/skills`, `backend/packages/harness/deerflow/agents/memory`, and Gateway router paths.",
+        "Add a precise browser-to-backend routing note: browser default base is `/api/langgraph`; nginx rewrites `/api/langgraph/*` to `/api/*`; Gateway serves the LangGraph-compatible route under `/api/threads/...`, including stream routes in `thread_runs.py`.",
+        "Correct the chat submit path to `InputBox -> ChatPage.handleSubmit -> useThreadStream.sendMessage -> LangGraph SDK useStream/thread.submit -> merged messages -> MessageList`; explicitly state `useThreadChat` manages route-derived thread state and does not submit messages.",
+        "Clarify artifact flow: UI reads `thread.values.artifacts`; `urlOfArtifact` builds `/api/threads/{threadId}/artifacts...`; in-progress `write-file:` artifacts are decoded from current tool-call/message data; sandbox file creation alone does not guarantee artifact-panel visibility.",
+        "Add a compact backend learning path diagram: nginx rewrite -> `thread_runs.stream_run` -> `services.start_run` -> `RunManager.create_or_reject` -> `run_agent` -> `make_lead_agent` -> middleware/tools/sandbox -> `StreamBridge` -> SSE consumer."
+      ],
+      "localFiles": [
+        ".agent_context/final_review/docs_md/355｜只会 JS 的前端学习 DeerFlow 路线图.md"
+      ],
+      "priority": "P0",
+      "remoteDocs": [
+        "CREATE new Lark docx from local doc 355; no existing token found"
+      ],
+      "why": "Doc 355 is the only local-not-remote document and the primary JS-only frontend learner entry. It must be source-accurate before publication."
+    },
+    {
+      "batch": "P0-B: Update learner navigation after doc 355 creation",
+      "edits": [
+        "Insert the newly created doc 355 Feishu URL/token into the top JS learner path.",
+        "Make doc 355 the recommended first entry for JS-only frontend learners, followed by frontend doc 06, settings/artifacts doc 07, Gateway/runtime docs 02/12, middleware docs 03/13, and checklist 353.",
+        "Add a prerequisite/next-step table: learner goal, doc to read, source files to open, expected checkpoint.",
+        "Preserve or merge any remote `# 可视化增强` sections before pushing updates.",
+        "In the chapter directory, add doc 355 as a numbered learner-route entry and include a short explanation of why it exists."
+      ],
+      "localFiles": [
+        ".agent_context/final_review/docs_md/349｜文档集导航指南_300_ 章节阅读路径.md",
+        ".agent_context/final_review/docs_md/DeerFlow 2.0 源码分层详解_章节目录.md"
+      ],
+      "priority": "P0",
+      "remoteDocs": [
+        "349｜文档集导航指南：300+ 章节阅读路径 — token EZT2d2U0gowj7uxQdl6meV8Hynh",
+        "DeerFlow 2.0 源码分层详解：章节目录 — token OOKTdDOiRokb7wx2rFRmQShcyrI"
+      ],
+      "why": "Remote navigation currently cannot link to doc 355 because the doc does not exist remotely. Navigation must be updated immediately after creation."
+    },
+    {
+      "batch": "P0-C: Fix frontend source-truth docs used by the JS route",
+      "edits": [
+        "Expand doc 06 section `2. /new thread 生命周期`: generated client UUID for `/new`, `isNewThread` gates SDK history fetch, `onSend` only changes welcome UI, `onStart` replaces URL and flips new-thread state.",
+        "Expand doc 06 section `3. sendMessage 内部流程`: file upload precedes `thread.submit`; optimistic messages are created; submit context includes thinking, plan mode, subagent, reasoning effort, and thread ID fields.",
+        "Correct callback ownership: `onCreated` upserts thread caches and calls `handleStreamStart`; URL replacement is performed by ChatPage `onStart`; `onUpdateEvent` handles summarization/title cache details while normal messages/todos/artifacts come from LangGraph `useStream` state.",
+        "Add route/API table for `/workspace/chats/new`, `/workspace/chats/[thread_id]`, `/api/langgraph`, `/api/threads/{thread_id}/runs/{run_id}/messages`, token usage, suggestions, uploads, artifacts, models, skills, and memory.",
+        "Clarify settings storage: `deerflow.local-settings` and `deerflow.thread-model.{threadId}` in localStorage; settings dialog sections are account, appearance, notification, memory, tools, skills, and about.",
+        "Clarify doc 07 artifact behavior with `thread.values.artifacts`, Gateway artifact URL builder, and in-progress `write-file:` preview path."
+      ],
+      "localFiles": [
+        ".agent_context/final_review/docs_md/06｜Frontend Workspace 与 Chat 主链路详解.md",
+        ".agent_context/final_review/docs_md/07｜Frontend Settings_Models_Artifacts 数据流详解.md"
+      ],
+      "priority": "P0",
+      "remoteDocs": [
+        "06｜Frontend Workspace 与 Chat 主链路详解 — token IvEydJu3Poud6vx4mR0mThL1y4f",
+        "07 if remote token is present in drive manifest; otherwise resolve by sequence/token before update"
+      ],
+      "why": "The frontend submit/stream/artifact model is the core learning path for JS-only readers and currently contains the highest-risk conceptual inaccuracies."
+    },
+    {
+      "batch": "P0-D: Update evidence summary only after the above are true",
+      "edits": [
+        "Rewrite acceptance claims as state-specific evidence rather than broad completion language.",
+        "Before doc 355 creation, state that remote has 355 docs and local has 356; after creation, update exact created token/URL and new counts.",
+        "Keep facts such as inventory counts, manifest counts, SHA split, and source files inspected. Qualify judgments like `覆盖面完整`, `适合源码走读`, and `未发现阻塞验收的问题` unless backed by explicit scans.",
+        "Remove or qualify the claim that prior codex-workflows was blocked by local Codex config/model authentication unless exact evidence is attached.",
+        "Add known caveats: live Lark refetch not performed by the audit, Markdown rendering not validated, 24 drifted docs need merge policy, remote visual enhancements must be preserved."
+      ],
+      "localFiles": [
+        ".agent_context/final_review/docs_md/354｜最终验收摘要与证据索引.md"
+      ],
+      "priority": "P0",
+      "remoteDocs": [
+        "354｜最终验收摘要与证据索引 — token JlDEdsqEWo9iOsxSEL8mljXYyVf"
+      ],
+      "why": "Doc 354 is the evidence/acceptance source. It must not imply doc 355 is published or that all rendering/sync work is complete before those actions happen."
+    },
+    {
+      "batch": "P1-A: Correct backend/runtime source-truth docs",
+      "edits": [
+        "Doc 02: correct run-flow order so run record creation/thread metadata happens before normalization/build config; add auth ownership check, model allowlist validation, `Content-Location`, `Last-Event-ID`, heartbeat, and unsupported `events` mode.",
+        "Docs 12/265/266: add unsupported `enqueue`, persistent-store rollback on create failure, sqlite retry/reconciliation, run journal progress/completion, rollback checkpoint snapshot, status/thread-title sync, and bridge cleanup delay.",
+        "Doc 03: update middleware order to include base runtime middlewares and lead-agent additions, including `DanglingToolCallMiddleware`, `LLMErrorHandlingMiddleware`, guardrails, `SandboxAuditMiddleware`, `ToolErrorHandlingMiddleware`, `TokenUsageMiddleware`, `DeferredToolFilterMiddleware`, `SafetyFinishReasonMiddleware`, and final `ClarificationMiddleware`.",
+        "Docs 13/24/26/29/37: explain lazy sandbox acquisition, LangGraph `Command(update=...)` state persistence, thread-data per-user paths, upload outline injection, slash skill activation, virtual path resolution, host-bash guard, ACP workspace, custom mounts, MCP filesystem allowed paths, and write/output limits.",
+        "Update or qualify `backend/README.md` middleware section if it presents a fixed simplified count/list that conflicts with source."
+      ],
+      "localFiles": [
+        ".agent_context/final_review/docs_md/02｜Gateway 与 LangGraph 运行时详解.md",
+        ".agent_context/final_review/docs_md/03｜Lead Agent_Prompt_Tools 与 Middleware 详解.md",
+        ".agent_context/final_review/docs_md/12｜Runtime RunManager_StreamBridge_Journal 详解.md",
+        ".agent_context/final_review/docs_md/13｜Backend Middleware 模块逐项详解.md",
+        ".agent_context/final_review/docs_md/24｜ThreadDataMiddleware 单文件详解.md",
+        ".agent_context/final_review/docs_md/26｜SandboxMiddleware 单文件详解.md",
+        ".agent_context/final_review/docs_md/29｜SkillActivationMiddleware 单文件详解.md",
+        ".agent_context/final_review/docs_md/37｜Sandbox Tools 单文件详解_bash_ls_glob_grep_read_write_str_replace.md",
+        ".agent_context/final_review/docs_md/265｜runtime_runs_worker.py 单文件详解.md",
+        ".agent_context/final_review/docs_md/266｜runtime_runs_manager.py 单文件详解.md",
+        "backend/README.md"
+      ],
+      "priority": "P1",
+      "remoteDocs": [
+        "02, 03, 12, 13, 24, 26, 29, 37, 265, 266: resolve tokens from `.agent_context/lark_remote/drive_files.jsonl` by numeric sequence before update"
+      ],
+      "why": "These docs define the backend path that doc 355 will point to. They should be corrected before or alongside learner-route publication."
+    },
+    {
+      "batch": "P1-B: Correct config, memory, skills, model-provider, and runtime-boundary docs",
+      "edits": [
+        "Docs 40/49/88/98: document memory injection as a dynamic `<system-reminder>` HumanMessage, debounced/user-agent-scoped memory updates, tiktoken char fallback/warm-up behavior, skills front matter requirements, optional `allowed-tools`, and project-root/explicit/env/legacy skill path resolution.",
+        "Docs 91/90: distinguish request-hot-reloaded `get_config()` from startup-bound stream bridge, DB/checkpointer/store/run event store/run manager that require backend restart.",
+        "Doc 88: preserve remote title slash form `Model/Sandbox/Memory/Tool Config` while keeping local filename-safe underscore form; update token-keyed sync ledger to avoid path/title mismatch.",
+        "Doc 95: merge source-backed provider behavior and preserve useful visual enhancement content before sync."
+      ],
+      "localFiles": [
+        ".agent_context/final_review/docs_md/40｜Memory Queue_Updater_Storage 单文件详解.md",
+        ".agent_context/final_review/docs_md/49｜Gateway MCP_Skills_Memory Router 深入详解.md",
+        ".agent_context/final_review/docs_md/88｜Model_Sandbox_Memory_Tool Config 单文件详解.md",
+        ".agent_context/final_review/docs_md/90｜AppConfig_Runtime Paths_Reload Boundary 单文件详解.md",
+        ".agent_context/final_review/docs_md/91｜Database_Checkpointer_RunEvents Config 详解.md",
+        ".agent_context/final_review/docs_md/95｜Patched Model Providers 深入详解.md",
+        ".agent_context/final_review/docs_md/98｜memory_config_sandbox_config_skills_config 单文件详解.md"
+      ],
+      "priority": "P1",
+      "remoteDocs": [
+        "88｜Model/Sandbox/Memory/Tool Config 单文件详解 — token Cxsnd5I1UoQEbcxAfthmRthyy0c",
+        "90｜AppConfig、Runtime Paths、Reload Boundary 单文件详解 — token InLIdtvS0oK111x7crnm1lueyJd",
+        "91｜Database、Checkpointer、RunEvents Config 详解 — token Qp22dl4NqoC0LfxmskNmfXqcyLb",
+        "95｜Patched Model Providers 深入详解 — token WHTodguJQoLMdLxHrN4mQbruy0f",
+        "98｜memory_config、sandbox_config、skills_config 单文件详解 — token DR6ndS7z8oDKx1xgLqImWMN1ywg",
+        "40 and 49: resolve tokens by numeric sequence before update"
+      ],
+      "why": "These docs explain the non-frontend systems a JS developer must understand after the chat route: config reload boundaries, memory, skills, sandbox, and model providers."
+    },
+    {
+      "batch": "P1-C: Update learner checklist and maintenance docs",
+      "edits": [
+        "Doc 353: align checklist with actual route names, submit/stream ownership, middleware order, runtime chain, artifact model, settings storage, and doc 355 path.",
+        "Docs 350/351/352: preserve remote visual/process enhancements and turn them into the operating manual for future documentation sync: coverage matrix, module-change workflow, visual style, merge policy, and verification commands.",
+        "Replace stale absolute paths `/Users/bytedance/deer-flow/...` with repo-relative paths in the first pass of 19 affected docs, prioritizing docs 01-19 and docs directly linked from the JS learner route.",
+        "Split compound backticked path lists such as `frontend/src/app、frontend/src/components/workspace、frontend/src/core` into valid individual repo-relative paths.",
+        "Reduce generic boilerplate in high-priority docs first; do not attempt an all-doc boilerplate cleanup in this workflow."
+      ],
+      "localFiles": [
+        ".agent_context/final_review/docs_md/353｜新同学源码走读检查清单.md",
+        ".agent_context/final_review/docs_md/350｜模块覆盖矩阵与验收说明.md",
+        ".agent_context/final_review/docs_md/351｜文档集维护指南_新增模块后的补文档方法.md",
+        ".agent_context/final_review/docs_md/352｜可视化风格指南_运行逻辑图绘制规范.md",
+        ".agent_context/final_review/docs_md/01｜DeerFlow 整体架构与分层总览.md",
+        ".agent_context/final_review/docs_md/04｜*.md",
+        ".agent_context/final_review/docs_md/05｜*.md",
+        ".agent_context/final_review/docs_md/08｜*.md",
+        ".agent_context/final_review/docs_md/09｜*.md",
+        ".agent_context/final_review/docs_md/10｜*.md",
+        ".agent_context/final_review/docs_md/15｜*.md",
+        ".agent_context/final_review/docs_md/19｜*.md"
+      ],
+      "priority": "P1",
+      "remoteDocs": [
+        "353｜新同学源码走读检查清单 — token EDuHdMZnPoOQXOx9U4rmuR3hy6f",
+        "350/351/352 and affected 01-19 docs: resolve tokens by numeric sequence before update"
+      ],
+      "why": "Checklist and maintenance docs make the corpus usable and maintainable without expanding scope to all 355 documents."
+    },
+    {
+      "batch": "P2: Build safe sync tooling and ledger before any broader synchronization",
+      "edits": [
+        "Create or update a durable sync manifest under `.agent_context/lark_remote/` keyed by sequence number and remote token. Fields: sequence, canonical_title, local_path, remote_name, token, url, local_sha, remote_sha, last_synced_at, sync_policy, and notes.",
+        "Fix compare-manifest semantics so `changed_matched` is renamed or supplemented with `matched` and `drifted`; 331 same-SHA docs should not appear as content changes.",
+        "Add a dry-run sync command that prints create/update/skip/delete actions and refuses to update drifted docs unless a merge policy is set for remote-only sections.",
+        "Post-update validation should refetch every touched Lark doc, compare SHA/char counts, and report mismatches.",
+        "Label validation-command sections in docs as candidate commands unless verified against current repo scripts."
+      ],
+      "localFiles": [
+        ".agent_context/lark_remote/sync_ledger.jsonl or equivalent",
+        ".agent_context/lark_remote/compare_manifest.json producer script/process",
+        ".agent_context/final_review/docs_md/351｜文档集维护指南_新增模块后的补文档方法.md"
+      ],
+      "priority": "P2",
+      "remoteDocs": [
+        "No immediate broad Lark update required; publish tooling/process docs only after commands are verified"
+      ],
+      "why": "This prevents future accidental overwrites, filename-token mismatches, and misleading drift reports."
+    }
+  ],
+  "verificationPlan": [
+    "Inventory sanity before edits: `wc -l .agent_context/lark_remote/drive_files.jsonl && find .agent_context/lark_remote/docs_md -name '*.md' | wc -l && find .agent_context/final_review/docs_md -name '*.md' | wc -l`.",
+    "Manifest sanity: `jq '{remote_count,local_count,matched_count,local_not_remote,remote_not_local,changed_matched_len:(.changed_matched|length)}' .agent_context/lark_remote/compare_manifest.json`.",
+    "SHA split check: `jq '[.changed_matched[] | select(.same_sha==true)] | length, [.changed_matched[] | select(.same_sha==false)] | length' .agent_context/lark_remote/compare_manifest.json` should show `331` and `24` before edits.",
+    "Missing doc check before create: `find .agent_context/lark_remote/docs_md -name '355*' -print` should be empty; `find .agent_context/final_review/docs_md -name '355*' -print` should show the local JS guide.",
+    "After adding title to doc 355: `sed -n '1,5p' '.agent_context/final_review/docs_md/355｜只会 JS 的前端学习 DeerFlow 路线图.md'` should show the title tag first.",
+    "Source-path validation: run `rg -n '/Users/bytedance/deer-flow|`mcp/\\*`|sandbox/\\*、mcp/\\*|frontend/src/app、frontend/src/components/workspace' .agent_context/final_review/docs_md backend/README.md` and ensure P0/P1 target docs have no invalid occurrences.",
+    "Frontend source-truth spot checks: `rg -n 'thread\\.submit|function handleSubmit|const handleSubmit|useThreadStream|useThreadChat|MessageList|deerflow\\.local-settings|deerflow\\.thread-model' frontend/src`.",
+    "Gateway route/rewrite spot checks: `rg -n 'api/langgraph|rewrite|runs/stream|Content-Location|StreamingResponse|Last-Event-ID|text/event-stream' docker/nginx backend/app/gateway`.",
+    "Runtime/middleware spot checks: `rg -n 'create_or_reject|UnsupportedStrategyError|enqueue|MemoryStreamBridge|END_SENTINEL|build_lead_runtime_middlewares|ClarificationMiddleware|DanglingToolCallMiddleware|SandboxAuditMiddleware|Command\\(update' backend/packages backend/app`.",
+    "Visual feature check for edited docs: use a small Python script to count `<callout`, Mermaid fences, tables, H1, and `<title>` in every touched local doc; fail if doc 355 lacks title or if a merge accidentally removes all diagrams/tables from a touched doc.",
+    "Remote visual preservation check before overwrite: compare each drifted doc local/remote for `# 可视化增强`; if remote has it and local does not, copy/merge it or record an explicit rejection reason.",
+    "Markdown compatibility smoke test: run the existing Feishu Markdown import/check tooling if available; otherwise validate fenced Mermaid blocks, tables, title tags, and callout syntax with a local parser/linter before Lark update.",
+    "Lark post-create/update validation: refetch every touched remote doc into a temporary Markdown snapshot, compute `shasum -a 256` and `wc -m`, compare to intended post-import local content, and update the sync ledger.",
+    "Navigation validation after doc 355 creation: `rg -n '355｜只会 JS|docx/|学习 DeerFlow 路线图' .agent_context/final_review/docs_md/349* .agent_context/final_review/docs_md/353* .agent_context/final_review/docs_md/354* '.agent_context/final_review/docs_md/DeerFlow 2.0 源码分层详解_章节目录.md'`.",
+    "Final scope validation: list touched docs and confirm it is limited to P0/P1/P2 targets, not a blanket rewrite of all 355 existing remote docs."
+  ],
+  "visualizationPlan": [
+    "Add a learner map diagram to doc 355: `JS concepts -> Next.js workspace -> chat submit hook -> Gateway stream route -> runtime/agent -> middleware/tools -> SSE/messages/artifacts`.",
+    "Add a frontend submit sequence diagram to docs 355 and 06: `User -> InputBox -> ChatPage.handleSubmit -> useThreadStream.sendMessage -> upload files -> thread.submit -> useStream state -> MessageList`.",
+    "Add a new-thread lifecycle flowchart to doc 06: `/workspace/chats/new -> generated visual thread id -> no eager history fetch -> submit -> backend-created thread id -> history.replaceState -> normal thread`.",
+    "Add a browser/Gateway routing diagram to docs 355, 349, 01, and 06: browser `/api/langgraph/*` -> nginx rewrite -> FastAPI `/api/*` -> thread run router -> SSE response.",
+    "Add a runtime streaming diagram to docs 02/12/265/266: request validation -> RunManager -> worker task -> lead agent astream -> MemoryStreamBridge event log -> SSE consumer -> frontend state.",
+    "Add a middleware-order ladder diagram to docs 03/13/353: base runtime middlewares first, then lead-specific middlewares, ending with `ClarificationMiddleware`.",
+    "Add an artifact flow diagram to docs 355 and 07: tool/write-file events and `thread.values.artifacts` -> ArtifactsProvider -> Artifact panel -> Gateway artifact URL/download; mark in-progress `write-file:` as a separate preview path.",
+    "Add a settings/storage diagram to docs 355/06/07: localStorage base settings + per-thread model override -> `useThreadSettings` -> ChatPage/InputBox context fields -> submit payload.",
+    "Add a memory/skills/sandbox interaction diagram to docs 40/49/88/98: skill activation and allowed-tools -> middleware/tool policy -> sandbox lazy acquisition/path resolution -> memory reminder/update queue.",
+    "Add a sync-process diagram to docs 351/352: local canonical + remote snapshot -> token-keyed ledger -> section-aware merge -> dry-run plan -> Lark update -> refetch/SHA verification."
+  ]
+}

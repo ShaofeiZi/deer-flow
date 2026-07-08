@@ -425,3 +425,11 @@ See the [LICENSE](../LICENSE) file in the project root.
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+
+## Current runtime source-truth notes
+
+- Browser `/api/langgraph/*` requests are rewritten by nginx to Gateway `/api/*`; the stream route is implemented by `backend/app/gateway/routers/thread_runs.py`.
+- Run creation goes through `services.start_run()`, `RunManager.create_or_reject()`, and a background `run_agent()` task.
+- `StreamBridge` connects the background producer to the HTTP SSE consumer and supports heartbeat/end/replay behavior.
+- Lead-agent middleware is assembled in layers: base runtime middleware first, then lead-agent context/skills/todo/title/memory/deferred/subagent/loop/safety/clarification additions.

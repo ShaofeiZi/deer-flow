@@ -1,0 +1,8 @@
+{"t":1783428087132,"type":"cached","id":"f8005b80014854e4#0","label":"inventory","phase":"Inventory"}
+{"t":1783428087133,"type":"cached","id":"257a3b59a664236a#0","label":"architecture","phase":"Focused Review"}
+{"t":1783428087133,"type":"cached","id":"891e717f9f0743b2#0","label":"frontend-learner","phase":"Focused Review"}
+{"t":1783428087134,"type":"cached","id":"36b1c2290375bee6#0","label":"backend-bff","phase":"Focused Review"}
+{"t":1783428087134,"type":"cached","id":"1bf9b9b35ea688ad#0","label":"doc-quality","phase":"Focused Review"}
+{"t":1783428087135,"type":"cached","id":"04e8b9d2cba59bf8#0","label":"claim-checker","phase":"Focused Review"}
+{"t":1783428087138,"type":"start","id":"5ca227faa8068b17#0","label":"synthesis","phase":"Synthesis","effort":"xhigh","model":"gpt-5.5-2026-04-24"}
+{"t":1783428155719,"type":"end","id":"5ca227faa8068b17#0","label":"synthesis","phase":"Synthesis","effort":"xhigh","model":"gpt-5.5-2026-04-24","tokens":130584,"ms":68580}

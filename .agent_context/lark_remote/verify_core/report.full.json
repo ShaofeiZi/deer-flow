@@ -1,0 +1,351 @@
+[
+  {
+    "seq": "1",
+    "name": "01｜DeerFlow 整体架构与分层总览",
+    "token": "TFY8df1x5o53mixHM3gmqNqlyce",
+    "ok": true,
+    "chars": 2838,
+    "mermaid": 3,
+    "sha256": "6018e360561bb8f662f3b56948e81891a1d9b3a7cb3f966aa2b24a78d0d22a8f",
+    "err": ""
+  },
+  {
+    "seq": "2",
+    "name": "02｜Gateway 与 LangGraph 运行时详解",
+    "token": "Dcvkdjf3KopJmsxZa9QmEQPWyic",
+    "ok": true,
+    "chars": 3946,
+    "mermaid": 3,
+    "sha256": "b530441d2f6aaf089ce923224124b586db7be8f510c0033929ae694116813f90",
+    "err": ""
+  },
+  {
+    "seq": "3",
+    "name": "03｜Lead Agent、Prompt、Tools 与 Middleware 详解",
+    "token": "WbumdDbSCoTmW4xIrCsmpOIaymd",
+    "ok": true,
+    "chars": 4395,
+    "mermaid": 4,
+    "sha256": "a1ff829bad7d6394eb536e3b109469c3238c5941541f6af6595cfd1dd462534d",
+    "err": ""
+  },
+  {
+    "seq": "4",
+    "name": "04｜Tools、Sandbox、Uploads 与 Artifacts 详解",
+    "token": "ZOtCdVzKjoa3lAx3p92ms1eMyge",
+    "ok": true,
+    "chars": 2902,
+    "mermaid": 4,
+    "sha256": "e45f9ecd42050ef7c1d07b9082b348431037b619717eb0d41910bb62841d5f86",
+    "err": ""
+  },
+  {
+    "seq": "5",
+    "name": "05｜Skills、MCP 与 Memory 详解",
+    "token": "U50Ldy2sxoHbOAxo58vmNMUiyef",
+    "ok": true,
+    "chars": 2960,
+    "mermaid": 4,
+    "sha256": "f50e16786a95e8c258fcf5195a6e2c89b5f5dd80d93e83bf9727fae1593195e7",
+    "err": ""
+  },
+  {
+    "seq": "6",
+    "name": "06｜Frontend Workspace 与 Chat 主链路详解",
+    "token": "IvEydJu3Poud6vx4mR0mThL1y4f",
+    "ok": true,
+    "chars": 4432,
+    "mermaid": 3,
+    "sha256": "cb0960c8ef73a04872f4962947cf934cce912609c3da647d325e5bdf020e8344",
+    "err": ""
+  },
+  {
+    "seq": "7",
+    "name": "07｜Frontend Settings、Models、Artifacts 数据流详解",
+    "token": "JFD3dRkmvoRYgHxlJD1mbEUUyeb",
+    "ok": true,
+    "chars": 4582,
+    "mermaid": 4,
+    "sha256": "b06e67eb707b04a3531e28096949d0391f0484b62a535d8f16ac99e9c3e30770",
+    "err": ""
+  },
+  {
+    "seq": "8",
+    "name": "08｜配置、部署、测试与排障详解",
+    "token": "XyAFdSxNooUswXxcVx8mbR7iyqg",
+    "ok": true,
+    "chars": 2919,
+    "mermaid": 4,
+    "sha256": "09e4742b1c100ba7d47de346b342ace74cf7e142bafff97e70af6a5a4ee07585",
+    "err": ""
+  },
+  {
+    "seq": "9",
+    "name": "09｜Auth、CSRF、权限与 IM Channels 详解",
+    "token": "KnQBdOROXoOE37xAKPdmljJJyHd",
+    "ok": true,
+    "chars": 2361,
+    "mermaid": 3,
+    "sha256": "7d94edec218056c666de5003bd9f371fb07d707d4b40f5ece971f118f8c69cb7",
+    "err": ""
+  },
+  {
+    "seq": "10",
+    "name": "10｜Models、Tracing、Persistence 与 Token Usage 详解",
+    "token": "RUtPdneNLoPyI0x5ksKmblLJynd",
+    "ok": true,
+    "chars": 2472,
+    "mermaid": 4,
+    "sha256": "06daf8d2b7f022c5d7604874c9555855d8243bbb48cdd380ef8b114c53ad3571",
+    "err": ""
+  },
+  {
+    "seq": "12",
+    "name": "12｜Runtime RunManager、StreamBridge、Journal 详解",
+    "token": "R7HYdJ5PXoiOdgxbpJfmMYDfyRb",
+    "ok": true,
+    "chars": 3041,
+    "mermaid": 4,
+    "sha256": "bbf3eba91c7daa9ccd8944b4ee58fb90efb9b453533cfe33ad5a31c8fd53c3a7",
+    "err": ""
+  },
+  {
+    "seq": "13",
+    "name": "13｜Backend Middleware 模块逐项详解",
+    "token": "FKvZdX732osfBNxyscOmHFkgydd",
+    "ok": true,
+    "chars": 3026,
+    "mermaid": 3,
+    "sha256": "56cfec5304e8a36bbb5a323cd83c93dd90fc39d0e0546cc5adbb1d09d8bae21d",
+    "err": ""
+  },
+  {
+    "seq": "15",
+    "name": "15｜Config、Paths 与 Hot Reload 边界详解",
+    "token": "DTU7dQ6SiopsQDxfJqZmSTVWyag",
+    "ok": true,
+    "chars": 2657,
+    "mermaid": 3,
+    "sha256": "503c49fd854e723259f938f57af37da8c4e8a7abc38aaaad61bfa2ef43ed9e59",
+    "err": ""
+  },
+  {
+    "seq": "19",
+    "name": "19｜Middleware 基建类文件详解：ThreadData、Uploads、Sandbox、ToolOutputBudget",
+    "token": "Dg0idIHMcovbQWxrpKjmEwT3yyh",
+    "ok": true,
+    "chars": 1981,
+    "mermaid": 2,
+    "sha256": "b760d1594f93f6b8fba6b6e8fc025e76ff042e5e2800c1733090c3f8f45ffef8",
+    "err": ""
+  },
+  {
+    "seq": "24",
+    "name": "24｜ThreadDataMiddleware 单文件详解",
+    "token": "UvKWdlU67ov47kx6ygsmR4FkyKd",
+    "ok": true,
+    "chars": 1805,
+    "mermaid": 2,
+    "sha256": "28e13dc2578e1121a882ee239cd432ddb515ca1bacded84cf0ba343ae17f6530",
+    "err": ""
+  },
+  {
+    "seq": "26",
+    "name": "26｜SandboxMiddleware 单文件详解",
+    "token": "ZTBedtbq1owHuuxfEj1mj6zny4J",
+    "ok": true,
+    "chars": 1957,
+    "mermaid": 3,
+    "sha256": "7609e0d6bac9269a3fe0fc0283e7029f107f11ed47c5cfa583d829ccd160fe5f",
+    "err": ""
+  },
+  {
+    "seq": "29",
+    "name": "29｜SkillActivationMiddleware 单文件详解",
+    "token": "Wqntdu46NobRZ6xXj1Jm07u2y3c",
+    "ok": true,
+    "chars": 1598,
+    "mermaid": 2,
+    "sha256": "f679c72b32081cff8309e9b678f4f37c23ec87f07b88c6679a0598c69b4ac79a",
+    "err": ""
+  },
+  {
+    "seq": "37",
+    "name": "37｜Sandbox Tools 单文件详解：bash/ls/glob/grep/read/write/str_replace",
+    "token": "SmrFdFwMYoZ1rSxcEWRm3aTSyVc",
+    "ok": true,
+    "chars": 1549,
+    "mermaid": 2,
+    "sha256": "654001a0893d576e1a5666862015ad5a6255e64a40e37fd05b25d6d1681ce067",
+    "err": ""
+  },
+  {
+    "seq": "40",
+    "name": "40｜Memory Queue、Updater、Storage 单文件详解",
+    "token": "LEsJdNSIWoaRpUxxcxCms3S9ykd",
+    "ok": true,
+    "chars": 1812,
+    "mermaid": 2,
+    "sha256": "a58ba7e5b1559363df66f91389beb73e7c8681adf982f38598d1446b093c1a9b",
+    "err": ""
+  },
+  {
+    "seq": "49",
+    "name": "49｜Gateway MCP、Skills、Memory Router 深入详解",
+    "token": "GvzAdygTVoxdSkx5ccJmq0LLyei",
+    "ok": true,
+    "chars": 1838,
+    "mermaid": 2,
+    "sha256": "05b16fb19d66b64d9f9006db8678bba5652ca6c57b0ee44094584e7e7341e5c8",
+    "err": ""
+  },
+  {
+    "seq": "88",
+    "name": "88｜Model/Sandbox/Memory/Tool Config 单文件详解",
+    "token": "Cxsnd5I1UoQEbcxAfthmRthyy0c",
+    "ok": true,
+    "chars": 2056,
+    "mermaid": 3,
+    "sha256": "88da8e33de87c174ac9ef6b92f2a78fc3f679a2f582252d3aed8aaf4e96f61df",
+    "err": ""
+  },
+  {
+    "seq": "90",
+    "name": "90｜AppConfig、Runtime Paths、Reload Boundary 单文件详解",
+    "token": "InLIdtvS0oK111x7crnm1lueyJd",
+    "ok": true,
+    "chars": 1607,
+    "mermaid": 2,
+    "sha256": "cc203555253c011a2e2bc98744c37313b7ad8711ff3425083b07f499bbbf8313",
+    "err": ""
+  },
+  {
+    "seq": "91",
+    "name": "91｜Database、Checkpointer、RunEvents Config 详解",
+    "token": "Qp22dl4NqoC0LfxmskNmfXqcyLb",
+    "ok": true,
+    "chars": 1752,
+    "mermaid": 3,
+    "sha256": "4aab702c12679876030648830cb760a6eb2800044f7a31cd056f95e9dbd952ad",
+    "err": ""
+  },
+  {
+    "seq": "95",
+    "name": "95｜Patched Model Providers 深入详解",
+    "token": "WHTodguJQoLMdLxHrN4mQbruy0f",
+    "ok": true,
+    "chars": 1742,
+    "mermaid": 2,
+    "sha256": "ca28719a7e2f2690ee112eca95ae6eb2e396f5fcb298b9ec6d510d8100b3748c",
+    "err": ""
+  },
+  {
+    "seq": "98",
+    "name": "98｜memory_config、sandbox_config、skills_config 单文件详解",
+    "token": "DR6ndS7z8oDKx1xgLqImWMN1ywg",
+    "ok": true,
+    "chars": 1628,
+    "mermaid": 3,
+    "sha256": "13e0fbfa14e216d2813a0dd62a2fe90adce1e1dc8a229f7cce56871740ffdd43",
+    "err": ""
+  },
+  {
+    "seq": "265",
+    "name": "265｜runtime/runs/worker.py 单文件详解",
+    "token": "RiDUdoENFo47jfxIXErmMtTryxb",
+    "ok": true,
+    "chars": 1794,
+    "mermaid": 3,
+    "sha256": "3975e048608b69e5e6e34896b21bc761973703f6b24ab8e54bbd38534d6affc3",
+    "err": ""
+  },
+  {
+    "seq": "266",
+    "name": "266｜runtime/runs/manager.py 单文件详解",
+    "token": "CEyzdci8noYLpux4gzVmCKUiyvf",
+    "ok": true,
+    "chars": 1255,
+    "mermaid": 2,
+    "sha256": "40ad3f8f494fd06472e28725b916112ab98441f2177b448c5c6f90eaabf9696a",
+    "err": ""
+  },
+  {
+    "seq": "349",
+    "name": "349｜文档集导航指南：300+ 章节阅读路径",
+    "token": "EZT2d2U0gowj7uxQdl6meV8Hynh",
+    "ok": true,
+    "chars": 3720,
+    "mermaid": 4,
+    "sha256": "2423dad82a0672f25841b393904a12b7a7879927542942f29f02a77ed24f202f",
+    "err": ""
+  },
+  {
+    "seq": "350",
+    "name": "350｜模块覆盖矩阵与验收说明",
+    "token": "WB4YdSMCToPfOCxGYbYmxVTKyne",
+    "ok": true,
+    "chars": 1347,
+    "mermaid": 2,
+    "sha256": "28622ab9f777027ea7af47f8fad98144c110a3b294ba718ccc619277f4d38cba",
+    "err": ""
+  },
+  {
+    "seq": "351",
+    "name": "351｜文档集维护指南：新增模块后的补文档方法",
+    "token": "Jw6bdJWhfoN955xnS6gmXDuAyvc",
+    "ok": true,
+    "chars": 1531,
+    "mermaid": 2,
+    "sha256": "922919b44ae6dbc17c78d75480c416e02be92ee29cc9fcf14bf8c8ec6893fdf2",
+    "err": ""
+  },
+  {
+    "seq": "352",
+    "name": "352｜可视化风格指南：运行逻辑图绘制规范",
+    "token": "Kgdcdeb6pofGkjxIo44m55x0yOc",
+    "ok": true,
+    "chars": 1389,
+    "mermaid": 2,
+    "sha256": "b43110416cd7379379621c324dff2a526d32e4557ca26f7cf9813985d15eebc9",
+    "err": ""
+  },
+  {
+    "seq": "353",
+    "name": "353｜新同学源码走读检查清单",
+    "token": "EDuHdMZnPoOQXOx9U4rmuR3hy6f",
+    "ok": true,
+    "chars": 2422,
+    "mermaid": 2,
+    "sha256": "71c45a16e78c37aa207ad6a7e531903ec82543cac85a4b91f7a980804afae19d",
+    "err": ""
+  },
+  {
+    "seq": "354",
+    "name": "354｜最终验收摘要与证据索引",
+    "token": "JlDEdsqEWo9iOsxSEL8mljXYyVf",
+    "ok": true,
+    "chars": 2270,
+    "mermaid": 1,
+    "sha256": "8d5625a328af0456f7f5fc0a388299a67d8e33931e7324635860529547d9694b",
+    "err": ""
+  },
+  {
+    "seq": "355",
+    "name": "355｜只会 JS 的前端学习 DeerFlow 路线图",
+    "token": "Zf5Rd7lkYolmRAxm7t4m7Aotyob",
+    "ok": true,
+    "chars": 8876,
+    "mermaid": 5,
+    "sha256": "bb8ac1fdde23fed44a3b81721c572e4f2916e6aa36ddae3dbe441bc4a8f9205a",
+    "err": ""
+  },
+  {
+    "seq": "dir",
+    "name": "DeerFlow 2.0 源码分层详解：章节目录",
+    "token": "OOKTdDOiRokb7wx2rFRmQShcyrI",
+    "ok": true,
+    "chars": 48876,
+    "mermaid": 2,
+    "sha256": "deb1e3f5879307eff32311e7b8e330f021b1a122e959dcce46d93d7fe24ecbad"
+  }
+]

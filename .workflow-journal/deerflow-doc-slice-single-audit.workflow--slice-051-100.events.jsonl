@@ -1,0 +1,2 @@
+{"t":1783483479924,"type":"start","id":"15ead695e68df71a#0","label":"051-100-api-config-providers","phase":"Single Slice Audit","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783483791620,"type":"end","id":"15ead695e68df71a#0","label":"051-100-api-config-providers","phase":"Single Slice Audit","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":1886743,"ms":311695}

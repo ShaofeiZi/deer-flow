@@ -1,0 +1,57 @@
+<title>68｜Channels Service 与 ChannelManager 详解</title>
+
+<callout emoji="✅">
+**本章目标：**讲清 IM channel service 如何启动、统一消息如何转为 LangGraph run。
+</callout>
+
+# 1. 模块职责
+
+| 模块 | 说明 |
+|-|-|
+| `service.py` | 启动/停止 ChannelService，按 config 初始化 channels。 |
+| `manager.py` | 统一处理 inbound message、slash skill、attachments、artifact delivery。 |
+| `message_bus.py` | InboundMessage/OutboundMessage 数据结构和 MessageBus。 |
+| `store.py` | channel 状态存储。 |
+
+# 2. 运行逻辑图
+
+```mermaid
+flowchart TD
+  Config[channels config] --> Service[ChannelService]
+  Service --> Channels[Feishu Slack Telegram Discord WeCom DingTalk Wechat]
+  Channels --> Bus[MessageBus]
+  Bus --> Manager[ChannelManager]
+  Manager --> Files[ingest inbound files]
+  Manager --> Capability{channel supports streaming?}
+  Capability -->|Feishu WeCom| Stream[LangGraph run stream]
+  Capability -->|others| Wait[LangGraph runs.wait]
+  Stream --> Response[format response and artifacts]
+  Wait --> Response
+  Response --> Bus
+  Bus --> Channels
+```
+
+---
+
+# 补充：设计取舍、重点代码与阅读路径
+
+<callout emoji="💡">
+**设计目的：**ChannelService 负责按配置启动各 IM 平台适配器，ChannelManager 负责把统一 InboundMessage 转成 DeerFlow thread/run，再把结果和 artifacts 转回平台消息。
+</callout>
+
+| 维度 | 说明 |
+|-|-|
+| 收益 | 新平台只需实现 `Channel.start/stop/send` 并注册到 `_CHANNEL_REGISTRY`；Manager 复用 thread 映射、slash skill、附件和 artifact 发送逻辑。 |
+| 代价 | 不同平台的长连接、文件下载、markdown/card 能力差异很大；运行路径还会按 `supports_streaming` 分成 stream 与 wait 两类。 |
+| 重点代码 | `backend/app/channels/service.py`、`manager.py`、`base.py`、各平台 channel 文件。 |
+| 阅读路径 | 先看 `_CHANNEL_REGISTRY` 和 `_CHANNEL_CREDENTIAL_KEYS`，再看 `CHANNEL_CAPABILITIES`，最后追踪 Manager 的 inbound -> run -> outbound。 |
+
+```mermaid
+flowchart TD
+  A[设计目的] --> B[模块职责]
+  B --> C[收益]
+  B --> D[代价]
+  C --> E[重点代码]
+  D --> E
+  E --> F[阅读路径]
+```

@@ -1,0 +1,1351 @@
+[
+  {
+    "seq": 103,
+    "path": ".agent_context/final_review/docs_md/103｜UI Input_Command_Select_Dropdown Primitives 详解.md",
+    "title": "103｜UI Input、Command、Select、Dropdown Primitives 详解",
+    "chars": 856,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 104,
+    "path": ".agent_context/final_review/docs_md/104｜AI Elements CodeBlock_WebPreview_Canvas_Image 详解.md",
+    "title": "104｜AI Elements CodeBlock、WebPreview、Canvas、Image 详解",
+    "chars": 978,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 108,
+    "path": ".agent_context/final_review/docs_md/108｜Claude_vLLM_MindIE_OpenAI Codex Provider 详解.md",
+    "title": "108｜Claude、vLLM、MindIE、OpenAI Codex Provider 详解",
+    "chars": 1062,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 111,
+    "path": ".agent_context/final_review/docs_md/111｜AI Elements Conversation 与 Message 详解.md",
+    "title": "111｜AI Elements Conversation 与 Message 详解",
+    "chars": 908,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 113,
+    "path": ".agent_context/final_review/docs_md/113｜AI Elements Artifact_Panel_OpenInChat 详解.md",
+    "title": "113｜AI Elements Artifact、Panel、OpenInChat 详解",
+    "chars": 866,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 118,
+    "path": ".agent_context/final_review/docs_md/118｜Workspace Welcome 与 AgentWelcome 组件详解.md",
+    "title": "118｜Workspace Welcome 与 AgentWelcome 组件详解",
+    "chars": 910,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 119,
+    "path": ".agent_context/final_review/docs_md/119｜ThreadTitle_TokenUsageIndicator_ExportTrigger 详解.md",
+    "title": "119｜ThreadTitle、TokenUsageIndicator、ExportTrigger 详解",
+    "chars": 998,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 11,
+    "path": ".agent_context/final_review/docs_md/11｜Gateway Routers API 模块逐项详解.md",
+    "title": "11｜Gateway Routers API 模块逐项详解",
+    "chars": 2470,
+    "mermaid": 2,
+    "tables": 26,
+    "callouts": 2,
+    "bad": [
+      "absolute_path",
+      "old_label"
+    ]
+  },
+  {
+    "seq": 120,
+    "path": ".agent_context/final_review/docs_md/120｜TodoList_CopyButton_Citations 组件详解.md",
+    "title": "120｜TodoList、CopyButton、Citations 组件详解",
+    "chars": 935,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 121,
+    "path": ".agent_context/final_review/docs_md/121｜Gateway Offline Banner_Fallback 组件详解.md",
+    "title": "121｜Gateway Offline Banner/Fallback 组件详解",
+    "chars": 1082,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 129,
+    "path": ".agent_context/final_review/docs_md/129｜Messages List_Item_Group_Subtask 组件详解.md",
+    "title": "129｜Messages List、Item、Group、Subtask 组件详解",
+    "chars": 1041,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 130,
+    "path": ".agent_context/final_review/docs_md/130｜Core Threads Stream_History_Cache 函数组详解.md",
+    "title": "130｜Core Threads Stream、History、Cache 函数组详解",
+    "chars": 1093,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 14,
+    "path": ".agent_context/final_review/docs_md/14｜Frontend Core Hooks 与 UI 模块逐项详解.md",
+    "title": "14｜Frontend Core Hooks 与 UI 模块逐项详解",
+    "chars": 2373,
+    "mermaid": 3,
+    "tables": 14,
+    "callouts": 2,
+    "bad": [
+      "absolute_path",
+      "old_label"
+    ]
+  },
+  {
+    "seq": 16,
+    "path": ".agent_context/final_review/docs_md/16｜Subagents_Task Tool 与并发执行详解.md",
+    "title": "16｜Subagents、Task Tool 与并发执行详解",
+    "chars": 2092,
+    "mermaid": 3,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "absolute_path",
+      "old_label"
+    ]
+  },
+  {
+    "seq": 175,
+    "path": ".agent_context/final_review/docs_md/175｜E2E_Replay_Container Workflows 详解.md",
+    "title": "175｜E2E、Replay、Container Workflows 详解",
+    "chars": 1054,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 17,
+    "path": ".agent_context/final_review/docs_md/17｜Model Provider Factory 与模型适配详解.md",
+    "title": "17｜Model Provider Factory 与模型适配详解",
+    "chars": 1975,
+    "mermaid": 2,
+    "tables": 15,
+    "callouts": 2,
+    "bad": [
+      "absolute_path",
+      "old_label"
+    ]
+  },
+  {
+    "seq": 189,
+    "path": ".agent_context/final_review/docs_md/189｜docker-compose 与 nginx 配置单文件详解.md",
+    "title": "189｜docker-compose 与 nginx 配置单文件详解",
+    "chars": 982,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 18,
+    "path": ".agent_context/final_review/docs_md/18｜Persistence_Database_ThreadMeta 与 Feedback 详解.md",
+    "title": "18｜Persistence、Database、ThreadMeta 与 Feedback 详解",
+    "chars": 2256,
+    "mermaid": 3,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "absolute_path",
+      "old_label"
+    ]
+  },
+  {
+    "seq": 20,
+    "path": ".agent_context/final_review/docs_md/20｜Middleware 上下文与 UX 类文件详解_Dynamic_Skill_Summary_Todo_Title_Memory.md",
+    "title": "20｜Middleware 上下文与 UX 类文件详解：Dynamic、Skill、Summary、Todo、Title、Memory",
+    "chars": 1690,
+    "mermaid": 2,
+    "tables": 14,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 21,
+    "path": ".agent_context/final_review/docs_md/21｜Run 与 Thread Router 文件级详解.md",
+    "title": "21｜Run 与 Thread Router 文件级详解",
+    "chars": 2009,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 222,
+    "path": ".agent_context/final_review/docs_md/222｜docs_pr-evidence 证据材料详解.md",
+    "title": "222｜docs/pr-evidence 证据材料详解",
+    "chars": 907,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 223,
+    "path": ".agent_context/final_review/docs_md/223｜AUTO_TITLE _ TITLE_GENERATION 文档单独详解.md",
+    "title": "223｜AUTO_TITLE / TITLE_GENERATION 文档单独详解",
+    "chars": 883,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 22,
+    "path": ".agent_context/final_review/docs_md/22｜管理类 Router 文件级详解_Models_MCP_Skills_Memory_Agents.md",
+    "title": "22｜管理类 Router 文件级详解：Models、MCP、Skills、Memory、Agents",
+    "chars": 1951,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 23,
+    "path": ".agent_context/final_review/docs_md/23｜文件类 Router 详解_Uploads_Artifacts_Feedback_Suggestions.md",
+    "title": "23｜文件类 Router 详解：Uploads、Artifacts、Feedback、Suggestions",
+    "chars": 2121,
+    "mermaid": 3,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 241,
+    "path": ".agent_context/final_review/docs_md/241｜Skill Manage PR Evidence 详解.md",
+    "title": "241｜Skill Manage PR Evidence 详解",
+    "chars": 913,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 24,
+    "path": ".agent_context/final_review/docs_md/24｜ThreadDataMiddleware 单文件详解.md",
+    "title": "24｜ThreadDataMiddleware 单文件详解",
+    "chars": 1806,
+    "mermaid": 2,
+    "tables": 17,
+    "callouts": 3,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 250,
+    "path": ".agent_context/final_review/docs_md/250｜Frontend Rehype _ Streamdown _ Mermaid 细节详解.md",
+    "title": "250｜Frontend Rehype / Streamdown / Mermaid 细节详解",
+    "chars": 981,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 251,
+    "path": ".agent_context/final_review/docs_md/251｜Persistence Run_Thread_Feedback Models 详解.md",
+    "title": "251｜Persistence Run/Thread/Feedback Models 详解",
+    "chars": 1008,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 252,
+    "path": ".agent_context/final_review/docs_md/252｜Persistence Repository Implementations 详解.md",
+    "title": "252｜Persistence Repository Implementations 详解",
+    "chars": 1052,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 253,
+    "path": ".agent_context/final_review/docs_md/253｜Runtime Checkpointer _ Store _ Events Store 详解.md",
+    "title": "253｜Runtime Checkpointer / Store / Events Store 详解",
+    "chars": 1092,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 256,
+    "path": ".agent_context/final_review/docs_md/256｜Frontend Build_Test Configs 详解.md",
+    "title": "256｜Frontend Build/Test Configs 详解",
+    "chars": 1000,
+    "mermaid": 2,
+    "tables": 14,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 257,
+    "path": ".agent_context/final_review/docs_md/257｜Root Config Files 详解_config.yaml_extensions_env.md",
+    "title": "257｜Root Config Files 详解：config.yaml、extensions、env",
+    "chars": 1026,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 258,
+    "path": ".agent_context/final_review/docs_md/258｜Persistence Engine _ Base _ JSON Compat 详解.md",
+    "title": "258｜Persistence Engine / Base / JSON Compat 详解",
+    "chars": 938,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 25,
+    "path": ".agent_context/final_review/docs_md/25｜UploadsMiddleware 单文件详解.md",
+    "title": "25｜UploadsMiddleware 单文件详解",
+    "chars": 1438,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 260,
+    "path": ".agent_context/final_review/docs_md/260｜ThreadMetaRow _ ThreadMetaRepository 详解.md",
+    "title": "260｜ThreadMetaRow / ThreadMetaRepository 详解",
+    "chars": 1050,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 264,
+    "path": ".agent_context/final_review/docs_md/264｜Runtime Events Store Provider 详解.md",
+    "title": "264｜Runtime Events Store Provider 详解",
+    "chars": 948,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 265,
+    "path": ".agent_context/final_review/docs_md/265｜runtime_runs_worker.py 单文件详解.md",
+    "title": "265｜runtime/runs/worker.py 单文件详解",
+    "chars": 1795,
+    "mermaid": 3,
+    "tables": 19,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 266,
+    "path": ".agent_context/final_review/docs_md/266｜runtime_runs_manager.py 单文件详解.md",
+    "title": "266｜runtime/runs/manager.py 单文件详解",
+    "chars": 1256,
+    "mermaid": 2,
+    "tables": 19,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 267,
+    "path": ".agent_context/final_review/docs_md/267｜runtime_runs_naming.py 与 schemas.py 详解.md",
+    "title": "267｜runtime/runs/naming.py 与 schemas.py 详解",
+    "chars": 974,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 268,
+    "path": ".agent_context/final_review/docs_md/268｜subagents_executor.py 单文件详解.md",
+    "title": "268｜subagents/executor.py 单文件详解",
+    "chars": 1021,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 26,
+    "path": ".agent_context/final_review/docs_md/26｜SandboxMiddleware 单文件详解.md",
+    "title": "26｜SandboxMiddleware 单文件详解",
+    "chars": 1958,
+    "mermaid": 3,
+    "tables": 16,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 273,
+    "path": ".agent_context/final_review/docs_md/273｜skill_manage_tool _ sync _ mcp_metadata _ types 详解.md",
+    "title": "273｜skill_manage_tool / sync / mcp_metadata / types 详解",
+    "chars": 944,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 274,
+    "path": ".agent_context/final_review/docs_md/274｜reflection_resolvers.py 单文件详解.md",
+    "title": "274｜reflection/resolvers.py 单文件详解",
+    "chars": 973,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 276,
+    "path": ".agent_context/final_review/docs_md/276｜utils_messages_network_time 详解.md",
+    "title": "276｜utils/messages、network、time 详解",
+    "chars": 923,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 277,
+    "path": ".agent_context/final_review/docs_md/277｜uploads_manager.py 单文件详解.md",
+    "title": "277｜uploads/manager.py 单文件详解",
+    "chars": 1042,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 279,
+    "path": ".agent_context/final_review/docs_md/279｜Channel Base _ MessageBus _ Store 单文件详解.md",
+    "title": "279｜Channel Base / MessageBus / Store 单文件详解",
+    "chars": 965,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 27,
+    "path": ".agent_context/final_review/docs_md/27｜ToolOutputBudgetMiddleware 单文件详解.md",
+    "title": "27｜ToolOutputBudgetMiddleware 单文件详解",
+    "chars": 1342,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 288,
+    "path": ".agent_context/final_review/docs_md/288｜auth repository_credential_file_reset_admin 详解.md",
+    "title": "288｜auth repository、credential_file、reset_admin 详解",
+    "chars": 917,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 289,
+    "path": ".agent_context/final_review/docs_md/289｜Feishu 与 Slack Channel 单文件详解.md",
+    "title": "289｜Feishu 与 Slack Channel 单文件详解",
+    "chars": 991,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 28,
+    "path": ".agent_context/final_review/docs_md/28｜DynamicContextMiddleware 单文件详解.md",
+    "title": "28｜DynamicContextMiddleware 单文件详解",
+    "chars": 1434,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 29,
+    "path": ".agent_context/final_review/docs_md/29｜SkillActivationMiddleware 单文件详解.md",
+    "title": "29｜SkillActivationMiddleware 单文件详解",
+    "chars": 1599,
+    "mermaid": 2,
+    "tables": 18,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 30,
+    "path": ".agent_context/final_review/docs_md/30｜Todo_Title_Memory Middleware 文件详解.md",
+    "title": "30｜Todo、Title、Memory Middleware 文件详解",
+    "chars": 1342,
+    "mermaid": 2,
+    "tables": 11,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 31,
+    "path": ".agent_context/final_review/docs_md/31｜LLMErrorHandlingMiddleware 单文件详解.md",
+    "title": "31｜LLMErrorHandlingMiddleware 单文件详解",
+    "chars": 1328,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 325,
+    "path": ".agent_context/final_review/docs_md/325｜Docker Provisioner Kubernetes Flow 深拆.md",
+    "title": "325｜Docker Provisioner Kubernetes Flow 深拆",
+    "chars": 958,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 32,
+    "path": ".agent_context/final_review/docs_md/32｜LoopDetectionMiddleware 单文件详解.md",
+    "title": "32｜LoopDetectionMiddleware 单文件详解",
+    "chars": 1338,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 332,
+    "path": ".agent_context/final_review/docs_md/332｜Docker Provisioner README_Dockerfile 深拆.md",
+    "title": "332｜Docker Provisioner README/Dockerfile 深拆",
+    "chars": 933,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 333,
+    "path": ".agent_context/final_review/docs_md/333｜configure.py 与 config-upgrade.sh 深拆.md",
+    "title": "333｜configure.py 与 config-upgrade.sh 深拆",
+    "chars": 917,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 336,
+    "path": ".agent_context/final_review/docs_md/336｜static detection scripts 深拆.md",
+    "title": "336｜static detection scripts 深拆",
+    "chars": 910,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 33,
+    "path": ".agent_context/final_review/docs_md/33｜SandboxAuditMiddleware 单文件详解.md",
+    "title": "33｜SandboxAuditMiddleware 单文件详解",
+    "chars": 1179,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 348,
+    "path": ".agent_context/final_review/docs_md/348｜ThemeProvider 与 Global Layout 详解.md",
+    "title": "348｜ThemeProvider 与 Global Layout 详解",
+    "chars": 844,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 349,
+    "path": ".agent_context/final_review/docs_md/349｜文档集导航指南_300_ 章节阅读路径.md",
+    "title": "349｜文档集导航指南：300+ 章节阅读路径",
+    "chars": 3759,
+    "mermaid": 4,
+    "tables": 24,
+    "callouts": 4,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 34,
+    "path": ".agent_context/final_review/docs_md/34｜DeferredToolFilterMiddleware 单文件详解.md",
+    "title": "34｜DeferredToolFilterMiddleware 单文件详解",
+    "chars": 1236,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 350,
+    "path": ".agent_context/final_review/docs_md/350｜模块覆盖矩阵与验收说明.md",
+    "title": "350｜模块覆盖矩阵与验收说明",
+    "chars": 1349,
+    "mermaid": 2,
+    "tables": 20,
+    "callouts": 3,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 351,
+    "path": ".agent_context/final_review/docs_md/351｜文档集维护指南_新增模块后的补文档方法.md",
+    "title": "351｜文档集维护指南：新增模块后的补文档方法",
+    "chars": 1532,
+    "mermaid": 2,
+    "tables": 21,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 352,
+    "path": ".agent_context/final_review/docs_md/352｜可视化风格指南_运行逻辑图绘制规范.md",
+    "title": "352｜可视化风格指南：运行逻辑图绘制规范",
+    "chars": 1390,
+    "mermaid": 2,
+    "tables": 19,
+    "callouts": 3,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 353,
+    "path": ".agent_context/final_review/docs_md/353｜新同学源码走读检查清单.md",
+    "title": "353｜新同学源码走读检查清单",
+    "chars": 2411,
+    "mermaid": 2,
+    "tables": 6,
+    "callouts": 3,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 35,
+    "path": ".agent_context/final_review/docs_md/35｜SafetyFinishReasonMiddleware 单文件详解.md",
+    "title": "35｜SafetyFinishReasonMiddleware 单文件详解",
+    "chars": 1182,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 36,
+    "path": ".agent_context/final_review/docs_md/36｜ViewImage_DanglingToolCall_SubagentLimit_TokenUsage Middleware 详解.md",
+    "title": "36｜ViewImage、DanglingToolCall、SubagentLimit、TokenUsage Middleware 详解",
+    "chars": 1392,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 37,
+    "path": ".agent_context/final_review/docs_md/37｜Sandbox Tools 单文件详解_bash_ls_glob_grep_read_write_str_replace.md",
+    "title": "37｜Sandbox Tools 单文件详解：bash/ls/glob/grep/read/write/str_replace",
+    "chars": 1550,
+    "mermaid": 2,
+    "tables": 22,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 38,
+    "path": ".agent_context/final_review/docs_md/38｜LocalSandbox 与 AioSandbox Provider 详解.md",
+    "title": "38｜LocalSandbox 与 AioSandbox Provider 详解",
+    "chars": 1394,
+    "mermaid": 2,
+    "tables": 11,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 39,
+    "path": ".agent_context/final_review/docs_md/39｜MCP Cache_Session Pool 与 OAuth 详解.md",
+    "title": "39｜MCP Cache、Session Pool 与 OAuth 详解",
+    "chars": 1437,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 40,
+    "path": ".agent_context/final_review/docs_md/40｜Memory Queue_Updater_Storage 单文件详解.md",
+    "title": "40｜Memory Queue、Updater、Storage 单文件详解",
+    "chars": 1813,
+    "mermaid": 2,
+    "tables": 19,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 41,
+    "path": ".agent_context/final_review/docs_md/41｜Skills Parser_Installer_Security Scanner 详解.md",
+    "title": "41｜Skills Parser、Installer、Security Scanner 详解",
+    "chars": 1370,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 42,
+    "path": ".agent_context/final_review/docs_md/42｜Frontend useThreadStream 单文件详解.md",
+    "title": "42｜Frontend useThreadStream 单文件详解",
+    "chars": 1472,
+    "mermaid": 2,
+    "tables": 14,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 43,
+    "path": ".agent_context/final_review/docs_md/43｜Frontend Message Utils 与 Artifacts Hooks 详解.md",
+    "title": "43｜Frontend Message Utils 与 Artifacts Hooks 详解",
+    "chars": 1468,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 44,
+    "path": ".agent_context/final_review/docs_md/44｜Config 配置类目录详解.md",
+    "title": "44｜Config 配置类目录详解",
+    "chars": 1488,
+    "mermaid": 2,
+    "tables": 16,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 45,
+    "path": ".agent_context/final_review/docs_md/45｜Models Provider Patch 文件详解.md",
+    "title": "45｜Models Provider Patch 文件详解",
+    "chars": 1321,
+    "mermaid": 2,
+    "tables": 15,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 46,
+    "path": ".agent_context/final_review/docs_md/46｜Persistence Repository 文件详解.md",
+    "title": "46｜Persistence Repository 文件详解",
+    "chars": 1517,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 47,
+    "path": ".agent_context/final_review/docs_md/47｜Frontend Settings 页面文件详解.md",
+    "title": "47｜Frontend Settings 页面文件详解",
+    "chars": 1672,
+    "mermaid": 2,
+    "tables": 14,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 48,
+    "path": ".agent_context/final_review/docs_md/48｜Gateway Auth Router 与认证模块详解.md",
+    "title": "48｜Gateway Auth Router 与认证模块详解",
+    "chars": 1405,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 49,
+    "path": ".agent_context/final_review/docs_md/49｜Gateway MCP_Skills_Memory Router 深入详解.md",
+    "title": "49｜Gateway MCP、Skills、Memory Router 深入详解",
+    "chars": 1839,
+    "mermaid": 2,
+    "tables": 16,
+    "callouts": 3,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 50,
+    "path": ".agent_context/final_review/docs_md/50｜Frontend ChatPage 与 InputBox 文件详解.md",
+    "title": "50｜Frontend ChatPage 与 InputBox 文件详解",
+    "chars": 1471,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 51,
+    "path": ".agent_context/final_review/docs_md/51｜thread_runs.py Router 单文件详解.md",
+    "title": "51｜thread_runs.py Router 单文件详解",
+    "chars": 1474,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 52,
+    "path": ".agent_context/final_review/docs_md/52｜threads.py Router 单文件详解.md",
+    "title": "52｜threads.py Router 单文件详解",
+    "chars": 1414,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 53,
+    "path": ".agent_context/final_review/docs_md/53｜uploads.py Router 单文件详解.md",
+    "title": "53｜uploads.py Router 单文件详解",
+    "chars": 1320,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 54,
+    "path": ".agent_context/final_review/docs_md/54｜artifacts.py Router 单文件详解.md",
+    "title": "54｜artifacts.py Router 单文件详解",
+    "chars": 1416,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 55,
+    "path": ".agent_context/final_review/docs_md/55｜skills.py Router 单文件详解.md",
+    "title": "55｜skills.py Router 单文件详解",
+    "chars": 1419,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 56,
+    "path": ".agent_context/final_review/docs_md/56｜memory.py Router 单文件详解.md",
+    "title": "56｜memory.py Router 单文件详解",
+    "chars": 1353,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 57,
+    "path": ".agent_context/final_review/docs_md/57｜mcp.py Router 单文件详解.md",
+    "title": "57｜mcp.py Router 单文件详解",
+    "chars": 1321,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 58,
+    "path": ".agent_context/final_review/docs_md/58｜Frontend Message Components 单文件详解.md",
+    "title": "58｜Frontend Message Components 单文件详解",
+    "chars": 1365,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 59,
+    "path": ".agent_context/final_review/docs_md/59｜Frontend Artifact Components 单文件详解.md",
+    "title": "59｜Frontend Artifact Components 单文件详解",
+    "chars": 1424,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 60,
+    "path": ".agent_context/final_review/docs_md/60｜Frontend Sidebar 与 Navigation 组件详解.md",
+    "title": "60｜Frontend Sidebar 与 Navigation 组件详解",
+    "chars": 1346,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 61,
+    "path": ".agent_context/final_review/docs_md/61｜auth.py Router 单文件详解.md",
+    "title": "61｜auth.py Router 单文件详解",
+    "chars": 1368,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 62,
+    "path": ".agent_context/final_review/docs_md/62｜agents.py Router 单文件详解.md",
+    "title": "62｜agents.py Router 单文件详解",
+    "chars": 1344,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 63,
+    "path": ".agent_context/final_review/docs_md/63｜feedback_suggestions_channels Router 详解.md",
+    "title": "63｜feedback、suggestions、channels Router 详解",
+    "chars": 1438,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 64,
+    "path": ".agent_context/final_review/docs_md/64｜Frontend API Client 与 Fetcher 详解.md",
+    "title": "64｜Frontend API Client 与 Fetcher 详解",
+    "chars": 1460,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 65,
+    "path": ".agent_context/final_review/docs_md/65｜Frontend Core Settings_Models_MCP_Skills_Memory API 层详解.md",
+    "title": "65｜Frontend Core Settings/Models/MCP/Skills/Memory API 层详解",
+    "chars": 1519,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 66,
+    "path": ".agent_context/final_review/docs_md/66｜Frontend Uploads_Notification_Tasks Core 详解.md",
+    "title": "66｜Frontend Uploads、Notification、Tasks Core 详解",
+    "chars": 1444,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 67,
+    "path": ".agent_context/final_review/docs_md/67｜Frontend Agents_Blog_I18n_Static Mode 模块详解.md",
+    "title": "67｜Frontend Agents、Blog、I18n、Static Mode 模块详解",
+    "chars": 1287,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 68,
+    "path": ".agent_context/final_review/docs_md/68｜Channels Service 与 ChannelManager 详解.md",
+    "title": "68｜Channels Service 与 ChannelManager 详解",
+    "chars": 1314,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 69,
+    "path": ".agent_context/final_review/docs_md/69｜Feishu_Slack_Telegram_WeCom_DingTalk_Wechat Channel 详解.md",
+    "title": "69｜Feishu/Slack/Telegram/WeCom/DingTalk/Wechat Channel 详解",
+    "chars": 1159,
+    "mermaid": 2,
+    "tables": 14,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  },
+  {
+    "seq": 74,
+    "path": ".agent_context/final_review/docs_md/74｜Frontend AI Elements 与 UI 基础组件详解.md",
+    "title": "74｜Frontend AI Elements 与 UI 基础组件详解",
+    "chars": 1187,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 75,
+    "path": ".agent_context/final_review/docs_md/75｜FeishuChannel 单文件详解.md",
+    "title": "75｜FeishuChannel 单文件详解",
+    "chars": 1067,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 84,
+    "path": ".agent_context/final_review/docs_md/84｜Jina_DDG_InfoQuest Provider 单模块详解.md",
+    "title": "84｜Jina、DDG、InfoQuest Provider 单模块详解",
+    "chars": 1120,
+    "mermaid": 2,
+    "tables": 12,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 85,
+    "path": ".agent_context/final_review/docs_md/85｜Feishu Channel 深入运行逻辑.md",
+    "title": "85｜Feishu Channel 深入运行逻辑",
+    "chars": 1150,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 86,
+    "path": ".agent_context/final_review/docs_md/86｜Slack Channel 深入运行逻辑.md",
+    "title": "86｜Slack Channel 深入运行逻辑",
+    "chars": 1070,
+    "mermaid": 2,
+    "tables": 13,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 89,
+    "path": ".agent_context/final_review/docs_md/89｜Landing Sections 深入组件逻辑.md",
+    "title": "89｜Landing Sections 深入组件逻辑",
+    "chars": 1038,
+    "mermaid": 2,
+    "tables": 14,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 90,
+    "path": ".agent_context/final_review/docs_md/90｜AppConfig_Runtime Paths_Reload Boundary 单文件详解.md",
+    "title": "90｜AppConfig、Runtime Paths、Reload Boundary 单文件详解",
+    "chars": 1608,
+    "mermaid": 2,
+    "tables": 17,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 91,
+    "path": ".agent_context/final_review/docs_md/91｜Database_Checkpointer_RunEvents Config 详解.md",
+    "title": "91｜Database、Checkpointer、RunEvents Config 详解",
+    "chars": 1753,
+    "mermaid": 3,
+    "tables": 18,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 95,
+    "path": ".agent_context/final_review/docs_md/95｜Patched Model Providers 深入详解.md",
+    "title": "95｜Patched Model Providers 深入详解",
+    "chars": 1744,
+    "mermaid": 2,
+    "tables": 19,
+    "callouts": 3,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": 98,
+    "path": ".agent_context/final_review/docs_md/98｜memory_config_sandbox_config_skills_config 单文件详解.md",
+    "title": "98｜memory_config、sandbox_config、skills_config 单文件详解",
+    "chars": 1629,
+    "mermaid": 3,
+    "tables": 17,
+    "callouts": 2,
+    "bad": [
+      "generic_boilerplate"
+    ]
+  },
+  {
+    "seq": null,
+    "path": ".agent_context/final_review/docs_md/DeerFlow 2.0 源码分层详解_章节目录.md",
+    "title": "DeerFlow 2.0 源码分层详解：章节目录",
+    "chars": 48876,
+    "mermaid": 2,
+    "tables": 473,
+    "callouts": 2,
+    "bad": [
+      "old_label"
+    ]
+  }
+]

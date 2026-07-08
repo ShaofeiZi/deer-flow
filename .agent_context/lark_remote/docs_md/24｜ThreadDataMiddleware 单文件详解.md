@@ -1,0 +1,58 @@
+<title>24｜ThreadDataMiddleware 单文件详解</title>
+
+<callout emoji="✅">
+**本章目标：**单独讲清 ThreadDataMiddleware 如何解析 thread_id/user_id，如何创建并写入 thread_data。
+</callout>
+
+| 点 | 说明 |
+|-|-|
+| 入口 | `before_agent` |
+| 状态 | 写入 `thread_data.workspace_path/uploads_path/outputs_path` |
+| 隔离 | 使用 `get_effective_user_id()` 进入 per-user 目录 |
+| 额外行为 | 给最后一条 HumanMessage 补 run_id 和 timestamp |
+
+```mermaid
+flowchart TD
+  A[before_agent] --> B{thread_id in runtime context?}
+  B -->|yes| C[use thread_id]
+  B -->|no| D[read config.configurable.thread_id]
+  D --> E{missing?}
+  E -->|yes| F[raise ValueError]
+  E -->|no| C
+  C --> G[get_effective_user_id]
+  G --> H{lazy_init?}
+  H -->|yes| I[compute paths only]
+  H -->|no| J[ensure_thread_dirs]
+  I --> K[return thread_data]
+  J --> K
+  K --> L[patch last HumanMessage metadata]
+```
+
+# 新同学阅读建议
+
+先看 `_get_thread_paths` 和 `before_agent`，再顺着 `Paths.sandbox_*_dir` 理解物理目录。
+
+---
+
+# 补充：设计取舍、重点代码与阅读路径
+
+<callout emoji="💡">
+**设计目的：**这个模块采用 middleware 形态，是为了把横切能力从主 agent 逻辑里剥离出来，并按 LangChain/LangGraph 生命周期挂载。
+</callout>
+
+| 维度 | 说明 |
+|-|-|
+| 收益 | 收益是可插拔、可独立测试、能按 before/after/wrap 阶段控制行为。 |
+| 代价 | 代价是执行顺序不直观，多个 middleware 同时改 messages/state 时调试成本较高。 |
+| 重点代码 | 重点代码通常在 `backend/packages/harness/deerflow/agents/middlewares/`，先看 class 的 hook 方法。 |
+| 阅读路径 | 阅读路径：先判断它在哪个 hook 生效，再看它读写 ThreadState 的哪些字段。 |
+
+```mermaid
+flowchart TD
+  A[设计动机] --> B[模块职责]
+  B --> C[收益]
+  B --> D[代价]
+  C --> E[重点代码]
+  D --> E
+  E --> F[理解方式]
+```

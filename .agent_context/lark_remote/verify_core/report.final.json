@@ -1,0 +1,58 @@
+[
+  {
+    "label": "355",
+    "ok": true,
+    "chars": 8876,
+    "mermaid": 5,
+    "has_js_route": true,
+    "sha256": "bb8ac1fdde23fed44a3b81721c572e4f2916e6aa36ddae3dbe441bc4a8f9205a"
+  },
+  {
+    "label": "06",
+    "ok": true,
+    "chars": 4432,
+    "mermaid": 3,
+    "has_js_route": false,
+    "sha256": "cb0960c8ef73a04872f4962947cf934cce912609c3da647d325e5bdf020e8344"
+  },
+  {
+    "label": "07",
+    "ok": true,
+    "chars": 4582,
+    "mermaid": 4,
+    "has_js_route": false,
+    "sha256": "b06e67eb707b04a3531e28096949d0391f0484b62a535d8f16ac99e9c3e30770"
+  },
+  {
+    "label": "349",
+    "ok": true,
+    "chars": 3720,
+    "mermaid": 4,
+    "has_js_route": true,
+    "sha256": "2423dad82a0672f25841b393904a12b7a7879927542942f29f02a77ed24f202f"
+  },
+  {
+    "label": "353",
+    "ok": true,
+    "chars": 2422,
+    "mermaid": 2,
+    "has_js_route": true,
+    "sha256": "71c45a16e78c37aa207ad6a7e531903ec82543cac85a4b91f7a980804afae19d"
+  },
+  {
+    "label": "354",
+    "ok": true,
+    "chars": 2270,
+    "mermaid": 1,
+    "has_js_route": true,
+    "sha256": "8d5625a328af0456f7f5fc0a388299a67d8e33931e7324635860529547d9694b"
+  },
+  {
+    "label": "目录",
+    "ok": true,
+    "chars": 48876,
+    "mermaid": 2,
+    "has_js_route": true,
+    "sha256": "deb1e3f5879307eff32311e7b8e330f021b1a122e959dcce46d93d7fe24ecbad"
+  }
+]

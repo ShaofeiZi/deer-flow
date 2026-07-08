@@ -1,0 +1,476 @@
+[
+  {
+    "path": ".agent_context/final_review/docs_md/107｜UI Navigation_Overlay Primitives 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/137｜Docker Compose_Nginx_Provisioner 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/138｜Public Skills 分类与运行逻辑详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/139｜Research_Review Public Skills 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/140｜Media Generation Public Skills 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/141｜Development_Deploy Public Skills 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/142｜Analysis_Consulting Public Skills 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/143｜Meta_Bootstrap Public Skills 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/144｜Skills Package Tests 与脚本详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/145｜deep-research Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/146｜github-deep-research Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/147｜academic-paper-review Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/150｜web-design-guidelines Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/151｜data-analysis Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/152｜chart-visualization Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/153｜image-generation Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/154｜skill-creator Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/155｜music-generation Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/156｜video-generation Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/157｜podcast-generation Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/158｜ppt-generation Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/159｜newsletter-generation Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/160｜find-skills Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/161｜bootstrap Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/162｜surprise-me Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/163｜vercel-deploy-claimable Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/164｜code-documentation Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/165｜consulting-analysis Public Skill 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/169｜Backend Agent_Middleware Tests 分类详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/182｜Upload _ Artifact _ File Conversion Tests 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/183｜Model _ Provider _ Config Tests 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/184｜Skills _ Tools _ Deferred Tests 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/194｜Setup_Update Agent E2E Tests 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/195｜Sandbox Provider 深层测试族详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/196｜MCP _ Deferred _ ToolSearch 测试族详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/20｜Middleware 上下文与 UX 类文件详解_Dynamic_Skill_Summary_Todo_Title_Memory.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/210｜backend_docs_CONFIGURATION.md 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/21｜Run 与 Thread Router 文件级详解.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/220｜Apple Container _ Auth Docker Gap Docs 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/22｜管理类 Router 文件级详解_Models_MCP_Skills_Memory_Agents.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/240｜Sandbox Memory Profiling _ Blocking IO Docs 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/242｜CODE_CHANGE_SUMMARY_BY_FILE 单文档详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/261｜Feedback _ User _ RunEvent Persistence 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/262｜Runtime Checkpointer Provider 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/263｜Runtime Store Provider 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/271｜Built-in Tools_view_image_tool_search_invoke_acp 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/272｜tools_tools.py 单文件详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/314｜Config _ Doctor _ Setup Wizard Tests 单文件族详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/317｜Artifact Loader _ Hooks _ Preview 单文件详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/318｜Generation Skill Scripts 单文件族详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/319｜Skill Creator Scripts 单文件族详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/321｜Backend AppConfig _ Runtime Paths Tests 深拆.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/340｜Gateway Runtime Lifecycle _ Shutdown Tests 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/42｜Frontend useThreadStream 单文件详解.md",
+    "bad": [
+      "前端模块按页面"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/46｜Persistence Repository 文件详解.md",
+    "bad": [
+      "前端模块按页面"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/48｜Gateway Auth Router 与认证模块详解.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/51｜thread_runs.py Router 单文件详解.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/52｜threads.py Router 单文件详解.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/53｜uploads.py Router 单文件详解.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/54｜artifacts.py Router 单文件详解.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/55｜skills.py Router 单文件详解.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/56｜memory.py Router 单文件详解.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/58｜Frontend Message Components 单文件详解.md",
+    "bad": [
+      "前端模块按页面"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/59｜Frontend Artifact Components 单文件详解.md",
+    "bad": [
+      "前端模块按页面"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/61｜auth.py Router 单文件详解.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/62｜agents.py Router 单文件详解.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/63｜feedback_suggestions_channels Router 详解.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/64｜Frontend API Client 与 Fetcher 详解.md",
+    "bad": [
+      "这个模块采用 router/API 分层"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/65｜Frontend Core Settings_Models_MCP_Skills_Memory API 层详解.md",
+    "bad": [
+      "前端模块按页面"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/66｜Frontend Uploads_Notification_Tasks Core 详解.md",
+    "bad": [
+      "前端模块按页面"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/70｜Community Search_Fetch_Image Tools 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/77｜DingTalk_WeCom_Wechat Channel 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/78｜Tavily_Firecrawl_Exa_Serper Web Search Provider 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/81｜Nextra Docs_Content 与 Blog 渲染详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/82｜Tavily 与 Firecrawl Provider 单模块详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/83｜Exa 与 Serper Provider 单模块详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/87｜Telegram_DingTalk_WeCom Channel 深入运行逻辑.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/96｜ACP_Guardrails_Safety Config 详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/97｜model_config_tool_config_tool_output_config_tool_search_config 单文件详解.md",
+    "bad": [
+      "该模块承担 agent 扩展能力"
+    ]
+  }
+]

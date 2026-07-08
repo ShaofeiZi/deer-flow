@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="use-iframe" content="true">
+  <meta name="html-box-height-mode" content="auto">
+  <title>DeerFlow JS 前端运行链路可视化</title>
+  <style>
+    :root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--muted:#64748b;--blue:#2563eb;--green:#16a34a;--amber:#d97706;--red:#dc2626;--line:#cbd5e1}
+    *{box-sizing:border-box} body{margin:0;background:linear-gradient(135deg,#f8fafc,#eef6ff);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink)}
+    .wrap{width:100%;max-width:100%;padding:18px}.hero{background:var(--card);border:1px solid #e2e8f0;border-radius:18px;padding:18px;box-shadow:0 10px 30px rgba(15,23,42,.08)}
+    h1{font-size:22px;margin:0 0 8px}.sub{color:var(--muted);line-height:1.6;margin-bottom:16px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0}
+    .step{border:1px solid #dbeafe;background:#fff;border-radius:14px;padding:12px;cursor:pointer;transition:.18s}.step:hover,.step.active{border-color:var(--blue);transform:translateY(-1px);box-shadow:0 8px 20px rgba(37,99,235,.14)}
+    .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:999px;background:#dbeafe;color:#1d4ed8;font-weight:700;margin-bottom:8px}.title{font-weight:700}.file{font-size:12px;color:var(--muted);margin-top:6px;word-break:break-all}
+    .panel{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:14px}.box{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px}.box h2{font-size:16px;margin:0 0 10px}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.pill{padding:8px 10px;border-radius:999px;background:#eff6ff;border:1px solid #bfdbfe;font-size:13px}.arrow{color:var(--muted)}
+    .states{display:grid;gap:8px}.state{display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:12px;border:1px solid #e2e8f0;background:#fff}.dot{width:10px;height:10px;border-radius:99px;margin-top:5px}.green{background:var(--green)}.amber{background:var(--amber)}.red{background:var(--red)}.blue{background:var(--blue)}
+    .checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.check{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:10px;font-size:13px}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 5px}
+    @media(max-width:720px){.grid{grid-template-columns:1fr 1fr}.panel{grid-template-columns:1fr}.checks{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="wrap"><div class="hero">
+  <h1>DeerFlow：JS 前端学习运行地图</h1>
+  <div class="sub">点击任一步骤，查看它在源码里的职责。目标是让只会 JS/React 的同学能从输入框一路追到后端 agent，再回到 MessageList / Artifacts。</div>
+  <div id="steps" class="grid"></div>
+  <div class="panel">
+    <div class="box"><h2 id="detailTitle">选择一个步骤</h2><div id="detail" class="sub"></div><div id="files"></div></div>
+    <div class="box"><h2>主链路</h2><div class="flow" id="flow"></div></div>
+  </div>
+  <div class="panel">
+    <div class="box"><h2>关键状态转换</h2><div class="states" id="states"></div></div>
+    <div class="box"><h2>学习验收</h2><div class="checks" id="checks"></div></div>
+  </div>
+</div></div>
+<script>
+const data=[
+ {t:'InputBox',d:'校验文本/文件，处理 stop streaming、模型自动选择，触发 onSubmit。',f:['frontend/src/components/workspace/input-box.tsx']},
+ {t:'ChatPage.handleSubmit',d:'页面层把 UI message 交给 sendMessage，并处理 /new 到真实 thread 的 URL 替换。',f:['frontend/src/app/workspace/chats/[thread_id]/page.tsx']},
+ {t:'useThreadStream.sendMessage',d:'上传文件、创建 optimistic message、构造 thread.submit 的 context。',f:['frontend/src/core/threads/hooks.ts']},
+ {t:'LangGraph SDK',d:'通过 useStream/thread.submit 发送 messages 和 stream options。',f:['frontend/src/core/api/api-client.ts','frontend/src/core/config/index.ts']},
+ {t:'Gateway stream route',d:'浏览器 /api/langgraph/* 经 nginx rewrite 到 Gateway /api/*，由 thread_runs.stream_run 承接。',f:['docker/nginx/nginx.local.conf','backend/app/gateway/routers/thread_runs.py']},
+ {t:'RunManager + worker',d:'创建 run、管理状态、启动后台 run_agent，发布 metadata/messages/custom/end。',f:['backend/app/gateway/services.py','backend/packages/harness/deerflow/runtime/runs/manager.py','backend/packages/harness/deerflow/runtime/runs/worker.py']},
+ {t:'lead_agent + middleware',d:'组装 model、prompt、tools、skills、memory、sandbox 和各种 middleware。',f:['backend/packages/harness/deerflow/agents/lead_agent/agent.py','backend/packages/harness/deerflow/agents/middlewares/']},
+ {t:'StreamBridge -> UI',d:'SSE 回到 useStream state，MessageList、Todo、Artifacts 消费状态。',f:['backend/packages/harness/deerflow/runtime/stream_bridge/','frontend/src/components/workspace/messages/','frontend/src/components/workspace/artifacts/']}
+];
+const stateData=[['blue','/new -> 临时 UUID','useThreadChat 创建展示用 threadId，但不拉后端 history。'],['amber','发送 -> optimistic','sendMessage 上传文件并插入乐观 human message。'],['green','onStart -> 真实 thread','后端创建 run 后，ChatPage replaceState 到真实 URL。'],['blue','Streaming -> 合并状态','useStream state 与历史消息、乐观消息合并。'],['green','Finish -> 刷新缓存','刷新 thread list、token usage、artifact/todo 状态。'],['red','Error -> 清理','清 optimistic/live state 并 toast 错误。']];
+const checks=['能说清 useThreadChat 不提交消息','能画出 InputBox 到 MessageList 的链路','能解释 /api/langgraph rewrite','能区分 upload/artifact/write-file','能解释 RunManager 和 StreamBridge','能说出 5 个 middleware 职责'];
+function render(i=0){
+ document.querySelectorAll('.step').forEach((n,k)=>n.classList.toggle('active',k===i));
+ const x=data[i]; document.getElementById('detailTitle').textContent=x.t; document.getElementById('detail').textContent=x.d;
+ document.getElementById('files').innerHTML=x.f.map(f=>`<div class="file"><span class="kbd">${f}</span></div>`).join('');
+}
+document.getElementById('steps').innerHTML=data.map((x,i)=>`<div class="step" onclick="render(${i})"><div class="num">${i+1}</div><div class="title">${x.t}</div><div class="file">${x.f[0]}</div></div>`).join('');
+document.getElementById('flow').innerHTML=data.map((x,i)=>`<span class="pill">${x.t}</span>${i<data.length-1?'<span class="arrow">→</span>':''}`).join('');
+document.getElementById('states').innerHTML=stateData.map(s=>`<div class="state"><span class="dot ${s[0]}"></span><div><b>${s[1]}</b><div class="sub">${s[2]}</div></div></div>`).join('');
+document.getElementById('checks').innerHTML=checks.map(c=>`<div class="check">✅ ${c}</div>`).join('');
+render(0);
+if(window.magic?.updateHeight) setTimeout(()=>window.magic.updateHeight(),200);
+</script>
+</body></html>

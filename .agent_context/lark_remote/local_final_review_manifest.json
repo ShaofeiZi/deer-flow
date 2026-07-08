@@ -1,0 +1,2494 @@
+[
+  {
+    "path": ".agent_context/final_review/docs_md/01｜DeerFlow 整体架构与分层总览.md",
+    "name": "01｜DeerFlow 整体架构与分层总览",
+    "title": "01｜DeerFlow 整体架构与分层总览",
+    "sha256": "fc75a0e13ccaf0367086eb900cd3357ab839b6b5387ce404f6f153678afba7fd",
+    "chars": 2919
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/02｜Gateway 与 LangGraph 运行时详解.md",
+    "name": "02｜Gateway 与 LangGraph 运行时详解",
+    "title": "02｜Gateway 与 LangGraph 运行时详解",
+    "sha256": "ba789589a49cdebf2739e7a1625a1bd79b69d6e24a2ef4ba9598b127a96649a6",
+    "chars": 3142
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/03｜Lead Agent_Prompt_Tools 与 Middleware 详解.md",
+    "name": "03｜Lead Agent_Prompt_Tools 与 Middleware 详解",
+    "title": "03｜Lead Agent、Prompt、Tools 与 Middleware 详解",
+    "sha256": "15bcb23e1a51c03e6c997c936ad995f2de32cfe173d17cbfe16c55a5f01877b6",
+    "chars": 3395
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/04｜Tools_Sandbox_Uploads 与 Artifacts 详解.md",
+    "name": "04｜Tools_Sandbox_Uploads 与 Artifacts 详解",
+    "title": "04｜Tools、Sandbox、Uploads 与 Artifacts 详解",
+    "sha256": "a26be0d0a251953175f0578b1d315fb97ff43d3e69a6fa5024625512bd66119e",
+    "chars": 2983
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/05｜Skills_MCP 与 Memory 详解.md",
+    "name": "05｜Skills_MCP 与 Memory 详解",
+    "title": "05｜Skills、MCP 与 Memory 详解",
+    "sha256": "451a6fa3fcd368ffcd44800161aa7ac32ef773c3fb3d10a8d0382f7eb37a0dfd",
+    "chars": 3041
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/06｜Frontend Workspace 与 Chat 主链路详解.md",
+    "name": "06｜Frontend Workspace 与 Chat 主链路详解",
+    "title": "06｜Frontend Workspace 与 Chat 主链路详解",
+    "sha256": "0695c800f8413a2cacbd6155ad18ea2f7b64eb98149590a9071b0ff094a191d3",
+    "chars": 2235
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/07｜Frontend Settings_Models_Artifacts 数据流详解.md",
+    "name": "07｜Frontend Settings_Models_Artifacts 数据流详解",
+    "title": "07｜Frontend Settings、Models、Artifacts 数据流详解",
+    "sha256": "ab2a56dc25fa81d1c0bc6a0718ab8bbdc8d62f634ae4ad774d353a1e8540c6de",
+    "chars": 2087
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/08｜配置_部署_测试与排障详解.md",
+    "name": "08｜配置_部署_测试与排障详解",
+    "title": "08｜配置、部署、测试与排障详解",
+    "sha256": "50f0d2c2169e5f7bf8434907f0a347be0d571308ce15a286a580479d8beb8688",
+    "chars": 3054
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/09｜Auth_CSRF_权限与 IM Channels 详解.md",
+    "name": "09｜Auth_CSRF_权限与 IM Channels 详解",
+    "title": "09｜Auth、CSRF、权限与 IM Channels 详解",
+    "sha256": "afceb1a2efefc5ace7f82298cfbb510bab1a913788ec558a81a9df04e2fb9b19",
+    "chars": 2442
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/100｜AI Elements Message_Conversation_PromptInput 详解.md",
+    "name": "100｜AI Elements Message_Conversation_PromptInput 详解",
+    "title": "100｜AI Elements Message、Conversation、PromptInput 详解",
+    "sha256": "30bf7ada45706819f9311b03235d3dfcee84be6281fc570330b72dbf4cb38c4c",
+    "chars": 1013
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/101｜AI Elements Reasoning_Task_Artifact 详解.md",
+    "name": "101｜AI Elements Reasoning_Task_Artifact 详解",
+    "title": "101｜AI Elements Reasoning、Task、Artifact 详解",
+    "sha256": "d3e072a9be3f1b99a064965706f516ae53d1300f63425bffdd80f8d9c7b4a769",
+    "chars": 1029
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/102｜UI Layout Primitives_Sidebar_Resizable_ScrollArea_Dialog 详解.md",
+    "name": "102｜UI Layout Primitives_Sidebar_Resizable_ScrollArea_Dialog 详解",
+    "title": "102｜UI Layout Primitives：Sidebar、Resizable、ScrollArea、Dialog 详解",
+    "sha256": "5b255f9ab2bff6fc5ccb632cb9585b5e003c801a743848ebfa01be9fad2c2e17",
+    "chars": 1017
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/103｜UI Input_Command_Select_Dropdown Primitives 详解.md",
+    "name": "103｜UI Input_Command_Select_Dropdown Primitives 详解",
+    "title": "103｜UI Input、Command、Select、Dropdown Primitives 详解",
+    "sha256": "7c568968f67a515de3986b49e6d63fc9940e11ba1c238d63eddb9e2a8af007ac",
+    "chars": 856
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/104｜AI Elements CodeBlock_WebPreview_Canvas_Image 详解.md",
+    "name": "104｜AI Elements CodeBlock_WebPreview_Canvas_Image 详解",
+    "title": "104｜AI Elements CodeBlock、WebPreview、Canvas、Image 详解",
+    "sha256": "66107d1e092baa7a5e706e9d81ee1de04c54f102d3d20e53c4884460d9efd020",
+    "chars": 978
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/105｜AI Elements ModelSelector_Loader_Suggestion_Sources 详解.md",
+    "name": "105｜AI Elements ModelSelector_Loader_Suggestion_Sources 详解",
+    "title": "105｜AI Elements ModelSelector、Loader、Suggestion、Sources 详解",
+    "sha256": "7583746ecb79b856f30b3c9775f6b0d4c73fccfd307a5c560ea8c306cd9f257a",
+    "chars": 1057
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/106｜UI Feedback_Display Primitives 详解.md",
+    "name": "106｜UI Feedback_Display Primitives 详解",
+    "title": "106｜UI Feedback/Display Primitives 详解",
+    "sha256": "78f43eb489d3e9a2e181fe0de4c5dba3a1f7deed7808b11070e42cca1a91fa5d",
+    "chars": 1011
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/107｜UI Navigation_Overlay Primitives 详解.md",
+    "name": "107｜UI Navigation_Overlay Primitives 详解",
+    "title": "107｜UI Navigation/Overlay Primitives 详解",
+    "sha256": "9db557e2aacae1010edb2aa98a9cdfe5c51669ff38e1a6c238edeae2ee2f90e0",
+    "chars": 1020
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/108｜Claude_vLLM_MindIE_OpenAI Codex Provider 详解.md",
+    "name": "108｜Claude_vLLM_MindIE_OpenAI Codex Provider 详解",
+    "title": "108｜Claude、vLLM、MindIE、OpenAI Codex Provider 详解",
+    "sha256": "74067cfe95eb0b5e7f842fa8fc81585832b3f5d4c81c60771a2e63295682d375",
+    "chars": 1062
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/109｜Tracing_TokenUsage_ACP 配置文件详解.md",
+    "name": "109｜Tracing_TokenUsage_ACP 配置文件详解",
+    "title": "109｜Tracing、TokenUsage、ACP 配置文件详解",
+    "sha256": "e0cf2b91ad955779b6b720f7ac47f44cbf0748fb40ec190db03fa85030f10451",
+    "chars": 1244
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/10｜Models_Tracing_Persistence 与 Token Usage 详解.md",
+    "name": "10｜Models_Tracing_Persistence 与 Token Usage 详解",
+    "title": "10｜Models、Tracing、Persistence 与 Token Usage 详解",
+    "sha256": "71b17b96f33547155bf5ff2d88bd93cfc6b73026146c13d4dadaad7d416b76a9",
+    "chars": 2553
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/110｜Frontend Streamdown_MDX_Markdown 渲染详解.md",
+    "name": "110｜Frontend Streamdown_MDX_Markdown 渲染详解",
+    "title": "110｜Frontend Streamdown、MDX、Markdown 渲染详解",
+    "sha256": "6226e1b23cf49330403988bfbf87ba249446bb52127d85dcf01174673b618016",
+    "chars": 1168
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/111｜AI Elements Conversation 与 Message 详解.md",
+    "name": "111｜AI Elements Conversation 与 Message 详解",
+    "title": "111｜AI Elements Conversation 与 Message 详解",
+    "sha256": "558861319a7217d5206472aad4ab8696218c376bb2804fe8ba0273b5d279dbf6",
+    "chars": 908
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/112｜AI Elements PromptInput 与 Controls 详解.md",
+    "name": "112｜AI Elements PromptInput 与 Controls 详解",
+    "title": "112｜AI Elements PromptInput 与 Controls 详解",
+    "sha256": "9feebc823b2726d6e66d81db570bfbf44887d651c36a3ab613e159e9c9e9de57",
+    "chars": 1003
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/113｜AI Elements Artifact_Panel_OpenInChat 详解.md",
+    "name": "113｜AI Elements Artifact_Panel_OpenInChat 详解",
+    "title": "113｜AI Elements Artifact、Panel、OpenInChat 详解",
+    "sha256": "22eddd48bcde63cc4339cc0f7345ec7862c204698a29ac16c71536ddfce53e26",
+    "chars": 866
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/114｜AI Elements Node_Edge_Checkpoint 图元素详解.md",
+    "name": "114｜AI Elements Node_Edge_Checkpoint 图元素详解",
+    "title": "114｜AI Elements Node、Edge、Checkpoint 图元素详解",
+    "sha256": "30a2430ea507f8c23b182083d780b38c9e29256706c12290e05cf90c9f168ace",
+    "chars": 940
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/115｜UI Form Primitives_Button_Input_Textarea_Switch_Toggle 详解.md",
+    "name": "115｜UI Form Primitives_Button_Input_Textarea_Switch_Toggle 详解",
+    "title": "115｜UI Form Primitives：Button、Input、Textarea、Switch、Toggle 详解",
+    "sha256": "d275eedd67b2fe2816e7b37b887f5a82d38186dd0e2b23cce9204db25bde6419",
+    "chars": 1038
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/116｜UI Data Display Primitives_Card_Avatar_Item_Table-like 详解.md",
+    "name": "116｜UI Data Display Primitives_Card_Avatar_Item_Table-like 详解",
+    "title": "116｜UI Data Display Primitives：Card、Avatar、Item、Table-like 详解",
+    "sha256": "22bbf4a7e7917118ce7b86f27d8fad32b93ab4cdd2e401b23836390ad62d618a",
+    "chars": 977
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/117｜UI Visual Effects Primitives_MagicBento_Aurora_Shine_Spotlight 详解.md",
+    "name": "117｜UI Visual Effects Primitives_MagicBento_Aurora_Shine_Spotlight 详解",
+    "title": "117｜UI Visual Effects Primitives：MagicBento、Aurora、Shine、Spotlight 详解",
+    "sha256": "2408cf238d7c28d9c16dbc4b5812b2f6905b00850e4c7b2a0aa3fcc9c5778bb4",
+    "chars": 1077
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/118｜Workspace Welcome 与 AgentWelcome 组件详解.md",
+    "name": "118｜Workspace Welcome 与 AgentWelcome 组件详解",
+    "title": "118｜Workspace Welcome 与 AgentWelcome 组件详解",
+    "sha256": "e0ef7ee85cc47bee05e58c54b37ebc67c7055db03d41d248134c4a20850de071",
+    "chars": 910
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/119｜ThreadTitle_TokenUsageIndicator_ExportTrigger 详解.md",
+    "name": "119｜ThreadTitle_TokenUsageIndicator_ExportTrigger 详解",
+    "title": "119｜ThreadTitle、TokenUsageIndicator、ExportTrigger 详解",
+    "sha256": "d71d1889706c968877aec2bf4246a91304e7f827d1e658a2204c4bf065d2937c",
+    "chars": 998
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/11｜Gateway Routers API 模块逐项详解.md",
+    "name": "11｜Gateway Routers API 模块逐项详解",
+    "title": "11｜Gateway Routers API 模块逐项详解",
+    "sha256": "66f682b808252f83503279460868c4b3a502e2a196fa3b46e651bdb5419bdeef",
+    "chars": 2470
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/120｜TodoList_CopyButton_Citations 组件详解.md",
+    "name": "120｜TodoList_CopyButton_Citations 组件详解",
+    "title": "120｜TodoList、CopyButton、Citations 组件详解",
+    "sha256": "142cae373fb6782ccd6bf8b27f4a7da3d977e46275b8baa57331060abc9f3ef6",
+    "chars": 935
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/121｜Gateway Offline Banner_Fallback 组件详解.md",
+    "name": "121｜Gateway Offline Banner_Fallback 组件详解",
+    "title": "121｜Gateway Offline Banner/Fallback 组件详解",
+    "sha256": "8ef6fea0f5f929d11d7997a54429edeb3b4d6d251d03abcc5e923940ad901b1b",
+    "chars": 1082
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/122｜AgentGallery_AgentCard 与 NewAgent Page 详解.md",
+    "name": "122｜AgentGallery_AgentCard 与 NewAgent Page 详解",
+    "title": "122｜AgentGallery、AgentCard 与 NewAgent Page 详解",
+    "sha256": "3e2fc6af7d085f34f97f007092b65eeb52febe88521ba6d9e43809d7b7d44be7",
+    "chars": 1164
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/123｜WorkspaceContainer_Header_Overscroll 组件详解.md",
+    "name": "123｜WorkspaceContainer_Header_Overscroll 组件详解",
+    "title": "123｜WorkspaceContainer、Header、Overscroll 组件详解",
+    "sha256": "6bb91662ec5a510137676c9754c58def772d1bc9a9cbe7c4491e2ec2a1c2f1bc",
+    "chars": 1056
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/124｜CodeEditor 与 Artifact Detail 交互详解.md",
+    "name": "124｜CodeEditor 与 Artifact Detail 交互详解",
+    "title": "124｜CodeEditor 与 Artifact Detail 交互详解",
+    "sha256": "e1ea9042714ea1ad54f86c1940519a1c8c0d6ad72b9d6e9a66cf7fcaed4d1f95",
+    "chars": 1100
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/125｜SettingsDialog 与 SettingsSection 详解.md",
+    "name": "125｜SettingsDialog 与 SettingsSection 详解",
+    "title": "125｜SettingsDialog 与 SettingsSection 详解",
+    "sha256": "248aabb73dc8b446434bb30f9bac67da87c1edd3d318dad2fdc63473541487f1",
+    "chars": 1034
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/126｜Tool_Skill_Memory Settings Pages 详解.md",
+    "name": "126｜Tool_Skill_Memory Settings Pages 详解",
+    "title": "126｜Tool、Skill、Memory Settings Pages 详解",
+    "sha256": "72c15034a084f1a9315a0c212c28c44a3f81ed61c807e8106436b6e12588052e",
+    "chars": 1195
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/127｜Account_Appearance_Notification_About Settings Pages 详解.md",
+    "name": "127｜Account_Appearance_Notification_About Settings Pages 详解",
+    "title": "127｜Account、Appearance、Notification、About Settings Pages 详解",
+    "sha256": "35ea3bd8684dc46856858ba27b854ed156e4b0901169399e12311085869d3d5f",
+    "chars": 1112
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/128｜Artifacts Context_Trigger_List_Detail 详解.md",
+    "name": "128｜Artifacts Context_Trigger_List_Detail 详解",
+    "title": "128｜Artifacts Context、Trigger、List、Detail 详解",
+    "sha256": "96ebb78aabfaf9b9003bab3ba61c67db1fe37ea3ccbae9bfbc3295f976515a64",
+    "chars": 1176
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/129｜Messages List_Item_Group_Subtask 组件详解.md",
+    "name": "129｜Messages List_Item_Group_Subtask 组件详解",
+    "title": "129｜Messages List、Item、Group、Subtask 组件详解",
+    "sha256": "f5a78e7e4c003d319af915bc11607f0f52938eb2aea02027abd51f2623e28f1e",
+    "chars": 1041
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/12｜Runtime RunManager_StreamBridge_Journal 详解.md",
+    "name": "12｜Runtime RunManager_StreamBridge_Journal 详解",
+    "title": "12｜Runtime RunManager、StreamBridge、Journal 详解",
+    "sha256": "3adba976f0aed18fa7cbd50cdb747292c024ace51c4c54c8bba1647c01e2fc4e",
+    "chars": 2343
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/130｜Core Threads Stream_History_Cache 函数组详解.md",
+    "name": "130｜Core Threads Stream_History_Cache 函数组详解",
+    "title": "130｜Core Threads Stream、History、Cache 函数组详解",
+    "sha256": "1aa752158a3841dcbec1ca0f76c3198492eb4cbcf09eba7bc68ed54d1371d153",
+    "chars": 1093
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/131｜Core Threads Runs_Delete_Rename_Token Usage Hooks 详解.md",
+    "name": "131｜Core Threads Runs_Delete_Rename_Token Usage Hooks 详解",
+    "title": "131｜Core Threads Runs、Delete、Rename、Token Usage Hooks 详解",
+    "sha256": "c0c46a124e61639f44b2a19c2c019c31b44d94353c1e0cef7c35aa8f7fffc736",
+    "chars": 1143
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/132｜Backend Tests 测试体系详解.md",
+    "name": "132｜Backend Tests 测试体系详解",
+    "title": "132｜Backend Tests 测试体系详解",
+    "sha256": "b723a44234af209b19a11305d10b9166a5d7d2ef293118c92f9172020a0ec1b0",
+    "chars": 1108
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/133｜Frontend Tests 与 Playwright E2E 详解.md",
+    "name": "133｜Frontend Tests 与 Playwright E2E 详解",
+    "title": "133｜Frontend Tests 与 Playwright E2E 详解",
+    "sha256": "7f423f366a27045fcb1b4aa4b59be53e090f58e3b6ee7a78db407f312e960282",
+    "chars": 1082
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/134｜GitHub Workflows CI 流水线详解.md",
+    "name": "134｜GitHub Workflows CI 流水线详解",
+    "title": "134｜GitHub Workflows CI 流水线详解",
+    "sha256": "a414ff6425b3f6790d5df0bfd24662811a0b994e6dc4c4dfeb161d8d9691aae1",
+    "chars": 1109
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/135｜Scripts Setup_Dev_Deploy 脚本详解.md",
+    "name": "135｜Scripts Setup_Dev_Deploy 脚本详解",
+    "title": "135｜Scripts Setup/Dev/Deploy 脚本详解",
+    "sha256": "ac314fa8ba67c70f86801969e367488c6b376253a08c9671a686f630818b0ee6",
+    "chars": 1096
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/136｜Scripts Diagnostics_Maintenance 脚本详解.md",
+    "name": "136｜Scripts Diagnostics_Maintenance 脚本详解",
+    "title": "136｜Scripts Diagnostics/Maintenance 脚本详解",
+    "sha256": "2f412ca87585c7d69cbb36216fa975faa682202f82ab76f6029df66a8ad81274",
+    "chars": 1182
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/137｜Docker Compose_Nginx_Provisioner 详解.md",
+    "name": "137｜Docker Compose_Nginx_Provisioner 详解",
+    "title": "137｜Docker Compose、Nginx、Provisioner 详解",
+    "sha256": "c391b5b72c5a3d64eb15c239d76a449112cd3028413ccfed66faebef7366ec1c",
+    "chars": 1172
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/138｜Public Skills 分类与运行逻辑详解.md",
+    "name": "138｜Public Skills 分类与运行逻辑详解",
+    "title": "138｜Public Skills 分类与运行逻辑详解",
+    "sha256": "860382a91f0f6716f2b3342eb470f4ad378d3da90f087bdc905a7a45a3f2d4a1",
+    "chars": 1351
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/139｜Research_Review Public Skills 详解.md",
+    "name": "139｜Research_Review Public Skills 详解",
+    "title": "139｜Research/Review Public Skills 详解",
+    "sha256": "8b0d606e9b39631eef00c9f7a471c38035490291804741b557370572f093ff0d",
+    "chars": 1106
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/13｜Backend Middleware 模块逐项详解.md",
+    "name": "13｜Backend Middleware 模块逐项详解",
+    "title": "13｜Backend Middleware 模块逐项详解",
+    "sha256": "f33a2de5cbf8c746450dde1deadcda60c16437b466ab20ae4c7bec6cf862b9f6",
+    "chars": 2279
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/140｜Media Generation Public Skills 详解.md",
+    "name": "140｜Media Generation Public Skills 详解",
+    "title": "140｜Media Generation Public Skills 详解",
+    "sha256": "1cdbe7809a062ba66ac946046186e8342f9f034f755f91106f31dec36086be3e",
+    "chars": 1143
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/141｜Development_Deploy Public Skills 详解.md",
+    "name": "141｜Development_Deploy Public Skills 详解",
+    "title": "141｜Development/Deploy Public Skills 详解",
+    "sha256": "160c27d4fec60a2238919ba1d7806ed7560873f3ad41bd638444099c104e1111",
+    "chars": 1163
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/142｜Analysis_Consulting Public Skills 详解.md",
+    "name": "142｜Analysis_Consulting Public Skills 详解",
+    "title": "142｜Analysis/Consulting Public Skills 详解",
+    "sha256": "3481174e44f44a12c2b95d67ffb59c64bda23c126fff171b12f2b7e948aa967f",
+    "chars": 1070
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/143｜Meta_Bootstrap Public Skills 详解.md",
+    "name": "143｜Meta_Bootstrap Public Skills 详解",
+    "title": "143｜Meta/Bootstrap Public Skills 详解",
+    "sha256": "4a299aef011790414c9d7d06d40b2c0a5b2dcf73433537f91b3760e62a630d58",
+    "chars": 1035
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/144｜Skills Package Tests 与脚本详解.md",
+    "name": "144｜Skills Package Tests 与脚本详解",
+    "title": "144｜Skills Package Tests 与脚本详解",
+    "sha256": "666bbea0add0c8b7ea1a2a8a72ddfd0d73de38dda9907510d6c51510bde96577",
+    "chars": 1213
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/145｜deep-research Public Skill 详解.md",
+    "name": "145｜deep-research Public Skill 详解",
+    "title": "145｜deep-research Public Skill 详解",
+    "sha256": "521b74da92c53f73b29129217f9a1d98b56ba52f252ce11e57468300f14b5cad",
+    "chars": 1056
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/146｜github-deep-research Public Skill 详解.md",
+    "name": "146｜github-deep-research Public Skill 详解",
+    "title": "146｜github-deep-research Public Skill 详解",
+    "sha256": "8e78326c97480284982dc292381267c77e06536423ec8f849b1981dd963047b8",
+    "chars": 1125
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/147｜academic-paper-review Public Skill 详解.md",
+    "name": "147｜academic-paper-review Public Skill 详解",
+    "title": "147｜academic-paper-review Public Skill 详解",
+    "sha256": "f72d90cd106120b9d267e76083e9f525d0ab660953b3873e9ecfae7f6a8e8b6e",
+    "chars": 1110
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/148｜systematic-literature-review Public Skill 详解.md",
+    "name": "148｜systematic-literature-review Public Skill 详解",
+    "title": "148｜systematic-literature-review Public Skill 详解",
+    "sha256": "11533512c3c2df561f6fd95a9452857c5a68f1d72a96551f704289b96880ad75",
+    "chars": 1142
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/149｜frontend-design Public Skill 详解.md",
+    "name": "149｜frontend-design Public Skill 详解",
+    "title": "149｜frontend-design Public Skill 详解",
+    "sha256": "82d44a4f18cfe34e09125f8c448a238e33c621656845de3279c3a3893728ed43",
+    "chars": 1067
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/14｜Frontend Core Hooks 与 UI 模块逐项详解.md",
+    "name": "14｜Frontend Core Hooks 与 UI 模块逐项详解",
+    "title": "14｜Frontend Core Hooks 与 UI 模块逐项详解",
+    "sha256": "af63f611257b3139187ccee9b934fe8c0f36844d3bbc212f34cfc69b169731dd",
+    "chars": 2373
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/150｜web-design-guidelines Public Skill 详解.md",
+    "name": "150｜web-design-guidelines Public Skill 详解",
+    "title": "150｜web-design-guidelines Public Skill 详解",
+    "sha256": "fb6943343f34d5ff10097a396be4c88edb3e42faa3d8638a92aaefa172865b1d",
+    "chars": 1114
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/151｜data-analysis Public Skill 详解.md",
+    "name": "151｜data-analysis Public Skill 详解",
+    "title": "151｜data-analysis Public Skill 详解",
+    "sha256": "5ba7cfc0dbe961d8c79bd256d3e5457b7b1e2e13125085eec5c65ddd2b3d1095",
+    "chars": 1063
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/152｜chart-visualization Public Skill 详解.md",
+    "name": "152｜chart-visualization Public Skill 详解",
+    "title": "152｜chart-visualization Public Skill 详解",
+    "sha256": "89c2596ee1a8d986006fddd566dc4f2963d330823de5b9219e8cb6152daf6648",
+    "chars": 1107
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/153｜image-generation Public Skill 详解.md",
+    "name": "153｜image-generation Public Skill 详解",
+    "title": "153｜image-generation Public Skill 详解",
+    "sha256": "bff3922d2260e15d5cacd1deb6392b8eff5bdef2961be5092c053036751c76e8",
+    "chars": 1088
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/154｜skill-creator Public Skill 详解.md",
+    "name": "154｜skill-creator Public Skill 详解",
+    "title": "154｜skill-creator Public Skill 详解",
+    "sha256": "34668935a237ce95ea58c8ddccd221140d5fc330afef473d538c2d3ef779e9f4",
+    "chars": 1069
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/155｜music-generation Public Skill 详解.md",
+    "name": "155｜music-generation Public Skill 详解",
+    "title": "155｜music-generation Public Skill 详解",
+    "sha256": "8ba2ad712d58895811f4d2dc4c2ecf0b6ab99232be2d7487f45ff54517f9ca71",
+    "chars": 1081
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/156｜video-generation Public Skill 详解.md",
+    "name": "156｜video-generation Public Skill 详解",
+    "title": "156｜video-generation Public Skill 详解",
+    "sha256": "a83a83bef768a208251e3bfaa963f4b4b8651899a72716c20d29ce58ba32ab14",
+    "chars": 1081
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/157｜podcast-generation Public Skill 详解.md",
+    "name": "157｜podcast-generation Public Skill 详解",
+    "title": "157｜podcast-generation Public Skill 详解",
+    "sha256": "dc916e872e5bc26fd6708ccef387ddb47a79d611c2b9f606fed7ec72078c5a03",
+    "chars": 1097
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/158｜ppt-generation Public Skill 详解.md",
+    "name": "158｜ppt-generation Public Skill 详解",
+    "title": "158｜ppt-generation Public Skill 详解",
+    "sha256": "a108013e2340e6fc44b38288e1d1649b9ccd0b3840b651387810e2ce34b9e360",
+    "chars": 1085
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/159｜newsletter-generation Public Skill 详解.md",
+    "name": "159｜newsletter-generation Public Skill 详解",
+    "title": "159｜newsletter-generation Public Skill 详解",
+    "sha256": "580eeb0046c995e2ec8e467cd13ea80dd95d856835b465bee69cc3b61e0b4b96",
+    "chars": 1130
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/15｜Config_Paths 与 Hot Reload 边界详解.md",
+    "name": "15｜Config_Paths 与 Hot Reload 边界详解",
+    "title": "15｜Config、Paths 与 Hot Reload 边界详解",
+    "sha256": "34a7eed7e66fec245ef1c8c85384340d682cce1b1c3ba43d22f264802ad36112",
+    "chars": 2738
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/160｜find-skills Public Skill 详解.md",
+    "name": "160｜find-skills Public Skill 详解",
+    "title": "160｜find-skills Public Skill 详解",
+    "sha256": "70d5168a2672c6d582a3a621a4fe309cb01239775eaf652ce9284e6a8c113c08",
+    "chars": 1060
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/161｜bootstrap Public Skill 详解.md",
+    "name": "161｜bootstrap Public Skill 详解",
+    "title": "161｜bootstrap Public Skill 详解",
+    "sha256": "76bc9633b952123c913746bd8abd477da9087d9ada4bd8434fd1f9da228c2df9",
+    "chars": 1039
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/162｜surprise-me Public Skill 详解.md",
+    "name": "162｜surprise-me Public Skill 详解",
+    "title": "162｜surprise-me Public Skill 详解",
+    "sha256": "e4d753d94c4b99207bef19b1508627de0dce7ba142bdf10eb8c0db9d774818aa",
+    "chars": 1052
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/163｜vercel-deploy-claimable Public Skill 详解.md",
+    "name": "163｜vercel-deploy-claimable Public Skill 详解",
+    "title": "163｜vercel-deploy-claimable Public Skill 详解",
+    "sha256": "9421e065fbcf5e4e1838731a8c3a9787ec8cc29fed052f1d45446a643fade86f",
+    "chars": 1114
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/164｜code-documentation Public Skill 详解.md",
+    "name": "164｜code-documentation Public Skill 详解",
+    "title": "164｜code-documentation Public Skill 详解",
+    "sha256": "6420b95252f876b679f9305190c7cc9d1c6a4df216eac4f70386cb34f03928dc",
+    "chars": 1099
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/165｜consulting-analysis Public Skill 详解.md",
+    "name": "165｜consulting-analysis Public Skill 详解",
+    "title": "165｜consulting-analysis Public Skill 详解",
+    "sha256": "cd0c0aa89e05214af69bef1385771c0e7066928338410d03488ab5468d7bfbda",
+    "chars": 1109
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/166｜claude-to-deerflow Public Skill 详解.md",
+    "name": "166｜claude-to-deerflow Public Skill 详解",
+    "title": "166｜claude-to-deerflow Public Skill 详解",
+    "sha256": "3cf6c083950d338b997669676a71a508853d51a26b58d8e0002d83193605dcf0",
+    "chars": 1110
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/167｜Backend Router Tests 分类详解.md",
+    "name": "167｜Backend Router Tests 分类详解",
+    "title": "167｜Backend Router Tests 分类详解",
+    "sha256": "cee477d528ea9a685b50f6d82fb82a65fd6ff4f9f1f1021f8a07f89fe2f695aa",
+    "chars": 1068
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/168｜Backend Runtime_Run_Stream Tests 分类详解.md",
+    "name": "168｜Backend Runtime_Run_Stream Tests 分类详解",
+    "title": "168｜Backend Runtime/Run/Stream Tests 分类详解",
+    "sha256": "889881b5e54c7651df9687a930ac1cb7dba2f17a5838d22448933fa690bcf679",
+    "chars": 1243
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/169｜Backend Agent_Middleware Tests 分类详解.md",
+    "name": "169｜Backend Agent_Middleware Tests 分类详解",
+    "title": "169｜Backend Agent/Middleware Tests 分类详解",
+    "sha256": "b48808de404bf2ac878195957afc2bc3148f4a3373858e9d13a8e3f8bbb21c79",
+    "chars": 1192
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/16｜Subagents_Task Tool 与并发执行详解.md",
+    "name": "16｜Subagents_Task Tool 与并发执行详解",
+    "title": "16｜Subagents、Task Tool 与并发执行详解",
+    "sha256": "4602d6e7c8db84f2c1d999a4abe00f6f4b0993bbbee4c674e579934bf557aa6c",
+    "chars": 2092
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/170｜Backend Sandbox_MCP_Memory Tests 分类详解.md",
+    "name": "170｜Backend Sandbox_MCP_Memory Tests 分类详解",
+    "title": "170｜Backend Sandbox/MCP/Memory Tests 分类详解",
+    "sha256": "e6a86c9b53c83d3b361c2411192f6d945e87db340b3fe005ba14deef22c1c593",
+    "chars": 1186
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/171｜Frontend E2E Specs 分类详解.md",
+    "name": "171｜Frontend E2E Specs 分类详解",
+    "title": "171｜Frontend E2E Specs 分类详解",
+    "sha256": "485956327b7f49c80d648067f4b4677f86b00ceddb3df4117a4f6df67381f683",
+    "chars": 1013
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/172｜GitHub Workflow 文件逐项详解.md",
+    "name": "172｜GitHub Workflow 文件逐项详解",
+    "title": "172｜GitHub Workflow 文件逐项详解",
+    "sha256": "04fda2f7f5c8982d78e06a2f063048064e9a5d78489bac908372faae8fb89b4a",
+    "chars": 1138
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/173｜Setup Wizard Scripts 详解.md",
+    "name": "173｜Setup Wizard Scripts 详解",
+    "title": "173｜Setup Wizard Scripts 详解",
+    "sha256": "055b62066286d0eaa1ca990c28d1c1d8c019b47409c3445e847aea0372987106",
+    "chars": 1156
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/174｜Backend_Frontend Unit Test Workflows 详解.md",
+    "name": "174｜Backend_Frontend Unit Test Workflows 详解",
+    "title": "174｜Backend/Frontend Unit Test Workflows 详解",
+    "sha256": "03e3fab4e6ea94283188dadd3dc977594229a5852afc05c6f982965d84931ebe",
+    "chars": 1060
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/175｜E2E_Replay_Container Workflows 详解.md",
+    "name": "175｜E2E_Replay_Container Workflows 详解",
+    "title": "175｜E2E、Replay、Container Workflows 详解",
+    "sha256": "6434ba427aecd2c824cd39f4ec3cc80a59633809a36efd1dd5199a7652022401",
+    "chars": 1054
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/176｜check.py_doctor.py_configure.py_config-upgrade 详解.md",
+    "name": "176｜check.py_doctor.py_configure.py_config-upgrade 详解",
+    "title": "176｜check.py、doctor.py、configure.py、config-upgrade 详解",
+    "sha256": "d5fac2846b23da95efb6b365be02b8122f2c27162da27f57802b2bf2d15846ec",
+    "chars": 1086
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/177｜serve.sh_docker.sh_deploy.sh 详解.md",
+    "name": "177｜serve.sh_docker.sh_deploy.sh 详解",
+    "title": "177｜serve.sh、docker.sh、deploy.sh 详解",
+    "sha256": "a8482fee67d53f5cbfa1a56a1129ca61d9c42bdb213abbb2004fb91ff509b830",
+    "chars": 1204
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/178｜Frontend E2E Chat_Sidebar_Artifacts Specs 详解.md",
+    "name": "178｜Frontend E2E Chat_Sidebar_Artifacts Specs 详解",
+    "title": "178｜Frontend E2E Chat/Sidebar/Artifacts Specs 详解",
+    "sha256": "383332df0ac6ab6b5892bf85e2d20c0d48a3bce976d188994f21fcc4e85d7410",
+    "chars": 1159
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/179｜Frontend E2E History_Landing_Real Backend Specs 详解.md",
+    "name": "179｜Frontend E2E History_Landing_Real Backend Specs 详解",
+    "title": "179｜Frontend E2E History/Landing/Real Backend Specs 详解",
+    "sha256": "358d6e09503c2abf5a28851ab5efe0e9262d1f5fc051af864777cb08b75d7571",
+    "chars": 1122
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/17｜Model Provider Factory 与模型适配详解.md",
+    "name": "17｜Model Provider Factory 与模型适配详解",
+    "title": "17｜Model Provider Factory 与模型适配详解",
+    "sha256": "5bba2ed5ee766f492cd3666dc65e58d14603f09622810276d5ebf4380c5c95bc",
+    "chars": 1975
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/180｜Backend Blocking IO Tests 详解.md",
+    "name": "180｜Backend Blocking IO Tests 详解",
+    "title": "180｜Backend Blocking IO Tests 详解",
+    "sha256": "937e57d72fb6bdfbca95efe300b4881352e32ee30e5c64841a154514596db0b2",
+    "chars": 1183
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/181｜Auth _ Owner Isolation Tests 详解.md",
+    "name": "181｜Auth _ Owner Isolation Tests 详解",
+    "title": "181｜Auth / Owner Isolation Tests 详解",
+    "sha256": "fc24ac8264b8f60ba97af474530e9d7083dd18a7ac8485240ecccb64e2581fd2",
+    "chars": 1072
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/182｜Upload _ Artifact _ File Conversion Tests 详解.md",
+    "name": "182｜Upload _ Artifact _ File Conversion Tests 详解",
+    "title": "182｜Upload / Artifact / File Conversion Tests 详解",
+    "sha256": "7c162ac425eef410feb2593aca7843c132e82df8b81c6592559f3e4caa4dbaba",
+    "chars": 1224
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/183｜Model _ Provider _ Config Tests 详解.md",
+    "name": "183｜Model _ Provider _ Config Tests 详解",
+    "title": "183｜Model / Provider / Config Tests 详解",
+    "sha256": "7e7d4bc9dcffefc107e799e5e41d4fe58c1e74cb1c2ce6b98444d66407b5503f",
+    "chars": 1156
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/184｜Skills _ Tools _ Deferred Tests 详解.md",
+    "name": "184｜Skills _ Tools _ Deferred Tests 详解",
+    "title": "184｜Skills / Tools / Deferred Tests 详解",
+    "sha256": "3c01d62c0731473044a611286e254c835656f88d50460fcbb1eef9eb87ad2e85",
+    "chars": 1218
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/185｜Channels _ Community Provider Tests 详解.md",
+    "name": "185｜Channels _ Community Provider Tests 详解",
+    "title": "185｜Channels / Community Provider Tests 详解",
+    "sha256": "a5f5849f86256b04bf49f2c3bd1d0d00934c7b5cb45e930ab712f6fb0bab99d6",
+    "chars": 1125
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/186｜Label Sync _ Triage _ Container Workflow 详解.md",
+    "name": "186｜Label Sync _ Triage _ Container Workflow 详解",
+    "title": "186｜Label Sync / Triage / Container Workflow 详解",
+    "sha256": "0c3cc5ac4581617f0185723a24ce2472b93adb5420c8d16b3f6bdd84a266c40c",
+    "chars": 1121
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/187｜OAuth _ Memory _ Sandbox _ Detection Scripts 详解.md",
+    "name": "187｜OAuth _ Memory _ Sandbox _ Detection Scripts 详解",
+    "title": "187｜OAuth / Memory / Sandbox / Detection Scripts 详解",
+    "sha256": "668dfe861d36cd99359fabd90673e1aa699d73cec672035b0ae14a4a88673a2b",
+    "chars": 1211
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/188｜docker_provisioner_app.py 单文件详解.md",
+    "name": "188｜docker_provisioner_app.py 单文件详解",
+    "title": "188｜docker/provisioner/app.py 单文件详解",
+    "sha256": "b64e2ec70b33abbeb67368936572a82ce817f84fccaff5e9c8e134c9ebad72a8",
+    "chars": 1026
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/189｜docker-compose 与 nginx 配置单文件详解.md",
+    "name": "189｜docker-compose 与 nginx 配置单文件详解",
+    "title": "189｜docker-compose 与 nginx 配置单文件详解",
+    "sha256": "739dc521099acd9b3f9d587adac3f705d8ee44a636da717fd8efe22739f6131d",
+    "chars": 982
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/18｜Persistence_Database_ThreadMeta 与 Feedback 详解.md",
+    "name": "18｜Persistence_Database_ThreadMeta 与 Feedback 详解",
+    "title": "18｜Persistence、Database、ThreadMeta 与 Feedback 详解",
+    "sha256": "c26d7c816be0d291b261495f05b004c1b5a43911fb3a8c78fac9784c5764832e",
+    "chars": 2256
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/190｜run-with-git-bash_wait-for-port_cleanup 脚本详解.md",
+    "name": "190｜run-with-git-bash_wait-for-port_cleanup 脚本详解",
+    "title": "190｜run-with-git-bash、wait-for-port、cleanup 脚本详解",
+    "sha256": "96957e33f513387766a725a696e594d0ffb46ca53f434b144e4d656b6970b594",
+    "chars": 1059
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/191｜Client E2E _ Live Tests 详解.md",
+    "name": "191｜Client E2E _ Live Tests 详解",
+    "title": "191｜Client E2E / Live Tests 详解",
+    "sha256": "422c4570d3e387fd69a66eea075990b2c674f3140d3f7810b474fe4434ba3e54",
+    "chars": 1067
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/192｜ThreadState _ Reducers _ Serialization Tests 详解.md",
+    "name": "192｜ThreadState _ Reducers _ Serialization Tests 详解",
+    "title": "192｜ThreadState / Reducers / Serialization Tests 详解",
+    "sha256": "5e2f47b803e506760875b9faf80a4ef6b5ce98c6fcfbbfecf7cb30e7b138e5d3",
+    "chars": 1212
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/193｜Tracing _ Token Usage Tests 详解.md",
+    "name": "193｜Tracing _ Token Usage Tests 详解",
+    "title": "193｜Tracing / Token Usage Tests 详解",
+    "sha256": "e8c1763b55a9fe942913c1a00c8b3d281f6884a9cc79be25d69f342c113fe9b8",
+    "chars": 1123
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/194｜Setup_Update Agent E2E Tests 详解.md",
+    "name": "194｜Setup_Update Agent E2E Tests 详解",
+    "title": "194｜Setup/Update Agent E2E Tests 详解",
+    "sha256": "53abcd67699f1be9200f8ab2afbaf4ddf0b32ed841dbd2c3cefabe7c2b87757b",
+    "chars": 1207
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/195｜Sandbox Provider 深层测试族详解.md",
+    "name": "195｜Sandbox Provider 深层测试族详解",
+    "title": "195｜Sandbox Provider 深层测试族详解",
+    "sha256": "598e9be6cd333a3c076a13ec3d2261a9d9ec2a6d90f135dbdafa5512bb4cc9ac",
+    "chars": 1119
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/196｜MCP _ Deferred _ ToolSearch 测试族详解.md",
+    "name": "196｜MCP _ Deferred _ ToolSearch 测试族详解",
+    "title": "196｜MCP / Deferred / ToolSearch 测试族详解",
+    "sha256": "ceec521fee437297f7a117580994ad0a8e39df4be6bf2df791893f673b1cf0c0",
+    "chars": 1136
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/197｜Memory _ Title _ Summarization 测试族详解.md",
+    "name": "197｜Memory _ Title _ Summarization 测试族详解",
+    "title": "197｜Memory / Title / Summarization 测试族详解",
+    "sha256": "64eaa7f261d9b9ece13fc0e8385fe4242c4bea97d6195a968a0f2e9361da0000",
+    "chars": 1119
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/198｜Frontend Unit 与 Real Backend Tests 详解.md",
+    "name": "198｜Frontend Unit 与 Real Backend Tests 详解",
+    "title": "198｜Frontend Unit 与 Real Backend Tests 详解",
+    "sha256": "75cc3d4d1f7ceb9f2bcb4cae5323f50a2321e3e3aaab2a99ed7d2587e9733fe7",
+    "chars": 1096
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/199｜docs_superpowers Specs 与 Plans 详解.md",
+    "name": "199｜docs_superpowers Specs 与 Plans 详解",
+    "title": "199｜docs/superpowers Specs 与 Plans 详解",
+    "sha256": "a04ab9e0be06c229008fc4ee3f51154d3e7b5da445c4c773c48e37cdd50259c0",
+    "chars": 1061
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/19｜Middleware 基建类文件详解_ThreadData_Uploads_Sandbox_ToolOutputBudget.md",
+    "name": "19｜Middleware 基建类文件详解_ThreadData_Uploads_Sandbox_ToolOutputBudget",
+    "title": "19｜Middleware 基建类文件详解：ThreadData、Uploads、Sandbox、ToolOutputBudget",
+    "sha256": "3e1a4998a18882da40b7d07bfe1e4ef99fe368d9f087b6782cdade8242e9e7ca",
+    "chars": 2062
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/200｜Backend Docs Architecture_API_Config 文档详解.md",
+    "name": "200｜Backend Docs Architecture_API_Config 文档详解",
+    "title": "200｜Backend Docs Architecture/API/Config 文档详解",
+    "sha256": "56c9de3d8d8c71f1c1ad400d8e484ca1a6938a066f8c76ec51ee24981fb07f78",
+    "chars": 1028
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/201｜Root Docs_Install_Contributing_Security 详解.md",
+    "name": "201｜Root Docs_Install_Contributing_Security 详解",
+    "title": "201｜Root Docs、Install、Contributing、Security 详解",
+    "sha256": "1b67f4d55e67d81b57c962f2e7d18fb23a295e79295f291c9a940b3550438a66",
+    "chars": 1108
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/202｜test_auth _ auth_middleware _ csrf 测试详解.md",
+    "name": "202｜test_auth _ auth_middleware _ csrf 测试详解",
+    "title": "202｜test_auth / auth_middleware / csrf 测试详解",
+    "sha256": "f2172d008ade3a838536e35862dcb0c9319a831e3faf4df6978f157eeb673a6a",
+    "chars": 1091
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/203｜Run API _ Runs Endpoint 测试详解.md",
+    "name": "203｜Run API _ Runs Endpoint 测试详解",
+    "title": "203｜Run API / Runs Endpoint 测试详解",
+    "sha256": "d9fadc21991b4c4ec917769c4a1938619f40709433e0848a41c30e4239f61fae",
+    "chars": 1134
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/204｜Threads _ Uploads _ Artifacts Router 测试详解.md",
+    "name": "204｜Threads _ Uploads _ Artifacts Router 测试详解",
+    "title": "204｜Threads / Uploads / Artifacts Router 测试详解",
+    "sha256": "7b3803f28804389c8a95028d3eeedc91a87983542b60fd0a3335cb93b3eb7050",
+    "chars": 1110
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/205｜MiniMax Generation Providers Specs_Plans 详解.md",
+    "name": "205｜MiniMax Generation Providers Specs_Plans 详解",
+    "title": "205｜MiniMax Generation Providers Specs/Plans 详解",
+    "sha256": "306fd9835b150a8cc99146e6931eaa5c7c9c74e20694190e62c796a46d752a77",
+    "chars": 1081
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/206｜Event Store _ History Specs_Plans 详解.md",
+    "name": "206｜Event Store _ History Specs_Plans 详解",
+    "title": "206｜Event Store / History Specs/Plans 详解",
+    "sha256": "4f87997168ccce5ddd9088f7bfdc07573182d87bc09c8f96158f17bc40922ae1",
+    "chars": 1062
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/207｜Summarize Marker _ Langfuse Tracing Plans 详解.md",
+    "name": "207｜Summarize Marker _ Langfuse Tracing Plans 详解",
+    "title": "207｜Summarize Marker / Langfuse Tracing Plans 详解",
+    "sha256": "997835a2f3160e279d932c31f407a761ea2aae3d522c922f609899c7b32dd32a",
+    "chars": 1059
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/208｜README _ Install _ Contributing 深入详解.md",
+    "name": "208｜README _ Install _ Contributing 深入详解",
+    "title": "208｜README / Install / Contributing 深入详解",
+    "sha256": "028db380e580d414af8e016007a45650f1c8518e80cde8fc9b1ab2e76a7caf0e",
+    "chars": 1002
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/209｜backend_docs_API.md 详解.md",
+    "name": "209｜backend_docs_API.md 详解",
+    "title": "209｜backend/docs/API.md 详解",
+    "sha256": "9500f4a1828663620da3489372552cdbac4cf38344fcc555848d3cc8406d9fb0",
+    "chars": 1083
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/20｜Middleware 上下文与 UX 类文件详解_Dynamic_Skill_Summary_Todo_Title_Memory.md",
+    "name": "20｜Middleware 上下文与 UX 类文件详解_Dynamic_Skill_Summary_Todo_Title_Memory",
+    "title": "20｜Middleware 上下文与 UX 类文件详解：Dynamic、Skill、Summary、Todo、Title、Memory",
+    "sha256": "d28f169fb17802d4b9bbdc951e128814b51b750164ccef7ddcdf0a1d20bf77df",
+    "chars": 1690
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/210｜backend_docs_CONFIGURATION.md 详解.md",
+    "name": "210｜backend_docs_CONFIGURATION.md 详解",
+    "title": "210｜backend/docs/CONFIGURATION.md 详解",
+    "sha256": "09ffac4b86dc9198c38f1c2e3200d109783071a05295f288618da3f676dabd5e",
+    "chars": 1032
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/211｜backend_docs_MCP_SERVER.md 详解.md",
+    "name": "211｜backend_docs_MCP_SERVER.md 详解",
+    "title": "211｜backend/docs/MCP_SERVER.md 详解",
+    "sha256": "60758b295c8266910f7eccb965f44ba999b77e2de5f866207b23517b20b91f75",
+    "chars": 981
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/212｜backend_docs_STREAMING.md 详解.md",
+    "name": "212｜backend_docs_STREAMING.md 详解",
+    "title": "212｜backend/docs/STREAMING.md 详解",
+    "sha256": "cb6fca471f86361709ce19b362e77de4b2e724311d8b22e6d2a728774d2929f9",
+    "chars": 1004
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/213｜backend_docs_FILE_UPLOAD.md 详解.md",
+    "name": "213｜backend_docs_FILE_UPLOAD.md 详解",
+    "title": "213｜backend/docs/FILE_UPLOAD.md 详解",
+    "sha256": "b5f90633d0333d852d763b2023572fe87d7d08bcf1d653d276b393e321f7097e",
+    "chars": 1150
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/214｜backend_docs_AUTH_DESIGN _ AUTH_UPGRADE 详解.md",
+    "name": "214｜backend_docs_AUTH_DESIGN _ AUTH_UPGRADE 详解",
+    "title": "214｜backend/docs/AUTH_DESIGN / AUTH_UPGRADE 详解",
+    "sha256": "005e96086fc7b89fee884f70965aa23726e663aa2e4cccae0d44c82c1bc5c6be",
+    "chars": 989
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/215｜backend_docs_GUARDRAILS 与 PATH_EXAMPLES 详解.md",
+    "name": "215｜backend_docs_GUARDRAILS 与 PATH_EXAMPLES 详解",
+    "title": "215｜backend/docs/GUARDRAILS 与 PATH_EXAMPLES 详解",
+    "sha256": "72b4664d91e373a44a98af12fc0d64eec21a01a336474110d6e3d2660043ba33",
+    "chars": 1053
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/216｜Memory Improvements _ Settings Docs 详解.md",
+    "name": "216｜Memory Improvements _ Settings Docs 详解",
+    "title": "216｜Memory Improvements / Settings Docs 详解",
+    "sha256": "6c37ee154be9905c9263e2a06317fd8dc336fffdb16a5f00eda6c1048d10c920",
+    "chars": 1064
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/217｜Title Generation Docs 详解.md",
+    "name": "217｜Title Generation Docs 详解",
+    "title": "217｜Title Generation Docs 详解",
+    "sha256": "74c6c762104f2422c55515cf08430293dae87dfc246654d3850c680e9fea07f0",
+    "chars": 1041
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/218｜Replay _ Setup _ TODO _ Plan Mode Docs 详解.md",
+    "name": "218｜Replay _ Setup _ TODO _ Plan Mode Docs 详解",
+    "title": "218｜Replay / Setup / TODO / Plan Mode Docs 详解",
+    "sha256": "c7a1812d1e900089a3caad3cde570638e5fcce6b704d548f6236406709259a0b",
+    "chars": 1030
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/219｜Backend RFC Docs 详解.md",
+    "name": "219｜Backend RFC Docs 详解",
+    "title": "219｜Backend RFC Docs 详解",
+    "sha256": "6a8c60196bd64b156ec9a39d8cb135a12c40e4ae66268c984b53af5e34f5aaa3",
+    "chars": 1108
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/21｜Run 与 Thread Router 文件级详解.md",
+    "name": "21｜Run 与 Thread Router 文件级详解",
+    "title": "21｜Run 与 Thread Router 文件级详解",
+    "sha256": "f4bf71ce049183aff620919f182933577b06d7818ab64a112abe18326e1a13b4",
+    "chars": 2009
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/220｜Apple Container _ Auth Docker Gap Docs 详解.md",
+    "name": "220｜Apple Container _ Auth Docker Gap Docs 详解",
+    "title": "220｜Apple Container / Auth Docker Gap Docs 详解",
+    "sha256": "aff6ed984337971c7957601f29a93bdd84d2401adf1e05d7df1442346e633209",
+    "chars": 1026
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/221｜CODE_CHANGE_SUMMARY 与 SKILL_NAME_CONFLICT_FIX 详解.md",
+    "name": "221｜CODE_CHANGE_SUMMARY 与 SKILL_NAME_CONFLICT_FIX 详解",
+    "title": "221｜CODE_CHANGE_SUMMARY 与 SKILL_NAME_CONFLICT_FIX 详解",
+    "sha256": "dddd762c7a9e0430d1ba62fc6c065d43d57fff30bf61a5c5ead074caa6d4d483",
+    "chars": 1010
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/222｜docs_pr-evidence 证据材料详解.md",
+    "name": "222｜docs_pr-evidence 证据材料详解",
+    "title": "222｜docs/pr-evidence 证据材料详解",
+    "sha256": "b3f28b0440899f84fb2fbb1b03a42ae37a5e11d9ad9c002a3e051c95650f6e22",
+    "chars": 907
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/223｜AUTO_TITLE _ TITLE_GENERATION 文档单独详解.md",
+    "name": "223｜AUTO_TITLE _ TITLE_GENERATION 文档单独详解",
+    "title": "223｜AUTO_TITLE / TITLE_GENERATION 文档单独详解",
+    "sha256": "a209b932c05017ce9161c0396db80442bf288b623b8275a43c30bc9f5642aee3",
+    "chars": 883
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/224｜REPLAY_E2E 文档单独详解.md",
+    "name": "224｜REPLAY_E2E 文档单独详解",
+    "title": "224｜REPLAY_E2E 文档单独详解",
+    "sha256": "ded3768a3b94c1827df23de47bb302c831d31b915517a7b58083cf17e3eb78c0",
+    "chars": 1062
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/225｜OpenAPI _ Setup _ Guardrails 相关文档详解.md",
+    "name": "225｜OpenAPI _ Setup _ Guardrails 相关文档详解",
+    "title": "225｜OpenAPI / Setup / Guardrails 相关文档详解",
+    "sha256": "6921e36db1e99f834aae31e0efa028ca0137fee921f8d022bb30c3604c757597",
+    "chars": 943
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/226｜docs_superpowers 全部 Specs_Plans 总览详解.md",
+    "name": "226｜docs_superpowers 全部 Specs_Plans 总览详解",
+    "title": "226｜docs/superpowers 全部 Specs/Plans 总览详解",
+    "sha256": "3bf78ba27b591ff9c55408be3a670ea42d2a92ccbd69c6f7134a38eeea686a51",
+    "chars": 926
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/227｜Frontend Content Introduction_Harness 文档分类详解.md",
+    "name": "227｜Frontend Content Introduction_Harness 文档分类详解",
+    "title": "227｜Frontend Content Introduction/Harness 文档分类详解",
+    "sha256": "2d5ef04332e46eb1fd26f273946dae94f1fab9d7c56270c55f4f2a6ca12f5b7a",
+    "chars": 1050
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/228｜Frontend Content Reference_Application_Tutorials 分类详解.md",
+    "name": "228｜Frontend Content Reference_Application_Tutorials 分类详解",
+    "title": "228｜Frontend Content Reference/Application/Tutorials 分类详解",
+    "sha256": "dab9afe5cfb9228ccb42678f57b103e45f246fc54f8772524e26d85812b97e28",
+    "chars": 954
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/229｜docs_plans 与 Root Docs 规划文档详解.md",
+    "name": "229｜docs_plans 与 Root Docs 规划文档详解",
+    "title": "229｜docs/plans 与 Root Docs 规划文档详解",
+    "sha256": "9f2b17d4bb2604eb1c340fff37aa5eedb7df3a9efdc02dc8b196eb50e6c241ab",
+    "chars": 1019
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/22｜管理类 Router 文件级详解_Models_MCP_Skills_Memory_Agents.md",
+    "name": "22｜管理类 Router 文件级详解_Models_MCP_Skills_Memory_Agents",
+    "title": "22｜管理类 Router 文件级详解：Models、MCP、Skills、Memory、Agents",
+    "sha256": "cd5d65491726a565b159b5428a8537a1de59fd278a3da3a7ddb4aaf5fe7a7a74",
+    "chars": 1951
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/230｜Frontend Content Introduction Docs 详解.md",
+    "name": "230｜Frontend Content Introduction Docs 详解",
+    "title": "230｜Frontend Content Introduction Docs 详解",
+    "sha256": "622830d08175ed3a800e5e34f191fff9c6d1a6490581acc67c000dd303dc9852",
+    "chars": 1004
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/231｜Frontend Content Harness _ Reference Docs 详解.md",
+    "name": "231｜Frontend Content Harness _ Reference Docs 详解",
+    "title": "231｜Frontend Content Harness / Reference Docs 详解",
+    "sha256": "7859d0337c949383628f10bd10074458b4e2e67161a5d31860758068bf17374e",
+    "chars": 1021
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/232｜Frontend Content Application _ Tutorials _ Posts 详解.md",
+    "name": "232｜Frontend Content Application _ Tutorials _ Posts 详解",
+    "title": "232｜Frontend Content Application / Tutorials / Posts 详解",
+    "sha256": "509a6963acac33d33af8ec343d1bba63b4af910361ceaea60b39b0062fcac838",
+    "chars": 993
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/233｜MiniMax Provider Spec_Plan 单文件详解.md",
+    "name": "233｜MiniMax Provider Spec_Plan 单文件详解",
+    "title": "233｜MiniMax Provider Spec/Plan 单文件详解",
+    "sha256": "63f0d6bb3c43a1a1abff30537e375d960986b27d195cb6e5c0d01dcb0dd855ab",
+    "chars": 952
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/234｜Event Store History Plan 单文件详解.md",
+    "name": "234｜Event Store History Plan 单文件详解",
+    "title": "234｜Event Store History Plan 单文件详解",
+    "sha256": "6d98435bb76aa6fec9d13223c7a6a156fc20b41a6bb8b050fab526893b0e5e8e",
+    "chars": 968
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/235｜Summarize Marker Spec 单文件详解.md",
+    "name": "235｜Summarize Marker Spec 单文件详解",
+    "title": "235｜Summarize Marker Spec 单文件详解",
+    "sha256": "c46fe8bd0a1ae9d12fe1f500c362e62adf3421927b5a1b9d21d236a34e0f3275",
+    "chars": 912
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/236｜backend_docs_summarization.md 单文件详解.md",
+    "name": "236｜backend_docs_summarization.md 单文件详解",
+    "title": "236｜backend/docs/summarization.md 单文件详解",
+    "sha256": "19d0bdf7a5a3675ffc02f74d069134dcd807eecc8de32032661aa2cd5c37ab63",
+    "chars": 1056
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/237｜Frontend Reference Model Providers 文档详解.md",
+    "name": "237｜Frontend Reference Model Providers 文档详解",
+    "title": "237｜Frontend Reference Model Providers 文档详解",
+    "sha256": "07560f2938b822e552e789211cfb9b37f4e5334447fb4da4f873ba77befe1439",
+    "chars": 966
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/238｜Frontend Blog Posts 与 Tags 文档详解.md",
+    "name": "238｜Frontend Blog Posts 与 Tags 文档详解",
+    "title": "238｜Frontend Blog Posts 与 Tags 文档详解",
+    "sha256": "ce30813aeaa5b74cddb602e6e866f3e9c99c4e4e689cb4754effef544882e40d",
+    "chars": 990
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/239｜OpenAPI _ SSE _ Streaming Contract 文档详解.md",
+    "name": "239｜OpenAPI _ SSE _ Streaming Contract 文档详解",
+    "title": "239｜OpenAPI / SSE / Streaming Contract 文档详解",
+    "sha256": "43b38bf29edbeea6a138a94e1bfc1e5ef8b12febf2bda18587d50ae6689c98af",
+    "chars": 990
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/23｜文件类 Router 详解_Uploads_Artifacts_Feedback_Suggestions.md",
+    "name": "23｜文件类 Router 详解_Uploads_Artifacts_Feedback_Suggestions",
+    "title": "23｜文件类 Router 详解：Uploads、Artifacts、Feedback、Suggestions",
+    "sha256": "faf07bfd231f631b61fba47eb0eecf0c7354ba7c4975febb92493d2b46668624",
+    "chars": 2121
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/240｜Sandbox Memory Profiling _ Blocking IO Docs 详解.md",
+    "name": "240｜Sandbox Memory Profiling _ Blocking IO Docs 详解",
+    "title": "240｜Sandbox Memory Profiling / Blocking IO Docs 详解",
+    "sha256": "d81e178de25dc7b06da54fca2fae49fb8d6749602639328241b82f9ca227ec69",
+    "chars": 1100
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/241｜Skill Manage PR Evidence 详解.md",
+    "name": "241｜Skill Manage PR Evidence 详解",
+    "title": "241｜Skill Manage PR Evidence 详解",
+    "sha256": "acae1360b5db820de6b3694cf0cdc3c68e4d6dae73c3825dab4bf6d5fd2fa49e",
+    "chars": 913
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/242｜CODE_CHANGE_SUMMARY_BY_FILE 单文档详解.md",
+    "name": "242｜CODE_CHANGE_SUMMARY_BY_FILE 单文档详解",
+    "title": "242｜CODE_CHANGE_SUMMARY_BY_FILE 单文档详解",
+    "sha256": "192b0ae0f6de6464e4049e18cdd8f8122bbd3902f255e2568bfd7628198422e2",
+    "chars": 957
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/243｜SKILL_NAME_CONFLICT_FIX 单文档详解.md",
+    "name": "243｜SKILL_NAME_CONFLICT_FIX 单文档详解",
+    "title": "243｜SKILL_NAME_CONFLICT_FIX 单文档详解",
+    "sha256": "522c326d491deefe2c6c2b63a201eeab6037ea1d5ef8a4fba41fb72d2de764bc",
+    "chars": 975
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/244｜Backend Test Helpers _ Fixtures 详解.md",
+    "name": "244｜Backend Test Helpers _ Fixtures 详解",
+    "title": "244｜Backend Test Helpers / Fixtures 详解",
+    "sha256": "cd53b8ebdd0174362b2a9c2f7abaf0ca61a302b9a4bd565271184d4dcfd03b95",
+    "chars": 1146
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/245｜Backend Replay Provider _ Seed _ Support 测试模块详解.md",
+    "name": "245｜Backend Replay Provider _ Seed _ Support 测试模块详解",
+    "title": "245｜Backend Replay Provider / Seed / Support 测试模块详解",
+    "sha256": "9cc47bfa41ad30bcc752b03f8d4f7cc1fa6f5bada27510bbe8e303bc562d5ac0",
+    "chars": 1077
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/246｜Frontend MDX Components 与 Content Meta 详解.md",
+    "name": "246｜Frontend MDX Components 与 Content Meta 详解",
+    "title": "246｜Frontend MDX Components 与 Content Meta 详解",
+    "sha256": "c62d248d0b5e18eecf0c8d66470b26b83e2b4ddf97819e3df606f88b6599ba66",
+    "chars": 1015
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/247｜Frontend Core Blog 与 I18n 细节详解.md",
+    "name": "247｜Frontend Core Blog 与 I18n 细节详解",
+    "title": "247｜Frontend Core Blog 与 I18n 细节详解",
+    "sha256": "fe9dd8e2c38b07b14cd6c8526f9b550064ec6b4da464e20f604ec4cde769fb44",
+    "chars": 1082
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/248｜Frontend Core Utils 详解.md",
+    "name": "248｜Frontend Core Utils 详解",
+    "title": "248｜Frontend Core Utils 详解",
+    "sha256": "837f710ba27c665b8b391e9d778205023c1ec26a048f267061f2474f1ebdb1c5",
+    "chars": 979
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/249｜Frontend Env_Config_Static Mode 详解.md",
+    "name": "249｜Frontend Env_Config_Static Mode 详解",
+    "title": "249｜Frontend Env、Config、Static Mode 详解",
+    "sha256": "3d4b860fa33737e9411a5222e22663ed9f788e33fcaf49959352b96092444161",
+    "chars": 1109
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/24｜ThreadDataMiddleware 单文件详解.md",
+    "name": "24｜ThreadDataMiddleware 单文件详解",
+    "title": "24｜ThreadDataMiddleware 单文件详解",
+    "sha256": "58e49948517b325267450b94d1ea342abea34507da056e49ad1efc82f172f18c",
+    "chars": 1442
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/250｜Frontend Rehype _ Streamdown _ Mermaid 细节详解.md",
+    "name": "250｜Frontend Rehype _ Streamdown _ Mermaid 细节详解",
+    "title": "250｜Frontend Rehype / Streamdown / Mermaid 细节详解",
+    "sha256": "bb7073897b962909e0c4f71ddd5aff83d814fb4f82a05c6df8d11d6e9dcd52b0",
+    "chars": 981
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/251｜Persistence Run_Thread_Feedback Models 详解.md",
+    "name": "251｜Persistence Run_Thread_Feedback Models 详解",
+    "title": "251｜Persistence Run/Thread/Feedback Models 详解",
+    "sha256": "86756dd7834be35d386d43165e209f1e94430e169eac10c2057ee0095c377d98",
+    "chars": 1008
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/252｜Persistence Repository Implementations 详解.md",
+    "name": "252｜Persistence Repository Implementations 详解",
+    "title": "252｜Persistence Repository Implementations 详解",
+    "sha256": "d322aba1c471fa39d862a8f942aa4e2f0083cc50971be456ea4f51001f5e82e0",
+    "chars": 1052
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/253｜Runtime Checkpointer _ Store _ Events Store 详解.md",
+    "name": "253｜Runtime Checkpointer _ Store _ Events Store 详解",
+    "title": "253｜Runtime Checkpointer / Store / Events Store 详解",
+    "sha256": "6fc4b2e54f86a19ccea8af954f8fd7f8cde0a0221771683a62714b03bbc574de",
+    "chars": 1092
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/254｜Runtime UserContext_Converters_Serialization 详解.md",
+    "name": "254｜Runtime UserContext_Converters_Serialization 详解",
+    "title": "254｜Runtime UserContext、Converters、Serialization 详解",
+    "sha256": "d4479ab580abe7711db7e875275f5648c67e0f947bf1fc61c4c698550c3e5776",
+    "chars": 1132
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/255｜Frontend Styles_Env_Typings 详解.md",
+    "name": "255｜Frontend Styles_Env_Typings 详解",
+    "title": "255｜Frontend Styles、Env、Typings 详解",
+    "sha256": "73ef43206888777617a32a71eedb77a9831d1ca5933c1e4675f60624a015233c",
+    "chars": 1020
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/256｜Frontend Build_Test Configs 详解.md",
+    "name": "256｜Frontend Build_Test Configs 详解",
+    "title": "256｜Frontend Build/Test Configs 详解",
+    "sha256": "bf2c3866ef5b71dba96505ee8384437e3219d652b6a19fc027b357794b930f75",
+    "chars": 1000
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/257｜Root Config Files 详解_config.yaml_extensions_env.md",
+    "name": "257｜Root Config Files 详解_config.yaml_extensions_env",
+    "title": "257｜Root Config Files 详解：config.yaml、extensions、env",
+    "sha256": "2550372f7d74e2b66f351367a81278c42703ccb106d7549c4ddc671356d1be16",
+    "chars": 1026
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/258｜Persistence Engine _ Base _ JSON Compat 详解.md",
+    "name": "258｜Persistence Engine _ Base _ JSON Compat 详解",
+    "title": "258｜Persistence Engine / Base / JSON Compat 详解",
+    "sha256": "d0145daad092215357ff7926a4b7afb4124eb5788642dccec5c0fdb37f4edea7",
+    "chars": 938
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/259｜RunRow _ RunRepository 单文件详解.md",
+    "name": "259｜RunRow _ RunRepository 单文件详解",
+    "title": "259｜RunRow / RunRepository 单文件详解",
+    "sha256": "17928ff8383fb738a7789e283df254ac9074c8c7509374ea115ff043706e63c1",
+    "chars": 1000
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/25｜UploadsMiddleware 单文件详解.md",
+    "name": "25｜UploadsMiddleware 单文件详解",
+    "title": "25｜UploadsMiddleware 单文件详解",
+    "sha256": "4e96018845b4a5234b25c77d2cb62553806e76368d434c1abdd6551ed900cb39",
+    "chars": 1438
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/260｜ThreadMetaRow _ ThreadMetaRepository 详解.md",
+    "name": "260｜ThreadMetaRow _ ThreadMetaRepository 详解",
+    "title": "260｜ThreadMetaRow / ThreadMetaRepository 详解",
+    "sha256": "a3308e29ebfa852cc7b1dad4dd12de241110a1e1bb057c15e6f1f1cae2899bd0",
+    "chars": 1050
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/261｜Feedback _ User _ RunEvent Persistence 详解.md",
+    "name": "261｜Feedback _ User _ RunEvent Persistence 详解",
+    "title": "261｜Feedback / User / RunEvent Persistence 详解",
+    "sha256": "ffb184be78c0a4c985649673ba841f9c084528f989199d4d61f7d19f859f1021",
+    "chars": 1096
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/262｜Runtime Checkpointer Provider 详解.md",
+    "name": "262｜Runtime Checkpointer Provider 详解",
+    "title": "262｜Runtime Checkpointer Provider 详解",
+    "sha256": "432b29f354e115f4e650f37f06ce55f450e36e1b3c2fe8beab8d60d0e34f5db0",
+    "chars": 1131
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/263｜Runtime Store Provider 详解.md",
+    "name": "263｜Runtime Store Provider 详解",
+    "title": "263｜Runtime Store Provider 详解",
+    "sha256": "949b52133e01b8d8b41dc978babfb78947bb8a6385249490a80448397c8596a6",
+    "chars": 1140
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/264｜Runtime Events Store Provider 详解.md",
+    "name": "264｜Runtime Events Store Provider 详解",
+    "title": "264｜Runtime Events Store Provider 详解",
+    "sha256": "cbc7b8e4130958e7a9cf1a0c419f59d5dae5d80320374eaf6ccafbc86a844ab8",
+    "chars": 948
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/265｜runtime_runs_worker.py 单文件详解.md",
+    "name": "265｜runtime_runs_worker.py 单文件详解",
+    "title": "265｜runtime/runs/worker.py 单文件详解",
+    "sha256": "c8ceff5fc005b01d6e53a07f1a183449df4ee13b8a975b6454040afe8b472cfe",
+    "chars": 1126
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/266｜runtime_runs_manager.py 单文件详解.md",
+    "name": "266｜runtime_runs_manager.py 单文件详解",
+    "title": "266｜runtime/runs/manager.py 单文件详解",
+    "sha256": "3f953c497f5591592547f1bb1c062908a0b3b7b0c11c2cff54f9829babaa7399",
+    "chars": 971
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/267｜runtime_runs_naming.py 与 schemas.py 详解.md",
+    "name": "267｜runtime_runs_naming.py 与 schemas.py 详解",
+    "title": "267｜runtime/runs/naming.py 与 schemas.py 详解",
+    "sha256": "ac309ce5e9027be48d9f0baff8a39dc5c7dca425eb6453ae77b6d89ab07fc0bd",
+    "chars": 974
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/268｜subagents_executor.py 单文件详解.md",
+    "name": "268｜subagents_executor.py 单文件详解",
+    "title": "268｜subagents/executor.py 单文件详解",
+    "sha256": "5e020e9414c30bf432b91967701d2144780ea154c44150b5522bd77f65117134",
+    "chars": 1021
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/269｜subagents registry_config_status_token_collector 详解.md",
+    "name": "269｜subagents registry_config_status_token_collector 详解",
+    "title": "269｜subagents registry/config/status/token_collector 详解",
+    "sha256": "4e282822df1ebb1debb8d4505f6422a3ee7d142f83c8588e8f63243f61ba2a07",
+    "chars": 1187
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/26｜SandboxMiddleware 单文件详解.md",
+    "name": "26｜SandboxMiddleware 单文件详解",
+    "title": "26｜SandboxMiddleware 单文件详解",
+    "sha256": "8a49e71cd23fcae28df824953dcc46352dd47cb9cd18865620401da7ad732345",
+    "chars": 1356
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/270｜Built-in Tools_task_present_files_clarification 详解.md",
+    "name": "270｜Built-in Tools_task_present_files_clarification 详解",
+    "title": "270｜Built-in Tools：task/present_files/clarification 详解",
+    "sha256": "5f9ca86e68c4d71347c7d2d8d1a45b7f453c2eaa892d3c370bbae9d3f99805ac",
+    "chars": 1098
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/271｜Built-in Tools_view_image_tool_search_invoke_acp 详解.md",
+    "name": "271｜Built-in Tools_view_image_tool_search_invoke_acp 详解",
+    "title": "271｜Built-in Tools：view_image/tool_search/invoke_acp 详解",
+    "sha256": "a4a978616f6836d5518526d535e6ef97bf4c37fdfc7144cef32fc5a71558c544",
+    "chars": 1167
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/272｜tools_tools.py 单文件详解.md",
+    "name": "272｜tools_tools.py 单文件详解",
+    "title": "272｜tools/tools.py 单文件详解",
+    "sha256": "f46b7ca511d082e8e7fc5b0d9f0edf9cc1859619d4cd543ee35e3274c02c6fd4",
+    "chars": 1064
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/273｜skill_manage_tool _ sync _ mcp_metadata _ types 详解.md",
+    "name": "273｜skill_manage_tool _ sync _ mcp_metadata _ types 详解",
+    "title": "273｜skill_manage_tool / sync / mcp_metadata / types 详解",
+    "sha256": "cb5e8e57ecf52cc402f2ecb450c8bcdba5fe13340d1bf338a76a247fa0f2a339",
+    "chars": 944
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/274｜reflection_resolvers.py 单文件详解.md",
+    "name": "274｜reflection_resolvers.py 单文件详解",
+    "title": "274｜reflection/resolvers.py 单文件详解",
+    "sha256": "e44f64d241226d043581a23e734383437908a5683b200770f2b8774cb39aef2d",
+    "chars": 973
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/275｜utils_file_conversion 与 readability 详解.md",
+    "name": "275｜utils_file_conversion 与 readability 详解",
+    "title": "275｜utils/file_conversion 与 readability 详解",
+    "sha256": "44e12e908bf07484f55a84093c18308ec340cdbda7c3d25b36fbf61fe4bd1099",
+    "chars": 1055
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/276｜utils_messages_network_time 详解.md",
+    "name": "276｜utils_messages_network_time 详解",
+    "title": "276｜utils/messages、network、time 详解",
+    "sha256": "5bbe77e83c3da5fc08fa66acdc39d32322352d00a72dcc77c3e51d2caf941131",
+    "chars": 923
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/277｜uploads_manager.py 单文件详解.md",
+    "name": "277｜uploads_manager.py 单文件详解",
+    "title": "277｜uploads/manager.py 单文件详解",
+    "sha256": "db31d24f28760249ba99a3ea7ec393344e9a7a03da394489de0655e0ed77f4e0",
+    "chars": 1042
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/278｜tracing_factory 与 metadata 详解.md",
+    "name": "278｜tracing_factory 与 metadata 详解",
+    "title": "278｜tracing/factory 与 metadata 详解",
+    "sha256": "e89b8d08230c06b1696d1752284806159a2517268827c7e7aaf8275dc6d5ff7e",
+    "chars": 1060
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/279｜Channel Base _ MessageBus _ Store 单文件详解.md",
+    "name": "279｜Channel Base _ MessageBus _ Store 单文件详解",
+    "title": "279｜Channel Base / MessageBus / Store 单文件详解",
+    "sha256": "e918d37afd2622bc79003233c8c108fc5f58fe7ea3e0689c28fff7d7cbabc3f3",
+    "chars": 965
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/27｜ToolOutputBudgetMiddleware 单文件详解.md",
+    "name": "27｜ToolOutputBudgetMiddleware 单文件详解",
+    "title": "27｜ToolOutputBudgetMiddleware 单文件详解",
+    "sha256": "35f14c2e87aa4749fa3782c80face8c3c513ed419112237421945caeaadcf4ce",
+    "chars": 1342
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/280｜ChannelService 与 ChannelManager 单文件详解.md",
+    "name": "280｜ChannelService 与 ChannelManager 单文件详解",
+    "title": "280｜ChannelService 与 ChannelManager 单文件详解",
+    "sha256": "99845f8589b46a34752943e4994da101adc25de43103a2fe37ec14483e21ac74",
+    "chars": 1138
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/281｜Gateway Auth 子模块详解.md",
+    "name": "281｜Gateway Auth 子模块详解",
+    "title": "281｜Gateway Auth 子模块详解",
+    "sha256": "1e335397e5f949383cb4e00b9b6dcff975c8a27d1cae2344bf7e0e5c185a0bf3",
+    "chars": 1081
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/282｜Gateway LocalAuthProvider _ SQLiteUserRepository 详解.md",
+    "name": "282｜Gateway LocalAuthProvider _ SQLiteUserRepository 详解",
+    "title": "282｜Gateway LocalAuthProvider / SQLiteUserRepository 详解",
+    "sha256": "c587be5dcb1f2bc512a454dbb07c1d28ed86f24800051f81ebb4fa0a3c62e377",
+    "chars": 1093
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/283｜Frontend Core Auth 文件详解.md",
+    "name": "283｜Frontend Core Auth 文件详解",
+    "title": "283｜Frontend Core Auth 文件详解",
+    "sha256": "dbef47cf53df66e7e9d374c0a49b5ef61ff8931b9e515ed9ebaf5d2fd2dad637",
+    "chars": 1084
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/284｜Frontend Core Uploads _ Agents _ Notification 详解.md",
+    "name": "284｜Frontend Core Uploads _ Agents _ Notification 详解",
+    "title": "284｜Frontend Core Uploads / Agents / Notification 详解",
+    "sha256": "e3d5c3ef796204e1f196c22a6d211dd7d4dcff2b5e97d0122960286a5d99a070",
+    "chars": 1080
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/285｜Frontend Core Todos _ Tasks _ Tools 详解.md",
+    "name": "285｜Frontend Core Todos _ Tasks _ Tools 详解",
+    "title": "285｜Frontend Core Todos / Tasks / Tools 详解",
+    "sha256": "0df911ce96b0fa72791a83e045544fe5f49705bface8f30817dfa3a1e02343bc",
+    "chars": 1077
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/286｜auth_jwt_password_errors 单文件详解.md",
+    "name": "286｜auth_jwt_password_errors 单文件详解",
+    "title": "286｜auth/jwt、password、errors 单文件详解",
+    "sha256": "c9e52f0feaafced0ead59b6981c408eca4513d47497abb57036ce072fdd02ed8",
+    "chars": 1018
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/287｜auth_config_models_providers 单文件详解.md",
+    "name": "287｜auth_config_models_providers 单文件详解",
+    "title": "287｜auth/config、models、providers 单文件详解",
+    "sha256": "65b53fa988561b63db0668e5a771571b7798fc27d5ffcbcdc0d5d7a5d5a43aff",
+    "chars": 1042
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/288｜auth repository_credential_file_reset_admin 详解.md",
+    "name": "288｜auth repository_credential_file_reset_admin 详解",
+    "title": "288｜auth repository、credential_file、reset_admin 详解",
+    "sha256": "4deb485c7330c102d89ba27bdef57f749c00a4f6f3a7c4ef2ac35469f882fa4f",
+    "chars": 917
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/289｜Feishu 与 Slack Channel 单文件详解.md",
+    "name": "289｜Feishu 与 Slack Channel 单文件详解",
+    "title": "289｜Feishu 与 Slack Channel 单文件详解",
+    "sha256": "a3fca30f4acfb698d6a7021c5349bd8ff37812f77a5c1dc7f3cf70d96f2d4de4",
+    "chars": 991
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/28｜DynamicContextMiddleware 单文件详解.md",
+    "name": "28｜DynamicContextMiddleware 单文件详解",
+    "title": "28｜DynamicContextMiddleware 单文件详解",
+    "sha256": "a787348adf2350488f6be222dc75fdaa600a16f178c57837e68a55219c7d49a7",
+    "chars": 1434
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/290｜Telegram_DingTalk_Discord Channel 单文件详解.md",
+    "name": "290｜Telegram_DingTalk_Discord Channel 单文件详解",
+    "title": "290｜Telegram、DingTalk、Discord Channel 单文件详解",
+    "sha256": "69aaa38795d2d4e2d0ce694fbc7008a38f67cca107df37b28257bd44219fb8ef",
+    "chars": 1067
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/291｜WeCom 与 Wechat Channel 单文件详解.md",
+    "name": "291｜WeCom 与 Wechat Channel 单文件详解",
+    "title": "291｜WeCom 与 Wechat Channel 单文件详解",
+    "sha256": "2ac4c342d8f57d13bb51b4eb1bb68615afb37658f6c7007afbbd840211f50aee",
+    "chars": 1053
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/292｜Frontend Agents_Uploads_Notification Core 单文件详解.md",
+    "name": "292｜Frontend Agents_Uploads_Notification Core 单文件详解",
+    "title": "292｜Frontend Agents、Uploads、Notification Core 单文件详解",
+    "sha256": "d5e57f4e3ba6713b14222a99367e5061f6e817f5150ac314ab6addadcda31c0f",
+    "chars": 1107
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/293｜Frontend Core Models 文件详解.md",
+    "name": "293｜Frontend Core Models 文件详解",
+    "title": "293｜Frontend Core Models 文件详解",
+    "sha256": "2624be58906e352157db45b78185c4e23cc938ce4cf15025d14541d5ac57cb5a",
+    "chars": 994
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/294｜Frontend Core MCP 文件详解.md",
+    "name": "294｜Frontend Core MCP 文件详解",
+    "title": "294｜Frontend Core MCP 文件详解",
+    "sha256": "2c95b4379ac0063ecc91acd75101504dfe4ce503cc8223b458da64390c96c539",
+    "chars": 1025
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/295｜Frontend Core Skills 文件详解.md",
+    "name": "295｜Frontend Core Skills 文件详解",
+    "title": "295｜Frontend Core Skills 文件详解",
+    "sha256": "0a309e74a9200d9a82790029457c66bb619757539d4aca6e042ef7189288f934",
+    "chars": 1047
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/296｜Frontend Core Memory 文件详解.md",
+    "name": "296｜Frontend Core Memory 文件详解",
+    "title": "296｜Frontend Core Memory 文件详解",
+    "sha256": "c0c1b2fa642c2a783cef829a6161b506a43b5629dc67657c87cc0bcd0601fe85",
+    "chars": 1051
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/297｜Frontend Core Settings 文件详解.md",
+    "name": "297｜Frontend Core Settings 文件详解",
+    "title": "297｜Frontend Core Settings 文件详解",
+    "sha256": "88527039ec1b835a4af5bda77c5057ae3ec05cc53a1437419cf0734c99832aed",
+    "chars": 1088
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/298｜Frontend Core API Feedback _ StreamMode 详解.md",
+    "name": "298｜Frontend Core API Feedback _ StreamMode 详解",
+    "title": "298｜Frontend Core API Feedback / StreamMode 详解",
+    "sha256": "05b04debfe131327083948bf43fd2bd64c1f736a2b0017c54553eb72b22216e2",
+    "chars": 992
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/299｜Frontend Core Threads Types _ Utils _ Export 详解.md",
+    "name": "299｜Frontend Core Threads Types _ Utils _ Export 详解",
+    "title": "299｜Frontend Core Threads Types / Utils / Export 详解",
+    "sha256": "002a8e1f17d19206878425c17424850c47d8c42430d1a9810ecfd02b55f8e107",
+    "chars": 1134
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/29｜SkillActivationMiddleware 单文件详解.md",
+    "name": "29｜SkillActivationMiddleware 单文件详解",
+    "title": "29｜SkillActivationMiddleware 单文件详解",
+    "sha256": "9a4766eb8d80ecfbc80435a0877fa35b86fd49af4d711e1e7438e903175cf883",
+    "chars": 1293
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/300｜Chat Page_Layout_Providers 单文件详解.md",
+    "name": "300｜Chat Page_Layout_Providers 单文件详解",
+    "title": "300｜Chat Page、Layout、Providers 单文件详解",
+    "sha256": "f743316be8daaab017284b8b002bfca2b21d83341ec539b795020af49a8ab5c9",
+    "chars": 1097
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/301｜Chat Hooks 与 ChatBox 单文件详解.md",
+    "name": "301｜Chat Hooks 与 ChatBox 单文件详解",
+    "title": "301｜Chat Hooks 与 ChatBox 单文件详解",
+    "sha256": "ade146ad862a44018e716c86e1c771ee416daf511ee659f083f1f46b33900c44",
+    "chars": 1035
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/302｜Artifact File List _ Detail _ Trigger 单文件详解.md",
+    "name": "302｜Artifact File List _ Detail _ Trigger 单文件详解",
+    "title": "302｜Artifact File List / Detail / Trigger 单文件详解",
+    "sha256": "2cedc8ac56bd1d46ee7823835e54a4e9db75e05cb2c2ebe0b7fcb3c3954b7e3d",
+    "chars": 1047
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/303｜MessageList 组件族细节详解.md",
+    "name": "303｜MessageList 组件族细节详解",
+    "title": "303｜MessageList 组件族细节详解",
+    "sha256": "5657689d2bd12dd9f7824fe429fca4a5c1608b4bc54a8554e16e33d3b7655c8a",
+    "chars": 1050
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/304｜MarkdownContent_TokenUsage_SubtaskCard 详解.md",
+    "name": "304｜MarkdownContent_TokenUsage_SubtaskCard 详解",
+    "title": "304｜MarkdownContent、TokenUsage、SubtaskCard 详解",
+    "sha256": "91a737f446d392dea30063994169e12cb0f4168c4e1f67a1ff787c16ace33b29",
+    "chars": 1048
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/305｜WorkspaceSidebar_NavChatList_RecentChatList 详解.md",
+    "name": "305｜WorkspaceSidebar_NavChatList_RecentChatList 详解",
+    "title": "305｜WorkspaceSidebar、NavChatList、RecentChatList 详解",
+    "sha256": "cb01469a8358c0d3e5ccd83c419b084de2cc7952adf8aebdb91bac40ba6d7a58",
+    "chars": 1078
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/306｜CommandPalette_GithubIcon_Tooltip 组件详解.md",
+    "name": "306｜CommandPalette_GithubIcon_Tooltip 组件详解",
+    "title": "306｜CommandPalette、GithubIcon、Tooltip 组件详解",
+    "sha256": "2f27a6af76e86d7be356f3fc5b16b3cfd31d410edeb458faa90ab7468d0dafd1",
+    "chars": 1018
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/307｜Workspace Account_Appearance_Notification_About 页面细节.md",
+    "name": "307｜Workspace Account_Appearance_Notification_About 页面细节",
+    "title": "307｜Workspace Account/Appearance/Notification/About 页面细节",
+    "sha256": "cf02f797ae33a67a80259b34d431d9cf9a5a4c825de6d195082358ed29e347fd",
+    "chars": 1125
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/308｜Workspace Tool_Skill_Memory Settings 页面细节.md",
+    "name": "308｜Workspace Tool_Skill_Memory Settings 页面细节",
+    "title": "308｜Workspace Tool/Skill/Memory Settings 页面细节",
+    "sha256": "b5c04f5acc1b52085f93497255c3c79b927870d2fe97881d98277b4f191d72ae",
+    "chars": 1084
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/309｜Remaining UI Form_Display Primitives 详解.md",
+    "name": "309｜Remaining UI Form_Display Primitives 详解",
+    "title": "309｜Remaining UI Form/Display Primitives 详解",
+    "sha256": "0a1ada9577cb499aaf87ed66d8798e9c488793a27393b732d3da5ed51951aa12",
+    "chars": 950
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/30｜Todo_Title_Memory Middleware 文件详解.md",
+    "name": "30｜Todo_Title_Memory Middleware 文件详解",
+    "title": "30｜Todo、Title、Memory Middleware 文件详解",
+    "sha256": "b184d10989e1a1666fc547d9448f41a4fc181d6358937d7fd474c9c0d80668cd",
+    "chars": 1342
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/310｜Remaining UI Overlay_Input Primitives 详解.md",
+    "name": "310｜Remaining UI Overlay_Input Primitives 详解",
+    "title": "310｜Remaining UI Overlay/Input Primitives 详解",
+    "sha256": "5488dfd8e4276d536bb0db7bdf8c14ae40d5997cf427476e4cd13048c9990c66",
+    "chars": 936
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/311｜Remaining Scripts Ops 详解.md",
+    "name": "311｜Remaining Scripts Ops 详解",
+    "title": "311｜Remaining Scripts Ops 详解",
+    "sha256": "5b5379347a673e633e71fcf0af6c3b16b2ad0835078d87b5e809b3039f9fcef5",
+    "chars": 977
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/312｜Backend Misc Tests 详解.md",
+    "name": "312｜Backend Misc Tests 详解",
+    "title": "312｜Backend Misc Tests 详解",
+    "sha256": "4c0fd8c2c654051a84688b08333c2f028ba8b7e19a3f28696fb9949d600e08ad",
+    "chars": 1045
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/313｜Frontend Misc Tests _ Configs 详解.md",
+    "name": "313｜Frontend Misc Tests _ Configs 详解",
+    "title": "313｜Frontend Misc Tests / Configs 详解",
+    "sha256": "325c46182b86bb432ed545dfeb16e4be96420ee6f13086eb6d6dd02f5a59aa7d",
+    "chars": 968
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/314｜Config _ Doctor _ Setup Wizard Tests 单文件族详解.md",
+    "name": "314｜Config _ Doctor _ Setup Wizard Tests 单文件族详解",
+    "title": "314｜Config / Doctor / Setup Wizard Tests 单文件族详解",
+    "sha256": "2eeac6d7546e4b05f2db508de35cf84ace82158344871d03f30253d221495fac",
+    "chars": 1085
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/315｜Safety _ Guardrails _ Sandbox Audit Tests 单文件族详解.md",
+    "name": "315｜Safety _ Guardrails _ Sandbox Audit Tests 单文件族详解",
+    "title": "315｜Safety / Guardrails / Sandbox Audit Tests 单文件族详解",
+    "sha256": "ec3acfc495cd2a3d869b7d23efeb8ad5dad423981e9776ff5f3dcf54afa5b7b7",
+    "chars": 1119
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/316｜Settings Dialog 单文件族详解.md",
+    "name": "316｜Settings Dialog 单文件族详解",
+    "title": "316｜Settings Dialog 单文件族详解",
+    "sha256": "8d11b2019c3d307ddd40d88fbe6fb2c401c83b6fba44739f5087d70f0d53324a",
+    "chars": 933
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/317｜Artifact Loader _ Hooks _ Preview 单文件详解.md",
+    "name": "317｜Artifact Loader _ Hooks _ Preview 单文件详解",
+    "title": "317｜Artifact Loader / Hooks / Preview 单文件详解",
+    "sha256": "87e318d5ef5b64c9ad5ccbc728aa5420b872de5f047511c4afacc7afc37c90f8",
+    "chars": 1037
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/318｜Generation Skill Scripts 单文件族详解.md",
+    "name": "318｜Generation Skill Scripts 单文件族详解",
+    "title": "318｜Generation Skill Scripts 单文件族详解",
+    "sha256": "399394f6c58161a2b4558f9fddb184ed11e7344e6b128e04c4c4db387cfd7a4d",
+    "chars": 1004
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/319｜Skill Creator Scripts 单文件族详解.md",
+    "name": "319｜Skill Creator Scripts 单文件族详解",
+    "title": "319｜Skill Creator Scripts 单文件族详解",
+    "sha256": "3e60e7b2e851c250b9e917ce5407acce7a69462d278a6c7404423b13f860604d",
+    "chars": 1056
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/31｜LLMErrorHandlingMiddleware 单文件详解.md",
+    "name": "31｜LLMErrorHandlingMiddleware 单文件详解",
+    "title": "31｜LLMErrorHandlingMiddleware 单文件详解",
+    "sha256": "4f2dbdb88c97db052b135d97724d3dcb056b70d4b2442a6dd11935ef3a38838a",
+    "chars": 1328
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/320｜Claude_Vercel_Find Skills Scripts 详解.md",
+    "name": "320｜Claude_Vercel_Find Skills Scripts 详解",
+    "title": "320｜Claude/Vercel/Find Skills Scripts 详解",
+    "sha256": "7edfbf7854d79bd8459d6b24f72d34996abfb1811f08316dd061b13a4b7b4283",
+    "chars": 1018
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/321｜Backend AppConfig _ Runtime Paths Tests 深拆.md",
+    "name": "321｜Backend AppConfig _ Runtime Paths Tests 深拆",
+    "title": "321｜Backend AppConfig / Runtime Paths Tests 深拆",
+    "sha256": "cf9ff95c5bb6a87494fa59e1309fc0b0418fa13f8c1ebbc88c07bc34c0555a21",
+    "chars": 1056
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/322｜Backend Model Provider Patch Tests 深拆.md",
+    "name": "322｜Backend Model Provider Patch Tests 深拆",
+    "title": "322｜Backend Model Provider Patch Tests 深拆",
+    "sha256": "41bcf8f5e5f881f967f29f9beba9e41346138e81b70010b0e93ff738ede98e78",
+    "chars": 1166
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/323｜Frontend Root_Auth_Workspace Page Layout 深拆.md",
+    "name": "323｜Frontend Root_Auth_Workspace Page Layout 深拆",
+    "title": "323｜Frontend Root/Auth/Workspace Page Layout 深拆",
+    "sha256": "a8e0b7fc4f73aaf46d56df51c8ec107fcbb9777ba2556cd19cbd15c28a442079",
+    "chars": 1197
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/324｜Frontend Docs_Blog Routes 深拆.md",
+    "name": "324｜Frontend Docs_Blog Routes 深拆",
+    "title": "324｜Frontend Docs/Blog Routes 深拆",
+    "sha256": "540a643262948a89353824b3b4654f6dd07c65a5ec74f27d798e48b96633e8c0",
+    "chars": 1105
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/325｜Docker Provisioner Kubernetes Flow 深拆.md",
+    "name": "325｜Docker Provisioner Kubernetes Flow 深拆",
+    "title": "325｜Docker Provisioner Kubernetes Flow 深拆",
+    "sha256": "2f0dfb6ceace6ef83f9661a70a614cfbef4790a3eea161500d9b2ea2399f6aa5",
+    "chars": 958
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/326｜Wizard Steps LLM_Search_Execution 深拆.md",
+    "name": "326｜Wizard Steps LLM_Search_Execution 深拆",
+    "title": "326｜Wizard Steps LLM/Search/Execution 深拆",
+    "sha256": "712a45585e2f85310e6f143c76c2f3a75a6e4727fbcd5bfd464ee3f39a5c4943",
+    "chars": 1145
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/327｜Wizard UI _ Writer _ Providers 深拆.md",
+    "name": "327｜Wizard UI _ Writer _ Providers 深拆",
+    "title": "327｜Wizard UI / Writer / Providers 深拆",
+    "sha256": "5b1eb019ecac752112669a25b7aed6b318bcec58c255860a9b2b60a0e076e450",
+    "chars": 956
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/328｜Frontend Agents New Route 深拆.md",
+    "name": "328｜Frontend Agents New Route 深拆",
+    "title": "328｜Frontend Agents New Route 深拆",
+    "sha256": "a7a7581a1fe0db9204dc2366700a9663af36374cb383ff22699da658e7ca72e5",
+    "chars": 1075
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/329｜Frontend Chats List Route 深拆.md",
+    "name": "329｜Frontend Chats List Route 深拆",
+    "title": "329｜Frontend Chats List Route 深拆",
+    "sha256": "5aa6da75e254c399799d5fac930aeed283523812bd109149cea5ec03ebc717e4",
+    "chars": 1062
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/32｜LoopDetectionMiddleware 单文件详解.md",
+    "name": "32｜LoopDetectionMiddleware 单文件详解",
+    "title": "32｜LoopDetectionMiddleware 单文件详解",
+    "sha256": "31b6fc9995a96911e242b5a232bc8a8cf9cf6b2858c9cdc5873d3960c21e77e1",
+    "chars": 1338
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/330｜Frontend Landing_Blog_Docs Route 文件深拆.md",
+    "name": "330｜Frontend Landing_Blog_Docs Route 文件深拆",
+    "title": "330｜Frontend Landing/Blog/Docs Route 文件深拆",
+    "sha256": "ca183a35eae873c2b08a9a4888f2be6cadddeb8a3a930c5590493c72a0c055d0",
+    "chars": 1081
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/331｜Frontend Content _meta.ts 文件深拆.md",
+    "name": "331｜Frontend Content _meta.ts 文件深拆",
+    "title": "331｜Frontend Content _meta.ts 文件深拆",
+    "sha256": "ab2e59ad9b679cdf47f96912c5d0864350e7a9610da2a99e43de745f6d25ed00",
+    "chars": 1006
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/332｜Docker Provisioner README_Dockerfile 深拆.md",
+    "name": "332｜Docker Provisioner README_Dockerfile 深拆",
+    "title": "332｜Docker Provisioner README/Dockerfile 深拆",
+    "sha256": "4ab8e3f704fa42bf2592a0d92356aa733ac5d4281436568b3707dffc483db027",
+    "chars": 933
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/333｜configure.py 与 config-upgrade.sh 深拆.md",
+    "name": "333｜configure.py 与 config-upgrade.sh 深拆",
+    "title": "333｜configure.py 与 config-upgrade.sh 深拆",
+    "sha256": "67d7bcc0522a468d4583bf8a6e4cd1f1fd1f7abc953c24f3166260dbef5ca434",
+    "chars": 917
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/334｜serve.sh 服务生命周期深拆.md",
+    "name": "334｜serve.sh 服务生命周期深拆",
+    "title": "334｜serve.sh 服务生命周期深拆",
+    "sha256": "e613f7d357c2e38b274871dd296a685b65c649ada10b8e54f9bcf89a3e090c43",
+    "chars": 952
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/335｜deploy_docker_cleanup scripts 深拆.md",
+    "name": "335｜deploy_docker_cleanup scripts 深拆",
+    "title": "335｜deploy/docker/cleanup scripts 深拆",
+    "sha256": "c8cd4ee344e8d91a35c9445dfe47ce166c5d780e4a628b568794281a0b894dea",
+    "chars": 937
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/336｜static detection scripts 深拆.md",
+    "name": "336｜static detection scripts 深拆",
+    "title": "336｜static detection scripts 深拆",
+    "sha256": "ab1e4ab68effaed130b730f3be69fc123c10e480f8324a76bc6f9d386cdc62ae",
+    "chars": 910
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/337｜Backend Makefile _ pyproject _ langgraph.json 详解.md",
+    "name": "337｜Backend Makefile _ pyproject _ langgraph.json 详解",
+    "title": "337｜Backend Makefile / pyproject / langgraph.json 详解",
+    "sha256": "466b3d3464dad3057fd98ce666abb6e8cc3a042bd99b60ed953e2612357a6d8a",
+    "chars": 1073
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/338｜Frontend package_Docker_Makefile 详解.md",
+    "name": "338｜Frontend package_Docker_Makefile 详解",
+    "title": "338｜Frontend package/Docker/Makefile 详解",
+    "sha256": "41a78da33c5d35367c16b374d5bb47108d6a7f24997e5ca1c469a0fc0e9cc73a",
+    "chars": 962
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/339｜backend_docs README _ Index 文档详解.md",
+    "name": "339｜backend_docs README _ Index 文档详解",
+    "title": "339｜backend/docs README / Index 文档详解",
+    "sha256": "0f09bdc22b6de2894569996bd588b164f5812a8102c7b5a242b787128b22481d",
+    "chars": 965
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/33｜SandboxAuditMiddleware 单文件详解.md",
+    "name": "33｜SandboxAuditMiddleware 单文件详解",
+    "title": "33｜SandboxAuditMiddleware 单文件详解",
+    "sha256": "464a5352a1fa6c1b1e2d040b6ad35954c8de3f0d81fed866374494cf9c64dbed",
+    "chars": 1179
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/340｜Gateway Runtime Lifecycle _ Shutdown Tests 详解.md",
+    "name": "340｜Gateway Runtime Lifecycle _ Shutdown Tests 详解",
+    "title": "340｜Gateway Runtime Lifecycle / Shutdown Tests 详解",
+    "sha256": "2ee8fe75749205c9c3a4748f926de8fd5a2b9029b66131cb0873533b4f851c7c",
+    "chars": 1132
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/341｜Tooling _ Scripts Tests 单文件族详解.md",
+    "name": "341｜Tooling _ Scripts Tests 单文件族详解",
+    "title": "341｜Tooling / Scripts Tests 单文件族详解",
+    "sha256": "5e5c62765b5f47f588349e7befe9d02a6ccaabab9edd33aa185eabdeec003e1f",
+    "chars": 1123
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/342｜Landing Header _ Footer _ Section 组件详解.md",
+    "name": "342｜Landing Header _ Footer _ Section 组件详解",
+    "title": "342｜Landing Header / Footer / Section 组件详解",
+    "sha256": "7581196a56f27744d9c5f88c02b3bfa8556e0ff8e60de2e73b33ae526ecd1c6c",
+    "chars": 919
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/343｜Landing Hero 与 ProgressiveSkillsAnimation 详解.md",
+    "name": "343｜Landing Hero 与 ProgressiveSkillsAnimation 详解",
+    "title": "343｜Landing Hero 与 ProgressiveSkillsAnimation 详解",
+    "sha256": "72185c27488fc56f6c656377054c753ee53e41c5e36856cb05f41d4b0c605c55",
+    "chars": 984
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/344｜Landing CaseStudy _ Skills _ Sandbox Sections 详解.md",
+    "name": "344｜Landing CaseStudy _ Skills _ Sandbox Sections 详解",
+    "title": "344｜Landing CaseStudy / Skills / Sandbox Sections 详解",
+    "sha256": "a4deed178b062b18f8e73579bff43b46edd38e14263abc39c3bc66153a1ffc5b",
+    "chars": 1104
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/345｜Landing WhatsNew _ Community Sections 详解.md",
+    "name": "345｜Landing WhatsNew _ Community Sections 详解",
+    "title": "345｜Landing WhatsNew / Community Sections 详解",
+    "sha256": "21c16fc41c85c18598041b68691f897efb78afdf99308c94712c01a1d25aaa27",
+    "chars": 989
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/346｜I18n Locale Detection 与 Provider 详解.md",
+    "name": "346｜I18n Locale Detection 与 Provider 详解",
+    "title": "346｜I18n Locale Detection 与 Provider 详解",
+    "sha256": "8c5a91eec65180a370123420efc5b46a474c7cdb5367a29e54875ebcc4770fa4",
+    "chars": 985
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/347｜I18n Locales 与 Translations 详解.md",
+    "name": "347｜I18n Locales 与 Translations 详解",
+    "title": "347｜I18n Locales 与 Translations 详解",
+    "sha256": "71c750691572f3be646b8fd5564e745a1a8cc92209d1b40b56109400d1acac60",
+    "chars": 973
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/348｜ThemeProvider 与 Global Layout 详解.md",
+    "name": "348｜ThemeProvider 与 Global Layout 详解",
+    "title": "348｜ThemeProvider 与 Global Layout 详解",
+    "sha256": "eb90e2e4b886e928b7849a9cbf451158ebfd4a84efa551119a026053f8acd0d8",
+    "chars": 844
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/349｜文档集导航指南_300_ 章节阅读路径.md",
+    "name": "349｜文档集导航指南_300_ 章节阅读路径",
+    "title": "349｜文档集导航指南：300+ 章节阅读路径",
+    "sha256": "eeac1b21efe7fb496fec577f52bf5c70cd30c3bf6777d0d7e7f731d85de57a88",
+    "chars": 2217
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/34｜DeferredToolFilterMiddleware 单文件详解.md",
+    "name": "34｜DeferredToolFilterMiddleware 单文件详解",
+    "title": "34｜DeferredToolFilterMiddleware 单文件详解",
+    "sha256": "3fcc081bfb9a25f2ca00aafdd116854a6241e85521c0096562eb4142a165cf54",
+    "chars": 1236
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/350｜模块覆盖矩阵与验收说明.md",
+    "name": "350｜模块覆盖矩阵与验收说明",
+    "title": "350｜模块覆盖矩阵与验收说明",
+    "sha256": "855094792c37d9cbd659dbe7e31ae0207bb247a109447446d4d6f32c110372fe",
+    "chars": 1059
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/351｜文档集维护指南_新增模块后的补文档方法.md",
+    "name": "351｜文档集维护指南_新增模块后的补文档方法",
+    "title": "351｜文档集维护指南：新增模块后的补文档方法",
+    "sha256": "af2159f2f89678280cf49558c35b9045b6122070504c129d2c9f39a2df59e5da",
+    "chars": 1011
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/352｜可视化风格指南_运行逻辑图绘制规范.md",
+    "name": "352｜可视化风格指南_运行逻辑图绘制规范",
+    "title": "352｜可视化风格指南：运行逻辑图绘制规范",
+    "sha256": "9fcf0b1e38449a2c5cce325a329fe1db7f58cfeeb2bb99e36ac974cbe251dd38",
+    "chars": 970
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/353｜新同学源码走读检查清单.md",
+    "name": "353｜新同学源码走读检查清单",
+    "title": "353｜新同学源码走读检查清单",
+    "sha256": "d96ababb0b18b33ddf841b40e34f2efe0549f6018cc5e7a4aebbe3f9b7ec051b",
+    "chars": 1713
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/354｜最终验收摘要与证据索引.md",
+    "name": "354｜最终验收摘要与证据索引",
+    "title": "354｜最终验收摘要与证据索引",
+    "sha256": "6a70fd2f8a203123f7ed745fe17b7a8a4fc3d08f1aad66c117b335cdc4995edf",
+    "chars": 3433
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/355｜只会 JS 的前端学习 DeerFlow 路线图.md",
+    "name": "355｜只会 JS 的前端学习 DeerFlow 路线图",
+    "title": "355｜只会 JS 的前端学习 DeerFlow 路线图",
+    "sha256": "788a647a0138a89ff3a7b434609ee7c4c6a2fb30b2569691b661825c8f0f5bea",
+    "chars": 9540
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/35｜SafetyFinishReasonMiddleware 单文件详解.md",
+    "name": "35｜SafetyFinishReasonMiddleware 单文件详解",
+    "title": "35｜SafetyFinishReasonMiddleware 单文件详解",
+    "sha256": "824eeb3a82e338a3decd885346e0f45ddb660a3692e2e97a944bb52011fd8f04",
+    "chars": 1182
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/36｜ViewImage_DanglingToolCall_SubagentLimit_TokenUsage Middleware 详解.md",
+    "name": "36｜ViewImage_DanglingToolCall_SubagentLimit_TokenUsage Middleware 详解",
+    "title": "36｜ViewImage、DanglingToolCall、SubagentLimit、TokenUsage Middleware 详解",
+    "sha256": "aebaa7c3ea3872a5a588c044b52b0901946f868f6963620d14f8d88d43e9c9b4",
+    "chars": 1392
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/37｜Sandbox Tools 单文件详解_bash_ls_glob_grep_read_write_str_replace.md",
+    "name": "37｜Sandbox Tools 单文件详解_bash_ls_glob_grep_read_write_str_replace",
+    "title": "37｜Sandbox Tools 单文件详解：bash/ls/glob/grep/read/write/str_replace",
+    "sha256": "ddc043dc50fc97d80cca61641454181d50022572cf0fe521365e2dff52be3838",
+    "chars": 1189
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/38｜LocalSandbox 与 AioSandbox Provider 详解.md",
+    "name": "38｜LocalSandbox 与 AioSandbox Provider 详解",
+    "title": "38｜LocalSandbox 与 AioSandbox Provider 详解",
+    "sha256": "7deae507f8ee3f9286695c0aa71d87474893eae4c676eaf375ddf3b65496d11e",
+    "chars": 1394
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/39｜MCP Cache_Session Pool 与 OAuth 详解.md",
+    "name": "39｜MCP Cache_Session Pool 与 OAuth 详解",
+    "title": "39｜MCP Cache、Session Pool 与 OAuth 详解",
+    "sha256": "a32f7b5dac233a2a7e9f190ab8224e53021fdc86e1f3d8e79a4977288f680442",
+    "chars": 1437
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/40｜Memory Queue_Updater_Storage 单文件详解.md",
+    "name": "40｜Memory Queue_Updater_Storage 单文件详解",
+    "title": "40｜Memory Queue、Updater、Storage 单文件详解",
+    "sha256": "705f73c04d044b952d007e4da690b086588dbdd11566ee745391b0734f9688c1",
+    "chars": 1486
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/41｜Skills Parser_Installer_Security Scanner 详解.md",
+    "name": "41｜Skills Parser_Installer_Security Scanner 详解",
+    "title": "41｜Skills Parser、Installer、Security Scanner 详解",
+    "sha256": "9bc0755bb82b5ba7fb72fccc1bf200e4caef595c6548ad61010f3bc60bb468e3",
+    "chars": 1370
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/42｜Frontend useThreadStream 单文件详解.md",
+    "name": "42｜Frontend useThreadStream 单文件详解",
+    "title": "42｜Frontend useThreadStream 单文件详解",
+    "sha256": "80135b593a75ad71bab50fe077ac546d2a2ddda8b7638b43b3ed6f0025de3555",
+    "chars": 1472
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/43｜Frontend Message Utils 与 Artifacts Hooks 详解.md",
+    "name": "43｜Frontend Message Utils 与 Artifacts Hooks 详解",
+    "title": "43｜Frontend Message Utils 与 Artifacts Hooks 详解",
+    "sha256": "681eaa3aa5140d691f207bf2e57da54782b48a3b1e1e0498397809b605df5e86",
+    "chars": 1468
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/44｜Config 配置类目录详解.md",
+    "name": "44｜Config 配置类目录详解",
+    "title": "44｜Config 配置类目录详解",
+    "sha256": "911c6b336187736fd60366a56053e1e0504d4f5779fae839f1b793b88535f800",
+    "chars": 1488
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/45｜Models Provider Patch 文件详解.md",
+    "name": "45｜Models Provider Patch 文件详解",
+    "title": "45｜Models Provider Patch 文件详解",
+    "sha256": "943a8148221677a3ca2ddb0b706fdce13ba90535e095dad96a32bb1adc222c99",
+    "chars": 1321
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/46｜Persistence Repository 文件详解.md",
+    "name": "46｜Persistence Repository 文件详解",
+    "title": "46｜Persistence Repository 文件详解",
+    "sha256": "0a83a8757e327f3d9bd898049550527c54f51ef7df0cdd7a3c0bda72bd983c8c",
+    "chars": 1517
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/47｜Frontend Settings 页面文件详解.md",
+    "name": "47｜Frontend Settings 页面文件详解",
+    "title": "47｜Frontend Settings 页面文件详解",
+    "sha256": "b4628f53d80b0b641f1adecf91dc41cd03f9d7de1c274fffed31870be2e3dbf3",
+    "chars": 1672
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/48｜Gateway Auth Router 与认证模块详解.md",
+    "name": "48｜Gateway Auth Router 与认证模块详解",
+    "title": "48｜Gateway Auth Router 与认证模块详解",
+    "sha256": "9e25dec08fe66b95768083157ad21d79118aa00955f907f5a31ee868f020d22b",
+    "chars": 1405
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/49｜Gateway MCP_Skills_Memory Router 深入详解.md",
+    "name": "49｜Gateway MCP_Skills_Memory Router 深入详解",
+    "title": "49｜Gateway MCP、Skills、Memory Router 深入详解",
+    "sha256": "9bd099ad0ca183f9c50b78fa44a49e4b013b82d0bbb6b2682e1f1c225c8e8098",
+    "chars": 1401
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/50｜Frontend ChatPage 与 InputBox 文件详解.md",
+    "name": "50｜Frontend ChatPage 与 InputBox 文件详解",
+    "title": "50｜Frontend ChatPage 与 InputBox 文件详解",
+    "sha256": "d4cc415f79aeeea0fe34578245e2483b160f9299df40e85a309de593800b35c8",
+    "chars": 1471
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/51｜thread_runs.py Router 单文件详解.md",
+    "name": "51｜thread_runs.py Router 单文件详解",
+    "title": "51｜thread_runs.py Router 单文件详解",
+    "sha256": "01728701bf76191af2fdf813d192b05e90d541262de460b8494705e12bc6cdda",
+    "chars": 1474
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/52｜threads.py Router 单文件详解.md",
+    "name": "52｜threads.py Router 单文件详解",
+    "title": "52｜threads.py Router 单文件详解",
+    "sha256": "6e86dcb71cc0cc7f958ba9a35591e5be47d1807010e97a5ba5320bf29b60f412",
+    "chars": 1414
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/53｜uploads.py Router 单文件详解.md",
+    "name": "53｜uploads.py Router 单文件详解",
+    "title": "53｜uploads.py Router 单文件详解",
+    "sha256": "9ec96754f6e15de8b2e14f9b4be5ef2ddac5bcf47c808f0a696ca8ce8fe9881e",
+    "chars": 1320
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/54｜artifacts.py Router 单文件详解.md",
+    "name": "54｜artifacts.py Router 单文件详解",
+    "title": "54｜artifacts.py Router 单文件详解",
+    "sha256": "2203d02e94207b5cb095eab3961915879e86263f3ec0a3146afdbef5718c0573",
+    "chars": 1416
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/55｜skills.py Router 单文件详解.md",
+    "name": "55｜skills.py Router 单文件详解",
+    "title": "55｜skills.py Router 单文件详解",
+    "sha256": "d13d1e94369e36a931d17ac931d1c5b23d03e16e18143377268d7d477d4c0e86",
+    "chars": 1419
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/56｜memory.py Router 单文件详解.md",
+    "name": "56｜memory.py Router 单文件详解",
+    "title": "56｜memory.py Router 单文件详解",
+    "sha256": "0654ccc5e46c55bc259953e973594df88bc6655cc273258a9f8c58dd909a8c77",
+    "chars": 1353
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/57｜mcp.py Router 单文件详解.md",
+    "name": "57｜mcp.py Router 单文件详解",
+    "title": "57｜mcp.py Router 单文件详解",
+    "sha256": "566a6fc9bd4f6766661e74f8b9bb8d14a5cd57b8631093f7894ad47c5fbbc7f1",
+    "chars": 1321
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/58｜Frontend Message Components 单文件详解.md",
+    "name": "58｜Frontend Message Components 单文件详解",
+    "title": "58｜Frontend Message Components 单文件详解",
+    "sha256": "1999859b099413c1b7427a3636856da047ebd6346c02183108042350ba953a8b",
+    "chars": 1365
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/59｜Frontend Artifact Components 单文件详解.md",
+    "name": "59｜Frontend Artifact Components 单文件详解",
+    "title": "59｜Frontend Artifact Components 单文件详解",
+    "sha256": "577f3e29352f03a2d31268eafb6730c5e6fe714671c6d231b46bedd156e5df81",
+    "chars": 1424
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/60｜Frontend Sidebar 与 Navigation 组件详解.md",
+    "name": "60｜Frontend Sidebar 与 Navigation 组件详解",
+    "title": "60｜Frontend Sidebar 与 Navigation 组件详解",
+    "sha256": "02a600051cc768755e18dd044782fd834f91849bbca5306f3e312f2a4121a5e9",
+    "chars": 1346
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/61｜auth.py Router 单文件详解.md",
+    "name": "61｜auth.py Router 单文件详解",
+    "title": "61｜auth.py Router 单文件详解",
+    "sha256": "f9c2821a1c8ffe2078f37afa1e7b3b81b9f41102d4731be5d91ecf24918c219c",
+    "chars": 1368
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/62｜agents.py Router 单文件详解.md",
+    "name": "62｜agents.py Router 单文件详解",
+    "title": "62｜agents.py Router 单文件详解",
+    "sha256": "0a7e5519c9fa5f0404cf55f29b69e98ca3ac56bdcc1efe23859f7fd394e60d2d",
+    "chars": 1344
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/63｜feedback_suggestions_channels Router 详解.md",
+    "name": "63｜feedback_suggestions_channels Router 详解",
+    "title": "63｜feedback、suggestions、channels Router 详解",
+    "sha256": "b9fd206b889d454f6c2999d774d545235137c4153ce72385e3776b141522528b",
+    "chars": 1438
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/64｜Frontend API Client 与 Fetcher 详解.md",
+    "name": "64｜Frontend API Client 与 Fetcher 详解",
+    "title": "64｜Frontend API Client 与 Fetcher 详解",
+    "sha256": "b4a39671f8940392c6930142bd9087fcdec0ef102671573ce08ae2aa48d4f092",
+    "chars": 1460
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/65｜Frontend Core Settings_Models_MCP_Skills_Memory API 层详解.md",
+    "name": "65｜Frontend Core Settings_Models_MCP_Skills_Memory API 层详解",
+    "title": "65｜Frontend Core Settings/Models/MCP/Skills/Memory API 层详解",
+    "sha256": "6494a58e0cd4290b18ffee2fc7270e5fc5e114dd36f401054543e8220e63b928",
+    "chars": 1519
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/66｜Frontend Uploads_Notification_Tasks Core 详解.md",
+    "name": "66｜Frontend Uploads_Notification_Tasks Core 详解",
+    "title": "66｜Frontend Uploads、Notification、Tasks Core 详解",
+    "sha256": "9056d5a42c089720b99a7e80d6defb475e7c58a715221af4d18c85bbe2831f59",
+    "chars": 1444
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/67｜Frontend Agents_Blog_I18n_Static Mode 模块详解.md",
+    "name": "67｜Frontend Agents_Blog_I18n_Static Mode 模块详解",
+    "title": "67｜Frontend Agents、Blog、I18n、Static Mode 模块详解",
+    "sha256": "31ed63131b1dfd73eb2b092470ad22edee0ab8c1ef6eb9be14b6770395205c8b",
+    "chars": 1287
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/68｜Channels Service 与 ChannelManager 详解.md",
+    "name": "68｜Channels Service 与 ChannelManager 详解",
+    "title": "68｜Channels Service 与 ChannelManager 详解",
+    "sha256": "78f54b01b385901008afcc3990072119cb30cace175395dba9f1b1ae34db3671",
+    "chars": 1314
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/69｜Feishu_Slack_Telegram_WeCom_DingTalk_Wechat Channel 详解.md",
+    "name": "69｜Feishu_Slack_Telegram_WeCom_DingTalk_Wechat Channel 详解",
+    "title": "69｜Feishu/Slack/Telegram/WeCom/DingTalk/Wechat Channel 详解",
+    "sha256": "88ab816378085032ad6c8fb7c691084a5c003b119d49424efaa2743edfb599cd",
+    "chars": 1159
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/70｜Community Search_Fetch_Image Tools 详解.md",
+    "name": "70｜Community Search_Fetch_Image Tools 详解",
+    "title": "70｜Community Search/Fetch/Image Tools 详解",
+    "sha256": "f6da5e3d3cf66c409a297a38ad41ef0612f2b26b103b3f1767fe566b315054c1",
+    "chars": 1323
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/71｜AioSandbox Community Backend 详解.md",
+    "name": "71｜AioSandbox Community Backend 详解",
+    "title": "71｜AioSandbox Community Backend 详解",
+    "sha256": "44219dbfb76edde56a5e0bf9eb2d66d7acb14d95f4fe0ac9ff7d4d7cdcc172e7",
+    "chars": 1421
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/72｜Frontend Landing_Docs_Blog 页面详解.md",
+    "name": "72｜Frontend Landing_Docs_Blog 页面详解",
+    "title": "72｜Frontend Landing、Docs、Blog 页面详解",
+    "sha256": "e6b5f09443bc01590107f0669a5e482c36d194d9f68ea9dc728a6dc1723a777a",
+    "chars": 1346
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/73｜Frontend Auth_Login_Setup 页面详解.md",
+    "name": "73｜Frontend Auth_Login_Setup 页面详解",
+    "title": "73｜Frontend Auth/Login/Setup 页面详解",
+    "sha256": "2798e7119ccbe88bbe1d86f794e4da39a9271a4a778d5de5b1231ed56a3d22e4",
+    "chars": 1317
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/74｜Frontend AI Elements 与 UI 基础组件详解.md",
+    "name": "74｜Frontend AI Elements 与 UI 基础组件详解",
+    "title": "74｜Frontend AI Elements 与 UI 基础组件详解",
+    "sha256": "4d9c3617f0821bd041fd96a417817b0112ccc5c1945b9443faa8ef3ce99591ba",
+    "chars": 1187
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/75｜FeishuChannel 单文件详解.md",
+    "name": "75｜FeishuChannel 单文件详解",
+    "title": "75｜FeishuChannel 单文件详解",
+    "sha256": "a8ca652da06bd62d95eb1beab44128e5733348194c0debdbb3ded852bfdde9fd",
+    "chars": 1067
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/76｜Slack 与 Telegram Channel 详解.md",
+    "name": "76｜Slack 与 Telegram Channel 详解",
+    "title": "76｜Slack 与 Telegram Channel 详解",
+    "sha256": "0e513e5bead7349d6d1b0b0dcb633c15199bc1a2885586107622513f5fd2c4e5",
+    "chars": 1215
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/77｜DingTalk_WeCom_Wechat Channel 详解.md",
+    "name": "77｜DingTalk_WeCom_Wechat Channel 详解",
+    "title": "77｜DingTalk、WeCom、Wechat Channel 详解",
+    "sha256": "bc830c5c05ef7ae5b27620255728e71b426aac276f96819c11e532ff6508140c",
+    "chars": 1178
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/78｜Tavily_Firecrawl_Exa_Serper Web Search Provider 详解.md",
+    "name": "78｜Tavily_Firecrawl_Exa_Serper Web Search Provider 详解",
+    "title": "78｜Tavily、Firecrawl、Exa、Serper Web Search Provider 详解",
+    "sha256": "31bed449a120fc57e7b6b70082616f1f3984de1f4e8b228dd7b6fc54b38ef65b",
+    "chars": 1173
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/79｜Jina_DDG_InfoQuest_Image Search Provider 详解.md",
+    "name": "79｜Jina_DDG_InfoQuest_Image Search Provider 详解",
+    "title": "79｜Jina、DDG、InfoQuest、Image Search Provider 详解",
+    "sha256": "ec32ef6b91b65e2e3219fe1417e528bcbf3c3dc970a25d7b1d1e31e6e12310bc",
+    "chars": 1146
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/80｜Landing Page Sections 组件详解.md",
+    "name": "80｜Landing Page Sections 组件详解",
+    "title": "80｜Landing Page Sections 组件详解",
+    "sha256": "bfef1a3c1d36043cf1fe80aa89ddf0cd1ceba3842baf97d563345c9e938194ff",
+    "chars": 1056
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/81｜Nextra Docs_Content 与 Blog 渲染详解.md",
+    "name": "81｜Nextra Docs_Content 与 Blog 渲染详解",
+    "title": "81｜Nextra Docs、Content 与 Blog 渲染详解",
+    "sha256": "3c10985e957bc7f89d2dcf0259c5c57a90d22aab9548f5feb857662740beb033",
+    "chars": 1175
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/82｜Tavily 与 Firecrawl Provider 单模块详解.md",
+    "name": "82｜Tavily 与 Firecrawl Provider 单模块详解",
+    "title": "82｜Tavily 与 Firecrawl Provider 单模块详解",
+    "sha256": "4456273632b2b97f6b522aa827cb0e90247bf545335bd5538b842452976e7c61",
+    "chars": 1259
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/83｜Exa 与 Serper Provider 单模块详解.md",
+    "name": "83｜Exa 与 Serper Provider 单模块详解",
+    "title": "83｜Exa 与 Serper Provider 单模块详解",
+    "sha256": "a396aae6e7b59b7d5602da6140c79fe7bc56b6685fef1071ca8537de2ceffd17",
+    "chars": 1184
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/84｜Jina_DDG_InfoQuest Provider 单模块详解.md",
+    "name": "84｜Jina_DDG_InfoQuest Provider 单模块详解",
+    "title": "84｜Jina、DDG、InfoQuest Provider 单模块详解",
+    "sha256": "5c9de1cab8b1913fd98260cc4625b86c96114d8704468aad80078179262dec5d",
+    "chars": 1120
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/85｜Feishu Channel 深入运行逻辑.md",
+    "name": "85｜Feishu Channel 深入运行逻辑",
+    "title": "85｜Feishu Channel 深入运行逻辑",
+    "sha256": "c6930ac2d15208676c58eb015b804ddb68a8feb57ee8942844137b6142735762",
+    "chars": 1150
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/86｜Slack Channel 深入运行逻辑.md",
+    "name": "86｜Slack Channel 深入运行逻辑",
+    "title": "86｜Slack Channel 深入运行逻辑",
+    "sha256": "cad0e1e4e8a299ea1d6ee485061278f052a51b8b9e1b91afe38fdbfc1f538010",
+    "chars": 1070
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/87｜Telegram_DingTalk_WeCom Channel 深入运行逻辑.md",
+    "name": "87｜Telegram_DingTalk_WeCom Channel 深入运行逻辑",
+    "title": "87｜Telegram、DingTalk、WeCom Channel 深入运行逻辑",
+    "sha256": "0b05ae3f104df0299b81c1540d9c8b9e4a7447cc2c1726169fa049e51da82cbf",
+    "chars": 1224
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/88｜Model_Sandbox_Memory_Tool Config 单文件详解.md",
+    "name": "88｜Model_Sandbox_Memory_Tool Config 单文件详解",
+    "title": "88｜Model/Sandbox/Memory/Tool Config 单文件详解",
+    "sha256": "62455153131c4c4ebb8c8f727dcd289b4e2157df2b782f2aebba24b3ec320f2b",
+    "chars": 1409
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/89｜Landing Sections 深入组件逻辑.md",
+    "name": "89｜Landing Sections 深入组件逻辑",
+    "title": "89｜Landing Sections 深入组件逻辑",
+    "sha256": "85935f34b7f804f2aafcb12d4bb6d6c0db4637d8215c684941fa55fea829f398",
+    "chars": 1038
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/90｜AppConfig_Runtime Paths_Reload Boundary 单文件详解.md",
+    "name": "90｜AppConfig_Runtime Paths_Reload Boundary 单文件详解",
+    "title": "90｜AppConfig、Runtime Paths、Reload Boundary 单文件详解",
+    "sha256": "73eb08f266ccead8e27e954806f477cef14e1e60a0f71f5e0469f280ef7a5cad",
+    "chars": 1205
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/91｜Database_Checkpointer_RunEvents Config 详解.md",
+    "name": "91｜Database_Checkpointer_RunEvents Config 详解",
+    "title": "91｜Database、Checkpointer、RunEvents Config 详解",
+    "sha256": "9cb1e25e0e12614233bc86ad5f28ee197f9e82a9494786a808bcda0e595e11de",
+    "chars": 1109
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/92｜Subagents_Summarization_Title_Tracing Config 详解.md",
+    "name": "92｜Subagents_Summarization_Title_Tracing Config 详解",
+    "title": "92｜Subagents、Summarization、Title、Tracing Config 详解",
+    "sha256": "9ca0eca500528ae1a9b5bfdc7950ad99bc137d26944af8f1b8dd309ef9258b96",
+    "chars": 1272
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/93｜Frontend UI Primitives 单文件详解.md",
+    "name": "93｜Frontend UI Primitives 单文件详解",
+    "title": "93｜Frontend UI Primitives 单文件详解",
+    "sha256": "a2e80d6c9cb468def95686d902821438c3e8843e749837ab7666348ab08d8743",
+    "chars": 1152
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/94｜Frontend AI Elements Primitives 详解.md",
+    "name": "94｜Frontend AI Elements Primitives 详解",
+    "title": "94｜Frontend AI Elements Primitives 详解",
+    "sha256": "8b8dcb71fd38b76ba3e4f217aa9fb301dc4ea35d18a2ad747a01d37e17ece5c4",
+    "chars": 1244
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/95｜Patched Model Providers 深入详解.md",
+    "name": "95｜Patched Model Providers 深入详解",
+    "title": "95｜Patched Model Providers 深入详解",
+    "sha256": "086264191fee581980535b2d88383bb470af3bb332ca46c294385f693adf19e1",
+    "chars": 1212
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/96｜ACP_Guardrails_Safety Config 详解.md",
+    "name": "96｜ACP_Guardrails_Safety Config 详解",
+    "title": "96｜ACP、Guardrails、Safety Config 详解",
+    "sha256": "718b4b949d301a462ad6aeb5c5c21745f0b52abd69236739591bba27691e5d8c",
+    "chars": 1347
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/97｜model_config_tool_config_tool_output_config_tool_search_config 单文件详解.md",
+    "name": "97｜model_config_tool_config_tool_output_config_tool_search_config 单文件详解",
+    "title": "97｜model_config、tool_config、tool_output_config、tool_search_config 单文件详解",
+    "sha256": "0d963e3f6b9f917fceb10c57a5a5bcbc1aa18bf596f3e533046d74ae551276d7",
+    "chars": 1143
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/98｜memory_config_sandbox_config_skills_config 单文件详解.md",
+    "name": "98｜memory_config_sandbox_config_skills_config 单文件详解",
+    "title": "98｜memory_config、sandbox_config、skills_config 单文件详解",
+    "sha256": "ad9f9ae900c7c1acb8da301043010ff6c3599cfc6cc68749a6ecbc5018d75448",
+    "chars": 1067
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/99｜agents_subagents_guardrails_loop_safety 配置文件详解.md",
+    "name": "99｜agents_subagents_guardrails_loop_safety 配置文件详解",
+    "title": "99｜agents/subagents/guardrails/loop/safety 配置文件详解",
+    "sha256": "c5fa426956b17a39cb8f57a73a65e3bcfd95f380ae686791ee1a3193aaeeda3d",
+    "chars": 1235
+  },
+  {
+    "path": ".agent_context/final_review/docs_md/DeerFlow 2.0 源码分层详解_章节目录.md",
+    "name": "DeerFlow 2.0 源码分层详解_章节目录",
+    "title": "DeerFlow 2.0 源码分层详解：章节目录",
+    "sha256": "deb1e3f5879307eff32311e7b8e330f021b1a122e959dcce46d93d7fe24ecbad",
+    "chars": 48876
+  }
+]

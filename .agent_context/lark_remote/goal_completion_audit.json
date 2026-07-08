@@ -1,0 +1,31 @@
+{
+  "local_docs": 356,
+  "remote_drive_records_current": 356,
+  "remote_current_snapshots": 356,
+  "local_issues": 0,
+  "remote_issues_adjusted": 0,
+  "local_issue_sample": [],
+  "remote_issue_sample": [],
+  "all_required_journals_present": true,
+  "journal_presence": {
+    "deerflow-lark-doc-sync-audit.workflow.jsonl": true,
+    "deerflow-doc-slice-single-audit.workflow.jsonl": true,
+    "deerflow-doc-slice-single-audit.workflow--slice-051-100.jsonl": true,
+    "deerflow-doc-slice-single-audit.workflow--slice-101-150.jsonl": true,
+    "deerflow-doc-slice-single-audit.workflow--slice-151-220.jsonl": true,
+    "deerflow-doc-slice-single-audit.workflow--slice-221-255.jsonl": true,
+    "deerflow-doc-slice-single-audit.workflow--slice-256-290.jsonl": true,
+    "deerflow-doc-slice-single-audit.workflow--slice-291-306.jsonl": true,
+    "deerflow-doc-slice-single-audit.workflow--slice-307-355.jsonl": true
+  },
+  "failure_files": {
+    ".agent_context/lark_remote/final_static_update_failures.json": 0,
+    ".agent_context/lark_remote/fetch_failures.json": 0,
+    ".agent_context/lark_remote/static_cleanup_update_failures.json": 0,
+    ".agent_context/lark_remote/p1_update_failures.json": 0,
+    ".agent_context/lark_remote/p1_missed_failures.json": 0
+  },
+  "all_failure_files_zero": true,
+  "sync_ledger_entries": 225,
+  "magic_html_box_present": true
+}

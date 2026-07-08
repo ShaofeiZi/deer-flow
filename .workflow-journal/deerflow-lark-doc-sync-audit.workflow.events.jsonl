@@ -1,0 +1,14 @@
+{"t":1783429109390,"type":"start","id":"9f28bbe290063125#0","label":"inventory","phase":"Inventory","effort":"xhigh","model":"gpt-5.5-2026-04-24"}
+{"t":1783429349248,"type":"end","id":"9f28bbe290063125#0","label":"inventory","phase":"Inventory","effort":"xhigh","model":"gpt-5.5-2026-04-24","tokens":1091700,"ms":239856}
+{"t":1783429349250,"type":"start","id":"4b0194de384de876#0","label":"frontend-source","phase":"Source Truth Review","effort":"high","model":"gpt-5.5-2026-04-24"}
+{"t":1783429349250,"type":"start","id":"b0f38fd2df4fd27f#0","label":"backend-runtime","phase":"Source Truth Review","effort":"high","model":"gpt-5.5-2026-04-24"}
+{"t":1783429349251,"type":"start","id":"733adea7fdb7d99a#0","label":"lark-visual","phase":"Source Truth Review","effort":"high","model":"gpt-5.5-2026-04-24"}
+{"t":1783429349251,"type":"start","id":"83d680d41a828e55#0","label":"coverage-maint","phase":"Source Truth Review","effort":"high","model":"gpt-5.5-2026-04-24"}
+{"t":1783429349252,"type":"start","id":"bb9003e633f7bf32#0","label":"claim-check","phase":"Source Truth Review","effort":"high","model":"gpt-5.5-2026-04-24"}
+{"t":1783429583585,"type":"end","id":"b0f38fd2df4fd27f#0","label":"backend-runtime","phase":"Source Truth Review","effort":"high","model":"gpt-5.5-2026-04-24","tokens":937954,"ms":164524}
+{"t":1783429589173,"type":"end","id":"4b0194de384de876#0","label":"frontend-source","phase":"Source Truth Review","effort":"high","model":"gpt-5.5-2026-04-24","tokens":907707,"ms":160709}
+{"t":1783429719529,"type":"end","id":"83d680d41a828e55#0","label":"coverage-maint","phase":"Source Truth Review","effort":"high","model":"gpt-5.5-2026-04-24","tokens":1181053,"ms":310290}
+{"t":1783429808272,"type":"end","id":"733adea7fdb7d99a#0","label":"lark-visual","phase":"Source Truth Review","effort":"high","model":"gpt-5.5-2026-04-24","tokens":524981,"ms":194261}
+{"t":1783429868551,"type":"end","id":"bb9003e633f7bf32#0","label":"claim-check","phase":"Source Truth Review","effort":"high","model":"gpt-5.5-2026-04-24","tokens":1642178,"ms":278719}
+{"t":1783429868553,"type":"start","id":"209763d9885eb20c#0","label":"sync-plan","phase":"Sync Plan","effort":"xhigh","model":"gpt-5.5-2026-04-24"}
+{"t":1783429966090,"type":"end","id":"209763d9885eb20c#0","label":"sync-plan","phase":"Sync Plan","effort":"xhigh","model":"gpt-5.5-2026-04-24","tokens":135306,"ms":97537}
