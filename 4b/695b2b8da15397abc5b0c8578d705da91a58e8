@@ -1,0 +1,983 @@
+".agent_context/final_review/docs_md/01｜DeerFlow 整体架构与分层总览.md"
+  s_6fa685823cd171::t_3db727b66141ba 82-96
+".agent_context/final_review/docs_md/02｜Gateway 与 LangGraph 运行时详解.md"
+  s_6fa685823cd171::t_f156687309f379 142-167
+".agent_context/final_review/docs_md/03｜Lead Agent_Prompt_Tools 与 Middleware 详解.md"
+  s_6fa685823cd171::t_6049f23eb4348b 122-140
+".agent_context/final_review/docs_md/04｜Tools_Sandbox_Uploads 与 Artifacts 详解.md"
+  s_6fa685823cd171::t_65acf31a2d5357 122-138
+".agent_context/final_review/docs_md/05｜Skills_MCP 与 Memory 详解.md"
+  s_6fa685823cd171::t_aaf9fb9c37d1bd 90-113
+".agent_context/final_review/docs_md/06｜Frontend Workspace 与 Chat 主链路详解.md"
+  s_6fa685823cd171::t_5aebd0134dfd03 124-145
+".agent_context/final_review/docs_md/07｜Frontend Settings_Models_Artifacts 数据流详解.md"
+  s_6fa685823cd171::t_43177aa1f9f17e 134-146
+.agent_context/final_review/docs_md/08｜配置_部署_测试与排障详解.md
+  s_6fa685823cd171::t_8336f9131b7589 116-127
+".agent_context/final_review/docs_md/09｜Auth_CSRF_权限与 IM Channels 详解.md"
+  s_6fa685823cd171::t_7becd7bc44e9c3 79-94
+".agent_context/final_review/docs_md/100｜AI Elements Message_Conversation_PromptInput 详解.md"
+  s_3681c5c1f97c5e::t_a6c4cc57e07545 43-54
+".agent_context/final_review/docs_md/101｜AI Elements Reasoning_Task_Artifact 详解.md"
+  s_3681c5c1f97c5e::t_04e2477c08227c 43-76
+".agent_context/final_review/docs_md/102｜UI Layout Primitives_Sidebar_Resizable_ScrollArea_Dialog 详解.md"
+  s_3681c5c1f97c5e::t_338bb66158b586 42-52
+".agent_context/final_review/docs_md/105｜AI Elements ModelSelector_Loader_Suggestion_Sources 详解.md"
+  s_3681c5c1f97c5e::t_387466fe0c881a 45-71
+".agent_context/final_review/docs_md/106｜UI Feedback_Display Primitives 详解.md"
+  s_3681c5c1f97c5e::t_b9377d247f415f 47-61
+".agent_context/final_review/docs_md/107｜UI Navigation_Overlay Primitives 详解.md"
+  s_3681c5c1f97c5e::t_9408b7b2222d04 46-61
+".agent_context/final_review/docs_md/109｜Tracing_TokenUsage_ACP 配置文件详解.md"
+  s_3681c5c1f97c5e::t_2e82adda4b8439 47-59
+".agent_context/final_review/docs_md/10｜Models_Tracing_Persistence 与 Token Usage 详解.md"
+  s_6fa685823cd171::t_f13ef7b1a1822e 77-92
+".agent_context/final_review/docs_md/110｜Frontend Streamdown_MDX_Markdown 渲染详解.md"
+  s_3681c5c1f97c5e::t_2da12d4f8ec73d 43-56
+".agent_context/final_review/docs_md/112｜AI Elements PromptInput 与 Controls 详解.md"
+  s_3681c5c1f97c5e::t_3061eccfe3e3c0 46-69
+".agent_context/final_review/docs_md/114｜AI Elements Node_Edge_Checkpoint 图元素详解.md"
+  s_3681c5c1f97c5e::t_afc118851d9cc8 43-73
+".agent_context/final_review/docs_md/115｜UI Form Primitives_Button_Input_Textarea_Switch_Toggle 详解.md"
+  s_3681c5c1f97c5e::t_277c8b248e84cb 45-68
+".agent_context/final_review/docs_md/116｜UI Data Display Primitives_Card_Avatar_Item_Table-like 详解.md"
+  s_3681c5c1f97c5e::t_64e88da0a53499 46-76
+".agent_context/final_review/docs_md/117｜UI Visual Effects Primitives_MagicBento_Aurora_Shine_Spotlight 详解.md"
+  s_3681c5c1f97c5e::t_025333f29053c0 45-76
+".agent_context/final_review/docs_md/11｜Gateway Routers API 模块逐项详解.md"
+  s_6fa685823cd171::t_49a19b516d6dfe 70-94
+".agent_context/final_review/docs_md/122｜AgentGallery_AgentCard 与 NewAgent Page 详解.md"
+  s_3681c5c1f97c5e::t_f37f0897b086cc 43-51
+".agent_context/final_review/docs_md/123｜WorkspaceContainer_Header_Overscroll 组件详解.md"
+  s_3681c5c1f97c5e::t_e47320e80b0f15 46-60
+".agent_context/final_review/docs_md/124｜CodeEditor 与 Artifact Detail 交互详解.md"
+  s_3681c5c1f97c5e::t_c6d3a1b375f211 52-68
+".agent_context/final_review/docs_md/125｜SettingsDialog 与 SettingsSection 详解.md"
+  s_3681c5c1f97c5e::t_9c0fc8b3bbcb2a 41-60
+".agent_context/final_review/docs_md/126｜Tool_Skill_Memory Settings Pages 详解.md"
+  s_3681c5c1f97c5e::t_315d325b4dc4b7 42-58
+".agent_context/final_review/docs_md/127｜Account_Appearance_Notification_About Settings Pages 详解.md"
+  s_3681c5c1f97c5e::t_bbf84568079dc0 43-59
+".agent_context/final_review/docs_md/128｜Artifacts Context_Trigger_List_Detail 详解.md"
+  s_3681c5c1f97c5e::t_bbdca8c1d7c23b 42-69
+".agent_context/final_review/docs_md/12｜Runtime RunManager_StreamBridge_Journal 详解.md"
+  s_6fa685823cd171::t_a277b6d51a73c7 96-110
+".agent_context/final_review/docs_md/131｜Core Threads Runs_Delete_Rename_Token Usage Hooks 详解.md"
+  s_3681c5c1f97c5e::t_bce3bb7ea33f68 48-65
+".agent_context/final_review/docs_md/132｜Backend Tests 测试体系详解.md"
+  s_3681c5c1f97c5e::t_9228963f6ce8b2 41-63
+".agent_context/final_review/docs_md/133｜Frontend Tests 与 Playwright E2E 详解.md"
+  s_3681c5c1f97c5e::t_1e968e09c93865 42-64
+".agent_context/final_review/docs_md/134｜GitHub Workflows CI 流水线详解.md"
+  s_3681c5c1f97c5e::t_29c973ea03d7f5 46-60
+".agent_context/final_review/docs_md/135｜Scripts Setup_Dev_Deploy 脚本详解.md"
+  s_3681c5c1f97c5e::t_127463afe61ad3 47-59
+".agent_context/final_review/docs_md/136｜Scripts Diagnostics_Maintenance 脚本详解.md"
+  s_3681c5c1f97c5e::t_c6273927dd0143 44-57
+".agent_context/final_review/docs_md/137｜Docker Compose_Nginx_Provisioner 详解.md"
+  s_3681c5c1f97c5e::t_34828aa2b458f4 47-67
+".agent_context/final_review/docs_md/138｜Public Skills 分类与运行逻辑详解.md"
+  s_3681c5c1f97c5e::t_d73f6b3abe9161 46-74
+".agent_context/final_review/docs_md/139｜Research_Review Public Skills 详解.md"
+  s_3681c5c1f97c5e::t_b070b2f2bea4ff 41-70
+".agent_context/final_review/docs_md/13｜Backend Middleware 模块逐项详解.md"
+  s_6fa685823cd171::t_393cb13ba588c1 98-110
+".agent_context/final_review/docs_md/140｜Media Generation Public Skills 详解.md"
+  s_3681c5c1f97c5e::t_5cfd25c7ddc847 43-60
+".agent_context/final_review/docs_md/141｜Development_Deploy Public Skills 详解.md"
+  s_3681c5c1f97c5e::t_4fcfcc8c60a342 42-56
+".agent_context/final_review/docs_md/142｜Analysis_Consulting Public Skills 详解.md"
+  s_3681c5c1f97c5e::t_aafd961213ccf2 40-57
+".agent_context/final_review/docs_md/143｜Meta_Bootstrap Public Skills 详解.md"
+  s_3681c5c1f97c5e::t_1ad9426f25b4af 40-62
+".agent_context/final_review/docs_md/144｜Skills Package Tests 与脚本详解.md"
+  s_3681c5c1f97c5e::t_531cb05385d401 42-53
+".agent_context/final_review/docs_md/145｜deep-research Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_d659055f0181c1 41-50
+".agent_context/final_review/docs_md/146｜github-deep-research Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_9355e335e36d7d 41-56
+".agent_context/final_review/docs_md/147｜academic-paper-review Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_4d2cec7d4baf13 41-49
+".agent_context/final_review/docs_md/148｜systematic-literature-review Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_f9fac5f50cb67e 41-51
+".agent_context/final_review/docs_md/149｜frontend-design Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_b8812f2fd7ea4c 41-54
+".agent_context/final_review/docs_md/14｜Frontend Core Hooks 与 UI 模块逐项详解.md"
+  s_6fa685823cd171::t_f119798c1d549d 76-99
+".agent_context/final_review/docs_md/150｜web-design-guidelines Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_374050dac0c604 40-60
+".agent_context/final_review/docs_md/151｜data-analysis Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_3345a474163f3e 41-58
+".agent_context/final_review/docs_md/152｜chart-visualization Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_d336c0c7bc2962 41-61
+".agent_context/final_review/docs_md/153｜image-generation Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_ed9646c741d8ec 41-55
+".agent_context/final_review/docs_md/154｜skill-creator Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_0fb19c370b462f 41-55
+".agent_context/final_review/docs_md/155｜music-generation Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_fc35452e48e0ba 41-57
+".agent_context/final_review/docs_md/156｜video-generation Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_a58710f2ec4994 41-53
+".agent_context/final_review/docs_md/157｜podcast-generation Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_076dda9c57eb95 41-71
+".agent_context/final_review/docs_md/158｜ppt-generation Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_c9d393fd35f6e3 41-54
+".agent_context/final_review/docs_md/159｜newsletter-generation Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_9808ba06d37580 41-51
+".agent_context/final_review/docs_md/15｜Config_Paths 与 Hot Reload 边界详解.md"
+  s_6fa685823cd171::t_9203acf4fa5f6e 84-101
+".agent_context/final_review/docs_md/160｜find-skills Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_1b885450d4e7bb 41-54
+".agent_context/final_review/docs_md/161｜bootstrap Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_11fb8f7e62089e 41-56
+".agent_context/final_review/docs_md/162｜surprise-me Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_f396cfd29ebf51 40-63
+".agent_context/final_review/docs_md/163｜vercel-deploy-claimable Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_3a51f6d1dede4e 41-55
+".agent_context/final_review/docs_md/164｜code-documentation Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_fe89d73e9aeb99 41-57
+".agent_context/final_review/docs_md/165｜consulting-analysis Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_c384068d657bb3 41-53
+".agent_context/final_review/docs_md/166｜claude-to-deerflow Public Skill 详解.md"
+  s_3681c5c1f97c5e::t_f5a49344f0e1a2 42-71
+".agent_context/final_review/docs_md/167｜Backend Router Tests 分类详解.md"
+  s_3681c5c1f97c5e::t_16d3097d5db333 41-58
+".agent_context/final_review/docs_md/169｜Backend Agent_Middleware Tests 分类详解.md"
+  s_3681c5c1f97c5e::t_8889967a3e0ce6 44-56
+".agent_context/final_review/docs_md/16｜Subagents_Task Tool 与并发执行详解.md"
+  s_6fa685823cd171::t_d598afa5a4f3db 76-92
+".agent_context/final_review/docs_md/170｜Backend Sandbox_MCP_Memory Tests 分类详解.md"
+  s_3681c5c1f97c5e::t_6f8f38776acd17 44-59
+".agent_context/final_review/docs_md/171｜Frontend E2E Specs 分类详解.md"
+  s_3681c5c1f97c5e::t_32727fcfa603a0 43-61
+".agent_context/final_review/docs_md/172｜GitHub Workflow 文件逐项详解.md"
+  s_3681c5c1f97c5e::t_f5b931c8cd6fb2 46-57
+".agent_context/final_review/docs_md/173｜Setup Wizard Scripts 详解.md"
+  s_3681c5c1f97c5e::t_1bc47839430e9f 47-69
+".agent_context/final_review/docs_md/174｜Backend_Frontend Unit Test Workflows 详解.md"
+  s_3681c5c1f97c5e::t_e0bf34ba3c2880 44-69
+".agent_context/final_review/docs_md/176｜check.py_doctor.py_configure.py_config-upgrade 详解.md"
+  s_3681c5c1f97c5e::t_fa41d9878aa737 45-58
+".agent_context/final_review/docs_md/177｜serve.sh_docker.sh_deploy.sh 详解.md"
+  s_3681c5c1f97c5e::t_17e01d4531fcb2 44-64
+".agent_context/final_review/docs_md/178｜Frontend E2E Chat_Sidebar_Artifacts Specs 详解.md"
+  s_3681c5c1f97c5e::t_278d6e54fd02c1 46-76
+".agent_context/final_review/docs_md/179｜Frontend E2E History_Landing_Real Backend Specs 详解.md"
+  s_3681c5c1f97c5e::t_0792e2b1d74095 45-60
+".agent_context/final_review/docs_md/17｜Model Provider Factory 与模型适配详解.md"
+  s_6fa685823cd171::t_b68c9fad562e1b 60-87
+".agent_context/final_review/docs_md/180｜Backend Blocking IO Tests 详解.md"
+  s_3681c5c1f97c5e::t_31ba89737d6bdb 44-59
+".agent_context/final_review/docs_md/181｜Auth _ Owner Isolation Tests 详解.md"
+  s_3681c5c1f97c5e::t_2672ab2b581b95 41-84
+".agent_context/final_review/docs_md/182｜Upload _ Artifact _ File Conversion Tests 详解.md"
+  s_3681c5c1f97c5e::t_02c4b6a98bf140 44-61
+".agent_context/final_review/docs_md/183｜Model _ Provider _ Config Tests 详解.md"
+  s_3681c5c1f97c5e::t_264ea627ae3107 44-64
+".agent_context/final_review/docs_md/184｜Skills _ Tools _ Deferred Tests 详解.md"
+  s_3681c5c1f97c5e::t_0d776e2910aada 47-76
+".agent_context/final_review/docs_md/185｜Channels _ Community Provider Tests 详解.md"
+  s_3681c5c1f97c5e::t_3e7bbe84a64bfc 41-65
+".agent_context/final_review/docs_md/186｜Label Sync _ Triage _ Container Workflow 详解.md"
+  s_3681c5c1f97c5e::t_562732b73464fc 42-57
+".agent_context/final_review/docs_md/187｜OAuth _ Memory _ Sandbox _ Detection Scripts 详解.md"
+  s_3681c5c1f97c5e::t_df16c826e371f6 45-61
+".agent_context/final_review/docs_md/188｜docker_provisioner_app.py 单文件详解.md"
+  s_3681c5c1f97c5e::t_d222d283121d48 41-77
+".agent_context/final_review/docs_md/18｜Persistence_Database_ThreadMeta 与 Feedback 详解.md"
+  s_6fa685823cd171::t_4f4333f312a3f4 72-80
+".agent_context/final_review/docs_md/190｜run-with-git-bash_wait-for-port_cleanup 脚本详解.md"
+  s_3681c5c1f97c5e::t_28cd16b965d58f 42-56
+".agent_context/final_review/docs_md/191｜Client E2E _ Live Tests 详解.md"
+  s_3681c5c1f97c5e::t_eb1db9fa37b139 43-59
+".agent_context/final_review/docs_md/192｜ThreadState _ Reducers _ Serialization Tests 详解.md"
+  s_3681c5c1f97c5e::t_73445a6fd03302 44-58
+".agent_context/final_review/docs_md/193｜Tracing _ Token Usage Tests 详解.md"
+  s_3681c5c1f97c5e::t_9462680c8fd07b 44-68
+".agent_context/final_review/docs_md/194｜Setup_Update Agent E2E Tests 详解.md"
+  s_3681c5c1f97c5e::t_bbd6d01d4fb85f 43-66
+".agent_context/final_review/docs_md/195｜Sandbox Provider 深层测试族详解.md"
+  s_3681c5c1f97c5e::t_233dfc086e2477 43-53
+".agent_context/final_review/docs_md/196｜MCP _ Deferred _ ToolSearch 测试族详解.md"
+  s_3681c5c1f97c5e::t_3e69959941e413 43-67
+".agent_context/final_review/docs_md/197｜Memory _ Title _ Summarization 测试族详解.md"
+  s_3681c5c1f97c5e::t_1077f7e49f4e1e 44-59
+".agent_context/final_review/docs_md/198｜Frontend Unit 与 Real Backend Tests 详解.md"
+  s_3681c5c1f97c5e::t_1c307955253483 44-68
+".agent_context/final_review/docs_md/199｜docs_superpowers Specs 与 Plans 详解.md"
+  s_3681c5c1f97c5e::t_bb5b7b62f1a279 41-62
+".agent_context/final_review/docs_md/19｜Middleware 基建类文件详解_ThreadData_Uploads_Sandbox_ToolOutputBudget.md"
+  s_6fa685823cd171::t_758c3fa680d707 56-69
+".agent_context/final_review/docs_md/200｜Backend Docs Architecture_API_Config 文档详解.md"
+  s_3681c5c1f97c5e::t_d99603a51bee89 43-70
+".agent_context/final_review/docs_md/201｜Root Docs_Install_Contributing_Security 详解.md"
+  s_3681c5c1f97c5e::t_354a2a1eb3de5f 43-57
+".agent_context/final_review/docs_md/202｜test_auth _ auth_middleware _ csrf 测试详解.md"
+  s_3681c5c1f97c5e::t_f62503dd3384f4 42-75
+".agent_context/final_review/docs_md/203｜Run API _ Runs Endpoint 测试详解.md"
+  s_3681c5c1f97c5e::t_d32a59b6140c4d 44-57
+".agent_context/final_review/docs_md/204｜Threads _ Uploads _ Artifacts Router 测试详解.md"
+  s_3681c5c1f97c5e::t_65254fe5701637 43-56
+".agent_context/final_review/docs_md/205｜MiniMax Generation Providers Specs_Plans 详解.md"
+  s_3681c5c1f97c5e::t_1e7e446bfbdb03 40-63
+".agent_context/final_review/docs_md/206｜Event Store _ History Specs_Plans 详解.md"
+  s_3681c5c1f97c5e::t_aebc9ef689b8ce 40-55
+".agent_context/final_review/docs_md/207｜Summarize Marker _ Langfuse Tracing Plans 详解.md"
+  s_3681c5c1f97c5e::t_8f34bea7fe26b1 40-66
+".agent_context/final_review/docs_md/208｜README _ Install _ Contributing 深入详解.md"
+  s_3681c5c1f97c5e::t_853d0b681f7a2a 44-54
+".agent_context/final_review/docs_md/209｜backend_docs_API.md 详解.md"
+  s_3681c5c1f97c5e::t_7ff0d526ff9a35 44-68
+".agent_context/final_review/docs_md/20｜Middleware 上下文与 UX 类文件详解_Dynamic_Skill_Summary_Todo_Title_Memory.md"
+  s_6fa685823cd171::t_81184063e41cbf 59-76
+".agent_context/final_review/docs_md/210｜backend_docs_CONFIGURATION.md 详解.md"
+  s_3681c5c1f97c5e::t_3f46656306ab9e 46-58
+".agent_context/final_review/docs_md/211｜backend_docs_MCP_SERVER.md 详解.md"
+  s_3681c5c1f97c5e::t_b503d67898e8a9 44-70
+".agent_context/final_review/docs_md/212｜backend_docs_STREAMING.md 详解.md"
+  s_3681c5c1f97c5e::t_ae94d8949d738a 44-57
+".agent_context/final_review/docs_md/213｜backend_docs_FILE_UPLOAD.md 详解.md"
+  s_3681c5c1f97c5e::t_0598220337b559 43-75
+".agent_context/final_review/docs_md/214｜backend_docs_AUTH_DESIGN _ AUTH_UPGRADE 详解.md"
+  s_3681c5c1f97c5e::t_63202bd5f15d1b 42-75
+".agent_context/final_review/docs_md/215｜backend_docs_GUARDRAILS 与 PATH_EXAMPLES 详解.md"
+  s_3681c5c1f97c5e::t_ea8764a393476e 43-56
+".agent_context/final_review/docs_md/216｜Memory Improvements _ Settings Docs 详解.md"
+  s_3681c5c1f97c5e::t_49a7d90f47e1f3 42-64
+".agent_context/final_review/docs_md/217｜Title Generation Docs 详解.md"
+  s_3681c5c1f97c5e::t_6e1b7d17697d70 41-56
+".agent_context/final_review/docs_md/218｜Replay _ Setup _ TODO _ Plan Mode Docs 详解.md"
+  s_3681c5c1f97c5e::t_31120a20ba90ac 41-53
+".agent_context/final_review/docs_md/219｜Backend RFC Docs 详解.md"
+  s_3681c5c1f97c5e::t_bd92636a9b63d5 40-58
+".agent_context/final_review/docs_md/21｜Run 与 Thread Router 文件级详解.md"
+  s_6fa685823cd171::t_fde134a6a673e6 65-93
+".agent_context/final_review/docs_md/220｜Apple Container _ Auth Docker Gap Docs 详解.md"
+  s_3681c5c1f97c5e::t_8784981aee5557 41-53
+".agent_context/final_review/docs_md/221｜CODE_CHANGE_SUMMARY 与 SKILL_NAME_CONFLICT_FIX 详解.md"
+  s_3681c5c1f97c5e::t_f6e9fbcb90bdfc 41-55
+".agent_context/final_review/docs_md/224｜REPLAY_E2E 文档单独详解.md"
+  s_3681c5c1f97c5e::t_5a6d5e26f7882b 41-70
+".agent_context/final_review/docs_md/225｜OpenAPI _ Setup _ Guardrails 相关文档详解.md"
+  s_3681c5c1f97c5e::t_94915fcc64a936 43-68
+".agent_context/final_review/docs_md/227｜Frontend Content Introduction_Harness 文档分类详解.md"
+  s_3681c5c1f97c5e::t_d3617256ea4a5a 45-62
+".agent_context/final_review/docs_md/228｜Frontend Content Reference_Application_Tutorials 分类详解.md"
+  s_3681c5c1f97c5e::t_55a1f6ce187850 45-56
+".agent_context/final_review/docs_md/229｜docs_plans 与 Root Docs 规划文档详解.md"
+  s_3681c5c1f97c5e::t_a2c0de85237f11 43-92
+".agent_context/final_review/docs_md/22｜管理类 Router 文件级详解_Models_MCP_Skills_Memory_Agents.md"
+  s_6fa685823cd171::t_2e03b9338d98d1 59-71
+".agent_context/final_review/docs_md/230｜Frontend Content Introduction Docs 详解.md"
+  s_3681c5c1f97c5e::t_06e50b5db0e084 41-58
+".agent_context/final_review/docs_md/231｜Frontend Content Harness _ Reference Docs 详解.md"
+  s_3681c5c1f97c5e::t_bdd3d721bc175b 40-51
+".agent_context/final_review/docs_md/233｜MiniMax Provider Spec_Plan 单文件详解.md"
+  s_3681c5c1f97c5e::t_5b566a6125022b 41-58
+".agent_context/final_review/docs_md/234｜Event Store History Plan 单文件详解.md"
+  s_3681c5c1f97c5e::t_706c41fb67c7b1 40-68
+".agent_context/final_review/docs_md/235｜Summarize Marker Spec 单文件详解.md"
+  s_3681c5c1f97c5e::t_6357d0992976e3 41-64
+".agent_context/final_review/docs_md/237｜Frontend Reference Model Providers 文档详解.md"
+  s_3681c5c1f97c5e::t_d9771055b149c9 41-53
+".agent_context/final_review/docs_md/238｜Frontend Blog Posts 与 Tags 文档详解.md"
+  s_3681c5c1f97c5e::t_f5ce9c04b0660d 41-59
+".agent_context/final_review/docs_md/23｜文件类 Router 详解_Uploads_Artifacts_Feedback_Suggestions.md"
+  s_6fa685823cd171::t_6c3feb8ab6e669 70-81
+".agent_context/final_review/docs_md/240｜Sandbox Memory Profiling _ Blocking IO Docs 详解.md"
+  s_3681c5c1f97c5e::t_49279de6bbf933 42-49
+".agent_context/final_review/docs_md/242｜CODE_CHANGE_SUMMARY_BY_FILE 单文档详解.md"
+  s_3681c5c1f97c5e::t_6fac9f52a74d95 41-52
+".agent_context/final_review/docs_md/243｜SKILL_NAME_CONFLICT_FIX 单文档详解.md"
+  s_3681c5c1f97c5e::t_9070230fb86f57 41-63
+".agent_context/final_review/docs_md/246｜Frontend MDX Components 与 Content Meta 详解.md"
+  s_3681c5c1f97c5e::t_28053a24f7ef3b 42-70
+".agent_context/final_review/docs_md/247｜Frontend Core Blog 与 I18n 细节详解.md"
+  s_3681c5c1f97c5e::t_dda2538ac3b929 44-58
+".agent_context/final_review/docs_md/248｜Frontend Core Utils 详解.md"
+  s_3681c5c1f97c5e::t_7df12fa98606f9 44-51
+".agent_context/final_review/docs_md/249｜Frontend Env_Config_Static Mode 详解.md"
+  s_3681c5c1f97c5e::t_f74bf5c660d693 45-60
+".agent_context/final_review/docs_md/24｜ThreadDataMiddleware 单文件详解.md"
+  s_6fa685823cd171::t_b95229700a6c8b 63-79
+".agent_context/final_review/docs_md/254｜Runtime UserContext_Converters_Serialization 详解.md"
+  s_3681c5c1f97c5e::t_f18965ff74c494 47-58
+".agent_context/final_review/docs_md/255｜Frontend Styles_Env_Typings 详解.md"
+  s_3681c5c1f97c5e::t_21ed4f5d7f31d3 42-54
+".agent_context/final_review/docs_md/259｜RunRow _ RunRepository 单文件详解.md"
+  s_3681c5c1f97c5e::t_38c80b9dc584ce 42-49
+".agent_context/final_review/docs_md/25｜UploadsMiddleware 单文件详解.md"
+  s_6fa685823cd171::t_0a669bdea73c93 46-65
+".agent_context/final_review/docs_md/261｜Feedback _ User _ RunEvent Persistence 详解.md"
+  s_3681c5c1f97c5e::t_e2a3d878acf6a7 45-59
+".agent_context/final_review/docs_md/262｜Runtime Checkpointer Provider 详解.md"
+  s_3681c5c1f97c5e::t_2c9f7f487eddd8 42-59
+".agent_context/final_review/docs_md/263｜Runtime Store Provider 详解.md"
+  s_3681c5c1f97c5e::t_79ebbbcd45e113 43-59
+".agent_context/final_review/docs_md/269｜subagents registry_config_status_token_collector 详解.md"
+  s_3681c5c1f97c5e::t_46c9144d2a77e8 44-59
+".agent_context/final_review/docs_md/26｜SandboxMiddleware 单文件详解.md"
+  s_6fa685823cd171::t_636ea99ab686c5 60-83
+".agent_context/final_review/docs_md/270｜Built-in Tools_task_present_files_clarification 详解.md"
+  s_3681c5c1f97c5e::t_7de1dcf3f50132 42-57
+".agent_context/final_review/docs_md/271｜Built-in Tools_view_image_tool_search_invoke_acp 详解.md"
+  s_3681c5c1f97c5e::t_19ea8a58089c0b 44-57
+".agent_context/final_review/docs_md/272｜tools_tools.py 单文件详解.md"
+  s_3681c5c1f97c5e::t_85b37d0f85000b 44-69
+".agent_context/final_review/docs_md/275｜utils_file_conversion 与 readability 详解.md"
+  s_3681c5c1f97c5e::t_0499ea78af5e17 42-58
+".agent_context/final_review/docs_md/278｜tracing_factory 与 metadata 详解.md"
+  s_3681c5c1f97c5e::t_838ddb1501fe7f 42-65
+".agent_context/final_review/docs_md/27｜ToolOutputBudgetMiddleware 单文件详解.md"
+  s_6fa685823cd171::t_2e2a8d5036a9ba 44-63
+".agent_context/final_review/docs_md/280｜ChannelService 与 ChannelManager 单文件详解.md"
+  s_3681c5c1f97c5e::t_908ec8c5893818 44-58
+".agent_context/final_review/docs_md/281｜Gateway Auth 子模块详解.md"
+  s_3681c5c1f97c5e::t_1a6645ee7f05ed 45-93
+".agent_context/final_review/docs_md/282｜Gateway LocalAuthProvider _ SQLiteUserRepository 详解.md"
+  s_3681c5c1f97c5e::t_f916ffc7c7bec6 42-74
+".agent_context/final_review/docs_md/283｜Frontend Core Auth 文件详解.md"
+  s_3681c5c1f97c5e::t_5939b9bc5ab58c 44-65
+".agent_context/final_review/docs_md/284｜Frontend Core Uploads _ Agents _ Notification 详解.md"
+  s_3681c5c1f97c5e::t_a02188f67b6d6a 42-54
+".agent_context/final_review/docs_md/285｜Frontend Core Todos _ Tasks _ Tools 详解.md"
+  s_3681c5c1f97c5e::t_84c4627e7f7841 41-64
+".agent_context/final_review/docs_md/286｜auth_jwt_password_errors 单文件详解.md"
+  s_3681c5c1f97c5e::t_2e3c24fbca8396 42-64
+".agent_context/final_review/docs_md/287｜auth_config_models_providers 单文件详解.md"
+  s_3681c5c1f97c5e::t_e48227eda36d85 42-55
+".agent_context/final_review/docs_md/28｜DynamicContextMiddleware 单文件详解.md"
+  s_6fa685823cd171::t_c9645cddd7d728 45-68
+".agent_context/final_review/docs_md/290｜Telegram_DingTalk_Discord Channel 单文件详解.md"
+  s_3681c5c1f97c5e::t_87d2afb0343b6f 42-72
+".agent_context/final_review/docs_md/292｜Frontend Agents_Uploads_Notification Core 单文件详解.md"
+  s_3681c5c1f97c5e::t_cb55487a01060a 42-65
+".agent_context/final_review/docs_md/293｜Frontend Core Models 文件详解.md"
+  s_3681c5c1f97c5e::t_4c27737984bb27 40-64
+".agent_context/final_review/docs_md/294｜Frontend Core MCP 文件详解.md"
+  s_3681c5c1f97c5e::t_ad2790f1443a89 40-63
+".agent_context/final_review/docs_md/295｜Frontend Core Skills 文件详解.md"
+  s_3681c5c1f97c5e::t_9f57ae0b029469 41-53
+".agent_context/final_review/docs_md/296｜Frontend Core Memory 文件详解.md"
+  s_3681c5c1f97c5e::t_d0e7a4bb58c0a6 42-62
+".agent_context/final_review/docs_md/298｜Frontend Core API Feedback _ StreamMode 详解.md"
+  s_3681c5c1f97c5e::t_0a1481fc0e1ada 42-56
+".agent_context/final_review/docs_md/299｜Frontend Core Threads Types _ Utils _ Export 详解.md"
+  s_3681c5c1f97c5e::t_d4dcb2f3f446ad 42-67
+".agent_context/final_review/docs_md/29｜SkillActivationMiddleware 单文件详解.md"
+  s_6fa685823cd171::t_7b6579c0ea3d14 52-66
+".agent_context/final_review/docs_md/300｜Chat Page_Layout_Providers 单文件详解.md"
+  s_3681c5c1f97c5e::t_3246c335f5c540 42-68
+".agent_context/final_review/docs_md/304｜MarkdownContent_TokenUsage_SubtaskCard 详解.md"
+  s_3681c5c1f97c5e::t_d6e70d0c315aee 42-73
+".agent_context/final_review/docs_md/306｜CommandPalette_GithubIcon_Tooltip 组件详解.md"
+  s_3681c5c1f97c5e::t_a5780b7c998ed8 41-67
+".agent_context/final_review/docs_md/307｜Workspace Account_Appearance_Notification_About 页面细节.md"
+  s_3681c5c1f97c5e::t_a802c83887d437 44-62
+".agent_context/final_review/docs_md/308｜Workspace Tool_Skill_Memory Settings 页面细节.md"
+  s_3681c5c1f97c5e::t_0bc9cc063010b6 44-61
+".agent_context/final_review/docs_md/309｜Remaining UI Form_Display Primitives 详解.md"
+  s_3681c5c1f97c5e::t_c075993d36ac6b 43-51
+".agent_context/final_review/docs_md/30｜Todo_Title_Memory Middleware 文件详解.md"
+  s_6fa685823cd171::t_c849ee141af215 45-58
+".agent_context/final_review/docs_md/310｜Remaining UI Overlay_Input Primitives 详解.md"
+  s_3681c5c1f97c5e::t_8cee0d5c84b2d2 44-81
+".agent_context/final_review/docs_md/311｜Remaining Scripts Ops 详解.md"
+  s_3681c5c1f97c5e::t_2f6160d30e4b34 43-72
+".agent_context/final_review/docs_md/312｜Backend Misc Tests 详解.md"
+  s_3681c5c1f97c5e::t_79f004b3e6660b 43-52
+".agent_context/final_review/docs_md/313｜Frontend Misc Tests _ Configs 详解.md"
+  s_3681c5c1f97c5e::t_6f834730b052ca 43-55
+".agent_context/final_review/docs_md/314｜Config _ Doctor _ Setup Wizard Tests 单文件族详解.md"
+  s_3681c5c1f97c5e::t_4d7599e6fe1a0b 44-56
+".agent_context/final_review/docs_md/315｜Safety _ Guardrails _ Sandbox Audit Tests 单文件族详解.md"
+  s_3681c5c1f97c5e::t_1da01a5a4cd8b2 42-56
+".agent_context/final_review/docs_md/316｜Settings Dialog 单文件族详解.md"
+  s_3681c5c1f97c5e::t_fcc001f9491e60 41-55
+".agent_context/final_review/docs_md/317｜Artifact Loader _ Hooks _ Preview 单文件详解.md"
+  s_3681c5c1f97c5e::t_1f13d5ffde960a 42-58
+".agent_context/final_review/docs_md/318｜Generation Skill Scripts 单文件族详解.md"
+  s_3681c5c1f97c5e::t_73f3048c182d2a 41-59
+".agent_context/final_review/docs_md/319｜Skill Creator Scripts 单文件族详解.md"
+  s_3681c5c1f97c5e::t_2dc0dfd5a1a5fa 44-59
+".agent_context/final_review/docs_md/31｜LLMErrorHandlingMiddleware 单文件详解.md"
+  s_6fa685823cd171::t_a824cf1363a655 45-53
+".agent_context/final_review/docs_md/320｜Claude_Vercel_Find Skills Scripts 详解.md"
+  s_3681c5c1f97c5e::t_6c19c5c4ef2572 42-56
+".agent_context/final_review/docs_md/321｜Backend AppConfig _ Runtime Paths Tests 深拆.md"
+  s_3681c5c1f97c5e::t_dc037c16d6df03 41-56
+".agent_context/final_review/docs_md/322｜Backend Model Provider Patch Tests 深拆.md"
+  s_3681c5c1f97c5e::t_a6aee7274984dc 43-55
+".agent_context/final_review/docs_md/323｜Frontend Root_Auth_Workspace Page Layout 深拆.md"
+  s_3681c5c1f97c5e::t_d0d556bf5b6432 45-56
+".agent_context/final_review/docs_md/324｜Frontend Docs_Blog Routes 深拆.md"
+  s_3681c5c1f97c5e::t_1b7c5178c6eec4 44-76
+".agent_context/final_review/docs_md/328｜Frontend Agents New Route 深拆.md"
+  s_3681c5c1f97c5e::t_9a5cafc55b0880 43-65
+".agent_context/final_review/docs_md/329｜Frontend Chats List Route 深拆.md"
+  s_3681c5c1f97c5e::t_f600eadef4f8d0 42-51
+".agent_context/final_review/docs_md/32｜LoopDetectionMiddleware 单文件详解.md"
+  s_6fa685823cd171::t_eb0f44b1172c05 44-62
+".agent_context/final_review/docs_md/330｜Frontend Landing_Blog_Docs Route 文件深拆.md"
+  s_3681c5c1f97c5e::t_4298b5c29509f7 44-82
+".agent_context/final_review/docs_md/331｜Frontend Content _meta.ts 文件深拆.md"
+  s_3681c5c1f97c5e::t_da5967b61b89d9 44-56
+".agent_context/final_review/docs_md/334｜serve.sh 服务生命周期深拆.md"
+  s_3681c5c1f97c5e::t_eb061d39835e3f 45-67
+".agent_context/final_review/docs_md/335｜deploy_docker_cleanup scripts 深拆.md"
+  s_3681c5c1f97c5e::t_c000a8faec0215 43-57
+".agent_context/final_review/docs_md/337｜Backend Makefile _ pyproject _ langgraph.json 详解.md"
+  s_3681c5c1f97c5e::t_60b7fe8d8ef179 41-51
+".agent_context/final_review/docs_md/338｜Frontend package_Docker_Makefile 详解.md"
+  s_3681c5c1f97c5e::t_01ca02fed819b0 44-58
+".agent_context/final_review/docs_md/339｜backend_docs README _ Index 文档详解.md"
+  s_3681c5c1f97c5e::t_0b7a79aaa29e12 42-53
+".agent_context/final_review/docs_md/33｜SandboxAuditMiddleware 单文件详解.md"
+  s_6fa685823cd171::t_466368868d4c6f 44-62
+".agent_context/final_review/docs_md/340｜Gateway Runtime Lifecycle _ Shutdown Tests 详解.md"
+  s_3681c5c1f97c5e::t_81b860ab943855 42-65
+".agent_context/final_review/docs_md/341｜Tooling _ Scripts Tests 单文件族详解.md"
+  s_3681c5c1f97c5e::t_046f3e6f84c37a 42-52
+".agent_context/final_review/docs_md/342｜Landing Header _ Footer _ Section 组件详解.md"
+  s_3681c5c1f97c5e::t_0d4c277a2c6ea4 41-61
+".agent_context/final_review/docs_md/343｜Landing Hero 与 ProgressiveSkillsAnimation 详解.md"
+  s_3681c5c1f97c5e::t_04e243e610c0c6 41-55
+".agent_context/final_review/docs_md/344｜Landing CaseStudy _ Skills _ Sandbox Sections 详解.md"
+  s_3681c5c1f97c5e::t_aeb7a8702d21f2 44-55
+".agent_context/final_review/docs_md/345｜Landing WhatsNew _ Community Sections 详解.md"
+  s_3681c5c1f97c5e::t_b2c8a284465513 43-64
+".agent_context/final_review/docs_md/347｜I18n Locales 与 Translations 详解.md"
+  s_3681c5c1f97c5e::t_cd52dbdebf53c8 43-54
+".agent_context/final_review/docs_md/34｜DeferredToolFilterMiddleware 单文件详解.md"
+  s_6fa685823cd171::t_cf024298f39665 43-58
+".agent_context/final_review/docs_md/35｜SafetyFinishReasonMiddleware 单文件详解.md"
+  s_6fa685823cd171::t_084175c69a6f7a 42-58
+".agent_context/final_review/docs_md/36｜ViewImage_DanglingToolCall_SubagentLimit_TokenUsage Middleware 详解.md"
+  s_6fa685823cd171::t_c4df57124daefe 42-55
+".agent_context/final_review/docs_md/37｜Sandbox Tools 单文件详解_bash_ls_glob_grep_read_write_str_replace.md"
+  s_6fa685823cd171::t_23f12169c10f27 55-65
+".agent_context/final_review/docs_md/38｜LocalSandbox 与 AioSandbox Provider 详解.md"
+  s_6fa685823cd171::t_4c09d11f12f40a 46-59
+".agent_context/final_review/docs_md/39｜MCP Cache_Session Pool 与 OAuth 详解.md"
+  s_6fa685823cd171::t_d45a8a61483384 46-76
+".agent_context/final_review/docs_md/40｜Memory Queue_Updater_Storage 单文件详解.md"
+  s_6fa685823cd171::t_4ac03e38421fba 60-69
+".agent_context/final_review/docs_md/41｜Skills Parser_Installer_Security Scanner 详解.md"
+  s_6fa685823cd171::t_85d4f51babfec2 48-73
+".agent_context/final_review/docs_md/42｜Frontend useThreadStream 单文件详解.md"
+  s_6fa685823cd171::t_34480ab1e48fb5 48-69
+".agent_context/final_review/docs_md/43｜Frontend Message Utils 与 Artifacts Hooks 详解.md"
+  s_6fa685823cd171::t_514f4c2c894384 48-62
+".agent_context/final_review/docs_md/44｜Config 配置类目录详解.md"
+  s_6fa685823cd171::t_f9c8b31a6b0a67 50-67
+".agent_context/final_review/docs_md/45｜Models Provider Patch 文件详解.md"
+  s_6fa685823cd171::t_1229c683dc059f 45-61
+".agent_context/final_review/docs_md/46｜Persistence Repository 文件详解.md"
+  s_6fa685823cd171::t_7b03bddc947b13 47-66
+".agent_context/final_review/docs_md/47｜Frontend Settings 页面文件详解.md"
+  s_6fa685823cd171::t_26faf36afa7752 50-67
+".agent_context/final_review/docs_md/48｜Gateway Auth Router 与认证模块详解.md"
+  s_6fa685823cd171::t_873ab07d6d45f2 49-64
+".agent_context/final_review/docs_md/49｜Gateway MCP_Skills_Memory Router 深入详解.md"
+  s_6fa685823cd171::t_69965b6307eb0e 57-70
+".agent_context/final_review/docs_md/50｜Frontend ChatPage 与 InputBox 文件详解.md"
+  s_6fa685823cd171::t_33848ce6992171 47-77
+".agent_context/final_review/docs_md/51｜thread_runs.py Router 单文件详解.md"
+  s_6fa685823cd171::t_1cc407cdf969e9 53-63
+".agent_context/final_review/docs_md/52｜threads.py Router 单文件详解.md"
+  s_6fa685823cd171::t_4064ad18b18ed2 54-64
+".agent_context/final_review/docs_md/53｜uploads.py Router 单文件详解.md"
+  s_6fa685823cd171::t_2c292b6812239c 55-72
+".agent_context/final_review/docs_md/54｜artifacts.py Router 单文件详解.md"
+  s_6fa685823cd171::t_aac94e4a6b155d 53-72
+".agent_context/final_review/docs_md/55｜skills.py Router 单文件详解.md"
+  s_6fa685823cd171::t_756921d9fec8bc 51-76
+".agent_context/final_review/docs_md/56｜memory.py Router 单文件详解.md"
+  s_6fa685823cd171::t_e1c4f19e4a62f7 53-76
+".agent_context/final_review/docs_md/58｜Frontend Message Components 单文件详解.md"
+  s_6fa685823cd171::t_4e35b013047099 54-67
+".agent_context/final_review/docs_md/59｜Frontend Artifact Components 单文件详解.md"
+  s_6fa685823cd171::t_53577f40ca64ed 54-77
+".agent_context/final_review/docs_md/60｜Frontend Sidebar 与 Navigation 组件详解.md"
+  s_6fa685823cd171::t_44c95da44aa017 56-74
+".agent_context/final_review/docs_md/61｜auth.py Router 单文件详解.md"
+  s_6fa685823cd171::t_c9e5cc84c588aa 55-62
+".agent_context/final_review/docs_md/62｜agents.py Router 单文件详解.md"
+  s_6fa685823cd171::t_b4e3353bd62bde 55-65
+".agent_context/final_review/docs_md/63｜feedback_suggestions_channels Router 详解.md"
+  s_6fa685823cd171::t_412ee46cc82828 53-72
+".agent_context/final_review/docs_md/64｜Frontend API Client 与 Fetcher 详解.md"
+  s_6fa685823cd171::t_12c4677e90395a 55-72
+".agent_context/final_review/docs_md/65｜Frontend Core Settings_Models_MCP_Skills_Memory API 层详解.md"
+  s_6fa685823cd171::t_f399da622fde6a 56-76
+".agent_context/final_review/docs_md/66｜Frontend Uploads_Notification_Tasks Core 详解.md"
+  s_6fa685823cd171::t_94ff966856681d 54-68
+".agent_context/final_review/docs_md/67｜Frontend Agents_Blog_I18n_Static Mode 模块详解.md"
+  s_6fa685823cd171::t_56533678bdab10 53-78
+".agent_context/final_review/docs_md/68｜Channels Service 与 ChannelManager 详解.md"
+  s_6fa685823cd171::t_d0adff47d8d623 51-69
+".agent_context/final_review/docs_md/69｜Feishu_Slack_Telegram_WeCom_DingTalk_Wechat Channel 详解.md"
+  s_6fa685823cd171::t_3a8b49c9e11cad 50-67
+".agent_context/final_review/docs_md/70｜Community Search_Fetch_Image Tools 详解.md"
+  s_3681c5c1f97c5e::t_c17fa616ff521b 49-68
+".agent_context/final_review/docs_md/72｜Frontend Landing_Docs_Blog 页面详解.md"
+  s_3681c5c1f97c5e::t_414490a1ff6a74 49-61
+".agent_context/final_review/docs_md/73｜Frontend Auth_Login_Setup 页面详解.md"
+  s_3681c5c1f97c5e::t_3a8b84bacf6873 47-65
+".agent_context/final_review/docs_md/76｜Slack 与 Telegram Channel 详解.md"
+  s_3681c5c1f97c5e::t_8674a5df8759e2 43-64
+".agent_context/final_review/docs_md/77｜DingTalk_WeCom_Wechat Channel 详解.md"
+  s_3681c5c1f97c5e::t_da47a192642aa0 43-56
+".agent_context/final_review/docs_md/78｜Tavily_Firecrawl_Exa_Serper Web Search Provider 详解.md"
+  s_3681c5c1f97c5e::t_188587e2d35168 42-57
+".agent_context/final_review/docs_md/79｜Jina_DDG_InfoQuest_Image Search Provider 详解.md"
+  s_3681c5c1f97c5e::t_30f6ef81191054 45-57
+".agent_context/final_review/docs_md/80｜Landing Page Sections 组件详解.md"
+  s_3681c5c1f97c5e::t_cfeefeb8209a00 46-68
+".agent_context/final_review/docs_md/81｜Nextra Docs_Content 与 Blog 渲染详解.md"
+  s_3681c5c1f97c5e::t_06c9b37450b383 42-57
+".agent_context/final_review/docs_md/82｜Tavily 与 Firecrawl Provider 单模块详解.md"
+  s_3681c5c1f97c5e::t_5fc2c75eeb91bf 45-65
+".agent_context/final_review/docs_md/83｜Exa 与 Serper Provider 单模块详解.md"
+  s_3681c5c1f97c5e::t_6b8517ba004068 43-56
+".agent_context/final_review/docs_md/87｜Telegram_DingTalk_WeCom Channel 深入运行逻辑.md"
+  s_3681c5c1f97c5e::t_caa250ed33359d 45-57
+".agent_context/final_review/docs_md/88｜Model_Sandbox_Memory_Tool Config 单文件详解.md"
+  s_3681c5c1f97c5e::t_329a69a9b27c97 68-83
+".agent_context/final_review/docs_md/92｜Subagents_Summarization_Title_Tracing Config 详解.md"
+  s_3681c5c1f97c5e::t_36cc05fa99a74f 45-65
+".agent_context/final_review/docs_md/93｜Frontend UI Primitives 单文件详解.md"
+  s_3681c5c1f97c5e::t_30fef60c66770d 45-58
+".agent_context/final_review/docs_md/94｜Frontend AI Elements Primitives 详解.md"
+  s_3681c5c1f97c5e::t_857730a0135c44 45-63
+".agent_context/final_review/docs_md/96｜ACP_Guardrails_Safety Config 详解.md"
+  s_3681c5c1f97c5e::t_528c72bc4a6bf3 45-79
+".agent_context/final_review/docs_md/97｜model_config_tool_config_tool_output_config_tool_search_config 单文件详解.md"
+  s_3681c5c1f97c5e::t_eb328c88ba13a8 43-69
+".agent_context/final_review/docs_md/99｜agents_subagents_guardrails_loop_safety 配置文件详解.md"
+  s_3681c5c1f97c5e::t_0af81259741061 46-59
+".agent_context/final_review/docs_md/DeerFlow 2.0 源码分层详解_章节目录.md"
+  s_6fa685823cd171::t_61b26b21d01025 670-683
+.agent_context/magic/PLAN.md
+  s_6fa685823cd171::t_a475afb52254f9 1-93
+.agent_context/magic/_test_blockids.json
+  s_6fa685823cd171::t_585d5f13a2f466 1-10
+.agent_context/magic/all_block_ids.json
+  s_3681c5c1f97c5e::t_1127bb12f69789 1-485
+.agent_context/magic/all_tokens.json
+  s_3681c5c1f97c5e::t_da1602ac74ece1 1-71
+.agent_context/magic/all_tokens.txt
+  s_3681c5c1f97c5e::t_53586cf4d57baa 1-69
+.agent_context/magic/apply_local.py
+  s_6fa685823cd171::t_50ba8b31d6f770 1-132
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__11｜Gateway Routers API 模块逐项详解.md.bak"
+  s_6fa685823cd171::t_daac1e4dac37af 1-77
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__12｜Runtime RunManager_StreamBridge_Journal 详解.md.bak"
+  s_6fa685823cd171::t_ef95537b461802 1-102
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__13｜Backend Middleware 模块逐项详解.md.bak"
+  s_6fa685823cd171::t_5c234a48a318a3 1-104
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__14｜Frontend Core Hooks 与 UI 模块逐项详解.md.bak"
+  s_6fa685823cd171::t_ca619f86275b6b 1-82
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__16｜Subagents_Task Tool 与并发执行详解.md.bak"
+  s_6fa685823cd171::t_0e6871e9ef12c7 1-82
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__17｜Model Provider Factory 与模型适配详解.md.bak"
+  s_6fa685823cd171::t_8fcfa1d96b96cc 1-67
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__18｜Persistence_Database_ThreadMeta 与 Feedback 详解.md.bak"
+  s_6fa685823cd171::t_e48326306aef68 1-79
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__20｜Middleware 上下文与 UX 类文件详解_Dynamic_Skill_Summary_Todo_Title_Memory.md.bak"
+  s_6fa685823cd171::t_3f2829207669f9 1-65
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__21｜Run 与 Thread Router 文件级详解.md.bak"
+  s_6fa685823cd171::t_03af3ee1e066d1 1-72
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__22｜管理类 Router 文件级详解_Models_MCP_Skills_Memory_Agents.md.bak"
+  s_6fa685823cd171::t_783e798728d066 1-65
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__23｜文件类 Router 详解_Uploads_Artifacts_Feedback_Suggestions.md.bak"
+  s_6fa685823cd171::t_2ed6a7c91f717b 1-76
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__24｜ThreadDataMiddleware 单文件详解.md.bak"
+  s_6fa685823cd171::t_991b9e268341d5 1-70
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__25｜UploadsMiddleware 单文件详解.md.bak"
+  s_6fa685823cd171::t_41fb0724768bca 1-52
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__26｜SandboxMiddleware 单文件详解.md.bak"
+  s_6fa685823cd171::t_3acda3b9d10a46 1-67
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__27｜ToolOutputBudgetMiddleware 单文件详解.md.bak"
+  s_6fa685823cd171::t_727f673920615f 1-50
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__28｜DynamicContextMiddleware 单文件详解.md.bak"
+  s_6fa685823cd171::t_1c63a4bc6ac04a 1-52
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__29｜SkillActivationMiddleware 单文件详解.md.bak"
+  s_6fa685823cd171::t_9e0cd5e08c22c7 1-58
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__30｜Todo_Title_Memory Middleware 文件详解.md.bak"
+  s_6fa685823cd171::t_249686478fa9e4 1-51
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__31｜LLMErrorHandlingMiddleware 单文件详解.md.bak"
+  s_df1fdedbaff076::t_395ab45fc577ac 1-52
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__32｜LoopDetectionMiddleware 单文件详解.md.bak"
+  s_df1fdedbaff076::t_44d59a3fb9c373 1-51
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__33｜SandboxAuditMiddleware 单文件详解.md.bak"
+  s_df1fdedbaff076::t_57dc3925943d81 1-50
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__34｜DeferredToolFilterMiddleware 单文件详解.md.bak"
+  s_df1fdedbaff076::t_7d3553856a8384 1-49
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__35｜SafetyFinishReasonMiddleware 单文件详解.md.bak"
+  s_df1fdedbaff076::t_d76ec4800c5789 1-48
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__36｜ViewImage_DanglingToolCall_SubagentLimit_TokenUsage Middleware 详解.md.bak"
+  s_df1fdedbaff076::t_cdca99947ef5f9 1-48
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__37｜Sandbox Tools 单文件详解_bash_ls_glob_grep_read_write_str_replace.md.bak"
+  s_df1fdedbaff076::t_7ff4f2863ba807 1-62
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__38｜LocalSandbox 与 AioSandbox Provider 详解.md.bak"
+  s_df1fdedbaff076::t_731b9e7e86856c 1-52
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__39｜MCP Cache_Session Pool 与 OAuth 详解.md.bak"
+  s_df1fdedbaff076::t_893fa5473cb856 1-53
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__40｜Memory Queue_Updater_Storage 单文件详解.md.bak"
+  s_df1fdedbaff076::t_886e090b6f8031 1-67
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__41｜Skills Parser_Installer_Security Scanner 详解.md.bak"
+  s_aac32234302c38::t_15c737073ead9c 1-55
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__42｜Frontend useThreadStream 单文件详解.md.bak"
+  s_6fa685823cd171::t_ff315f7360b674 1-55
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__43｜Frontend Message Utils 与 Artifacts Hooks 详解.md.bak"
+  s_6fa685823cd171::t_16efe9d11d738a 1-54
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__44｜Config 配置类目录详解.md.bak"
+  s_df1fdedbaff076::t_a705cf0e14d03a 1-56
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__45｜Models Provider Patch 文件详解.md.bak"
+  s_df1fdedbaff076::t_2d686e33e9db04 1-52
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__46｜Persistence Repository 文件详解.md.bak"
+  s_6fa685823cd171::t_512983ca33f9d3 1-54
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__47｜Frontend Settings 页面文件详解.md.bak"
+  s_410a2bcc1ee389::t_e386a8e3c04fb0 1-56
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__48｜Gateway Auth Router 与认证模块详解.md.bak"
+  s_6fa685823cd171::t_2378d99f0c1221 1-55
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__49｜Gateway MCP_Skills_Memory Router 深入详解.md.bak"
+  s_6fa685823cd171::t_83ceee0307b833 1-63
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__50｜Frontend ChatPage 与 InputBox 文件详解.md.bak"
+  s_aac32234302c38::t_cf15ebcbf7fd27 1-54
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__51｜thread_runs.py Router 单文件详解.md.bak"
+  s_6fa685823cd171::t_422b1a04b278fd 1-60
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__52｜threads.py Router 单文件详解.md.bak"
+  s_6fa685823cd171::t_031420addfc20c 1-60
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__53｜uploads.py Router 单文件详解.md.bak"
+  s_6fa685823cd171::t_60172db0ae765f 1-61
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__54｜artifacts.py Router 单文件详解.md.bak"
+  s_6fa685823cd171::t_a52c49e8af0527 1-60
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__55｜skills.py Router 单文件详解.md.bak"
+  s_6fa685823cd171::t_98b299195ae03c 1-58
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__56｜memory.py Router 单文件详解.md.bak"
+  s_6fa685823cd171::t_938488c9d80da3 1-60
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__58｜Frontend Message Components 单文件详解.md.bak"
+  s_6fa685823cd171::t_32fdfaeeafefef 1-60
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__59｜Frontend Artifact Components 单文件详解.md.bak"
+  s_410a2bcc1ee389::t_2382a071318b0e 1-61
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__60｜Frontend Sidebar 与 Navigation 组件详解.md.bak"
+  s_aac32234302c38::t_cc809bb393c514 1-62
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__61｜auth.py Router 单文件详解.md.bak"
+  s_6fa685823cd171::t_04df454f8528ad 1-62
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__62｜agents.py Router 单文件详解.md.bak"
+  s_6fa685823cd171::t_6e83ea9bb8a358 1-61
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__63｜feedback_suggestions_channels Router 详解.md.bak"
+  s_410a2bcc1ee389::t_e9babfa2153606 1-60
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__64｜Frontend API Client 与 Fetcher 详解.md.bak"
+  s_6fa685823cd171::t_3bfed5d11ffa72 1-61
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__65｜Frontend Core Settings_Models_MCP_Skills_Memory API 层详解.md.bak"
+  s_410a2bcc1ee389::t_7dd602a43c8904 1-63
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__66｜Frontend Uploads_Notification_Tasks Core 详解.md.bak"
+  s_410a2bcc1ee389::t_ce0c85265eeb09 1-60
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__67｜Frontend Agents_Blog_I18n_Static Mode 模块详解.md.bak"
+  s_6fa685823cd171::t_f3fbc75d87e955 1-60
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__68｜Channels Service 与 ChannelManager 详解.md.bak"
+  s_410a2bcc1ee389::t_2a10d8c37baf62 1-57
+".agent_context/magic/backup/.agent_context_reviewer_tmp_docs_md__69｜Feishu_Slack_Telegram_WeCom_DingTalk_Wechat Channel 详解.md.bak"
+  s_aac32234302c38::t_dbd63b77cb5608 1-56
+".agent_context/magic/backup/.agent_context_visual_review_docs_md__01｜DeerFlow 整体架构与分层总览.md.bak"
+  s_6fa685823cd171::t_bc97adb479a622 1-88
+".agent_context/magic/backup/.agent_context_visual_review_docs_md__02｜Gateway 与 LangGraph 运行时详解.md.bak"
+  s_6fa685823cd171::t_5973a623a54e0f 1-149
+".agent_context/magic/backup/.agent_context_visual_review_docs_md__03｜Lead Agent_Prompt_Tools 与 Middleware 详解.md.bak"
+  s_6fa685823cd171::t_6b247d48c2e87d 1-128
+".agent_context/magic/backup/.agent_context_visual_review_docs_md__04｜Tools_Sandbox_Uploads 与 Artifacts 详解.md.bak"
+  s_6fa685823cd171::t_0223f04481ba96 1-128
+".agent_context/magic/backup/.agent_context_visual_review_docs_md__05｜Skills_MCP 与 Memory 详解.md.bak"
+  s_6fa685823cd171::t_440cb5a4031762 1-97
+".agent_context/magic/backup/.agent_context_visual_review_docs_md__06｜Frontend Workspace 与 Chat 主链路详解.md.bak"
+  s_6fa685823cd171::t_0bd72f3e34c387 1-131
+".agent_context/magic/backup/.agent_context_visual_review_docs_md__07｜Frontend Settings_Models_Artifacts 数据流详解.md.bak"
+  s_6fa685823cd171::t_0fd3c823c45f43 1-140
+".agent_context/magic/backup/.agent_context_visual_review_docs_md__DeerFlow 2.0 源码分层详解_章节目录.md.bak"
+  s_50c55b7f0adaba::t_7759af96ad8185 1-677
+.agent_context/magic/batch_mapping.json
+  s_6fa685823cd171::t_b90f81683e1f30 1-347
+.agent_context/magic/batch_tokens.json
+  s_6fa685823cd171::t_e268fb9ea89ca7 1-12
+.agent_context/magic/block_ids.json
+  s_6fa685823cd171::t_86d8c3b2ee8b68 1-71
+.agent_context/magic/design_results_283.json
+  s_3681c5c1f97c5e::t_7f20cd9a12ce7b 1
+.agent_context/magic/designs.json
+  s_4e42c6a92dd7b4::t_423b094b4c15c1 1-1350
+.agent_context/magic/doc_sources.json
+  s_6fa685823cd171::t_d794da12307a60 1-206
+.agent_context/magic/fetch_blockids.sh
+  s_6fa685823cd171::t_4274e32851a2bc 1-57
+.agent_context/magic/fetch_blocks.py
+  s_3681c5c1f97c5e::t_225febd0e44a26 1-54
+.agent_context/magic/fetch_cache/AqFBdegF4osKOsx759OmqUGfyGd.json
+  s_6fa685823cd171::t_2360766848cd55 1
+.agent_context/magic/fetch_cache/B0EAdEvMoo9NCDxwUHLm5GMqyUf.json
+  s_6fa685823cd171::t_dcf23ac90da7c3 1
+.agent_context/magic/fetch_cache/BCeodzVdFoTfd2xYV7zmbv9ey2g.json
+  s_6fa685823cd171::t_41fc380577136c 1
+.agent_context/magic/fetch_cache/Bh2wdOJ4eoYqolxDDfnmSgNtyec.json
+  s_6fa685823cd171::t_84ddb794afb95b 1
+.agent_context/magic/fetch_cache/Dcvkdjf3KopJmsxZa9QmEQPWyic.json
+  s_3681c5c1f97c5e::t_d93cdda0b51a9a 1
+.agent_context/magic/fetch_cache/DujDdwq1uoWq1lxzFJ6m3ACSyYc.json
+  s_6fa685823cd171::t_1676dd1121f007 1
+.agent_context/magic/fetch_cache/EH0IdtUGuoPKQfxql2UmiuiGylu.json
+  s_3681c5c1f97c5e::t_5cd3ad2f1843ed 1
+.agent_context/magic/fetch_cache/FGBSd60wYoPStFxTn1wmos4Iyhd.json
+  s_6fa685823cd171::t_3c8ca5f53f6d90 1
+.agent_context/magic/fetch_cache/FKvZdX732osfBNxyscOmHFkgydd.json
+  s_6fa685823cd171::t_3fd1b05ca13c3c 1
+.agent_context/magic/fetch_cache/G6g2dsCTJoC7I5xBSvymxpYGyDh.json
+  s_6fa685823cd171::t_3b152f5fde235a 1
+.agent_context/magic/fetch_cache/IiQ9dfvfUoPcXLxr8JTmgS5nyKb.json
+  s_6fa685823cd171::t_53ba2d566a8991 1
+.agent_context/magic/fetch_cache/IvEydJu3Poud6vx4mR0mThL1y4f.json
+  s_6fa685823cd171::t_6ab5908c277d8c 1
+.agent_context/magic/fetch_cache/JFD3dRkmvoRYgHxlJD1mbEUUyeb.json
+  s_6fa685823cd171::t_93ca41f348f4d7 1
+.agent_context/magic/fetch_cache/JH1VdeODuo4gavxMsiCmIJ5cyih.json
+  s_6fa685823cd171::t_37fc30d21e9db2 1
+.agent_context/magic/fetch_cache/JcBLdKkKro44LfxcRmjmkANvypd.json
+  s_6fa685823cd171::t_9964f7fe62c6de 1
+.agent_context/magic/fetch_cache/KRkUdNbBTogsdVxvGYomgrhbymh.json
+  s_6fa685823cd171::t_da347dc0d55ae1 1
+.agent_context/magic/fetch_cache/KnQBdOROXoOE37xAKPdmljJJyHd.json
+  s_6fa685823cd171::t_c33fb2c0af05b3 1
+.agent_context/magic/fetch_cache/LEsJdNSIWoaRpUxxcxCms3S9ykd.json
+  s_6fa685823cd171::t_d2a573379b5b6c 1
+.agent_context/magic/fetch_cache/LfAcdzwGoovGBKxt2Y3muPMFyRe.json
+  s_6fa685823cd171::t_e02d82e3e01646 1
+.agent_context/magic/fetch_cache/Ms9CdobALoYwXxxIolSmjnYhydh.json
+  s_6fa685823cd171::t_8460c19a11ca5c 1
+.agent_context/magic/fetch_cache/OOKTdDOiRokb7wx2rFRmQShcyrI.json
+  s_3681c5c1f97c5e::t_7c9dfd16aadc7d 1
+.agent_context/magic/fetch_cache/ObtfdmyjXo7OYpxM0i1mnRVZyAh.json
+  s_6fa685823cd171::t_66920b13acd6dc 1
+.agent_context/magic/fetch_cache/QnVXd93l7oRHrYxKiMrmy1R1yqd.json
+  s_6fa685823cd171::t_090d74d8550d0e 1
+.agent_context/magic/fetch_cache/R63yd6XPyoTIaCxrHgKmzacOyoh.json
+  s_3681c5c1f97c5e::t_866c6112dc963f 1
+.agent_context/magic/fetch_cache/R7HYdJ5PXoiOdgxbpJfmMYDfyRb.json
+  s_6fa685823cd171::t_3e395c76d91e04 1
+.agent_context/magic/fetch_cache/RRlAdJ5QeoVOVmxAd5AmHF9Wycf.json
+  s_6fa685823cd171::t_419752efa17f81 1
+.agent_context/magic/fetch_cache/RUtPdneNLoPyI0x5ksKmblLJynd.json
+  s_6fa685823cd171::t_6b2defbced57b4 1
+.agent_context/magic/fetch_cache/SmrFdFwMYoZ1rSxcEWRm3aTSyVc.json
+  s_6fa685823cd171::t_08f14ea41d44e1 1
+.agent_context/magic/fetch_cache/TFY8df1x5o53mixHM3gmqNqlyce.json
+  s_3681c5c1f97c5e::t_6569593c980d82 1
+.agent_context/magic/fetch_cache/UvKWdlU67ov47kx6ygsmR4FkyKd.json
+  s_6fa685823cd171::t_63fc6bdfa4829e 1
+.agent_context/magic/fetch_cache/VEKEdbAY1o3fUTxJXNWmqtw9yke.json
+  s_6fa685823cd171::t_30e9ba314ebd27 1
+.agent_context/magic/fetch_cache/WI9ddl8N4ozZ59xVObim5745yOe.json
+  s_6fa685823cd171::t_4c80b2dcc3b090 1
+.agent_context/magic/fetch_cache/XBu1d292ioMiS1xPPgGmIfayybg.json
+  s_6fa685823cd171::t_cb0a23c9cecfbe 1
+.agent_context/magic/fetch_cache/XgSYdKk4goj6hXxiChvmPQX4yPc.json
+  s_6fa685823cd171::t_2f128254a395a7 1
+.agent_context/magic/fetch_cache/XyAFdSxNooUswXxcVx8mbR7iyqg.json
+  s_6fa685823cd171::t_19e6528c60af0a 1
+.agent_context/magic/fetch_cache/YZrtddBLUoi6dHxaE9qmtkUeyag.json
+  s_6fa685823cd171::t_f44bf0ab8a326d 1
+.agent_context/magic/fetch_cache/YhEfdVXOYoljEFxq2aWmD2UZyCf.json
+  s_6fa685823cd171::t_ad10b84e7c3b5a 1
+.agent_context/magic/fetch_cache/ZTBedtbq1owHuuxfEj1mj6zny4J.json
+  s_6fa685823cd171::t_d70295a9a77f9d 1
+.agent_context/magic/fix_15_remaining.py
+  s_3681c5c1f97c5e::t_17ea18d695ed0e 1-70
+.agent_context/magic/fix_15_results.json
+  s_3681c5c1f97c5e::t_2e4e44db990c67 1-114
+.agent_context/magic/insert_14.py
+  s_3681c5c1f97c5e::t_787de8a41ce801 1-72
+.agent_context/magic/insert_14_results.json
+  s_3681c5c1f97c5e::t_2bacdc984ba9fa 1-67
+.agent_context/magic/lark_folder_files.json
+  s_3681c5c1f97c5e::t_654bca23fe4dea 1-1782
+.agent_context/magic/local_fake_docs.json
+  s_6fa685823cd171::t_083cb3b50d33ba 1-71
+.agent_context/magic/local_fix_map.json
+  s_3681c5c1f97c5e::t_10d0aac27e7e8d 1
+.agent_context/magic/make_designs.py
+  s_052c7edc2dc292::t_3db8461cf42e7c 1-39
+.agent_context/magic/push_one.py
+  s_6fa685823cd171::t_edd94e2ba73aa9 1-20
+.agent_context/magic/push_payload_276.json
+  s_3681c5c1f97c5e::t_4d15e0dfecedae 1
+.agent_context/magic/push_remote.py
+  s_3681c5c1f97c5e::t_c5ee65a70723cc 1-69
+.agent_context/magic/push_remote.sh
+  s_6fa685823cd171::t_c6a1e6c2d42e5b 1-113
+.agent_context/magic/push_results.json
+  s_3681c5c1f97c5e::t_08202ad0355483 1-2358
+.agent_context/magic/push_results.jsonl
+  s_6fa685823cd171::t_3a6b708e34d02d 1-69
+.agent_context/magic/push_results_live.json
+  s_3681c5c1f97c5e::t_6c99b95cd5e2a0 1
+.agent_context/magic/redo229.json
+  s_3681c5c1f97c5e::t_581275343a3067 1
+.agent_context/magic/redo_7.json
+  s_3681c5c1f97c5e::t_dad1198993a7bc 1
+.agent_context/magic/redo_7_done.json
+  s_3681c5c1f97c5e::t_a9bc0ede3dbdbd 1
+.agent_context/magic/repush_15.json
+  s_3681c5c1f97c5e::t_de24cc6c751734 1
+.agent_context/magic/repush_15.py
+  s_3681c5c1f97c5e::t_2bdd694e69a5d9 1-41
+.agent_context/magic/repush_15_results.json
+  s_3681c5c1f97c5e::t_6e5e0792af96f7 1-152
+.agent_context/magic/retry_9_results.json
+  s_3681c5c1f97c5e::t_508c900767893e 1-38
+.agent_context/magic/review_batches/batch_00.json
+  s_3681c5c1f97c5e::t_9686d09cba8b65 1
+.agent_context/magic/review_batches/batch_01.json
+  s_3681c5c1f97c5e::t_4f46a58f26cf8f 1
+.agent_context/magic/review_batches/batch_02.json
+  s_3681c5c1f97c5e::t_bfc7b57b1f3132 1
+.agent_context/magic/review_batches/batch_03.json
+  s_3681c5c1f97c5e::t_7be2febd3f4078 1
+.agent_context/magic/review_batches/batch_04.json
+  s_3681c5c1f97c5e::t_5e2bce8d9e6090 1
+.agent_context/magic/review_batches/batch_05.json
+  s_3681c5c1f97c5e::t_dd699b05706787 1
+.agent_context/magic/review_batches/batch_06.json
+  s_3681c5c1f97c5e::t_b779374fbd3f09 1
+.agent_context/magic/review_batches/batch_07.json
+  s_3681c5c1f97c5e::t_4bf42dcb87c568 1
+.agent_context/magic/scan_cache/JLjKdD7K2oGpWuxvWTHmZEjhyYe.json
+  s_3681c5c1f97c5e::t_c90ac6850b55e8 1
+.agent_context/magic/scan_cache/JdI1dhTOboOwsuxU7DamW4yPyOg.json
+  s_3681c5c1f97c5e::t_e11abffb69641e 1
+.agent_context/magic/scan_cache/OOKTdDOiRokb7wx2rFRmQShcyrI.json
+  s_3681c5c1f97c5e::t_ed2bd902d8db05 1
+.agent_context/magic/scan_cache/TFY8df1x5o53mixHM3gmqNqlyce.json
+  s_3681c5c1f97c5e::t_9a2b3996b0658e 1
+.agent_context/magic/scan_cache/XvbLdJrb7oQmERxIHlPmrPaHyUe.json
+  s_3681c5c1f97c5e::t_3af0800d15cedc 1
+.agent_context/magic/scan_remote_fake.json
+  s_3681c5c1f97c5e::t_fe76970d701e2a 1-2502
+.agent_context/magic/scan_remote_fake.py
+  s_3681c5c1f97c5e::t_15acce0873731b 1-72
+.agent_context/magic/scope.json
+  s_3681c5c1f97c5e::t_b5598540102b03 1-145
+.agent_context/magic/source_missing.json
+  s_3681c5c1f97c5e::t_6b7bfa2850fe12 1-19
+.agent_context/magic/test_result_3.json
+  s_3681c5c1f97c5e::t_849d81a7944ad6 1
+.agent_context/magic/verify.py
+  s_6fa685823cd171::t_2822def5b03da3 1-90
+.agent_context/magic/workflow_args.json
+  s_3681c5c1f97c5e::t_d4153234a07465 1
+.agent_context/magic/workflow_args_283.json
+  s_3681c5c1f97c5e::t_4dcf9ca8068051 1
+.agent_context/mermaid_fake_batch_001.json
+  s_410a2bcc1ee389::t_891a358b2eb9a0 1-14
+.workflow-journal/deerflow-mermaid-realify-batch.workflow.events.jsonl
+  s_06a33e59660499::t_4f4d6e9eb5c54e 1-22
+.workflow-journal/deerflow-mermaid-realify-batch.workflow.jsonl
+  s_06a33e59660499::t_46148fbd638901 1-11
+.workflow-journal/deerflow-mermaid-realify-batch.workflow.meta.json
+  s_410a2bcc1ee389::t_352320cc264ae2 1
+.workflow-journal/deerflow-mermaid-realify-batch.workflow.progress.json
+  s_06a33e59660499::t_62ff7ba6ad9b4a 1
+.workflow-journal/deerflow-mermaid-realify-batch.workflow.result.json
+  s_06a33e59660499::t_07bd9cd527a506 1
+deerflow-mermaid-realify-283.workflow.js
+  s_3681c5c1f97c5e::t_45bf3824e86bbe 1-118
+deerflow-mermaid-realify-all.workflow.js
+  s_3681c5c1f97c5e::t_9f0caf4b1609cf 1-119
+deerflow-mermaid-realify-batch.workflow.js
+  s_410a2bcc1ee389::t_26dc1d7b7d08a4 1-76
+deerflow-mermaid-redo-7.workflow.js
+  s_3681c5c1f97c5e::t_d4c2e69d5aee3c 1-52
+deerflow-mermaid-review-batches.workflow.js
+  s_3681c5c1f97c5e::t_5165d361cefdee 1-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "4b695b2b8da15397abc5b0c8578d705da91a58e8",
+  "prompts": {},
+  "sessions": {
+    "s_052c7edc2dc292": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-a7f4901c13f64807c",
+        "model": "unknown"
+      },
+      "human_author": "訾绍飞 <zishaofei@bytedance.com>"
+    },
+    "s_06a33e59660499": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f40ff-4223-73b2-8a98-4df984f6dffc",
+        "model": "unknown"
+      },
+      "human_author": "訾绍飞 <zishaofei@bytedance.com>"
+    },
+    "s_3681c5c1f97c5e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "53b090fc-c413-4eca-8c5a-0acc1388bca4",
+        "model": "unknown"
+      },
+      "human_author": "訾绍飞 <zishaofei@bytedance.com>"
+    },
+    "s_410a2bcc1ee389": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f4095-c433-7251-90f8-28ad4c3b413b",
+        "model": "unknown"
+      },
+      "human_author": "訾绍飞 <zishaofei@bytedance.com>"
+    },
+    "s_4e42c6a92dd7b4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-a08715a7a4713d028",
+        "model": "unknown"
+      },
+      "human_author": "訾绍飞 <zishaofei@bytedance.com>"
+    },
+    "s_50c55b7f0adaba": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f3fd0-d52e-7261-8daf-f9bf2068b144",
+        "model": "unknown"
+      },
+      "human_author": "訾绍飞 <zishaofei@bytedance.com>"
+    },
+    "s_6fa685823cd171": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "040a8e81-465d-4f9e-8b24-7df0128f2066",
+        "model": "unknown"
+      },
+      "human_author": "訾绍飞 <zishaofei@bytedance.com>"
+    },
+    "s_aac32234302c38": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f3c57-b39f-7d63-87d7-54bbce150da8",
+        "model": "unknown"
+      },
+      "human_author": "訾绍飞 <zishaofei@bytedance.com>"
+    },
+    "s_df1fdedbaff076": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f3fd0-f4c1-7e62-86ba-4afa5f2bd6b9",
+        "model": "unknown"
+      },
+      "human_author": "訾绍飞 <zishaofei@bytedance.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
