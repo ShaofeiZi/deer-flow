@@ -39,11 +39,28 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant GW as RunsWorker
+    participant CL as DeerFlowClient stream
+    participant CFG as tracing_config
+    participant FAC as factory build_tracing_callbacks
+    participant MD as metadata inject_langfuse_metadata
+    participant RC as RunnableConfig
+    participant GR as lead_agent astream
+    participant LF as Langfuse CallbackHandler
+
+    GW->>CFG: get_enabled_tracing_providers
+    CL->>CFG: get_enabled_tracing_providers
+    CFG-->>FAC: langsmith or langfuse
+    FAC->>FAC: LangChainTracer or Langfuse CallbackHandler
+    GW->>MD: thread_id user_id assistant_id model_name
+    CL->>MD: thread_id user_id assistant_id model_name
+    MD->>RC: setdefault langfuse_session_id user_id tags
+    GW->>RC: append config callbacks
+    CL->>RC: append config callbacks
+    GW->>GR: agent.astream runnableConfig
+    CL->>GR: agent.astream config
+    GR->>LF: on_chain_start parent_run_id None
+    LF->>LF: propagate session_id user_id to root trace
+    GR-->>LF: nested LLM spans and tool spans
 ```

@@ -40,10 +40,30 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+    TC["tool call request"]
+    GM["GuardrailMiddleware.wrap_tool_call"]
+    BR["_build_request to GuardrailRequest"]
+    PV["GuardrailProvider.evaluate"]
+    DEC["GuardrailDecision"]
+    AL["allow=true"]
+    DN["allow=false"]
+    HDL["handler to tool runs"]
+    DM["_build_denied_message"]
+    TM["ToolMessage status=error"]
+    ERR["provider raised"]
+    FC["fail_closed=true"]
+    FO["fail_closed=false"]
+    AG["agent adapts"]
+
+    TC --> GM
+    GM --> BR
+    BR --> PV
+    PV --> DEC
+    DEC -- AL --> HDL
+    DEC -- DN --> DM
+    DM --> TM
+    TM --> AG
+    PV -- ERR --> FC
+    FC -- blocks --> DM
+    ERR -- FO --> HDL
 ```

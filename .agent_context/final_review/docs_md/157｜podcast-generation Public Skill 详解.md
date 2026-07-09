@@ -38,10 +38,35 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  CLI["generate.py CLI"]
+  GP["generate_podcast"]
+  LOAD["Script.from_dict"]
+  MD["generate_markdown"]
+  TN["tts_node"]
+  PROV["_resolve_tts_provider"]
+  WORK["_default_max_workers"]
+  POOL["ThreadPoolExecutor _process_line"]
+  VOLC["text_to_speech_volcengine"]
+  MM["text_to_speech_minimax"]
+  RTY["_backoff_sleep retry"]
+  MIX["mix_audio"]
+  OUT["output MP3 and transcript"]
+
+  CLI --> GP
+  GP --> LOAD
+  LOAD --> MD
+  LOAD --> TN
+  TN --> PROV
+  PROV --> WORK
+  WORK --> POOL
+  POOL --> VOLC
+  POOL --> MM
+  VOLC -.transient error.-> RTY
+  MM -.transient error.-> RTY
+  RTY -.backoff retry.-> VOLC
+  RTY -.backoff retry.-> MM
+  VOLC --> MIX
+  MM --> MIX
+  MIX --> OUT
+  MD --> OUT
 ```

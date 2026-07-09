@@ -51,10 +51,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Loop[getMessageGroups over thread.messages] --> Hidden{isHiddenFromUIMessage}
+  Hidden -- yes --> Skip[skip message]
+  Hidden -- no --> Type{message.type}
+  Type -- human --> Human[human group]
+  Type -- tool --> Tool{ask_clarification tool}
+  Tool -- yes --> Clarify[clarification group]
+  Tool -- no --> Append[append to open group]
+  Type -- ai --> Files{hasPresentFiles}
+  Files -- yes --> Present[present-files group]
+  Files -- no --> Sub{hasSubagent task call}
+  Sub -- yes --> Subagent[subagent group]
+  Sub -- no --> Proc{hasReasoning or hasToolCalls}
+  Proc -- yes --> Processing[processing group]
+  Proc -- no --> Asst[assistant bubble]
 ```

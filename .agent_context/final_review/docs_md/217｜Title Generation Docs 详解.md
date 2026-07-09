@@ -38,10 +38,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Hook["aafter_model hook"] --> Gate{"should_generate_title"}
+  Gate -->|"enabled first exchange"| Prompt["_build_title_prompt"]
+  Gate -->|"titled or disabled"| Skip["return None"]
+  Prompt --> Model["create_chat_model thinking off"]
+  Model --> Invoke["model.ainvoke tag middleware title"]
+  Invoke --> Parse["_parse_title strip quotes max_chars"]
+  Parse -->|"non-empty"| Set["state title set"]
+  Parse -->|"empty or exception"| Fallback["_fallback_title truncates user_msg"]
+  Fallback --> Set
+  Set --> Ckpt["checkpoint channel_values title"]
+  Ckpt --> Worker["run_worker finally block"]
+  Ckpt --> Router["PATCH threads state with title"]
+  Worker --> Sync["thread_store.update_display_name"]
+  Router --> Sync
+  Sync --> MetaRow["threads_meta.display_name row"]
+  MetaRow --> Search["threads search returns title"]
 ```

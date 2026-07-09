@@ -56,10 +56,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  BA[before_agent hook] --> DYN[DynamicContextMiddleware inject memory and date]
+  BA --> TBA[TodoMiddleware clear stale run reminders]
+  DYN --> BM[before_model hook]
+  TBA --> BM
+  BM --> SUM[SummarizationMiddleware _maybe_summarize]
+  BM --> TBM[TodoMiddleware inject todo_reminder if write_todos lost]
+  SUM --> WMC[wrap_model_call hook]
+  TBM --> WMC
+  WMC --> SKILL[SkillActivationMiddleware inject SKILL.md]
+  WMC --> TDR[TodoMiddleware drain completion reminders]
+  SKILL --> MODEL[LLM Model invoke]
+  TDR --> MODEL
+  MODEL --> AM[after_model hook]
+  AM --> TITLE[TitleMiddleware generate thread title]
+  AM --> TAM[TodoMiddleware jump_to model if todos incomplete]
+  TAM --> WMC
+  AM --> AA[after_agent hook]
+  AA --> MEM[MemoryMiddleware queue via get_memory_queue]
 ```

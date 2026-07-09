@@ -57,11 +57,28 @@ flowchart TD
 | 阅读路径 | 阅读路径：先判断它在哪个 hook 生效，再看它读写 ThreadState 的哪些字段。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Agent
+  participant MW as SandboxMiddleware
+  participant Tool as ensure_sandbox_initialized
+  participant Prov as SandboxProvider
+  participant RState as runtime.state
+  participant Graph as ThreadState.sandbox
+
+  Note over Agent,MW: lazy_init True default
+  Agent->>MW: before_agent skip acquire
+  Agent->>MW: wrap_tool_call request
+  MW->>RState: read prev sandbox_id
+  MW->>Tool: call handler
+  Tool->>Prov: get or acquire by thread_id
+  Prov-->>Tool: sandbox_id
+  Tool->>RState: write sandbox local only
+  Tool-->>MW: ToolMessage result
+  MW->>RState: read curr sandbox_id
+  alt new sandbox_id appeared
+    MW->>Graph: Command update sandbox and messages
+  end
+  MW-->>Agent: Command or ToolMessage
+  Agent->>MW: after_agent
+  MW->>Prov: release sandbox_id
 ```

@@ -39,11 +39,20 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+    [*] --> execute_async: task_tool invoke
+    execute_async --> Running: scheduler_pool submit
+    Running --> Completed: SubagentStatus COMPLETED
+    Running --> Failed: SubagentStatus FAILED
+    Running --> Cancelled: CancelledError
+    Running --> TimedOut: SubagentStatus TIMED_OUT
+    Running --> PollingTimedOut: poll_count over max
+    Completed --> cleanup_background_task
+    Failed --> cleanup_background_task
+    Cancelled --> _await_subagent_terminal: request_cancel
+    _await_subagent_terminal --> cleanup_background_task
+    TimedOut --> cleanup_background_task
+    PollingTimedOut --> _schedule_deferred_subagent_cleanup: request_cancel
+    _schedule_deferred_subagent_cleanup --> cleanup_background_task
+    cleanup_background_task --> [*]
 ```

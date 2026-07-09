@@ -52,11 +52,15 @@ flowchart TD
 | 阅读路径 | 阅读路径：先确认它在系统链路中的上游和下游，再看关键函数。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+    [*] --> LockHeld: acquire file_operation_lock
+    LockHeld --> Read: sandbox.read_file
+    Read --> Empty: content empty
+    Empty --> [*]: return OK
+    Read --> Check: old_str in content
+    Check --> NotFound: old_str missing
+    NotFound --> [*]: return Error
+    Check --> Replaced: content.replace
+    Replaced --> Written: sandbox.write_file
+    Written --> [*]: return OK
 ```

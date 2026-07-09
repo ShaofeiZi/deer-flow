@@ -39,11 +39,38 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant C as Client
+    participant R as routers/auth.py
+    participant JWT as auth/jwt.py
+    participant MW as auth_middleware.py
+    participant D as deps.get_current_user_from_request
+    participant P as LocalAuthProvider
+    participant Repo as SQLiteUserRepository
+    participant UC as user_context ContextVar
+
+    C->>R: POST /api/v1/auth/login/local
+    R->>P: authenticate email/password
+    P->>Repo: get_user_by_email
+    Repo-->>P: User record
+    P->>P: verify_password_async
+    P-->>R: User
+    R->>JWT: create_access_token user_id token_version
+    JWT-->>R: JWT string
+    R-->>C: 200 + access_token HttpOnly cookie
+
+    C->>MW: GET /api/v1/threads (cookie)
+    MW->>MW: _is_public path? no
+    MW->>D: resolve access_token cookie
+    D->>JWT: decode_token
+    JWT-->>D: TokenPayload or TokenError
+    D->>P: get_user payload.sub
+    P->>Repo: get_user_by_id
+    Repo-->>P: User
+    P-->>D: User
+    D->>D: check token_version == User.token_version
+    D-->>MW: User
+    MW->>UC: set_current_user User
+    MW->>MW: request.state.user = User
+    MW-->>C: route response
 ```

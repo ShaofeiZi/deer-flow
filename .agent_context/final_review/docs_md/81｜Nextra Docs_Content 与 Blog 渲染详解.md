@@ -39,11 +39,20 @@ flowchart TD
 | 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  Req["Next request URL"] --> ResLang["getI18n cookie locale"]
+  ResLang --> PrefLang["getPreferredBlogLang"]
+  Req --> Route{"mdxPath?"}
+  Route -->|"empty"| AllPosts["getAllPosts"]
+  Route -->|"tags/x"| TagPage["getBlogIndexData tag filter"]
+  Route -->|"slug"| LoadBlog["loadBlogPage"]
+  AllPosts --> MapPosts["getPageMap /en/posts and /zh/posts"]
+  LoadBlog --> TryLangs["importPage slug for en and zh"]
+  TryLangs --> PickLang["select preferred lang fallback"]
+  MapPosts --> Merge["mergePostsBySlug dedupe tags sort by date"]
+  Merge --> PageMap["blog pageMap sidebar"]
+  PickLang --> Wrapper["mdx-components wrapper"]
+  PageMap --> NextraLayout["nextra-theme-docs Layout"]
+  Wrapper --> NextraLayout
+  NextraLayout --> Browser["rendered blog page"]
 ```

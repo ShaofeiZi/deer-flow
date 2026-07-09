@@ -41,10 +41,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  A["MemoryMiddleware after_agent"] --> B["filter and detect signals"]
+  B --> C["get_effective_user_id"]
+  C --> D["MemoryUpdateQueue.add"]
+  D --> E{"debounce window"}
+  E -->|expire| F["_process_queue on timer thread"]
+  F --> G["MemoryUpdater.update_memory"]
+  G --> H{"loop active"}
+  H -->|yes| I["sync executor offload"]
+  H -->|no| J["_do_update_memory_sync"]
+  I --> J
+  J --> K["build prompt from stored memory"]
+  K --> L["model.invoke sync"]
+  L --> M["parse and apply updates"]
+  M --> N["strip upload mentions"]
+  N --> O["FileMemoryStorage.save per-user"]
+  O --> P["/api/memory reads back"]
 ```

@@ -119,10 +119,23 @@ backend/packages/harness/deerflow/agents/middlewares/
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Entry[build_middlewares config model_name] --> Base[build_lead_runtime_middlewares]
+  Base --> Dyn[DynamicContext + SkillActivation always]
+  Dyn --> SumQ{summarization.enabled}
+  SumQ -->|yes| Sum[DeerFlowSummarizationMiddleware]
+  SumQ -->|no| PlanQ{is_plan_mode}
+  Sum --> PlanQ
+  PlanQ -->|yes| Todo[TodoMiddleware]
+  PlanQ -->|no| Title[TitleMiddleware + MemoryMiddleware]
+  Todo --> Title
+  Title --> VisQ{model supports_vision}
+  VisQ -->|yes| View[ViewImageMiddleware]
+  VisQ -->|no| SubQ{subagent_enabled}
+  View --> SubQ
+  SubQ -->|yes| SubLim[SubagentLimitMiddleware]
+  SubQ -->|no| LoopQ{loop_detection.enabled}
+  SubLim --> LoopQ
+  LoopQ -->|yes| Loop[LoopDetectionMiddleware]
+  LoopQ -->|no| Clar[ClarificationMiddleware last]
+  Loop --> Clar
 ```

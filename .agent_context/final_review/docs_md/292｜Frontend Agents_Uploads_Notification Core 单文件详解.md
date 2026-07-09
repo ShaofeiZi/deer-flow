@@ -39,11 +39,28 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant U as PromptInput
+    participant V as splitUnsupportedUploadFiles
+    participant S as useThreadStream sendMessage
+    participant C as promptInputFilePartToFile
+    participant A as uploadFiles api
+    participant B as backend uploads route
+    participant Q as queryClient invalidate
+    participant N as useNotification showNotification
+    U->>V: drop fileList
+    V-->>U: accepted minus .app bundles
+    U->>S: submit message.files
+    S->>C: convert each FileUIPart
+    C-->>S: File objects
+    S->>A: POST /api/threads/threadId/uploads
+    A->>B: FormData files
+    B-->>A: UploadedFileInfo[]
+    A-->>S: uploadResponse
+    S->>S: setOptimisticMessages uploaded status
+    S->>Q: invalidate uploads list
+    Q-->>S: refetch
+    S->>N: onFinish when tab hidden
+    N->>N: check supported enabled throttle permission
+    N-->>U: new Notification title body
 ```

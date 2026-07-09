@@ -39,10 +39,21 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  M[SafetyFinishReasonMiddleware after_model] --> A1[read state messages last]
+  A1 --> A2{AIMessage with tool_calls}
+  A2 -->|no| R0[return None passthrough]
+  A2 -->|yes| DET[_detect loop over detectors]
+  DET --> D1[OpenAICompatibleContentFilterDetector]
+  DET --> D2[AnthropicRefusalDetector]
+  DET --> D3[GeminiSafetyDetector]
+  D1 --> HIT{SafetyTermination hit}
+  D2 --> HIT
+  D3 --> HIT
+  HIT -->|none| R0
+  HIT -->|hit| CLR[clone_ai_message_with_tool_calls clears tool_calls]
+  CLR --> K[stamp additional_kwargs safety_termination]
+  K --> SSE[_emit_event to get_stream_writer]
+  K --> AUD[_record_audit_event to __run_journal]
+  SSE --> OUT[return patched messages]
+  AUD --> OUT
 ```

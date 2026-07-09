@@ -39,10 +39,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  subgraph FD["frontend-design"]
+    FD1["frontend request"] --> FD2["SKILL.md aesthetic direction"] --> FD3["index.html + Deerflow badge"]
+  end
+  subgraph WD["web-design-guidelines"]
+    WD1["UI file arg"] --> WD2["WebFetch vercel-labs rules"] --> WD3["rule findings"]
+  end
+  subgraph CD["code-documentation"]
+    CD1["codebase"] --> CD2["analysis phases"] --> CD3["README/API/architecture docs"]
+  end
+  subgraph VD["vercel-deploy-claimable"]
+    VD1["project dir"] --> VD2["deploy.sh detect_framework"] --> VD3["previewUrl + claimUrl"]
+  end
+  subgraph CT["claude-to-deerflow"]
+    CT1["message arg"] --> CT2["chat.sh health and /runs/stream"] --> CT3["final AI response"]
+  end
 ```

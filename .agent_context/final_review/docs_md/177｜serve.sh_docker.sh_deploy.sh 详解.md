@@ -41,11 +41,25 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant U as make dev
+  participant S as serve.sh
+  participant W as wait-for-port.sh
+  participant G as uvicorn Gateway 8001
+  participant F as Frontend pnpm 3000
+  participant N as Nginx 2026
+  U->>S: --dev
+  S->>S: stop_all reclaim ports
+  S->>S: config check and config-upgrade.sh
+  S->>S: uv sync and pnpm install
+  S->>G: run_service
+  S->>W: poll 8001
+  W-->>S: listening
+  S->>F: run_service
+  S->>W: poll 3000
+  W-->>S: listening
+  S->>N: run_service
+  S->>W: poll 2026
+  W-->>S: listening
+  S-->>U: ready localhost 2026
 ```

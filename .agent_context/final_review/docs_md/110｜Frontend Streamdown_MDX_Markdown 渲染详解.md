@@ -40,11 +40,18 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  AssistantMsg["assistant markdown"] --> Preprocess["preprocessStreamdownMarkdown"]
+  Preprocess --> StreamdownPlugins["streamdownPlugins"]
+  Subtask["subtask content"] --> WordAnim["streamdownPluginsWithWordAnimation"]
+  HumanMsg["human message"] --> HumanPlugins["humanMessagePlugins"]
+  ReasoningText["reasoning text"] --> ReasoningPlugins["reasoningPlugins"]
+  ArtifactCode["artifact code"] --> CodeEditor["CodeEditor"]
+  StreamdownPlugins --> MarkdownContent["MarkdownContent"]
+  WordAnim --> MarkdownContent
+  HumanPlugins --> MarkdownContent
+  ReasoningPlugins --> StreamdownComp["ClipboardSafeStreamdown"]
+  CodeEditor --> CodeMirror["CodeMirror extensions"]
+  MarkdownContent --> MessageResponse["MessageResponse + CitationLink"]
+  StreamdownPlugins -. minus rehypeRaw .-> ReasoningPlugins
 ```

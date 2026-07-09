@@ -40,10 +40,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Mgr["ChannelManager _handle_chat"] --> Bus["bus publish_outbound"]
+  Bus --> Base["Channel _on_outbound"]
+  Base --> Txt["channel.send text"]
+  Txt --> DT["DingTalkChannel.send"]
+  Txt --> WC["WeComChannel _send_ws"]
+  Txt --> WX["WechatChannel _send_text_message"]
+  DT --> Adapt["_adapt_markdown_for_dingtalk"]
+  DT --> Card["AI card stream or sampleMarkdown"]
+  WC --> Stream["reply_stream with retry"]
+  WX --> Ctx["_resolve_context_token"]
+  Base --> File["channel.send_file"]
+  File --> DTUp["DingTalk _upload_media"]
+  File --> WCUp["WeCom _upload_media_ws chunked"]
+  File --> WXUp["Wechat AES-128-ECB and CDN upload"]
 ```

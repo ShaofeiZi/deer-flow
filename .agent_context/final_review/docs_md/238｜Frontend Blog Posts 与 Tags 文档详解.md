@@ -38,11 +38,23 @@ flowchart TD
 | 阅读路径 | 阅读路径：从 URL/API 入口往内追 service，再看数据落到哪里。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  Cookie["locale cookie"] --> GetI18n["getI18n detectLocaleServer"]
+  GetI18n --> PrefLang["getPreferredBlogLang"]
+  ContentZh["content/zh/posts mdx"] --> PageMap["getPageMap /zh/posts"]
+  ContentEn["content/en/posts mdx"] --> PageMap2["getPageMap /en/posts"]
+  PageMap --> Collect["collectLocalizedBlogPosts"]
+  PageMap2 --> Collect
+  Collect --> Merge["mergePostsBySlug"]
+  PrefLang --> Merge
+  Merge --> GetAll["getAllPosts cached"]
+  GetAll --> Index["getBlogIndexData"]
+  Index --> Tags["tags index group by count"]
+  Index --> Filter["matchTags by tag slug"]
+  Layout["app/blog/layout"] --> Index
+  RootRoute["app/blog/...mdxPath page"] --> GetAll
+  TagRoute["app/blog/tags page"] --> Filter
+  GetAll --> PostList["PostList render"]
+  Filter --> PostList
+  Index --> Sidebar["Nextra pageMap sidebar"]
 ```

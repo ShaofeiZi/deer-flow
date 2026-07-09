@@ -39,11 +39,15 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  Tchk["test_check_script.py"] -->|"importlib.spec"| Chk["scripts/check.py"]
+  Tuv["test_detect_uv_extras.py"] -->|"importlib.spec"| Uv["scripts/detect_uv_extras.py"]
+  Chk --> ChkFn["find_pnpm_command"]
+  Uv --> UvFn["resolve_extras parse_env_extras format_flags"]
+  Tblk["test_detect_blocking_io_static.py"] -->|"from support.detectors"| Blk["support/detectors/blocking_io_static.py"]
+  Tthr["test_detect_thread_boundaries.py"] -->|"from support.detectors"| Thr["support/detectors/thread_boundaries.py"]
+  Blk --> BlkFn["scan_file main --format json"]
+  Thr --> ThrFn["scan_file main --min-severity"]
+  Tdev["test_dev_entrypoint.py"] -->|"subprocess sh"| Dev["docker/dev-entrypoint.sh"]
+  Dev --> DevFn["--print-extras UV_EXTRAS --extra X"]
 ```

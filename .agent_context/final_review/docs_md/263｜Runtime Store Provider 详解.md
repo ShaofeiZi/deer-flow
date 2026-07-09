@@ -40,10 +40,21 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+    AppConfig["AppConfig.checkpointer"] --> make_store
+    AppConfig --> get_store
+    make_store --> _async_store
+    get_store --> _sync_store_cm
+    _async_store --> BackendSelect{"config.type"}
+    _sync_store_cm --> BackendSelect
+    BackendSelect -->|"memory"| InMemoryStore
+    BackendSelect -->|"sqlite"| SqliteUtils
+    BackendSelect -->|"postgres"| PostgresStore
+    SqliteUtils -->|"resolve_sqlite_conn_str + ensure_sqlite_parent_dir"| SqliteStore
+    InMemoryStore --> BaseStore["BaseStore app.state.store"]
+    SqliteStore --> BaseStore
+    PostgresStore --> BaseStore
+    BaseStore -->|"make_thread_store sf, store"| ThreadStore["app.state.thread_store"]
+    BaseStore -->|"_migrate_orphaned_threads admin_id"| OrphanMig["orphan migration asearch aput"]
+    ThreadStore --> ThreadsNS["threads namespace aget aput asearch adelete"]
+    OrphanMig --> ThreadsNS
 ```

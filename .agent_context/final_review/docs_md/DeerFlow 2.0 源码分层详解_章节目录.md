@@ -667,11 +667,18 @@ flowchart LR
 | 阅读路径 | 把它理解成文档系统的路由表：先找主题，再跳到章节。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  A[chapter list lark_folder_files.json] --> B[scan_remote_fake.py]
+  B --> C[lark-cli docs fetch tail]
+  C --> D[scan_cache per-token json]
+  D --> E[classify last whiteboard block]
+  E --> F[scan_remote_fake.json fake-block-ids]
+  F --> H[mermaid realify workflow]
+  G[batch_mapping.json doc-token-blockid] --> H
+  H --> I[make_designs.py designs.json]
+  I --> K[apply_local.py]
+  I --> L[push_remote.py]
+  K --> P[6 local snapshot dirs]
+  L --> M[lark-cli docs block_replace]
+  M --> N[Lark whiteboard block updated]
 ```

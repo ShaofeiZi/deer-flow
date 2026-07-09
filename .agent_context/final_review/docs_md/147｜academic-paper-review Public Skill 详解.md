@@ -38,10 +38,13 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  In["Paper URL or PDF"] --> P1a["Phase1 Metadata"]
+  P1a --> P1b["Phase1 Deep Reading"]
+  P1b --> P1c["Phase1 Key Claims"]
+  P1c --> P2a["Phase2 Literature Search web_fetch"]
+  P2a --> P2b["Phase2 Methodology Assessment"]
+  P2b --> P2c["Phase2 Contribution Significance"]
+  P2c --> P2d["Phase2 Strengths and Weaknesses"]
+  P2d --> P3["Phase3 Assemble Structured Review"]
+  P3 --> Out["present_files plus review md output"]
 ```

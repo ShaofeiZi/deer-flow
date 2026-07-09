@@ -40,10 +40,16 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Mount["useI18n mount"] --> ReadCookie["getLocaleFromCookie"]
+  ReadCookie --> HasCookie{"cookie set"}
+  HasCookie -- yes --> NormSaved["normalizeLocale saved"]
+  HasCookie -- no --> Detect["detectLocale navigator.language"]
+  Detect --> NormDetect["normalizeLocale"]
+  NormSaved --> SetCtx["setLocale in I18nProvider"]
+  NormDetect --> SetCtx
+  SetCtx --> Resolve["t from translations locale fallback DEFAULT_LOCALE"]
+  Resolve --> Render["page and settings read t"]
+  Switch["changeLocale newLocale"] --> SetCtx2["setLocale in context"]
+  SetCtx2 --> Persist["setLocaleInCookie"]
+  Persist --> Resolve
 ```

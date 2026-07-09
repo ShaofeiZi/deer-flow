@@ -131,10 +131,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  FP[filepath prop] --> WC{isWriteFile check}
+  WC -->|write-file prefix| Parse[parse URL pathname and tool_call_id]
+  WC -->|regular file| Fetch[useArtifactContent fetch]
+  Parse --> Tool[findToolCallResult in thread messages]
+  Tool --> Throttle[useThrottledValue]
+  Fetch --> Throttle
+  Throttle --> Classify[checkCodeFile and isSkillFile]
+  Classify --> VM{viewMode toggle}
+  VM -->|preview html or markdown| Preview[ArtifactFilePreview]
+  VM -->|code mode| Editor[CodeEditor readonly]
+  Classify -->|non-code file| Iframe[iframe via urlOfArtifact]
+  Preview --> Render[html blob iframe or Streamdown]
+  Classify -->|skill file| Install[installSkill action]
 ```

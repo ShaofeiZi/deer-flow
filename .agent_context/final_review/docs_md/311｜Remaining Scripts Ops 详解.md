@@ -40,10 +40,34 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  subgraph ThreadBoundaries
+    TB1["detect_thread_boundaries.py"]
+    TB2["BoundaryVisitor AST scan"]
+    TB3["findings JSON or text"]
+    TB1 --> TB2 --> TB3
+  end
+  subgraph UVExtras
+    UV1["detect_uv_extras.py"]
+    UV2["UV_EXTRAS env or config.yaml"]
+    UV3["--extra flags for uv sync"]
+    UV1 --> UV2 --> UV3
+  end
+  subgraph SyncLabels
+    SL1["sync_labels.py"]
+    SL2[".github/labels.yml"]
+    SL3["gh label create --force"]
+    SL1 --> SL2 --> SL3
+  end
+  subgraph ToolError
+    TE1["tool-error-degradation-detection.sh"]
+    TE2["build_middlewares lead and subagent"]
+    TE3["ToolErrorHandlingMiddleware downgrades error and preserves outputs"]
+    TE1 --> TE2 --> TE3
+  end
+  subgraph MemorySample
+    LM1["load_memory_sample.py"]
+    LM2["backend/docs/memory-settings-sample.json"]
+    LM3["backend/.deer-flow/memory.json"]
+    LM1 --> LM2 --> LM3
+  end
 ```

@@ -45,11 +45,30 @@ flowchart TD
 | 阅读路径 | 先看 parser 如何读 `SKILL.md`，再看 storage/installer 如何管理 custom skill，最后看 router 和 middleware 如何启用。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant FE as frontend installSkill
+  participant RT as router install_skill
+  participant ST as LocalSkillStorage
+  participant EX as installer safe_extract
+  participant SC as security_scanner
+  participant FS as filesystem custom dir
+
+  FE->>RT: POST /api/skills/install
+  RT->>RT: resolve_thread_virtual_path
+  RT->>ST: ainstall_skill_from_archive
+  ST->>EX: safe_extract_skill_archive
+  EX->>EX: reject unsafe paths and symlinks
+  EX-->>ST: skill_dir
+  ST->>ST: _validate_skill_frontmatter
+  ST->>SC: _scan_skill_archive_contents_or_raise
+  SC->>SC: LLM scan_skill_content allow warn block
+  alt decision block
+    SC-->>ST: SkillSecurityScanError
+    RT-->>FE: HTTP 400 blocked
+  else allow or warn
+    ST->>FS: _move_staged_skill_into_reserved_target
+    ST-->>RT: success skill_name
+    RT->>RT: refresh_skills_system_prompt_cache_async
+    RT-->>FE: HTTP 200 SkillInstallResponse
+  end
 ```

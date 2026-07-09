@@ -38,10 +38,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Start["analyze.py main"] --> Parse["argparse --files --action"]
+  Parse --> Hash["compute_files_hash SHA256"]
+  Hash --> Cache{"load_table_map hit"}
+  Cache -- "hit" --> RO["duckdb.connect read_only"]
+  Cache -- "miss" --> RW["duckdb.connect read_write"]
+  RW --> Load["load_files then save_table_map"]
+  RO --> Action{"args.action"}
+  Load --> Action
+  Action -- "inspect" --> Inspect["action_inspect schema sample"]
+  Action -- "query" --> Query["action_query"]
+  Action -- "summary" --> Summary["action_summary stats"]
+  Query --> Out{"--output-file"}
+  Out -- "set" --> Exp["_export_results csv json md"]
+  Out -- "none" --> Fmt["_format_table"]
+  Inspect --> Done["con.close"]
+  Summary --> Done
+  Exp --> Done
+  Fmt --> Done
 ```

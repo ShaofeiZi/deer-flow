@@ -52,10 +52,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Call[getAPIClient isMock] --> Cache{_clients Map has cacheKey}
+  Cache -- hit --> Cached[return cached LangGraphClient]
+  Cache -- miss --> Create[createCompatibleClient]
+  Create --> Static{isStaticWebsiteOnly and not isMock}
+  Static -- true --> StaticClient[createStaticClient mocks threads + empty runs]
+  StaticClient --> LoadDemo[loadStaticDemoThreads / loadStaticDemoThread]
+  Static -- false --> Real[new LangGraphClient onRequest injectCsrfHeader]
+  Real --> BaseURL[getLangGraphBaseURL isMock]
+  Real --> Stream[runs.stream wrapper]
+  Real --> Join[runs.joinStream wrapper]
+  Stream --> Sanitize[sanitizeRunStreamOptions]
+  Sanitize --> OrigStream[original runs.stream]
+  Join --> Sanitize2[sanitizeRunStreamOptions]
+  Sanitize2 --> TryJoin{try original joinStream}
+  TryJoin -- 409 inactive --> Clear[clearReconnectRun lg:stream threadId]
+  TryJoin -- other error --> Throw[throw error]
+  Real --> SetCache[_clients.set cacheKey]
+  StaticClient --> SetCache
 ```

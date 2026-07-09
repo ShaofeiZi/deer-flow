@@ -38,10 +38,15 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  P1["Phase 1 Plan topic scope format"] --> P2["Phase 2 arxiv_search.py"]
+  P2 -->|JSON papers| P3a["task subagent batch 1"]
+  P2 -->|JSON papers| P3b["task subagent batch 2"]
+  P2 -->|JSON papers| P3c["task subagent batch 3"]
+  P3a --> AG["flatten metadata"]
+  P3b --> AG
+  P3c --> AG
+  AG --> P4["Phase 4 read templates apa ieee bibtex"]
+  P4 -->|themes convergences gaps| P5["Phase 5 save slr report md"]
+  P5 --> PF["present_files"]
+  P2 -.->|relevance sort one call| ARX["arXiv API"]
 ```

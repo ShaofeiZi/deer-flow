@@ -38,11 +38,29 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Platform as FeishuChannel
+  participant Bus as MessageBus
+  participant Mgr as ChannelManager
+  participant Store as ChannelStore
+  participant GW as Gateway client
+
+  Platform->>Bus: publish_inbound InboundMessage
+  Bus->>Mgr: get_inbound dispatch_loop
+  Mgr->>Mgr: _handle_message route chat or command
+  Mgr->>Store: get_thread_id by topic_id
+  alt thread missing
+    Mgr->>GW: threads.create
+    GW-->>Mgr: thread_id
+    Mgr->>Store: set_thread_id
+  end
+  opt msg.files present
+    Mgr->>Platform: receive_file
+  end
+  Mgr->>GW: runs.wait human_message
+  GW-->>Mgr: result with messages
+  Mgr->>Mgr: _extract_response_text and _extract_artifacts
+  Mgr->>Bus: publish_outbound OutboundMessage
+  Bus->>Platform: _on_outbound callback
+  Platform->>Platform: send then send_file
 ```

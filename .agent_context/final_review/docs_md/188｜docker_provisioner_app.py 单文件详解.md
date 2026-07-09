@@ -38,11 +38,41 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Caller as remote_backend
+    participant App as FastAPI app
+    participant CS as create_sandbox
+    participant K8s as core_v1 CoreV1Api
+    participant Pod as sandbox Pod
+    participant Svc as NodePort Service
+
+    Note over App: lifespan starts
+    App->>K8s: _wait_for_kubeconfig
+    App->>K8s: _init_k8s_client
+    App->>K8s: _ensure_namespace
+
+    Caller->>App: POST /api/sandboxes
+    App->>CS: CreateSandboxRequest
+    CS->>K8s: _get_node_port sandbox_id
+    alt node_port exists
+        K8s-->>CS: existing port
+        CS->>K8s: _get_pod_phase
+        CS-->>Caller: SandboxResponse idempotent
+    else not exists
+        CS->>K8s: create_namespaced_pod _build_pod
+        K8s->>Pod: sandbox-id Pod
+        CS->>K8s: create_namespaced_service _build_service
+        alt Service 409 or error
+            CS->>K8s: delete_namespaced_pod rollback
+            CS-->>Caller: HTTPException 500
+        else Service created
+            K8s->>Svc: NodePort selector sandbox-id
+            loop up to 20 times
+                CS->>K8s: _get_node_port poll
+                K8s-->>CS: node_port
+            end
+            CS->>K8s: _get_pod_phase
+            CS-->>Caller: SandboxResponse sandbox_url NODE_HOST port
+        end
+    end
 ```

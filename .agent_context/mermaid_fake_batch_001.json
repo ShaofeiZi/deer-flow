@@ -1,0 +1,14 @@
+{
+  "batch": [
+    "01｜DeerFlow 整体架构与分层总览.md",
+    "02｜Gateway 与 LangGraph 运行时详解.md",
+    "03｜Lead Agent_Prompt_Tools 与 Middleware 详解.md",
+    "04｜Tools_Sandbox_Uploads 与 Artifacts 详解.md",
+    "05｜Skills_MCP 与 Memory 详解.md",
+    "06｜Frontend Workspace 与 Chat 主链路详解.md",
+    "07｜Frontend Settings_Models_Artifacts 数据流详解.md",
+    "08｜配置_部署_测试与排障详解.md",
+    "09｜Auth_CSRF_权限与 IM Channels 详解.md",
+    "10｜Models_Tracing_Persistence 与 Token Usage 详解.md"
+  ]
+}

@@ -121,11 +121,26 @@ flowchart TD
 | 阅读路径 | 阅读路径：InputBox 产出消息，useThreadStream 处理流，MessageList 消费状态。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant User
+  participant InputBox
+  participant ChatPage
+  participant Stream as useThreadStream
+  participant SDK as useStream
+  participant Gateway
+  User->>InputBox: handleSubmit message
+  InputBox->>ChatPage: onSubmit message
+  ChatPage->>Stream: sendMessage threadId message
+  Stream->>SDK: thread.submit context
+  SDK->>Gateway: create run SSE
+  Gateway-->>SDK: onCreated meta
+  SDK-->>Stream: handleStreamStart
+  Stream-->>ChatPage: onStart createdThreadId
+  ChatPage->>ChatPage: history.replaceState chats id
+  Gateway-->>SDK: SSE updates
+  SDK-->>Stream: onUpdateEvent onCustomEvent
+  Stream->>Stream: mergeMessages history live optimistic
+  Gateway-->>SDK: run complete
+  SDK-->>Stream: onFinish state
+  Stream-->>ChatPage: onFinish notification
 ```

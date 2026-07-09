@@ -38,10 +38,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  SettingsPage["SkillSettingsPage"] --> UseSkills["useSkills hook"]
+  UseSkills --> LoadSkills["loadSkills api.ts"]
+  LoadSkills --> GetSkills["GET api/skills"]
+  GetSkills -->|Skill array| UseSkills
+  Switch["Switch onCheckedChange"] --> UseEnable["useEnableSkill hook"]
+  UseEnable --> EnableApi["enableSkill api.ts"]
+  EnableApi --> PutSkill["PUT api/skills/name"]
+  PutSkill -->|onSuccess| Invalidate["invalidateQueries skills"]
+  Invalidate --> UseSkills
+  ArtifactDetail["artifact-file-detail"] --> InstallApi["installSkill api.ts"]
+  ArtifactList["artifact-file-list"] --> InstallApi
+  InstallApi --> PostInstall["POST api/skills/install"]
+  PostInstall -->|InstallSkillResponse| Toast["toast success or error"]
 ```

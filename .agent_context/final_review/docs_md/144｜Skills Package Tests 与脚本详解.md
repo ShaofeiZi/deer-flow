@@ -39,10 +39,16 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  T["test_*_generation.py"] --> L["skill_loader.load"]
+  L --> I["importlib spec_from_file_location"]
+  I --> M["exec_module and return"]
+  M --> P["monkeypatch module.requests"]
+  P --> G["generate_image music video podcast"]
+  G --> R["_resolve_provider by env"]
+  R --> H["build payload and headers"]
+  H --> Q["requests.post or get mocked"]
+  Q --> F["FakeResp json or content"]
+  F --> D["decode base64 hex or bytes"]
+  D --> W["write output artifact"]
+  W --> A["pytest assert bytes match"]
 ```

@@ -41,10 +41,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Node["graph node partial state"] --> Reducer{"ThreadState reducer"}
+  Reducer --> MergeTodos["merge_todos"]
+  Reducer --> MergeArt["merge_artifacts"]
+  Reducer --> MergeImg["merge_viewed_images"]
+  Reducer --> MergeProm["merge_promoted"]
+  MergeTodos --> TS["ThreadState Annotated fields"]
+  MergeArt --> TS
+  MergeImg --> TS
+  MergeProm --> TS
+  TS --> Serialize["serialize values mode"]
+  Serialize --> SCV["serialize_channel_values"]
+  SCV --> Strip["drop __pregel_ and __interrupt__"]
+  Strip --> SLC["serialize_lc_object"]
+  SLC --> MDump["model_dump / dict / str fallback"]
+  MDump --> Out["JSON-safe dict"]
 ```

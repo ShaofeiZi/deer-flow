@@ -41,12 +41,25 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Dialog["SettingsDialog activeSection"] --> Account["AccountSettingsPage"]
+  Dialog --> Appearance["AppearanceSettingsPage"]
+  Dialog --> Notif["NotificationSettingsPage"]
+  Dialog --> About["AboutSettingsPage"]
+
+  Account --> ChangePw["handleChangePassword"]
+  ChangePw --> Route["POST /api/v1/auth/change-password"]
+  Route --> AcctResult["parseAuthError sets message or error"]
+  Account --> Logout["useAuth logout"]
+
+  Appearance --> SetTheme["next-themes setTheme"]
+  Appearance --> ChangeLocale["changeLocale"]
+  ChangeLocale --> Cookie["setLocaleInCookie"]
+
+  Notif --> ReqPerm["Notification.requestPermission"]
+  Notif --> SaveLocal["setSettings notification.enabled to localStorage"]
+  Notif --> Test["showNotification test"]
+
+  About --> Stream["ClipboardSafeStreamdown aboutMarkdown"]
 ```
 
 ## 页面状态流补充

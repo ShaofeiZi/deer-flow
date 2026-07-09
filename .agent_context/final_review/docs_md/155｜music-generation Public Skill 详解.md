@@ -38,10 +38,21 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Args["CLI args prompt-file output-file"] --> Load["load JSON spec"]
+  Load --> Key{"MINIMAX_API_KEY set"}
+  Key -- no --> ErrKey["return error not set"]
+  Key -- yes --> Prompt{"prompt non-empty"}
+  Prompt -- no --> ErrVal["raise ValueError"]
+  Prompt -- yes --> Body["build body model audio_setting"]
+  Body --> Branch{"lyrics / instrumental / neither"}
+  Branch -- lyrics given --> SetLyrics["body lyrics"]
+  Branch -- is_instrumental true --> SetInst["body is_instrumental True"]
+  Branch -- neither --> SetOpt["body lyrics_optimizer True"]
+  SetLyrics --> Post["POST v1/music_generation"]
+  SetInst --> Post
+  SetOpt --> Post
+  Post --> Check["_check_base_resp"]
+  Check --> Hex["data.audio hex"]
+  Hex --> Write["decode hex write MP3"]
+  Write --> Done["return success path"]
 ```

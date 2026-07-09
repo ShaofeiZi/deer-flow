@@ -50,11 +50,15 @@ flowchart TD
 | 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+  [*] --> pending : RunManager.create_or_reject
+  pending --> running : worker.run_agent set_status
+  pending --> interrupted : RunManager.cancel interrupt
+  running --> success : worker normal completion
+  running --> error : exception or llm_error_fallback
+  running --> error : cancel rollback
+  running --> interrupted : cancel interrupt
+  success --> [*]
+  error --> [*]
+  interrupted --> [*]
 ```

@@ -41,10 +41,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Startup["app.py startup"] --> Warm["warm_tiktoken_cache"]
+  Warm --> EncCache["_tiktoken_encoding_cache"]
+  Run["lead_agent run"] --> TitleMW["TitleMiddleware after_model"]
+  Run --> SummMW["SummarizationMiddleware before_model"]
+  Run --> MemMW["MemoryMiddleware after_agent"]
+  TitleMW --> TitleState["state.title"]
+  SummMW --> PartSum["_partition and _fire_hooks"]
+  PartSum --> FlushHook["memory_flush_hook"]
+  MemMW --> QAdd["queue.add debounced"]
+  FlushHook --> QAdd
+  QAdd --> Proc["_process_queue Timer"]
+  Proc --> Updater["MemoryUpdater.update_memory"]
+  Updater --> Storage["FileMemoryStorage.save"]
+  Storage --> Inject["format_memory_for_injection"]
+  EncCache --> Inject
+  Inject --> SysPrompt["lead_agent system prompt"]
 ```

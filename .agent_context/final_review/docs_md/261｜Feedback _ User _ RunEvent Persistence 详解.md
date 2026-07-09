@@ -42,10 +42,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+    Start["run_events.backend config"] --> Factory["make_run_event_store"]
+    Factory -->|memory| Mem["MemoryRunEventStore"]
+    Factory -->|jsonl| Jsonl["JsonlRunEventStore"]
+    Factory -->|db| GetSF["get_session_factory"]
+    GetSF -->|None| MemFallback["fallback MemoryRunEventStore"]
+    GetSF -->|session_factory| Db["DbRunEventStore"]
+    Db --> Ctx["get_current_user contextvar"]
+    Ctx --> Stamp["stamp user_id on RunEventRow"]
+    Db --> Lock["pg_advisory_xact_lock / FOR UPDATE"]
+    Lock --> Seq["assign monotonic seq"]
+    Seq --> WriteRow["INSERT RunEventRow"]
+    Journal["RunJournal.put_batch"] --> Factory
+    Journal -->|memory| Mem
+    Journal -->|jsonl| Jsonl
+    Journal -->|db| Db
 ```

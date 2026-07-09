@@ -43,10 +43,35 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  subgraph RouteL["route layer"]
+    P["agents/page.tsx"]
+  end
+  subgraph CoreL["core data layer"]
+    H["useAgents"]
+    L["listAgents"]
+    B["GET /api/agents"]
+  end
+  subgraph BizL["business component"]
+    G["AgentGallery"]
+    AC["AgentCard"]
+  end
+  subgraph UIL["ui primitives"]
+    C["Card"]
+    CH["CardHeader"]
+    CT["CardTitle"]
+    CD["CardDescription"]
+    BDG["Badge"]
+    CF["CardFooter"]
+  end
+  P --> G
+  G --> H
+  H --> L
+  L --> B
+  G --> AC
+  AC --> C
+  C --> CH
+  CH --> CT
+  CH --> CD
+  AC --> BDG
+  C --> CF
 ```

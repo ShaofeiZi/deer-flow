@@ -50,11 +50,28 @@ flowchart TD
 | 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Client
+  participant Router as memory router
+  participant Updater as updater
+  participant Storage as memory storage
+  Client->>Router: PATCH /api/memory/facts/fact_id
+  Router->>Router: get_effective_user_id
+  Router->>Updater: update_memory_fact fact_id content confidence
+  Updater->>Storage: load user_id
+  Storage-->>Updater: current memory dict
+  alt fact_id missing
+    Updater-->>Router: KeyError fact_id
+    Router-->>Client: 404 fact not found
+  else confidence invalid
+    Updater-->>Router: ValueError confidence
+    Router-->>Client: 400 invalid confidence
+  else save failure
+    Updater-->>Router: OSError
+    Router-->>Client: 500 failed to update
+  else success
+    Updater->>Storage: save updated memory
+    Updater-->>Router: updated memory dict
+    Router-->>Client: 200 MemoryResponse
+  end
 ```

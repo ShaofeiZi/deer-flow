@@ -38,10 +38,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+    Trigger["trigger /bootstrap or SOUL missing"] --> ReadSkill["read SKILL.md"]
+    ReadSkill --> ReadRefs["read references/conversation-guide.md"]
+    ReadSkill --> ReadTpl["read templates/SOUL.template.md"]
+    ReadRefs --> P1["Phase 1 Hello"]
+    ReadTpl --> P1
+    P1 --> P2["Phase 2 You"]
+    P2 --> P3["Phase 3 Personality"]
+    P3 --> P4["Phase 4 Depth"]
+    P4 --> Tracker{"extraction tracker complete"}
+    Tracker -- missing fields --> P2
+    Tracker -- all required --> Gen["generate SOUL.md from template"]
+    Gen --> Confirm{"user confirms"}
+    Confirm -- iterate --> Gen
+    Confirm -- confirmed --> CallTool["call setup_agent tool"]
+    CallTool --> Persist["setup_agent writes SOUL.md + config.yaml"]
+    Persist --> Done["agent continues as custom agent"]
 ```

@@ -41,10 +41,24 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Hook[wrap_tool_call hook] --> Need{_needs_budget?}
+  Need -->|no| Keep[return unchanged]
+  Need -->|yes| Patch[_patch_tool_message]
+  Patch --> Exempt{name in exempt_tools?}
+  Exempt -->|yes| Keep
+  Exempt -->|no| Ext{over externalize threshold?}
+  Ext -->|yes| Sbx{sandbox resolved?}
+  Sbx -->|no| Host[_externalize to host outputs_path]
+  Sbx -->|yes| Mount{provider uses_thread_data_mounts?}
+  Mount -->|yes| Host
+  Mount -->|no| SbxFs[_externalize_to_sandbox write_file]
+  Host --> Vp{virtual_path ok?}
+  SbxFs --> Vp
+  Vp -->|yes| Prev[_build_preview head ref tail]
+  Vp -->|no| FbChk{over fallback_max_chars?}
+  Ext -->|no| FbChk
+  FbChk -->|yes| Fb[_build_fallback truncation]
+  FbChk -->|no| Keep
+  Prev --> Out[model_copy patched ToolMessage]
+  Fb --> Out
 ```

@@ -39,11 +39,27 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant UI as memory-settings-page
+    participant Hooks as core/memory/hooks
+    participant API as core/memory/api
+    participant Proxy as api/memory route
+    participant Router as routers/memory.py
+    participant Updater as memory/updater.py
+    participant Storage as FileMemoryStorage
+    participant File as memory.json
+    UI->>Hooks: useMemory useCreate useUpdate useDelete useClear
+    Hooks->>API: loadMemory createMemoryFact updateMemoryFact deleteMemoryFact clearMemory
+    API->>Proxy: GET POST PATCH DELETE /api/memory/facts
+    Proxy->>Router: proxy to backend /api/memory
+    Router->>Updater: get_memory_data create_memory_fact update_memory_fact delete_memory_fact clear_memory_data
+    Updater->>Storage: get_memory_storage save
+    Storage->>File: atomic write .tmp then replace
+    File-->>Storage: mtime updated
+    Storage-->>Updater: saved memory dict
+    Updater-->>Router: MemoryResponse
+    Router-->>Proxy: 200 JSON
+    Proxy-->>API: response
+    API-->>Hooks: UserMemory
+    Hooks->>UI: react-query setQueryData refresh
 ```

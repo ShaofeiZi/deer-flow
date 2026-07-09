@@ -38,10 +38,34 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+    U["User task"] --> R{"Intent routing"}
+    R -->|"web research"| DR["deep-research SKILL.md"]
+    R -->|"GitHub repo URL"| GH["github-deep-research SKILL.md"]
+    R -->|"single paper review"| AP["academic-paper-review SKILL.md"]
+    R -->|"multi-paper SLR"| SL["systematic-literature-review SKILL.md"]
+
+    DR --> WS["web_search + web_fetch"]
+    DR --> SYN1["4-phase synthesis"]
+
+    GH --> GA["scripts/github_api.py"]
+    GA --> GHAPI["GitHubAPI class"]
+    GHAPI --> RT["assets/report_template.md"]
+    GH --> WF1["web_search + web_fetch"]
+
+    AP --> PDF["PDF / arXiv URL parse"]
+    PDF --> MA["methodology + contribution assessment"]
+    MA --> LIT["literature context search"]
+    AP --> PF1["present_files"]
+
+    SL --> ARX["scripts/arxiv_search.py"]
+    ARX --> ATOM["Atom XML parse + id normalise"]
+    ATOM --> TASK["task tool subagents max 3"]
+    TASK --> BATCH["batch of 5 papers"]
+    BATCH --> TPL["templates apa ieee bibtex"]
+    TPL --> PF2["present_files slr file"]
+
+    SYN1 --> OUT["Markdown artifact"]
+    RT --> OUT
+    LIT --> OUT
+    PF2 --> OUT
 ```

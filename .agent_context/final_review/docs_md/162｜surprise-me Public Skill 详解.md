@@ -37,11 +37,28 @@ flowchart TD
 | 阅读路径 | 先读 skill frontmatter 和触发场景，再读正文 workflow，最后检查 references/templates/scripts 是否支撑描述。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant U as User
+    participant M as SkillActivationMiddleware
+    participant S as slash.py
+    participant ST as SkillStorage
+    participant SM as surprise-me SKILL.md
+    participant L as LeadAgent model
+
+    U->>M: "/surprise-me" turn text
+    M->>S: parse_slash_skill_reference
+    S-->>M: name surprise-me
+    M->>ST: load_skills enabled_only false
+    ST-->>M: matched Skill enabled
+    M->>S: resolve_slash_skill
+    S-->>M: container path /mnt/skills/public/surprise-me
+    M->>SM: _read_skill_content SKILL.md
+    SM-->>M: full skill body
+    M->>M: build slash_skill_activation reminder
+    M->>L: insert activation HumanMessage before turn
+    L->>L: Step1 discover available_skills
+    L->>L: Step2 plan 1-3 skill mashup
+    L->>L: Step3 fallback if no skills
+    L->>L: Step4 execute selected skills
+    L->>U: Step5 reveal single cohesive artifact
 ```

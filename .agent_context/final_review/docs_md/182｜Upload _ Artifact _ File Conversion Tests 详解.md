@@ -41,10 +41,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req["upload_files POST handler"] --> Limits["_get_upload_limits"]
+  Limits --> CountCheck{"files exceed max_files"}
+  CountCheck -->|yes| E413["HTTP 413 too many files"]
+  CountCheck -->|no| Ensure["ensure_uploads_dir"]
+  Ensure --> Mounts{"uses_thread_data_mounts"}
+  Mounts -->|false| Acquire["acquire sandbox or HTTP 500"]
+  Mounts -->|true| Loop["per uploaded file"]
+  Acquire --> Loop
+  Loop --> Norm["normalize_filename and claim_unique_filename"]
+  Norm --> Write["open_upload_file_no_symlink chunked write"]
+  Write --> Convert{"auto_convert convertible ext"}
+  Convert -->|yes| Md["convert_file_to_markdown writes .md"]
+  Convert -->|no| Perms["_make_file_sandbox_readable"]
+  Md --> Perms
+  Perms --> Sync{"sync_to_sandbox"}
+  Sync -->|yes| Update["_make_file_sandbox_writable sandbox.update_file"]
+  Sync -->|no| Resp["UploadResponse"]
+  Update --> Resp
 ```

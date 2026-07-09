@@ -39,11 +39,12 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+  pending --> running: worker set_status running
+  running --> success: worker set_status success
+  running --> error: worker set_status error
+  running --> interrupted: cancel or shutdown drain
+  pending --> interrupted: cancel
+  pending --> error: reconcile orphan inflight at startup
+  running --> error: reconcile orphan inflight at startup
 ```

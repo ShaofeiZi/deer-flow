@@ -41,12 +41,24 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  SD["SettingsDialog activeSection"]
+  SD --> ToolPage["ToolSettingsPage"]
+  SD --> SkillPage["SkillSettingsPage"]
+  SD --> MemPage["MemorySettingsPage"]
+  ToolPage --> useMCP["useMCPConfig useEnableMCPServer"]
+  SkillPage --> useSkills["useSkills useEnableSkill"]
+  MemPage --> useMem["useMemory useClearMemory useCreateMemoryFact ..."]
+  useMCP --> loadMCP["loadMCPConfig updateMCPConfig"]
+  useSkills --> loadSkills["loadSkills enableSkill"]
+  useMem --> loadMem["loadMemory clearMemory createMemoryFact updateMemoryFact importMemory"]
+  loadMCP --> routeMCP["GET PUT /api/mcp/config"]
+  loadSkills --> routeSkills["GET /api/skills PUT /api/skills/name"]
+  loadMem --> routeMem["GET DELETE /api/memory POST PATCH /api/memory/facts"]
+  useMCP -. invalidate mcpConfig .-> cache["React Query cache"]
+  useSkills -. invalidate skills .-> cache
+  useMem -. setQueryData memory .-> cache
+  SkillPage --> createSkill["router.push chats/new mode=skill"]
+  MemPage --> exportMem["exportMemory GET /api/memory/export"]
 ```
 
 ## Settings 数据流补充

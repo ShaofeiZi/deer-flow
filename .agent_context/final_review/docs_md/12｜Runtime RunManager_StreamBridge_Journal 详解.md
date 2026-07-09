@@ -93,10 +93,19 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Entry[run_agent worker] --> InitJ[RunJournal init]
+  InitJ --> Running[RunManager.set_status running]
+  Running --> Ckpt[capture pre-run checkpoint]
+  Ckpt --> Meta[StreamBridge.publish metadata]
+  Meta --> Loop[agent.astream stream_mode loop]
+  Loop --> Pub[StreamBridge.publish chunks]
+  Loop --> Cb[RunJournal callbacks on_llm_end]
+  Cb --> Batch[put_batch to RunEventStore]
+  Pub --> Check{abort_event set}
+  Check -->|no| Loop
+  Check -->|yes| Final[RunManager.set_status final]
+  Final --> Flush[RunJournal.flush]
+  Flush --> Comp[RunManager.update_run_completion]
+  Comp --> EndSent[StreamBridge.publish_end]
+  EndSent --> Clean[StreamBridge.cleanup]
 ```

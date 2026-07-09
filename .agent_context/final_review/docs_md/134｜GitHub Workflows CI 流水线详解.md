@@ -43,10 +43,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  PushPR["push to main or PR non-draft"]
+  Tag["git tag v pushed"]
+  PushPR --> BUnit["backend-unit-tests backend make test"]
+  PushPR --> FUnit["frontend-unit-tests frontend make test"]
+  PushPR --> LintBE["lint-check lint-backend make lint"]
+  PushPR --> LintFE["lint-check lint-frontend format lint typecheck build"]
+  PushPR --> FEGate["frontend paths changed"]
+  FEGate --> E2E["e2e-tests playwright test"]
+  PushPR --> BEGate["backend paths changed"]
+  BEGate --> Blocking["backend-blocking-io make test-blocking-io"]
+  PushPR --> CTRGate["frontend or gateway or harness changed"]
+  CTRGate --> ReplayL1["replay-e2e Layer1 test_replay_golden"]
+  CTRGate --> ReplayL2["replay-e2e Layer2 real-backend render"]
+  Tag --> BEImg["container backend Dockerfile push ghcr.io"]
+  Tag --> FEImg["container frontend Dockerfile push ghcr.io"]
 ```

@@ -38,11 +38,27 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Record as "record_gateway.py"
+    participant Build as "build_fixture_from_jsonl.py"
+    participant Test as "test_replay_golden.py"
+    participant Provider as "ReplayChatModel"
+    participant App as "create_app gateway"
+    participant Client as "Starlette TestClient"
+    participant Golden as "fixtures/replay golden"
+
+    Record->>Build: real model calls keyed by input hash
+    Build->>Test: fixture json write_read_file.ultra
+    Test->>Provider: DEERFLOW_REPLAY_FIXTURE swap use
+    Test->>App: create_app + hermetic config
+    Test->>Client: drive_gateway prompt + context
+    Client->>App: POST /api/v1/auth/register
+    App-->>Client: csrf_token cookie
+    Client->>App: POST /api/threads
+    Client->>App: POST runs/stream values
+    App->>Provider: lead agent model call
+    Provider-->>App: recorded turn by hash
+    App-->>Client: SSE event shapes
+    Test->>Provider: replay_misses assert empty
+    Test->>Golden: assert events equal golden
 ```

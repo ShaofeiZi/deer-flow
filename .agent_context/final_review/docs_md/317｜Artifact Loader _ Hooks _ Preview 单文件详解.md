@@ -39,10 +39,21 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Hook["useArtifactContent"]
+  Hook --> Prefix{"write-file prefix"}
+  Prefix -->|"yes"| ToolCall["loadArtifactContentFromToolCall"]
+  Prefix -->|"no"| Query["useQuery react-query 5m cache"]
+  ToolCall --> Build["buildWriteFileDraftContent"]
+  Build --> Scan["scan ai messages for write_file tool_call by tool_call_id"]
+  Scan --> Append{"args.append true"}
+  Append -->|"append"| Concat["draft += content"]
+  Append -->|"overwrite"| Set["draft = content"]
+  Concat --> Result{"tool result check"}
+  Set --> Result
+  Result -->|"failed"| Empty["return undefined"]
+  Result -->|"ok or none"| Done["return draft"]
+  Query --> Load["loadArtifactContent"]
+  Load --> Fetch["urlOfArtifact then fetch"]
+  Fetch --> Text["response.text"]
+  Text --> Out["content and url"]
 ```

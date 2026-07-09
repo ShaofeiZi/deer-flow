@@ -38,11 +38,48 @@ flowchart TD
 | 阅读路径 | 先看请求如何得到 current user，再看 owner_check 如何查资源归属，最后用测试确认未授权、跨用户和 auth-disabled 分支。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Client as TestClient
+    participant MW as AuthMiddleware
+    participant Deps as deps get_current_user
+    participant Route as require_permission decorator
+    participant TS as thread_store check_access
+    participant Svc as services.start_run
+    participant Repo as Repository owner filter
+    autonumber
+    Client->>MW: request to non-public path
+    alt public path
+        MW-->>Client: pass-through 200
+    else no cookie or invalid JWT
+        MW-->>Client: 401 NOT_AUTHENTICATED or TOKEN_INVALID
+    else valid cookie
+        MW->>Deps: resolve JWT to User
+        Deps-->>MW: User
+        MW->>MW: stamp request.state.user and AuthContext
+        MW->>MW: set_current_user contextvar token
+    end
+    alt path-param route threads
+        Client->>Route: GET/PATCH/DELETE thread_id
+        Route->>TS: check_access thread_id user_id
+        alt different owner
+            TS-->>Route: False
+            Route-->>Client: 404 Thread not found
+        else owner or shared or missing row
+            TS-->>Route: True
+            Route->>Repo: handler runs with contextvar
+            Repo-->>Client: 200 own rows only
+        end
+    else stateless runs body thread_id
+        Client->>Svc: POST runs/stream or runs/wait
+        Svc->>TS: check_access thread_id user_id
+        alt foreign owner
+            TS-->>Svc: False
+            Svc-->>Client: 404 Thread not found
+        else owner or untracked or internal role
+            TS-->>Svc: True
+            Svc->>Svc: run_manager create_or_reject
+            Svc-->>Client: 409 sentinel
+        end
+    end
+    Note over MW: finally reset_current_user token
 ```

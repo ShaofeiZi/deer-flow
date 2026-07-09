@@ -39,10 +39,21 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Entry["convert_file_to_markdown"] --> Size{"size over 1MB"}
+  Size -->|yes| Thread["asyncio.to_thread _do_convert"]
+  Size -->|no| Sync["_do_convert sync"]
+  Thread --> Pdf{"PDF and pdf_converter != markitdown"}
+  Sync --> Pdf
+  Pdf -->|no| MarkItDown["_convert_with_markitdown"]
+  Pdf -->|yes| TryPy["import pymupdf4llm"]
+  TryPy --> Installed{"installed and converts ok"}
+  Installed -->|no| MarkItDown
+  Installed -->|yes| Explicit{"pdf_converter is pymupdf4llm"}
+  Explicit -->|yes explicit| UsePy["use pymupdf4llm text"]
+  Explicit -->|auto mode| Sparse{"_pymupdf_output_too_sparse"}
+  Sparse -->|no| UsePy
+  Sparse -->|yes image-based| MarkItDown
+  UsePy --> WriteMd["write .md sibling file"]
+  MarkItDown --> WriteMd
+  WriteMd --> Return["return md_path or None"]
 ```

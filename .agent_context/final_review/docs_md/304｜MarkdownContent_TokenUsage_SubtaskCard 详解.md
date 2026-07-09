@@ -39,10 +39,36 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Stream["thread.messages BaseStream"]
+  List["MessageList groupedMessages"]
+  Turn["getAssistantTurnUsageMessages"]
+  TUList["MessageTokenUsageList"]
+  Accum["accumulateUsage usage.ts"]
+  TU["TokenUsageSummary"]
+  SubProv["SubtasksProvider providers.tsx"]
+  Upd["useUpdateSubtask"]
+  Card["SubtaskCard taskId"]
+  UseSub["useSubtask taskId"]
+  Exp["explainLastToolCall"]
+  MD["MarkdownContent"]
+  Pre["preprocessStreamdownMarkdown"]
+  Resp["MessageResponse streamdownPlugins"]
+  Copy["CopyButton clipboardData"]
+  Clip["writeTextToClipboard clipboard.ts"]
+
+  Stream --> List
+  List --> Turn
+  Turn --> TUList
+  TUList --> Accum
+  Accum --> TU
+  Stream --> Upd
+  Upd --> SubProv
+  SubProv --> UseSub
+  UseSub --> Card
+  Card --> Exp
+  Card --> MD
+  MD --> Pre
+  MD --> Resp
+  List --> Copy
+  Copy --> Clip
 ```

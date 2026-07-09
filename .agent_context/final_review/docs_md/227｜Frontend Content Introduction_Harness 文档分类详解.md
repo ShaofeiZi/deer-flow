@@ -42,10 +42,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req["GET /:lang/docs/:mdxPath"] --> Root["app/layout.tsx"]
+  Root --> Detect["detectLocaleServer"]
+  Detect --> Cookie["locale cookie"]
+  Cookie --> Norm["normalizeLocale"]
+  Norm --> I18nProv["I18nProvider"]
+  Root --> DocsLayout["docs/layout.tsx"]
+  DocsLayout --> GetLocale["getLocaleByHang"]
+  DocsLayout --> PageMap["getPageMap /:lang"]
+  PageMap --> Meta["content/:lang/_meta.ts"]
+  Meta --> Intro["introduction/*.mdx"]
+  Meta --> Harness["harness/*.mdx"]
+  DocsLayout --> Format["formatPageRoute /:lang/docs"]
+  Format --> NextraLayout["nextra-theme-docs Layout"]
+  DocsPage["docs/[[...mdxPath]]/page.tsx"] --> Import["importPage mdxPath lang"]
+  Import --> MDX["MDXContent toc metadata"]
+  MDX --> Wrapper["mdx-components.ts wrapper"]
+  Wrapper --> NextraLayout
+  NextraLayout --> Site["DocsSite"]
 ```

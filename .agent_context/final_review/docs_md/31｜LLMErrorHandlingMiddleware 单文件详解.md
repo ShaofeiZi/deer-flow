@@ -42,11 +42,13 @@ flowchart TD
 | 阅读路径 | 阅读路径：先判断它在哪个 hook 生效，再看它读写 ThreadState 的哪些字段。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+    [*] --> closed
+    closed --> open: _record_failure count reaches threshold
+    closed --> closed: _record_success resets failure count
+    open --> half_open: recovery_timeout elapsed in _check_circuit
+    open --> open: _check_circuit fast-fails the request
+    half_open --> closed: probe handler succeeds _record_success
+    half_open --> open: probe handler fails _record_failure
+    half_open --> half_open: GraphBubbleUp releases probe slot
 ```

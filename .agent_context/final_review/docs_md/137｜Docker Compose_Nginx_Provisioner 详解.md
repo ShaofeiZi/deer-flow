@@ -44,11 +44,25 @@ flowchart TD
 | 阅读路径 | 先读 skill frontmatter 和触发场景，再读正文 workflow，最后检查 references/templates/scripts 是否支撑描述。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant BE as Backend gateway
+    participant NX as nginx 2026
+    participant PR as provisioner app.py 8002
+    participant K8s as K8s CoreV1Api
+    participant SB as sandbox Pod NodePort
+
+    BE->>NX: POST /api/sandboxes
+    NX->>PR: location /api/sandboxes proxy_pass provisioner 8002
+    PR->>K8s: read_namespaced_service _get_node_port
+    alt node_port already exists
+        PR-->>BE: SandboxResponse existing url
+    else new sandbox
+        PR->>K8s: create_namespaced_pod _build_pod
+        PR->>K8s: create_namespaced_service _build_service NodePort
+        loop poll up to 20 times
+            PR->>K8s: read_namespaced_service node_port
+        end
+        PR-->>BE: SandboxResponse sandbox_url
+    end
+    BE->>SB: direct http NODE_HOST NodePort
 ```

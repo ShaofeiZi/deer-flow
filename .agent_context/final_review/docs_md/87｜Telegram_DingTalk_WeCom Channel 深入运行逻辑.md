@@ -42,10 +42,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  CM["ChannelManager publish_outbound"] --> Bus["MessageBus.publish_outbound"]
+  Bus --> OB["Channel._on_outbound base"]
+  OB --> Send["channel.send OutboundMessage"]
+  Send --> TG["TelegramChannel"]
+  Send --> DT["DingTalkChannel"]
+  Send --> WC["WeComChannel"]
+  TG --> TGM["bot.send_message retry and reply_to threading"]
+  DT --> DTC{"AI card created"}
+  DTC --> Card["_stream_update_card streaming"]
+  DTC --> MD["_adapt_markdown_for_dingtalk sampleMarkdown"]
+  WC --> WSC{"ws frame cached for thread_ts"}
+  WSC --> Stream["reply_stream with is_final"]
+  WSC --> Mk["send_message markdown fallback"]
 ```

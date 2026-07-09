@@ -39,10 +39,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  AIMsg["AIMessage from model"] --> AfterModel["SafetyFinishReasonMiddleware after_model"]
+  AfterModel --> Det["OpenAICompatible / AnthropicRefusal / GeminiSafety detectors"]
+  Det --> Hit{"termination hit"}
+  Hit -- yes --> Strip["strip tool_calls, stamp safety_termination, emit SSE and journal"]
+  Strip --> NoRun["return patched message, tools not run"]
+  Hit -- no --> Dispatch["tool_calls dispatched"]
+  Dispatch --> GR["GuardrailMiddleware.wrap_tool_call"]
+  GR --> Eval["provider.evaluate GuardrailRequest"]
+  Eval --> Dec{"allow"}
+  Dec -- no --> Deny["error ToolMessage oap.denied"]
+  Dec -- yes --> SA["SandboxAuditMiddleware.wrap_tool_call bash only"]
+  SA --> Blk{"_classify_command verdict"}
+  Blk -- block --> BlkMsg["block ToolMessage, handler skipped"]
+  Blk -- warn --> RunW["handler runs, warning appended"]
+  Blk -- pass --> RunOK["handler runs, bash executes"]
 ```

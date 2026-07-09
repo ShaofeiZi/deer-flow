@@ -40,11 +40,28 @@ flowchart TD
 | 阅读路径 | 先看入口命令，再看脚本调用链，最后看测试或日志如何证明行为。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant HTTP as Authed HTTP Request
+    participant GW as inject_authenticated_user_context
+    participant WK as worker._build_runtime_context
+    participant RT as langgraph.Runtime
+    participant TN as create_agent ToolNode
+    participant Tool as setup_agent update_agent
+    participant Resolve as resolve_runtime_user_id
+    participant Dir as users/user_id/agents/name
+
+    HTTP->>GW: request.state.user.id
+    GW->>GW: stamp config.context.user_id
+    GW->>WK: config.context with agent_name user_id
+    WK->>WK: merge caller_context into runtime_ctx
+    WK->>RT: Runtime context equals runtime_ctx
+    RT->>TN: pregel runtime under config.configurable
+    TN->>Tool: ToolRuntime.context carries user_id
+    Tool->>Tool: validate_agent_name from runtime.context
+    Tool->>Resolve: runtime
+    Resolve-->>Tool: user_id from context else contextvar else default
+    Tool->>Dir: paths.user_agent_dir user_id agent_name
+    Tool->>Dir: stage temps then atomic replace config.yaml SOUL.md
+    Dir-->>Tool: ToolMessage result
+    Tool-->>TN: Command update messages
 ```

@@ -74,10 +74,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Start[init_engine_from_config] --> Branch{backend}
+  Branch -->|memory| NoOp[no-op return]
+  Branch -->|sqlite| SQLite[create_async_engine]
+  Branch -->|postgres| PgCheck[verify asyncpg import]
+  SQLite --> WAL[PRAGMA WAL and synchronous NORMAL]
+  PgCheck --> PgEngine[create_async_engine pool_pre_ping]
+  WAL --> Session[async_sessionmaker]
+  PgEngine --> Session
+  Session --> ImportModels[import persistence.models]
+  ImportModels --> CreateAll[Base.metadata.create_all]
+  CreateAll --> Err{create fails}
+  Err -->|postgres missing db| Auto[_auto_create_postgres_db]
+  Auto --> Retry[rebuild engine retry create_all]
+  Err -->|ok| Ready[engine ready]
+  Retry --> Ready
+  Err -->|other error| Raise[re-raise]
 ```

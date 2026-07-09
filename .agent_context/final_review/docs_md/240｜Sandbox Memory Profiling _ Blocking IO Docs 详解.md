@@ -39,10 +39,12 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Src["backend/app source"] --> Scan["scan_paths AST"]
+  Scan --> Visitor["BlockingIOStaticVisitor"]
+  Visitor --> Findings["static findings"]
+  Findings --> JSON[".deer-flow/blocking-io-findings.json"]
+  JSON --> Anchor["backend/tests/blocking_io anchor"]
+  Anchor --> Gate["detect_blocking_io_strict"]
+  Gate --> BB["Blockbuster app deerflow"]
+  BB --> Block["BlockingError regression"]
 ```

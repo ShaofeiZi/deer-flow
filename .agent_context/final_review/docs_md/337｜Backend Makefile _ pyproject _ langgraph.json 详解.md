@@ -38,10 +38,15 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Makefile["backend/Makefile"] -->|"make dev / make gateway"| Uvicorn["uvicorn app.gateway.app:app"]
+  Uvicorn --> App["app/gateway/app.py FastAPI"]
+  App -->|"lifespan"| Runtime["langgraph_runtime in deps.py"]
+  App --> LanggraphJson["backend/langgraph.json"]
+  LanggraphJson -->|"graphs.lead_agent"| MLAgent["deerflow.agents:make_lead_agent"]
+  LanggraphJson -->|"auth.path"| LGAuth["app/gateway/langgraph_auth.py:auth"]
+  LanggraphJson -->|"checkpointer.path"| AsyncProvider["runtime/checkpointer/async_provider.py:make_checkpointer"]
+  RootPy["backend/pyproject.toml"] -->|"depends on deerflow-harness"| HarnessPkg["packages/harness/pyproject.toml"]
+  RootPy -->|"tool.uv.workspace members"| HarnessPkg
+  HarnessPkg -->|"hatchling packages=deerflow"| MLAgent
+  MLAgent -->|"create_agent + ThreadState"| LeadAgent["lead_agent/agent.py build_middlewares"]
 ```

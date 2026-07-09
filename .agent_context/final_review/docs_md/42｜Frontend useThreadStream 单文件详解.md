@@ -45,11 +45,26 @@ flowchart TD
 | 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant ChatPage
+  participant sendMessage
+  participant uploadFiles
+  participant useStream
+  participant Cache as ReactQuery cache
+
+  ChatPage->>sendMessage: sendMessage threadId message
+  sendMessage->>sendMessage: setOptimisticMessages human + uploading ai
+  alt message.files present
+    sendMessage->>uploadFiles: upload threadId files
+    uploadFiles-->>sendMessage: UploadedFileInfo
+  end
+  sendMessage->>useStream: thread.submit messages + context
+  useStream->>useStream: onCreated meta thread_id run_id
+  useStream->>Cache: upsertThread search + infinite
+  useStream->>useStream: onUpdateEvent state data
+  useStream->>Cache: setQueriesData title update
+  useStream->>useStream: onCustomEvent task_running or llm_retry
+  useStream->>useStream: onFinish state values
+  useStream->>Cache: invalidate threads search + infinite + token usage
+  Note over sendMessage,useStream: server human msg arrives then clear optimistic
 ```

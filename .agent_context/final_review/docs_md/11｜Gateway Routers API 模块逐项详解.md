@@ -67,11 +67,29 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 URL 前缀，再找 router，再看 service。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Client as useStream client
+  participant Router as thread_runs.py
+  participant Authz as require_permission
+  participant Service as services.start_run
+  participant RunMgr as RunManager
+  participant Agent as run_agent task
+  participant Bridge as StreamBridge
+  participant SSE as sse_consumer
+  Client->>Router: POST /threads/{id}/runs/stream
+  Router->>Authz: owner_check runs/create
+  Authz-->>Router: ok
+  Router->>Service: body thread_id request
+  Service->>RunMgr: create_or_reject
+  RunMgr-->>Service: RunRecord or HTTP 409
+  Service->>Agent: asyncio.create_task
+  Agent->>Bridge: publish events
+  Service-->>Router: RunRecord
+  Router->>SSE: StreamingResponse
+  SSE->>Bridge: subscribe run_id last_event_id
+  Bridge-->>SSE: heartbeat events END_SENTINEL
+  SSE-->>Client: format_sse frames
+  alt client disconnect and on_disconnect=cancel
+    SSE->>RunMgr: cancel run_id
+  end
 ```

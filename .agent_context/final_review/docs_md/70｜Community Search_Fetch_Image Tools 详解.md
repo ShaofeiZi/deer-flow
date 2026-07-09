@@ -46,10 +46,24 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  CfgYaml["config.yaml tools use field"] --> Resolve["resolve_variable imports tool func"]
+  Resolve --> Tool["web_search_tool web_fetch_tool image_search_tool"]
+  Tool --> GetCfg["get_app_config.get_tool_config"]
+  GetCfg --> Extra["read model_extra api_key max_results"]
+  Extra --> Tavily["TavilyClient search extract"]
+  Extra --> Firecrawl["FirecrawlApp search scrape"]
+  Extra --> Exa["Exa search get_contents"]
+  Extra --> DDGS["DDGS text images"]
+  Extra --> Jina["JinaClient crawl html"]
+  Extra --> Serper["httpx POST google.serper.dev"]
+  Extra --> InfoQuest["InfoQuestClient search fetch image_search"]
+  Tavily --> Ext["external search fetch API"]
+  Firecrawl --> Ext
+  Exa --> Ext
+  DDGS --> Ext
+  Jina --> Ext
+  Serper --> Ext
+  InfoQuest --> Ext
+  Ext --> Norm["normalize title url snippet JSON"]
+  Norm --> Agent["ToolMessage returned to agent"]
 ```

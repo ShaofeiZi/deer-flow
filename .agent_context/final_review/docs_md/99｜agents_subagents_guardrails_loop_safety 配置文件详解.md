@@ -43,10 +43,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req["load_agent_config name"] --> Name["validate_agent_name"]
+  Name --> Resolve["resolve_agent_dir"]
+  Resolve --> U{"per-user config.yaml exists"}
+  U -- yes --> User["users/user_id/agents/name"]
+  U -- no --> L{"legacy config.yaml exists"}
+  L -- yes --> Legacy["agents/name legacy"]
+  L -- no --> RetUser["return per-user path"]
+  User --> Read["read config.yaml"]
+  Legacy --> Read
+  RetUser --> NotFound["FileNotFoundError"]
+  Read --> Strip["strip unknown fields"]
+  Strip --> Cfg["AgentConfig"]
+  Resolve --> Soul["load_agent_soul SOUL.md"]
+  Soul --> Prompt["lead agent system prompt"]
 ```

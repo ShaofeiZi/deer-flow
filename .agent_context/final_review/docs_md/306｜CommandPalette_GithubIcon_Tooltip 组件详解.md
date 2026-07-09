@@ -38,11 +38,31 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    actor User
+    participant CopyButton as CopyButton.tsx
+    participant WTooltip as workspace Tooltip
+    participant ClipMod as core/clipboard.ts
+    participant NavClip as navigator.clipboard
+    participant DOM as execCommand fallback
+    participant Toast as sonner toast
+    User->>WTooltip: hover CopyButton
+    WTooltip-->>User: show copyToClipboard hint
+    User->>CopyButton: onClick
+    CopyButton->>ClipMod: writeTextToClipboard data
+    alt navigator.clipboard.writeText exists
+        ClipMod->>NavClip: writeText text
+        NavClip-->>ClipMod: resolve
+    else fallback path
+        ClipMod->>DOM: copyTextWithExecCommand text
+        DOM-->>ClipMod: boolean
+    end
+    alt copy succeeded
+        ClipMod-->>CopyButton: true
+        CopyButton->>CopyButton: setCopied true for 2s
+        CopyButton-->>User: swap to CheckIcon
+    else copy failed
+        ClipMod-->>CopyButton: false
+        CopyButton->>Toast: toast.error failedToCopy
+    end
 ```

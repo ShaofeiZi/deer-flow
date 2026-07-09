@@ -51,10 +51,15 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req[HTTP request /api/threads] --> Perm[require_permission owner_check]
+  Perm --> Handler[route handler]
+  Handler --> Strip[_strip_reserved_metadata]
+  Handler --> CP[checkpointer aget/aput]
+  Handler --> TS[thread_store get/create/search]
+  Handler --> FS[delete_thread_dir filesystem]
+  CP --> Derive[_derive_thread_status]
+  CP --> Serialize[serialize_channel_values]
+  TS --> Serialize
+  Serialize --> Resp[ThreadResponse / ThreadStateResponse]
+  Derive --> Resp
 ```

@@ -44,11 +44,35 @@ flowchart TD
 | 阅读路径 | 先看 ChatPage 如何创建 handleSubmit，再看 InputBox 如何调用 onSubmit，最后追 useThreadStream 如何调用 SDK。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant User
+  participant InputBox
+  participant ChatPage
+  participant Stream as useThreadStream
+  participant SDK as useStream
+  participant Server as LangGraph Server
+  User->>InputBox: submit PromptInputMessage
+  InputBox->>InputBox: guard streaming and empty input
+  InputBox->>ChatPage: onSubmit message
+  ChatPage->>Stream: sendMessage threadId message
+  Stream->>Stream: push optimistic messages
+  Stream->>ChatPage: onSend threadId
+  ChatPage->>ChatPage: setIsWelcomeMode false
+  opt files attached
+    Stream->>Server: uploadFiles threadId files
+    Server-->>Stream: uploaded file info
+  end
+  Stream->>SDK: thread.submit messages and context
+  SDK->>Server: run lead_agent stream
+  Server-->>SDK: onCreated meta
+  SDK->>Stream: onCreated meta
+  Stream->>ChatPage: onStart createdThreadId
+  ChatPage->>ChatPage: history.replaceState, setThreadId, setIsNewThread false
+  Server-->>SDK: stream chunks
+  SDK->>Stream: onUpdateEvent onCustomEvent
+  Stream->>Stream: clear optimistic on human message
+  Server-->>SDK: onFinish state
+  SDK->>Stream: onFinish state
+  Stream->>ChatPage: onFinish state
+  ChatPage->>ChatPage: showNotification if not focused
 ```

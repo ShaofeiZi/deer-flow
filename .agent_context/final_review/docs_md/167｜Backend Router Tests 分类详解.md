@@ -38,10 +38,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  T["router test e.g. test_artifacts_router"] --> H["make_authed_test_app"]
+  H --> APP["FastAPI bare app"]
+  H --> MW["_StubAuthMiddleware"]
+  H --> TS["app.state.thread_store MagicMock"]
+  T --> IR["app.include_router runs.router artifacts.router memory.router"]
+  IR --> APP
+  APP --> TC["TestClient GET /api/..."]
+  TC --> MW
+  MW --> SU["request.state.user stub User"]
+  MW --> AC["request.state.auth AuthContext"]
+  TC --> RP["require_permission owner_check=True"]
+  RP --> HP["auth.has_permission"]
+  RP --> CA["thread_store.check_access"]
+  CA --> TS
+  RP --> HANDLER["route handler executes"]
+  HANDLER --> TC
+  T --> CU["call_unwrapped walks __wrapped__"]
+  CU --> HANDLER
 ```

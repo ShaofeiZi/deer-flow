@@ -40,11 +40,27 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Page as NewAgentPage
+  participant Hook as useThreadStream
+  participant Lead as lead_agent
+  participant Tool as setup_agent
+  participant API as agents api
+  participant Retry as getAgentWithRetry
+
+  Page->>Hook: sendMessage saveCommand hide_from_ui true
+  Hook->>Lead: thread.submit agent_name
+  Lead->>Tool: invoke setup_agent
+  Tool->>Tool: write SOUL.md and config.yaml
+  Tool-->>Lead: Command created_agent_name
+  Lead-->>Hook: on_tool_end setup_agent
+  Hook-->>Page: onToolEnd status completed
+  Page->>Retry: getAgentWithRetry
+  loop delays 200 500 1000 2000
+    Retry->>API: getAgent name
+    API-->>Retry: Agent JSON
+  end
+  Retry-->>Page: fetched Agent
+  Page->>Page: setAgent show success
+  Page->>Page: router.push chats new
 ```

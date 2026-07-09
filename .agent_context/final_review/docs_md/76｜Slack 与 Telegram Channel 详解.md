@@ -40,11 +40,26 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Slack as SlackChannel
+  participant TG as TelegramChannel
+  participant Bus as MessageBus
+  participant Mgr as ChannelManager
+  participant GW as Gateway
+
+  Slack->>Slack: _on_socket_event strip mention check users
+  Slack->>Slack: _send_running_reply Working on it
+  Slack->>Bus: publish_inbound InboundMessage
+  TG->>TG: _on_text _check_user strip username
+  TG->>TG: _send_running_reply Working on it
+  TG->>Bus: publish_inbound InboundMessage
+  Bus->>Mgr: _dispatch_loop get_inbound
+  Mgr->>Mgr: _handle_chat _resolve_run_params
+  Mgr->>Mgr: store get_thread_id reuse or create
+  Mgr->>GW: runs.wait thread_id human_message
+  GW-->>Mgr: result messages
+  Mgr->>Mgr: _extract_response_text _extract_artifacts
+  Mgr->>Bus: publish_outbound OutboundMessage
+  Bus->>Slack: _on_outbound chat_postMessage
+  Bus->>TG: _on_outbound bot send_message
 ```

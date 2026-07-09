@@ -43,13 +43,30 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant U as User
+    participant TA as PromptInputTextarea
+    participant PI as PromptInput
+    participant Prov as PromptInputProvider
+    participant IB as InputBox
+    participant API as suggestions API
+
+    U->>TA: type message
+    Note over TA: handleKeyDown Enter
+    TA->>PI: form requestSubmit
+    PI->>Prov: read controller textInput value
+    Prov-->>PI: text and attachments
+    PI->>PI: convertBlobUrlToDataUrl
+    PI->>IB: onSubmit PromptInputMessage
+    alt status is streaming
+        IB->>IB: call onStop
+    else ready
+        IB->>IB: model auto-select guard
+        IB->>IB: forward onSubmit to parent
+    end
+    PI->>Prov: clearSubmittedState on success
+    Note over IB: streaming to idle transition
+    IB->>API: POST threads thread_id suggestions
 ```
 
 <callout emoji="💡">

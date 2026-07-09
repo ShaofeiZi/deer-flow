@@ -39,11 +39,35 @@ flowchart TD
 | 阅读路径 | 先看 channel 如何产生 InboundMessage，再看 ChannelManager 如何启动 run，最后看 OutboundMessage 如何回到平台。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant TG as TelegramChannel
+  participant DT as DingTalkChannel
+  participant DC as DiscordChannel
+  participant Bus as MessageBus
+  participant Mgr as ChannelManager
+  participant Store as ChannelStore
+  participant GW as Gateway
+  Note over TG,DC: each adapter runs polling or stream in own thread
+  TG->>Bus: publish_inbound InboundMessage
+  DT->>Bus: publish_inbound InboundMessage
+  DC->>Bus: publish_inbound InboundMessage
+  Bus->>Mgr: get_inbound in dispatch_loop
+  Mgr->>Store: get_thread_id chat_id topic_id
+  alt no existing thread
+    Mgr->>GW: threads.create
+    Mgr->>Store: set_thread_id
+  end
+  alt supports_streaming
+    Mgr->>GW: runs.stream
+    GW-->>Mgr: stream chunks
+    Mgr->>Bus: publish_outbound is_final false
+  else non-streaming
+    Mgr->>GW: runs.wait
+    GW-->>Mgr: final state
+  end
+  Mgr->>Bus: publish_outbound OutboundMessage final
+  Bus->>TG: _on_outbound
+  Bus->>DT: _on_outbound
+  Bus->>DC: _on_outbound
+  Note over TG,DC: base._on_outbound filters by channel_name then send and send_file
 ```

@@ -43,10 +43,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+    YAML["config.yaml"] --> FromFile["AppConfig.from_file"]
+    FromFile --> Single["_apply_singleton_configs"]
+    Single --> Cache["cached _app_config"]
+    Cache --> Get["get_app_config"]
+    Get -->|"mtime changed"| Reload["reload_app_config"]
+    Get --> Hot["hot reload per request"]
+    Hot --> H1["models memory tools skills"]
+    Hot --> H2["guardrails summarization title"]
+    Get --> Cold["STARTUP_ONLY_FIELDS"]
+    Cold --> C1["database init_engine_from_config"]
+    Cold --> C2["sandbox get_sandbox_provider"]
+    Cold --> C3["checkpointer make_checkpointer"]
+    Cold --> C4["log_level apply_logging_level"]
 ```

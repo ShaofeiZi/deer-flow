@@ -37,11 +37,25 @@ flowchart TD
 | 阅读路径 | 先读 skill frontmatter 和触发场景，再读正文 workflow，最后检查 references/templates/scripts 是否支撑描述。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant U as User
+    participant M as SkillActivationMiddleware
+    participant P as slash.py
+    participant S as SkillStorage
+    participant A as Agent
+
+    U->>M: HumanMessage slash web-design-guidelines app.tsx
+    M->>M: _find_activation_target scans messages
+    M->>P: parse_slash_skill_reference text
+    P-->>M: SlashSkillReference name and remaining_text
+    M->>S: load_skills enabled_only false
+    S->>S: _iter_skill_files parse_skill_file SKILL.md
+    S-->>M: Skill list with enabled state
+    M->>P: resolve_slash_skill name skills
+    P-->>M: ResolvedSlashSkill container_file_path
+    M->>M: _read_skill_content sha256 hash
+    M->>M: _build_activation_reminder XML skill_content
+    M->>M: insert hidden HumanMessage before target
+    M->>A: override messages then handler
+    A-->>U: terse file-line findings
 ```

@@ -39,11 +39,38 @@ flowchart TD
 | 阅读路径 | 阅读路径：从 URL/API 入口往内追 service，再看数据落到哪里。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Client
+    participant CSRF as CSRFMiddleware
+    participant Auth as AuthMiddleware
+    participant Deps as get_current_user_from_request
+    participant Handler as route handler
+    Client->>CSRF: POST mutation
+    CSRF->>CSRF: should_check_csrf POST
+    alt auth endpoint login register
+        CSRF->>CSRF: verify same Origin header
+        CSRF-->>Client: 403 cross-site denied
+    else non-auth mutation
+        CSRF->>CSRF: match X-CSRF-Token to csrf_token cookie
+        CSRF-->>Client: 403 token missing or mismatch
+    end
+    CSRF->>Auth: forward validated request
+    Auth->>Auth: _is_public path check
+    alt public path health docs login
+        Auth->>Handler: call_next anonymous
+    else protected path
+        Auth->>Auth: internal auth header first
+        alt valid internal token
+            Auth->>Auth: user get_internal_user
+        else access_token cookie present
+            Auth->>Deps: strict JWT resolve User
+            Deps-->>Auth: User or 401 token invalid
+        else no cookie auth disabled
+            Auth->>Auth: stamp e2e-admin user
+        else no cookie auth on
+            Auth-->>Client: 401 NOT_AUTHENTICATED
+        end
+    end
+    Auth->>Handler: stamp state.user set_current_user
+    Handler-->>Client: 200 ok
 ```

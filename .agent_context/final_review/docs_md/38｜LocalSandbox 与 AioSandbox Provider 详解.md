@@ -43,10 +43,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Call[get_sandbox_provider] --> Prov{provider type}
+  Prov -->|Local| Lacq[LocalSandboxProvider.acquire]
+  Prov -->|AIO| Aacq[AioSandboxProvider.acquire]
+  Lacq --> Lcache{_thread_sandboxes}
+  Lcache -->|hit| Llru[move_to_end LRU]
+  Lcache -->|miss| Lbuild[_build_thread_path_mappings]
+  Lbuild --> Lnew[new LocalSandbox id local-tid]
+  Lnew --> Levict[LRU evict to cap 256]
+  Aacq --> Areuse[_reuse_in_process_sandbox]
+  Areuse --> Awarm[_reclaim_warm_pool_sandbox]
+  Awarm --> Afile[_discover_or_create_with_lock]
+  Afile --> Adiscover[backend.discover]
+  Adiscover --> Acreate[_create_sandbox backend.create]
+  Acreate --> Aready[wait_for_sandbox_ready]
 ```

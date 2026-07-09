@@ -39,10 +39,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  MakeDev["make dev / start"] --> CheckPy["scripts/check.py deps"]
+  CheckPy --> ServeSh["scripts/serve.sh"]
+  WinOnly{"Windows?"} -- yes --> GitBash["run-with-git-bash.cmd"]
+  WinOnly -- no --> ServeSh
+  GitBash --> ServeSh
+  ServeSh --> RunSvc["run_service launches svc"]
+  RunSvc --> Launch["nohup/sh start Gateway 8001 Frontend 3000 Nginx 2026"]
+  Launch --> WaitPort["wait-for-port.sh polls port"]
+  WaitPort -- listening --> Ready["service ready"]
+  WaitPort -- timeout --> StopAll["stop_all cleanup"]
+  StopAll --> Cleanup["cleanup-containers.sh deer-flow-sandbox"]
+  Cleanup --> Docker["docker stop sandbox"]
+  Cleanup --> Apple["container stop sandbox"]
+  MakeStop["make stop / restart"] --> StopAll
+  StartDaemon["start-daemon.sh --daemon"] --> ServeSh
 ```

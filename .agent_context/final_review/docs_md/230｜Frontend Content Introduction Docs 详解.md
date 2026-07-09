@@ -38,10 +38,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req["Browser request docs introduction"] --> Page["page.tsx catch-all mdxPath"]
+  Page --> GSP["generateStaticParamsFor"]
+  Page --> IP["importPage mdxPath lang"]
+  IP --> MDX["content lang introduction MDX"]
+  MDX --> Meta["_meta.ts"]
+  Meta --> SB["title and order for sidebar"]
+  IP --> Wrap["mdx-components.ts wrapper"]
+  Wrap --> Out["MDXContent toc metadata"]
+  Out --> Layout["layout.tsx DocLayout"]
+  Layout --> GPM["getPageMap slash lang"]
+  GPM --> FPR["formatPageRoute slash lang docs"]
+  FPR --> PM["pageMap sidebar nav"]
+  Layout --> Loc["getLocaleByLang lang"]
+  Loc --> Theme["Layout nextra-theme-docs"]
+  PM --> Theme
+  Out --> Theme
+  Theme --> Chrome["Header and Footer landing"]
+  Theme --> Browser["Browser renders docs page"]
 ```

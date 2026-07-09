@@ -40,10 +40,21 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Stream["DeerFlowClient.stream"] --> AutoID["thread_id or uuid4"]
+  AutoID --> GetCfg["_get_runnable_config"]
+  GetCfg --> Trace["tracing callbacks plus langfuse metadata"]
+  Trace --> Ensure["_ensure_agent"]
+  Ensure -->|config key changed| Build["build_middlewares and create_agent"]
+  Build --> Agent["self._agent.stream"]
+  Ensure -->|same config key| Agent
+  Agent -->|stream_mode list| Fan["values messages custom"]
+  Fan -->|custom| EvCustom["StreamEvent custom"]
+  Fan -->|messages AI| EvAI["_ai_text_event and _ai_tool_calls_event"]
+  Fan -->|messages tool| EvTool["_tool_message_event"]
+  Fan -->|values| Dedup["streamed_ids and seen_ids dedup"]
+  Dedup --> EvValues["StreamEvent values via _serialize_message"]
+  EvCustom --> End["StreamEvent end cumulative usage"]
+  EvAI --> End
+  EvTool --> End
+  EvValues --> End
 ```

@@ -43,10 +43,24 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  A[POST /api/threads/.../uploads] --> B[uploads.upload_files]
+  B --> C[normalize_filename / claim_unique_filename]
+  C --> D[ensure_uploads_dir host dir]
+  D --> E[_write_upload_file_with_limits chunked]
+  E --> F{auto_convert_documents and ext in CONVERTIBLE_EXTENSIONS}
+  F -->|yes| G[convert_file_to_markdown writes sibling .md]
+  F -->|no| H[_make_file_sandbox_readable chmod]
+  G --> H
+  H --> I[UploadResponse returns files metadata to frontend]
+  I --> J[frontend sets HumanMessage additional_kwargs.files]
+  J --> K[UploadsMiddleware.abefore_agent run_in_executor]
+  K --> L[before_agent reads thread_id from runtime.context]
+  L --> M[Paths.sandbox_uploads_dir resolves uploads_dir]
+  M --> N[_files_from_kwargs validates filename + file exists]
+  M --> O[iter uploads_dir collect historical_files]
+  N --> P[_extract_outline_for_file reads sibling .md via extract_outline]
+  O --> P
+  P --> Q[_create_files_message builds uploaded_files block]
+  Q --> R[prepend block to last HumanMessage content]
+  R --> S[return uploaded_files and messages to state]
 ```

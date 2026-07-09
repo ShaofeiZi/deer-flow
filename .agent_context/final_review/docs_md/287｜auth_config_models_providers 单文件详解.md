@@ -39,10 +39,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req["auth request"]
+  Req --> AD{"is_auth_disabled"}
+  AD -- yes --> AU["AUTH_DISABLED_USER_ID admin"]
+  AD -- no --> CK{"access_token cookie"}
+  CK -- absent --> E1["401 not_authenticated"]
+  CK -- present --> DT["jwt.decode_token"]
+  DT -- TokenError --> E2["401 token_expired or token_invalid"]
+  DT -- TokenPayload --> GU["LocalAuthProvider.get_user"]
+  GU -- None --> E3["401 user_not_found"]
+  GU -- User --> TV{"token_version match"}
+  TV -- no --> E4["401 token_invalid revoked"]
+  TV -- yes --> OK["return User"]
+  LG["langgraph_auth.authenticate"] -.reuses.-> DT
+  LG -.reuses.-> GU
 ```

@@ -39,11 +39,27 @@ flowchart TD
 | 阅读路径 | 阅读路径：从 URL/API 入口往内追 service，再看数据落到哪里。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant C as Client
+    participant R as routers/auth.py
+    participant P as LocalAuthProvider
+    participant V as password.verify_password_async
+    participant J as jwt.create_access_token
+    participant K as _set_session_cookie
+    participant E as errors.AuthErrorCode
+    C->>R: POST login/local
+    R->>R: check_rate_limit client_ip
+    R->>P: authenticate email password
+    P->>V: plain vs password_hash
+    alt verify fails
+        P-->>R: None
+        R->>E: INVALID_CREDENTIALS
+        R-->>C: 401 AuthErrorResponse
+    else verify ok
+        P-->>R: User
+        R->>J: user_id token_version
+        J-->>R: JWT string
+        R->>K: set HttpOnly access_token
+        R-->>C: LoginResponse expires_in needs_setup
+    end
 ```

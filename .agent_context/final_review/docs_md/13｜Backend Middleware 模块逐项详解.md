@@ -95,10 +95,17 @@ mindmap
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Base[build_lead_runtime_middlewares] --> Dyn[DynamicContextMiddleware]
+  Dyn --> Skill[SkillActivationMiddleware]
+  Skill --> Sum[SummarizationMiddleware opt]
+  Sum --> Todo[TodoMiddleware opt]
+  Todo --> Tok[TokenUsageMiddleware opt]
+  Tok --> Title[TitleMiddleware]
+  Title --> Mem[MemoryMiddleware]
+  Mem --> View[ViewImageMiddleware opt]
+  View --> Def[DeferredToolFilterMiddleware opt]
+  Def --> Sub[SubagentLimitMiddleware opt]
+  Sub --> Loop[LoopDetectionMiddleware opt]
+  Loop --> Safe[SafetyFinishReasonMiddleware opt]
+  Safe --> Clar[ClarificationMiddleware last]
 ```

@@ -81,10 +81,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  YAML[config.yaml + extensions_config.json] --> AF[AppConfig.from_file]
+  AF --> Req[get_app_config per request - mtime hot reload]
+  Req --> Hot[request-time fields - models tools skills memory subagents]
+  AF --> Start[langgraph_runtime startup captures once]
+  Start --> DB[init_engine_from_config - database]
+  Start --> CP[make_checkpointer - checkpointer]
+  Start --> RE[make_run_event_store - run_events]
+  Start --> SB[make_stream_bridge - stream_bridge]
+  Start --> SD[get_sandbox_provider - sandbox]
+  Start --> LV[apply_logging_level - log_level]
+  Start --> CH[start_channel_service - channels]
+  DB --> Frz[restart required singletons]
+  CP --> Frz
+  RE --> Frz
+  SB --> Frz
+  SD --> Frz
+  LV --> Frz
+  CH --> Frz
 ```

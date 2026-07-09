@@ -41,10 +41,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req["gateway request"] --> Get["get_app_config"]
+  Get --> Ov{"runtime override set"}
+  Ov -- yes --> RetOv["return override"]
+  Ov -- no --> Mt{"mtime or path changed"}
+  Mt -- no --> RetCache["return cached _app_config"]
+  Mt -- yes --> Load["AppConfig.from_file"]
+  Load --> V{"ValidationError raised"}
+  V -- yes --> Keep["keep previous _app_config and singletons"]
+  V -- no --> Reset["reset sub-config singletons"]
+  Reset --> Cache["cache new _app_config"]
+  Cache --> RetNew["return new _app_config"]
+  Boundary["reload_boundary STARTUP_ONLY_FIELDS"] -. captured at startup .-> RetCache
+  Boundary -. requires restart .-> RetNew
 ```

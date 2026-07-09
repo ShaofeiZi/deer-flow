@@ -43,11 +43,16 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  PR["push or pull_request on main"] --> BE["backend-unit-tests make test"]
+  PR --> FE["frontend-unit-tests make test"]
+  PR --> E2E["e2e-tests playwright test"]
+  PR --> RP["replay-e2e test_replay_golden"]
+  RP --> L2["fullstack playwright.real-backend"]
+  PR --> BLK["backend-blocking-io make test-blocking-io"]
+  PR --> LNT["lint-check make lint"]
+  TAG["push tag v*"] --> CBE["container backend Dockerfile"]
+  TAG --> CFE["container frontend Dockerfile"]
+  DISP["workflow_dispatch or labels.yml push"] --> SYL["label-sync sync_labels.py"]
+  PRT["pull_request_target or issue"] --> TRG["triage pr-labels reviewing issue-triage"]
 ```

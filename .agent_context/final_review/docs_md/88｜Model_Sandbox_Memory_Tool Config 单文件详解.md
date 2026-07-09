@@ -65,10 +65,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  YAML["config.yaml"] --> APP["AppConfig"]
+  APP --> MODEL["ModelConfig"]
+  APP --> TOOL["ToolConfig"]
+  APP --> OUT["ToolOutputConfig"]
+  APP --> SRCH["ToolSearchConfig"]
+  APP --> SBX["SandboxConfig"]
+  APP --> MEM["MemoryConfig"]
+  MODEL --> FACTORY["create_chat_model"]
+  TOOL --> TOOLS["get_available_tools"]
+  OUT --> BUDGET["ToolOutputBudgetMiddleware"]
+  SRCH --> SEARCH["tool_search deferred MCP"]
+  SBX --> PROVIDER["get_sandbox_provider singleton"]
+  MEM --> MEMMW["MemoryMiddleware inject facts"]
+  MEM --> STORE["FileMemoryStorage memory.json"]
+  PROVIDER -. "reset_sandbox_provider to reload" .-> SBX
+  STORE -. "persists on disk across runs" .-> MEM
 ```

@@ -1,0 +1,19 @@
+{
+  "38｜LocalSandbox 与 AioSandbox Provider 详解.md": [
+    "agents/memory"
+  ],
+  "39｜MCP Cache_Session Pool 与 OAuth 详解.md": [
+    "agents/memory"
+  ],
+  "40｜Memory Queue_Updater_Storage 单文件详解.md": [
+    "agents/memory"
+  ],
+  "60｜Frontend Sidebar 与 Navigation 组件详解.md": [
+    "workspace-nav-chat-list.tsx",
+    "recent-chat-list.tsx",
+    "workspace-nav-menu.tsx"
+  ],
+  "68｜Channels Service 与 ChannelManager 详解.md": [
+    "Channel.start/stop/send"
+  ]
+}

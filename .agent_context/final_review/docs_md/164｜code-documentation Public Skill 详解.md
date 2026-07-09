@@ -38,10 +38,21 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  P1["Phase 1 Codebase Analysis"] --> S11["Project Discovery"]
+  S11 --> S12["Code Structure Analysis"]
+  S12 --> S13["Identify Doc Scope"]
+  S13 --> P2["Phase 2 Doc Generation"]
+  P2 --> S21["README Generation"]
+  P2 --> S22["API Reference Generation"]
+  P2 --> S23["Architecture Documentation"]
+  P2 --> S24["Inline Code Documentation"]
+  S21 --> P3["Phase 3 Quality Assurance"]
+  S22 --> P3
+  S23 --> P3
+  S24 --> P3
+  P3 --> Q1["Completeness Check"]
+  Q1 --> Q2["Quality Standards"]
+  Q2 --> Q3["Cross-reference Validation"]
+  Q3 --> Out["Output Handling present_files"]
+  Out --> Dir["mnt/user-data/outputs"]
 ```

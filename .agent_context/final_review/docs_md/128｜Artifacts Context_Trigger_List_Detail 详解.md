@@ -39,11 +39,32 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant User
+  participant List as ArtifactFileList
+  participant Ctx as ArtifactsProvider
+  participant Detail as ArtifactFileDetail
+  participant Hook as useArtifactContent
+  participant Loader as loader.ts
+  participant Cache as react-query cache
+
+  User->>List: click file row
+  List->>Ctx: select filepath
+  List->>Ctx: setOpen true
+  Ctx->>Detail: selectedArtifact updates
+  Detail->>Hook: invoke filepath threadId
+  alt filepath starts with write-file
+    Hook->>Loader: loadArtifactContentFromToolCall
+    Loader->>Loader: findToolCallResult in thread.messages
+    Loader-->>Hook: toolCall args content
+  else normal artifact path
+    Hook->>Cache: useQuery key filepath threadId isMock
+    Cache->>Loader: loadArtifactContent staleTime 5min
+    Loader->>Loader: urlOfArtifact appends SKILL.md for skill
+    Loader->>Loader: fetch artifact url
+    Loader-->>Cache: content and url
+    Cache-->>Hook: data content url
+  end
+  Hook-->>Detail: content url isLoading
+  Detail->>Detail: render CodeEditor or Preview iframe
 ```

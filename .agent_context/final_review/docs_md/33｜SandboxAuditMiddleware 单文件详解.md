@@ -41,10 +41,23 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  A[_classify_command] --> B[Pass1 raw cmd vs HIGH_RISK_PATTERNS]
+  B --> C{match?}
+  C -->|yes| BLK[return block]
+  C -->|no| D[_split_compound_command]
+  D --> E{unclosed quote?}
+  E -->|yes| F[fail-closed whole cmd]
+  E -->|no| G[iterate sub-commands]
+  F --> H[_classify_single_command]
+  G --> H
+  H --> I[normalized and shlex vs HIGH_RISK_PATTERNS]
+  I --> J{block?}
+  J -->|yes| BLK
+  J -->|no| K[vs MEDIUM_RISK_PATTERNS]
+  K --> L{verdict}
+  L -->|warn| M[worst=warn]
+  L -->|pass| M
+  M --> N{next sub?}
+  N -->|yes| G
+  N -->|no| O[return worst]
 ```

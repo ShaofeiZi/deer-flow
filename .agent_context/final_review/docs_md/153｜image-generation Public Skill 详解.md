@@ -38,10 +38,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Read["read prompt_file"] --> Resolve["_resolve_provider"]
+  Resolve --> Decide{"provider selected"}
+  Decide -- "gemini" --> Gemini["_generate_image_gemini"]
+  Decide -- "minimax" --> MiniMax["_generate_image_minimax"]
+  Decide -- "unknown" --> Err["raise ValueError"]
+  Gemini --> GVal["validate_image per ref"]
+  GVal --> GApi["POST gemini generateContent"]
+  GApi --> GDecode["decode inlineData"]
+  MiniMax --> MCheck["prompt under 1500 chars"]
+  MCheck --> MApi["POST v1 image_generation"]
+  MApi --> MDecode["decode image_base64"]
+  GDecode --> OutDir["_ensure_output_dir"]
+  MDecode --> OutDir
+  OutDir --> Write["write output_file"]
+  Write --> Done["return success"]
 ```

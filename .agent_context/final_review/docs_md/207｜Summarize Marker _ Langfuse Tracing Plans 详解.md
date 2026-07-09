@@ -37,11 +37,31 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Worker as RunWorker
+  participant Meta as tracing.metadata
+  participant TFactory as tracing.factory
+  participant Agent as lead_agent
+  participant SMW as SummarizationMiddleware
+  participant Hook as memory_flush_hook
+  participant SModel as summary_model
+  participant LF as LangfuseHandler
+
+  Worker->>Meta: inject_langfuse_metadata
+  Note over Meta: sets session_id user_id trace_name tags
+  Worker->>Agent: build and stream config
+  Agent->>TFactory: build_tracing_callbacks
+  TFactory-->>Agent: langfuse handler
+  Agent->>SMW: abefore_model state runtime
+  SMW->>SMW: should_summarize token trigger
+  alt threshold met
+    SMW->>SMW: partition_with_skill_rescue
+    SMW->>Hook: before_summarization event
+    Hook->>Hook: MemoryQueue add_nowait
+    SMW->>SModel: ainvoke nostream prompt
+    SModel->>LF: on_chain_start root trace
+    SMW-->>Agent: RemoveMessage plus summary plus preserved
+  else not met
+    SMW-->>Agent: None
+  end
 ```

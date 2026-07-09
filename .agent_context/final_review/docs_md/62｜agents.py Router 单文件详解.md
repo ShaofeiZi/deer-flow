@@ -52,10 +52,15 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req[agents.py route] --> Gate[require agents api enabled]
+  Gate --> UID[get_effective_user_id]
+  UID --> Op{operation}
+  Op -->|list| Union[list_custom_agents per-user plus legacy]
+  Op -->|get| Res[resolve_agent_dir]
+  Op -->|create| Write[write user_agent_dir config.yaml and SOUL.md]
+  Op -->|update or delete| Legacy{only legacy agent_dir exists}
+  Res -->|user config.yaml present| UDir[user_agent_dir]
+  Res -->|legacy config.yaml present| LDir[agent_dir fallback]
+  Legacy -->|yes| Err409[409 run migrate_user_isolation]
+  Legacy -->|no| Mut[mutate config.yaml SOUL.md or rmtree]
 ```

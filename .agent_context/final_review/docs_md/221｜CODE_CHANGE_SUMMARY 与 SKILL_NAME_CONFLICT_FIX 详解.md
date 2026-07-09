@@ -38,10 +38,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  InstallRoute["POST /api/skills/install"] --> Storage["LocalSkillStorage.ainstall"]
+  Storage --> Extract["safe_extract_skill_archive"]
+  Extract --> Resolve["resolve_skill_dir_from_archive"]
+  Resolve --> Validate["_validate_skill_frontmatter"]
+  Validate --> DupCheck{"custom dir exists"}
+  DupCheck -- "yes" --> Conflict["SkillAlreadyExistsError HTTP 409"]
+  DupCheck -- "no" --> Scan["_scan_skill_archive_contents_or_raise"]
+  Scan --> Move["_move_staged_skill_into_reserved_target"]
+  Move --> CustomDir["custom/name dir"]
+  ListRoute["GET /api/skills"] --> Load["SkillStorage.load_skills"]
+  Load --> Iter["_iter_skill_files"]
+  Iter --> Parse["parse_skill_file"]
+  Parse --> Enabled["ExtensionsConfig.is_skill_enabled"]
+  Enabled --> Sort["sort by name"]
+  CustomDir -.-> Iter
 ```

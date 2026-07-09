@@ -54,10 +54,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  MCP[PUT /api/mcp/config] --> Admin[_require_admin_user]
+  Admin --> Stdio[_validate_mcp_update_request]
+  Stdio --> Merge[_merge_preserving_secrets]
+  Merge --> ExtFile[extensions_config.json]
+  ExtFile --> Reload[reload_extensions_config]
+  SkillEdit[PUT /api/skills/custom] --> SecScan[scan_skill_content]
+  SecScan --> SkillWrite[write_custom_skill]
+  SkillWrite --> Hist[append_history]
+  SkillInstall[POST /api/skills/install] --> Archive[ainstall_skill_from_archive]
+  Archive --> Prompt[refresh_skills_system_prompt_cache_async]
+  SkillWrite --> Prompt
+  Reload --> Prompt
+  MemFact[POST /api/memory/facts] --> FactUp[create_memory_fact]
+  FactUp --> MemFile[memory.json]
 ```

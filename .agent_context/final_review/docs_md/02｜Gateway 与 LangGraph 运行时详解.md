@@ -139,11 +139,30 @@ POST /api/langgraph/threads/{thread_id}/runs/stream
 | 阅读路径 | 阅读路径：router 只接请求，services 建 run，worker 真执行。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant W as run_agent
+  participant RM as RunManager
+  participant B as StreamBridge
+  participant C as Checkpointer
+  participant J as RunJournal
+  participant TS as thread_store
+  W->>J: init from event_store
+  W->>RM: set_status running
+  W->>C: aget_tuple pre-run snapshot
+  W->>B: publish metadata
+  W->>W: make_lead_agent build agent
+  loop agent.astream
+    W->>B: publish values messages custom
+  end
+  alt abort rollback
+    W->>C: aput restore pre-run checkpoint
+    W->>RM: set_status error
+  else normal finish
+    W->>RM: set_status success or error
+  end
+  W->>J: flush token usage
+  W->>RM: update_run_completion
+  W->>TS: update_display_name and status from checkpoint
+  W->>B: publish_end
+  W->>B: cleanup delay 60s
 ```

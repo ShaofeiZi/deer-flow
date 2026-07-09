@@ -60,11 +60,21 @@ flowchart TD
 | 阅读路径 | 阅读路径：先判断它在哪个 hook 生效，再看它读写 ThreadState 的哪些字段。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  BA[before_agent] --> UID[get_effective_user_id]
+  UID --> TP[_get_thread_paths]
+  TP --> TDIR[Paths.thread_dir]
+  TDIR -->|user_id set| PU[users/user_id/threads/thread_id]
+  TDIR -->|no user_id| LG[threads/thread_id]
+  PU --> UD[user-data]
+  LG --> UD
+  UD --> WP[workspace_path]
+  UD --> UP[uploads_path]
+  UD --> OP[outputs_path]
+  WP --> TD[thread_data state]
+  UP --> TD
+  OP --> TD
+  WP -.maps to.-> VW[mnt/user-data/workspace]
+  UP -.maps to.-> VU[mnt/user-data/uploads]
+  OP -.maps to.-> VO[mnt/user-data/outputs]
 ```

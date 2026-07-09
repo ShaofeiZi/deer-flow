@@ -44,10 +44,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Check["check.py"] --> Serve["serve.sh"]
+  Serve --> Stop["stop_all"]
+  Stop --> CfgChk{"config.yaml exists"}
+  CfgChk -->|missing| Abort["exit 1"]
+  CfgChk -->|ok| Upgrade["config-upgrade.sh"]
+  Upgrade --> Extras["detect_uv_extras.py"]
+  Extras --> Sync["uv sync + pnpm install"]
+  Sync --> GW["Gateway uvicorn 8001"]
+  Sync --> FE["Frontend 3000"]
+  Sync --> NX["Nginx 2026"]
+  GW --> Ready["localhost 2026 ready"]
+  FE --> Ready
+  NX --> Ready
 ```

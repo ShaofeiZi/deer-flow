@@ -40,11 +40,29 @@ flowchart TD
 | 阅读路径 | 先看入口命令，再看脚本调用链，最后看测试或日志如何证明行为。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Model
+    participant Filter as DeferredToolFilterMiddleware
+    participant ToolNode
+    participant TS as tool_search
+    participant State as ThreadState.promoted
+
+    Note over Model,State: build phase assemble_deferred_tools tags MCP tools via is_mcp_tool builds DeferredToolCatalog and DeferredToolSetup then attaches Filter with deferred_names and catalog_hash
+    Model->>Filter: wrap_model_call turn 1
+    Filter->>Filter: _filter_tools hides deferred tool schemas
+    Filter-->>Model: bind active tools plus tool_search only
+    Model->>Filter: tool_call tool_search select mcp_calc
+    Filter->>Filter: _blocked_tool_message allows tool_search
+    Filter->>ToolNode: route to ToolNode
+    ToolNode->>TS: invoke query select mcp_calc
+    TS->>TS: catalog.search returns mcp_calc
+    TS-->>State: Command update promoted names with catalog_hash
+    Note over State: merge_promoted reducer scopes by catalog_hash and drops stale names
+    Model->>Filter: wrap_model_call turn 2
+    Filter->>Filter: _filter_tools reads state promoted hash matches unhide mcp_calc
+    Filter-->>Model: bind active tools plus mcp_calc plus tool_search
+    Model->>Filter: tool_call mcp_calc
+    Filter->>Filter: _blocked_tool_message mcp_calc promoted allow
+    Filter->>ToolNode: route mcp_calc
+    ToolNode-->>Model: tool result
 ```

@@ -37,10 +37,27 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+    Req["user request"]
+    Req --> Bootstrap["bootstrap SKILL.md"]
+    Req --> Find["find-skills SKILL.md"]
+    Req --> Creator["skill-creator SKILL.md"]
+
+    Bootstrap --> ReadGuide["references/conversation-guide.md"]
+    Bootstrap --> ReadTpl["templates/SOUL.template.md"]
+    ReadGuide --> Phases["Hello You Personality Depth phases"]
+    Phases --> Gen["generate SOUL.md"]
+    Gen --> SetupAgent["setup_agent tool persists SOUL.md"]
+
+    Find --> NpxFind["npx skills find query"]
+    NpxFind --> InstallSh["scripts/install-skill.sh"]
+    InstallSh --> NpxAdd["npx skills add owner/repo@skill"]
+    NpxAdd --> CustomDir["skills/custom symlink"]
+
+    Creator --> Draft["write SKILL.md draft"]
+    Draft --> Runs["spawn with-skill and baseline runs"]
+    Runs --> Grader["agents/grader.md"]
+    Grader --> Agg["scripts/aggregate_benchmark.py"]
+    Agg --> Viewer["eval-viewer/generate_review.py"]
+    Viewer --> Loop["scripts/run_loop.py optimize description"]
+    Loop --> Package["scripts/package_skill.py"]
 ```

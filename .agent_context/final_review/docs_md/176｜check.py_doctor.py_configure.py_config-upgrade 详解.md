@@ -42,10 +42,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Dr["doctor.py check_config_version"] --> Warn["warn user_ver below example_ver"]
+  Warn --> Sug["suggest make config-upgrade"]
+  Sug --> Up["config-upgrade.sh"]
+  Up --> Resolve["resolve CONFIG path"]
+  Resolve --> Exists{"config.yaml exists?"}
+  Exists -- no --> Copy["cp config.example.yaml"]
+  Copy --> Done1["exit created"]
+  Exists -- yes --> Cmp{"versions equal or newer?"}
+  Cmp -- yes --> Uptd["exit already up to date"]
+  Cmp -- no --> Mig["apply MIGRATIONS replacements"]
+  Mig --> Merge["recursive merge missing fields"]
+  Merge --> Bump["set config_version example_version"]
+  Bump --> Bak["backup config.yaml.bak"]
+  Bak --> Write["write config.yaml"]
 ```

@@ -119,10 +119,21 @@ frontend/src/components/workspace/artifacts/
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req[get_artifact request] --> Skill{path contains .skill/}
+  Skill -->|yes| Extract[_extract_file_from_skill_archive]
+  Extract --> SkillDL{download or active mime}
+  SkillDL -->|html svg xhtml or download| Attach[attachment FileResponse]
+  SkillDL -->|text or other| SkillText[PlainTextResponse]
+  Skill -->|no| Resolve[resolve_thread_virtual_path]
+  Resolve --> Exists{exists and is_file}
+  Exists -->|no| Err[404 or 400 HTTP]
+  Exists -->|yes| Download{download flag}
+  Download -->|true| Attach
+  Download -->|false| Active{mime in ACTIVE_CONTENT_MIME_TYPES}
+  Active -->|html xhtml svg| Attach
+  Active -->|other| TextCheck{mime starts with text}
+  TextCheck -->|yes| Inline[PlainTextResponse inline]
+  TextCheck -->|no| BinCheck{is_text_file_by_content}
+  BinCheck -->|yes| Inline
+  BinCheck -->|no| Binary[inline binary Response]
 ```

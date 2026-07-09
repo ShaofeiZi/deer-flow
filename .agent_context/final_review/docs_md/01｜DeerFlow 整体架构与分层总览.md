@@ -79,10 +79,19 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Nginx[nginx 2026] -->|proxy /api| Lifespan[Gateway lifespan get_app_config]
+  Lifespan --> Tiktoken[warm_tiktoken_cache]
+  Tiktoken --> RT[langgraph_runtime]
+  RT --> SB[StreamBridge]
+  RT --> Persist[init_engine_from_config]
+  Persist --> CP[make_checkpointer]
+  Persist --> Store[make_store]
+  Store --> Repos[RunStore + ThreadStore]
+  Repos --> RES[make_run_event_store]
+  RES --> RM[RunManager]
+  RM --> Admin[_ensure_admin_user]
+  Admin --> Chan[start_channel_service]
+  Chan --> Serve[yield serve requests]
+  Serve --> StopChan[stop_channel_service]
+  StopChan --> Drain[_drain_inflight_runs]
 ```

@@ -42,11 +42,53 @@ flowchart TD
 | 阅读路径 | 阅读路径：从 URL/API 入口往内追 service，再看数据落到哪里。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Client
+    participant Router as "routers/auth.py"
+    participant Provider as "LocalAuthProvider"
+    participant Repo as "UserRepository"
+    participant PW as "password.py"
+    participant JWT as "jwt.py"
+    participant MW as "AuthMiddleware"
+    Participant Deps as "get_current_user"
+
+    Client->>Router: POST login/local
+    Router->>Router: check_rate_limit client_ip
+    Router->>Provider: authenticate email password
+    Provider->>Repo: get_user_by_email
+    Repo-->>Provider: User or None
+    Provider->>PW: verify_password_async
+    PW-->>Provider: ok or fail
+    alt valid credentials
+      Provider->>PW: needs_rehash upgrade
+      Provider-->>Router: User
+      Router->>JWT: create_access_token user_id token_version
+      JWT-->>Router: signed HS256 token
+      Router-->>Client: HttpOnly cookie LoginResponse
+    else invalid
+      Router->>Router: record_login_failure ip
+      Router-->>Client: 401 invalid_credentials
+    end
+
+    Note over Client,MW: later protected request
+    Client->>MW: GET /api/threads with cookie
+    MW->>Deps: get_current_user_from_request
+    Deps->>JWT: decode_token
+    JWT-->>Deps: TokenPayload or TokenError
+    alt TokenError
+      Deps-->>MW: 401 token_expired or token_invalid
+    else valid payload
+      Deps->>Provider: get_user payload.sub
+      Provider->>Repo: get_user_by_id
+      Repo-->>Provider: User
+      Provider-->>Deps: User
+      Deps->>Deps: check token_version match
+      alt version mismatch
+        Deps-->>MW: 401 token_invalid revoked
+      else match
+        Deps-->>MW: User
+        MW->>MW: stamp request.state.user contextvar
+        MW-->>Client: route response
+      end
+    end
 ```

@@ -50,11 +50,24 @@ flowchart TD
 | 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Client
+    participant Router as get_artifact
+    participant Authz as require_permission
+    participant PathUtils as resolve_thread_virtual_path
+    participant UserCtx as get_effective_user_id
+    participant Paths as Paths.resolve_virtual_path
+    participant Zip as _extract_file_from_skill_archive
+    Client->>Router: GET artifacts x.skill/SKILL.md
+    Router->>Authz: threads read owner_check
+    Authz-->>Router: authorized
+    Router->>PathUtils: resolve skill_file_path
+    PathUtils->>UserCtx: get_effective_user_id
+    UserCtx-->>PathUtils: user_id
+    PathUtils->>Paths: resolve_virtual_path
+    Paths-->>PathUtils: actual_skill_path
+    PathUtils-->>Router: actual_skill_path
+    Router->>Zip: extract internal_path
+    Zip-->>Router: content bytes
+    Router-->>Client: 200 with cache headers
 ```

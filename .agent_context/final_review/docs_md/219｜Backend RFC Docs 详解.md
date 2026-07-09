@@ -37,11 +37,23 @@ flowchart TD
 | 阅读路径 | 阅读路径：从 URL/API 入口往内追 service，再看数据落到哪里。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Client
+  participant MW as AuthMiddleware
+  participant JWT as auth/jwt decode_token
+  participant Prov as LocalAuthProvider get_user
+  participant RP as require_permission
+  participant TMS as ThreadMetaStore check_access
+  participant H as delete_thread_data
+  Client->>MW: DELETE /api/threads by id, access_token cookie
+  MW->>JWT: decode_token cookie
+  JWT-->>MW: TokenPayload or TokenError
+  MW->>Prov: get_user payload.sub
+  Prov-->>MW: User or 401 user_not_found
+  MW->>MW: stamp request.state.user and user_context
+  MW->>RP: threads delete owner_check require_existing
+  RP->>TMS: check_access thread_id user.id
+  TMS-->>RP: allow or deny 404
+  RP->>H: invoke delete_thread_data
+  H-->>Client: ThreadDeleteResponse
 ```

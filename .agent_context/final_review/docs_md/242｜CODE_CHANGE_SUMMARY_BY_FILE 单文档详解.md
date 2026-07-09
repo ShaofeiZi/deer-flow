@@ -38,10 +38,16 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  PR["重大 PR"] --> Diff["git diff HEAD"]
+  Diff --> Backend["backend/"]
+  Diff --> Frontend["frontend/src/"]
+  Diff --> Skills["skills/public/"]
+  Diff --> DocsDirs["docs/"]
+  Backend --> Summary["CODE_CHANGE_SUMMARY_BY_FILE.md"]
+  Frontend --> Summary
+  Skills --> Summary
+  DocsDirs --> Summary
+  Summary --> Evidence["docs/pr-evidence"]
+  Summary --> Plans["docs/plans"]
+  Summary --> Reviewer["reviewer 定位变更范围"]
 ```

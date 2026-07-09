@@ -40,10 +40,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  In["agent multi-turn input_"] --> Override["PatchedChat _get_request_payload"]
+  Override --> Capt["self._convert_input to_messages"]
+  Override --> Sup["parent _get_request_payload"]
+  Sup --> Dropped["base payload drops provider fields"]
+  Capt --> RAP["restore_assistant_payloads"]
+  Dropped --> RAP
+  RAP --> Sig["signature then positional match"]
+  Sig --> SigOpen["_restore_tool_call_signatures"]
+  Sig --> SigRC["restore_reasoning_content"]
+  SigOpen --> Out["outgoing OpenAI-compat payload"]
+  SigRC --> Out
+  Override --> MM["PatchedChatMiniMax reasoning_split strip names"]
+  MM --> Out
 ```

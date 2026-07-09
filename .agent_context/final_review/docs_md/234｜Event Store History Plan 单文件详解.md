@@ -37,11 +37,33 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Worker as runs/worker.py
+  participant Journal as RunJournal
+  participant Store as RunEventStore
+  participant Endpoint as get_thread_history
+  participant Helper as _get_event_store_messages
+  participant Ckpt as checkpointer
+  participant FE as useStream frontend
+
+  Note over Worker,Journal: write path during a run
+  Worker->>Journal: on_tool_end and on_chat_model_start
+  Journal->>Journal: _put appends to buffer
+  Journal->>Store: put_batch at flush_threshold
+  Worker->>Journal: flush in worker finally
+  Journal->>Store: put_batch drains buffer
+
+  Note over FE,Endpoint: read path the plan implements
+  FE->>Endpoint: POST /api/threads/id/history
+  Endpoint->>Helper: await helper thread_id
+  Helper->>Store: count_messages thread_id
+  Helper->>Store: list_messages after_seq cursor loop
+  Helper->>Helper: uuid5 id patch and sanitize legacy Command
+  alt store empty or unavailable
+    Helper-->>Endpoint: None fallback
+    Endpoint->>Ckpt: channel_values messages
+  else store has messages
+    Helper-->>Endpoint: patched message list
+  end
+  Endpoint-->>FE: HistoryEntry with messages
 ```

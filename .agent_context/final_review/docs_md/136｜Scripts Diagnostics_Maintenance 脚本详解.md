@@ -41,10 +41,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  SH["tool-error-degradation-detection.sh"] --> UV{"uv in PATH"}
+  UV -->|missing| X1["exit 1"]
+  UV -->|ok| HD["uv run python heredoc in backend"]
+  HD --> LM["build_middlewares from lead_agent.agent"]
+  HD --> SM["build_subagent_runtime_middlewares or fallback"]
+  LM --> CMP["_compose_sync and _compose_async wrappers"]
+  SM --> CMP
+  CMP --> TC["run TOOL_CALLS web_search web_fetch"]
+  TC --> WS["web_search raises SSLError"]
+  TC --> WF["web_fetch returns ToolMessage success"]
+  WS --> VAL["_validate_outputs"]
+  WF --> VAL
+  VAL -->|error then success| OK["PASS downgrade confirmed"]
+  VAL -->|abort or wrong status| NG["SystemExit non-zero"]
 ```

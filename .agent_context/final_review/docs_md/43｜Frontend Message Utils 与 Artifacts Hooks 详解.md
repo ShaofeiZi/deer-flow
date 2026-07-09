@@ -45,10 +45,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Hook[useArtifactContent] --> Check{write-file prefix}
+  Check -->|yes| Write[loadArtifactContentFromToolCall]
+  Write --> Draft[buildWriteFileDraftContent from thread.messages]
+  Check -->|no| Query[useQuery 5min staleTime]
+  Query --> Load[loadArtifactContent]
+  Load --> Skill{.skill file}
+  Skill -->|yes| Enhance[append SKILL.md]
+  Skill -->|no| URLNode[urlOfArtifact]
+  Enhance --> URLNode
+  URLNode --> Static{isStaticWebsiteOnly}
+  Static -->|yes| Demo[demo artifact URL]
+  Static -->|no| Api[api or mock-api URL]
+  Demo --> Fetch[fetch text]
+  Api --> Fetch
+  Fetch --> Detail[ArtifactFileDetail render]
 ```

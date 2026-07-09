@@ -42,10 +42,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Lay["app workspace layout"] --> Auth["AuthProvider core auth"]
+  Lay --> Wc["WorkspaceContent"]
+  Wc --> Qcp["QueryClientProvider"]
+  Wc --> Sbp["SidebarProvider ui sidebar"]
+  Wc --> Cmd["CommandPalette"]
+  Route["chats thread route"] --> Utc["useThreadChat"]
+  Route --> Uts["useThreadStream core threads"]
+  Uts --> Tctx["ThreadContext Provider"]
+  Tctx --> Cb["ChatBox ResizablePanel"]
+  Tctx --> Ml["MessageList"]
+  Tctx --> Ib["InputBox"]
+  Cb --> Art["useArtifacts panel"]
+  Ib --> Prim1["ui Button Dropdown Dialog"]
+  Cmd --> Prim2["ui Command Dialog"]
 ```

@@ -39,10 +39,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Loop[AgentLoop] --> View[ViewImageMiddleware before_model]
+  View --> ViewInject[inject HumanMessage from viewed_images]
+  ViewInject --> Dangle[DanglingToolCallMiddleware wrap_model_call]
+  Dangle --> DangleFind[find tool_calls missing ToolMessage]
+  DangleFind --> DangleFix[insert synthetic ToolMessage error]
+  DangleFix --> Model[LLM model patched messages]
+  Model --> ModelOut[AIMessage with tool_calls]
+  ModelOut --> SubLimit[SubagentLimitMiddleware after_model]
+  SubLimit --> SubClamp[count task calls clamp 2 to 4]
+  SubClamp --> SubDrop[drop excess task calls]
+  SubDrop --> Token[TokenUsageMiddleware after_model]
+  Token --> Cache[pop_cached_subagent_usage by tool_call_id]
+  Cache --> TokenMerge[merge usage_metadata write token_usage_attribution]
+  TokenMerge --> TokenOut[annotated AIMessage]
 ```

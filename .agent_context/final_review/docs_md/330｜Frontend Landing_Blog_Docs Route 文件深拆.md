@@ -41,10 +41,43 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  PostsPage["app/blog/posts/page.tsx"]
+  TagPage["app/blog/tags/[tag]/page.tsx"]
+  BlogLayout["app/blog/layout.tsx"]
+  DocLayout["app/[lang]/docs/layout.tsx"]
+  LandingPage["app/page.tsx"]
+
+  BlogCore["core/blog index.ts"]
+  GetIndex["getBlogIndexData"]
+  GetAll["getAllPosts - cached"]
+  Merge["mergePostsBySlug"]
+  Select["selectPreferredLanguage"]
+  PageMapEN["getPageMap /en/posts"]
+  PageMapZH["getPageMap /zh/posts"]
+
+  I18nServer["core/i18n server"]
+  GetLocale["getLocaleByLang"]
+
+  PostList["PostList component"]
+  NextraLayout["Nextra Layout"]
+  LandingSections["landing sections"]
+
+  PostsPage --> I18nServer
+  PostsPage --> GetAll
+  TagPage --> I18nServer
+  TagPage --> GetIndex
+  BlogLayout --> GetIndex
+
+  GetIndex --> GetAll
+  GetAll --> PageMapEN
+  GetAll --> PageMapZH
+  GetAll --> Merge
+  Merge --> Select
+
+  PostsPage --> PostList
+  TagPage --> PostList
+  BlogLayout --> NextraLayout
+  DocLayout --> GetLocale
+  DocLayout --> NextraLayout
+  LandingPage --> LandingSections
 ```

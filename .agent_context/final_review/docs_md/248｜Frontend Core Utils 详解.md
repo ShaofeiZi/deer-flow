@@ -41,10 +41,12 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  UUID["uuid.ts"] --> P1["uuid v4"]
+  JSON["json.ts"] --> P2["best-effort-json-parser"]
+  MD["markdown.ts"] --> Pure["pure string parse"]
+  DT["datetime.ts"] --> P3["date-fns formatDistanceToNow"]
+  DT --> I18n["core/i18n locale cookie"]
+  Files["files.tsx"] --> P4["lucide-react icons"]
+  Clip["clipboard.ts"] --> Nav["navigator.clipboard.writeText"]
+  Clip -.fallback.-> FB["execCommand textarea fallback"]
 ```

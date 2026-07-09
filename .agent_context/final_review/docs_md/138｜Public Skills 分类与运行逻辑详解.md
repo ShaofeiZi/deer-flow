@@ -43,11 +43,33 @@ flowchart TD
 | 阅读路径 | 先读 skill frontmatter 和触发场景，再读正文 workflow，最后检查 references/templates/scripts 是否支撑描述。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant User
+    participant SAMW as SkillActivationMiddleware
+    participant Slash as slash.py
+    participant Store as SkillStorage
+    participant Parser as parser.py
+    participant Ext as ExtensionsConfig
+    participant File as SKILL.md
+    User->>SAMW: turn starts with /skill-name task
+    SAMW->>Slash: parse_slash_skill_reference text
+    Slash-->>SAMW: SlashSkillReference name plus remaining text
+    SAMW->>Store: load_skills enabled_only false
+    Store->>Parser: parse_skill_file md_path
+    Parser->>Parser: read YAML frontmatter
+    Parser-->>Store: Skill name description allowed-tools
+    Store->>Ext: is_skill_enabled name category
+    Ext-->>Store: enabled bool
+    Store-->>SAMW: skills list with enabled state
+    alt skill disabled or not available
+        SAMW-->>User: AIMessage failure_message
+    else enabled and whitelisted
+        SAMW->>Store: resolve_slash_skill text skills
+        SAMW->>File: _read_skill_content validated path
+        File-->>SAMW: skill content sha256 hash
+        SAMW->>SAMW: _build_activation_reminder XML
+        SAMW->>User: insert hidden HumanMessage at target
+        SAMW->>SAMW: request.override messages
+    end
+    SAMW->>SAMW: handler prepared request
 ```

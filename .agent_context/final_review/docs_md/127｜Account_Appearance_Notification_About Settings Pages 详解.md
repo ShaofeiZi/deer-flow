@@ -40,11 +40,21 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Page as NotificationSettingsPage
+  participant Notif as useNotification
+  participant LS as useLocalSettings
+  participant API as Notification API
+
+  Page->>LS: set notification enabled
+  LS->>LS: updateLocalSettings store
+  Page->>Notif: requestPermission
+  Notif->>API: Notification.requestPermission
+  API-->>Notif: permission result
+  Notif->>Page: setPermission state
+  Page->>Notif: showNotification title body
+  Notif->>LS: read notification.enabled
+  Notif->>Notif: check 1s throttle
+  Notif->>API: new Notification title opts
+  API-->>Page: onclick focus close
 ```

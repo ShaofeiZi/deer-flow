@@ -42,11 +42,39 @@ flowchart TD
 | 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant M as Model
+    participant S as SafetyFinishReasonMW
+    participant L as LoopDetectionMW
+    participant T as ToolsNode
+    participant G as GuardrailMW
+    participant E as ToolErrorHandlingMW
+    participant A as invoke_acp_agent
+
+    M->>S: AIMessage with tool_calls
+    S->>S: detector scans finish_reason
+    alt safety terminated
+        S-->>M: strip tool_calls and append explanation
+        Note over S: emit safety_termination SSE and RunJournal audit
+    else clean
+        S->>L: forward AIMessage
+        L->>L: hash tool_calls per thread window
+        alt hard_limit hit
+            L-->>M: strip tool_calls forced stop
+        else warn_threshold hit
+            L->>L: queue loop warning for next turn
+        end
+        L->>T: forward tool_calls
+        T->>G: ToolCallRequest
+        G->>G: GuardrailProvider evaluate
+        alt denied fail_closed
+            G-->>T: error ToolMessage
+        else allowed
+            G->>E: handler
+            E->>A: spawn_agent_process new_session prompt
+            A-->>E: collected text
+            E-->>T: ToolMessage
+        end
+        T-->>M: ToolMessage
+    end
 ```

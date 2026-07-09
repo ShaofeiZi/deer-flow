@@ -41,11 +41,18 @@ sequenceDiagram
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+    [*] --> pending: create_or_reject
+    pending --> running: run_agent set_status running
+    running --> success: astream finished
+    running --> error: exception or llm fallback
+    running --> interrupted: cancel action interrupt
+    running --> error: rollback restores pre-run checkpoint
+    pending --> interrupted: cancel before start
+    success --> [*]: bridge publish_end
+    error --> [*]: bridge publish_end cleanup delay 60
+    interrupted --> [*]: bridge publish_end
+    note right of running
+        sse_consumer on_disconnect cancel calls RunManager.cancel setting abort_event
+    end note
 ```

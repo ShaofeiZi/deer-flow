@@ -39,10 +39,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Start["caller"] --> SyncEntry["get_checkpointer / checkpointer_context"]
+  Start --> AsyncEntry["make_checkpointer app_config"]
+  SyncEntry --> LoadCfg["ensure_config_loaded / get_app_config"]
+  AsyncEntry --> LegacyCheck{"app_config.checkpointer set"}
+  LegacyCheck -- yes --> Legacy["_async_checkpointer config"]
+  LegacyCheck -- no --> DBCheck{"app_config.database set"}
+  DBCheck -- yes --> DBPath["_async_checkpointer_from_database"]
+  DBCheck -- no --> InMemSaver["InMemorySaver fallback"]
+  Legacy --> Dispatch["dispatch by backend type"]
+  DBPath --> Dispatch
+  LoadCfg --> Dispatch
+  Dispatch -- memory --> InMemSaver
+  Dispatch -- sqlite --> SqliteSaver["SqliteSaver / AsyncSqliteSaver"]
+  Dispatch -- postgres --> PostgresSaver["PostgresSaver / AsyncPostgresSaver"]
+  SqliteSaver --> Setup["saver.setup then yield"]
+  PostgresSaver --> Setup
+  Setup --> Yield["yield Checkpointer"]
+  Yield --> RunAgent["run_agent reads and writes checkpoint"]
 ```

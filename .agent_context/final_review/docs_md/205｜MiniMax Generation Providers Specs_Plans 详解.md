@@ -37,11 +37,28 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  ENV["env: SKILL_PROVIDER / creds"] --> RES["_resolve_provider"]
+  RES -->|override or existing creds| GEN["existing provider path"]
+  RES -->|MINIMAX_API_KEY fallback| MM["MiniMax branch"]
+
+  GEN --> IMG["generate_image to gemini"]
+  GEN --> VID["generate_video to veo"]
+  GEN --> POD["tts_node to volcengine"]
+
+  MM --> IMGMM["_generate_image_minimax"]
+  MM --> VIDMM["_generate_video_minimax"]
+  MM --> PODMM["text_to_speech_minimax"]
+  MM --> MUS["generate_music"]
+
+  IMGMM -->|"POST /v1/image_generation"| BASE["base_resp check + base64 write"]
+  VIDMM --> POLL["_poll_video_task to /v1/query/video_generation"]
+  POLL --> RETR["_retrieve_file_url to /v1/files/retrieve"]
+  RETR --> DL["_download mp4"]
+  PODMM -->|"POST /v1/t2a_v2"| HEX["bytes.fromhex to mp3"]
+  MUS -->|"POST /v1/music_generation"| HEX
+
+  BASE --> OUT["output_file"]
+  DL --> OUT
+  HEX --> OUT
 ```

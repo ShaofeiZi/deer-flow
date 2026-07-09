@@ -51,11 +51,28 @@ flowchart TD
 | 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant User
+  participant List as ArtifactFileList
+  participant Ctx as ArtifactsProvider
+  participant Detail as ArtifactFileDetail
+  participant Hook as useArtifactContent
+  participant Loader as loadArtifactContent
+  User->>List: click file card
+  List->>Ctx: select filepath and setOpen true
+  Ctx->>Detail: render selectedArtifact
+  Detail->>Hook: useArtifactContent filepath
+  alt write-file prefix
+    Hook->>Loader: loadArtifactContentFromToolCall thread.messages
+    Loader-->>Hook: tool_call args content
+  else normal filepath
+    Hook->>Loader: loadArtifactContent fetch urlOfArtifact
+    Loader-->>Hook: text content and url
+  end
+  Hook-->>Detail: content url isLoading
+  alt html or markdown
+    Detail->>Detail: ArtifactFilePreview blob iframe
+  else code file
+    Detail->>Detail: CodeEditor readonly
+  end
 ```

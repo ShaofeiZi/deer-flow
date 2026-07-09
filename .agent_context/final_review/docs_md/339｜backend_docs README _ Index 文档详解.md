@@ -39,11 +39,16 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  DocsIndex["docs/README"] --> ArchDoc["ARCHITECTURE.md"]
+  DocsIndex --> ApiDoc["API.md"]
+  DocsIndex --> ConfigDoc["CONFIGURATION.md"]
+  BackendREADME["backend/README"] --> GatewayApp["gateway/app.py"]
+  BackendREADME --> LeadAgent["lead_agent/agent.py"]
+  BackendREADME --> Runtime["runtime/ RunManager"]
+  Contributing["CONTRIBUTING.md"] --> Middlewares["agents/middlewares"]
+  Contributing --> Routers["gateway/routers"]
+  Contributing --> AppConfig["config/app_config.py"]
+  AgentInstr["CLAUDE/AGENTS.md"] --> Runtime
+  AgentInstr --> LeadAgent
 ```

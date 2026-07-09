@@ -42,10 +42,36 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  MB["MagicBento"]
+  UMD["useMobileDetection"]
+  GS["GlobalSpotlight"]
+  BCG["BentoCardGrid"]
+  Stars{"enableStars"}
+  PC["ParticleCard"]
+  Plain["plain bento-card div"]
+  Glow["--glow-intensity"]
+  Parts["particle clones"]
+  Tilt["rotateX rotateY"]
+  Mag["magnet x y"]
+  Ripple["click ripple"]
+  GSAP["gsap tweens"]
+
+  MB --> UMD
+  MB --> GS
+  MB --> BCG
+  MB --> Stars
+  UMD -->|"shouldDisableAnimations"| GS
+  UMD -->|"shouldDisableAnimations"| PC
+  Stars -->|true| PC
+  Stars -->|false| Plain
+  BCG --> PC
+  GS --> Glow
+  PC --> Parts
+  PC --> Tilt
+  PC --> Mag
+  PC --> Ripple
+  Parts --> GSAP
+  Tilt --> GSAP
+  Mag --> GSAP
+  Ripple --> GSAP
 ```

@@ -41,10 +41,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req["POST runs cancel or stream action"] --> Cancel["RunManager.cancel"]
+  Cancel --> Chk{"run status"}
+  Chk -->|"already interrupted"| Idem["idempotent True, HTTP 202"]
+  Chk -->|"pending or running"| Abort["set abort_event and cancel task"]
+  Chk -->|"terminal or unknown"| Reject["False, HTTP 404 or 409"]
+  Abort --> Interrupted["set_status interrupted"]
+  Interrupted --> Worker["worker.run_agent finally"]
+  Worker --> Act{"abort_action"}
+  Act -->|"interrupt"| Keep["keep checkpoint, stay interrupted"]
+  Act -->|"rollback"| RB["_rollback_to_pre_run_checkpoint"]
+  RB --> HasSnap{"pre_run_snapshot"}
+  HasSnap -->|"yes"| Restore["checkpointer.aput restore"]
+  HasSnap -->|"none"| Del["checkpointer.adelete_thread"]
+  Restore --> Err["set_status error Rolled back by user"]
 ```

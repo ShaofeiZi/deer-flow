@@ -43,10 +43,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Cn["cn @/lib/utils"]
+  Slot["@radix-ui/react-slot"]
+  Cn --> Breadcrumb["breadcrumb.tsx"]
+  Slot --> Breadcrumb
+  Cn --> DM["DropdownMenu Root"]
+  DM --> DMTr["Trigger"]
+  DM --> DMPortal["Portal"]
+  DMPortal --> DMContent["Content sideOffset"]
+  DMContent --> DMItems["Item CheckboxItem RadioItem Sub"]
+  Cn --> HC["HoverCard Root"]
+  HC --> HCTr["HoverCardTrigger"]
+  HC --> HCContent["HoverCardContent align sideOffset"]
+  Cn --> SH["Sheet Root"]
+  SH --> SHC["SheetTrigger SheetClose"]
+  SH --> SHContent["SheetContent side"]
+  SHContent --> SHOverlay["SheetOverlay inset-0 z-50"]
 ```

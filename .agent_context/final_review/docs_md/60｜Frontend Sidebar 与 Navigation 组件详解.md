@@ -53,10 +53,23 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  WS[WorkspaceSidebar] --> H[SidebarHeader]
+  WS --> C[SidebarContent]
+  WS --> F[SidebarFooter]
+  WS --> R[SidebarRail]
+  H --> WH[WorkspaceHeader]
+  C --> NC[WorkspaceNavChatList]
+  C --> RC[RecentChatList]
+  F --> NM[WorkspaceNavMenu]
+  NC -->|link chats| ChatsRoute[workspace chats route]
+  NC -->|link agents| AgentsRoute[workspace agents route]
+  IT[useInfiniteThreads] --> RC
+  SENT[IntersectionObserver sentinel] -->|fetchNextPage| IT
+  RC -->|pathOfThread Link| ThreadRoute[workspace chats thread_id]
+  RC -->|rename| RT[useRenameThread]
+  RC -->|export| GS[apiClient threads getState]
+  RC -->|delete| DT[useDeleteThread]
+  DT -->|router.push nextThread| ThreadRoute
+  NM -->|Settings section| SD[SettingsDialog]
+  NM -->|external| Ext[Github Issues Mail]
 ```

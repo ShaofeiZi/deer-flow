@@ -39,11 +39,37 @@ flowchart TD
 | 阅读路径 | 阅读路径：从 URL/API 入口往内追 service，再看数据落到哪里。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Client
+    participant Router as login_local
+    participant Deps as get_local_provider
+    participant Provider as LocalAuthProvider
+    participant Repo as SQLiteUserRepository
+    participant DB as UserRow users table
+    participant Pw as password module
+
+    Client->>Router: POST /login/local
+    Router->>Deps: get_local_provider
+    Deps-->>Router: cached LocalAuthProvider
+    Router->>Provider: authenticate email password
+    Provider->>Repo: get_user_by_email
+    Repo->>DB: SELECT by email
+    DB-->>Repo: UserRow
+    Repo-->>Provider: User or None
+    alt no user or OAuth only
+        Provider-->>Router: None
+        Router-->>Client: 401 invalid credentials
+    else password matches
+        Provider->>Pw: verify_password_async
+        Pw-->>Provider: verified
+        opt needs_rehash v1 hash
+            Provider->>Pw: hash_password_async
+            Provider->>Repo: update_user rehash
+            Repo->>DB: UPDATE password_hash
+        end
+        Provider-->>Router: User
+        Router->>Router: create_access_token token_version
+        Router->>Router: set access_token cookie
+        Router-->>Client: LoginResponse needs_setup
+    end
 ```

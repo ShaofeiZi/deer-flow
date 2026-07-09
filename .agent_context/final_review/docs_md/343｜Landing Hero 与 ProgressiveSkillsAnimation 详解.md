@@ -38,11 +38,19 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+  [*] --> idle
+  idle --> user_input: handlePlay
+  user_input --> scanning: timeline t0
+  scanning --> load_skill: timeline t1
+  load_skill --> load_template: timeline t2
+  load_template --> researching: timeline t3
+  researching --> load_frontend: timeline t4
+  load_frontend --> building: timeline t5
+  building --> load_deploy: timeline t6
+  load_deploy --> deploying: timeline t7
+  deploying --> done: timeline t8
+  done --> idle: FINAL_DISPLAY_DURATION
+  note right of scanning: IntersectionObserver auto-play
+  note right of done: resets searchIndex buildIndex
 ```

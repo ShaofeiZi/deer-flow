@@ -40,10 +40,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  INIT[DeferredToolFilterMiddleware deferred_names + catalog_hash]
+  INIT --> WM[wrap_model_call]
+  INIT --> WT[wrap_tool_call]
+  WM --> FT[_filter_tools request.state]
+  WT --> BLK[_blocked_tool_message request.state]
+  FT --> HID[_hidden = _deferred minus _promoted]
+  BLK --> HID
+  HID --> PROM[_promoted reads state.promoted]
+  PROM --> CH{state.promoted catalog_hash matches self}
+  CH -->|match| NAMES[promoted names returned]
+  CH -->|mismatch stale| EMPTY[empty set returned]
+  NAMES --> HIDOUT[hidden name set]
+  EMPTY --> HIDOUT
+  FT -->|override tools=active| H1[handler ModelResponse]
+  BLK -->|tool name in hidden| ERR[ToolMessage status error]
+  BLK -->|not hidden| H2[handler ToolMessage]
 ```

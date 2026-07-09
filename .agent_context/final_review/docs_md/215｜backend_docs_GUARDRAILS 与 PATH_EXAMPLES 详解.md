@@ -40,10 +40,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  TC["ToolCallRequest"] --> WR["wrap_tool_call"]
+  WR --> BR["_build_request"]
+  BR --> GR["GuardrailRequest"]
+  GR --> PE["provider.evaluate"]
+  PE --> DEC["GuardrailDecision"]
+  DEC --> CHECK{"allow"}
+  CHECK -->|true| HANDLER["handler request"]
+  HANDLER --> EXEC["tool executes"]
+  CHECK -->|false| BDM["_build_denied_message"]
+  BDM --> TM["ToolMessage error"]
+  PE -.->|Exception| FC{"fail_closed"}
+  FC -->|true| BDM
+  FC -->|false| HANDLER
+  PE -.->|GraphBubbleUp| PROP["propagate"]
 ```

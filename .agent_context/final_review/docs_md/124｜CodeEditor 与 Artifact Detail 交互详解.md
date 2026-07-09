@@ -49,12 +49,23 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Start["write-file filepath"] --> Parse["parseWriteFileArtifact"]
+  Parse --> Scan["scan ai messages tool_calls"]
+  Scan --> Match{"write_file args.path match"}
+  Match -->|"no"| Scan
+  Match -->|"yes"| Res["findToolResult tool_call_id"]
+  Res --> FailCheck{"selected and failed result"}
+  FailCheck -->|"yes"| Empty["return undefined"]
+  FailCheck -->|"no"| Include{"OK or selected undefined"}
+  Include -->|"no"| Scan
+  Include -->|"yes"| Append{"args.append and hasDraft"}
+  Append -->|"yes"| Grow["append content"]
+  Append -->|"no"| Reset["replace content"]
+  Grow --> Sel{"isSelected"}
+  Reset --> Sel
+  Sel -->|"yes"| Done["return draft"]
+  Sel -->|"no"| Scan
+  Scan -->|"end no draft"| Fallback["toolCall.args.content"]
 ```
 
 ## Artifact detail 运行态补充

@@ -41,11 +41,31 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant FE as frontend hooks
+  participant Router as mcp.py PUT /api/mcp/config
+  participant Cfg as extensions_config.json
+  participant Cache as cache.py
+  participant Tools as tools.py get_mcp_tools
+  participant OAuth as OAuthTokenManager
+  participant Client as MultiServerMCPClient
+  participant Pool as MCPSessionPool
+
+  FE->>Router: PUT mcp_servers masked
+  Router->>Router: _validate_mcp_update_request stdio allowlist
+  Router->>Cfg: _merge_preserving_secrets write
+  Router->>Cfg: reload_extensions_config
+  Note over Cache: next get_cached_mcp_tools sees stale mtime
+  Cache->>Cache: _is_cache_stale reset_mcp_tools_cache
+  Cache->>Pool: close_all_sync
+  Cache->>Tools: initialize_mcp_tools
+  Tools->>Cfg: ExtensionsConfig.from_file
+  Tools->>Tools: build_servers_config per server
+  Tools->>OAuth: get_initial_oauth_headers
+  OAuth-->>Tools: Authorization headers sse http
+  Tools->>Client: get_tools discover
+  Client-->>Tools: BaseTool list
+  Tools->>Tools: wrap stdio tools _make_session_pool_tool
+  Tools->>Tools: make_sync_tool_wrapper
+  Tools-->>Cache: wrapped tools cached
 ```

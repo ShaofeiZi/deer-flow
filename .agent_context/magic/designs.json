@@ -1,0 +1,1350 @@
+{
+  "01｜DeerFlow 整体架构与分层总览.md": {
+    "mermaid": "flowchart TD\n  Nginx[nginx 2026] -->|proxy /api| Lifespan[Gateway lifespan get_app_config]\n  Lifespan --> Tiktoken[warm_tiktoken_cache]\n  Tiktoken --> RT[langgraph_runtime]\n  RT --> SB[StreamBridge]\n  RT --> Persist[init_engine_from_config]\n  Persist --> CP[make_checkpointer]\n  Persist --> Store[make_store]\n  Store --> Repos[RunStore + ThreadStore]\n  Repos --> RES[make_run_event_store]\n  RES --> RM[RunManager]\n  RM --> Admin[_ensure_admin_user]\n  Admin --> Chan[start_channel_service]\n  Chan --> Serve[yield serve requests]\n  Serve --> StopChan[stop_channel_service]\n  StopChan --> Drain[_drain_inflight_runs]",
+    "approve": true,
+    "reason": "Source-backed (nginx.conf, gateway app/deps, lead_agent) concrete lifespan startup/shutdown chain with no breaking chars in labels.",
+    "kind": "flowchart TD",
+    "summary": "Gateway lifespan startup/shutdown lifecycle: nginx :2026 proxies /api into FastAPI, which boots runtime singletons via langgraph_runtime before serving requests and drains them on shutdown.",
+    "evidence": [
+      ".agent_context/final_review/docs_md/01｜DeerFlow 整体架构与分层总览.md",
+      "docker/nginx/nginx.local.conf",
+      "backend/app/gateway/app.py",
+      "backend/app/gateway/deps.py",
+      "backend/packages/harness/deerflow/agents/lead_agent/agent.py"
+    ],
+    "risks": [
+      "_drain_inflight_runs is invoked inside langgraph_runtime's async-context teardown (deps.py), not as a direct sibling of stop_channel_service in lifespan; the linear flowchart collapses these two scopes into one shutdown sequence for readability.",
+      "lead_agent/agent.py is a per-request graph factory (make_lead_agent) exercised via the runs router, not during lifespan bootstrap, so it is intentionally omitted from this lifecycle diagram (the doc's sequence diagram #3 already covers the per-request path).",
+      "warm_tiktoken_cache is conditional in app.py (skipped when memory.token_counting == 'char'); the diagram shows it in the default warm path."
+    ],
+    "found_fake": true
+  },
+  "02｜Gateway 与 LangGraph 运行时详解.md": {
+    "mermaid": "sequenceDiagram\n  participant W as run_agent\n  participant RM as RunManager\n  participant B as StreamBridge\n  participant C as Checkpointer\n  participant J as RunJournal\n  participant TS as thread_store\n  W->>J: init from event_store\n  W->>RM: set_status running\n  W->>C: aget_tuple pre-run snapshot\n  W->>B: publish metadata\n  W->>W: make_lead_agent build agent\n  loop agent.astream\n    W->>B: publish values messages custom\n  end\n  alt abort rollback\n    W->>C: aput restore pre-run checkpoint\n    W->>RM: set_status error\n  else normal finish\n    W->>RM: set_status success or error\n  end\n  W->>J: flush token usage\n  W->>RM: update_run_completion\n  W->>TS: update_display_name and status from checkpoint\n  W->>B: publish_end\n  W->>B: cleanup delay 60s",
+    "approve": true,
+    "reason": "Concrete run_agent worker sequence (RunManager/StreamBridge/Checkpointer/RunJournal/thread_store) tied to services.py, deps.py, worker.py.",
+    "kind": "sequenceDiagram",
+    "summary": "Sequence of the background run_agent worker driving RunManager status transitions, StreamBridge event publishing, checkpointer pre-run snapshot and rollback, RunJournal token tracking, and thread_store title/status sync across a run's lifecycle.",
+    "evidence": [
+      "/Users/bytedance/deer-flow/.agent_context/final_review/docs_md/02｜Gateway 与 LangGraph 运行时详解.md",
+      "/Users/bytedance/deer-flow/backend/app/gateway/services.py",
+      "/Users/bytedance/deer-flow/backend/app/gateway/deps.py",
+      "/Users/bytedance/deer-flow/backend/packages/harness/deerflow/runtime/runs/worker.py"
+    ],
+    "risks": [
+      "I did not open manager.py directly; set_status / update_run_completion / cancel call shapes are inferred from worker.py call sites and the doc's own table, which I did read.",
+      "deps.py confirms thread_store, event_store, checkpointer, RunManager, stream_bridge are the real app.state singletons wired into RunContext, but the concrete RunStore backing RunManager (RunRepository vs MemoryRunStore) was not separately verified.",
+      "The earlier diagram at doc lines 13-24 already shows run_agent as a single box; this new sequence expands that box's internal interactions, so it is complementary rather than duplicative, though a reviewer may initially perceive overlap."
+    ],
+    "found_fake": true
+  },
+  "03｜Lead Agent_Prompt_Tools 与 Middleware 详解.md": {
+    "mermaid": "flowchart TD\n  Entry[build_middlewares config model_name] --> Base[build_lead_runtime_middlewares]\n  Base --> Dyn[DynamicContext + SkillActivation always]\n  Dyn --> SumQ{summarization.enabled}\n  SumQ -->|yes| Sum[DeerFlowSummarizationMiddleware]\n  SumQ -->|no| PlanQ{is_plan_mode}\n  Sum --> PlanQ\n  PlanQ -->|yes| Todo[TodoMiddleware]\n  PlanQ -->|no| Title[TitleMiddleware + MemoryMiddleware]\n  Todo --> Title\n  Title --> VisQ{model supports_vision}\n  VisQ -->|yes| View[ViewImageMiddleware]\n  VisQ -->|no| SubQ{subagent_enabled}\n  View --> SubQ\n  SubQ -->|yes| SubLim[SubagentLimitMiddleware]\n  SubQ -->|no| LoopQ{loop_detection.enabled}\n  SubLim --> LoopQ\n  LoopQ -->|yes| Loop[LoopDetectionMiddleware]\n  LoopQ -->|no| Clar[ClarificationMiddleware last]\n  Loop --> Clar",
+    "approve": true,
+    "reason": "Doc-specific build_middlewares conditional assembly from lead_agent agent.py/prompt.py; clean decision-node labels.",
+    "kind": "flowchart TD",
+    "summary": "Build-time conditional assembly of the lead-agent middleware chain in build_middlewares, where each capability middleware is appended only when its runtime config flag is set, ending with ClarificationMiddleware last.",
+    "evidence": [
+      "backend/packages/harness/deerflow/agents/lead_agent/agent.py",
+      "backend/packages/harness/deerflow/agents/lead_agent/prompt.py",
+      ".agent_context/final_review/docs_md/03｜Lead Agent_Prompt_Tools 与 Middleware 详解.md"
+    ],
+    "risks": [
+      "For brevity (<=16 nodes) several middlewares are omitted from the diagram: TokenUsageMiddleware (token_usage.enabled), DeferredToolFilterMiddleware (deferred_setup.deferred_names), custom_middlewares injection, and SafetyFinishReasonMiddleware (safety_finish_reason.enabled, registered after custom so its after_model hook runs before Clarification in reverse order). The ordering of the middlewares shown is preserved from agent.py:300-376.",
+      "Grouping 'DynamicContext + SkillActivation always' and 'TitleMiddleware + MemoryMiddleware' into single nodes collapses two sequential always-on appends each; both are unconditional and adjacent in source, so the gating logic is unaffected, but the node does not show them as distinct steps.",
+      "build_lead_runtime_middlewares is imported from tool_error_handling_middleware.py but that file was not opened; the base middleware contents (ToolOutputBudget/ThreadData/Uploads/Sandbox/etc.) are taken from the doc's own table and the agent.py call site, not directly verified against the function body."
+    ],
+    "found_fake": true
+  },
+  "04｜Tools_Sandbox_Uploads 与 Artifacts 详解.md": {
+    "mermaid": "flowchart TD\n  Req[get_artifact request] --> Skill{path contains .skill/}\n  Skill -->|yes| Extract[_extract_file_from_skill_archive]\n  Extract --> SkillDL{download or active mime}\n  SkillDL -->|html svg xhtml or download| Attach[attachment FileResponse]\n  SkillDL -->|text or other| SkillText[PlainTextResponse]\n  Skill -->|no| Resolve[resolve_thread_virtual_path]\n  Resolve --> Exists{exists and is_file}\n  Exists -->|no| Err[404 or 400 HTTP]\n  Exists -->|yes| Download{download flag}\n  Download -->|true| Attach\n  Download -->|false| Active{mime in ACTIVE_CONTENT_MIME_TYPES}\n  Active -->|html xhtml svg| Attach\n  Active -->|other| TextCheck{mime starts with text}\n  TextCheck -->|yes| Inline[PlainTextResponse inline]\n  TextCheck -->|no| BinCheck{is_text_file_by_content}\n  BinCheck -->|yes| Inline\n  BinCheck -->|no| Binary[inline binary Response]",
+    "approve": true,
+    "reason": "Source-backed get_artifact decision flow (sandbox/tools.py, uploads/artifacts routers) with concrete mime/path branches.",
+    "kind": "flowchart TD",
+    "summary": "Decision flow inside artifacts router get_artifact: skill-archive extraction, forced attachment for active HTML/SVG/XHTML content, plain-text inline, or inline binary response.",
+    "evidence": [
+      "backend/packages/harness/deerflow/sandbox/tools.py",
+      "backend/app/gateway/routers/uploads.py",
+      "backend/app/gateway/routers/artifacts.py"
+    ],
+    "risks": [
+      "The skill-archive branch lumps the text and unknown-type fallback together as 'text or other'; the code actually has a UnicodeDecodeError fallback to octet-stream for non-decodable unknown types, which this diagram simplifies.",
+      "The diagram reflects the current artifacts.py control flow; if the active-content set or download flag handling changes, the diagram would need to be rechecked."
+    ],
+    "found_fake": true
+  },
+  "05｜Skills_MCP 与 Memory 详解.md": {
+    "mermaid": "sequenceDiagram\n  participant AG as lead_agent\n  participant ST as StructuredTool wrapper\n  participant PO as MCPSessionPool\n  participant OT as _run_session owner task\n  participant SE as ClientSession\n  participant IX as OAuth interceptor\n  AG->>ST: invoke with runtime and args\n  ST->>PO: get_session server thread_id\n  alt cached session on same loop\n    PO-->>ST: return live ClientSession\n  else no session yet\n    PO->>OT: create _run_session task\n    OT->>SE: create_session and initialize\n    SE-->>OT: session ready\n    OT-->>PO: publish via ready future\n  end\n  ST->>IX: MCPToolCallRequest with args\n  IX->>IX: attach Authorization header\n  IX->>SE: call_tool name args meta\n  SE-->>IX: CallToolResult\n  IX-->>ST: CallToolResult\n  ST->>ST: _convert_call_tool_result\n  ST-->>AG: ToolMessage content and artifact",
+    "approve": true,
+    "reason": "Concrete MCP tool-call sequence (StructuredTool, MCPSessionPool owner task, OAuth interceptor) backed by mcp/*.py.",
+    "kind": "sequenceDiagram",
+    "summary": "A single MCP tool call flows from lead_agent through a StructuredTool wrapper, the MCPSessionPool (which lazily spawns an owner task that creates and initializes a persistent ClientSession), an OAuth interceptor, and the pooled ClientSession, returning a converted ToolMessage.",
+    "evidence": [
+      "backend/packages/harness/deerflow/mcp/tools.py",
+      "backend/packages/harness/deerflow/mcp/session_pool.py",
+      "backend/packages/harness/deerflow/mcp/client.py",
+      "backend/packages/harness/deerflow/skills/parser.py",
+      "backend/packages/harness/deerflow/agents/memory/updater.py",
+      ".agent_context/final_review/docs_md/05｜Skills_MCP 与 Memory 详解.md"
+    ],
+    "risks": [
+      "The OAuth interceptor step assumes build_oauth_tool_interceptor produces an interceptor that attaches Authorization headers on each call; the per-call header forwarding via MCP meta is implemented in tools.py base_handler, but oauth.py itself was not read, so the exact header mutation is inferred.",
+      "Only the stdio session-pool path is depicted; HTTP/SSE tools skip the pool and the StructuredTool wrapper entirely (tools.py lines 276-281) and that branch is not shown.",
+      "The alt branch for cached-vs-new sessions simplifies the real get_session logic, which also handles foreign-loop eviction, in-flight creation joining, and LRU cap eviction (session_pool.py); those transitions are omitted for clarity."
+    ],
+    "found_fake": true
+  },
+  "06｜Frontend Workspace 与 Chat 主链路详解.md": {
+    "mermaid": "sequenceDiagram\n  participant User\n  participant InputBox\n  participant ChatPage\n  participant Stream as useThreadStream\n  participant SDK as useStream\n  participant Gateway\n  User->>InputBox: handleSubmit message\n  InputBox->>ChatPage: onSubmit message\n  ChatPage->>Stream: sendMessage threadId message\n  Stream->>SDK: thread.submit context\n  SDK->>Gateway: create run SSE\n  Gateway-->>SDK: onCreated meta\n  SDK-->>Stream: handleStreamStart\n  Stream-->>ChatPage: onStart createdThreadId\n  ChatPage->>ChatPage: history.replaceState chats id\n  Gateway-->>SDK: SSE updates\n  SDK-->>Stream: onUpdateEvent onCustomEvent\n  Stream->>Stream: mergeMessages history live optimistic\n  Gateway-->>SDK: run complete\n  SDK-->>Stream: onFinish state\n  Stream-->>ChatPage: onFinish notification",
+    "approve": true,
+    "reason": "Doc-specific chat send/stream sequence tied to ChatPage, useThreadStream, input-box; concrete SDK callbacks.",
+    "kind": "sequenceDiagram",
+    "summary": "Sequence of one chat send: InputBox hands the message to ChatPage, useThreadStream calls thread.submit on the useStream SDK, and the Gateway streams back onCreated/onUpdateEvent/onCustomEvent/onFinish callbacks that drive URL replacement, message merging, and finish notifications.",
+    "evidence": [
+      ".agent_context/final_review/docs_md/06｜Frontend Workspace 与 Chat 主链路详解.md",
+      "frontend/src/app/workspace/chats/[thread_id]/page.tsx",
+      "frontend/src/core/threads/hooks.ts",
+      "frontend/src/components/workspace/input-box.tsx"
+    ],
+    "risks": [
+      "The Gateway participant and the create run SSE / SSE updates / run complete arrows are inferred from the doc's own Gateway terminology and the @langchain/langgraph-sdk useStream contract; I did not open a Gateway backend source file to verify the exact SSE transport.",
+      "The final onFinish notification arrow collapses two coupled steps: useThreadStream.onFinish invalidates thread/token-usage query caches, and ChatPage.onFinish (via listeners.current.onFinish) fires showNotification; I merged them into one arrow for brevity.",
+      "onError is not shown to keep the diagram under the node budget; the error path clears optimistic messages and toasts, per hooks.ts onError."
+    ],
+    "found_fake": true
+  },
+  "07｜Frontend Settings_Models_Artifacts 数据流详解.md": {
+    "mermaid": "flowchart TD\n  FP[filepath prop] --> WC{isWriteFile check}\n  WC -->|write-file prefix| Parse[parse URL pathname and tool_call_id]\n  WC -->|regular file| Fetch[useArtifactContent fetch]\n  Parse --> Tool[findToolCallResult in thread messages]\n  Tool --> Throttle[useThrottledValue]\n  Fetch --> Throttle\n  Throttle --> Classify[checkCodeFile and isSkillFile]\n  Classify --> VM{viewMode toggle}\n  VM -->|preview html or markdown| Preview[ArtifactFilePreview]\n  VM -->|code mode| Editor[CodeEditor readonly]\n  Classify -->|non-code file| Iframe[iframe via urlOfArtifact]\n  Preview --> Render[html blob iframe or Streamdown]\n  Classify -->|skill file| Install[installSkill action]",
+    "approve": true,
+    "reason": "ArtifactFileDetail render pipeline backed by settings/artifacts components and core utils; concrete branch labels.",
+    "kind": "flowchart TD",
+    "summary": "Internal render pipeline of ArtifactFileDetail: a filepath prop branches through write-file vs regular content resolution, file-type classification, and view-mode rendering to CodeEditor, ArtifactFilePreview, or an iframe.",
+    "evidence": [
+      "frontend/src/components/workspace/settings/settings-dialog.tsx",
+      "frontend/src/components/workspace/artifacts/artifact-file-detail.tsx",
+      "frontend/src/core/settings/local.ts",
+      "frontend/src/core/artifacts/utils.ts"
+    ],
+    "risks": [
+      "installSkill is a user-triggered header action for .skill files, not part of the automatic render pipeline; depicting it as a branch from Classify is a simplification.",
+      "useThrottledValue runs on every render but only throttles at 3000ms when isWritingFile (write-file with no tool result yet); the diagram collapses this into a single node without the interval detail.",
+      "checkCodeFile and getArtifactViewState are referenced in artifact-file-detail.tsx but I did not open their source files; the classification and preview-eligibility logic is inferred from call-site usage only.",
+      "settings-dialog.tsx and local.ts were read per the doc's 重点代码 row but are not directly depicted in this diagram, which focuses on the ArtifactFileDetail pipeline."
+    ],
+    "found_fake": true
+  },
+  "08｜配置_部署_测试与排障详解.md": {
+    "mermaid": "flowchart TD\n  Dev[make dev] --> Check[scripts/check.py]\n  Check --> Serve[scripts/serve.sh --dev]\n  Serve --> Env[load .env]\n  Env --> Stop[stop_all reclaim 8001 3000 2026]\n  Stop --> Cfg[config.yaml check]\n  Cfg --> Upgrade[config-upgrade.sh]\n  Upgrade --> Extras[detect_uv_extras.py]\n  Extras --> Sync[uv sync + pnpm install]\n  Sync --> GW[run_service Gateway uvicorn 8001]\n  GW --> FE[run_service Frontend pnpm dev 3000]\n  FE --> Nginx[run_service Nginx 2026]\n  Nginx --> Ready[localhost 2026 ready]",
+    "approve": true,
+    "reason": "make dev lifecycle grounded in Makefile, scripts/serve.sh, scripts/check.py with concrete steps and ports.",
+    "kind": "flowchart TD",
+    "summary": "The make dev startup lifecycle as orchestrated by scripts/serve.sh, from dependency check through port reclamation, config validation, dependency sync, to sequential launch of Gateway, Frontend, and Nginx.",
+    "evidence": [
+      ".agent_context/final_review/docs_md/08｜配置_部署_测试与排障详解.md",
+      "Makefile",
+      "scripts/serve.sh",
+      "scripts/check.py"
+    ],
+    "risks": [
+      "The GW -> FE -> Nginx ordering reflects serve.sh's sequential run_service call order (lines 446-458); each service process actually runs in the background via sh -c ... & and wait-for-port.sh gates each step, which the diagram abstracts as implicit rather than a separate node.",
+      "scripts/config-upgrade.sh and scripts/detect_uv_extras.py were inferred from their invocation sites in serve.sh (lines 343, 365) but their internal contents were not read; only the call order is asserted.",
+      "Port numbers 8001/3000/2026 are shown bare (no colons) to keep Mermaid label parsing safe; the ready node uses 'localhost 2026' rather than a URL for the same reason."
+    ],
+    "found_fake": true
+  },
+  "09｜Auth_CSRF_权限与 IM Channels 详解.md": {
+    "mermaid": "flowchart TD\n  In[MessageBus inbound] --> Loop[_dispatch_loop]\n  Loop --> Handle[_handle_message]\n  Handle --> Branch{msg type}\n  Branch -->|COMMAND| Cmd[_handle_command]\n  Branch -->|CHAT| Chat[_handle_chat]\n  Chat --> Lookup{thread in store}\n  Lookup -->|missing| Create[_create_thread]\n  Lookup -->|exists| Reuse[reuse thread_id]\n  Create --> Params[_resolve_run_params]\n  Reuse --> Params\n  Params --> Stream{streaming?}\n  Stream -->|no| Wait[client.runs.wait]\n  Stream -->|yes| RunStream[client.runs.stream]\n  Cmd --> Out[publish OutboundMessage]\n  Wait --> Out\n  RunStream --> Out",
+    "approve": true,
+    "reason": "ChannelManager inbound dispatch (channels/manager.py, auth/csrf middleware) with concrete _handle_chat/runs.wait/runs.stream branches.",
+    "kind": "flowchart TD",
+    "summary": "ChannelManager inbound-message dispatch lifecycle: MessageBus inbound through _dispatch_loop and _handle_message, thread lookup/create, _resolve_run_params, branching on streaming support to client.runs.wait or client.runs.stream, then publishing OutboundMessage.",
+    "evidence": [
+      "backend/app/channels/manager.py",
+      "backend/app/gateway/auth_middleware.py",
+      "backend/app/gateway/csrf_middleware.py",
+      ".agent_context/final_review/docs_md/09｜Auth_CSRF_权限与 IM Channels 详解.md"
+    ],
+    "risks": [
+      "_handle_command is shown going directly to Out, but /bootstrap and slash-skill commands actually route back through _handle_chat (manager.py lines 1121, 1169); collapsed for clarity.",
+      "Edge label 'streaming?' relies on _channel_supports_streaming which delegates to service.get_channel(channel_name).supports_streaming; the per-channel capability values come from CHANNEL_CAPABILITIES in manager.py, not re-verified against each channel implementation.",
+      "auth_middleware.py and csrf_middleware.py were read only to confirm the existing section-1 diagram already covers the HTTP security chain and avoid duplication; the new diagram focuses solely on the channels runtime flow."
+    ],
+    "found_fake": true
+  },
+  "10｜Models_Tracing_Persistence 与 Token Usage 详解.md": {
+    "mermaid": "flowchart TD\n  Start[init_engine_from_config] --> Branch{backend}\n  Branch -->|memory| NoOp[no-op return]\n  Branch -->|sqlite| SQLite[create_async_engine]\n  Branch -->|postgres| PgCheck[verify asyncpg import]\n  SQLite --> WAL[PRAGMA WAL and synchronous NORMAL]\n  PgCheck --> PgEngine[create_async_engine pool_pre_ping]\n  WAL --> Session[async_sessionmaker]\n  PgEngine --> Session\n  Session --> ImportModels[import persistence.models]\n  ImportModels --> CreateAll[Base.metadata.create_all]\n  CreateAll --> Err{create fails}\n  Err -->|postgres missing db| Auto[_auto_create_postgres_db]\n  Auto --> Retry[rebuild engine retry create_all]\n  Err -->|ok| Ready[engine ready]\n  Retry --> Ready\n  Err -->|other error| Raise[re-raise]",
+    "approve": true,
+    "reason": "init_engine_from_config backend branching (sqlite WAL/postgres pool/auto-create) backed by persistence/engine.py.",
+    "kind": "flowchart TD",
+    "summary": "Persistence engine init lifecycle: init_engine_from_config branches on backend (memory no-op, sqlite WAL PRAGMAs, postgres pool with asyncpg check), builds async_sessionmaker, imports persistence.models, runs Base.metadata.create_all, and on a postgres missing-DB error auto-creates the database then rebuilds and retries.",
+    "evidence": [
+      ".agent_context/final_review/docs_md/10｜Models_Tracing_Persistence 与 Token Usage 详解.md",
+      "backend/packages/harness/deerflow/models/factory.py",
+      "backend/packages/harness/deerflow/tracing/factory.py",
+      "backend/packages/harness/deerflow/persistence/engine.py"
+    ],
+    "risks": [
+      "Diagram covers only the persistence engine init lifecycle (one of the doc's three modules); it complements existing diagram #3 (topology) rather than spanning all three modules.",
+      "The 'import persistence.models' step is shown as a straight edge, but in code it is best-effort (wrapped in try/except ImportError and skipped if models package is absent during scaffolding) — happy path only.",
+      "The 'create fails' decision merges the success and exception paths; the postgres-missing-DB auto-create branch is the only exception case handled specially, all others re-raise."
+    ],
+    "found_fake": true
+  },
+  "11｜Gateway Routers API 模块逐项详解.md": {
+    "mermaid": "sequenceDiagram\n  participant Client as useStream client\n  participant Router as thread_runs.py\n  participant Authz as require_permission\n  participant Service as services.start_run\n  participant RunMgr as RunManager\n  participant Agent as run_agent task\n  participant Bridge as StreamBridge\n  participant SSE as sse_consumer\n  Client->>Router: POST /threads/{id}/runs/stream\n  Router->>Authz: owner_check runs/create\n  Authz-->>Router: ok\n  Router->>Service: body thread_id request\n  Service->>RunMgr: create_or_reject\n  RunMgr-->>Service: RunRecord or HTTP 409\n  Service->>Agent: asyncio.create_task\n  Agent->>Bridge: publish events\n  Service-->>Router: RunRecord\n  Router->>SSE: StreamingResponse\n  SSE->>Bridge: subscribe run_id last_event_id\n  Bridge-->>SSE: heartbeat events END_SENTINEL\n  SSE-->>Client: format_sse frames\n  alt client disconnect and on_disconnect=cancel\n    SSE->>RunMgr: cancel run_id\n  end",
+    "approve": true,
+    "reason": "SSE run lifecycle (thread_runs.py, services.py, runs.py) with require_permission/RunManager/sse_consumer; source-backed.",
+    "kind": "sequenceDiagram",
+    "summary": "Runtime SSE lifecycle of a threaded run: thread_runs.py stream endpoint authorizes via require_permission, delegates to services.start_run which creates a RunRecord via RunManager and launches a background run_agent task, while sse_consumer subscribes to StreamBridge and emits format_sse frames to the useStream client, cancelling on disconnect.",
+    "evidence": [
+      "backend/app/gateway/services.py",
+      "backend/app/gateway/routers/thread_runs.py",
+      "backend/app/gateway/routers/runs.py"
+    ],
+    "risks": [
+      "The /wait path (wait_for_run_completion + checkpointer.aget_tuple returning serialize_channel_values) and the explicit cancel endpoint are not depicted, to keep the diagram focused on the primary stream lifecycle.",
+      "runs.py stateless /api/runs/stream reuses the same start_run + sse_consumer path via _resolve_thread_id; it is not shown as a separate participant.",
+      "Internal ownership check (run_ctx.thread_store.check_access) and model allowlist validation inside start_run are omitted for brevity; they precede create_or_reject in code."
+    ],
+    "found_fake": true
+  },
+  "12｜Runtime RunManager_StreamBridge_Journal 详解.md": {
+    "mermaid": "flowchart TD\n  Entry[run_agent worker] --> InitJ[RunJournal init]\n  InitJ --> Running[RunManager.set_status running]\n  Running --> Ckpt[capture pre-run checkpoint]\n  Ckpt --> Meta[StreamBridge.publish metadata]\n  Meta --> Loop[agent.astream stream_mode loop]\n  Loop --> Pub[StreamBridge.publish chunks]\n  Loop --> Cb[RunJournal callbacks on_llm_end]\n  Cb --> Batch[put_batch to RunEventStore]\n  Pub --> Check{abort_event set}\n  Check -->|no| Loop\n  Check -->|yes| Final[RunManager.set_status final]\n  Final --> Flush[RunJournal.flush]\n  Flush --> Comp[RunManager.update_run_completion]\n  Comp --> EndSent[StreamBridge.publish_end]\n  EndSent --> Clean[StreamBridge.cleanup]",
+    "approve": true,
+    "reason": "Worker/manager/journal/stream_bridge lifecycle tied to runtime/runs/* and stream_bridge/*; concrete publish/flush/cleanup steps.",
+    "kind": "flowchart TD",
+    "summary": "Depicts the run_agent worker lifecycle orchestrating RunManager status transitions, StreamBridge event publishing, and RunJournal event capture from entry through the finally-block cleanup.",
+    "evidence": [
+      ".agent_context/final_review/docs_md/12｜Runtime RunManager_StreamBridge_Journal 详解.md",
+      "backend/packages/harness/deerflow/runtime/runs/worker.py",
+      "backend/packages/harness/deerflow/runtime/runs/manager.py",
+      "backend/packages/harness/deerflow/runtime/journal.py",
+      "backend/packages/harness/deerflow/runtime/stream_bridge/base.py",
+      "backend/packages/harness/deerflow/runtime/stream_bridge/memory.py"
+    ],
+    "risks": [
+      "The diagram linearizes what is actually a per-iteration parallel activity: during agent.astream, StreamBridge.publish and RunJournal callbacks (on_llm_end/on_chain) fire on each chunk, not once.",
+      "RunJournal.flush to RunEventStore is buffered/throttled (flush_threshold=20) and scheduled asynchronously via _flush_sync, not strictly synchronous per callback; collapsed to one put_batch step.",
+      "'set_status final' collapses four distinct terminal branches in worker.py (success / error / interrupted / rollback-to-error) into one node for brevity; the run status state machine is already covered by the doc's earlier diagram.",
+      "The abort_event check is shown as a single decision, but in code it is evaluated at the top of each astream iteration and again after the loop before the final-status decision."
+    ],
+    "found_fake": true
+  },
+  "13｜Backend Middleware 模块逐项详解.md": {
+    "mermaid": "flowchart TD\n  Base[build_lead_runtime_middlewares] --> Dyn[DynamicContextMiddleware]\n  Dyn --> Skill[SkillActivationMiddleware]\n  Skill --> Sum[SummarizationMiddleware opt]\n  Sum --> Todo[TodoMiddleware opt]\n  Todo --> Tok[TokenUsageMiddleware opt]\n  Tok --> Title[TitleMiddleware]\n  Title --> Mem[MemoryMiddleware]\n  Mem --> View[ViewImageMiddleware opt]\n  View --> Def[DeferredToolFilterMiddleware opt]\n  Def --> Sub[SubagentLimitMiddleware opt]\n  Sub --> Loop[LoopDetectionMiddleware opt]\n  Loop --> Safe[SafetyFinishReasonMiddleware opt]\n  Safe --> Clar[ClarificationMiddleware last]",
+    "approve": true,
+    "reason": "Middleware chain assembly order from lead_agent agent.py plus tool_error_handling_middleware; concrete middleware names with opt flags.",
+    "kind": "flowchart TD",
+    "summary": "Depicts the lead-agent middleware chain assembly order inside build_middlewares, from the base runtime block through each appended middleware to the always-last ClarificationMiddleware.",
+    "evidence": [
+      ".agent_context/final_review/docs_md/13｜Backend Middleware 模块逐项详解.md",
+      "backend/packages/harness/deerflow/agents/lead_agent/agent.py",
+      "backend/packages/harness/deerflow/agents/middlewares/tool_error_handling_middleware.py"
+    ],
+    "risks": [
+      "The Base node represents build_lead_runtime_middlewares as a single function; its internal contents (ToolOutputBudget, ThreadData, Sandbox, Uploads, DanglingToolCall, LLMErrorHandling, Guardrail, SandboxAudit, ToolErrorHandling) are not enumerated in the diagram to stay under the node limit, relying on the doc table and existing first diagram to cover them.",
+      "Conditional appends are marked with 'opt' but the specific gating condition (plan_mode, vision support, deferred_setup, subagent_enabled, config.enabled flags) is not shown per-node to keep labels short; the conditions are documented in build_middlewares.",
+      "custom_middlewares injection point (agent.py line 363-364) is omitted from the chain to stay under 16 nodes; it would slot in before SafetyFinishReasonMiddleware."
+    ],
+    "found_fake": true
+  },
+  "14｜Frontend Core Hooks 与 UI 模块逐项详解.md": {
+    "mermaid": "flowchart TD\n  Send[sendMessage] --> Opt[setOptimisticMessages]\n  Send --> Upload[uploadFiles]\n  Upload --> Submit[thread.submit]\n  Submit --> Stream[useStream live events]\n  Stream --> Created[onCreated]\n  Created --> Cache1[upsertThreadInSearchCache]\n  Created --> Cache2[upsertThreadInInfiniteCache]\n  Stream --> Update[onUpdateEvent]\n  Update --> Title[update title in query cache]\n  Stream --> Custom[onCustomEvent]\n  Custom --> Subtask[updateSubtask task_running]\n  Custom --> Retry[toast llm_retry]\n  Stream --> Err[onError]\n  Err --> Clear[clear optimistic messages]\n  Stream --> Fin[onFinish]\n  Fin --> Invalidate[invalidate search and token usage]\n  Stream --> Persisted[thread.messages persisted]\n  Hist[useThreadHistory] --> RunMsgs[run messages by before_seq]\n  RunMsgs --> Merge[mergeMessages]\n  Opt --> Merge\n  Persisted --> Merge\n  RunMsgs --> Merge\n  Merge --> Groups[getMessageGroups]\n  Groups --> Render[MessageList render]",
+    "approve": true,
+    "reason": "useThreadStream message lifecycle (hooks.ts, messages/utils.ts, message-list.tsx) with concrete cache/merge/group steps.",
+    "kind": "flowchart TD",
+    "summary": "Runtime message lifecycle in useThreadStream: sendMessage spawns optimistic messages and uploads files before thread.submit, the useStream live events update React Query caches and thread.messages, useThreadHistory loads older run messages, and mergeMessages plus getMessageGroups feed MessageList rendering.",
+    "evidence": [
+      "frontend/src/core/threads/hooks.ts",
+      "frontend/src/core/messages/utils.ts",
+      "frontend/src/components/workspace/messages/message-list.tsx"
+    ],
+    "risks": [
+      "The edge from Opt/RunMsgs/Persisted all converging on Merge is conceptually accurate (mergeMessages takes visibleHistory, persistedMessages, visibleOptimisticMessages) but rendered as three separate arrows for clarity rather than one combined input.",
+      "getMessageGroups is called in message-list.tsx on the merged messages; the diagram assumes those merged messages are the useThreadStream return value (thread.messages = mergedMessages), which is true in hooks.ts but the exact prop plumbing from the page component to MessageList was inferred, not fully traced.",
+      "onUpdateEvent also handles SummarizationMiddleware messages via appendMessages into useThreadHistory state; this branch is omitted to keep the diagram under the node budget."
+    ],
+    "found_fake": true
+  },
+  "15｜Config_Paths 与 Hot Reload 边界详解.md": {
+    "mermaid": "flowchart TD\n  YAML[config.yaml + extensions_config.json] --> AF[AppConfig.from_file]\n  AF --> Req[get_app_config per request - mtime hot reload]\n  Req --> Hot[request-time fields - models tools skills memory subagents]\n  AF --> Start[langgraph_runtime startup captures once]\n  Start --> DB[init_engine_from_config - database]\n  Start --> CP[make_checkpointer - checkpointer]\n  Start --> RE[make_run_event_store - run_events]\n  Start --> SB[make_stream_bridge - stream_bridge]\n  Start --> SD[get_sandbox_provider - sandbox]\n  Start --> LV[apply_logging_level - log_level]\n  Start --> CH[start_channel_service - channels]\n  DB --> Frz[restart required singletons]\n  CP --> Frz\n  RE --> Frz\n  SB --> Frz\n  SD --> Frz\n  LV --> Frz\n  CH --> Frz",
+    "approve": true,
+    "reason": "Hot-reload boundary from config app_config/paths/reload_boundary; concrete per-request vs startup singleton split.",
+    "kind": "flowchart TD",
+    "summary": "Depicts the config hot-reload boundary: AppConfig.from_file feeds both per-request get_app_config (hot fields) and langgraph_runtime startup singleton captures (database/checkpointer/run_events/stream_bridge/sandbox/log_level/channels) that require a restart.",
+    "evidence": [
+      "backend/packages/harness/deerflow/config/app_config.py",
+      "backend/packages/harness/deerflow/config/paths.py",
+      "backend/packages/harness/deerflow/config/reload_boundary.py"
+    ],
+    "risks": [
+      "The arrow AF --> Start assumes the startup singleton-capture functions (init_engine_from_config, make_checkpointer, etc.) read AppConfig via get_app_config at startup; this is asserted by reload_boundary.py docstring ('gateway captures once at startup') but the actual startup call sites in langgraph_runtime were not opened and verified in this pass.",
+      "langgraph_runtime is named from the reload_boundary.py docstring text rather than a directly inspected module; the real startup entrypoint function name may differ."
+    ],
+    "found_fake": true
+  },
+  "16｜Subagents_Task Tool 与并发执行详解.md": {
+    "mermaid": "flowchart TD\n  TT[task_tool] -->|execute_async| EA[execute_async]\n  EA -->|store PENDING| BT[_background_tasks]\n  EA -->|submit run_task| SP[scheduler_pool ThreadPool 3]\n  SP -->|submit coro| IL[isolated_subagent_loop]\n  IL -->|runs| AX[_aexecute]\n  AX -->|agent.astream| AG[agent.astream]\n  AX -->|checks each chunk| CE[cancel_event]\n  AX -->|try_set_terminal| BT\n  TT -->|poll every 5s| GR[get_background_task_result]\n  GR -->|reads| BT\n  TT -->|status change| WR[writer SSE events]\n  TT -->|terminal| CB[cleanup_background_task]\n  CB -->|removes entry| BT\n  TT -->|poll timeout| RC[request_cancel_background_task]\n  RC -->|sets| CE\n  TT -->|poll timeout| DC[deferred_cleanup task]\n  DC -->|poll then| CB",
+    "approve": true,
+    "reason": "task_tool background execution (executor.py, task_tool.py) verified: _background_tasks, scheduler_pool ThreadPool 3, isolated_subagent_loop, poll/cleanup/cancel all confirmed in source.",
+    "kind": "flowchart TD",
+    "summary": "Background execution and polling topology for the task tool: task_tool spawns execute_async which stores a PENDING SubagentResult in the shared _background_tasks dict and submits work through the scheduler_pool onto the persistent isolated_subagent_loop where _aexecute runs agent.astream, while task_tool polls get_background_task_result every 5s, streams SSE events, and on terminal/timeout invokes cleanup_background_task or request_cancel_background_task plus deferred cleanup.",
+    "evidence": [
+      "backend/packages/harness/deerflow/tools/builtins/task_tool.py",
+      "backend/packages/harness/deerflow/subagents/executor.py"
+    ],
+    "risks": [
+      "The run_task closure submitted to scheduler_pool is collapsed into the SP->IL edge; in code run_task is the bridge that calls _submit_to_isolated_loop_in_context to hand the coroutine to the isolated loop. This is a simplification of a two-hop handoff, not a direct call.",
+      "Token-usage reporting paths (_report_subagent_usage -> RunJournal, _cache_subagent_usage for TokenUsageMiddleware) are omitted to stay under the node budget; they are real but secondary to the execution/polling topology depicted.",
+      "The diagram treats _background_tasks as a single shared node; in code it is a module-level dict guarded by _background_tasks_lock, accessed by both the poller (task_tool) and the executor thread."
+    ],
+    "found_fake": true
+  },
+  "17｜Model Provider Factory 与模型适配详解.md": {
+    "mermaid": "sequenceDiagram\n  participant Caller as lead_agent.create_agent\n  participant Factory as factory.create_chat_model\n  participant Config as AppConfig.get_model_config\n  participant Resolver as reflection.resolve_class\n  participant Importer as importlib.import_module\n  participant Provider as ProviderClass\n  participant Tracing as tracing.build_tracing_callbacks\n\n  Caller->>Factory: name + thinking_enabled + attach_tracing\n  Factory->>Config: get_model_config name\n  Config-->>Factory: ModelConfig.use class path\n  Factory->>Resolver: resolve_class use BaseChatModel\n  Resolver->>Importer: import_module langchain_openai\n  Note over Importer,Resolver: On ImportError raises with uv add hint\n  Importer-->>Resolver: module object\n  Resolver->>Importer: getattr ChatOpenAI\n  Importer-->>Resolver: model_class\n  Resolver-->>Factory: model_class\n  Factory->>Factory: merge thinking and stream_usage defaults\n  Factory->>Provider: new model_class kwargs + settings\n  Provider-->>Factory: BaseChatModel instance\n  alt attach_tracing true\n    Factory->>Tracing: build_tracing_callbacks\n    Tracing-->>Factory: callback list\n    Factory->>Provider: callbacks existing + tracing\n  end\n  Factory-->>Caller: BaseChatModel",
+    "approve": true,
+    "reason": "create_chat_model reflection sequence (factory.py, resolvers.py, model_config/app_config) with concrete import_module/getattr/tracing steps.",
+    "kind": "sequenceDiagram",
+    "summary": "Runtime sequence of create_chat_model resolving a provider class via reflection, instantiating it with merged thinking/stream_usage settings, and attaching tracing callbacks before returning the BaseChatModel to the lead agent.",
+    "evidence": [
+      ".agent_context/final_review/docs_md/17｜Model Provider Factory 与模型适配详解.md",
+      "backend/packages/harness/deerflow/models/factory.py",
+      "backend/packages/harness/deerflow/reflection/resolvers.py",
+      "backend/packages/harness/deerflow/reflection/__init__.py",
+      "backend/packages/harness/deerflow/config/model_config.py",
+      "backend/packages/harness/deerflow/config/app_config.py",
+      "backend/packages/harness/deerflow/agents/lead_agent/agent.py"
+    ],
+    "risks": [
+      "create_chat_model has multiple callers (lead_agent, memory updater, title middleware, executor subagent, security_scanner); the diagram uses lead_agent.create_agent as the representative caller with attach_tracing=False, which matches lead_agent/agent.py:494,521 but other callers may use the default attach_tracing=True.",
+      "build_tracing_callbacks was verified to exist via grep at deerflow/tracing/factory.py:32 but its implementation was not read; the callbacks attachment step is taken from factory.py:198-203.",
+      "The example provider langchain_openai:ChatOpenAI is used as a concrete illustration; the actual class path comes from ModelConfig.use and varies per model entry in config.yaml."
+    ],
+    "found_fake": true
+  },
+  "18｜Persistence_Database_ThreadMeta 与 Feedback 详解.md": {
+    "mermaid": "stateDiagram-v2\n  [*] --> pending: RunRepository.put\n  pending --> running: update_status\n  running --> success: update_run_completion\n  running --> error: update_run_completion\n  running --> running: update_run_progress\n  success --> [*]\n  error --> [*]\n  note right of pending: startup recovery via list_inflight",
+    "approve": true,
+    "reason": "RunRow state machine driven by RunRepository methods (run/sql.py, engine.py, thread_meta/feedback sql); concrete transitions.",
+    "kind": "stateDiagram-v2",
+    "summary": "Run row lifecycle state machine driven by RunRepository: put creates pending, update_status moves to running, update_run_progress loops while running, update_run_completion settles success/error, with list_inflight recovering inflight rows at startup.",
+    "evidence": [
+      "backend/packages/harness/deerflow/persistence/run/sql.py",
+      "backend/packages/harness/deerflow/persistence/engine.py",
+      "backend/packages/harness/deerflow/persistence/thread_meta/sql.py",
+      "backend/packages/harness/deerflow/persistence/feedback/sql.py",
+      "backend/packages/harness/deerflow/persistence/base.py",
+      "backend/packages/harness/deerflow/persistence/__init__.py"
+    ],
+    "risks": [
+      "run/model.py documents additional valid statuses (timeout, interrupted) per its inline comment, but I did not Read that file with the Read tool (only grepped it), so the diagram omits those states to avoid asserting transitions I cannot fully verify from this code.",
+      "update_status accepts an arbitrary status string, so in principle any transition is possible; the diagram shows only the verified core path (pending -> running -> success/error) rather than every possible caller-driven transition.",
+      "The diagram assumes RunRepository.put defaults status to 'pending', which is verified in run/sql.py (status='pending' default param); callers may override it, which is not depicted."
+    ],
+    "found_fake": true
+  },
+  "19｜Middleware 基建类文件详解_ThreadData_Uploads_Sandbox_ToolOutputBudget.md": {
+    "mermaid": "flowchart TD\n  Tool[handler returns ToolMessage] --> Needs[_needs_budget pre-scan]\n  Needs -->|exempt or under trigger| Skip[return original ToolMessage]\n  Needs -->|over trigger| Resolve[_resolve_outputs_path and _resolve_sandbox]\n  Resolve --> Branch{sandbox resolved}\n  Branch -->|uses_thread_data_mounts| Host[_externalize to host outputs_path]\n  Branch -->|remote sandbox| SB[_externalize_to_sandbox write_file]\n  Branch -->|outputs_path only| Host\n  Branch -->|none| Fallback[_build_fallback]\n  Host --> VP{virtual_path ok}\n  SB --> VP\n  VP -->|yes| Preview[_build_preview head tail read_file ref]\n  VP -->|no| Fallback\n  Fallback --> Patch[_patch_tool_message content]\n  Preview --> Patch",
+    "approve": true,
+    "reason": "ToolOutputBudget decision flow verified against tool_output_budget_middleware.py (_needs_budget, _resolve_outputs_path, _externalize_to_sandbox, _build_fallback).",
+    "kind": "flowchart TD",
+    "summary": "ToolOutputBudgetMiddleware tool-call decision flow showing how an oversized ToolMessage result is routed to host-disk externalization, sandbox-filesystem externalization, or head-tail fallback truncation before patching the message content.",
+    "evidence": [
+      "backend/packages/harness/deerflow/agents/middlewares/tool_output_budget_middleware.py",
+      "backend/packages/harness/deerflow/agents/middlewares/thread_data_middleware.py",
+      "backend/packages/harness/deerflow/agents/middlewares/uploads_middleware.py",
+      "backend/packages/harness/deerflow/sandbox/middleware.py"
+    ],
+    "risks": [
+      "The _needs_budget pre-scan and the exempt check both live in _tool_message_over_budget; the diagram collapses exempt and under-trigger into one skip path, which is accurate to the code but slightly simplified.",
+      "The diagram focuses on the ToolOutputBudget branch of the module; it complements rather than reproduces the doc's earlier linear topology diagram, so the other three middlewares are not shown here."
+    ],
+    "found_fake": true
+  },
+  "20｜Middleware 上下文与 UX 类文件详解_Dynamic_Skill_Summary_Todo_Title_Memory.md": {
+    "mermaid": "flowchart TD\n  BA[before_agent hook] --> DYN[DynamicContextMiddleware inject memory and date]\n  BA --> TBA[TodoMiddleware clear stale run reminders]\n  DYN --> BM[before_model hook]\n  TBA --> BM\n  BM --> SUM[SummarizationMiddleware _maybe_summarize]\n  BM --> TBM[TodoMiddleware inject todo_reminder if write_todos lost]\n  SUM --> WMC[wrap_model_call hook]\n  TBM --> WMC\n  WMC --> SKILL[SkillActivationMiddleware inject SKILL.md]\n  WMC --> TDR[TodoMiddleware drain completion reminders]\n  SKILL --> MODEL[LLM Model invoke]\n  TDR --> MODEL\n  MODEL --> AM[after_model hook]\n  AM --> TITLE[TitleMiddleware generate thread title]\n  AM --> TAM[TodoMiddleware jump_to model if todos incomplete]\n  TAM --> WMC\n  AM --> AA[after_agent hook]\n  AA --> MEM[MemoryMiddleware queue via get_memory_queue]",
+    "approve": true,
+    "reason": "Per-hook middleware firing map for the six context/UX middlewares; concrete hook names and behaviors per source files.",
+    "kind": "flowchart TD",
+    "summary": "LangGraph middleware hook lifecycle for the six context/UX middlewares, showing which concrete middleware fires at before_agent, before_model, wrap_model_call, after_model and after_agent, including the TodoMiddleware jump-to-model loop.",
+    "evidence": [
+      "backend/packages/harness/deerflow/agents/middlewares/dynamic_context_middleware.py",
+      "backend/packages/harness/deerflow/agents/middlewares/skill_activation_middleware.py",
+      "backend/packages/harness/deerflow/agents/middlewares/summarization_middleware.py",
+      "backend/packages/harness/deerflow/agents/middlewares/todo_middleware.py",
+      "backend/packages/harness/deerflow/agents/middlewares/title_middleware.py",
+      "backend/packages/harness/deerflow/agents/middlewares/memory_middleware.py"
+    ],
+    "risks": [
+      "The diagram assumes the standard LangGraph middleware hook ordering before_agent -> before_model -> wrap_model_call -> model -> after_model -> after_agent; I inferred this from each file's @override hook methods rather than from the agent wiring file that registers the middlewares, which I did not open to confirm exact registration order or concurrency.",
+      "Multiple middlewares fire at the same hook (e.g. DynamicContext and Todo at before_agent; Summarization and Todo at before_model; Skill and Todo at wrap_model_call; Title and Todo at after_model). The diagram shows them as parallel branches but does not assert a strict sub-ordering between siblings at the same hook.",
+      "For brevity I omitted TodoMiddleware.after_agent clearing the current run's reminders and the deeper get_memory_queue worker path; the MemoryMiddleware terminal node summarizes the enqueue step."
+    ],
+    "found_fake": true
+  },
+  "21｜Run 与 Thread Router 文件级详解.md": {
+    "mermaid": "sequenceDiagram\n    participant Client as LangGraph SDK\n    participant Router as runs or thread_runs router\n    participant StartRun as services.start_run\n    participant RunMgr as RunManager.create_or_reject\n    participant Task as run_agent background task\n    participant Bridge as StreamBridge\n    participant SSE as sse_consumer\n\n    Client->>Router: POST runs/stream\n    Router->>StartRun: body thread_id request\n    StartRun->>RunMgr: create_or_reject\n    alt ConflictError\n        RunMgr-->>StartRun: ConflictError\n        StartRun-->>Client: HTTP 409\n    else accepted\n        RunMgr-->>StartRun: RunRecord\n        StartRun->>Task: asyncio.create_task run_agent\n        StartRun-->>Router: record\n        Router-->>Client: StreamingResponse text/event-stream\n        Router->>SSE: sse_consumer bridge record\n        Task->>Bridge: publish events\n        Bridge->>SSE: subscribe entries\n        SSE-->>Client: SSE frames event and data\n        Task->>Bridge: END_SENTINEL\n        Bridge->>SSE: END_SENTINEL\n        SSE-->>Client: end frame\n    end\n    note over SSE,RunMgr: on client disconnect with on_disconnect cancel sse_consumer calls RunMgr.cancel",
+    "approve": true,
+    "reason": "POST runs/stream lifecycle (thread_runs/runs routers, services) with 409 conflict and END_SENTINEL/cancel; source-backed.",
+    "kind": "sequenceDiagram",
+    "summary": "Runtime lifecycle of a POST runs/stream request: router delegates to services.start_run, which calls RunManager.create_or_reject (409 on conflict), spawns a background run_agent task, and returns an SSE StreamingResponse whose sse_consumer drains StreamBridge events until END_SENTINEL (or cancels on client disconnect).",
+    "evidence": [
+      "backend/app/gateway/routers/thread_runs.py",
+      "backend/app/gateway/routers/runs.py",
+      "backend/app/gateway/services.py",
+      "backend/app/gateway/routers/threads.py",
+      ".agent_context/final_review/docs_md/21｜Run 与 Thread Router 文件级详解.md"
+    ],
+    "risks": [
+      "run_agent, RunManager.create_or_reject, ConflictError, END_SENTINEL, and DisconnectMode.cancel were read via imports in services.py; the RunManager/StreamBridge/run_agent implementations themselves live in deerflow.runtime and were not opened, so the exact internal event-publishing ordering is inferred from the docstrings and call sites rather than verified line-by-line.",
+      "The diagram collapses thread_runs.stream_run and runs.stateless_stream into one 'runs or thread_runs router' participant; runs.py additionally calls _resolve_thread_id to auto-create or reuse a thread before start_run, which is omitted to keep the diagram under the node budget.",
+      "The 409 path can also arise from UnsupportedStrategyError (501) in start_run; only the ConflictError->409 branch is shown for clarity."
+    ],
+    "found_fake": true
+  },
+  "22｜管理类 Router 文件级详解_Models_MCP_Skills_Memory_Agents.md": {
+    "mermaid": "flowchart TD\n  Req[PUT /api/mcp/config] --> Admin[_require_admin_user]\n  Admin --> Valid[_validate_mcp_update_request]\n  Valid --> Allow[_allowed_stdio_commands npx uvx]\n  Valid --> Reject[400 disallowed command]\n  Allow --> Path[resolve_config_path]\n  Path --> Raw[read raw extensions_config.json]\n  Raw --> Merge[_merge_preserving_secrets]\n  Merge --> Write[write extensions_config.json]\n  Write --> Reload[reload_extensions_config]\n  Reload --> Mask[_mask_server_config]\n  Mask --> Resp[McpConfigResponse masked]\n  Get[GET /api/mcp/config] --> Admin\n  Get2[GET returns env headers oauth as ***] --> Get2",
+    "approve": true,
+    "reason": "PUT /api/mcp/config write path (mcp.py, skills/agents routers, extensions_config) with admin/stdio-allowlist/secret-merge/reload; concrete.",
+    "kind": "flowchart TD",
+    "summary": "PUT /api/mcp/config write lifecycle in mcp.py: admin guard, stdio allowlist validation, secret-preserving merge against raw extensions_config.json, write, reload cache, masked response.",
+    "evidence": [
+      "backend/app/gateway/routers/mcp.py",
+      "backend/app/gateway/routers/skills.py",
+      "backend/app/gateway/routers/agents.py",
+      "backend/packages/harness/deerflow/config/extensions_config.py"
+    ],
+    "risks": [
+      "The last Get2 node is loosely attached (no upstream arrow) purely to note that GET masks secrets; if strict DAG shape is desired it could be dropped.",
+      "extensions_config.py was located at backend/packages/harness/deerflow/config/ rather than the deerflow/config/ path the routers import; the actual code matches the import semantics.",
+      "reload_extensions_config triggers downstream MCP tools cache reset per the route docstring, but the tools-cache reset call site was not directly read in this pass."
+    ],
+    "found_fake": true
+  },
+  "23｜文件类 Router 详解_Uploads_Artifacts_Feedback_Suggestions.md": {
+    "mermaid": "flowchart TD\n  Req[PUT/POST feedback] --> Perm[require_permission]\n  Perm --> Rating{rating is 1 or -1?}\n  Rating -->|no| BadRequest[400 invalid rating]\n  Rating -->|yes| User[get_current_user]\n  User --> RunGet[run_store.get run_id]\n  RunGet --> RunExists{run found?}\n  RunExists -->|no| NotFound[404 run not found]\n  RunExists -->|yes| Match{run thread_id matches?}\n  Match -->|no| NotFound\n  Match -->|yes| Repo[get_feedback_repo]\n  Repo --> Op[feedback_repo.upsert or create]\n  Op --> Resp[FeedbackResponse]",
+    "approve": true,
+    "reason": "Feedback validation chain (feedback.py) with quoted labels containing rating/run/thread checks; source-backed and parse-safe.",
+    "kind": "flowchart TD",
+    "summary": "Feedback write-path validation chain in feedback.py: require_permission owner_check, rating validation, run_store.get, thread_id match, then feedback_repo upsert/create.",
+    "evidence": [
+      "backend/app/gateway/routers/feedback.py",
+      "backend/app/gateway/routers/uploads.py",
+      "backend/app/gateway/routers/artifacts.py",
+      "backend/app/gateway/routers/suggestions.py",
+      ".agent_context/final_review/docs_md/23｜文件类 Router 详解_Uploads_Artifacts_Feedback_Suggestions.md"
+    ],
+    "risks": [
+      "Diagram covers only the write paths (PUT upsert_feedback, POST create_feedback). Read endpoints (list_feedback, feedback_stats) skip run_store validation entirely, and delete_run_feedback skips it too; delete_feedback (by feedback_id) validates via feedback_repo.get instead of run_store.get. These alternate paths are omitted to keep the diagram focused and under the node cap.",
+      "require_permission runs as a decorator wrapping each endpoint (owner_check=True, require_existing=True for writes) before the function body executes; it is shown as the first node but its internal owner/thread-existence checks are not expanded.",
+      "get_current_user, get_run_store, and get_feedback_repo are resolved from request state via app.gateway.deps; the diagram treats them as direct calls for clarity rather than depicting the dependency-injection indirection."
+    ],
+    "found_fake": true
+  },
+  "24｜ThreadDataMiddleware 单文件详解.md": {
+    "mermaid": "flowchart LR\n  BA[before_agent] --> UID[get_effective_user_id]\n  UID --> TP[_get_thread_paths]\n  TP --> TDIR[Paths.thread_dir]\n  TDIR -->|user_id set| PU[users/user_id/threads/thread_id]\n  TDIR -->|no user_id| LG[threads/thread_id]\n  PU --> UD[user-data]\n  LG --> UD\n  UD --> WP[workspace_path]\n  UD --> UP[uploads_path]\n  UD --> OP[outputs_path]\n  WP --> TD[thread_data state]\n  UP --> TD\n  OP --> TD\n  WP -.maps to.-> VW[mnt/user-data/workspace]\n  UP -.maps to.-> VU[mnt/user-data/uploads]\n  OP -.maps to.-> VO[mnt/user-data/outputs]",
+    "approve": true,
+    "reason": "before_agent path resolution (thread_data_middleware.py, paths.py, thread_state/user_context) with concrete per-thread dirs and virtual mounts.",
+    "kind": "flowchart LR",
+    "summary": "ThreadDataMiddleware.before_agent resolves thread_id and user_id into three per-thread host directories (workspace/uploads/outputs) under user-data, writes them to thread_data state, and maps each to a /mnt/user-data virtual mount path.",
+    "evidence": [
+      "backend/packages/harness/deerflow/agents/middlewares/thread_data_middleware.py",
+      "backend/packages/harness/deerflow/config/paths.py",
+      "backend/packages/harness/deerflow/agents/thread_state.py",
+      "backend/packages/harness/deerflow/runtime/user_context.py",
+      ".agent_context/final_review/docs_md/24｜ThreadDataMiddleware 单文件详解.md"
+    ],
+    "risks": [
+      "The host-to-virtual path mapping (mnt/user-data/workspace etc.) is documented in paths.py docstrings (VIRTUAL_PATH_PREFIX and each sandbox_*_dir 'Sandbox:' line), but the actual sandbox bind-mount is performed by sandbox setup code I did not read; the 'maps to' edges reflect the documented convention, not a mount performed by this middleware.",
+      "The doc claims UploadsMiddleware, SandboxMiddleware and the artifact router depend on the same path convention, but I did not open those files to verify a direct dependency on thread_data, so downstream consumers are omitted from the diagram.",
+      "get_effective_user_id returns the literal 'default' user id when no user context is set (user_context.py); the diagram collapses this into the 'no user_id' legacy-layout branch, though in code a missing contextvar still yields user_id='default' rather than None, which would actually take the per-user branch with user_id=default."
+    ],
+    "found_fake": true
+  },
+  "25｜UploadsMiddleware 单文件详解.md": {
+    "mermaid": "flowchart TD\n  A[POST /api/threads/.../uploads] --> B[uploads.upload_files]\n  B --> C[normalize_filename / claim_unique_filename]\n  C --> D[ensure_uploads_dir host dir]\n  D --> E[_write_upload_file_with_limits chunked]\n  E --> F{auto_convert_documents and ext in CONVERTIBLE_EXTENSIONS}\n  F -->|yes| G[convert_file_to_markdown writes sibling .md]\n  F -->|no| H[_make_file_sandbox_readable chmod]\n  G --> H\n  H --> I[UploadResponse returns files metadata to frontend]\n  I --> J[frontend sets HumanMessage additional_kwargs.files]\n  J --> K[UploadsMiddleware.abefore_agent run_in_executor]\n  K --> L[before_agent reads thread_id from runtime.context]\n  L --> M[Paths.sandbox_uploads_dir resolves uploads_dir]\n  M --> N[_files_from_kwargs validates filename + file exists]\n  M --> O[iter uploads_dir collect historical_files]\n  N --> P[_extract_outline_for_file reads sibling .md via extract_outline]\n  O --> P\n  P --> Q[_create_files_message builds uploaded_files block]\n  Q --> R[prepend block to last HumanMessage content]\n  R --> S[return uploaded_files and messages to state]",
+    "approve": true,
+    "reason": "Cross-module upload lifecycle (uploads_middleware, uploads router, file_conversion) with concrete router-then-middleware steps; clean labels.",
+    "kind": "flowchart TD",
+    "summary": "Cross-module lifecycle of an uploaded file: gateway router writes the file and converts a sibling .md, then UploadsMiddleware.before_agent reads additional_kwargs.files plus the .md outline and prepends an uploaded_files context block to the last HumanMessage.",
+    "evidence": [
+      "backend/packages/harness/deerflow/agents/middlewares/uploads_middleware.py",
+      "backend/app/gateway/routers/uploads.py",
+      "backend/packages/harness/deerflow/utils/file_conversion.py"
+    ],
+    "risks": [
+      "The link from frontend UploadResponse back into HumanMessage additional_kwargs.files is inferred from doc text and code comments, not from reading frontend code directly.",
+      "The exact attribute access pattern sandbox_uploads_dir(thread_id, user_id=...) is taken from the middleware/router calls; Paths internals were not read.",
+      "sync_to_sandbox branch (sandbox.update_file) is omitted to keep the diagram under 16 nodes and focused on the middleware-relevant path; AIO Docker sandbox mode may follow a slightly different write sequence."
+    ],
+    "found_fake": true
+  },
+  "26｜SandboxMiddleware 单文件详解.md": {
+    "mermaid": "sequenceDiagram\n  participant Agent\n  participant MW as SandboxMiddleware\n  participant Tool as ensure_sandbox_initialized\n  participant Prov as SandboxProvider\n  participant RState as runtime.state\n  participant Graph as ThreadState.sandbox\n\n  Note over Agent,MW: lazy_init True default\n  Agent->>MW: before_agent skip acquire\n  Agent->>MW: wrap_tool_call request\n  MW->>RState: read prev sandbox_id\n  MW->>Tool: call handler\n  Tool->>Prov: get or acquire by thread_id\n  Prov-->>Tool: sandbox_id\n  Tool->>RState: write sandbox local only\n  Tool-->>MW: ToolMessage result\n  MW->>RState: read curr sandbox_id\n  alt new sandbox_id appeared\n    MW->>Graph: Command update sandbox and messages\n  end\n  MW-->>Agent: Command or ToolMessage\n  Agent->>MW: after_agent\n  MW->>Prov: release sandbox_id",
+    "approve": true,
+    "reason": "SandboxMiddleware lazy-init sequence (sandbox/middleware.py, tools.py, thread_state) with wrap_tool_call diff/Command(update); source-backed.",
+    "kind": "sequenceDiagram",
+    "summary": "A sequence diagram of the SandboxMiddleware lazy-init lifecycle: before_agent skips acquire, wrap_tool_call diffs runtime.state around the tool handler so a freshly-acquired sandbox_id is re-emitted via Command(update) into ThreadState.sandbox, and after_agent releases it.",
+    "evidence": [
+      "backend/packages/harness/deerflow/sandbox/middleware.py",
+      "backend/packages/harness/deerflow/sandbox/tools.py",
+      "backend/packages/harness/deerflow/agents/thread_state.py"
+    ],
+    "risks": [
+      "Only the lazy_init=True default path is depicted; the eager before_agent acquire (lazy_init=False) and the runtime.context sandbox_id release branch in after_agent exist in code but are omitted for clarity.",
+      "The async hook variants abefore_agent/awrap_tool_call/aafter_agent and provider.acquire_async mirror the sync ones and are not shown separately.",
+      "The get-or-acquire step condenses ensure_sandbox_initialized's reuse-vs-acquire decision: if provider.get(sandbox_id) returns an existing sandbox it is reused, otherwise provider.acquire(thread_id) runs.",
+      "after_agent release is shown once; in code it releases from state.sandbox first, falling back to runtime.context.sandbox_id."
+    ],
+    "found_fake": true
+  },
+  "27｜ToolOutputBudgetMiddleware 单文件详解.md": {
+    "mermaid": "flowchart TD\n  Hook[wrap_tool_call hook] --> Need{_needs_budget?}\n  Need -->|no| Keep[return unchanged]\n  Need -->|yes| Patch[_patch_tool_message]\n  Patch --> Exempt{name in exempt_tools?}\n  Exempt -->|yes| Keep\n  Exempt -->|no| Ext{over externalize threshold?}\n  Ext -->|yes| Sbx{sandbox resolved?}\n  Sbx -->|no| Host[_externalize to host outputs_path]\n  Sbx -->|yes| Mount{provider uses_thread_data_mounts?}\n  Mount -->|yes| Host\n  Mount -->|no| SbxFs[_externalize_to_sandbox write_file]\n  Host --> Vp{virtual_path ok?}\n  SbxFs --> Vp\n  Vp -->|yes| Prev[_build_preview head ref tail]\n  Vp -->|no| FbChk{over fallback_max_chars?}\n  Ext -->|no| FbChk\n  FbChk -->|yes| Fb[_build_fallback truncation]\n  FbChk -->|no| Keep\n  Prev --> Out[model_copy patched ToolMessage]\n  Fb --> Out",
+    "approve": true,
+    "reason": "wrap_tool_call decision tree verified in source (exempt_tools, externalize threshold, uses_thread_data_mounts, fallback_max_chars).",
+    "kind": "flowchart TD",
+    "summary": "Decision tree inside ToolOutputBudgetMiddleware.wrap_tool_call: how _patch_tool_message gates on exempt_tools, branches the persistence target between host-disk _externalize and sandbox _externalize_to_sandbox based on uses_thread_data_mounts, and falls back to _build_fallback truncation when externalization fails or the threshold is not met.",
+    "evidence": [
+      "backend/packages/harness/deerflow/agents/middlewares/tool_output_budget_middleware.py",
+      "backend/packages/harness/deerflow/config/tool_output_config.py",
+      "backend/packages/harness/deerflow/sandbox/sandbox_provider.py"
+    ],
+    "risks": [
+      "The earlier real diagram in the same doc (lines 14-23) already shows a linear externalize->preview->patch happy path; this replacement intentionally expands the persistence-target branch and the fallback-truncation path that the earlier one collapses, so the two are complementary rather than duplicative.",
+      "wrap_model_call historical-message truncation is omitted to stay under ~16 nodes; that path calls _patch_model_messages with outputs_path=None and never externalizes, only inline-truncates."
+    ],
+    "found_fake": true
+  },
+  "28｜DynamicContextMiddleware 单文件详解.md": {
+    "mermaid": "sequenceDiagram\n    participant Agent as lead_agent agent.py\n    participant MW as DynamicContextMiddleware\n    participant Inject as _inject\n    participant Mem as _get_memory_context\n    participant State as ThreadState messages\n    Agent->>MW: abefore_agent state runtime\n    MW->>Inject: asyncio.to_thread timeout 5s\n    Inject->>State: read messages\n    Inject->>Inject: _last_injected_date scan reminder flag\n    alt last_date None first turn\n        Inject->>Mem: memory if injection_enabled\n        Mem-->>Inject: memory context or empty\n        Inject->>Inject: _build_full_reminder\n        Inject-->>MW: reminder plus user via ID swap\n    else last_date equals current\n        Inject-->>MW: None skip\n    else midnight crossed\n        Inject->>Inject: _build_date_update_reminder\n        Inject-->>MW: date update plus user via ID swap\n    end\n    MW-->>Agent: add_messages replaces by id\n    Note over MW: TimeoutError returns None and skips\n    Note over Agent,State: title_middleware and summarization_middleware reuse is_dynamic_context_reminder",
+    "approve": true,
+    "reason": "abefore_agent _inject sequence (dynamic_context_middleware, lead_agent prompt/agent) with first-turn/same-day/midnight branches; concrete.",
+    "kind": "sequenceDiagram",
+    "summary": "Runtime lifecycle of DynamicContextMiddleware.abefore_agent offloading _inject to a bounded thread, branching on the last injected date (first-turn full reminder, same-day skip, midnight date-update), returning an ID-swapped message patch that downstream middlewares consume via is_dynamic_context_reminder.",
+    "evidence": [
+      "backend/packages/harness/deerflow/agents/middlewares/dynamic_context_middleware.py",
+      "backend/packages/harness/deerflow/agents/lead_agent/prompt.py",
+      "backend/packages/harness/deerflow/agents/lead_agent/agent.py"
+    ],
+    "risks": [
+      "title_middleware.py and summarization_middleware.py were inspected via grep only (import + call sites of is_dynamic_context_reminder), not fully Read; the downstream-consumer note reflects that grep output rather than a full read of those files.",
+      "The 5s timeout path (asyncio.wait_for raising TimeoutError, caught and returning None) is simplified into a single Note rather than a full alt branch to keep the diagram under the node budget.",
+      "The final MW-->>Agent arrow depicts the non-None patch path; the same-day and timeout branches implicitly return None to the agent without a separate arrow."
+    ],
+    "found_fake": true
+  },
+  "29｜SkillActivationMiddleware 单文件详解.md": {
+    "mermaid": "flowchart TD\n  Hook[wrap_model_call / awrap_model_call] --> Prep[_prepare_model_request]\n  Prep --> Find[_find_activation_target]\n  Find --> Dedup{already activated for target?}\n  Dedup -->|yes| Skip[return None - handler unchanged]\n  Dedup -->|no| Resolve[_resolve_activation]\n  Resolve --> Checks{skill name/enabled/available?}\n  Checks -->|fail| Fail[AIMessage failure_message]\n  Checks -->|ok| ResolvePath[resolve_slash_skill]\n  ResolvePath -->|None| Fail\n  ResolvePath -->|resolved| Read[_read_skill_content SKILL.md within skills root]\n  Read -->|OSError or ValueError| Fail\n  Read -->|ok| Audit[_record_activation sha256 run_journal]\n  Audit --> Reminder[_build_activation_reminder xml]\n  Reminder --> Insert[insert hidden HumanMessage at target_index]\n  Insert --> Handler[handler prepared ModelRequest]",
+    "approve": true,
+    "reason": "_prepare_model_request decision tree (skill_activation_middleware, slash.py, skill_storage, types) with dedup/gates/SKILL.md read/audit; source-backed.",
+    "kind": "flowchart TD",
+    "summary": "Decision tree of SkillActivationMiddleware._prepare_model_request showing the dedup check, three skill-eligibility gates, SKILL.md read with failure branches, run_journal audit, and hidden activation-message insertion before the handler runs.",
+    "evidence": [
+      ".agent_context/final_review/docs_md/29｜SkillActivationMiddleware 单文件详解.md",
+      "backend/packages/harness/deerflow/agents/middlewares/skill_activation_middleware.py",
+      "backend/packages/harness/deerflow/skills/slash.py",
+      "backend/packages/harness/deerflow/skills/storage/skill_storage.py",
+      "backend/packages/harness/deerflow/skills/types.py"
+    ],
+    "risks": [
+      "The Checks node consolidates three sequential code-level gates (skill found in load_skills, skill.enabled, reference.name in available_skills) into one decision for brevity; each returns a distinct failure_message in code (not installed / disabled / not available).",
+      "resolve_slash_skill returning None and _read_skill_content raising OSError/ValueError both route to the same Fail node, but the code emits different failure_message text for each.",
+      "wrap_model_call delegates to _prepare_model_request synchronously while awrap_model_call wraps it in asyncio.to_thread; the diagram treats them as one entry point since their decision logic is identical."
+    ],
+    "found_fake": true
+  },
+  "30｜Todo_Title_Memory Middleware 文件详解.md": {
+    "mermaid": "flowchart TD\n  Agent[LeadAgent run] --> TodoBefore[before_model inject todo_reminder]\n  TodoBefore --> TodoWrap[wrap_model_call drain reminders]\n  TodoWrap --> TodoAug[augmented ModelRequest]\n  TodoAug --> TodoAfter[after_model last AIMessage]\n  TodoAfter --> TodoQueue[queue completion reminder if todos incomplete]\n  TodoQueue --> TodoJump[jump_to model]\n  TodoJump --> TitleAfter[after_model first exchange]\n  TitleAfter --> TitleCheck[should_generate_title]\n  TitleCheck --> TitleGen[create_chat_model title_agent]\n  TitleGen --> TitleReturn[return title to state]\n  TitleReturn --> MemAfter[after_agent state messages]\n  MemAfter --> MemFilter[filter_messages_for_memory]\n  MemFilter --> QueueAdd[MemoryUpdateQueue add thread_id user_id]\n  QueueAdd --> QueueNone[no state change]",
+    "approve": true,
+    "reason": "Hook sequence across Todo/Title/Memory middlewares plus MemoryUpdateQueue (queue.py); concrete before_model/after_model/after_agent behaviors.",
+    "kind": "sequenceDiagram",
+    "summary": "A single lead-agent run sequenced through the before_model / wrap_model_call / after_model / after_agent hooks of TodoMiddleware, TitleMiddleware, and MemoryMiddleware, ending with MemoryMiddleware enqueuing filtered messages onto MemoryUpdateQueue.",
+    "evidence": [
+      "backend/packages/harness/deerflow/agents/middlewares/todo_middleware.py",
+      "backend/packages/harness/deerflow/agents/middlewares/title_middleware.py",
+      "backend/packages/harness/deerflow/agents/middlewares/memory_middleware.py",
+      "backend/packages/harness/deerflow/agents/memory/queue.py"
+    ],
+    "risks": [
+      "The relative ordering of TitleMiddleware vs TodoMiddleware within the same after_model phase depends on middleware registration order in the agent builder, which I did not inspect; the diagram shows both after_model hooks firing in the same phase but not a guaranteed sequence between them.",
+      "The diagram assumes the lead agent run executes before_model -> wrap_model_call -> after_model -> after_agent in that order, which is the standard LangChain agent middleware lifecycle but I did not open the agent loop code to confirm this exact ordering for this repo.",
+      "TodoMiddleware.after_model returns jump_to model only under the retry cap _MAX_COMPLETION_REMINDERS=2; the diagram condenses this guard into a single alt branch."
+    ],
+    "found_fake": true
+  },
+  "31｜LLMErrorHandlingMiddleware 单文件详解.md": {
+    "mermaid": "stateDiagram-v2\n    [*] --> closed\n    closed --> open: _record_failure count reaches threshold\n    closed --> closed: _record_success resets failure count\n    open --> half_open: recovery_timeout elapsed in _check_circuit\n    open --> open: _check_circuit fast-fails the request\n    half_open --> closed: probe handler succeeds _record_success\n    half_open --> open: probe handler fails _record_failure\n    half_open --> half_open: GraphBubbleUp releases probe slot",
+    "approve": true,
+    "reason": "Circuit breaker state machine verified in llm_error_handling_middleware.py (closed/open/half_open, _check_circuit, _record_success/failure, probe slot).",
+    "kind": "stateDiagram-v2",
+    "summary": "Circuit breaker state machine (closed/open/half_open) for LLMErrorHandlingMiddleware, driven by _check_circuit, _record_success, and _record_failure.",
+    "evidence": [
+      "backend/packages/harness/deerflow/agents/middlewares/llm_error_handling_middleware.py",
+      ".agent_context/final_review/docs_md/31｜LLMErrorHandlingMiddleware 单文件详解.md"
+    ],
+    "risks": [
+      "AppConfig.circuit_breaker.failure_threshold and recovery_timeout_sec field definitions were not read; threshold/timeout semantics are inferred from their usage in _record_failure and _check_circuit.",
+      "GraphBubbleUp in half_open only clears _circuit_probe_in_flight without changing _circuit_state; depicted as a self-transition on half_open, which is a faithful but simplified rendering.",
+      "The state values closed/open/half_open are taken from the literal strings assigned to _circuit_state in the source; no external state enum was inspected."
+    ],
+    "found_fake": true
+  },
+  "32｜LoopDetectionMiddleware 单文件详解.md": {
+    "mermaid": "sequenceDiagram\n  participant WM as wrap_model_call\n  participant M as Model\n  participant AM as after_model\n  participant TN as Tools node\n  participant PW as _pending_warnings\n\n  Note over WM,PW: iteration N\n  WM->>PW: drain pending warnings\n  WM->>M: ModelRequest\n  M-->>AM: AIMessage with tool_calls\n  AM->>AM: _track_and_check hit warn_threshold\n  AM->>PW: _queue_pending_warning keyed by thread/run\n  AM-->>TN: AIMessage unchanged\n  TN-->>TN: emit ToolMessage responses\n  Note over WM,PW: next iteration\n  WM->>PW: _drain_pending_warnings\n  PW-->>WM: warning text\n  WM->>M: messages plus HumanMessage loop_warning after ToolMessages",
+    "approve": true,
+    "reason": "Deferred-warning lifecycle verified in loop_detection_middleware.py (_pending_warnings, warn_threshold, _queue/_drain_pending_warnings).",
+    "kind": "sequenceDiagram",
+    "summary": "Sequence of the deferred-warning lifecycle across two agent iterations: after_model detects a repeat and queues a warning keyed by thread/run without mutating the AIMessage, the tools node emits its ToolMessage responses, then the next wrap_model_call drains the queue and appends a HumanMessage after all tool messages so provider tool-call pairing stays intact.",
+    "evidence": [
+      "backend/packages/harness/deerflow/agents/middlewares/loop_detection_middleware.py"
+    ],
+    "risks": [
+      "The Tools node participant and emit ToolMessage responses step are standard LangGraph behavior described in the module docstring; I did not open the tools-node source to verify that step directly.",
+      "The hook ordering (wrap_model_call wraps the model call before it runs, after_model fires on the returned AIMessage) is the LangChain AgentMiddleware contract inferred from the @override methods and docstring, not verified against framework source.",
+      "The diagram shows only the warn_threshold path; the hard_limit path (_build_hard_stop_update stripping tool_calls in-place inside after_model) is omitted to stay focused and under the node budget."
+    ],
+    "found_fake": true
+  },
+  "33｜SandboxAuditMiddleware 单文件详解.md": {
+    "mermaid": "flowchart TD\n  A[_classify_command] --> B[Pass1 raw cmd vs HIGH_RISK_PATTERNS]\n  B --> C{match?}\n  C -->|yes| BLK[return block]\n  C -->|no| D[_split_compound_command]\n  D --> E{unclosed quote?}\n  E -->|yes| F[fail-closed whole cmd]\n  E -->|no| G[iterate sub-commands]\n  F --> H[_classify_single_command]\n  G --> H\n  H --> I[normalized and shlex vs HIGH_RISK_PATTERNS]\n  I --> J{block?}\n  J -->|yes| BLK\n  J -->|no| K[vs MEDIUM_RISK_PATTERNS]\n  K --> L{verdict}\n  L -->|warn| M[worst=warn]\n  L -->|pass| M\n  M --> N{next sub?}\n  N -->|yes| G\n  N -->|no| O[return worst]",
+    "approve": true,
+    "reason": "Two-pass _classify_command pipeline (sandbox_audit_middleware.py + tests) with HIGH_RISK/MEDIUM patterns and worst-verdict aggregation; concrete.",
+    "kind": "flowchart TD",
+    "summary": "Internal two-pass command classification pipeline of _classify_command: whole-command HIGH_RISK scan, then quote-aware split with fail-closed, per-sub _classify_single_command via HIGH then MEDIUM patterns, with block short-circuit and worst-verdict-wins aggregation.",
+    "evidence": [
+      "backend/packages/harness/deerflow/agents/middlewares/sandbox_audit_middleware.py",
+      "backend/tests/test_sandbox_audit_middleware.py"
+    ],
+    "risks": [
+      "The earlier real diagram (lines 14-25) already covers the high-level request path; this replacement deliberately zooms into the classify step internals to avoid duplication. If a maintainer prefers the tail diagram to repeat the request path instead, this choice could be reconsidered.",
+      "shlex ValueError path and unclosed-quote fail-closed both route to block; I merged them into the BLK node for compactness, so the diagram does not separately visualize the shlex.split ValueError branch returning block — it is folded under the {block?} decision in _classify_single_command."
+    ],
+    "found_fake": true
+  },
+  "34｜DeferredToolFilterMiddleware 单文件详解.md": {
+    "mermaid": "flowchart TD\n  INIT[DeferredToolFilterMiddleware deferred_names + catalog_hash]\n  INIT --> WM[wrap_model_call]\n  INIT --> WT[wrap_tool_call]\n  WM --> FT[_filter_tools request.state]\n  WT --> BLK[_blocked_tool_message request.state]\n  FT --> HID[_hidden = _deferred minus _promoted]\n  BLK --> HID\n  HID --> PROM[_promoted reads state.promoted]\n  PROM --> CH{state.promoted catalog_hash matches self}\n  CH -->|match| NAMES[promoted names returned]\n  CH -->|mismatch stale| EMPTY[empty set returned]\n  NAMES --> HIDOUT[hidden name set]\n  EMPTY --> HIDOUT\n  FT -->|override tools=active| H1[handler ModelResponse]\n  BLK -->|tool name in hidden| ERR[ToolMessage status error]\n  BLK -->|not hidden| H2[handler ToolMessage]",
+    "approve": true,
+    "reason": "catalog_hash stale-promotion gating (deferred_tool_filter_middleware.py) with _hidden/_promoted/_blocked_tool_message; source-backed.",
+    "kind": "flowchart TD",
+    "summary": "How DeferredToolFilterMiddleware's wrap_model_call and wrap_tool_call hooks both delegate to _hidden(state), which is gated by a catalog_hash match against state.promoted so a stale persisted promotion cannot expose a renamed tool.",
+    "evidence": [
+      "backend/packages/harness/deerflow/agents/middlewares/deferred_tool_filter_middleware.py"
+    ],
+    "risks": [
+      "request.state and request.tools attribute access is taken directly from source (lines 54, 57, 60, 65, 68); not inferred.",
+      "The 'mismatch stale -> empty set' branch reflects the docstring intent and the code returning set() when catalog_hash differs (lines 44-46); verified."
+    ],
+    "found_fake": true
+  },
+  "35｜SafetyFinishReasonMiddleware 单文件详解.md": {
+    "mermaid": "flowchart TD\n  M[SafetyFinishReasonMiddleware after_model] --> A1[read state messages last]\n  A1 --> A2{AIMessage with tool_calls}\n  A2 -->|no| R0[return None passthrough]\n  A2 -->|yes| DET[_detect loop over detectors]\n  DET --> D1[OpenAICompatibleContentFilterDetector]\n  DET --> D2[AnthropicRefusalDetector]\n  DET --> D3[GeminiSafetyDetector]\n  D1 --> HIT{SafetyTermination hit}\n  D2 --> HIT\n  D3 --> HIT\n  HIT -->|none| R0\n  HIT -->|hit| CLR[clone_ai_message_with_tool_calls clears tool_calls]\n  CLR --> K[stamp additional_kwargs safety_termination]\n  K --> SSE[_emit_event to get_stream_writer]\n  K --> AUD[_record_audit_event to __run_journal]\n  SSE --> OUT[return patched messages]\n  AUD --> OUT",
+    "approve": true,
+    "reason": "after_model detector fan-out (safety_finish_reason_middleware.py, safety_termination_detectors) with clone/clear tool_calls and SSE/journal audit; concrete.",
+    "kind": "flowchart TD",
+    "summary": "Data flow of SafetyFinishReasonMiddleware.after_model: it gates on AIMessage-with-tool_calls, runs the three provider detectors in order, and on a hit clears tool_calls via clone_ai_message_with_tool_calls before fanning out observability to the SSE stream writer and the __run_journal audit store.",
+    "evidence": [
+      ".agent_context/final_review/docs_md/35｜SafetyFinishReasonMiddleware 单文件详解.md",
+      "backend/packages/harness/deerflow/agents/middlewares/safety_finish_reason_middleware.py",
+      "backend/packages/harness/deerflow/agents/middlewares/safety_termination_detectors.py"
+    ],
+    "risks": [
+      "The body of clone_ai_message_with_tool_calls in tool_call_metadata.py was not read line-by-line; the clearing semantics are inferred from the middleware's call site (passing [] for tool_calls) and its docstring comments.",
+      "Detector iteration order is taken from default_detectors() = [OpenAI, Anthropic, Gemini]; when a custom config.detectors list is supplied via from_config, the order and set differs from what the diagram's three detector nodes show.",
+      "The diagram shows _emit_event and _record_audit_event as parallel fan-out from the stamping step; in code both are called sequentially after _build_suppressed_message, but both are best-effort and swallow exceptions, so either branch may silently no-op at runtime."
+    ],
+    "found_fake": true
+  },
+  "36｜ViewImage_DanglingToolCall_SubagentLimit_TokenUsage Middleware 详解.md": {
+    "mermaid": "flowchart TD\n  Loop[AgentLoop] --> View[ViewImageMiddleware before_model]\n  View --> ViewInject[inject HumanMessage from viewed_images]\n  ViewInject --> Dangle[DanglingToolCallMiddleware wrap_model_call]\n  Dangle --> DangleFind[find tool_calls missing ToolMessage]\n  DangleFind --> DangleFix[insert synthetic ToolMessage error]\n  DangleFix --> Model[LLM model patched messages]\n  Model --> ModelOut[AIMessage with tool_calls]\n  ModelOut --> SubLimit[SubagentLimitMiddleware after_model]\n  SubLimit --> SubClamp[count task calls clamp 2 to 4]\n  SubClamp --> SubDrop[drop excess task calls]\n  SubDrop --> Token[TokenUsageMiddleware after_model]\n  Token --> Cache[pop_cached_subagent_usage by tool_call_id]\n  Cache --> TokenMerge[merge usage_metadata write token_usage_attribution]\n  TokenMerge --> TokenOut[annotated AIMessage]",
+    "approve": true,
+    "reason": "One-turn hook sequence across four middlewares (view_image, dangling_tool_call, subagent_limit, token_usage) plus task_tool usage cache; source-backed.",
+    "kind": "sequenceDiagram",
+    "summary": "Hook call sequence across one agent turn for the four middlewares: before_model image injection, wrap_model_call dangling-ToolMessage patch, then after_model task-call truncation and token-usage attribution.",
+    "evidence": [
+      "backend/packages/harness/deerflow/agents/middlewares/view_image_middleware.py",
+      "backend/packages/harness/deerflow/agents/middlewares/dangling_tool_call_middleware.py",
+      "backend/packages/harness/deerflow/agents/middlewares/subagent_limit_middleware.py",
+      "backend/packages/harness/deerflow/agents/middlewares/token_usage_middleware.py",
+      "backend/packages/harness/deerflow/agents/factory.py",
+      "backend/packages/harness/deerflow/agents/lead_agent/agent.py",
+      "backend/packages/harness/deerflow/subagents/executor.py",
+      "backend/packages/harness/deerflow/tools/builtins/task_tool.py"
+    ],
+    "risks": [
+      "The before_model / wrap_model_call / after_model ordering is inferred from LangChain hook semantics and the middleware hook overrides actually present in each file, not from a single end-to-end traced call site; the real lead_agent chain interleaves other middlewares (e.g. ClarificationMiddleware, SafetyFinishReasonMiddleware, ToolErrorHandlingMiddleware) which are omitted to keep the diagram focused on this doc's four subjects.",
+      "ViewImage injection is conditional (only when the last AIMessage has view_image tool_calls all completed and not already injected); the diagram shows the happy path, not the no-op branch.",
+      "TokenUsageMiddleware merges subagent usage by searching backward for the dispatching AIMessage via _has_tool_call; the diagram simplifies this to a single pop_cached_subagent_usage lookup against the task_tool cache.",
+      "SubagentLimit clamps max_concurrent to [2,4] with default MAX_CONCURRENT_SUBAGENTS=3 (verified in subagents/executor.py); the diagram labels the range rather than the default."
+    ],
+    "found_fake": true
+  },
+  "37｜Sandbox Tools 单文件详解_bash_ls_glob_grep_read_write_str_replace.md": {
+    "mermaid": "stateDiagram-v2\n    [*] --> LockHeld: acquire file_operation_lock\n    LockHeld --> Read: sandbox.read_file\n    Read --> Empty: content empty\n    Empty --> [*]: return OK\n    Read --> Check: old_str in content\n    Check --> NotFound: old_str missing\n    NotFound --> [*]: return Error\n    Check --> Replaced: content.replace\n    Replaced --> Written: sandbox.write_file\n    Written --> [*]: return OK",
+    "approve": true,
+    "reason": "str_replace_tool atomic read-modify-write under file_operation_lock (sandbox/tools.py, file_operation_lock.py) with empty/not-found exits; concrete state machine.",
+    "kind": "stateDiagram-v2",
+    "summary": "str_replace_tool's atomic read-modify-write lifecycle under the per-path file_operation_lock, with empty-content and old_str-not-found early exits before the replace+write commit.",
+    "evidence": [
+      ".agent_context/final_review/docs_md/37｜Sandbox Tools 单文件详解_bash_ls_glob_grep_read_write_str_replace.md",
+      "backend/packages/harness/deerflow/sandbox/tools.py",
+      "backend/packages/harness/deerflow/sandbox/file_operation_lock.py"
+    ],
+    "risks": [
+      "Lock release on all exit paths is implied by Python's `with get_file_operation_lock(...)` block; the diagram shows terminal states but does not separately depict exception-path lock release (e.g. SandboxError raised between read and write).",
+      "The diagram omits the local-sandbox path validation/resolution steps that occur before lock acquisition (validate_local_tool_path / _resolve_and_validate_user_data_path); those belong to the doc's existing generic per-tool flowchart and were intentionally excluded to avoid duplication.",
+      "write_file_tool shares the same per-path lock but is not shown here; the diagram is scoped to str_replace's read-modify-write transitions only."
+    ],
+    "found_fake": true
+  },
+  "38｜LocalSandbox 与 AioSandbox Provider 详解.md": {
+    "mermaid": "flowchart TD\n  Call[get_sandbox_provider] --> Prov{provider type}\n  Prov -->|Local| Lacq[LocalSandboxProvider.acquire]\n  Prov -->|AIO| Aacq[AioSandboxProvider.acquire]\n  Lacq --> Lcache{_thread_sandboxes}\n  Lcache -->|hit| Llru[move_to_end LRU]\n  Lcache -->|miss| Lbuild[_build_thread_path_mappings]\n  Lbuild --> Lnew[new LocalSandbox id local-tid]\n  Lnew --> Levict[LRU evict to cap 256]\n  Aacq --> Areuse[_reuse_in_process_sandbox]\n  Areuse --> Awarm[_reclaim_warm_pool_sandbox]\n  Awarm --> Afile[_discover_or_create_with_lock]\n  Afile --> Adiscover[backend.discover]\n  Adiscover --> Acreate[_create_sandbox backend.create]\n  Acreate --> Aready[wait_for_sandbox_ready]",
+    "approve": true,
+    "reason": "Acquire(thread_id) lifecycle for both providers (sandbox_provider, local + aio_sandbox) with LRU/in-process cache/warm pool/file-locked discover; source-backed.",
+    "kind": "flowchart TD",
+    "summary": "Acquire(thread_id) lifecycle for both providers: LocalSandboxProvider's LRU-cached per-thread LocalSandbox versus AioSandboxProvider's layered in-process cache, warm pool, and cross-process file-locked discover/create path.",
+    "evidence": [
+      "backend/packages/harness/deerflow/sandbox/sandbox_provider.py",
+      "backend/packages/harness/deerflow/sandbox/sandbox.py",
+      "backend/packages/harness/deerflow/sandbox/local/local_sandbox_provider.py",
+      "backend/packages/harness/deerflow/sandbox/local/local_sandbox.py",
+      "backend/packages/harness/deerflow/community/aio_sandbox/aio_sandbox_provider.py",
+      "backend/packages/harness/deerflow/community/aio_sandbox/backend.py",
+      "backend/packages/harness/deerflow/community/aio_sandbox/sandbox_info.py",
+      "backend/packages/harness/deerflow/community/aio_sandbox/aio_sandbox.py"
+    ],
+    "risks": [
+      "The tail '重点代码' row lists skills/mcp/agents-memory paths that are generic mismatched template content (the callout on line 34 explicitly describes skill/MCP/memory extension, not sandbox providers); I treated that row as non-authoritative for THIS doc and grounded the diagram in the doc's title, table, and earlier real diagram plus the actual sandbox source files instead.",
+      "The diagram omits the thread_id=None generic-singleton branch of LocalSandboxProvider.acquire (id 'local') and the AioSandboxProvider.acquire_async variant for brevity; both are real but secondary paths.",
+      "Edge labels 'hit'/'miss' use ASCII words; the rhombus nodes {_thread_sandboxes} and {provider type} carry underscore/space text that renders fine in Mermaid but has not been whiteboard-validated in this environment."
+    ],
+    "found_fake": true
+  },
+  "39｜MCP Cache_Session Pool 与 OAuth 详解.md": {
+    "mermaid": "sequenceDiagram\n    participant Agent\n    participant Tool as session_pool_tool\n    participant Pool as MCPSessionPool\n    participant Owner as _run_session\n    participant OAuth as oauth_interceptor\n    participant Session as ClientSession\n\n    Agent->>Tool: invoke with runtime\n    Tool->>Tool: _extract_thread_id\n    Tool->>Pool: get_session server thread_id\n    alt existing same-loop entry\n        Pool-->>Tool: cached ClientSession\n    else new or evicted key\n        Pool->>Owner: create_task\n        Owner->>Session: create_session aenter\n        Owner->>Session: initialize\n        Owner-->>Pool: ready future\n    end\n    Tool->>OAuth: MCPToolCallRequest name args\n    OAuth->>OAuth: get_authorization_header\n    alt token fresh\n        OAuth-->>OAuth: cached token\n    else expiring\n        OAuth->>OAuth: _fetch_token refresh\n    end\n    OAuth->>Session: override headers call_tool\n    Session-->>OAuth: CallToolResult\n    OAuth-->>Tool: result\n    Tool->>Tool: _convert_call_tool_result\n    Tool-->>Agent: content and artifact",
+    "approve": true,
+    "reason": "Pooled stdio MCP call path (mcp tools/session_pool/oauth/cache/client) with owner-task creation and token refresh; concrete sequence.",
+    "kind": "sequenceDiagram",
+    "summary": "Runtime request path of one pooled stdio MCP tool call: thread_id extraction, MCPSessionPool owner-task session creation/lookup, oauth_interceptor token-cache-or-refresh and header override, then CallToolResult conversion back to the agent.",
+    "evidence": [
+      "/Users/bytedance/deer-flow/.agent_context/final_review/docs_md/39｜MCP Cache_Session Pool 与 OAuth 详解.md",
+      "/Users/bytedance/deer-flow/backend/packages/harness/deerflow/mcp/tools.py",
+      "/Users/bytedance/deer-flow/backend/packages/harness/deerflow/mcp/session_pool.py",
+      "/Users/bytedance/deer-flow/backend/packages/harness/deerflow/mcp/oauth.py",
+      "/Users/bytedance/deer-flow/backend/packages/harness/deerflow/mcp/cache.py",
+      "/Users/bytedance/deer-flow/backend/packages/harness/deerflow/mcp/client.py"
+    ],
+    "risks": [
+      "The OAuth interceptor branch only runs when OAuth is configured for the server; if no OAuth server is enabled, build_oauth_tool_interceptor returns None and call_with_persistent_session calls session.call_tool directly without the interceptor chain. The diagram depicts the OAuth-configured case.",
+      "I did not read extensions_config.py (McpOAuthConfig / McpServerConfig definitions); the grant_type, refresh_skew_seconds, token_url fields are taken from oauth.py's usage and may have additional config nuances.",
+      "The diagram simplifies the pool's Phase 1-4 locking/in-flight dedup and LRU eviction into a single alt; concurrent same-key creation via _inflight join is not shown."
+    ],
+    "found_fake": true
+  },
+  "40｜Memory Queue_Updater_Storage 单文件详解.md": {
+    "mermaid": "stateDiagram-v2\n  [*] --> IDLE\n  IDLE --> DEBOUNCE : add or add_nowait enqueue schedule timer\n  DEBOUNCE --> DEBOUNCE : add merges by queue_key reset timer\n  DEBOUNCE --> PROCESSING : timer fires _process_queue acquires lock\n  DEBOUNCE --> IDLE : timer fires but queue empty\n  DEBOUNCE --> PROCESSING : flush cancels timer calls _process_queue\n  PROCESSING --> DEBOUNCE : add during processing sets debounce timer\n  PROCESSING --> PROCESSING : timer fires while busy reschedule timer 0\n  PROCESSING --> IDLE : contexts drained clears _processing flag",
+    "approve": true,
+    "reason": "MemoryUpdateQueue debounce/idle/single-flight/merge-by-queue_key state machine (memory/queue.py + updater/storage/message_processing); source-backed.",
+    "kind": "stateDiagram-v2",
+    "summary": "Lifecycle of MemoryUpdateQueue: debounce/idle, single-flight processing, merge-by-queue_key, and requeue-on-busy transitions grounded in queue.py.",
+    "evidence": [
+      ".agent_context/final_review/docs_md/40｜Memory Queue_Updater_Storage 单文件详解.md",
+      "backend/packages/harness/deerflow/agents/memory/queue.py",
+      "backend/packages/harness/deerflow/agents/memory/updater.py",
+      "backend/packages/harness/deerflow/agents/memory/storage.py",
+      "backend/packages/harness/deerflow/agents/memory/message_processing.py"
+    ],
+    "risks": [
+      "flush_nowait also schedules timer(0) rather than calling _process_queue directly; only the flush direct path is shown for simplicity.",
+      "Debounce delay value comes from config.debounce_seconds via get_memory_config(); not depicted as a parameter.",
+      "The diagram abstracts the lock-held copy+clear of contexts_to_process inside _process_queue as the single DEBOUNCE->PROCESSING transition."
+    ],
+    "found_fake": true
+  },
+  "41｜Skills Parser_Installer_Security Scanner 详解.md": {
+    "mermaid": "sequenceDiagram\n  participant FE as frontend installSkill\n  participant RT as router install_skill\n  participant ST as LocalSkillStorage\n  participant EX as installer safe_extract\n  participant SC as security_scanner\n  participant FS as filesystem custom dir\n\n  FE->>RT: POST /api/skills/install\n  RT->>RT: resolve_thread_virtual_path\n  RT->>ST: ainstall_skill_from_archive\n  ST->>EX: safe_extract_skill_archive\n  EX->>EX: reject unsafe paths and symlinks\n  EX-->>ST: skill_dir\n  ST->>ST: _validate_skill_frontmatter\n  ST->>SC: _scan_skill_archive_contents_or_raise\n  SC->>SC: LLM scan_skill_content allow warn block\n  alt decision block\n    SC-->>ST: SkillSecurityScanError\n    RT-->>FE: HTTP 400 blocked\n  else allow or warn\n    ST->>FS: _move_staged_skill_into_reserved_target\n    ST-->>RT: success skill_name\n    RT->>RT: refresh_skills_system_prompt_cache_async\n    RT-->>FE: HTTP 200 SkillInstallResponse\n  end",
+    "approve": true,
+    "reason": ".skill install path (skills api, skills router, local_skill_storage, installer, security_scanner, validation) with scan-block 400 vs happy-path 200; concrete.",
+    "kind": "sequenceDiagram",
+    "summary": "Depicts the .skill archive install request path from frontend installSkill through gateway router install_skill into LocalSkillStorage safe-extract, frontmatter validate, LLM security scan, and move-staged pipeline, with the scanner block branch returning HTTP 400 versus the happy path returning HTTP 200 after refreshing the skills prompt cache.",
+    "evidence": [
+      "frontend/src/core/skills/api.ts",
+      "backend/app/gateway/routers/skills.py",
+      "backend/packages/harness/deerflow/skills/storage/local_skill_storage.py",
+      "backend/packages/harness/deerflow/skills/installer.py",
+      "backend/packages/harness/deerflow/skills/security_scanner.py",
+      "backend/packages/harness/deerflow/skills/validation.py"
+    ],
+    "risks": [
+      "refresh_skills_system_prompt_cache_async is verified only from its call site in routers/skills.py; I did not open the deerflow.agents.lead_agent.prompt module to confirm its internal cache-refresh behavior.",
+      "The diagram asserts the security scanner runs per-file via _scan_skill_archive_contents_or_raise before the move-staged step; this is verified in local_skill_storage.py, but the LLM fallback-to-block behavior on model failure is summarized, not exhaustively enumerated.",
+      "HTTP status mappings (400 for ValueError/SkillSecurityScanError, 409 for SkillAlreadyExistsError) are taken from the router exception handlers; the 409 branch is omitted from the diagram to keep it under ~16 nodes."
+    ],
+    "found_fake": true
+  },
+  "42｜Frontend useThreadStream 单文件详解.md": {
+    "mermaid": "sequenceDiagram\n  participant ChatPage\n  participant sendMessage\n  participant uploadFiles\n  participant useStream\n  participant Cache as ReactQuery cache\n\n  ChatPage->>sendMessage: sendMessage threadId message\n  sendMessage->>sendMessage: setOptimisticMessages human + uploading ai\n  alt message.files present\n    sendMessage->>uploadFiles: upload threadId files\n    uploadFiles-->>sendMessage: UploadedFileInfo\n  end\n  sendMessage->>useStream: thread.submit messages + context\n  useStream->>useStream: onCreated meta thread_id run_id\n  useStream->>Cache: upsertThread search + infinite\n  useStream->>useStream: onUpdateEvent state data\n  useStream->>Cache: setQueriesData title update\n  useStream->>useStream: onCustomEvent task_running or llm_retry\n  useStream->>useStream: onFinish state values\n  useStream->>Cache: invalidate threads search + infinite + token usage\n  Note over sendMessage,useStream: server human msg arrives then clear optimistic",
+    "approve": true,
+    "reason": "Single send/stream cycle in useThreadStream (hooks.ts) with optimistic/upload/submit and React Query cache callbacks; source-backed.",
+    "kind": "sequenceDiagram",
+    "summary": "Runtime sequence of a single send-and-stream cycle in useThreadStream: sendMessage sets optimistic messages, optionally uploads files, calls thread.submit, then useStream fires onCreated/onUpdateEvent/onCustomEvent/onFinish which read and invalidate the React Query thread caches.",
+    "evidence": [
+      "frontend/src/core/threads/hooks.ts",
+      ".agent_context/final_review/docs_md/42｜Frontend useThreadStream 单文件详解.md"
+    ],
+    "risks": [
+      "The diagram models the four useStream callbacks (onCreated, onUpdateEvent, onCustomEvent, onFinish) as ordered self-messages on useStream for compactness; in reality they fire asynchronously and can repeat or interleave (e.g. onUpdateEvent fires many times, onCustomEvent can arrive between updates). The shown order reflects typical first-occurrence timing, not a strict contract.",
+      "useStream in the diagram denotes the LangGraph useStream instance returned inside useThreadStream (the object exposing thread.submit and the callbacks); the diagram conflates the SDK object and its registered callbacks into one participant lane for brevity.",
+      "The optimistic-clear note summarizes the useEffect at lines 777-786 that clears optimisticMessages once the server's human message lands (humanMessageCount rises); it is not itself a useStream callback but a derived reactive effect, so its placement on the useStream lane is approximate."
+    ],
+    "found_fake": true
+  },
+  "43｜Frontend Message Utils 与 Artifacts Hooks 详解.md": {
+    "mermaid": "flowchart TD\n  Hook[useArtifactContent] --> Check{write-file prefix}\n  Check -->|yes| Write[loadArtifactContentFromToolCall]\n  Write --> Draft[buildWriteFileDraftContent from thread.messages]\n  Check -->|no| Query[useQuery 5min staleTime]\n  Query --> Load[loadArtifactContent]\n  Load --> Skill{.skill file}\n  Skill -->|yes| Enhance[append SKILL.md]\n  Skill -->|no| URLNode[urlOfArtifact]\n  Enhance --> URLNode\n  URLNode --> Static{isStaticWebsiteOnly}\n  Static -->|yes| Demo[demo artifact URL]\n  Static -->|no| Api[api or mock-api URL]\n  Demo --> Fetch[fetch text]\n  Api --> Fetch\n  Fetch --> Detail[ArtifactFileDetail render]",
+    "approve": true,
+    "reason": "useArtifactContent resolution lifecycle (artifacts hooks/loader/utils/preview + components) with write-file vs fetch and URL branching; concrete.",
+    "kind": "flowchart TD",
+    "summary": "Depicts the artifact content resolution lifecycle inside useArtifactContent: the write-file draft path versus the react-query fetch path, .skill SKILL.md path enhancement, and the static/mock/api URL branching in urlOfArtifact feeding ArtifactFileDetail render.",
+    "evidence": [
+      "frontend/src/core/artifacts/hooks.ts",
+      "frontend/src/core/artifacts/loader.ts",
+      "frontend/src/core/artifacts/utils.ts",
+      "frontend/src/core/artifacts/preview.ts",
+      "frontend/src/components/workspace/artifacts/artifact-file-detail.tsx",
+      "frontend/src/components/workspace/artifacts/artifact-file-list.tsx",
+      "frontend/src/core/messages/utils.ts",
+      "frontend/src/components/workspace/messages/message-list.tsx"
+    ],
+    "risks": [
+      "The three-way URL branch in urlOfArtifact (static demo / isMock /api / real /api) is condensed into two outcome nodes for brevity; mock and real differ only by a /mock prefix on the same artifacts endpoint pattern.",
+      "The final render node is a single box, though ArtifactFileDetail further branches by file type into CodeEditor, a direct iframe, or ArtifactFilePreview (html iframe blob / markdown Streamdown); that sub-branching is omitted to stay under the node budget.",
+      "The first real diagram in the doc already shows the high-level present-files to preview pipeline, so this replacement intentionally focuses on the deeper content-resolution branching to remain complementary rather than duplicative."
+    ],
+    "found_fake": true
+  },
+  "44｜Config 配置类目录详解.md": {
+    "mermaid": "flowchart TD\n  Caller[caller get_app_config] --> Ctx{_current_app_config set}\n  Ctx -- yes --> ReturnCtx[return runtime override]\n  Ctx -- no --> Custom{_app_config_is_custom}\n  Custom -- yes --> ReturnCustom[return set_app_config instance]\n  Custom -- no --> Mtime{file mtime changed}\n  Mtime -- no --> ReturnCached[return cached _app_config]\n  Mtime -- yes --> Reload[AppConfig.from_file]\n  Reload --> Validate[AppConfig.model_validate]\n  Validate --> Singletons[_apply_singleton_configs]\n  Singletons --> Sum[load_summarization_config_from_dict]\n  Singletons --> Sub[load_subagents_config_from_dict]\n  Singletons --> Search[load_tool_search_config_from_dict]\n  Singletons --> Check[load_checkpointer_config_from_dict]\n  Check --> Reset[reset_checkpointer/reset_store]\n  Sum --> ReturnCached\n  Sub --> ReturnCached\n  Search --> ReturnCached\n  Reset --> ReturnCached",
+    "approve": true,
+    "reason": "get_app_config access lifecycle (config app_config/model_config + section configs) with ContextVar/custom/mtime-cache and singleton fan-out; source-backed.",
+    "kind": "flowchart TD",
+    "summary": "AppConfig access lifecycle: get_app_config returns a ContextVar runtime override, a custom singleton, or the mtime-cached singleton, reloading via AppConfig.from_file which model_validates config.yaml and fans out to per-section module singletons through _apply_singleton_configs.",
+    "evidence": [
+      "backend/packages/harness/deerflow/config/app_config.py",
+      "backend/packages/harness/deerflow/config/model_config.py",
+      "backend/packages/harness/deerflow/config/sandbox_config.py",
+      "backend/packages/harness/deerflow/config/subagents_config.py",
+      "backend/packages/harness/deerflow/config/summarization_config.py",
+      "backend/packages/harness/deerflow/config/tool_output_config.py",
+      "backend/packages/harness/deerflow/config/tool_search_config.py",
+      "backend/packages/harness/deerflow/config/tracing_config.py",
+      "backend/packages/harness/deerflow/config/run_events_config.py"
+    ],
+    "risks": [
+      "reset_checkpointer and reset_store are invoked via local imports inside _apply_singleton_configs (app_config.py lines 265-268) when the checkpointer config changes, but their definitions in deerflow/runtime/checkpointer and deerflow/runtime/store were not opened; the call relationship is taken directly from the source.",
+      "from_file performs additional steps before model_validate (resolve_config_path, yaml.safe_load, _check_config_version, resolve_env_variables, _apply_database_defaults, ExtensionsConfig.from_file, _validate_acp_agents) which the diagram compresses into Reload -> Validate for brevity.",
+      "The four load_X_config_from_dict nodes are a representative subset; _apply_singleton_configs also calls load_title/memory/agents_api/guardrails/stream_bridge/acp loaders not shown to keep under 16 nodes."
+    ],
+    "found_fake": true
+  },
+  "45｜Models Provider Patch 文件详解.md": {
+    "mermaid": "sequenceDiagram\n    participant Agent as leadAgent\n    participant Factory as create_chat_model\n    participant Patch as patched provider\n    participant Base as BaseChatModel\n    participant API as provider gateway\n\n    Agent->>Factory: name and thinking_enabled\n    Factory->>Patch: model_class with merged settings\n    Agent->>Patch: invoke multi-turn messages\n    Patch->>Base: call base _get_request_payload\n    Base-->>Patch: payload drops thought_signature and reasoning_content\n    Patch->>Patch: restore_assistant_payloads or reasoning_split or OAuth billing\n    Patch->>API: POST repaired payload\n    API-->>Patch: response with reasoning_details and signatures\n    Patch-->>Agent: AIMessage additional_kwargs preserved\n    Note over Agent,API: next turn reuses preserved fields",
+    "approve": true,
+    "reason": "Patched provider _get_request_payload repair sequence (factory.py, credential_loader, patched_* providers) restoring dropped multi-turn fields; concrete.",
+    "kind": "sequenceDiagram",
+    "summary": "Per-call lifecycle in which a patched provider overrides _get_request_payload to re-inject thought_signature/reasoning_content/OAuth-billing fields that the base LangChain serializer drops, keeping multi-turn conversations intact.",
+    "evidence": [
+      "backend/packages/harness/deerflow/models/factory.py",
+      "backend/packages/harness/deerflow/models/credential_loader.py",
+      "backend/packages/harness/deerflow/models/patched_openai.py",
+      "backend/packages/harness/deerflow/models/patched_deepseek.py",
+      "backend/packages/harness/deerflow/models/patched_minimax.py",
+      "backend/packages/harness/deerflow/models/claude_provider.py",
+      "backend/packages/harness/deerflow/models/openai_codex_provider.py"
+    ],
+    "risks": [
+      "The diagram unifies patched_openai, patched_deepseek, patched_minimax, and claude_provider under one 'patched provider' participant; each model uses exactly one provider class, not all of them.",
+      "CodexChatModel (openai_codex_provider.py) overrides _generate, not _get_request_payload, so the 'call base _get_request_payload' step does not apply to it; it is omitted from the payload-repair pattern shown.",
+      "credential_loader is invoked inside claude_provider.model_post_init and CodexChatModel.model_post_init, not directly by create_chat_model; the diagram avoids asserting a direct Factory->Credential edge to stay conservative.",
+      "The 'payload drops thought_signature and reasoning_content' step is grounded in docstrings of patched_openai.py and patched_deepseek.py, not in the base langchain_openai serializer source itself, which I did not read."
+    ],
+    "found_fake": true
+  },
+  "46｜Persistence Repository 文件详解.md": {
+    "mermaid": "stateDiagram-v2\n    [*] --> pending: RunRepository.put\n    pending --> running: update_status\n    running --> running: update_run_progress\n    running --> success: update_run_completion\n    running --> error: update_run_completion\n    running --> timeout: update_run_completion\n    running --> interrupted: update_run_completion\n    pending --> success: update_run_completion\n    pending --> error: update_run_completion\n    success --> [*]\n    error --> [*]\n    timeout --> [*]\n    interrupted --> [*]\n    note right of pending\n      list_pending / list_inflight recover on boot\n    end note\n    note right of running\n      update_run_progress writes tokens and message_count only when status = running\n    end note",
+    "approve": true,
+    "reason": "RunRow.status state machine (run model/sql, thread_meta/feedback sql, run_event/user models) with boot recovery notes; source-backed.",
+    "kind": "stateDiagram-v2",
+    "summary": "State machine of RunRow.status through pending/running/terminal states, driven by RunRepository methods put/update_status/update_run_progress/update_run_completion, with boot-time recovery via list_pending and list_inflight.",
+    "evidence": [
+      "backend/packages/harness/deerflow/persistence/run/model.py",
+      "backend/packages/harness/deerflow/persistence/run/sql.py",
+      "backend/packages/harness/deerflow/persistence/thread_meta/sql.py",
+      "backend/packages/harness/deerflow/persistence/feedback/sql.py",
+      "backend/packages/harness/deerflow/persistence/models/run_event.py",
+      "backend/packages/harness/deerflow/persistence/user/model.py"
+    ],
+    "risks": [
+      "The exact transitions out of pending (e.g. pending->success without going through running) are inferred from update_run_completion accepting an arbitrary status string; the code does not enforce a strict predecessor, so some edges are plausible rather than explicitly coded.",
+      "update_status can set any status string the caller passes, so terminal transitions could in principle originate from pending too; the diagram shows the common lifecycle but not every legal call site.",
+      "I did not read the runtime caller (RunManager) that actually invokes these repository methods, so the triggering sequence is inferred from repository method semantics, not from the calling code."
+    ],
+    "found_fake": true
+  },
+  "47｜Frontend Settings 页面文件详解.md": {
+    "mermaid": "flowchart TD\n  Page[MemorySettingsPage]\n  Q[useMemory]\n  Cache[memory cache]\n  Page -->|GET /api/memory| Q\n  Q --> Cache\n  Create[useCreateMemoryFact]\n  Update[useUpdateMemoryFact]\n  DelFact[useDeleteMemoryFact]\n  Import[useImportMemory]\n  Clear[useClearMemory]\n  Create -->|POST /api/memory/facts| API[backend api memory]\n  Update -->|PATCH /api/memory/facts/id| API\n  DelFact -->|DELETE /api/memory/facts/id| API\n  Import -->|POST /api/memory/import| API\n  Clear -->|DELETE /api/memory| API\n  API -->|onSuccess setQueryData| Cache\n  Cache --> Page\n  Export[exportMemory] -->|GET /api/memory/export| DL[download json]",
+    "approve": true,
+    "reason": "MemorySettingsPage data lifecycle (memory hooks/api, settings pages) with shared cache setQueryData and export-without-cache; concrete.",
+    "kind": "flowchart TD",
+    "summary": "MemorySettingsPage data lifecycle: useMemory reads /api/memory into the shared React Query memory cache, while create/update/delete/import/clear mutations each call a backend /api/memory endpoint and write the returned UserMemory back to the same cache via setQueryData; exportMemory fetches /api/memory/export and downloads a JSON file without touching the cache.",
+    "evidence": [
+      "frontend/src/components/workspace/settings/memory-settings-page.tsx",
+      "frontend/src/core/memory/hooks.ts",
+      "frontend/src/core/memory/api.ts",
+      "frontend/src/components/workspace/settings/settings-dialog.tsx",
+      "frontend/src/components/workspace/settings/tool-settings-page.tsx",
+      "frontend/src/components/workspace/settings/skill-settings-page.tsx",
+      "frontend/src/core/mcp/hooks.ts",
+      "frontend/src/core/skills/hooks.ts"
+    ],
+    "risks": [
+      "The backend is treated as a single node 'backend api memory'; the actual server-side route handlers were not read, only the frontend api.ts calls.",
+      "The queryKey is shown as 'memory cache' rather than the literal [\"memory\"] array to avoid bracket characters in labels; the underlying key is verified in hooks.ts.",
+      "Node labels use camelCase hook names verbatim (e.g. useCreateMemoryFact) which is accurate to source but longer than typical short labels."
+    ],
+    "found_fake": true
+  },
+  "48｜Gateway Auth Router 与认证模块详解.md": {
+    "mermaid": "flowchart TD\n  Req[Incoming Request] --> Pub{_is_public path}\n  Pub -- yes --> Next[call_next route]\n  Pub -- no --> Int{valid internal token}\n  Int -- yes --> IntUser[get_internal_user]\n  Int -- no --> Cookie{access_token cookie}\n  Cookie -- missing --> Disabled{is_auth_disabled}\n  Cookie -- present --> Resolve[get_current_user_from_request strict JWT]\n  Resolve -- HTTPException --> Disabled\n  Resolve -- User --> Stamp\n  Disabled -- yes --> DisUser[get_auth_disabled_user]\n  Disabled -- no --> Unauthorized[401 NOT_AUTHENTICATED JSONResponse]\n  IntUser --> Stamp[set request.state.user and auth and auth_source]\n  DisUser --> Stamp\n  Stamp --> Ctx[set_current_user contextvar]\n  Ctx --> Next\n  Next --> Reset[reset_current_user in finally]",
+    "approve": true,
+    "reason": "AuthMiddleware.dispatch control flow (auth/csrf middleware, auth router, local_provider/password/jwt, deps) with public/internal/cookie/disabled/401 branches; source-backed.",
+    "kind": "flowchart TD",
+    "summary": "AuthMiddleware.dispatch control flow: public paths pass through, internal-auth header short-circuits, otherwise a strict JWT resolve of the access_token cookie gates the request, falling back to auth-disabled or 401, then stamps request.state and the user_context contextvar before call_next.",
+    "evidence": [
+      "backend/app/gateway/auth_middleware.py",
+      "backend/app/gateway/csrf_middleware.py",
+      "backend/app/gateway/routers/auth.py",
+      "backend/app/gateway/auth/local_provider.py",
+      "backend/app/gateway/auth/password.py",
+      "backend/app/gateway/auth/jwt.py",
+      "backend/app/gateway/deps.py"
+    ],
+    "risks": [
+      "The diagram collapses the per-exception-code 401 responses (TOKEN_INVALID etc. via AuthErrorCode) into the single 'Unauthorized' node for brevity; the actual code returns the exception's status_code and detail verbatim.",
+      "get_current_user_from_request is the strict resolver used inside the middleware (confirmed by both auth_middleware.py dispatch and deps.py line 434); the doc text and the earlier sequenceDiagram reference get_optional_user_from_request in the middleware comment, but the running code calls the strict variant — diagram reflects running code.",
+      "CSRFMiddleware is part of this module's stack per the doc table but is intentionally omitted from this diagram since it is a separate middleware dispatch; the existing earlier sequenceDiagram already covers request-level flow at a higher level, so this diagram focuses narrowly on AuthMiddleware.dispatch decision logic."
+    ],
+    "found_fake": true
+  },
+  "49｜Gateway MCP_Skills_Memory Router 深入详解.md": {
+    "mermaid": "flowchart TD\n  MCP[PUT /api/mcp/config] --> Admin[_require_admin_user]\n  Admin --> Stdio[_validate_mcp_update_request]\n  Stdio --> Merge[_merge_preserving_secrets]\n  Merge --> ExtFile[extensions_config.json]\n  ExtFile --> Reload[reload_extensions_config]\n  SkillEdit[PUT /api/skills/custom] --> SecScan[scan_skill_content]\n  SecScan --> SkillWrite[write_custom_skill]\n  SkillWrite --> Hist[append_history]\n  SkillInstall[POST /api/skills/install] --> Archive[ainstall_skill_from_archive]\n  Archive --> Prompt[refresh_skills_system_prompt_cache_async]\n  SkillWrite --> Prompt\n  Reload --> Prompt\n  MemFact[POST /api/memory/facts] --> FactUp[create_memory_fact]\n  FactUp --> MemFile[memory.json]",
+    "approve": true,
+    "reason": "Write-path for three Settings routers (mcp/skills/memory routers + memory updater/storage + skill_storage) with concrete validation/scan/refresh steps.",
+    "kind": "flowchart TD",
+    "summary": "Write-path lifecycle for the three Settings routers: MCP config update flows through admin/stdio validation and secret-merge into extensions_config.json then reload; Skills custom-edit and install flow through security scan into storage then refresh the skills prompt cache; Memory fact mutations flow through the updater into memory.json.",
+    "evidence": [
+      "backend/app/gateway/routers/mcp.py",
+      "backend/app/gateway/routers/skills.py",
+      "backend/app/gateway/routers/memory.py",
+      "backend/packages/harness/deerflow/agents/memory/updater.py",
+      "backend/packages/harness/deerflow/agents/memory/storage.py",
+      "backend/packages/harness/deerflow/skills/storage/local_skill_storage.py"
+    ],
+    "risks": [
+      "extensions_config.py was inspected via grep only (not fully Read); the symbols reload_extensions_config / get_extensions_config / ExtensionsConfig.resolve_config_path are confirmed by their import-and-call sites in mcp.py and skills.py, which were Read in full.",
+      "The edges Reload --> Prompt and SkillWrite --> Prompt reflect that reload_extensions_config and refresh_skills_system_prompt_cache_async are called in the same handler (skills.py update_skill calls both); MCP update_mcp_configuration calls reload but does NOT call refresh_skills_system_prompt_cache_async, so the Reload --> Prompt edge represents the Skills update_skill path, not the MCP path. This is a slight simplification of a shared-side-effect view.",
+      "memory.json is the configured storage_path shown in memory.py's example response; actual per-user path is resolved by FileMemoryStorage._get_memory_file_path (storage.py) and may differ at runtime."
+    ],
+    "found_fake": true
+  },
+  "50｜Frontend ChatPage 与 InputBox 文件详解.md": {
+    "mermaid": "sequenceDiagram\n  participant User\n  participant InputBox\n  participant ChatPage\n  participant Stream as useThreadStream\n  participant SDK as useStream\n  participant Server as LangGraph Server\n  User->>InputBox: submit PromptInputMessage\n  InputBox->>InputBox: guard streaming and empty input\n  InputBox->>ChatPage: onSubmit message\n  ChatPage->>Stream: sendMessage threadId message\n  Stream->>Stream: push optimistic messages\n  Stream->>ChatPage: onSend threadId\n  ChatPage->>ChatPage: setIsWelcomeMode false\n  opt files attached\n    Stream->>Server: uploadFiles threadId files\n    Server-->>Stream: uploaded file info\n  end\n  Stream->>SDK: thread.submit messages and context\n  SDK->>Server: run lead_agent stream\n  Server-->>SDK: onCreated meta\n  SDK->>Stream: onCreated meta\n  Stream->>ChatPage: onStart createdThreadId\n  ChatPage->>ChatPage: history.replaceState, setThreadId, setIsNewThread false\n  Server-->>SDK: stream chunks\n  SDK->>Stream: onUpdateEvent onCustomEvent\n  Stream->>Stream: clear optimistic on human message\n  Server-->>SDK: onFinish state\n  SDK->>Stream: onFinish state\n  Stream->>ChatPage: onFinish state\n  ChatPage->>ChatPage: showNotification if not focused",
+    "approve": true,
+    "reason": "ChatPage/InputBox send lifecycle (page.tsx, input-box, use-thread-chat, hooks) with optimistic/upload/replaceState/streaming/finish; source-backed.",
+    "kind": "sequenceDiagram",
+    "summary": "Depicts the send-message lifecycle for ChatPage/InputBox: from InputBox submit through ChatPage.handleSubmit into useThreadStream.sendMessage and the LangGraph SDK useStream, covering optimistic messages, file upload, thread creation via onStart with history.replaceState, streaming updates, and onFinish notification.",
+    "evidence": [
+      "frontend/src/app/workspace/chats/[thread_id]/page.tsx",
+      "frontend/src/components/workspace/input-box.tsx",
+      "frontend/src/components/workspace/chats/use-thread-chat.ts",
+      "frontend/src/core/threads/hooks.ts"
+    ],
+    "risks": [
+      "The Server participant (LangGraph Server) is a logical boundary referenced indirectly via getAPIClient/useStream rather than a directly imported file I read; the SDK calls against it are inferred from useStream config (assistantId lead_agent, streamSubgraphs, streamResumable, recursion_limit 1000) and onCreated/onUpdateEvent/onCustomEvent/onFinish callbacks in hooks.ts.",
+      "Several real branches are collapsed for brevity: onCustomEvent routes task_running to updateSubtask and llm_retry to toast; onUpdateEvent also upserts thread title into react-query caches and handles SummarizationMiddleware messages; these are real but summarized.",
+      "use-thread-chat.ts was read and supplies threadId/isNewThread but is not a distinct participant in the sequence to keep the diagram under the node budget; its /new -> UUID -> URL replace behavior is represented via the onStart history.replaceState step driven by useThreadStream.onCreated."
+    ],
+    "found_fake": true
+  },
+  "51｜thread_runs.py Router 单文件详解.md": {
+    "mermaid": "stateDiagram-v2\n  [*] --> pending : RunManager.create_or_reject\n  pending --> running : worker.run_agent set_status\n  pending --> interrupted : RunManager.cancel interrupt\n  running --> success : worker normal completion\n  running --> error : exception or llm_error_fallback\n  running --> error : cancel rollback\n  running --> interrupted : cancel interrupt\n  success --> [*]\n  error --> [*]\n  interrupted --> [*]",
+    "approve": true,
+    "reason": "RunStatus state machine (thread_runs.py, services, schemas, manager, worker) driven by run_agent and RunManager.cancel; concrete transitions.",
+    "kind": "stateDiagram-v2",
+    "summary": "RunStatus lifecycle for a thread run: pending -> running -> success/error/interrupted, driven by worker.run_agent and RunManager.cancel.",
+    "evidence": [
+      "backend/app/gateway/routers/thread_runs.py",
+      "backend/app/gateway/services.py",
+      "backend/packages/harness/deerflow/runtime/runs/schemas.py",
+      "backend/packages/harness/deerflow/runtime/runs/manager.py",
+      "backend/packages/harness/deerflow/runtime/runs/worker.py"
+    ],
+    "risks": [
+      "RunStatus.timeout exists in the enum (schemas.py:13) but no code path in this module calls RunManager.set_status with RunStatus.timeout; wechat.py uses status=\"timeout\" but that is a channel-level string, not a RunStatus transition, so timeout is omitted from the diagram.",
+      "The doc tail's 重点代码 row was generic and did not list specific source paths; the relevant files were inferred from the module name (thread_runs.py Router) and read directly."
+    ],
+    "found_fake": true
+  },
+  "52｜threads.py Router 单文件详解.md": {
+    "mermaid": "flowchart TD\n  Req[HTTP request /api/threads] --> Perm[require_permission owner_check]\n  Perm --> Handler[route handler]\n  Handler --> Strip[_strip_reserved_metadata]\n  Handler --> CP[checkpointer aget/aput]\n  Handler --> TS[thread_store get/create/search]\n  Handler --> FS[delete_thread_dir filesystem]\n  CP --> Derive[_derive_thread_status]\n  CP --> Serialize[serialize_channel_values]\n  TS --> Serialize\n  Serialize --> Resp[ThreadResponse / ThreadStateResponse]\n  Derive --> Resp",
+    "approve": true,
+    "reason": "/api/threads request lifecycle (threads.py, deps, authz) with owner-check, dual checkpointer/thread_store/filesystem backends; source-backed.",
+    "kind": "flowchart TD",
+    "summary": "Request lifecycle for /api/threads: authz owner-check gate, handler, dual checkpointer + thread_store + filesystem backends, then status derivation and channel-value serialization back to the response model.",
+    "evidence": [
+      "backend/app/gateway/routers/threads.py",
+      "backend/app/gateway/deps.py",
+      "backend/app/gateway/authz.py"
+    ],
+    "risks": [
+      "Paths.delete_thread_dir is only exercised by DELETE /{id}; including it as a general handler branch is a slight generalization but accurate to the module's backends.",
+      "serialize_channel_values is imported from deerflow.runtime.serialization; I read its usage in threads.py but did not open the serialization module itself, so its internal behavior is taken on the docstring's word."
+    ],
+    "found_fake": true
+  },
+  "53｜uploads.py Router 单文件详解.md": {
+    "mermaid": "flowchart TD\n  A[POST uploads - upload_files] --> B[_get_upload_limits, ensure_uploads_dir]\n  B --> C[get_sandbox_provider]\n  C --> D{uses_thread_data_mounts}\n  D -->|mount| E[skip sandbox sync]\n  D -->|sync| F[acquire sandbox]\n  E --> G[normalize_filename, claim_unique_filename]\n  F --> G\n  G --> H[_write_upload_file_with_limits]\n  H --> I[open_upload_file_no_symlink, chunked write]\n  I --> J{auto_convert_documents and CONVERTIBLE_EXTENSIONS}\n  J -->|yes| K[convert_file_to_markdown]\n  J -->|no| L[_make_file_sandbox_readable]\n  K --> L\n  L --> M{sync_to_sandbox}\n  M -->|yes| N[sandbox.update_file]\n  M -->|no| O[UploadResponse]\n  N --> O\n  I -->|413 or error| P[_cleanup_uploaded_paths]",
+    "approve": true,
+    "reason": "upload_files internal flow (uploads router, uploads/manager, sandbox_provider, file_conversion) with mount-vs-sync and 413 cleanup; concrete.",
+    "kind": "flowchart TD",
+    "summary": "Internal control flow of the POST upload_files handler: limit setup, sandbox mount-vs-sync branch, safe chunked write with 413 guards, optional markdown conversion, permission adjustment, conditional sandbox sync, and error cleanup.",
+    "evidence": [
+      "backend/app/gateway/routers/uploads.py",
+      "backend/packages/harness/deerflow/uploads/manager.py",
+      "backend/packages/harness/deerflow/sandbox/sandbox_provider.py",
+      "backend/packages/harness/deerflow/utils/file_conversion.py",
+      ".agent_context/final_review/docs_md/53｜uploads.py Router 单文件详解.md"
+    ],
+    "risks": [
+      "The early max_files 413 check (uploads.py line 226-227) is folded into the setup node _get_upload_limits, ensure_uploads_dir for brevity; the per-file size 413 from _write_upload_file_with_limits is shown via the 413 or error edge.",
+      "Only the POST upload_files handler is depicted; GET /limits, GET /list, and DELETE /{filename} handlers are not shown.",
+      "The diagram shows _make_file_sandbox_readable as always-on (line 329-330) and _make_file_sandbox_writable + sandbox.update_file as sync-only (lines 332-335); this reflects code but the writable chmod step is not visualized as a separate node to stay under the node budget."
+    ],
+    "found_fake": true
+  },
+  "54｜artifacts.py Router 单文件详解.md": {
+    "mermaid": "sequenceDiagram\n    participant Client\n    participant Router as get_artifact\n    participant Authz as require_permission\n    participant PathUtils as resolve_thread_virtual_path\n    participant UserCtx as get_effective_user_id\n    participant Paths as Paths.resolve_virtual_path\n    participant Zip as _extract_file_from_skill_archive\n    Client->>Router: GET artifacts x.skill/SKILL.md\n    Router->>Authz: threads read owner_check\n    Authz-->>Router: authorized\n    Router->>PathUtils: resolve skill_file_path\n    PathUtils->>UserCtx: get_effective_user_id\n    UserCtx-->>PathUtils: user_id\n    PathUtils->>Paths: resolve_virtual_path\n    Paths-->>PathUtils: actual_skill_path\n    PathUtils-->>Router: actual_skill_path\n    Router->>Zip: extract internal_path\n    Zip-->>Router: content bytes\n    Router-->>Client: 200 with cache headers",
+    "approve": true,
+    "reason": ".skill archive preview sequence (artifacts.py, path_utils, config/paths) with owner check, virtual path resolution, zip extraction; source-backed.",
+    "kind": "sequenceDiagram",
+    "summary": "Cross-module sequence of the .skill archive preview request through get_artifact, require_permission owner check, virtual path resolution, and zip member extraction.",
+    "evidence": [
+      "/Users/bytedance/deer-flow/.agent_context/final_review/docs_md/54｜artifacts.py Router 单文件详解.md",
+      "/Users/bytedance/deer-flow/backend/app/gateway/routers/artifacts.py",
+      "/Users/bytedance/deer-flow/backend/app/gateway/path_utils.py",
+      "/Users/bytedance/deer-flow/backend/packages/harness/deerflow/config/paths.py"
+    ],
+    "risks": [
+      "The doc's tail '重点代码' row is a generic placeholder ('标题对应的源码、测试或文档入口') with no actual paths; I instead derived real paths from the doc's function table (section 1) and the imports in artifacts.py.",
+      "authz.require_permission and user_context.get_effective_user_id were verified via grep only (not fully Read); the diagram asserts only that they are invoked, not their internal logic.",
+      "Only the .skill archive preview happy path is depicted; the regular-file branch and the 413 size-cap error from _read_skill_archive_member are omitted to stay complementary to the doc's existing TD branching flowchart."
+    ],
+    "found_fake": true
+  },
+  "55｜skills.py Router 单文件详解.md": {
+    "mermaid": "sequenceDiagram\n    participant Client\n    participant Router as install_skill\n    participant PathUtil as resolve_thread_virtual_path\n    participant Storage as SkillStorage\n    participant Cache as refresh_skills_system_prompt_cache_async\n\n    Client->>Router: POST /api/skills/install thread_id path\n    Router->>PathUtil: resolve thread_id path\n    PathUtil-->>Router: skill_file_path\n    Router->>Storage: ainstall_skill_from_archive skill_file_path\n    alt FileNotFoundError\n        Storage-->>Router: raise\n        Router-->>Client: 404 Not Found\n    else SkillAlreadyExistsError\n        Storage-->>Router: raise\n        Router-->>Client: 409 Conflict\n    else ValueError\n        Storage-->>Router: raise\n        Router-->>Client: 400 Bad Request\n    else success\n        Storage-->>Router: result skill_name\n        Router->>Cache: refresh skills system prompt\n        Cache-->>Router: ok\n        Router-->>Client: 200 SkillInstallResponse\n    end",
+    "approve": true,
+    "reason": "POST /api/skills/install chain (skills.py router) with virtual-path resolve, archive install, error-to-HTTP mapping, cache refresh; concrete.",
+    "kind": "sequenceDiagram",
+    "summary": "Request/response chain for the POST /api/skills/install handler: virtual-path resolution, archive install via SkillStorage, error-to-HTTP-status mapping, and system prompt cache refresh.",
+    "evidence": [
+      "backend/app/gateway/routers/skills.py",
+      ".agent_context/final_review/docs_md/55｜skills.py Router 单文件详解.md"
+    ],
+    "risks": [
+      "I read only the router file; the downstream implementations of resolve_thread_virtual_path (app.gateway.path_utils), SkillStorage.ainstall_skill_from_archive (deerflow.skills.storage), and refresh_skills_system_prompt_cache_async (deerflow.agents.lead_agent.prompt) were not opened, so their internal behavior is inferred only from the router's calls and exception handling.",
+      "The 'success' alt branch aggregates the path where no exception is raised; the router does not explicitly branch on success, it falls through to refresh + return.",
+      "'Client' is a generic participant representing the API caller; it is the only non-code-named node, used as the standard sequence-diagram caller."
+    ],
+    "found_fake": true
+  },
+  "56｜memory.py Router 单文件详解.md": {
+    "mermaid": "sequenceDiagram\n  participant Client\n  participant Router as memory router\n  participant Updater as updater\n  participant Storage as memory storage\n  Client->>Router: PATCH /api/memory/facts/fact_id\n  Router->>Router: get_effective_user_id\n  Router->>Updater: update_memory_fact fact_id content confidence\n  Updater->>Storage: load user_id\n  Storage-->>Updater: current memory dict\n  alt fact_id missing\n    Updater-->>Router: KeyError fact_id\n    Router-->>Client: 404 fact not found\n  else confidence invalid\n    Updater-->>Router: ValueError confidence\n    Router-->>Client: 400 invalid confidence\n  else save failure\n    Updater-->>Router: OSError\n    Router-->>Client: 500 failed to update\n  else success\n    Updater->>Storage: save updated memory\n    Updater-->>Router: updated memory dict\n    Router-->>Client: 200 MemoryResponse\n  end",
+    "approve": true,
+    "reason": "PATCH /api/memory/facts/{id} lifecycle (memory.py router, updater, user_context, tests) with four mutually exclusive outcomes; source-backed.",
+    "kind": "sequenceDiagram",
+    "summary": "Request/response lifecycle for PATCH /api/memory/facts/{fact_id} through memory router into updater and storage, with the router's four mutually exclusive outcomes (404 KeyError, 400 ValueError, 500 OSError, 200 MemoryResponse).",
+    "evidence": [
+      "backend/app/gateway/routers/memory.py",
+      "backend/packages/harness/deerflow/agents/memory/updater.py",
+      "backend/packages/harness/deerflow/runtime/user_context.py",
+      "backend/tests/test_memory_router.py",
+      ".agent_context/final_review/docs_md/56｜memory.py Router 单文件详解.md"
+    ],
+    "risks": [
+      "The 'memory storage' participant was not opened directly (storage.py not read); its load/save calls are inferred from updater.py's get_memory_storage().load(...) and .save(...) invocations, which were read.",
+      "The empty-content ValueError branch (content stripped to empty -> 400 'Memory fact content cannot be empty') is folded into the 'confidence invalid' alt branch for brevity; both surface as 400 via _map_memory_fact_value_error but with different detail messages.",
+      "The alt branches are modeled as mutually exclusive per single request, which matches the code: if fact_id is not found the confidence-validation branch is never entered, so KeyError and ValueError cannot both fire for the same request."
+    ],
+    "found_fake": true
+  },
+  "58｜Frontend Message Components 单文件详解.md": {
+    "mermaid": "flowchart TD\n  Loop[getMessageGroups over thread.messages] --> Hidden{isHiddenFromUIMessage}\n  Hidden -- yes --> Skip[skip message]\n  Hidden -- no --> Type{message.type}\n  Type -- human --> Human[human group]\n  Type -- tool --> Tool{ask_clarification tool}\n  Tool -- yes --> Clarify[clarification group]\n  Tool -- no --> Append[append to open group]\n  Type -- ai --> Files{hasPresentFiles}\n  Files -- yes --> Present[present-files group]\n  Files -- no --> Sub{hasSubagent task call}\n  Sub -- yes --> Subagent[subagent group]\n  Sub -- no --> Proc{hasReasoning or hasToolCalls}\n  Proc -- yes --> Processing[processing group]\n  Proc -- no --> Asst[assistant bubble]",
+    "approve": true,
+    "reason": "getMessageGroups classification flow (messages/utils.ts, message-list.tsx) with hidden/type/clarification/present-files/subagent/processing branches; concrete.",
+    "kind": "flowchart TD",
+    "summary": "Decision flow showing how getMessageGroups classifies each LangGraph message into a typed MessageGroup before MessageList renders it.",
+    "evidence": [
+      "frontend/src/core/messages/utils.ts",
+      "frontend/src/components/workspace/messages/message-list.tsx",
+      ".agent_context/final_review/docs_md/58｜Frontend Message Components 单文件详解.md"
+    ],
+    "risks": [
+      "The AI-message branch is not a pure else-if chain: an AI message with reasoning+content but no tool_calls is pushed into BOTH the processing group and its own assistant bubble (utils.ts lines 108-128). The diagram simplifies this to a single decision path for readability; the dual-emission case is not shown.",
+      "The doc's tail '重点代码' row is generic template text and does not name concrete source paths; I inferred the real code from the doc's section-1 component table and section-2 diagram (getMessageGroups), then read message-list.tsx and utils.ts. I did not read message-group.tsx, subtask-card.tsx, message-list-item.tsx, or markdown-content.tsx, so the diagram intentionally covers only the grouping logic in utils.ts, which I verified.",
+      "Edge labels use ASCII text only; group-type identifiers like 'assistant:clarification' are rendered as 'clarification group' etc. to avoid colons that may break whiteboard parsing, so the exact type-string names are paraphrased."
+    ],
+    "found_fake": true
+  },
+  "59｜Frontend Artifact Components 单文件详解.md": {
+    "mermaid": "sequenceDiagram\n  participant User\n  participant List as ArtifactFileList\n  participant Ctx as ArtifactsProvider\n  participant Detail as ArtifactFileDetail\n  participant Hook as useArtifactContent\n  participant Loader as loadArtifactContent\n  User->>List: click file card\n  List->>Ctx: select filepath and setOpen true\n  Ctx->>Detail: render selectedArtifact\n  Detail->>Hook: useArtifactContent filepath\n  alt write-file prefix\n    Hook->>Loader: loadArtifactContentFromToolCall thread.messages\n    Loader-->>Hook: tool_call args content\n  else normal filepath\n    Hook->>Loader: loadArtifactContent fetch urlOfArtifact\n    Loader-->>Hook: text content and url\n  end\n  Hook-->>Detail: content url isLoading\n  alt html or markdown\n    Detail->>Detail: ArtifactFilePreview blob iframe\n  else code file\n    Detail->>Detail: CodeEditor readonly\n  end",
+    "approve": true,
+    "reason": "Artifact selection sequence (artifacts context/list/detail, hooks, loader) with write-file vs fetch and preview/editor render; source-backed.",
+    "kind": "sequenceDiagram",
+    "summary": "Runtime sequence of selecting an artifact file: ArtifactFileList click updates ArtifactsProvider state, ArtifactFileDetail mounts useArtifactContent which branches write-file tool-call content vs fetched content, then renders ArtifactFilePreview or CodeEditor.",
+    "evidence": [
+      "frontend/src/components/workspace/artifacts/context.tsx",
+      "frontend/src/components/workspace/artifacts/artifact-file-list.tsx",
+      "frontend/src/components/workspace/artifacts/artifact-file-detail.tsx",
+      "frontend/src/core/artifacts/hooks.ts",
+      "frontend/src/core/artifacts/loader.ts"
+    ],
+    "risks": [
+      "The .skill ZIP special-case in loadArtifactContent (appends /SKILL.md to filepath before fetch) and the react-query staleTime cache are omitted for clarity; only the two main content sources are shown.",
+      "ArtifactFileDetail's third render branch (non-code file rendered via raw iframe with urlOfArtifact) is omitted to keep the alt block under the node budget; it only triggers when isCodeFile is false.",
+      "The select callback in ArtifactsProvider also closes the sidebar via setSidebarOpen(false) when not in static-website-only mode; this side effect is not shown in the sequence."
+    ],
+    "found_fake": true
+  },
+  "60｜Frontend Sidebar 与 Navigation 组件详解.md": {
+    "mermaid": "flowchart TD\n  WS[WorkspaceSidebar] --> H[SidebarHeader]\n  WS --> C[SidebarContent]\n  WS --> F[SidebarFooter]\n  WS --> R[SidebarRail]\n  H --> WH[WorkspaceHeader]\n  C --> NC[WorkspaceNavChatList]\n  C --> RC[RecentChatList]\n  F --> NM[WorkspaceNavMenu]\n  NC -->|link chats| ChatsRoute[workspace chats route]\n  NC -->|link agents| AgentsRoute[workspace agents route]\n  IT[useInfiniteThreads] --> RC\n  SENT[IntersectionObserver sentinel] -->|fetchNextPage| IT\n  RC -->|pathOfThread Link| ThreadRoute[workspace chats thread_id]\n  RC -->|rename| RT[useRenameThread]\n  RC -->|export| GS[apiClient threads getState]\n  RC -->|delete| DT[useDeleteThread]\n  DT -->|router.push nextThread| ThreadRoute\n  NM -->|Settings section| SD[SettingsDialog]\n  NM -->|external| Ext[Github Issues Mail]",
+    "approve": true,
+    "reason": "WorkspaceSidebar assembly + RecentChatList infinite/IntersectionObserver/actions + NavMenu routing (sidebar, nav-chat-list, recent-chat-list, nav-menu); concrete.",
+    "kind": "flowchart TD",
+    "summary": "Runtime assembly of WorkspaceSidebar (Header/Content/Footer/Rail regions) and the data flow through RecentChatList's infinite threads + IntersectionObserver + per-thread actions, plus WorkspaceNavMenu routing to Settings/external links.",
+    "evidence": [
+      "frontend/src/components/workspace/workspace-sidebar.tsx",
+      "frontend/src/components/workspace/workspace-nav-chat-list.tsx",
+      "frontend/src/components/workspace/recent-chat-list.tsx",
+      "frontend/src/components/workspace/workspace-nav-menu.tsx"
+    ],
+    "risks": [
+      "The SidebarRail, SidebarHeader/Content/Footer are shadcn ui primitives (imported from @/components/ui/sidebar), not read directly; their exact behavior is inferred from usage in workspace-sidebar.tsx.",
+      "pathOfThread produces /workspace/chats/<thread_id> for normal threads and the 'new' path for the new-chat fallback; exact path string shapes inferred from utils import and handleDelete fallback usage, the utils file itself was not read.",
+      "SettingsDialog is imported from ./settings but that file was not read; its section names come from the defaultSection union type in workspace-nav-menu.tsx."
+    ],
+    "found_fake": true
+  },
+  "61｜auth.py Router 单文件详解.md": {
+    "mermaid": "stateDiagram-v2\n  [*] --> NoRecord\n  NoRecord --> Tracked: login_local fail\n  Tracked --> Tracked: fail again count under 5\n  Tracked --> Locked: 5th fail lock 300s\n  Tracked --> NoRecord: login_local success\n  Locked --> Locked: request 429 within lock\n  Locked --> NoRecord: lock_until passed evict",
+    "approve": true,
+    "reason": "Per-IP login lockout state machine verified in auth.py (_check_rate_limit, _record_login_failure/success, _MAX_LOGIN_ATTEMPTS=5, _LOCKOUT_SECONDS=300).",
+    "kind": "stateDiagram-v2",
+    "summary": "Per-IP login lockout state machine in auth.py: _check_rate_limit, _record_login_failure and _record_login_success drive transitions between NoRecord, Tracked (count 1-4) and Locked (5 fails / 300s) for the login_local endpoint.",
+    "evidence": [
+      "backend/app/gateway/routers/auth.py",
+      ".agent_context/final_review/docs_md/61｜auth.py Router 单文件详解.md"
+    ],
+    "risks": [
+      "The _login_attempts dict is in-process per worker (noted in the source comment at lines 150-156); the diagram depicts single-worker state and omits the multi-worker N x attempts caveat.",
+      "The _MAX_TRACKED_IPS size-cap eviction path (lines 241-257) is not shown to keep the diagram under the node budget.",
+      "OAuth oauth_login/oauth_callback are 501 placeholders in this file and are intentionally excluded from the lockout diagram.",
+      "The 'NoRecord -> Tracked: login_local fail' transition assumes authenticate() returned None for a fresh IP; the actual record creation happens in _record_login_failure on the None branch of login_local (lines 288-295)."
+    ],
+    "found_fake": true
+  },
+  "62｜agents.py Router 单文件详解.md": {
+    "mermaid": "flowchart TD\n  Req[agents.py route] --> Gate[require agents api enabled]\n  Gate --> UID[get_effective_user_id]\n  UID --> Op{operation}\n  Op -->|list| Union[list_custom_agents per-user plus legacy]\n  Op -->|get| Res[resolve_agent_dir]\n  Op -->|create| Write[write user_agent_dir config.yaml and SOUL.md]\n  Op -->|update or delete| Legacy{only legacy agent_dir exists}\n  Res -->|user config.yaml present| UDir[user_agent_dir]\n  Res -->|legacy config.yaml present| LDir[agent_dir fallback]\n  Legacy -->|yes| Err409[409 run migrate_user_isolation]\n  Legacy -->|no| Mut[mutate config.yaml SOUL.md or rmtree]",
+    "approve": true,
+    "reason": "Per-user vs legacy agent dir resolution (agents.py, agents_config, paths) verified: 409 migrate_user_isolation for legacy-only update/delete; concrete.",
+    "kind": "flowchart TD",
+    "summary": "Per-user vs legacy agent directory resolution and mutation paths in agents.py: list/resolve read both layouts, create writes user_agent_dir, and update/delete on legacy-only agents return 409 pointing to migrate_user_isolation.",
+    "evidence": [
+      "backend/app/gateway/routers/agents.py",
+      "backend/packages/harness/deerflow/config/agents_config.py",
+      "backend/packages/harness/deerflow/config/paths.py"
+    ],
+    "risks": [
+      "The migration script scripts/migrate_user_isolation.py is referenced only by the 409 error-message strings in agents.py; I did not independently open or verify that the script file exists.",
+      "create_agent_endpoint also returns 409 when a legacy agent_dir already exists (legacy_dir.exists() -> None -> 409); that specific collision branch is folded into the single create/write node for brevity rather than shown as a separate decision.",
+      "The diagram treats require-agents-api-enabled as a single gate node; the 403 branch on disabled API is implied but not drawn, to stay under the node budget."
+    ],
+    "found_fake": true
+  },
+  "63｜feedback_suggestions_channels Router 详解.md": {
+    "mermaid": "sequenceDiagram\n    participant Client\n    participant generate_suggestions\n    participant chat_model\n    participant _parse_json_string_list\n    Client->>generate_suggestions: POST /api/threads/thread_id/suggestions\n    generate_suggestions->>generate_suggestions: require_permission threads read\n    generate_suggestions->>generate_suggestions: _format_conversation\n    generate_suggestions->>chat_model: create_chat_model ainvoke thinking false\n    chat_model-->>generate_suggestions: response.content may contain think\n    generate_suggestions->>_parse_json_string_list: raw text\n    _parse_json_string_list->_parse_json_string_list: _strip_think_blocks\n    _parse_json_string_list->_parse_json_string_list: _strip_markdown_code_fence\n    _parse_json_string_list->_parse_json_string_list: extract JSON json.loads\n    _parse_json_string_list-->>generate_suggestions: list str or None\n    alt success\n        generate_suggestions-->>Client: SuggestionsResponse suggestions n\n    else parse fails or exception\n        generate_suggestions-->>Client: SuggestionsResponse empty\n    end",
+    "approve": true,
+    "reason": "Suggestions endpoint sequence (feedback/suggestions/channels routers) with permission/format/LLM/think-strip/JSON parse and fallback; source-backed.",
+    "kind": "sequenceDiagram",
+    "summary": "Request/response sequence for the suggestions endpoint: permission check, conversation formatting, LLM invocation with thinking disabled, think-block stripping, JSON list parsing, and the success/empty fallback paths.",
+    "evidence": [
+      "backend/app/gateway/routers/feedback.py",
+      "backend/app/gateway/routers/suggestions.py",
+      "backend/app/gateway/routers/channels.py"
+    ],
+    "risks": [
+      "create_chat_model is imported from deerflow.models and not opened directly; its exact behavior is inferred from usage (thinking_enabled=False, ainvoke) rather than reading its source.",
+      "The existing section-2 diagram already shows the suggestions strip->model->parse chain at a coarse level, so this diagram is more granular but overlaps thematically; chosen sequence form to show the request lifecycle and the empty-result fallback which the topology diagram omits."
+    ],
+    "found_fake": true
+  },
+  "64｜Frontend API Client 与 Fetcher 详解.md": {
+    "mermaid": "flowchart TD\n  Call[getAPIClient isMock] --> Cache{_clients Map has cacheKey}\n  Cache -- hit --> Cached[return cached LangGraphClient]\n  Cache -- miss --> Create[createCompatibleClient]\n  Create --> Static{isStaticWebsiteOnly and not isMock}\n  Static -- true --> StaticClient[createStaticClient mocks threads + empty runs]\n  StaticClient --> LoadDemo[loadStaticDemoThreads / loadStaticDemoThread]\n  Static -- false --> Real[new LangGraphClient onRequest injectCsrfHeader]\n  Real --> BaseURL[getLangGraphBaseURL isMock]\n  Real --> Stream[runs.stream wrapper]\n  Real --> Join[runs.joinStream wrapper]\n  Stream --> Sanitize[sanitizeRunStreamOptions]\n  Sanitize --> OrigStream[original runs.stream]\n  Join --> Sanitize2[sanitizeRunStreamOptions]\n  Sanitize2 --> TryJoin{try original joinStream}\n  TryJoin -- 409 inactive --> Clear[clearReconnectRun lg:stream threadId]\n  TryJoin -- other error --> Throw[throw error]\n  Real --> SetCache[_clients.set cacheKey]\n  StaticClient --> SetCache",
+    "approve": true,
+    "reason": "getAPIClient lifecycle (api-client, fetcher, stream-mode, config, static-mode) with cache/static-demo/runs.stream+joinStream wrappers; quoted labels are parse-safe.",
+    "kind": "flowchart TD",
+    "summary": "getAPIClient client-acquisition lifecycle: _clients cache, static-demo fallback branch, and the two runs.stream/runs.joinStream wrappers (sanitize + 409 inactive-run cleanup).",
+    "evidence": [
+      "frontend/src/core/api/api-client.ts",
+      "frontend/src/core/api/fetcher.ts",
+      "frontend/src/core/api/stream-mode.ts",
+      "frontend/src/core/config/index.ts",
+      "frontend/src/core/static-mode.ts"
+    ],
+    "risks": [
+      "Edge TryJoin -- other error --> Throw and the 'return' on 409 are simplified to two outcomes; the code's yield*-then-catch structure is represented as a decision node for readability.",
+      "Node labels reference function/identifier names exactly as in source, but sessionStorage key 'lg:stream:${threadId}' is abbreviated to 'lg:stream threadId' to avoid $/{} characters that can break whiteboard parsing."
+    ],
+    "found_fake": true
+  },
+  "65｜Frontend Core Settings_Models_MCP_Skills_Memory API 层详解.md": {
+    "mermaid": "sequenceDiagram\n    participant UI as Settings UI\n    participant Hook as useThreadSettings\n    participant Store as settings store\n    participant Local as local.ts\n    participant LS as localStorage\n    participant Tab as Other browser tab\n    UI->>Hook: setSettings context model_name\n    Hook->>Store: updateThreadSettings threadId key value\n    Store->>Store: mergeSettingsSection baseSettings\n    Store->>Local: saveLocalSettings\n    Local->>LS: write deerflow.local-settings\n    Store->>Local: saveThreadModelName threadId\n    Local->>LS: write deerflow.thread-model.id\n    Store-->>Hook: emitChange listeners\n    Hook-->>UI: useSyncExternalStore re-render\n    Tab->>LS: write same key in another tab\n    LS-->>Store: window storage event\n    Store->>Local: getLocalSettings getThreadModelName\n    Store-->>Hook: emitChange\n    Hook-->>UI: re-render",
+    "approve": true,
+    "reason": "Thread model override write through useThreadSettings store into localStorage with same-tab emitChange and cross-tab storage event (settings hooks/store/local + model/mcp/skills/memory api/hooks); concrete.",
+    "kind": "sequenceDiagram",
+    "summary": "A thread model override write flowing from the Settings UI through useThreadSettings and the custom external store into localStorage, with the same-tab emitChange re-render path and the cross-tab storage event path back to React.",
+    "evidence": [
+      "frontend/src/core/settings/hooks.ts",
+      "frontend/src/core/settings/store.ts",
+      "frontend/src/core/settings/local.ts",
+      "frontend/src/core/settings/index.ts",
+      "frontend/src/core/models/api.ts",
+      "frontend/src/core/models/hooks.ts",
+      "frontend/src/core/mcp/api.ts",
+      "frontend/src/core/mcp/hooks.ts",
+      "frontend/src/core/skills/api.ts",
+      "frontend/src/core/skills/hooks.ts",
+      "frontend/src/core/memory/api.ts",
+      "frontend/src/core/memory/hooks.ts"
+    ],
+    "risks": [
+      "The browser storage event fires only in OTHER tabs/windows, not the originating tab; the same-tab re-render is via the direct emitChange call inside updateThreadSettings. Both paths are depicted but the 'Other browser tab' participant is the sole trigger of the storage event path - accurate per handleStorage in store.ts.",
+      "handleStorage dispatches on event.key: getLocalSettings for deerflow.local-settings and getThreadModelName for deerflow.thread-model.* keys; the diagram collapses these into one 'getLocalSettings getThreadModelName' message for brevity, slightly simplifying two distinct branches.",
+      "updateThreadSettings only persists a thread model name when key is 'context' and value has model_name; the diagram assumes that specific shape for the setSettings call, which is the documented thread-override use case but not the only possible settings write."
+    ],
+    "found_fake": true
+  },
+  "66｜Frontend Uploads_Notification_Tasks Core 详解.md": {
+    "mermaid": "flowchart TD\n  TM[ToolMessage content] --> Parse[parseSubtaskResult]\n  Parse --> Struct[readStructuredStatus]\n  Struct --> Has{subagent_status stamped}\n  Has -->|no| FromText[parseFromText]\n  Has -->|yes| Map[STRUCTURED_STATUS_TO_SUBTASK]\n  Map --> Mapped[mapped to completed or failed]\n  FromText --> Prefix{prefix match}\n  Prefix -->|SUCCESS_PREFIX| Completed[completed]\n  Prefix -->|FAILURE/TIMEOUT/CANCELLED/ERROR| Failed[failed]\n  Prefix -->|no match| InProg[in_progress]\n  Mapped --> Update[useUpdateSubtask]\n  Completed --> Update\n  Failed --> Update\n  InProg --> Update\n  Update --> Card[Subtask card pill]",
+    "approve": true,
+    "reason": "parseSubtaskResult resolution verified in subtask-result.ts (STRUCTURED_STATUS_TO_SUBTASK, SUCCESS_PREFIX, FAILURE/TIMEOUT/CANCELLED prefixes, useUpdateSubtask).",
+    "kind": "flowchart TD",
+    "summary": "parseSubtaskResult resolves a task tool ToolMessage to a SubtaskStatus via the structured subagent_status stamp or legacy prefix matching, then useUpdateSubtask writes it into the SubtasksProvider tasks map for the subtask card pill.",
+    "evidence": [
+      "frontend/src/core/tasks/subtask-result.ts",
+      "frontend/src/core/tasks/context.tsx",
+      "frontend/src/core/tasks/types.ts",
+      "frontend/src/core/uploads/api.ts",
+      "frontend/src/core/uploads/prompt-input-files.ts",
+      "frontend/src/core/notification/hooks.ts"
+    ],
+    "risks": [
+      "Simplifies the dual-path: in code parseFromText always runs (even when structured status is present) to back-fill result/error under text-agreement rules; the diagram renders structured and text as exclusive branches for clarity.",
+      "Edge label FAILURE/TIMEOUT/CANCELLED/ERROR abbreviates FAILURE_PREFIX, TIMEOUT_PREFIX, CANCELLED_PREFIX, POLLING_TIMEOUT_PREFIX and ERROR_WRAPPER_PATTERN from subtask-result.ts.",
+      "Does not redraw the uploads/api.ts or notification/hooks.ts runtime flows because the doc's existing earlier diagram already covers them at a high level; this diagram focuses on the subtask-status lifecycle, which was not previously diagrammed.",
+      "STRUCTURED_STATUS_TO_SUBTASK also folds cancelled, timed_out and polling_timed_out into failed; the diagram notes the mapping generally rather than enumerating each fold."
+    ],
+    "found_fake": true
+  },
+  "67｜Frontend Agents_Blog_I18n_Static Mode 模块详解.md": {
+    "mermaid": "sequenceDiagram\n  participant Client\n  participant BlogRoute as blog page\n  participant getI18n\n  participant detectLocaleServer\n  participant normalizeLocale\n  participant getPreferredBlogLang\n  participant loadBlogPage\n  participant importPage as nextra importPage\n\n  Client->>BlogRoute: GET /blog/slug\n  BlogRoute->>getI18n: getI18n\n  getI18n->>detectLocaleServer: read locale cookie\n  detectLocaleServer->>normalizeLocale: raw cookie value\n  normalizeLocale-->>getI18n: en-US or zh-CN\n  getI18n-->>BlogRoute: locale and t\n  BlogRoute->>getPreferredBlogLang: locale\n  getPreferredBlogLang-->>BlogRoute: localePreferredLang\n  BlogRoute->>BlogRoute: queryLang override check\n  BlogRoute->>loadBlogPage: slug and preferredLang\n  loop each BLOG_LANGS\n    loadBlogPage->>importPage: importPage slug lang\n    importPage-->>loadBlogPage: page or null\n  end\n  loadBlogPage-->>BlogRoute: best match and languages\n  BlogRoute-->>Client: MDX and PostMeta",
+    "approve": true,
+    "reason": "Server-side /blog resolution (blog page, i18n server/locale) with locale cookie, preferred blog lang, nextra importPage loop; source-backed.",
+    "kind": "sequenceDiagram",
+    "summary": "Server-side resolution of a /blog request: the blog route reads the locale cookie via getI18n, maps it to a preferred blog lang, and loads the best-matching localized MDX page through nextra importPage.",
+    "evidence": [
+      "frontend/src/app/blog/[[...mdxPath]]/page.tsx",
+      "frontend/src/core/i18n/server.ts",
+      "frontend/src/core/i18n/locale.ts"
+    ],
+    "risks": [
+      "Did not open frontend/src/core/blog (getPreferredBlogLang, loadBlogPage, BLOG_LANGS); their behavior is inferred only from call sites in blog/[[...mdxPath]]/page.tsx.",
+      "Diagram depicts the server-side blog request only; client-side locale switching via useI18n/changeLocale writes the locale cookie that the next server request reads, closing the loop, but that client side is not shown.",
+      "normalizeLocale fallback to DEFAULT_LOCALE (en-US) for non-zh inputs is shown as a binary en-US/zh-CN outcome for brevity; the function also accepts already-valid locales unchanged."
+    ],
+    "found_fake": true
+  },
+  "68｜Channels Service 与 ChannelManager 详解.md": {
+    "mermaid": "flowchart TD\n  Bus[MessageBus get_inbound] --> Loop[dispatch_loop]\n  Loop --> Chat[_handle_message]\n  Chat --> GetTid[ChannelStore get_thread_id]\n  GetTid --> HasTid{thread_id exists}\n  HasTid -->|no| Create[LangGraph client threads.create]\n  Create --> SetTid[ChannelStore set_thread_id]\n  HasTid -->|yes| Resolve[_resolve_run_params]\n  SetTid --> Resolve\n  Resolve --> Ingest[_ingest_inbound_files]\n  Ingest --> Stream{supports_streaming feishu wecom}\n  Stream -->|yes| RunsStream[client runs.stream]\n  RunsStream --> Chunks[stream chunks]\n  Chunks --> OutPartial[OutboundMessage is_final false]\n  Stream -->|no| RunsWait[client runs.wait reject]\n  RunsWait --> FinalResult[final result]\n  FinalResult --> OutFinal\n  OutPartial --> OutFinal[OutboundMessage is_final true]\n  OutFinal --> Extract[_extract_response_text]\n  Extract --> ChannelSend[Channel.send text then send_file]",
+    "approve": true,
+    "reason": "Inbound IM sequence (channels service/manager/base) with thread reuse/create, runs.stream vs runs.wait, final OutboundMessage + send_file; concrete.",
+    "kind": "sequenceDiagram",
+    "summary": "Sequence of an inbound IM message through ChannelManager: dispatch loop pulls from MessageBus, reuses or creates a LangGraph thread via ChannelStore, branches into runs.stream (Feishu/WeCom with intermediate is_final=false publishes) versus runs.wait, then extracts response/artifacts and publishes a final OutboundMessage that Channel.send delivers followed by send_file.",
+    "evidence": [
+      "backend/app/channels/service.py",
+      "backend/app/channels/manager.py",
+      "backend/app/channels/base.py"
+    ],
+    "risks": [
+      "Streaming intermediate publishes are throttled by STREAM_UPDATE_MIN_INTERVAL_SECONDS (0.35s); omitted from diagram for brevity.",
+      "The _handle_command path (/new, /status, /bootstrap, slash skills) is a separate branch in _handle_message and is not depicted; diagram focuses on the chat runtime path which is the doc's stated focus.",
+      "Concurrency control via asyncio.Semaphore(max_concurrency=5) in _handle_message is not shown to keep the diagram under the node budget."
+    ],
+    "found_fake": true
+  },
+  "69｜Feishu_Slack_Telegram_WeCom_DingTalk_Wechat Channel 详解.md": {
+    "mermaid": "flowchart TD\n  Svc[ChannelService.start] --> Loop[ChannelManager._dispatch_loop]\n  Svc --> Chan[Channel.start - feishu slack discord telegram wecom dingtalk wechat]\n  Chan -->|publish_inbound| Bus[MessageBus inbound queue]\n  Bus --> Loop\n  Loop --> Hdr[_handle_message semaphore]\n  Hdr -->|COMMAND| Cmd[_handle_command - new status models memory help]\n  Hdr -->|CHAT| Chat[_handle_chat]\n  Chat --> Store[ChannelStore get or create thread]\n  Store --> Files[receive_file and ingest_inbound_files]\n  Files --> Stream{_channel_supports_streaming}\n  Stream -->|feishu wecom| WaitS[runs.stream]\n  Stream -->|others| WaitW[runs.wait]\n  WaitS --> Prep[extract response text and artifacts]\n  WaitW --> Prep\n  Prep -->|publish_outbound| Out[MessageBus outbound]\n  Cmd --> Out\n  Out --> CB[Channel._on_outbound]\n  CB --> Send[send and send_file to platform]",
+    "approve": true,
+    "reason": "Seven-channel data flow into MessageBus/ChannelManager (channels service/message_bus/manager/base) with streaming split and outbound delivery; source-backed.",
+    "kind": "flowchart TD",
+    "summary": "Runtime data flow from the seven platform channels through the MessageBus into the ChannelManager dispatch loop, with the streaming-versus-runs.wait capability split and outbound delivery back to platforms.",
+    "evidence": [
+      "backend/app/channels/service.py",
+      "backend/app/channels/message_bus.py",
+      "backend/app/channels/manager.py",
+      "backend/app/channels/base.py",
+      ".agent_context/final_review/docs_md/69｜Feishu_Slack_Telegram_WeCom_DingTalk_Wechat Channel 详解.md"
+    ],
+    "risks": [
+      "The doc's 重点代码 row says paths are listed in the section-1 table, but that table only lists platform names without explicit source paths; I resolved the source files from the repo layout and _CHANNEL_REGISTRY in service.py rather than from a literal path list in the doc.",
+      "runs.wait / runs.stream target the LangGraph SDK URL (DEFAULT_LANGGRAPH_URL) while command fetches use DEFAULT_GATEWAY_URL; in code both default to the same host (localhost:8001), so the diagram collapses them to runs.wait/runs.stream without distinguishing the two URLs.",
+      "The diagram conceptually neighbors the doc's existing section-2 flowchart (command/chat split); I made it complementary by adding the MessageBus pub/sub topology, the streaming capability split per CHANNEL_CAPABILITIES, and file/artifact delivery, which the existing diagram omits."
+    ],
+    "found_fake": true
+  },
+  "DeerFlow 2.0 源码分层详解_章节目录.md": {
+    "mermaid": "flowchart LR\n  A[chapter list lark_folder_files.json] --> B[scan_remote_fake.py]\n  B --> C[lark-cli docs fetch tail]\n  C --> D[scan_cache per-token json]\n  D --> E[classify last whiteboard block]\n  E --> F[scan_remote_fake.json fake-block-ids]\n  F --> H[mermaid realify workflow]\n  G[batch_mapping.json doc-token-blockid] --> H\n  H --> I[make_designs.py designs.json]\n  I --> K[apply_local.py]\n  I --> L[push_remote.py]\n  K --> P[6 local snapshot dirs]\n  L --> M[lark-cli docs block_replace]\n  M --> N[Lark whiteboard block updated]",
+    "approve": true,
+    "reason": "Hub-of-pipeline sync flow grounded in verified magic scripts (scan_remote_fake.py, apply_local.py, push_remote.py, make_designs.py) and JSON inputs; concrete and source-backed.",
+    "kind": "flowchart LR",
+    "summary": "The chapter-directory doc is the hub of a sync pipeline: scan_remote_fake.py fetches each Lark chapter tail, classifies the last whiteboard mermaid as fake/real, then apply_local.py replaces the fake block across 6 local snapshot dirs and push_remote.py pushes the replacement to Lark via docs block_replace.",
+    "evidence": [
+      ".agent_context/final_review/docs_md/DeerFlow 2.0 源码分层详解_章节目录.md",
+      ".agent_context/magic/PLAN.md",
+      ".agent_context/magic/lark_folder_files.json",
+      ".agent_context/magic/batch_mapping.json",
+      ".agent_context/magic/doc_sources.json",
+      ".agent_context/magic/batch_tokens.json",
+      ".agent_context/magic/workflow_args.json",
+      ".agent_context/magic/scan_remote_fake.py",
+      ".agent_context/magic/apply_local.py",
+      ".agent_context/magic/push_remote.py",
+      ".agent_context/magic/make_designs.py"
+    ],
+    "risks": [
+      "The doc's 重点代码 row cites /tmp/deerflow_chapters/create_results.jsonl, which does not exist in the repo (ephemeral /tmp manifest, not versioned); I grounded the diagram in the persistent .agent_context/magic/ scripts instead.",
+      "The doc frames its key material as the Lark directory doc itself rather than business code, so I treated the chapter-sync pipeline (scan -> classify -> realify -> apply/push) as the only verifiable code-backed runtime flow for this index doc.",
+      "I did not execute the scripts; node names and the scan->classify->publish ordering are inferred from reading the source of scan_remote_fake.py, apply_local.py, push_remote.py, and make_designs.py, not from runtime traces.",
+      "Node 'mermaid realify workflow' refers to the deerflow-mermaid-realify-batch workflow (per .workflow-journal artifacts and PLAN.md); the per-doc replacement content itself is produced by external agents, not by a script in this repo."
+    ],
+    "found_fake": true
+  }
+}

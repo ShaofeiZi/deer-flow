@@ -37,11 +37,20 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  F["make_run_event_store"] --> ES["RunEventStore"]
+  ES --> MEM["MemoryRunEventStore"]
+  ES --> DB["DbRunEventStore"]
+  ES --> JSONL["JsonlRunEventStore"]
+  CB["LangChain callbacks"] --> J["RunJournal._put"]
+  J --> BUF["event buffer"]
+  BUF -->|"threshold"| FB["_flush_sync"]
+  FB --> PB["put_batch"]
+  PB --> ES
+  RM["GET thread messages"] --> LM["list_messages"]
+  RR["GET run messages"] --> LMR["list_messages_by_run"]
+  RE["GET run events"] --> LE["list_events"]
+  LM --> ES
+  LMR --> ES
+  LE --> ES
 ```

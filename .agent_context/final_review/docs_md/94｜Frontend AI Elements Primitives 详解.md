@@ -42,11 +42,23 @@ flowchart TD
 | 阅读路径 | 先看 primitive props，再看 workspace 组件如何把 thread/message/task/artifact 状态传入。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant User
+  participant TA as PromptInputTextarea
+  participant PI as PromptInput
+  participant CT as Controller
+  participant CB as onSubmit callback
+
+  User->>TA: type text
+  TA->>CT: textInput setInput
+  User->>TA: paste or drop files
+  TA->>CT: attachments add
+  User->>TA: Enter key no shift
+  TA->>PI: form requestSubmit
+  PI->>PI: capture text and reset form
+  PI->>PI: convertBlobUrlToDataUrl per file
+  PI->>CB: text and files
+  CB-->>PI: resolve
+  PI->>CT: clear attachments and text
+  Note over PI,CB: on reject keep state for retry
 ```

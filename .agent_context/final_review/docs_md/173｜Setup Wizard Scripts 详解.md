@@ -44,11 +44,27 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant U as User
+    participant M as setup_wizard main
+    participant L as run_llm_step
+    participant S as run_search_step
+    participant E as run_execution_step
+    participant W as wizard writer
+    participant C as config.yaml
+    participant N as .env
+
+    U->>M: make setup
+    M->>M: isatty check
+    M->>L: Step 1/4
+    L-->>M: LLMStepResult
+    M->>S: Step 2/4
+    S-->>M: SearchStepResult
+    M->>E: Step 3/4
+    E-->>M: ExecutionStepResult
+    M->>W: write_config_yaml
+    W->>C: models tools sandbox
+    M->>W: write_env_file
+    W->>N: merge API keys
+    M-->>U: setup complete
 ```

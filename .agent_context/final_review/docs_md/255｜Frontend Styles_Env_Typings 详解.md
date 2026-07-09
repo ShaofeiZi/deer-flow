@@ -39,10 +39,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Env["env.js createEnv"] --> Config["core/config getLangGraphBaseURL"]
+  RootLayout["app/layout RootLayout"] --> I18n["core/i18n/server detectLocaleServer"]
+  I18n --> I18nProvider["core/i18n/context I18nProvider"]
+  RootLayout --> Theme["components/theme-provider"]
+  WSLayout["app/workspace/layout WorkspaceLayout"] --> AuthSrv["core/auth/server getServerSideUser"]
+  AuthSrv --> AuthProvider["core/auth/AuthProvider"]
+  Config --> ApiClient["core/api/api-client LangGraph SDK"]
+  ApiClient --> Fetcher["core/api/fetcher CSRF token"]
+  Fetcher --> Gateway["gateway REST endpoints"]
+  WSLayout --> WSContent["app/workspace/workspace-content"]
+  WSContent --> BizCmp["components/workspace business components"]
+  BizCmp --> UIPrim["components/ui primitives"]
+  BizCmp --> ApiClient
 ```

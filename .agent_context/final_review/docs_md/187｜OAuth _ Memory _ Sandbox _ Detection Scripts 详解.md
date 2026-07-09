@@ -42,11 +42,21 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Script as detection.sh
+    participant Lead as build_middlewares
+    participant Sub as build_subagent_runtime_middlewares
+    participant TEH as ToolErrorHandlingMiddleware
+    participant Handler as simulated handler
+    Script->>Lead: build lead chain
+    Script->>Sub: build subagent chain
+    Note over Lead,Sub: both inject TEH wrap_tool_call
+    Script->>Handler: compose wrappers
+    Script->>Handler: call web_search
+    Handler-->>TEH: raise SSLError
+    TEH-->>Script: ToolMessage status error
+    Script->>Handler: call web_fetch
+    Handler-->>Script: ToolMessage status success
+    Script->>Script: validate first error second success
+    Note over Script: PASS conversation continues
 ```

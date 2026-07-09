@@ -47,10 +47,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Page[MemorySettingsPage]
+  Q[useMemory]
+  Cache[memory cache]
+  Page -->|GET /api/memory| Q
+  Q --> Cache
+  Create[useCreateMemoryFact]
+  Update[useUpdateMemoryFact]
+  DelFact[useDeleteMemoryFact]
+  Import[useImportMemory]
+  Clear[useClearMemory]
+  Create -->|POST /api/memory/facts| API[backend api memory]
+  Update -->|PATCH /api/memory/facts/id| API
+  DelFact -->|DELETE /api/memory/facts/id| API
+  Import -->|POST /api/memory/import| API
+  Clear -->|DELETE /api/memory| API
+  API -->|onSuccess setQueryData| Cache
+  Cache --> Page
+  Export[exportMemory] -->|GET /api/memory/export| DL[download json]
 ```

@@ -38,10 +38,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Start["parse_skill_md utils.py"] --> Split["split_eval_set train and test"]
+  Split --> Loop{"iteration under max"}
+  Loop -->|run| RunEval["run_eval.py spawns claude -p"]
+  RunEval --> Detect["stream-json tool_use Skill or Read"]
+  Detect --> Rate["trigger_rate vs threshold"]
+  Rate --> SplitRT["split train and test results"]
+  SplitRT --> Check{"train all passed"}
+  Check -->|no| Improve["improve_description.py claude -p"]
+  Improve --> Limit{"over 1024 chars"}
+  Limit -->|yes| Shorten["shorten rewrite claude -p"]
+  Limit -->|no| Next["next iteration"]
+  Shorten --> Next
+  Next --> Loop
+  Check -->|yes| Best["pick best by test_passed"]
+  Best --> Out["best_description and history"]
 ```

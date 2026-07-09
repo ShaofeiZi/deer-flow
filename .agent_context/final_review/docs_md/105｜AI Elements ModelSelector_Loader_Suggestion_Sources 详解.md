@@ -42,12 +42,33 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  subgraph AI["AI Elements primitives"]
+    MS["ModelSelector"]
+    LD["Loader"]
+    SG["Suggestion"]
+    SR["Sources"]
+    CN["Connection"]
+  end
+  subgraph UI["shadcn ui primitives"]
+    DLG["Dialog and Command"]
+    SCR["ScrollArea"]
+    BTN["Button"]
+    CLP["Collapsible"]
+  end
+  subgraph RT["runtime and external"]
+    LOGO["models.dev logo svg"]
+    HREF["Source anchor href"]
+    RFLOW["React Flow line component"]
+    ISVG["inline SVG icon"]
+  end
+  MS --> DLG
+  MS --> LOGO
+  SG --> SCR
+  SG --> BTN
+  SR --> CLP
+  SR --> HREF
+  CN --> RFLOW
+  LD --> ISVG
 ```
 
 <callout emoji="⚠️">

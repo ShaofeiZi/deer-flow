@@ -57,11 +57,14 @@ sequenceDiagram
 | 阅读路径 | 阅读路径：把 skill 当说明书，MCP 当工具注册表，memory 当上下文注入源。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+  [*] --> IDLE
+  IDLE --> DEBOUNCE : add or add_nowait enqueue schedule timer
+  DEBOUNCE --> DEBOUNCE : add merges by queue_key reset timer
+  DEBOUNCE --> PROCESSING : timer fires _process_queue acquires lock
+  DEBOUNCE --> IDLE : timer fires but queue empty
+  DEBOUNCE --> PROCESSING : flush cancels timer calls _process_queue
+  PROCESSING --> DEBOUNCE : add during processing sets debounce timer
+  PROCESSING --> PROCESSING : timer fires while busy reschedule timer 0
+  PROCESSING --> IDLE : contexts drained clears _processing flag
 ```

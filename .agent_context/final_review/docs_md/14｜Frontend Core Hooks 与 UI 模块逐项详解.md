@@ -73,10 +73,28 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Send[sendMessage] --> Opt[setOptimisticMessages]
+  Send --> Upload[uploadFiles]
+  Upload --> Submit[thread.submit]
+  Submit --> Stream[useStream live events]
+  Stream --> Created[onCreated]
+  Created --> Cache1[upsertThreadInSearchCache]
+  Created --> Cache2[upsertThreadInInfiniteCache]
+  Stream --> Update[onUpdateEvent]
+  Update --> Title[update title in query cache]
+  Stream --> Custom[onCustomEvent]
+  Custom --> Subtask[updateSubtask task_running]
+  Custom --> Retry[toast llm_retry]
+  Stream --> Err[onError]
+  Err --> Clear[clear optimistic messages]
+  Stream --> Fin[onFinish]
+  Fin --> Invalidate[invalidate search and token usage]
+  Stream --> Persisted[thread.messages persisted]
+  Hist[useThreadHistory] --> RunMsgs[run messages by before_seq]
+  RunMsgs --> Merge[mergeMessages]
+  Opt --> Merge
+  Persisted --> Merge
+  RunMsgs --> Merge
+  Merge --> Groups[getMessageGroups]
+  Groups --> Render[MessageList render]
 ```

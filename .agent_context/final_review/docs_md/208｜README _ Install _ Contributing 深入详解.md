@@ -41,10 +41,15 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Root["repo root Makefile backend frontend"] --> HasCfg{"config.yaml exists"}
+  HasCfg -- no --> MakeConfig["make config"]
+  HasCfg -- yes --> ProbeDocker{"docker info"}
+  MakeConfig --> ProbeDocker
+  ProbeDocker -- yes --> DockerInit["make docker-init"]
+  DockerInit --> DockerStart["make docker-start"]
+  ProbeDocker -- no --> MakeCheck["make check"]
+  MakeCheck --> MakeInstall["make install"]
+  MakeInstall --> MakeDev["make dev"]
+  DockerStart --> Entry["nginx port 2026"]
+  MakeDev --> Entry
 ```

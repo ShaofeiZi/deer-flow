@@ -87,11 +87,28 @@ sequenceDiagram
 | 阅读路径 | 阅读路径：Skills 是说明书，MCP 是工具箱，Memory 是用户画像。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant AG as lead_agent
+  participant ST as StructuredTool wrapper
+  participant PO as MCPSessionPool
+  participant OT as _run_session owner task
+  participant SE as ClientSession
+  participant IX as OAuth interceptor
+  AG->>ST: invoke with runtime and args
+  ST->>PO: get_session server thread_id
+  alt cached session on same loop
+    PO-->>ST: return live ClientSession
+  else no session yet
+    PO->>OT: create _run_session task
+    OT->>SE: create_session and initialize
+    SE-->>OT: session ready
+    OT-->>PO: publish via ready future
+  end
+  ST->>IX: MCPToolCallRequest with args
+  IX->>IX: attach Authorization header
+  IX->>SE: call_tool name args meta
+  SE-->>IX: CallToolResult
+  IX-->>ST: CallToolResult
+  ST->>ST: _convert_call_tool_result
+  ST-->>AG: ToolMessage content and artifact
 ```

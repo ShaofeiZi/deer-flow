@@ -40,10 +40,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  RecordConfig["playwright.record.config.ts"] --> RecordSpecs["tests/e2e-record specs"]
+  RecordConfig --> RecordGateway["record_gateway.py port 8012"]
+  RecordConfig --> Frontend["pnpm build and start port 3000"]
+  RecordGateway --> Fixtures["DEERFLOW_RECORD_OUT"]
+  Fixtures --> ReplayChatModel["ReplayChatModel"]
+  ReplayConfig["playwright.real-backend.config.ts"] --> ReplaySpecs["tests/e2e-real-backend specs"]
+  ReplayConfig --> ReplayGateway["run_replay_gateway.py port 8011"]
+  ReplayConfig --> Frontend
+  ReplayGateway --> ReplayChatModel
+  ReplayChatModel --> ReplaySpecs
+  Vitest["vitest.config.ts"] --> UnitTests["tests/unit"]
+  Lint["eslint.config.js and prettier"] --> Check["pnpm check and lint"]
+  Components["components.json"] --> ShadcnUI["src/components/ui"]
 ```

@@ -38,11 +38,34 @@ flowchart TD
 | 阅读路径 | 先读 REPLAY_E2E.md 的两层验证模型，再看 record/build fixture，最后跑 backend golden 与 real-backend Playwright。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Test as test_replay_golden.py
+    participant Driver as drive_gateway
+    participant GW as app.gateway.app create_app
+    participant Graph as lead_agent graph
+    participant Model as ReplayChatModel._match
+    participant Fix as fixture input_hash table
+    Test->>Test: setenv DEERFLOW_REPLAY_FIXTURE / reset singletons
+    Test->>Driver: drive_gateway app prompt context
+    Driver->>GW: POST /api/v1/auth/register
+    GW-->>Driver: 201 csrf cookie
+    Driver->>GW: POST /api/threads
+    Driver->>GW: POST /runs/stream stream_mode values
+    GW->>Graph: invoke lead_agent
+    Graph->>Model: _generate messages
+    Model->>Model: caller_identity from tags
+    Model->>Model: hash_replay_input normalize exclude system prompt
+    Model->>Fix: lookup input_hash bucket
+    alt hit
+        Fix-->>Model: AIMessage with recorded tool_calls
+    else miss
+        Model->>Model: append replay_misses and raise
+        GW-->>Driver: SSE shapes unchanged via LLMErrorHandling
+    end
+    Model-->>Graph: recorded turn
+    Graph-->>GW: write_file then auto-title then read_file then answer
+    GW-->>Driver: SSE event sequence metadata ... end
+    Driver-->>Test: events list
+    Test->>Test: assert events == committed golden
+    Test->>Test: assert replay_misses empty else re-record
 ```

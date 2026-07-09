@@ -40,10 +40,23 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  CW["e2e-tests.yml"] --> CM["playwright.config.ts"]
+  RW["replay-e2e.yml"] --> CR["playwright.real-backend.config.ts"]
+  CM --> WS1["webServer pnpm build start"]
+  CR --> WS2["run_replay_gateway.py :8011"]
+  CR --> WS3["webServer pnpm build start"]
+  WS1 --> S1["tests/e2e specs"]
+  WS2 --> S2["tests/e2e-real-backend specs"]
+  WS3 --> S2
+  S1 --> CH["Chromium page.route"]
+  S2 --> CH2["Chromium credentials:include"]
+  CH --> MK["utils/mock-api.ts"]
+  MK --> SSE["handleRunStream SSE"]
+  CH2 --> NX["next.config.js rewrites"]
+  NX --> GW["ReplayChatModel replay gateway"]
+  WS2 --> FX["fixtures/replay/write_read_file.ultra.json"]
+  CH --> ART["artifact-preview.spec"]
+  CH --> TH["thread-history-mermaid.spec"]
+  CH2 --> MR["multi-run-order.spec"]
+  MR --> SD["seed_runs_router.py"]
 ```

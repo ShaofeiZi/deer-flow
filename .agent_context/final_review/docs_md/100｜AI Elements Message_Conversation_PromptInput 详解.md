@@ -40,10 +40,16 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  A["PromptInputTextarea Enter"] --> B["PromptInput handleSubmit"]
+  C["PromptInputSubmit click"] --> B
+  D["paste or drop files"] --> E["splitUnsupportedUploadFiles"]
+  E --> F["store attachment files"]
+  B --> G["read textInput and files"]
+  F --> G
+  G --> H["convertBlobUrlToDataUrl"]
+  H --> I["onSubmit message"]
+  I --> J["InputBox handleSubmit"]
+  J --> K{"status is streaming"}
+  K -- yes --> L["onStop abort"]
+  K -- no --> M["parent onSubmit send"]
 ```

@@ -38,10 +38,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  U["User asks find a skill for X"] --> A["Agent matches find-skills"]
+  A --> R["Read SKILL.md frontmatter"]
+  R --> Q["npx skills find query"]
+  Q --> S["skills.sh registry results"]
+  S --> P["Present options and install cmd"]
+  P --> C{"User confirms?"}
+  C -->|yes| I["install-skill.sh owner/repo@name"]
+  I --> F["find_project_root deer-flow.code-workspace"]
+  F --> N["npx skills add -g"]
+  N --> H["~/.agents/skills/name"]
+  H --> V{"dir exists?"}
+  V -->|yes| L["ln -sf into skills/custom"]
+  L --> D["Skill linked in project"]
+  C -->|no| G["Help directly or npx skills init"]
 ```

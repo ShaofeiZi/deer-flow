@@ -45,10 +45,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  DelMut["useDeleteThread mutation"]
+  DelMut --> DelApiCall["apiClient.threads.delete"]
+  DelMut --> DelLocal["DELETE /api/threads/id"]
+  DelApiCall --> DelSuccess["onSuccess setQueriesData filter"]
+  DelLocal --> DelSettled["onSettled invalidateQueries"]
+  DelSuccess --> SearchCache["threads search cache"]
+  DelSuccess --> InfCache["searchInfinite cache"]
+  DelSettled --> SearchCache
+  DelSettled --> InfCache
+
+  RenMut["useRenameThread mutation"]
+  RenMut --> RenApiCall["apiClient.threads.updateState title"]
+  RenApiCall --> RenSuccess["onSuccess setQueriesData map title"]
+  RenSuccess --> SearchCache
+  RenSuccess --> InfCache
+
+  StreamInv["useThreadStream onFinish/onError"]
+  StreamInv --> UsageCache["invalidate thread-token-usage cache"]
 ```

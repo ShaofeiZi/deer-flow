@@ -43,11 +43,35 @@ flowchart TD
 | 阅读路径 | 阅读路径：把 skill 当说明书，MCP 当工具注册表，memory 当上下文注入源。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Agent
+    participant Tool as session_pool_tool
+    participant Pool as MCPSessionPool
+    participant Owner as _run_session
+    participant OAuth as oauth_interceptor
+    participant Session as ClientSession
+
+    Agent->>Tool: invoke with runtime
+    Tool->>Tool: _extract_thread_id
+    Tool->>Pool: get_session server thread_id
+    alt existing same-loop entry
+        Pool-->>Tool: cached ClientSession
+    else new or evicted key
+        Pool->>Owner: create_task
+        Owner->>Session: create_session aenter
+        Owner->>Session: initialize
+        Owner-->>Pool: ready future
+    end
+    Tool->>OAuth: MCPToolCallRequest name args
+    OAuth->>OAuth: get_authorization_header
+    alt token fresh
+        OAuth-->>OAuth: cached token
+    else expiring
+        OAuth->>OAuth: _fetch_token refresh
+    end
+    OAuth->>Session: override headers call_tool
+    Session-->>OAuth: CallToolResult
+    OAuth-->>Tool: result
+    Tool->>Tool: _convert_call_tool_result
+    Tool-->>Agent: content and artifact
 ```

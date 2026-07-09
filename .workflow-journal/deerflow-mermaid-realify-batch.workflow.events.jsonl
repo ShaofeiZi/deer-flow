@@ -1,0 +1,22 @@
+{"t":1783500797541,"type":"start","id":"7baa35a159dd8e29#0","label":"01｜DeerFlow 整体架构与分层总览.md","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783500910102,"type":"end","id":"7baa35a159dd8e29#0","label":"01｜DeerFlow 整体架构与分层总览.md","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":643024,"ms":112557}
+{"t":1783500910108,"type":"start","id":"28a2497d2b3d41d4#0","label":"02｜Gateway 与 LangGraph 运","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783500985813,"type":"end","id":"28a2497d2b3d41d4#0","label":"02｜Gateway 与 LangGraph 运","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":311497,"ms":75705}
+{"t":1783500985823,"type":"start","id":"b68402339418d693#0","label":"03｜Lead Agent_Prompt_Too","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783501082166,"type":"end","id":"b68402339418d693#0","label":"03｜Lead Agent_Prompt_Too","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":428502,"ms":96314}
+{"t":1783501082171,"type":"start","id":"61b85362c96e2eaf#0","label":"04｜Tools_Sandbox_Uploads","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783501169899,"type":"end","id":"61b85362c96e2eaf#0","label":"04｜Tools_Sandbox_Uploads","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":524920,"ms":87728}
+{"t":1783501169915,"type":"start","id":"3229dc63848975e0#0","label":"05｜Skills_MCP 与 Memory 详","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783501275356,"type":"end","id":"3229dc63848975e0#0","label":"05｜Skills_MCP 与 Memory 详","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":442277,"ms":105440}
+{"t":1783501275370,"type":"start","id":"b64dc46299eae3a4#0","label":"06｜Frontend Workspace 与 ","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783501383817,"type":"end","id":"b64dc46299eae3a4#0","label":"06｜Frontend Workspace 与 ","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":454559,"ms":108433}
+{"t":1783501383820,"type":"start","id":"4f4b3c77fdc08bed#0","label":"07｜Frontend Settings_Mod","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783501518103,"type":"end","id":"4f4b3c77fdc08bed#0","label":"07｜Frontend Settings_Mod","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":719917,"ms":134282}
+{"t":1783501518113,"type":"start","id":"dc19d5707e094627#0","label":"08｜配置_部署_测试与排障详解.md","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783501653522,"type":"end","id":"dc19d5707e094627#0","label":"08｜配置_部署_测试与排障详解.md","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":814786,"ms":135407}
+{"t":1783501653526,"type":"start","id":"992e2c07b7324f6e#0","label":"09｜Auth_CSRF_权限与 IM Chan","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783501807302,"type":"end","id":"992e2c07b7324f6e#0","label":"09｜Auth_CSRF_权限与 IM Chan","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":646154,"ms":153765}
+{"t":1783501807304,"type":"start","id":"514466da21d5df76#0","label":"10｜Models_Tracing_Persis","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783501898254,"type":"end","id":"514466da21d5df76#0","label":"10｜Models_Tracing_Persis","phase":"Per-doc source-backed diagram design","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":341332,"ms":90941}
+{"t":1783501898256,"type":"start","id":"ca3282cb11be9a45#0","label":"batch-review","phase":"Batch review","effort":"medium","model":"gpt-5.5-2026-04-24"}
+{"t":1783502032353,"type":"end","id":"ca3282cb11be9a45#0","label":"batch-review","phase":"Batch review","effort":"medium","model":"gpt-5.5-2026-04-24","tokens":542779,"ms":134095}

@@ -40,10 +40,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Visitor --> README["README.md project positioning"]
+  Visitor --> IA["Install.md agent bootstrap"]
+  Visitor --> CB["CONTRIBUTING.md dev workflow"]
+  Visitor --> SEC["SECURITY.md report policy"]
+  Visitor --> COC["CODE_OF_CONDUCT.md community rules"]
+  IA --> Cfg["make config creates config.yaml"]
+  Cfg --> Path{"docker info ok?"}
+  Path -->|"yes"| Docker["make docker-init then docker-start"]
+  Path -->|"no"| Local["make check then install then make dev"]
+  CB --> FB["git checkout -b feature branch"]
+  FB --> Fmt["make format and make test"]
+  Fmt --> PR["open Pull Request"]
+  PR --> CI[".github CI workflows run tests"]
+  SEC --> Adv["GitHub advisory on main or main-1.x"]
+  COC --> LAD["Correction Warning Ban ladder"]
 ```

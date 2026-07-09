@@ -41,10 +41,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Call["agent tool call"] --> View["view_image_tool"]
+  Call --> Search["tool_search"]
+  Call --> Acp["invoke_acp_agent"]
+  Call --> Skill["skill_manage_tool"]
+  View --> VPath["validate virtual path"]
+  VPath --> VMime["magic-byte MIME detect"]
+  VMime --> VState["state viewed_images"]
+  Search --> CatSearch["DeferredToolCatalog.search"]
+  CatSearch --> PromState["state promoted names"]
+  Acp --> WorkDir["per-thread acp-workspace"]
+  WorkDir --> Spawn["spawn_agent_process"]
+  Spawn --> Stream["collect streamed text"]
+  Skill --> Scan["scan_skill_content"]
+  Scan --> Store["SkillStorage write history"]
 ```

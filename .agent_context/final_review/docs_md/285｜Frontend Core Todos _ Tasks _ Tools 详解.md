@@ -38,11 +38,28 @@ flowchart TD
 | 阅读路径 | 阅读路径：从 URL/API 入口往内追 service，再看数据落到哪里。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Stream as threads/hooks useStream
+  participant List as message-list render
+  participant Ctx as SubtasksProvider context
+  participant Parser as parseSubtaskResult
+  participant Card as SubtaskCard
+  participant ToolExp as explainLastToolCall
+  Stream->>List: assistant subagent message group
+  List->>List: match tool_calls name task
+  List->>Ctx: updateSubtask status in_progress
+  Ctx->>Card: useSubtask id returns in_progress
+  Card->>ToolExp: explainLastToolCall latestMessage
+  ToolExp-->>Card: tool call label
+  Stream->>List: tool result ToolMessage
+  List->>Parser: text plus additional_kwargs
+  alt subagent_status stamp present
+    Parser->>Parser: readStructuredStatus maps enum
+  else no stamp
+    Parser->>Parser: parseFromText prefix match
+  end
+  Parser-->>List: SubtaskResultUpdate status result error
+  List->>Ctx: updateSubtask merge parsed update
+  Ctx->>Card: status completed or failed
+  Card->>Card: render status pill
 ```

@@ -44,10 +44,16 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  RoutePage["app/workspace/chats thread_id page"]
+  RoutePage --> UseThreadChat["useThreadChat hook"]
+  RoutePage --> ThreadHooks["core/threads/hooks useThreadStream"]
+  RoutePage --> ChatBox["ChatBox business component"]
+  RoutePage --> ThreadTitle["thread-title component"]
+  ThreadTitle --> UseThreadChat
+  ThreadHooks --> ApiClient["getAPIClient LangGraphClient"]
+  ThreadHooks --> ThreadsApi["core/threads/api fetchThreadTokenUsage"]
+  ApiClient --> Fetcher["fetcher fetchWithAuth CSRF"]
+  ThreadsApi --> Fetcher
+  Fetcher --> Gateway["gateway /api/langgraph"]
+  ChatBox --> UIPrim["components/ui and ai-elements"]
 ```

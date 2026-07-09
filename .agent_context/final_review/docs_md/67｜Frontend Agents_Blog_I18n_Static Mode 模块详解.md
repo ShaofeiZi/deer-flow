@@ -50,11 +50,30 @@ flowchart TD
 | 阅读路径 | 阅读路径：先确认它在系统链路中的上游和下游，再看关键函数。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Client
+  participant BlogRoute as blog page
+  participant getI18n
+  participant detectLocaleServer
+  participant normalizeLocale
+  participant getPreferredBlogLang
+  participant loadBlogPage
+  participant importPage as nextra importPage
+
+  Client->>BlogRoute: GET /blog/slug
+  BlogRoute->>getI18n: getI18n
+  getI18n->>detectLocaleServer: read locale cookie
+  detectLocaleServer->>normalizeLocale: raw cookie value
+  normalizeLocale-->>getI18n: en-US or zh-CN
+  getI18n-->>BlogRoute: locale and t
+  BlogRoute->>getPreferredBlogLang: locale
+  getPreferredBlogLang-->>BlogRoute: localePreferredLang
+  BlogRoute->>BlogRoute: queryLang override check
+  BlogRoute->>loadBlogPage: slug and preferredLang
+  loop each BLOG_LANGS
+    loadBlogPage->>importPage: importPage slug lang
+    importPage-->>loadBlogPage: page or null
+  end
+  loadBlogPage-->>BlogRoute: best match and languages
+  BlogRoute-->>Client: MDX and PostMeta
 ```

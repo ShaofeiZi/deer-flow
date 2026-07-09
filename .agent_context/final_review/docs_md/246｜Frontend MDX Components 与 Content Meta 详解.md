@@ -39,10 +39,33 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req["GET /blog request"]
+  Route["blog page.tsx"]
+  Loc["getPreferredBlogLang"]
+  GPM["getPageMap zh posts and en posts"]
+  Collect["collectLocalizedBlogPosts"]
+  Norm["normalizeBlogRoute to /blog"]
+  Merge["mergePostsBySlug"]
+  Pref["selectPreferredLanguage"]
+  Sort["sort by date desc"]
+  Data["BlogIndexData posts tags recent"]
+  IP["importPage slug lang"]
+  Wrap["useMDXComponents Wrapper"]
+  Page["rendered blog page"]
+
+  Req --> Route
+  Route --> Loc
+  Route --> GPM
+  Loc --> Merge
+  GPM --> Collect
+  Collect --> Norm
+  Norm --> Merge
+  Merge --> Pref
+  Pref --> Sort
+  Sort --> Data
+  Route --> IP
+  Route --> Wrap
+  IP --> Page
+  Wrap --> Page
+  Data --> Page
 ```

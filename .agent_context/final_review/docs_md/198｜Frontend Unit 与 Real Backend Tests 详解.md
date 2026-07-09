@@ -41,11 +41,29 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant spec as multi-run-order.spec
+    participant page as Playwright page
+    participant next as next.config rewrite
+    participant gw as replay gateway
+    participant hist as useThreadHistory
+    participant runs as useThreadRuns
+    participant merge as mergeMessages
+
+    spec->>next: POST /api/v1/auth/register
+    next->>gw: same-origin proxy to /api/v1/auth/register
+    gw-->>spec: 201 plus csrf_token cookie
+    spec->>next: POST /api/test-only/seed-runs
+    next->>gw: seed ALPHA older and OMEGA newer
+    spec->>page: goto /workspace/chats/threadId
+    page->>hist: mount thread view
+    hist->>runs: list runs by thread
+    runs->>gw: runs.list newest-first
+    runs-->>hist: run list ALPHA then OMEGA
+    hist->>gw: GET run messages buildRunMessagesUrl
+    gw-->>hist: per-run message pages
+    hist->>merge: prepend loaded pages
+    merge-->>page: chronological message list
+    page-->>spec: ALPHA rendered above OMEGA
+    spec->>spec: assert ALPHA y less than OMEGA y
 ```

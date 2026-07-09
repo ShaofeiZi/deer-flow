@@ -38,10 +38,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Deploy["scripts/deploy.sh"] --> Compose["docker-compose.yaml"]
+  Compose --> GW["gateway worker"]
+  Compose --> Nginx["nginx port 2026"]
+  Compose --> Vol["DEER_FLOW_HOME volume"]
+  GW --> Token["INTERNAL_AUTH_TOKEN"]
+  Browser["browser access_token cookie"] --> Nginx
+  Channel["channels/manager.py"] -->|"X-DeerFlow-Internal-Token"| AuthMW["AuthMiddleware"]
+  Nginx -->|"proxy /api"| AuthMW
+  AuthMW -->|"public path"| AuthRouter["auth router login-local"]
+  AuthMW -->|"JWT validate"| Routes["protected routes"]
+  GW --> Sandbox["LocalContainerBackend detect_runtime"]
+  Sandbox -->|"Darwin has container CLI"| Apple["Apple Container"]
+  Sandbox -->|"fallback"| DockerRT["Docker runtime"]
 ```

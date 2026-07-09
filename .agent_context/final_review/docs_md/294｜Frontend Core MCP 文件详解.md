@@ -37,11 +37,28 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Switch as Switch onCheckedChange
+    participant Hook as useEnableMCPServer
+    participant Cache as mcpConfig query cache
+    participant Api as updateMCPConfig
+    participant Backend as update_mcp_configuration
+    participant Query as useMCPConfig
+
+    Switch->>Hook: mutate serverName enabled
+    Hook->>Cache: read current config
+    alt server missing
+        Hook-->>Switch: throw server not found
+    end
+    Hook->>Hook: merge per-server enabled
+    Hook->>Api: PUT api/mcp/config
+    Api->>Backend: McpConfigUpdateRequest
+    Backend->>Backend: require admin user
+    Backend->>Backend: validate stdio allowlist
+    Backend->>Backend: save to extensions_config.json
+    Backend-->>Api: masked McpConfigResponse
+    Api-->>Hook: resolve mutation
+    Hook->>Cache: invalidate mcpConfig
+    Cache->>Query: refetch triggered
+    Query->>Api: loadMCPConfig GET
 ```

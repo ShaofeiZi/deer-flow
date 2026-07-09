@@ -44,10 +44,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Route["app/workspace route"] --> WC["WorkspaceContent"]
+  WC --> QCP["QueryClientProvider"]
+  QCP --> Toaster["ui/sonner Toaster mounted once"]
+  WC --> ML["message-list"]
+  ML -- "loading" --> MLSkel["MessageListSkeleton"]
+  MLSkel --> Skel["ui/skeleton"]
+  Hook["core/threads/hooks.ts stream"] -- "llm_retry event" --> ToastCall["toast message"]
+  Hook -- "onError" --> ToastErr["toast.error"]
+  ToastCall --> Toaster
+  ToastErr --> Toaster
+  ML -- "ai message" --> TokenUsage["message-token-usage"]
+  TokenUsage --> Badge["ui/badge token counts"]
+  CTX["ai-elements/context"] --> Prog["ui/progress"]
+  Tip["workspace/tooltip"] --> UiTip["ui/tooltip"]
+  AgentsPage["workspace/agents/new page"] --> Alert["ui/alert"]
 ```

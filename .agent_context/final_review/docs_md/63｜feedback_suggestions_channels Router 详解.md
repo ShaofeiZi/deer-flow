@@ -50,11 +50,24 @@ flowchart TD
 | 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Client
+    participant generate_suggestions
+    participant chat_model
+    participant _parse_json_string_list
+    Client->>generate_suggestions: POST /api/threads/thread_id/suggestions
+    generate_suggestions->>generate_suggestions: require_permission threads read
+    generate_suggestions->>generate_suggestions: _format_conversation
+    generate_suggestions->>chat_model: create_chat_model ainvoke thinking false
+    chat_model-->>generate_suggestions: response.content may contain think
+    generate_suggestions->>_parse_json_string_list: raw text
+    _parse_json_string_list->_parse_json_string_list: _strip_think_blocks
+    _parse_json_string_list->_parse_json_string_list: _strip_markdown_code_fence
+    _parse_json_string_list->_parse_json_string_list: extract JSON json.loads
+    _parse_json_string_list-->>generate_suggestions: list str or None
+    alt success
+        generate_suggestions-->>Client: SuggestionsResponse suggestions n
+    else parse fails or exception
+        generate_suggestions-->>Client: SuggestionsResponse empty
+    end
 ```

@@ -57,11 +57,32 @@ flowchart TD
 | 阅读路径 | 阅读路径：ModelConfig.use 是字符串，resolver 把它变成类。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Caller as lead_agent.create_agent
+  participant Factory as factory.create_chat_model
+  participant Config as AppConfig.get_model_config
+  participant Resolver as reflection.resolve_class
+  participant Importer as importlib.import_module
+  participant Provider as ProviderClass
+  participant Tracing as tracing.build_tracing_callbacks
+
+  Caller->>Factory: name + thinking_enabled + attach_tracing
+  Factory->>Config: get_model_config name
+  Config-->>Factory: ModelConfig.use class path
+  Factory->>Resolver: resolve_class use BaseChatModel
+  Resolver->>Importer: import_module langchain_openai
+  Note over Importer,Resolver: On ImportError raises with uv add hint
+  Importer-->>Resolver: module object
+  Resolver->>Importer: getattr ChatOpenAI
+  Importer-->>Resolver: model_class
+  Resolver-->>Factory: model_class
+  Factory->>Factory: merge thinking and stream_usage defaults
+  Factory->>Provider: new model_class kwargs + settings
+  Provider-->>Factory: BaseChatModel instance
+  alt attach_tracing true
+    Factory->>Tracing: build_tracing_callbacks
+    Tracing-->>Factory: callback list
+    Factory->>Provider: callbacks existing + tracing
+  end
+  Factory-->>Caller: BaseChatModel
 ```

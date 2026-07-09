@@ -40,10 +40,14 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  OpenAPITest["test_openapi_operation_ids"] --> GWApp["app.gateway.app.openapi"]
+  GWApp --> StreamOp["runs stream GET POST distinct operationId"]
+  TimeTest["test_utils_time"] --> TimeMod["deerflow.utils.time"]
+  TimeMod --> Coerce["coerce_iso now_iso UTC ISO8601"]
+  ReadTest["test_readability"] --> Extractor["ReadabilityExtractor.extract_article"]
+  Extractor --> Fallback["use_readability True then False fallback"]
+  ReflTest["test_reflection_resolvers"] --> ResolveVar["resolve_variable"]
+  ResolveVar --> Hint["install hint uv add langchain-google-genai"]
+  BoundTest["test_harness_boundary"] --> ASTScan["ast scan packages/harness/deerflow"]
+  ASTScan --> NoApp["reject any import app"]
 ```

@@ -47,10 +47,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Caller[caller get_app_config] --> Ctx{_current_app_config set}
+  Ctx -- yes --> ReturnCtx[return runtime override]
+  Ctx -- no --> Custom{_app_config_is_custom}
+  Custom -- yes --> ReturnCustom[return set_app_config instance]
+  Custom -- no --> Mtime{file mtime changed}
+  Mtime -- no --> ReturnCached[return cached _app_config]
+  Mtime -- yes --> Reload[AppConfig.from_file]
+  Reload --> Validate[AppConfig.model_validate]
+  Validate --> Singletons[_apply_singleton_configs]
+  Singletons --> Sum[load_summarization_config_from_dict]
+  Singletons --> Sub[load_subagents_config_from_dict]
+  Singletons --> Search[load_tool_search_config_from_dict]
+  Singletons --> Check[load_checkpointer_config_from_dict]
+  Check --> Reset[reset_checkpointer/reset_store]
+  Sum --> ReturnCached
+  Sub --> ReturnCached
+  Search --> ReturnCached
+  Reset --> ReturnCached
 ```

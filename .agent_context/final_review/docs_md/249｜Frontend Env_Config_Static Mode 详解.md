@@ -42,10 +42,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Env["env.js createEnv"] --> Flag["NEXT_PUBLIC_STATIC_WEBSITE_ONLY"]
+  Env --> Backend["NEXT_PUBLIC_BACKEND_BASE_URL"]
+  Env --> LangURL["NEXT_PUBLIC_LANGGRAPH_BASE_URL"]
+  Flag --> Static["isStaticWebsiteOnly"]
+  Backend --> CfgBackend["getBackendBaseURL"]
+  LangURL --> CfgLang["getLangGraphBaseURL"]
+  GetAPI["getAPIClient"] --> Create["createCompatibleClient"]
+  Static --> Create
+  Create -->|"static and not mock"| StaticClient["createStaticClient"]
+  Create -->|"real or mock"| RealClient["LangGraphClient + injectCsrfHeader"]
+  CfgLang --> RealClient
+  StaticClient --> DemoSearch["threads.search to loadStaticDemoThreads"]
+  StaticClient --> DemoGet["threads.get to loadStaticDemoThread"]
+  DemoSearch --> FetchDemo["fetch /demo/threads/thread.json"]
+  DemoGet --> FetchDemo
+  FetchDemo --> ThreadState["staticDemoThreadState"]
 ```

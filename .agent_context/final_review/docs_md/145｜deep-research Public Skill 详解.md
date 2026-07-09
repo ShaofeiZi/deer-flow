@@ -38,10 +38,14 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Trigger["research question or pre-research"] --> P1["Phase 1 Broad Exploration"]
+  P1 --> Survey["Initial Survey + Identify Dimensions"]
+  Survey --> P2["Phase 2 Deep Dive"]
+  P2 --> Fetch["web_fetch full sources"]
+  Fetch --> Follow["Follow References"]
+  Follow --> P3["Phase 3 Diversity and Validation"]
+  P3 --> P4["Phase 4 Synthesis Check"]
+  P4 --> Gate{"all checks pass"}
+  Gate -- "NO" --> P2
+  Gate -- "YES" --> Gen["proceed to content generation"]
 ```

@@ -39,11 +39,25 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Page as MemorySettingsPage
+  participant Hook as useCreateMemoryFact
+  participant Api as createMemoryFact
+  participant Fetch as fetcher.fetch
+  participant Route as app/api/memory route
+  participant BE as backend /api/memory
+  participant QC as QueryClient
+  Page->>Hook: mutate fact input
+  Hook->>Api: mutationFn input
+  Api->>Fetch: POST /api/memory/facts
+  Fetch->>Fetch: inject X-CSRF-Token
+  Fetch->>Route: credentials include
+  Route->>BE: proxy POST facts
+  BE-->>Route: UserMemory JSON
+  Route-->>Fetch: Response
+  Fetch-->>Api: Response
+  Api->>Api: readMemoryResponse
+  Api-->>Hook: UserMemory
+  Hook->>QC: setQueryData memory
+  QC-->>Page: useMemory re-renders
 ```

@@ -38,10 +38,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Route["app/workspace/chats/[thread_id]/page.tsx"] --> CoreHooks["core/threads/hooks.ts useThreadStream"]
+  Route --> SkillsHooks["core/skills/hooks.ts useSkills/useEnableSkill"]
+  CoreHooks --> APIClient["core/api/api-client.ts getAPIClient"]
+  SkillsHooks --> SkillsAPI["core/skills/api.ts enableSkill"]
+  SkillsAPI --> APIClient
+  APIClient --> Backend["core/config getBackendBaseURL"]
+  Route --> BizComp["components/workspace/input-box.tsx InputBox"]
+  Route --> MessageList["components/workspace/messages MessageList"]
+  BizComp --> AIE["components/ai-elements prompt-input"]
+  MessageList --> AIE
+  BizComp --> UIPrim["components/ui button card alert"]
+  MessageList --> UIPrim
+  Route --> ThreadCtx["components/workspace/messages/context ThreadContext"]
+  ThreadCtx --> BizComp
 ```

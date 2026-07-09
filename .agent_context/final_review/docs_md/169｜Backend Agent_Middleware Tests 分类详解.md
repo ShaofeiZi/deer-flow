@@ -41,10 +41,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Base["lead runtime middlewares"] --> DynCtx["DynamicContextMiddleware"]
+  DynCtx --> SkillAct["SkillActivationMiddleware"]
+  SkillAct --> Summ["SummarizationMiddleware"]
+  Summ --> Todo["TodoMiddleware plan mode"]
+  Todo --> Token["TokenUsageMiddleware"]
+  Token --> Title["TitleMiddleware"]
+  Title --> Mem["MemoryMiddleware"]
+  Mem --> View["ViewImageMiddleware vision"]
+  View --> SubLimit["SubagentLimitMiddleware"]
+  SubLimit --> Loop["LoopDetectionMiddleware"]
+  Loop --> Safety["SafetyFinishReasonMiddleware"]
+  Safety --> Clarify["ClarificationMiddleware last"]
+  Clarify --> Agent["create_agent"]
 ```

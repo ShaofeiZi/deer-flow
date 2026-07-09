@@ -40,10 +40,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Threads["threads.py"] --> Authz["authz require_permission"]
+  Threads --> Checkpointer["checkpointer"]
+  Threads --> ThreadStore["thread_meta store"]
+  Threads --> Paths["paths delete_thread_dir"]
+  Uploads["uploads.py"] --> Authz
+  Uploads --> UploadMgr["uploads.manager"]
+  Uploads --> Sandbox["sandbox_provider"]
+  Artifacts["artifacts.py"] --> Authz
+  Artifacts --> PathUtils["path_utils resolve"]
+  Feedback["feedback.py"] --> Authz
+  Feedback --> FeedbackRepo["feedback_repo"]
+  Feedback --> RunStore["run_store"]
+  Suggestions["suggestions.py"] --> Authz
+  Suggestions --> ChatModel["create_chat_model"]
 ```

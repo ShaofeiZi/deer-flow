@@ -38,11 +38,25 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Browser
+  participant Page as app/page.tsx
+  participant Header as landing/header.tsx
+  participant I18n as i18n/server.ts
+  participant Cookie as next/headers
+  participant GH as GitHub API
+
+  Browser->>Page: GET /
+  Page->>Header: render async server component
+  Header->>I18n: getI18n with no locale
+  I18n->>Cookie: read locale cookie
+  Cookie-->>I18n: raw locale value
+  I18n->>I18n: normalizeLocale
+  I18n-->>Header: locale and t strings
+  Header-->>Browser: docs and blog nav links
+  alt static site and oauth token set
+    Header->>GH: fetch stargazers revalidate 3600
+    GH-->>Header: stargazers count
+    Header-->>Browser: StarCounter NumberTicker
+  end
 ```

@@ -41,11 +41,37 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Browser
+  participant BlogLayout as "blog/layout.tsx"
+  participant BlogPage as "blog/page.tsx"
+  participant Core as "core/blog index.ts"
+  participant Nextra as "nextra importPage"
+
+  Browser->>BlogLayout: GET /blog
+  BlogLayout->>Core: getBlogIndexData
+  Core->>Core: getAllPosts mergePostsBySlug
+  Core-->>BlogLayout: pageMap recentPosts tags
+  BlogLayout-->>Browser: Nextra Layout sidebar
+
+  Browser->>BlogPage: mdxPath params
+  BlogPage->>BlogPage: getI18n getPreferredBlogLang
+  alt mdxPath empty
+    BlogPage->>Core: getAllPosts preferredLang
+    Core-->>BlogPage: BlogPost list
+    BlogPage-->>Browser: PostList All Posts
+  else mdxPath tags
+    BlogPage->>Core: getBlogIndexData tag filter
+    Core-->>BlogPage: filtered posts
+    alt posts empty
+      BlogPage-->>Browser: notFound 404
+    else
+      BlogPage-->>Browser: PostList by tag
+    end
+  else mdxPath post slug
+    BlogPage->>Nextra: importPage per BLOG_LANGS
+    Nextra-->>BlogPage: localized pages
+    BlogPage->>BlogPage: pick preferredLang else fallback
+    BlogPage-->>Browser: MDXContent PostMeta
+  end
 ```

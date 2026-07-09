@@ -41,10 +41,16 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Page["page.tsx LandingPage"] --> CS["CaseStudySection"]
+  Page --> SK["SkillsSection"]
+  Page --> SB["SandboxSection"]
+  CS --> Sec["Section shared layout"]
+  SK --> Sec
+  SB --> Sec
+  CS --> Card["ui Card"]
+  CS --> Pot["core/threads pathOfThread"]
+  Pot --> Route["/workspace/chats threadId mock"]
+  SK --> PSA["ProgressiveSkillsAnimation"]
+  PSA --> Phase["phase machine idle to done"]
+  SB --> Term["ui Terminal"]
 ```

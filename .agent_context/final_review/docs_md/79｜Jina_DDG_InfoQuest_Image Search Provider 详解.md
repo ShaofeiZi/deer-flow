@@ -42,10 +42,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  JF["jina web_fetch_tool"] -->|"coerce timeout proxy"| JC["JinaClient.crawl httpx"]
+  JC -->|"POST r.jina.ai"| HTML["html"]
+  IF["infoquest web_fetch_tool"] --> IQC["InfoQuestClient requests"]
+  IQC -->|"POST reader.infoquest"| HTML
+  HTML --> RE["ReadabilityExtractor.extract_article"]
+  RE --> MD["Article.to_markdown 4096"]
+  WS["ddg web_search_tool"] --> ST["_search_text"]
+  ST -->|"resolve region backend"| DDGT["DDGS.text normalize"]
+  IQS["infoquest web_search_tool"] --> IQC
+  IQC -->|"POST search.infoquest"| CLEAN["clean_results pages news"]
+  IIMG["infoquest image_search_tool"] --> IQC
+  IQC -->|"POST search.infoquest Images"| IMGS["image_url list"]
+  IS["image_search_tool"] --> DDGI["DDGS.images"]
 ```

@@ -38,10 +38,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Arg["deploy.sh INPUT_PATH arg"] --> Check["is .tgz or directory"]
+  Check -->|tgz file| UseTar["use file as TARBALL"]
+  Check -->|directory| Pkg["read package.json"]
+  Pkg --> Detect["detect_framework has_dep checks"]
+  Pkg -->|no package.json| Rename["rename single html to index.html"]
+  Detect --> FW["set FRAMEWORK name"]
+  Rename --> FW
+  FW --> Tar["tar -czf exclude node_modules and git"]
+  UseTar --> Curl
+  Tar --> Curl["curl POST to DEPLOY_ENDPOINT"]
+  Curl --> Resp["RESPONSE JSON body"]
+  Resp --> Err["check error key"]
+  Err -->|yes| Fail["exit 1 print ERROR_MSG"]
+  Err -->|no| Parse["grep previewUrl and claimUrl"]
+  Parse --> Out["stdout JSON plus stderr URLs"]
 ```

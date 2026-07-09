@@ -40,11 +40,38 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  Route["chats thread page"]
+  Providers["ChatProviders"]
+  Stream["useThreadStream lead_agent"]
+  History["useThreadHistory runs"]
+  Merge["mergeMessages dedupe"]
+  List["MessageList groups"]
+  Item["MessageListItem"]
+  Group["MessageGroup ToolCall"]
+  Reasoning["Reasoning primitive"]
+  Task["Task primitive"]
+  CoT["ChainOfThought primitive"]
+  Sources["ChainOfThoughtSearchResults"]
+  Ctx["useArtifacts select"]
+  Panel["ArtifactFileDetail"]
+  Artifact["Artifact primitive"]
+  ArtHooks["useArtifactContent loader"]
+
+  Route --> Providers
+  Route --> Stream
+  Stream --> History
+  Stream --> Merge
+  Stream -->|"task_running"| Ctx
+  Merge --> List
+  List --> Item
+  List --> Group
+  Item --> Reasoning
+  Item --> Task
+  Group --> CoT
+  Group --> Sources
+  Group -->|"write_file"| Ctx
+  Ctx --> Panel
+  Panel --> Artifact
+  Panel --> ArtHooks
 ```

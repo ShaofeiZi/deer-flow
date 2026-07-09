@@ -43,11 +43,27 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  Page["app page.tsx LandingPage"] --> Hero
+  Page --> CaseStudy["CaseStudySection"]
+  Page --> Skills["SkillsSection"]
+  Page --> Sandbox["SandboxSection"]
+  Page --> WhatsNew["WhatsNewSection"]
+  Page --> Community["CommunitySection"]
+
+  CaseStudy --> Section["section.tsx Section layout"]
+  Skills --> Section
+  Sandbox --> Section
+  WhatsNew --> Section
+  Community --> Section
+
+  CaseStudy --> ThreadUtil["core threads utils pathOfThread"]
+  ThreadUtil --> ThreadRoute["workspace thread route mock"]
+
+  Skills --> PSkills["progressive-skills-animation"]
+  Sandbox --> Terminal["ui terminal TypingAnimation"]
+  WhatsNew --> MagicBento["ui magic-bento"]
+  Community --> GitHub["GitHub contribute link"]
+  Hero --> UIPrims["ui Galaxy FlickeringGrid WordRotate"]
+  Hero --> Workspace["workspace Get Started link"]
 ```

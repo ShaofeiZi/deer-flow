@@ -37,11 +37,16 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  Route["app/workspace/chats/[thread_id]/page.tsx"] --> ChatHook["useThreadChat/useThreadStream"]
+  ChatHook --> SDK["core/api/api-client.ts getAPIClient"]
+  SDK --> Fetcher["core/api/fetcher.ts fetchWithAuth"]
+  Fetcher -->|"X-CSRF-Token + credentials"| Gateway["gateway /api/langgraph + /api/threads"]
+  ChatHook -->|"threads.search"| ThreadList["useInfiniteThreads"]
+  ChatHook -->|"runs.stream"| Thread["AgentThreadState stream"]
+  Route --> Providers["ChatProviders SubtasksProvider/ArtifactsProvider/PromptInputProvider"]
+  Route --> Comp["components/workspace MessageList/InputBox/ThreadTitle"]
+  Comp --> ThreadCtx["ThreadContext thread/isMock"]
+  Thread -->|"onUpdateEvent"| Comp
+  ThreadList --> Sidebar["workspace-sidebar recent-chat-list"]
 ```

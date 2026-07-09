@@ -44,11 +44,24 @@ flowchart TD
 | 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+    [*] --> pending: RunRepository.put
+    pending --> running: update_status
+    running --> running: update_run_progress
+    running --> success: update_run_completion
+    running --> error: update_run_completion
+    running --> timeout: update_run_completion
+    running --> interrupted: update_run_completion
+    pending --> success: update_run_completion
+    pending --> error: update_run_completion
+    success --> [*]
+    error --> [*]
+    timeout --> [*]
+    interrupted --> [*]
+    note right of pending
+      list_pending / list_inflight recover on boot
+    end note
+    note right of running
+      update_run_progress writes tokens and message_count only when status = running
+    end note
 ```

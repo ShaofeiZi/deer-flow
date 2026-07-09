@@ -41,10 +41,25 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Entry["create_chat_model name thinking_enabled"]
+  Entry --> Resolve["get_model_config name"]
+  Resolve --> Found{"found"}
+  Found -->|"no"| Err["raise ValueError"]
+  Found -->|"yes"| Class["resolve_class use BaseChatModel"]
+  Class --> Dump["model_dump exclude wte wtd thinking"]
+  Dump --> On{"thinking_enabled"}
+  On -->|"True"| Guard{"supports_thinking"}
+  Guard -->|"False"| ErrThink["raise ValueError"]
+  Guard -->|"True"| ApplyOn["merge effective_wte"]
+  On -->|"False"| Fmt{"disable format"}
+  Fmt --> WTD["when_thinking_disabled precedence"]
+  Fmt --> OAI["extra_body thinking disabled"]
+  Fmt --> ANTH["thinking type disabled"]
+  Fmt --> VLLM["chat_template_kwargs false"]
+  ApplyOn --> Build["model_class kwargs plus stream defaults"]
+  WTD --> Build
+  OAI --> Build
+  ANTH --> Build
+  VLLM --> Build
+  Build --> Done["return instance with tracing"]
 ```

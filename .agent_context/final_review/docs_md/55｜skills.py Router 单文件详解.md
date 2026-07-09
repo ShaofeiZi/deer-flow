@@ -48,11 +48,30 @@ flowchart TD
 | 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Client
+    participant Router as install_skill
+    participant PathUtil as resolve_thread_virtual_path
+    participant Storage as SkillStorage
+    participant Cache as refresh_skills_system_prompt_cache_async
+
+    Client->>Router: POST /api/skills/install thread_id path
+    Router->>PathUtil: resolve thread_id path
+    PathUtil-->>Router: skill_file_path
+    Router->>Storage: ainstall_skill_from_archive skill_file_path
+    alt FileNotFoundError
+        Storage-->>Router: raise
+        Router-->>Client: 404 Not Found
+    else SkillAlreadyExistsError
+        Storage-->>Router: raise
+        Router-->>Client: 409 Conflict
+    else ValueError
+        Storage-->>Router: raise
+        Router-->>Client: 400 Bad Request
+    else success
+        Storage-->>Router: result skill_name
+        Router->>Cache: refresh skills system prompt
+        Cache-->>Router: ok
+        Router-->>Client: 200 SkillInstallResponse
+    end
 ```

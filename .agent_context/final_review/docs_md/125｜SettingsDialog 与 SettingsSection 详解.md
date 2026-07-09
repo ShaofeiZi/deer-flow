@@ -38,10 +38,24 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Trigger["command-palette / nav-menu"] --> Dialog["SettingsDialog open + defaultSection"]
+  Dialog --> Effect["useEffect syncs activeSection"]
+  Effect --> Nav["sections nav list 7 buttons"]
+  Nav --> SetActive["setActiveSection id"]
+  SetActive --> Render["conditional render activeSection"]
+  Render --> Account["AccountSettingsPage"]
+  Render --> Appearance["AppearanceSettingsPage"]
+  Render --> Memory["MemorySettingsPage"]
+  Render --> Tools["ToolSettingsPage"]
+  Render --> Skills["SkillSettingsPage"]
+  Render --> Notif["NotificationSettingsPage"]
+  Render --> About["AboutSettingsPage"]
+  Account --> Section["SettingsSection title + children"]
+  Appearance --> Section
+  Memory --> Section
+  Tools --> Section
+  Skills --> Section
+  Notif --> Section
+  About --> Section
+  Section --> Scroll["ScrollArea content"]
 ```

@@ -41,10 +41,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+    Task["task tool result"] --> MW["ToolErrorHandlingMiddleware"]
+    MW --> Stamp["_stamp_task_subagent_status"]
+    Stamp --> Extr["extract_subagent_status"]
+    Extr --> Prefix["_PREFIX_TO_STATUS"]
+    Prefix -->|"Task Succeeded"| Comp["completed"]
+    Prefix -->|"polling timed out"| Poll["polling_timed_out"]
+    Prefix -->|"Task timed out"| Tout["timed_out"]
+    Prefix -->|"cancelled by user"| Canc["cancelled"]
+    Prefix -->|"Task failed / Error"| Fail["failed"]
+    Comp --> Make["make_subagent_additional_kwargs"]
+    Poll --> Make
+    Tout --> Make
+    Canc --> Make
+    Fail --> Make
+    Make --> AK["ToolMessage additional_kwargs"]
+    AK --> FE["frontend subtask card"]
 ```

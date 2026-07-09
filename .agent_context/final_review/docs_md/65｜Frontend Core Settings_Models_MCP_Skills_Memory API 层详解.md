@@ -53,11 +53,25 @@ flowchart TD
 | 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant UI as Settings UI
+    participant Hook as useThreadSettings
+    participant Store as settings store
+    participant Local as local.ts
+    participant LS as localStorage
+    participant Tab as Other browser tab
+    UI->>Hook: setSettings context model_name
+    Hook->>Store: updateThreadSettings threadId key value
+    Store->>Store: mergeSettingsSection baseSettings
+    Store->>Local: saveLocalSettings
+    Local->>LS: write deerflow.local-settings
+    Store->>Local: saveThreadModelName threadId
+    Local->>LS: write deerflow.thread-model.id
+    Store-->>Hook: emitChange listeners
+    Hook-->>UI: useSyncExternalStore re-render
+    Tab->>LS: write same key in another tab
+    LS-->>Store: window storage event
+    Store->>Local: getLocalSettings getThreadModelName
+    Store-->>Hook: emitChange
+    Hook-->>UI: re-render
 ```

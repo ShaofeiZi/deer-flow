@@ -56,10 +56,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req[PUT /api/mcp/config] --> Admin[_require_admin_user]
+  Admin --> Valid[_validate_mcp_update_request]
+  Valid --> Allow[_allowed_stdio_commands npx uvx]
+  Valid --> Reject[400 disallowed command]
+  Allow --> Path[resolve_config_path]
+  Path --> Raw[read raw extensions_config.json]
+  Raw --> Merge[_merge_preserving_secrets]
+  Merge --> Write[write extensions_config.json]
+  Write --> Reload[reload_extensions_config]
+  Reload --> Mask[_mask_server_config]
+  Mask --> Resp[McpConfigResponse masked]
+  Get[GET /api/mcp/config] --> Admin
+  Get2[GET returns env headers oauth as ***] --> Get2
 ```

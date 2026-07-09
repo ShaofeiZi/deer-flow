@@ -40,10 +40,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  A["generate.py entry"] --> B["read prompt-file JSON"]
+  B --> C["_resolve_provider"]
+  C --> D{"SKILL_PROVIDER env"}
+  D -- yes --> E["forced provider"]
+  D -- no --> F{"existing creds"}
+  F -- yes --> G["default provider"]
+  F -- no --> H{"MINIMAX_API_KEY"}
+  H -- yes --> I["minimax fallback"]
+  H -- no --> J["raise ValueError"]
+  E --> K{"dispatch"}
+  G --> K
+  I --> K
+  K -- gemini --> L["Gemini API"]
+  K -- minimax --> M["MiniMax API"]
+  K -- volcengine --> N["Volcengine TTS"]
+  L --> O["write output-file"]
+  M --> O
+  N --> O
 ```

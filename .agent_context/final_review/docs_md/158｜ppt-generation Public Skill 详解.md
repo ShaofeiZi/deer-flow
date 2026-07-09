@@ -38,10 +38,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  A["SKILL.md frontmatter match"] --> B["plan JSON write"]
+  B --> C["slide-01 prompt JSON"]
+  C --> D["image-generation generate.py"]
+  D --> E["_resolve_provider picks gemini or minimax"]
+  E --> F["slide-01.jpg"]
+  F --> G["slide-02 prompt references slide-01"]
+  G --> D
+  F --> H["slide-02.jpg"]
+  H --> I["repeat per slide sequential"]
+  I --> J["ppt-generation generate.py generate_ppt"]
+  J --> K["python-pptx Presentation blank layout"]
+  K --> L["add_picture fit aspect ratio"]
+  L --> M["notes_slide add title and key_points"]
+  M --> N["save presentation.pptx"]
 ```

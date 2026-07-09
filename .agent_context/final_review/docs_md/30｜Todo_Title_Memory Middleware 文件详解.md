@@ -42,10 +42,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Agent[LeadAgent run] --> TodoBefore[before_model inject todo_reminder]
+  TodoBefore --> TodoWrap[wrap_model_call drain reminders]
+  TodoWrap --> TodoAug[augmented ModelRequest]
+  TodoAug --> TodoAfter[after_model last AIMessage]
+  TodoAfter --> TodoQueue[queue completion reminder if todos incomplete]
+  TodoQueue --> TodoJump[jump_to model]
+  TodoJump --> TitleAfter[after_model first exchange]
+  TitleAfter --> TitleCheck[should_generate_title]
+  TitleCheck --> TitleGen[create_chat_model title_agent]
+  TitleGen --> TitleReturn[return title to state]
+  TitleReturn --> MemAfter[after_agent state messages]
+  MemAfter --> MemFilter[filter_messages_for_memory]
+  MemFilter --> QueueAdd[MemoryUpdateQueue add thread_id user_id]
+  QueueAdd --> QueueNone[no state change]
 ```

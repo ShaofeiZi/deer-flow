@@ -39,10 +39,27 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Vitest["vitest.config.ts"] --> UnitSpec["tests/unit"]
+  UnitSpec --> CoreSrc["src/core"]
+
+  Mock["playwright.config.ts"] --> MockSpec["tests/e2e"]
+  Mock --> FrontendA["next build and start :3000"]
+  FrontendA --> MockSpec
+  MockSpec -.mock.-> MockAPI["utils/mock-api.ts"]
+
+  Real["playwright.real-backend.config.ts"] --> RealSpec["tests/e2e-real-backend"]
+  Real --> ReplayGW["run_replay_gateway.py :8011"]
+  Real --> FrontendB["next start :3000"]
+  FrontendB -- DEER_FLOW_INTERNAL_GATEWAY_BASE_URL --> ReplayGW
+  ReplayGW --> RealSpec
+  RealSpec --> Fixtures["tests/fixtures/replay"]
+
+  Record["playwright.record.config.ts"] --> RecordSpec["tests/e2e-record"]
+  Record --> RecordGW["record_gateway.py :8012"]
+  Record --> FrontendC["next start :3000"]
+  FrontendC --> RecordGW
+  RecordGW -- DEERFLOW_RECORD_OUT --> Capture["recorded captures"]
+
+  Mock -. DEER_FLOW_AUTH_DISABLED .-> FrontendA
+  Real -. DEER_FLOW_AUTH_DISABLED .-> FrontendB
 ```

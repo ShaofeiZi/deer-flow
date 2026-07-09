@@ -69,11 +69,13 @@ sequenceDiagram
 | 阅读路径 | 阅读路径：model 定义表，repository 定义行为，engine 管连接。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+  [*] --> pending: RunRepository.put
+  pending --> running: update_status
+  running --> success: update_run_completion
+  running --> error: update_run_completion
+  running --> running: update_run_progress
+  success --> [*]
+  error --> [*]
+  note right of pending: startup recovery via list_inflight
 ```

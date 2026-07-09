@@ -40,10 +40,35 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  subgraph xyflow["@xyflow/react"]
+    H["Handle"]
+    BE["BaseEdge"]
+    GBP["getBezierPath"]
+    SBP["getSimpleBezierPath"]
+    UIN["useInternalNode"]
+  end
+  subgraph ui["ui primitives"]
+    CARD["ui/card"]
+    COLL["ui/collapsible"]
+    BTN["ui/button"]
+    SEP["ui/separator"]
+    TIP["ui/tooltip"]
+  end
+  NODE["node.tsx Node"]
+  EDGE["edge.tsx Temporary and Animated"]
+  CP["checkpoint.tsx Checkpoint"]
+  TASK["task.tsx Task"]
+  MLI["message-list-item.tsx"]
+
+  CARD --> NODE
+  H --> NODE
+  BE --> EDGE
+  SBP --> EDGE
+  GBP --> EDGE
+  UIN --> EDGE
+  SEP --> CP
+  BTN --> CP
+  TIP --> CP
+  COLL --> TASK
+  MLI -->|"element is task"| TASK
 ```

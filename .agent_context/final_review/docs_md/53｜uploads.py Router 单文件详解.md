@@ -52,10 +52,22 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  A[POST uploads - upload_files] --> B[_get_upload_limits, ensure_uploads_dir]
+  B --> C[get_sandbox_provider]
+  C --> D{uses_thread_data_mounts}
+  D -->|mount| E[skip sandbox sync]
+  D -->|sync| F[acquire sandbox]
+  E --> G[normalize_filename, claim_unique_filename]
+  F --> G
+  G --> H[_write_upload_file_with_limits]
+  H --> I[open_upload_file_no_symlink, chunked write]
+  I --> J{auto_convert_documents and CONVERTIBLE_EXTENSIONS}
+  J -->|yes| K[convert_file_to_markdown]
+  J -->|no| L[_make_file_sandbox_readable]
+  K --> L
+  L --> M{sync_to_sandbox}
+  M -->|yes| N[sandbox.update_file]
+  M -->|no| O[UploadResponse]
+  N --> O
+  I -->|413 or error| P[_cleanup_uploaded_paths]
 ```

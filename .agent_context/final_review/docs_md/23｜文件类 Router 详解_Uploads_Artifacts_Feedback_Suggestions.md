@@ -67,10 +67,16 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req[PUT/POST feedback] --> Perm[require_permission]
+  Perm --> Rating{rating is 1 or -1?}
+  Rating -->|no| BadRequest[400 invalid rating]
+  Rating -->|yes| User[get_current_user]
+  User --> RunGet[run_store.get run_id]
+  RunGet --> RunExists{run found?}
+  RunExists -->|no| NotFound[404 run not found]
+  RunExists -->|yes| Match{run thread_id matches?}
+  Match -->|no| NotFound
+  Match -->|yes| Repo[get_feedback_repo]
+  Repo --> Op[feedback_repo.upsert or create]
+  Op --> Resp[FeedbackResponse]
 ```

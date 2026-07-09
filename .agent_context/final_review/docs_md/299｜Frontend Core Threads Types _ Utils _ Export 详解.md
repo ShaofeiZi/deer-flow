@@ -39,11 +39,30 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  subgraph exportTs["threads/export.ts"]
+    MD["exportThreadAsMarkdown"]
+    JSON["exportThreadAsJSON"]
+    VIS["visibleMessages"]
+    FMC["formatMessageContent"]
+    SIM["stripInternalMarkers"]
+    DL["downloadAsFile"]
+  end
+  subgraph utilsTs["threads/utils.ts"]
+    TITLE["titleOfThread"]
+    SAN["sanitizeFilename"]
+  end
+  subgraph msgUtils["messages/utils.ts"]
+    HIDE["isHiddenFromUIMessage"]
+  end
+  MD --> VIS
+  JSON --> VIS
+  VIS --> HIDE
+  VIS --> FMC
+  FMC --> SIM
+  MD --> TITLE
+  TITLE --> SAN
+  SAN --> DL
+  FMC --> DL
+  DL --> OUT["Blob + anchor download"]
 ```

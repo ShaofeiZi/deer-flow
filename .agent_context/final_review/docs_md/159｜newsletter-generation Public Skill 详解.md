@@ -38,10 +38,15 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Plan["Phase 1 Planning - requirements and structure"]
+  Plan --> Research["Step 2.1 Multi-Source Web Search"]
+  Research --> Evaluate["Step 2.2 Source Evaluation"]
+  Evaluate --> Extract["Step 2.3 Deep Extraction via web_fetch"]
+  Extract --> Write["Phase 3 Writing - header sections standards"]
+  Write --> Assemble["Step 4.1 Assemble Newsletter"]
+  Assemble --> Footer["Step 4.2 Add Footer"]
+  Footer --> Checklist["Step 4.3 Quality Checklist"]
+  Checklist --> Save["Save newsletter-topic-date.md"]
+  Save --> Present["present_files tool"]
+  Present --> Refine["Offer tone or length adjustments"]
 ```

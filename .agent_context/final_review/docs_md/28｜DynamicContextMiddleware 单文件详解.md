@@ -42,11 +42,28 @@ flowchart TD
 | 阅读路径 | 阅读路径：先判断它在哪个 hook 生效，再看它读写 ThreadState 的哪些字段。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Agent as lead_agent agent.py
+    participant MW as DynamicContextMiddleware
+    participant Inject as _inject
+    participant Mem as _get_memory_context
+    participant State as ThreadState messages
+    Agent->>MW: abefore_agent state runtime
+    MW->>Inject: asyncio.to_thread timeout 5s
+    Inject->>State: read messages
+    Inject->>Inject: _last_injected_date scan reminder flag
+    alt last_date None first turn
+        Inject->>Mem: memory if injection_enabled
+        Mem-->>Inject: memory context or empty
+        Inject->>Inject: _build_full_reminder
+        Inject-->>MW: reminder plus user via ID swap
+    else last_date equals current
+        Inject-->>MW: None skip
+    else midnight crossed
+        Inject->>Inject: _build_date_update_reminder
+        Inject-->>MW: date update plus user via ID swap
+    end
+    MW-->>Agent: add_messages replaces by id
+    Note over MW: TimeoutError returns None and skips
+    Note over Agent,State: title_middleware and summarization_middleware reuse is_dynamic_context_reminder
 ```

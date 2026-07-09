@@ -1,0 +1,1782 @@
+[
+  {
+    "name": "01｜DeerFlow 整体架构与分层总览",
+    "token": "TFY8df1x5o53mixHM3gmqNqlyce",
+    "type": "docx"
+  },
+  {
+    "name": "DeerFlow 2.0 源码分层详解：章节目录",
+    "token": "OOKTdDOiRokb7wx2rFRmQShcyrI",
+    "type": "docx"
+  },
+  {
+    "name": "73｜Frontend Auth/Login/Setup 页面详解",
+    "token": "P0ybdryeloBAZsxsrWWm1iOQyjF",
+    "type": "docx"
+  },
+  {
+    "name": "72｜Frontend Landing、Docs、Blog 页面详解",
+    "token": "Wc80dFkogouhcuxbpIOmzcBPyIb",
+    "type": "docx"
+  },
+  {
+    "name": "68｜Channels Service 与 ChannelManager 详解",
+    "token": "EH0IdtUGuoPKQfxql2UmiuiGylu",
+    "type": "docx"
+  },
+  {
+    "name": "67｜Frontend Agents、Blog、I18n、Static Mode 模块详解",
+    "token": "GZsrdYiLLoT05sxERhNmH1v1ycb",
+    "type": "docx"
+  },
+  {
+    "name": "66｜Frontend Uploads、Notification、Tasks Core 详解",
+    "token": "IdEZdZcDeoADdIxMfjWmETbEyLb",
+    "type": "docx"
+  },
+  {
+    "name": "65｜Frontend Core Settings/Models/MCP/Skills/Memory API 层详解",
+    "token": "Xfm2d6pOMotWZixrSDcm22bsyic",
+    "type": "docx"
+  },
+  {
+    "name": "63｜feedback、suggestions、channels Router 详解",
+    "token": "EemWdDNmiovWWlxz6Y3mqSt7y6e",
+    "type": "docx"
+  },
+  {
+    "name": "59｜Frontend Artifact Components 单文件详解",
+    "token": "NcqBdQyhgomSFNxnWvYmL4KFyrv",
+    "type": "docx"
+  },
+  {
+    "name": "49｜Gateway MCP、Skills、Memory Router 深入详解",
+    "token": "GvzAdygTVoxdSkx5ccJmq0LLyei",
+    "type": "docx"
+  },
+  {
+    "name": "47｜Frontend Settings 页面文件详解",
+    "token": "YBAWdQHf5o5XE0xFWanm7TZJyua",
+    "type": "docx"
+  },
+  {
+    "name": "43｜Frontend Message Utils 与 Artifacts Hooks 详解",
+    "token": "LKNFdYQDFob1Pnxz0nTmHIRDy5b",
+    "type": "docx"
+  },
+  {
+    "name": "347｜I18n Locales 与 Translations 详解",
+    "token": "MyjodrFq4oBsG3xJFHqmWAscyRh",
+    "type": "docx"
+  },
+  {
+    "name": "346｜I18n Locale Detection 与 Provider 详解",
+    "token": "A94QdQWSnolx8wxq6e7mVmAaysh",
+    "type": "docx"
+  },
+  {
+    "name": "327｜Wizard UI / Writer / Providers 深拆",
+    "token": "DFAjdJAJxo4cTgxzMg1mKBYayrh",
+    "type": "docx"
+  },
+  {
+    "name": "326｜Wizard Steps LLM/Search/Execution 深拆",
+    "token": "NjQad5V2noof1qxry3Dm5NxPyud",
+    "type": "docx"
+  },
+  {
+    "name": "322｜Backend Model Provider Patch Tests 深拆",
+    "token": "RxLad0zzOoRGSRxfeklmtAgayUd",
+    "type": "docx"
+  },
+  {
+    "name": "308｜Workspace Tool/Skill/Memory Settings 页面细节",
+    "token": "A1SjdgFxKoBrcMxPbMLmMQ0iyGf",
+    "type": "docx"
+  },
+  {
+    "name": "307｜Workspace Account/Appearance/Notification/About 页面细节",
+    "token": "XjARdfJHmoq8bvxDXejm3j6Dyqf",
+    "type": "docx"
+  },
+  {
+    "name": "290｜Telegram、DingTalk、Discord Channel 单文件详解",
+    "token": "OlyudMCLXorg5kxYOumm804vyzf",
+    "type": "docx"
+  },
+  {
+    "name": "287｜auth/config、models、providers 单文件详解",
+    "token": "FrXYd3OjaoYnKpx1Z3NmqXFEyZd",
+    "type": "docx"
+  },
+  {
+    "name": "286｜auth/jwt、password、errors 单文件详解",
+    "token": "INBIdBtxeo2bhux5fpCmv4GTy3d",
+    "type": "docx"
+  },
+  {
+    "name": "285｜Frontend Core Todos / Tasks / Tools 详解",
+    "token": "KY7IdLhSioPH5WxOoANmDGYtysh",
+    "type": "docx"
+  },
+  {
+    "name": "282｜Gateway LocalAuthProvider / SQLiteUserRepository 详解",
+    "token": "UBGDdvmMFod8hex3BJpm467syFd",
+    "type": "docx"
+  },
+  {
+    "name": "281｜Gateway Auth 子模块详解",
+    "token": "HMYDdvXZuoeJxNx8f64mClbVyUh",
+    "type": "docx"
+  },
+  {
+    "name": "280｜ChannelService 与 ChannelManager 单文件详解",
+    "token": "SKKodkGNWoEHNfx9FdrmWS7byPb",
+    "type": "docx"
+  },
+  {
+    "name": "23｜文件类 Router 详解：Uploads、Artifacts、Feedback、Suggestions",
+    "token": "Ms9CdobALoYwXxxIolSmjnYhydh",
+    "type": "docx"
+  },
+  {
+    "name": "238｜Frontend Blog Posts 与 Tags 文档详解",
+    "token": "PjCsdy7BbokflSxHhpFmYr52y0d",
+    "type": "docx"
+  },
+  {
+    "name": "22｜管理类 Router 文件级详解：Models、MCP、Skills、Memory、Agents",
+    "token": "XgSYdKk4goj6hXxiChvmPQX4yPc",
+    "type": "docx"
+  },
+  {
+    "name": "21｜Run 与 Thread Router 文件级详解",
+    "token": "XBu1d292ioMiS1xPPgGmIfayybg",
+    "type": "docx"
+  },
+  {
+    "name": "219｜Backend RFC Docs 详解",
+    "token": "CremdpVhaokfGaxAEj7mzm4ayPN",
+    "type": "docx"
+  },
+  {
+    "name": "213｜backend/docs/FILE_UPLOAD.md 详解",
+    "token": "O2CqdHMwyofyrRxUSRHmMRZZynb",
+    "type": "docx"
+  },
+  {
+    "name": "208｜README / Install / Contributing 深入详解",
+    "token": "HD7CdYzTXoFkkwxM0BwmartoyLd",
+    "type": "docx"
+  },
+  {
+    "name": "204｜Threads / Uploads / Artifacts Router 测试详解",
+    "token": "D9lxdFWHloLMWlxGT6KmcBbPykd",
+    "type": "docx"
+  },
+  {
+    "name": "203｜Run API / Runs Endpoint 测试详解",
+    "token": "KAD8dRD4aoKkUix8wNVmF4K9yoe",
+    "type": "docx"
+  },
+  {
+    "name": "202｜test_auth / auth_middleware / csrf 测试详解",
+    "token": "Ct03dPYhEoIgJxxLvG5mCCJoyKd",
+    "type": "docx"
+  },
+  {
+    "name": "199｜docs/superpowers Specs 与 Plans 详解",
+    "token": "OjF7dbZv9oB1mAxCzmim9i50yxJ",
+    "type": "docx"
+  },
+  {
+    "name": "186｜Label Sync / Triage / Container Workflow 详解",
+    "token": "GWTCdlNfLon05KxCVMXm0XCPyHh",
+    "type": "docx"
+  },
+  {
+    "name": "180｜Backend Blocking IO Tests 详解",
+    "token": "Flz4daeKQoknccxEUlvmG9Rzy3b",
+    "type": "docx"
+  },
+  {
+    "name": "166｜claude-to-deerflow Public Skill 详解",
+    "token": "TjB5dinPno2umfxVCMxmyN3ByKY",
+    "type": "docx"
+  },
+  {
+    "name": "14｜Frontend Core Hooks 与 UI 模块逐项详解",
+    "token": "W0cHd2o13oeVMSx2ucomr8N7yqc",
+    "type": "docx"
+  },
+  {
+    "name": "11｜Gateway Routers API 模块逐项详解",
+    "token": "ObtfdmyjXo7OYpxM0i1mnRVZyAh",
+    "type": "docx"
+  },
+  {
+    "name": "109｜Tracing、TokenUsage、ACP 配置文件详解",
+    "token": "Nzmidco1BoEK70xxO9xm9xUUy2g",
+    "type": "docx"
+  },
+  {
+    "name": "07｜Frontend Settings、Models、Artifacts 数据流详解",
+    "token": "JFD3dRkmvoRYgHxlJD1mbEUUyeb",
+    "type": "docx"
+  },
+  {
+    "name": "05｜Skills、MCP 与 Memory 详解",
+    "token": "U50Ldy2sxoHbOAxo58vmNMUiyef",
+    "type": "docx"
+  },
+  {
+    "name": "02｜Gateway 与 LangGraph 运行时详解",
+    "token": "Dcvkdjf3KopJmsxZa9QmEQPWyic",
+    "type": "docx"
+  },
+  {
+    "name": "355｜只会 JS 的前端学习 DeerFlow 路线图",
+    "token": "Zf5Rd7lkYolmRAxm7t4m7Aotyob",
+    "type": "docx"
+  },
+  {
+    "name": "340｜Gateway Runtime Lifecycle / Shutdown Tests 详解",
+    "token": "JDi5duDmvo3S3Gx3vUhmMJCmyqh",
+    "type": "docx"
+  },
+  {
+    "name": "321｜Backend AppConfig / Runtime Paths Tests 深拆",
+    "token": "BZEhd4cSdoUfIaxh34GmeAb9yAf",
+    "type": "docx"
+  },
+  {
+    "name": "319｜Skill Creator Scripts 单文件族详解",
+    "token": "B5acdjImbo6xV7xgkH5mDOuIypd",
+    "type": "docx"
+  },
+  {
+    "name": "318｜Generation Skill Scripts 单文件族详解",
+    "token": "KcaNdGcluo6Vpyx5mrzm8Fkyysh",
+    "type": "docx"
+  },
+  {
+    "name": "317｜Artifact Loader / Hooks / Preview 单文件详解",
+    "token": "HudZdufZfo2f20xTug3mMvUhyuh",
+    "type": "docx"
+  },
+  {
+    "name": "314｜Config / Doctor / Setup Wizard Tests 单文件族详解",
+    "token": "FCPLdM2jmoIXE6x2noRmzd8Lyrb",
+    "type": "docx"
+  },
+  {
+    "name": "272｜tools/tools.py 单文件详解",
+    "token": "T1jXda6EUoTqlGxFCbImuL8uy4P",
+    "type": "docx"
+  },
+  {
+    "name": "271｜Built-in Tools：view_image/tool_search/invoke_acp 详解",
+    "token": "ZEm5dEe2QouWJcxhxYsmyXYOyAg",
+    "type": "docx"
+  },
+  {
+    "name": "263｜Runtime Store Provider 详解",
+    "token": "WZoQdNYXKoJcmYx32cJmyv3ryzb",
+    "type": "docx"
+  },
+  {
+    "name": "262｜Runtime Checkpointer Provider 详解",
+    "token": "KOtAdoWRxoPWsyxbYjbm4tMUyxc",
+    "type": "docx"
+  },
+  {
+    "name": "261｜Feedback / User / RunEvent Persistence 详解",
+    "token": "PX2xdEvvjogMKFxoLFfm5iM3yHc",
+    "type": "docx"
+  },
+  {
+    "name": "242｜CODE_CHANGE_SUMMARY_BY_FILE 单文档详解",
+    "token": "CbagdPdIioxA3ExbirAmInD7ydf",
+    "type": "docx"
+  },
+  {
+    "name": "240｜Sandbox Memory Profiling / Blocking IO Docs 详解",
+    "token": "GQDjdom6Qo2tkrxLphjmfeKEyub",
+    "type": "docx"
+  },
+  {
+    "name": "220｜Apple Container / Auth Docker Gap Docs 详解",
+    "token": "NscndtsJNoOGO5xt0SYmN5GyyJh",
+    "type": "docx"
+  },
+  {
+    "name": "210｜backend/docs/CONFIGURATION.md 详解",
+    "token": "KyXedoiW6oQqUDxX5bimmHhUycb",
+    "type": "docx"
+  },
+  {
+    "name": "196｜MCP / Deferred / ToolSearch 测试族详解",
+    "token": "JgyKdnZfhoDYEtxh1f0mbp5XyVU",
+    "type": "docx"
+  },
+  {
+    "name": "195｜Sandbox Provider 深层测试族详解",
+    "token": "YVUvdolHBoXveLxH8Q1mQ2fMyDf",
+    "type": "docx"
+  },
+  {
+    "name": "194｜Setup/Update Agent E2E Tests 详解",
+    "token": "VbBkd42Z8oVfkEx75SdmO5hXydb",
+    "type": "docx"
+  },
+  {
+    "name": "184｜Skills / Tools / Deferred Tests 详解",
+    "token": "EpjFd94nOou7CyxzNjImWfMiylm",
+    "type": "docx"
+  },
+  {
+    "name": "183｜Model / Provider / Config Tests 详解",
+    "token": "W6wEdAWFYoz8sWxO5W7mcHWNyUg",
+    "type": "docx"
+  },
+  {
+    "name": "182｜Upload / Artifact / File Conversion Tests 详解",
+    "token": "DwvwdcYHcoT5fYxtWG9mdbjeyZg",
+    "type": "docx"
+  },
+  {
+    "name": "169｜Backend Agent/Middleware Tests 分类详解",
+    "token": "FfXYdW7tYoKZFwxLhq5m6v5Oy9c",
+    "type": "docx"
+  },
+  {
+    "name": "165｜consulting-analysis Public Skill 详解",
+    "token": "JgH7d5rEooWdaNxLFfXmgffTyff",
+    "type": "docx"
+  },
+  {
+    "name": "164｜code-documentation Public Skill 详解",
+    "token": "CqdrdGw7zoQJxFxSGjNmOaLHyPx",
+    "type": "docx"
+  },
+  {
+    "name": "163｜vercel-deploy-claimable Public Skill 详解",
+    "token": "WDI8dNRyho20NaxFQYzmLsRQylh",
+    "type": "docx"
+  },
+  {
+    "name": "162｜surprise-me Public Skill 详解",
+    "token": "C2Fgd11tLoyguZxeQNGmdZ27yrc",
+    "type": "docx"
+  },
+  {
+    "name": "161｜bootstrap Public Skill 详解",
+    "token": "PM9idxWJvoJxIcxcmImmfxWiy5g",
+    "type": "docx"
+  },
+  {
+    "name": "160｜find-skills Public Skill 详解",
+    "token": "Dj6Cd75ctobQMzxKT7smtfvMyec",
+    "type": "docx"
+  },
+  {
+    "name": "159｜newsletter-generation Public Skill 详解",
+    "token": "JRvCdEVy6oZRmix5bFVm31wBykh",
+    "type": "docx"
+  },
+  {
+    "name": "158｜ppt-generation Public Skill 详解",
+    "token": "WV7edvlgHovpRExfSTZmMBx2y9d",
+    "type": "docx"
+  },
+  {
+    "name": "157｜podcast-generation Public Skill 详解",
+    "token": "R61bdSOyBoryIMxVruRmW7I0yDe",
+    "type": "docx"
+  },
+  {
+    "name": "156｜video-generation Public Skill 详解",
+    "token": "FmiGdBipKoljikxkx66mrq2nyHg",
+    "type": "docx"
+  },
+  {
+    "name": "155｜music-generation Public Skill 详解",
+    "token": "SrxjdNycwoniOlxgfj8md54ByTf",
+    "type": "docx"
+  },
+  {
+    "name": "154｜skill-creator Public Skill 详解",
+    "token": "V32AdbOFKozFkfxolgUmvIeTyzf",
+    "type": "docx"
+  },
+  {
+    "name": "153｜image-generation Public Skill 详解",
+    "token": "KJxPdkehPoFjYWxpQRIm8T2jyCb",
+    "type": "docx"
+  },
+  {
+    "name": "152｜chart-visualization Public Skill 详解",
+    "token": "IIYCdr2m7oQ0dGx6PTPmI0f4ySJ",
+    "type": "docx"
+  },
+  {
+    "name": "151｜data-analysis Public Skill 详解",
+    "token": "XnVFd6MhDo6iXyxl7q5mNpK5y5M",
+    "type": "docx"
+  },
+  {
+    "name": "150｜web-design-guidelines Public Skill 详解",
+    "token": "IxAHdSXtLoegxOxX8PBmvz15ymw",
+    "type": "docx"
+  },
+  {
+    "name": "147｜academic-paper-review Public Skill 详解",
+    "token": "VkkadcAy2oW1rzx1BD2m0ecOyzd",
+    "type": "docx"
+  },
+  {
+    "name": "146｜github-deep-research Public Skill 详解",
+    "token": "IzzLdAE3voY4ZKxyipcm8xKpyPh",
+    "type": "docx"
+  },
+  {
+    "name": "145｜deep-research Public Skill 详解",
+    "token": "BOgmda6SboP0FVx1AwvmA0ycySf",
+    "type": "docx"
+  },
+  {
+    "name": "144｜Skills Package Tests 与脚本详解",
+    "token": "EftrddWgNodlpgxVmy8m2DUdyoh",
+    "type": "docx"
+  },
+  {
+    "name": "143｜Meta/Bootstrap Public Skills 详解",
+    "token": "VMokdYGL4o3kv8x18C1mptDwy9b",
+    "type": "docx"
+  },
+  {
+    "name": "142｜Analysis/Consulting Public Skills 详解",
+    "token": "VCO9d74gVo0SOVxL52CmwxPOyyn",
+    "type": "docx"
+  },
+  {
+    "name": "141｜Development/Deploy Public Skills 详解",
+    "token": "D4HXdo0SyoFn9ux4L24m5GTYyPh",
+    "type": "docx"
+  },
+  {
+    "name": "140｜Media Generation Public Skills 详解",
+    "token": "JB1TdkfzAo4Cxzx65lDmUwPnytc",
+    "type": "docx"
+  },
+  {
+    "name": "139｜Research/Review Public Skills 详解",
+    "token": "DbZMdm3n7o7d9oxbUOcmhnuyy3c",
+    "type": "docx"
+  },
+  {
+    "name": "138｜Public Skills 分类与运行逻辑详解",
+    "token": "R7Tddja3zoy1lpxB3aVmnNrUyCe",
+    "type": "docx"
+  },
+  {
+    "name": "137｜Docker Compose、Nginx、Provisioner 详解",
+    "token": "LHnqdWz1Aoxf7oxQA7nmHDeTy0d",
+    "type": "docx"
+  },
+  {
+    "name": "107｜UI Navigation/Overlay Primitives 详解",
+    "token": "CIhNdlSJaooYULxICc5mGrLVyvf",
+    "type": "docx"
+  },
+  {
+    "name": "97｜model_config、tool_config、tool_output_config、tool_search_config 单文件详解",
+    "token": "KM4Gdg0KfomaaFx8ddkmNCcWy9e",
+    "type": "docx"
+  },
+  {
+    "name": "96｜ACP、Guardrails、Safety Config 详解",
+    "token": "ORgBd8a9wohpjjxl3InmnSe8yHg",
+    "type": "docx"
+  },
+  {
+    "name": "87｜Telegram、DingTalk、WeCom Channel 深入运行逻辑",
+    "token": "ADipdPBhKoiHtpxvRr3mo9gHyag",
+    "type": "docx"
+  },
+  {
+    "name": "83｜Exa 与 Serper Provider 单模块详解",
+    "token": "SXAvdVOyRo74WVxtEEOmZiivy7b",
+    "type": "docx"
+  },
+  {
+    "name": "82｜Tavily 与 Firecrawl Provider 单模块详解",
+    "token": "BJQTdmcNBow7eMxwAIEm0yjPyxh",
+    "type": "docx"
+  },
+  {
+    "name": "81｜Nextra Docs、Content 与 Blog 渲染详解",
+    "token": "AQyEdfAQtoEFjSx9QGkmHu9NyYe",
+    "type": "docx"
+  },
+  {
+    "name": "78｜Tavily、Firecrawl、Exa、Serper Web Search Provider 详解",
+    "token": "TBw5dOi4Pop0pcxsIK2mNW9Fyqe",
+    "type": "docx"
+  },
+  {
+    "name": "77｜DingTalk、WeCom、Wechat Channel 详解",
+    "token": "Gj3fdQukjo9O0txWJUHmiJMnysh",
+    "type": "docx"
+  },
+  {
+    "name": "70｜Community Search/Fetch/Image Tools 详解",
+    "token": "YI9pdyg9YoDuMCx7sK8mLMn7yHg",
+    "type": "docx"
+  },
+  {
+    "name": "64｜Frontend API Client 与 Fetcher 详解",
+    "token": "Vdnzdq4HfoAl4pxJk1VmQnpAyGg",
+    "type": "docx"
+  },
+  {
+    "name": "62｜agents.py Router 单文件详解",
+    "token": "FgmQddXpfogJd2xoPJUmcxubytf",
+    "type": "docx"
+  },
+  {
+    "name": "61｜auth.py Router 单文件详解",
+    "token": "AmL1d7za4oPMylxMcZ8mHcjtyyg",
+    "type": "docx"
+  },
+  {
+    "name": "58｜Frontend Message Components 单文件详解",
+    "token": "Pj9cdb03Ro5PKWxWuPOmQCk9ysd",
+    "type": "docx"
+  },
+  {
+    "name": "56｜memory.py Router 单文件详解",
+    "token": "YhEfdVXOYoljEFxq2aWmD2UZyCf",
+    "type": "docx"
+  },
+  {
+    "name": "55｜skills.py Router 单文件详解",
+    "token": "QnVXd93l7oRHrYxKiMrmy1R1yqd",
+    "type": "docx"
+  },
+  {
+    "name": "54｜artifacts.py Router 单文件详解",
+    "token": "LfAcdzwGoovGBKxt2Y3muPMFyRe",
+    "type": "docx"
+  },
+  {
+    "name": "53｜uploads.py Router 单文件详解",
+    "token": "KRkUdNbBTogsdVxvGYomgrhbymh",
+    "type": "docx"
+  },
+  {
+    "name": "52｜threads.py Router 单文件详解",
+    "token": "G6g2dsCTJoC7I5xBSvymxpYGyDh",
+    "type": "docx"
+  },
+  {
+    "name": "51｜thread_runs.py Router 单文件详解",
+    "token": "BCeodzVdFoTfd2xYV7zmbv9ey2g",
+    "type": "docx"
+  },
+  {
+    "name": "48｜Gateway Auth Router 与认证模块详解",
+    "token": "RIpxddfV7oVl1pxsy2wmbgxty5f",
+    "type": "docx"
+  },
+  {
+    "name": "46｜Persistence Repository 文件详解",
+    "token": "P0iPdScRBooiWtxzMALmUoEGyNd",
+    "type": "docx"
+  },
+  {
+    "name": "42｜Frontend useThreadStream 单文件详解",
+    "token": "FAKHdFdrxoDN17x6L2pmRh8LyLh",
+    "type": "docx"
+  },
+  {
+    "name": "20｜Middleware 上下文与 UX 类文件详解：Dynamic、Skill、Summary、Todo、Title、Memory",
+    "token": "JcBLdKkKro44LfxcRmjmkANvypd",
+    "type": "docx"
+  },
+  {
+    "name": "325｜Docker Provisioner Kubernetes Flow 深拆",
+    "token": "OkySdeMPFoTUKkxGIJkmZCUayWb",
+    "type": "docx"
+  },
+  {
+    "name": "305｜WorkspaceSidebar、NavChatList、RecentChatList 详解",
+    "token": "Tgu3djIbPoz3jaxqFYCmK8lsyVc",
+    "type": "docx"
+  },
+  {
+    "name": "303｜MessageList 组件族细节详解",
+    "token": "IHWXdQFsxoEg7txEOg7mDCleyVc",
+    "type": "docx"
+  },
+  {
+    "name": "302｜Artifact File List / Detail / Trigger 单文件详解",
+    "token": "Vc5tdiBLwogUDnxwNkpmqBXOySe",
+    "type": "docx"
+  },
+  {
+    "name": "301｜Chat Hooks 与 ChatBox 单文件详解",
+    "token": "Zo4KdPv9EotNJxxCgxCmoBcbylc",
+    "type": "docx"
+  },
+  {
+    "name": "297｜Frontend Core Settings 文件详解",
+    "token": "HGSzd1Ah7oHr5LxTnTUmDO0my8e",
+    "type": "docx"
+  },
+  {
+    "name": "291｜WeCom 与 Wechat Channel 单文件详解",
+    "token": "JNSydYiZ5oTSabx4FYUmv1tLyXV",
+    "type": "docx"
+  },
+  {
+    "name": "267｜runtime/runs/naming.py 与 schemas.py 详解",
+    "token": "XSF2dZOJCohf2UxB01CmoF4xyFs",
+    "type": "docx"
+  },
+  {
+    "name": "266｜runtime/runs/manager.py 单文件详解",
+    "token": "CEyzdci8noYLpux4gzVmCKUiyvf",
+    "type": "docx"
+  },
+  {
+    "name": "264｜Runtime Events Store Provider 详解",
+    "token": "BbSodvM4koWnRkxm7bnmqw7vy5b",
+    "type": "docx"
+  },
+  {
+    "name": "254｜Runtime UserContext、Converters、Serialization 详解",
+    "token": "CvHJd6JJho8ToRxdN5dmPwz0yog",
+    "type": "docx"
+  },
+  {
+    "name": "253｜Runtime Checkpointer / Store / Events Store 详解",
+    "token": "D6yodUpI9oCjvZx5ad1mKCAay0e",
+    "type": "docx"
+  },
+  {
+    "name": "245｜Backend Replay Provider / Seed / Support 测试模块详解",
+    "token": "RZ5DdbNuQoOs5DxOcF0mTVG8y2e",
+    "type": "docx"
+  },
+  {
+    "name": "244｜Backend Test Helpers / Fixtures 详解",
+    "token": "KqxBdSPOQoIJPpxnY00maCPjyef",
+    "type": "docx"
+  },
+  {
+    "name": "239｜OpenAPI / SSE / Streaming Contract 文档详解",
+    "token": "EM3rd6XoSo7lS7xL1gLm2F0Ayaf",
+    "type": "docx"
+  },
+  {
+    "name": "236｜backend/docs/summarization.md 单文件详解",
+    "token": "JmG0dE4vkoeARLxZWRxmucbByTg",
+    "type": "docx"
+  },
+  {
+    "name": "232｜Frontend Content Application / Tutorials / Posts 详解",
+    "token": "ZnBVdCkwToJYgHxr19qm9NmcyZe",
+    "type": "docx"
+  },
+  {
+    "name": "226｜docs/superpowers 全部 Specs/Plans 总览详解",
+    "token": "QfSSdO8hfoc3lcxacY7mJyRfyRf",
+    "type": "docx"
+  },
+  {
+    "name": "224｜REPLAY_E2E 文档单独详解",
+    "token": "CivLd9lDQoJJmDxSkoamHa4Iyng",
+    "type": "docx"
+  },
+  {
+    "name": "181｜Auth / Owner Isolation Tests 详解",
+    "token": "GBSFdiLNWoCqsRxIcBgmvnmQyWe",
+    "type": "docx"
+  },
+  {
+    "name": "170｜Backend Sandbox/MCP/Memory Tests 分类详解",
+    "token": "GkTPdXagboZghKxHpjDm0EwaySb",
+    "type": "docx"
+  },
+  {
+    "name": "168｜Backend Runtime/Run/Stream Tests 分类详解",
+    "token": "OutldTAUHokNLfxEKy0m74YQyxe",
+    "type": "docx"
+  },
+  {
+    "name": "130｜Core Threads Stream、History、Cache 函数组详解",
+    "token": "LfIHdQPs4orPQxxjckXmM0nIytf",
+    "type": "docx"
+  },
+  {
+    "name": "124｜CodeEditor 与 Artifact Detail 交互详解",
+    "token": "H5KWdFhfios1ETxgVzDmPIfYytf",
+    "type": "docx"
+  },
+  {
+    "name": "123｜WorkspaceContainer、Header、Overscroll 组件详解",
+    "token": "JEBDdvjamoEHsLxNe5kmgPxIyDf",
+    "type": "docx"
+  },
+  {
+    "name": "112｜AI Elements PromptInput 与 Controls 详解",
+    "token": "H9WgdlSXCo9u2oxk5cfmlZCdyMg",
+    "type": "docx"
+  },
+  {
+    "name": "105｜AI Elements ModelSelector、Loader、Suggestion、Sources 详解",
+    "token": "Yc6XdUsPVovVBAxsegGmkOFeyqe",
+    "type": "docx"
+  },
+  {
+    "name": "99｜agents/subagents/guardrails/loop/safety 配置文件详解",
+    "token": "U1EAd9aqMoIVTrxNoqkmNyJyy0b",
+    "type": "docx"
+  },
+  {
+    "name": "94｜Frontend AI Elements Primitives 详解",
+    "token": "DjOOd6VXKohlpIxaJaum2Z2TyjI",
+    "type": "docx"
+  },
+  {
+    "name": "92｜Subagents、Summarization、Title、Tracing Config 详解",
+    "token": "JsEIdU1XmoygtQxL7NtmCj0wyhb",
+    "type": "docx"
+  },
+  {
+    "name": "88｜Model/Sandbox/Memory/Tool Config 单文件详解",
+    "token": "Cxsnd5I1UoQEbcxAfthmRthyy0c",
+    "type": "docx"
+  },
+  {
+    "name": "71｜AioSandbox Community Backend 详解",
+    "token": "GtFUdhE7toXYiqxtKFWmMkctyJL",
+    "type": "docx"
+  },
+  {
+    "name": "69｜Feishu/Slack/Discord/Telegram/WeCom/DingTalk/Wechat Channel 详解",
+    "token": "R63yd6XPyoTIaCxrHgKmzacOyoh",
+    "type": "docx"
+  },
+  {
+    "name": "60｜Frontend Sidebar 与 Navigation 组件详解",
+    "token": "QHtJdUR0no3wkdxcY1Zm5WYNyPg",
+    "type": "docx"
+  },
+  {
+    "name": "57｜mcp.py Router 单文件详解",
+    "token": "BR2idY5bloBoMexpvGimofvnyfc",
+    "type": "docx"
+  },
+  {
+    "name": "50｜Frontend ChatPage 与 InputBox 文件详解",
+    "token": "YZrtddBLUoi6dHxaE9qmtkUeyag",
+    "type": "docx"
+  },
+  {
+    "name": "41｜Skills Parser、Installer、Security Scanner 详解",
+    "token": "KeIZd79ZSo4Ye5xMo6mmxI3ayif",
+    "type": "docx"
+  },
+  {
+    "name": "04｜Tools、Sandbox、Uploads 与 Artifacts 详解",
+    "token": "ZOtCdVzKjoa3lAx3p92ms1eMyge",
+    "type": "docx"
+  },
+  {
+    "name": "353｜新同学源码走读检查清单",
+    "token": "EDuHdMZnPoOQXOx9U4rmuR3hy6f",
+    "type": "docx"
+  },
+  {
+    "name": "352｜可视化风格指南：运行逻辑图绘制规范",
+    "token": "Kgdcdeb6pofGkjxIo44m55x0yOc",
+    "type": "docx"
+  },
+  {
+    "name": "351｜文档集维护指南：新增模块后的补文档方法",
+    "token": "Jw6bdJWhfoN955xnS6gmXDuAyvc",
+    "type": "docx"
+  },
+  {
+    "name": "350｜模块覆盖矩阵与验收说明",
+    "token": "WB4YdSMCToPfOCxGYbYmxVTKyne",
+    "type": "docx"
+  },
+  {
+    "name": "349｜文档集导航指南：300+ 章节阅读路径",
+    "token": "EZT2d2U0gowj7uxQdl6meV8Hynh",
+    "type": "docx"
+  },
+  {
+    "name": "348｜ThemeProvider 与 Global Layout 详解",
+    "token": "K08idKcD1oq7cbxeH3smCGTryod",
+    "type": "docx"
+  },
+  {
+    "name": "336｜static detection scripts 深拆",
+    "token": "AVjAdiJsRoJCHMxhjWGmn9tgy3k",
+    "type": "docx"
+  },
+  {
+    "name": "333｜configure.py 与 config-upgrade.sh 深拆",
+    "token": "BmMHdMck6ojxIYxuK1cm9w2yyie",
+    "type": "docx"
+  },
+  {
+    "name": "332｜Docker Provisioner README/Dockerfile 深拆",
+    "token": "PoXqdni5MoeZV8xfMecm247oyDe",
+    "type": "docx"
+  },
+  {
+    "name": "289｜Feishu 与 Slack Channel 单文件详解",
+    "token": "Te3lduXKPorQUox92vhmtBoIyrd",
+    "type": "docx"
+  },
+  {
+    "name": "288｜auth repository、credential_file、reset_admin 详解",
+    "token": "PDi1dfZWBoDwk1xGUb9mJ46jykf",
+    "type": "docx"
+  },
+  {
+    "name": "279｜Channel Base / MessageBus / Store 单文件详解",
+    "token": "TYXmdsPIjoMwwWxzLzzm8SQWync",
+    "type": "docx"
+  },
+  {
+    "name": "277｜uploads/manager.py 单文件详解",
+    "token": "HyYtdAH4xomM54x4SFomKpCoyHg",
+    "type": "docx"
+  },
+  {
+    "name": "276｜utils/messages、network、time 详解",
+    "token": "TtO4dkRfuoNSTexaTVbmB1ivytd",
+    "type": "docx"
+  },
+  {
+    "name": "274｜reflection/resolvers.py 单文件详解",
+    "token": "C21ed62UNoIzG0xQIanmuRxtydh",
+    "type": "docx"
+  },
+  {
+    "name": "273｜skill_manage_tool / sync / mcp_metadata / types 详解",
+    "token": "T1mhdUid6oqejwxLQxpmTbclySf",
+    "type": "docx"
+  },
+  {
+    "name": "268｜subagents/executor.py 单文件详解",
+    "token": "I5u7dLYNko1E5gx1gOwmeuW0ytc",
+    "type": "docx"
+  },
+  {
+    "name": "265｜runtime/runs/worker.py 单文件详解",
+    "token": "RiDUdoENFo47jfxIXErmMtTryxb",
+    "type": "docx"
+  },
+  {
+    "name": "260｜ThreadMetaRow / ThreadMetaRepository 详解",
+    "token": "SWuadn7NuoRwmUxLIcImH0Loygd",
+    "type": "docx"
+  },
+  {
+    "name": "258｜Persistence Engine / Base / JSON Compat 详解",
+    "token": "OMmbdvG74oQZvNxJgN0mHtNuyKg",
+    "type": "docx"
+  },
+  {
+    "name": "257｜Root Config Files 详解：config.yaml、extensions、env",
+    "token": "MTLodmuoco6IVnxjtdEm1suxyZe",
+    "type": "docx"
+  },
+  {
+    "name": "256｜Frontend Build/Test Configs 详解",
+    "token": "I76gdhKYMoyRZJxJZ40m2U8Cyid",
+    "type": "docx"
+  },
+  {
+    "name": "252｜Persistence Repository Implementations 详解",
+    "token": "YPaEdeb9AoNpwBxqCFcmZTGxyid",
+    "type": "docx"
+  },
+  {
+    "name": "251｜Persistence Run/Thread/Feedback Models 详解",
+    "token": "Ec12dK8I5oOYEUxY2mDmuuiuyZf",
+    "type": "docx"
+  },
+  {
+    "name": "250｜Frontend Rehype / Streamdown / Mermaid 细节详解",
+    "token": "CtRNd6LImoikZmx1YVkmrPeHyJh",
+    "type": "docx"
+  },
+  {
+    "name": "241｜Skill Manage PR Evidence 详解",
+    "token": "X0JMdixjpoZUjpxzImIm5kJzyec",
+    "type": "docx"
+  },
+  {
+    "name": "223｜AUTO_TITLE / TITLE_GENERATION 文档单独详解",
+    "token": "HvzydHuWDoAn7KxJi7GmW3DbyCh",
+    "type": "docx"
+  },
+  {
+    "name": "222｜docs/pr-evidence 证据材料详解",
+    "token": "J42FddMalo1l51x8R3DmEdfayxh",
+    "type": "docx"
+  },
+  {
+    "name": "189｜docker-compose 与 nginx 配置单文件详解",
+    "token": "HziodLMsjoqwiJxH48NmgqHKyXf",
+    "type": "docx"
+  },
+  {
+    "name": "175｜E2E、Replay、Container Workflows 详解",
+    "token": "VBOSdCNrtomPTMxUnJgmWAuxyWc",
+    "type": "docx"
+  },
+  {
+    "name": "129｜Messages List、Item、Group、Subtask 组件详解",
+    "token": "LX5PdYmtKoUkRmxdegZmkAj8ySb",
+    "type": "docx"
+  },
+  {
+    "name": "121｜Gateway Offline Banner/Fallback 组件详解",
+    "token": "AJ0OdyjGloe8BZxuVLNmHiz8y27",
+    "type": "docx"
+  },
+  {
+    "name": "120｜TodoList、CopyButton、Citations 组件详解",
+    "token": "UIbqdws4zoEH78xfssBmvIPeywd",
+    "type": "docx"
+  },
+  {
+    "name": "119｜ThreadTitle、TokenUsageIndicator、ExportTrigger 详解",
+    "token": "KcKrdsMpDo6qo7xv6prmAo8uyWT",
+    "type": "docx"
+  },
+  {
+    "name": "118｜Workspace Welcome 与 AgentWelcome 组件详解",
+    "token": "ByTKdUjzFoi8RpxBLfgmBRNyyRb",
+    "type": "docx"
+  },
+  {
+    "name": "113｜AI Elements Artifact、Panel、OpenInChat 详解",
+    "token": "JYEIdPqTyo7gqGxXYhGmR1Rpysg",
+    "type": "docx"
+  },
+  {
+    "name": "111｜AI Elements Conversation 与 Message 详解",
+    "token": "M0sDdzfHXoV9MIx0J36mfXE1yVh",
+    "type": "docx"
+  },
+  {
+    "name": "108｜Claude、vLLM、MindIE、OpenAI Codex Provider 详解",
+    "token": "PWcGdJg5MoC7OHxYUFqmq6zryxc",
+    "type": "docx"
+  },
+  {
+    "name": "104｜AI Elements CodeBlock、WebPreview、Canvas、Image 详解",
+    "token": "TJC7dR82Hou6xdxRBTmmuJR2yBe",
+    "type": "docx"
+  },
+  {
+    "name": "103｜UI Input、Command、Select、Dropdown Primitives 详解",
+    "token": "VtUtduI0soRZZmxD3QfmogrXykT",
+    "type": "docx"
+  },
+  {
+    "name": "98｜memory_config、sandbox_config、skills_config 单文件详解",
+    "token": "DR6ndS7z8oDKx1xgLqImWMN1ywg",
+    "type": "docx"
+  },
+  {
+    "name": "95｜Patched Model Providers 深入详解",
+    "token": "WHTodguJQoLMdLxHrN4mQbruy0f",
+    "type": "docx"
+  },
+  {
+    "name": "91｜Database、Checkpointer、RunEvents Config 详解",
+    "token": "Qp22dl4NqoC0LfxmskNmfXqcyLb",
+    "type": "docx"
+  },
+  {
+    "name": "90｜AppConfig、Runtime Paths、Reload Boundary 单文件详解",
+    "token": "InLIdtvS0oK111x7crnm1lueyJd",
+    "type": "docx"
+  },
+  {
+    "name": "89｜Landing Sections 深入组件逻辑",
+    "token": "UBupdd0huofiFzx7kwQma6Jbytc",
+    "type": "docx"
+  },
+  {
+    "name": "86｜Slack Channel 深入运行逻辑",
+    "token": "V9S3dU4Npoer4hxYDKomIVBeyVh",
+    "type": "docx"
+  },
+  {
+    "name": "85｜Feishu Channel 深入运行逻辑",
+    "token": "CjJDdvrq1o4xqdxx1m1mQM7Vyth",
+    "type": "docx"
+  },
+  {
+    "name": "84｜Jina、DDG、InfoQuest Provider 单模块详解",
+    "token": "CLtTdACCIoOmyLxUHpOmPenGyzL",
+    "type": "docx"
+  },
+  {
+    "name": "75｜FeishuChannel 单文件详解",
+    "token": "FmyedWaiuoqW75xBkQ9mxXAkyee",
+    "type": "docx"
+  },
+  {
+    "name": "74｜Frontend AI Elements 与 UI 基础组件详解",
+    "token": "W4CkdRccMosnvWxg22vmYZhcyod",
+    "type": "docx"
+  },
+  {
+    "name": "45｜Models Provider Patch 文件详解",
+    "token": "Px9jdtsoToG0dGxxvrqmwjAayYd",
+    "type": "docx"
+  },
+  {
+    "name": "44｜Config 配置类目录详解",
+    "token": "KkxxdGMdMoQL7xxJ68KmYRXNy5d",
+    "type": "docx"
+  },
+  {
+    "name": "40｜Memory Queue、Updater、Storage 单文件详解",
+    "token": "LEsJdNSIWoaRpUxxcxCms3S9ykd",
+    "type": "docx"
+  },
+  {
+    "name": "39｜MCP Cache、Session Pool 与 OAuth 详解",
+    "token": "RRlAdJ5QeoVOVmxAd5AmHF9Wycf",
+    "type": "docx"
+  },
+  {
+    "name": "38｜LocalSandbox 与 AioSandbox Provider 详解",
+    "token": "DujDdwq1uoWq1lxzFJ6m3ACSyYc",
+    "type": "docx"
+  },
+  {
+    "name": "37｜Sandbox Tools 单文件详解：bash/ls/glob/grep/read/write/str_replace",
+    "token": "SmrFdFwMYoZ1rSxcEWRm3aTSyVc",
+    "type": "docx"
+  },
+  {
+    "name": "36｜ViewImage、DanglingToolCall、SubagentLimit、TokenUsage Middleware 详解",
+    "token": "FGBSd60wYoPStFxTn1wmos4Iyhd",
+    "type": "docx"
+  },
+  {
+    "name": "35｜SafetyFinishReasonMiddleware 单文件详解",
+    "token": "AqFBdegF4osKOsx759OmqUGfyGd",
+    "type": "docx"
+  },
+  {
+    "name": "34｜DeferredToolFilterMiddleware 单文件详解",
+    "token": "Bh2wdOJ4eoYqolxDDfnmSgNtyec",
+    "type": "docx"
+  },
+  {
+    "name": "33｜SandboxAuditMiddleware 单文件详解",
+    "token": "JH1VdeODuo4gavxMsiCmIJ5cyih",
+    "type": "docx"
+  },
+  {
+    "name": "32｜LoopDetectionMiddleware 单文件详解",
+    "token": "B0EAdEvMoo9NCDxwUHLm5GMqyUf",
+    "type": "docx"
+  },
+  {
+    "name": "31｜LLMErrorHandlingMiddleware 单文件详解",
+    "token": "YFlDdZ5uLoCidrxeQJ6mzqhfyUc",
+    "type": "docx"
+  },
+  {
+    "name": "30｜Todo、Title、Memory Middleware 文件详解",
+    "token": "TwFzdZemFoTVJOxJ2pAmaGRkyJX",
+    "type": "docx"
+  },
+  {
+    "name": "29｜SkillActivationMiddleware 单文件详解",
+    "token": "Wqntdu46NobRZ6xXj1Jm07u2y3c",
+    "type": "docx"
+  },
+  {
+    "name": "28｜DynamicContextMiddleware 单文件详解",
+    "token": "WI9ddl8N4ozZ59xVObim5745yOe",
+    "type": "docx"
+  },
+  {
+    "name": "27｜ToolOutputBudgetMiddleware 单文件详解",
+    "token": "VEKEdbAY1o3fUTxJXNWmqtw9yke",
+    "type": "docx"
+  },
+  {
+    "name": "26｜SandboxMiddleware 单文件详解",
+    "token": "ZTBedtbq1owHuuxfEj1mj6zny4J",
+    "type": "docx"
+  },
+  {
+    "name": "25｜UploadsMiddleware 单文件详解",
+    "token": "IiQ9dfvfUoPcXLxr8JTmgS5nyKb",
+    "type": "docx"
+  },
+  {
+    "name": "24｜ThreadDataMiddleware 单文件详解",
+    "token": "UvKWdlU67ov47kx6ygsmR4FkyKd",
+    "type": "docx"
+  },
+  {
+    "name": "18｜Persistence、Database、ThreadMeta 与 Feedback 详解",
+    "token": "AEwWdPBDGovKumxTbd3mDiFfywc",
+    "type": "docx"
+  },
+  {
+    "name": "17｜Model Provider Factory 与模型适配详解",
+    "token": "GHiydyXRiof4QWxhlrcm8Y8MyAe",
+    "type": "docx"
+  },
+  {
+    "name": "16｜Subagents、Task Tool 与并发执行详解",
+    "token": "T2nWdcV6OoO2xBxBjB2mBIFOyJd",
+    "type": "docx"
+  },
+  {
+    "name": "08｜配置、部署、测试与排障详解",
+    "token": "XyAFdSxNooUswXxcVx8mbR7iyqg",
+    "type": "docx"
+  },
+  {
+    "name": "13｜Backend Middleware 模块逐项详解",
+    "token": "FKvZdX732osfBNxyscOmHFkgydd",
+    "type": "docx"
+  },
+  {
+    "name": "12｜Runtime RunManager、StreamBridge、Journal 详解",
+    "token": "R7HYdJ5PXoiOdgxbpJfmMYDfyRb",
+    "type": "docx"
+  },
+  {
+    "name": "09｜Auth、CSRF、权限与 IM Channels 详解",
+    "token": "KnQBdOROXoOE37xAKPdmljJJyHd",
+    "type": "docx"
+  },
+  {
+    "name": "03｜Lead Agent、Prompt、Tools 与 Middleware 详解",
+    "token": "WbumdDbSCoTmW4xIrCsmpOIaymd",
+    "type": "docx"
+  },
+  {
+    "name": "19｜Middleware 基建类文件详解：ThreadData、Uploads、Sandbox、ToolOutputBudget",
+    "token": "Dg0idIHMcovbQWxrpKjmEwT3yyh",
+    "type": "docx"
+  },
+  {
+    "name": "15｜Config、Paths 与 Hot Reload 边界详解",
+    "token": "DTU7dQ6SiopsQDxfJqZmSTVWyag",
+    "type": "docx"
+  },
+  {
+    "name": "10｜Models、Tracing、Persistence 与 Token Usage 详解",
+    "token": "RUtPdneNLoPyI0x5ksKmblLJynd",
+    "type": "docx"
+  },
+  {
+    "name": "354｜最终验收摘要与证据索引",
+    "token": "JlDEdsqEWo9iOsxSEL8mljXYyVf",
+    "type": "docx"
+  },
+  {
+    "name": "06｜Frontend Workspace 与 Chat 主链路详解",
+    "token": "IvEydJu3Poud6vx4mR0mThL1y4f",
+    "type": "docx"
+  },
+  {
+    "name": "133｜Frontend Tests 与 Playwright E2E 详解",
+    "token": "OUAUdzRP8oDP2uxkNTbmhpbiyr1",
+    "type": "docx"
+  },
+  {
+    "name": "132｜Backend Tests 测试体系详解",
+    "token": "XnvOdeyO4ofXDPxGUwqmobtdyte",
+    "type": "docx"
+  },
+  {
+    "name": "100｜AI Elements Message、Conversation、PromptInput 详解",
+    "token": "P3MRdKYHNokBdDxaDl0mRmEcywh",
+    "type": "docx"
+  },
+  {
+    "name": "76｜Slack 与 Telegram Channel 详解",
+    "token": "BkyWdXX9ho3grxxX0rMmXeSKySe",
+    "type": "docx"
+  },
+  {
+    "name": "79｜Jina、DDG、InfoQuest、Image Search Provider 详解",
+    "token": "D9H8d1zSOoONoRxX8bNmFHRUyyd",
+    "type": "docx"
+  },
+  {
+    "name": "80｜Landing Page Sections 组件详解",
+    "token": "Odo6dODyOooQqSxIkFGm4V5EyHt",
+    "type": "docx"
+  },
+  {
+    "name": "93｜Frontend UI Primitives 单文件详解",
+    "token": "T2S7diLrro8qWjxgBkDmAiW9yih",
+    "type": "docx"
+  },
+  {
+    "name": "101｜AI Elements Reasoning、Task、Artifact 详解",
+    "token": "IdVGdsdtko2usdx2ukimWyonyJb",
+    "type": "docx"
+  },
+  {
+    "name": "102｜UI Layout Primitives：Sidebar、Resizable、ScrollArea、Dialog 详解",
+    "token": "JnTmdreu6ofZksxLltgmkCjryvb",
+    "type": "docx"
+  },
+  {
+    "name": "106｜UI Feedback/Display Primitives 详解",
+    "token": "KIszdrsBfoZLMVxblCQmeFMhySb",
+    "type": "docx"
+  },
+  {
+    "name": "110｜Frontend Streamdown、MDX、Markdown 渲染详解",
+    "token": "CKqhdfJVpoYmIzxl65Gmb15MyCd",
+    "type": "docx"
+  },
+  {
+    "name": "114｜AI Elements Node、Edge、Checkpoint 图元素详解",
+    "token": "IdqXddiXroGyW7x191amrlwYyJM",
+    "type": "docx"
+  },
+  {
+    "name": "115｜UI Form Primitives：Button、Input、Textarea、Switch、Toggle 详解",
+    "token": "M1nXdLJVxog1iaxytLzm0RRky5e",
+    "type": "docx"
+  },
+  {
+    "name": "116｜UI Data Display Primitives：Card、Avatar、Item、Table-like 详解",
+    "token": "KHf1dqySAojRn3xyKTrmpExpymg",
+    "type": "docx"
+  },
+  {
+    "name": "117｜UI Visual Effects Primitives：MagicBento、Aurora、Shine、Spotlight 详解",
+    "token": "UmEmdGe27op9TPxjFnmm56CAyIg",
+    "type": "docx"
+  },
+  {
+    "name": "122｜AgentGallery、AgentCard 与 NewAgent Page 详解",
+    "token": "JshPdr2YRo3ynjxZ0REmIDAByeh",
+    "type": "docx"
+  },
+  {
+    "name": "125｜SettingsDialog 与 SettingsSection 详解",
+    "token": "FetXdwj2Oo7Uq9xrOmtmC1pUytf",
+    "type": "docx"
+  },
+  {
+    "name": "126｜Tool、Skill、Memory Settings Pages 详解",
+    "token": "Q3nMdn8QroDBnHxcpxBmnE7Nyxe",
+    "type": "docx"
+  },
+  {
+    "name": "127｜Account、Appearance、Notification、About Settings Pages 详解",
+    "token": "HdyvdD7nJoeHh3xLWOsm8V7hyZf",
+    "type": "docx"
+  },
+  {
+    "name": "128｜Artifacts Context、Trigger、List、Detail 详解",
+    "token": "TmVTd99CloWR5yx2L4vmTyuWyCe",
+    "type": "docx"
+  },
+  {
+    "name": "131｜Core Threads Runs、Delete、Rename、Token Usage Hooks 详解",
+    "token": "YNy0dJRfMoTHMSxCCF8mwjS7yRb",
+    "type": "docx"
+  },
+  {
+    "name": "134｜GitHub Workflows CI 流水线详解",
+    "token": "AuwvdIOcHocJNfxTv36mx07PyOb",
+    "type": "docx"
+  },
+  {
+    "name": "135｜Scripts Setup/Dev/Deploy 脚本详解",
+    "token": "KzTudbQrso6iq1xv9oVm1IQGyfe",
+    "type": "docx"
+  },
+  {
+    "name": "136｜Scripts Diagnostics/Maintenance 脚本详解",
+    "token": "W07EdWJpWooeyOxpPa0mO8MWyhg",
+    "type": "docx"
+  },
+  {
+    "name": "148｜systematic-literature-review Public Skill 详解",
+    "token": "VHwydVr3Po77tlxLDy6mLagjy7g",
+    "type": "docx"
+  },
+  {
+    "name": "149｜frontend-design Public Skill 详解",
+    "token": "Td3ddJCMVogvl7xdNKumtVLQyWc",
+    "type": "docx"
+  },
+  {
+    "name": "167｜Backend Router Tests 分类详解",
+    "token": "ORVpd2dyWo6POuxbMm8mMmGOyve",
+    "type": "docx"
+  },
+  {
+    "name": "171｜Frontend E2E Specs 分类详解",
+    "token": "UdJLd1PnjoCoaRxPymZmxYwAymg",
+    "type": "docx"
+  },
+  {
+    "name": "173｜Setup Wizard Scripts 详解",
+    "token": "IvFddjdM4oFm6nxy72mmK3oky5g",
+    "type": "docx"
+  },
+  {
+    "name": "174｜Backend/Frontend Unit Test Workflows 详解",
+    "token": "Mi1IdEdyNoRM9exWg0HmwvLwy9d",
+    "type": "docx"
+  },
+  {
+    "name": "176｜check.py、doctor.py、configure.py、config-upgrade 详解",
+    "token": "WvtCdqH0Do2ItUxzxOzmGbZkyFd",
+    "type": "docx"
+  },
+  {
+    "name": "177｜serve.sh、docker.sh、deploy.sh 详解",
+    "token": "BSKAdlpSaoZnB1xTULsmqxutyIg",
+    "type": "docx"
+  },
+  {
+    "name": "178｜Frontend E2E Chat/Sidebar/Artifacts Specs 详解",
+    "token": "Z6d4dIlnSoqvWixQ5QNmCXK9y1d",
+    "type": "docx"
+  },
+  {
+    "name": "179｜Frontend E2E History/Landing/Real Backend Specs 详解",
+    "token": "FxBxdvuC4oKStXx2ioBmsLmoyqf",
+    "type": "docx"
+  },
+  {
+    "name": "185｜Channels / Community Provider Tests 详解",
+    "token": "ERFDdnFKAoR7Z5xw7kXmibdOyHh",
+    "type": "docx"
+  },
+  {
+    "name": "187｜OAuth / Memory / Sandbox / Detection Scripts 详解",
+    "token": "Gk4udjVLUojGoXxCgIWmMwwgyRd",
+    "type": "docx"
+  },
+  {
+    "name": "188｜docker/provisioner/app.py 单文件详解",
+    "token": "UErKdqEhpoQC28x64QVmD1dEyRd",
+    "type": "docx"
+  },
+  {
+    "name": "190｜run-with-git-bash、wait-for-port、cleanup 脚本详解",
+    "token": "C9BkdgFoboWJozxohBKmcJYfyCb",
+    "type": "docx"
+  },
+  {
+    "name": "191｜Client E2E / Live Tests 详解",
+    "token": "VGDgdKGROoCfgExY44Zm95pSyIe",
+    "type": "docx"
+  },
+  {
+    "name": "192｜ThreadState / Reducers / Serialization Tests 详解",
+    "token": "E4pcdCnDFoEA0jxkjgRmBjxYyPd",
+    "type": "docx"
+  },
+  {
+    "name": "193｜Tracing / Token Usage Tests 详解",
+    "token": "QXKRdL3tUoqa5LxPRPwm1OgNyqj",
+    "type": "docx"
+  },
+  {
+    "name": "197｜Memory / Title / Summarization 测试族详解",
+    "token": "K0ptdeGR3ovdlnxh5bymPOn2yXc",
+    "type": "docx"
+  },
+  {
+    "name": "198｜Frontend Unit 与 Real Backend Tests 详解",
+    "token": "OM24d78EKoUa3rx7BW4mFipayec",
+    "type": "docx"
+  },
+  {
+    "name": "200｜Backend Docs Architecture/API/Config 文档详解",
+    "token": "HCB4ds0zxoUHFDxDhaYm7J40yfh",
+    "type": "docx"
+  },
+  {
+    "name": "201｜Root Docs、Install、Contributing、Security 详解",
+    "token": "JcildSxKLoDd3vxnDBtmT1HkyJe",
+    "type": "docx"
+  },
+  {
+    "name": "205｜MiniMax Generation Providers Specs/Plans 详解",
+    "token": "SW10ddSGZodQVhxEbDRmXiD8yMg",
+    "type": "docx"
+  },
+  {
+    "name": "206｜Event Store / History Specs/Plans 详解",
+    "token": "MFzkd2pvaoLNUUxzpvLmLoyYysg",
+    "type": "docx"
+  },
+  {
+    "name": "207｜Summarize Marker / Langfuse Tracing Plans 详解",
+    "token": "TuDRdJtrxosPTFxRFzTm32y4yUe",
+    "type": "docx"
+  },
+  {
+    "name": "209｜backend/docs/API.md 详解",
+    "token": "MTw4daCMwo4JxSxAoLLmAB7tyUr",
+    "type": "docx"
+  },
+  {
+    "name": "211｜backend/docs/MCP_SERVER.md 详解",
+    "token": "CgAadryj6oNzWfxWs3cmY7yPyIb",
+    "type": "docx"
+  },
+  {
+    "name": "212｜backend/docs/STREAMING.md 详解",
+    "token": "CznvdObnlogSxSxiEoDmg0Qzy4f",
+    "type": "docx"
+  },
+  {
+    "name": "214｜backend/docs/AUTH_DESIGN / AUTH_UPGRADE 详解",
+    "token": "SZS8dq3K9ob8PtxAK9amK40Qyvd",
+    "type": "docx"
+  },
+  {
+    "name": "215｜backend/docs/GUARDRAILS 与 PATH_EXAMPLES 详解",
+    "token": "Gm17danMcod7CvxlF88mhxGmyhg",
+    "type": "docx"
+  },
+  {
+    "name": "216｜Memory Improvements / Settings Docs 详解",
+    "token": "OW9DdKitFoczTYxLPbvmFA2wyHc",
+    "type": "docx"
+  },
+  {
+    "name": "217｜Title Generation Docs 详解",
+    "token": "SmcZdLFmmoUYmWxyTSnmmjaayRf",
+    "type": "docx"
+  },
+  {
+    "name": "218｜Replay / Setup / TODO / Plan Mode Docs 详解",
+    "token": "ZfmqdK80tomX36xDlermqzhNyYb",
+    "type": "docx"
+  },
+  {
+    "name": "172｜GitHub Workflow 文件逐项详解",
+    "token": "PB7GdUM7CozMjaxHX12ms1SHyYK",
+    "type": "docx"
+  },
+  {
+    "name": "221｜CODE_CHANGE_SUMMARY 与 SKILL_NAME_CONFLICT_FIX 详解",
+    "token": "LwoSddDYWoW5eGxnLbtm5wqDynd",
+    "type": "docx"
+  },
+  {
+    "name": "225｜OpenAPI / Setup / Guardrails 相关文档详解",
+    "token": "IwmLdkPXgo2yCNxzapAmVtTJysf",
+    "type": "docx"
+  },
+  {
+    "name": "227｜Frontend Content Introduction/Harness 文档分类详解",
+    "token": "Gb8pd2CRRoTIQbxtq9Om4POByQc",
+    "type": "docx"
+  },
+  {
+    "name": "228｜Frontend Content Reference/Application/Tutorials 分类详解",
+    "token": "KdEbdHreKob17ixvQMrmrhExyWk",
+    "type": "docx"
+  },
+  {
+    "name": "229｜docs/plans 与 Root Docs 规划文档详解",
+    "token": "Ks8gdYhHUoFOEBxQhDSmmovYyPb",
+    "type": "docx"
+  },
+  {
+    "name": "230｜Frontend Content Introduction Docs 详解",
+    "token": "Cp14dWpdkoVuvYxC2f0mrgofyud",
+    "type": "docx"
+  },
+  {
+    "name": "231｜Frontend Content Harness / Reference Docs 详解",
+    "token": "XABYdGt31o2SOLxpkxPmJPsVy4g",
+    "type": "docx"
+  },
+  {
+    "name": "233｜MiniMax Provider Spec/Plan 单文件详解",
+    "token": "GITfdbN9bogpEIxvJgdm15jPywh",
+    "type": "docx"
+  },
+  {
+    "name": "234｜Event Store History Plan 单文件详解",
+    "token": "Ze5rdjaYgofCFUxHSDOmwMuuyEd",
+    "type": "docx"
+  },
+  {
+    "name": "235｜Summarize Marker Spec 单文件详解",
+    "token": "Jf3kdJbqNozJCzxecDZmaGafy9d",
+    "type": "docx"
+  },
+  {
+    "name": "237｜Frontend Reference Model Providers 文档详解",
+    "token": "UCzhdTVw0oJ6h1xoQTDmFVVtyMe",
+    "type": "docx"
+  },
+  {
+    "name": "243｜SKILL_NAME_CONFLICT_FIX 单文档详解",
+    "token": "L1oOd5AwBoahdux67yMmjOtoyJe",
+    "type": "docx"
+  },
+  {
+    "name": "246｜Frontend MDX Components 与 Content Meta 详解",
+    "token": "Y7t6dnPXFouJCfxbjDQmPuIRyQh",
+    "type": "docx"
+  },
+  {
+    "name": "247｜Frontend Core Blog 与 I18n 细节详解",
+    "token": "ZQVpdSguvoxtOZxHSTGmluX4yjd",
+    "type": "docx"
+  },
+  {
+    "name": "248｜Frontend Core Utils 详解",
+    "token": "NxyGdMJkHoWgBhx6o75mITjDyIe",
+    "type": "docx"
+  },
+  {
+    "name": "249｜Frontend Env、Config、Static Mode 详解",
+    "token": "LpgDdSYnxomHUMxAAPJmQbH4yRa",
+    "type": "docx"
+  },
+  {
+    "name": "255｜Frontend Styles、Env、Typings 详解",
+    "token": "JyumdDj7ioEyWWxAcfImBGpfyAd",
+    "type": "docx"
+  },
+  {
+    "name": "259｜RunRow / RunRepository 单文件详解",
+    "token": "VU3ldLhUooneRzxpvCWmtrWQyEd",
+    "type": "docx"
+  },
+  {
+    "name": "269｜subagents registry/config/status/token_collector 详解",
+    "token": "A0WHdbqoroYKTBx9ShWmET69yEV",
+    "type": "docx"
+  },
+  {
+    "name": "270｜Built-in Tools：task/present_files/clarification 详解",
+    "token": "L6hodVBgZoE6nGxzuUfm3Vbaynb",
+    "type": "docx"
+  },
+  {
+    "name": "275｜utils/file_conversion 与 readability 详解",
+    "token": "YckMdsDGGo7QToxOpZ2mxY6GyAh",
+    "type": "docx"
+  },
+  {
+    "name": "278｜tracing/factory 与 metadata 详解",
+    "token": "XezJdBnoFohv2ExO2KXmaR3Eyhb",
+    "type": "docx"
+  },
+  {
+    "name": "283｜Frontend Core Auth 文件详解",
+    "token": "ZdKudf7Z8oBjApxZthUm8RRHyZc",
+    "type": "docx"
+  },
+  {
+    "name": "284｜Frontend Core Uploads / Agents / Notification 详解",
+    "token": "ROhedWkLuo9JQ4xnm25mXjRQyOg",
+    "type": "docx"
+  },
+  {
+    "name": "292｜Frontend Agents、Uploads、Notification Core 单文件详解",
+    "token": "McTIdxau1ojWWExZRZxmexjIyMh",
+    "type": "docx"
+  },
+  {
+    "name": "293｜Frontend Core Models 文件详解",
+    "token": "DHjhdSnorosgKlxsenAmKK7hyjc",
+    "type": "docx"
+  },
+  {
+    "name": "294｜Frontend Core MCP 文件详解",
+    "token": "TrM3dSu7voXFlAxeYh1mga5uyhg",
+    "type": "docx"
+  },
+  {
+    "name": "295｜Frontend Core Skills 文件详解",
+    "token": "KuyLdzE2QowZbDxxr7em1fSTyCc",
+    "type": "docx"
+  },
+  {
+    "name": "296｜Frontend Core Memory 文件详解",
+    "token": "JN6Ud0UD4oGhQ2xt01BmachEyNf",
+    "type": "docx"
+  },
+  {
+    "name": "298｜Frontend Core API Feedback / StreamMode 详解",
+    "token": "TrqjdRLNXoSPn9xOAkwmXrxsyBd",
+    "type": "docx"
+  },
+  {
+    "name": "299｜Frontend Core Threads Types / Utils / Export 详解",
+    "token": "Oyrwd0Jsuo8JgXx922hmO8tcyWd",
+    "type": "docx"
+  },
+  {
+    "name": "300｜Chat Page、Layout、Providers 单文件详解",
+    "token": "NvHrdrCT6o7BWpxzajJmvu65y4d",
+    "type": "docx"
+  },
+  {
+    "name": "304｜MarkdownContent、TokenUsage、SubtaskCard 详解",
+    "token": "FEUsdoMPaoFHZQxUGkYm1pwMy4b",
+    "type": "docx"
+  },
+  {
+    "name": "306｜CommandPalette、GithubIcon、Tooltip 组件详解",
+    "token": "T8D7dkDjEoe8fexsuKOmSzhqy7d",
+    "type": "docx"
+  },
+  {
+    "name": "309｜Remaining UI Form/Display Primitives 详解",
+    "token": "M6Umdnmrson8ICx4QTsmQbNZypb",
+    "type": "docx"
+  },
+  {
+    "name": "310｜Remaining UI Overlay/Input Primitives 详解",
+    "token": "A2evdr6pmoncOXx9er4mX2ruyZf",
+    "type": "docx"
+  },
+  {
+    "name": "311｜Remaining Scripts Ops 详解",
+    "token": "UsMadseQnoSWpdx8osbm6Oqvyub",
+    "type": "docx"
+  },
+  {
+    "name": "312｜Backend Misc Tests 详解",
+    "token": "C2Uldipg6ohG1xxInjLmfVM6yUA",
+    "type": "docx"
+  },
+  {
+    "name": "313｜Frontend Misc Tests / Configs 详解",
+    "token": "OEAyduFL8oI5fhxj8QbmCeq1yee",
+    "type": "docx"
+  },
+  {
+    "name": "315｜Safety / Guardrails / Sandbox Audit Tests 单文件族详解",
+    "token": "HqR5dBbMSoZyTGx7082mFjigyad",
+    "type": "docx"
+  },
+  {
+    "name": "316｜Settings Dialog 单文件族详解",
+    "token": "DpC2diKEuoukR1xBUNjmd44Wyvb",
+    "type": "docx"
+  },
+  {
+    "name": "320｜Claude/Vercel/Find Skills Scripts 详解",
+    "token": "Q2TAdCnA7o8KVux0m6HmQGBjyzh",
+    "type": "docx"
+  },
+  {
+    "name": "323｜Frontend Root/Auth/Workspace Page Layout 深拆",
+    "token": "ZiDYd8Blkoe9RQxGATcmi0hYy8c",
+    "type": "docx"
+  },
+  {
+    "name": "324｜Frontend Docs/Blog Routes 深拆",
+    "token": "YTxYdImeNovLe0x4r82mnbREyub",
+    "type": "docx"
+  },
+  {
+    "name": "328｜Frontend Agents New Route 深拆",
+    "token": "DB0gdbrAWoXJmExIMmum7Bhvyig",
+    "type": "docx"
+  },
+  {
+    "name": "329｜Frontend Chats List Route 深拆",
+    "token": "JocVd2CNCoGZw2x9nfkmPbxtykg",
+    "type": "docx"
+  },
+  {
+    "name": "330｜Frontend Landing/Blog/Docs Route 文件深拆",
+    "token": "GnNQd3gzFoiVwrxzU0gmvvkXyGh",
+    "type": "docx"
+  },
+  {
+    "name": "331｜Frontend Content _meta.ts 文件深拆",
+    "token": "Cu39dcmSloriSxxDBtDmNAO8yYd",
+    "type": "docx"
+  },
+  {
+    "name": "334｜serve.sh 服务生命周期深拆",
+    "token": "FX8CdqrDOoisI3xq2TrmYeznyTf",
+    "type": "docx"
+  },
+  {
+    "name": "335｜deploy/docker/cleanup scripts 深拆",
+    "token": "DGnwdPCi5o03I2xNMNamTE92y1b",
+    "type": "docx"
+  },
+  {
+    "name": "337｜Backend Makefile / pyproject / langgraph.json 详解",
+    "token": "KwuudEriQocN00xk3N2muOq0yju",
+    "type": "docx"
+  },
+  {
+    "name": "338｜Frontend package/Docker/Makefile 详解",
+    "token": "VJW6d2Ux5oDWoLxkQuDmn6k6yMh",
+    "type": "docx"
+  },
+  {
+    "name": "339｜backend/docs README / Index 文档详解",
+    "token": "T8TmdSZ2aox1syxOEnymcZF8ykc",
+    "type": "docx"
+  },
+  {
+    "name": "341｜Tooling / Scripts Tests 单文件族详解",
+    "token": "AQNOd120IolNDExWUqxmjHb8yAh",
+    "type": "docx"
+  },
+  {
+    "name": "342｜Landing Header / Footer / Section 组件详解",
+    "token": "VrzHdwzdRoi76PxCPb2mWMD9yrg",
+    "type": "docx"
+  },
+  {
+    "name": "343｜Landing Hero 与 ProgressiveSkillsAnimation 详解",
+    "token": "JLjKdD7K2oGpWuxvWTHmZEjhyYe",
+    "type": "docx"
+  },
+  {
+    "name": "344｜Landing CaseStudy / Skills / Sandbox Sections 详解",
+    "token": "JdI1dhTOboOwsuxU7DamW4yPyOg",
+    "type": "docx"
+  },
+  {
+    "name": "345｜Landing WhatsNew / Community Sections 详解",
+    "token": "XvbLdJrb7oQmERxIHlPmrPaHyUe",
+    "type": "docx"
+  }
+]

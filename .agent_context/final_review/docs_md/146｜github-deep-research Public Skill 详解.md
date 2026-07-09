@@ -38,10 +38,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Trigger["/github-deep-research"] --> SKILL["SKILL.md frontmatter"]
+  SKILL --> R1["Round 1 GitHub API"]
+  SKILL --> R2["Rounds 2-4 web search"]
+  R1 --> CLI["github_api.py main"]
+  CLI --> Dispatch["command arg"]
+  Dispatch -->|"summary"| Sum["summarize_repo"]
+  Dispatch -->|"readme tree"| RT["get_readme get_tree"]
+  Dispatch -->|"issues prs commits"| IPC["get_issues get_pull_requests get_recent_commits"]
+  Sum --> Get["_get requests.get"]
+  RT --> Get
+  IPC --> Get
+  Get --> API["api.github.com REST"]
+  R2 --> WS["web_search web_fetch"]
+  R1 --> Tpl["report_template.md"]
+  R2 --> Tpl
+  Tpl --> Out["research_topic_YYYYMMDD.md"]
 ```

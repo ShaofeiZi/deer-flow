@@ -41,11 +41,23 @@ flowchart TD
 | 阅读路径 | 阅读路径：先判断它在哪个 hook 生效，再看它读写 ThreadState 的哪些字段。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant WM as wrap_model_call
+  participant M as Model
+  participant AM as after_model
+  participant TN as Tools node
+  participant PW as _pending_warnings
+
+  Note over WM,PW: iteration N
+  WM->>PW: drain pending warnings
+  WM->>M: ModelRequest
+  M-->>AM: AIMessage with tool_calls
+  AM->>AM: _track_and_check hit warn_threshold
+  AM->>PW: _queue_pending_warning keyed by thread/run
+  AM-->>TN: AIMessage unchanged
+  TN-->>TN: emit ToolMessage responses
+  Note over WM,PW: next iteration
+  WM->>PW: _drain_pending_warnings
+  PW-->>WM: warning text
+  WM->>M: messages plus HumanMessage loop_warning after ToolMessages
 ```

@@ -39,10 +39,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  SDKPath["api-client getAPIClient"]
+  RESTPath["feedback upsertFeedback deleteFeedback"]
+  SDKPath --> PatchStream["patch runs.stream"]
+  SDKPath --> PatchJoin["patch runs.joinStream"]
+  PatchStream --> Sanitize["sanitizeRunStreamOptions"]
+  PatchJoin --> Sanitize
+  PatchJoin --> Inactive["isInactiveRunStreamError clearReconnectRun"]
+  Sanitize --> LangGraph["LangGraphClient originalRunStream"]
+  LangGraph --> OnReq["onRequest injectCsrfHeader"]
+  RESTPath --> Fetcher["fetcher.fetch credentials include"]
+  Fetcher --> Fetch401["401 buildLoginUrl redirect"]
+  OnReq --> Shared["isStateChangingMethod readCsrfCookie"]
+  Fetcher --> Shared
+  Shared --> Header["X-CSRF-Token header"]
+  Header --> Gateway["Gateway CSRFMiddleware"]
 ```

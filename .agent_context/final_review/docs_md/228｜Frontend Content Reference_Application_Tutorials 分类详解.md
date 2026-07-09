@@ -42,10 +42,16 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  NextCfg["next.config.js withNextra"] --> Build["Nextra build"]
+  Root["content/en/_meta.ts"] --> Build
+  Build --> PageMap["Nextra PageMap"]
+  RefMeta["reference/_meta.ts model-providers"] --> RefSec["Reference section"]
+  AppMeta["application/_meta.ts quick-start configuration"] --> AppSec["Application section"]
+  TutMeta["tutorials/_meta.ts first-conversation"] --> TutSec["Tutorials section"]
+  PostsMeta["posts/_meta.ts weekly"] --> BlogSec["Blog section"]
+  PageMap --> Sidebar["Sidebar navigation"]
+  RefSec --> Sidebar
+  AppSec --> Sidebar
+  TutSec --> Sidebar
+  BlogSec --> BlogPage["Blog index page"]
 ```

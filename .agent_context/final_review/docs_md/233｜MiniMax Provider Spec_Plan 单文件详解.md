@@ -38,10 +38,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Entry["generate_image / generate_video / generate_podcast"]
+  Entry --> Resolve["_resolve_provider"]
+  Resolve -->|"SKILL_PROVIDER set"| Force["override wins"]
+  Resolve -->|"existing creds present"| Legacy["gemini or volcengine"]
+  Resolve -->|"only MINIMAX_API_KEY"| MM["minimax"]
+  Resolve -->|"no creds"| Err["ValueError"]
+  MM --> Img["POST /v1/image_generation"]
+  MM --> Vid["POST /v1/video_generation"]
+  MM --> Pod["POST /v1/t2a_v2"]
+  MusEntry["generate_music minimax only"] --> Mus["POST /v1/music_generation"]
+  Img --> ImgDec["base64 decode image_base64"]
+  Pod --> HexDec["hex decode data.audio"]
+  Mus --> HexDec
+  Vid --> Poll["_poll_video_task /v1/query then /v1/files/retrieve"]
+  Poll --> DL["download mp4"]
+  ImgDec --> Write["write output file"]
+  HexDec --> Write
+  DL --> Write
 ```

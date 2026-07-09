@@ -76,10 +76,20 @@ backend/app/channels/feishu.py
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  In[MessageBus inbound] --> Loop[_dispatch_loop]
+  Loop --> Handle[_handle_message]
+  Handle --> Branch{msg type}
+  Branch -->|COMMAND| Cmd[_handle_command]
+  Branch -->|CHAT| Chat[_handle_chat]
+  Chat --> Lookup{thread in store}
+  Lookup -->|missing| Create[_create_thread]
+  Lookup -->|exists| Reuse[reuse thread_id]
+  Create --> Params[_resolve_run_params]
+  Reuse --> Params
+  Params --> Stream{streaming?}
+  Stream -->|no| Wait[client.runs.wait]
+  Stream -->|yes| RunStream[client.runs.stream]
+  Cmd --> Out[publish OutboundMessage]
+  Wait --> Out
+  RunStream --> Out
 ```

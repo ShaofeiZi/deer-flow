@@ -39,11 +39,34 @@ flowchart TD
 | 阅读路径 | 阅读路径：从 URL/API 入口往内追 service，再看数据落到哪里。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Client as chat.sh useStream
+  participant TR as threads.py
+  participant RR as runs.py
+  participant AZ as authz.py
+  participant SV as services.py
+  participant RT as RunManager StreamBridge
+  participant TS as thread_store
+  participant CK as checkpointer
+
+  Client->>TR: POST threads
+  TR->>TS: thread_store create
+  TR->>CK: aput empty checkpoint
+  TR-->>Client: thread_id
+  Client->>RR: POST runs stream
+  RR->>AZ: require_permission owner_check
+  AZ->>TS: check_access
+  RR->>SV: start_run
+  SV->>RT: create_or_reject RunRecord
+  SV->>TS: upsert thread_meta
+  SV->>RT: create_task run_agent
+  SV-->>RR: RunRecord
+  RR-->>Client: StreamingResponse sse_consumer
+  loop SSE frames
+    RT->>SV: bridge.subscribe events
+    SV->>Client: metadata values messages-tuple
+  end
+  RT->>SV: END_SENTINEL
+  SV->>Client: end event
+  Note over SV,Client: client disconnect triggers run_mgr cancel
 ```

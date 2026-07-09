@@ -38,10 +38,28 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+    Entry["before_model abefore_model"]
+    Count["token_counter"]
+    Gate{"_should_summarize"}
+    Cutoff["_determine_cutoff_index"]
+    Partition["_partition_with_skill_rescue"]
+    Reminders["_preserve_dynamic_context_reminders"]
+    Hooks["_fire_hooks"]
+    Memory["memory_flush_hook"]
+    Queue["MemoryQueue add_nowait"]
+    Summary["_acreate_summary"]
+    Model["_summary_model ainvoke TAG_NOSTREAM"]
+    NewMsg["_build_new_messages HumanMessage name=summary"]
+    State["RemoveMessage REMOVE_ALL_MESSAGES"]
+    Noop["return None"]
+    Exit["return messages patch"]
+
+    Entry --> Count --> Gate
+    Gate -- no --> Noop
+    Gate -- yes --> Cutoff
+    Cutoff -- "no cutoff" --> Noop
+    Cutoff -- ok --> Partition
+    Partition --> Reminders --> Hooks
+    Hooks --> Memory --> Queue
+    Hooks --> Summary --> Model --> NewMsg --> State --> Exit
 ```

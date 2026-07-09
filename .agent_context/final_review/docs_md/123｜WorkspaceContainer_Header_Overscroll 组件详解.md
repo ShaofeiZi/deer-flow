@@ -43,12 +43,21 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Layout["workspace/layout.tsx"] --> Content["WorkspaceContent"]
+  Content --> Provider["SidebarProvider"]
+  Provider --> Sidebar["WorkspaceSidebar"]
+  Provider --> Inset["SidebarInset"]
+  Sidebar --> SideHeader["WorkspaceHeader sidebar"]
+  SideHeader --> NewChat["chats/new link"]
+  Inset --> ChatsPage["chats/page.tsx"]
+  ChatsPage --> Container["WorkspaceContainer"]
+  Container --> MainHeader["WorkspaceHeader content"]
+  MainHeader --> Breadcrumb["Breadcrumb usePathname"]
+  MainHeader --> Github["Tooltip GithubIcon"]
+  Container --> Body["WorkspaceBody"]
+  ChatsPage --> Threads["useInfiniteThreads"]
+  Threads --> List["filtered thread list"]
+  Body --> List
 ```
 
 <callout emoji="⚠️">

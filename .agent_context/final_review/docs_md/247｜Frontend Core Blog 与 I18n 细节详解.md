@@ -41,10 +41,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req["GET /blog request"] --> Srv["detectLocaleServer"]
+  Srv --> Cookie["locale cookie"]
+  Cookie --> Norm["normalizeLocale"]
+  Norm --> I18n["getI18n / locale"]
+  I18n --> Pref["getPreferredBlogLang"]
+  Pref --> All["getAllPosts cached"]
+  All --> PMzh["getPageMap /zh/posts"]
+  All --> PMen["getPageMap /en/posts"]
+  PMzh --> Collect["collectLocalizedBlogPosts"]
+  PMen --> Collect
+  Collect --> Merge["mergePostsBySlug"]
+  Merge --> Sel["selectPreferredLanguage"]
+  Sel --> Sorted["BlogPost[] sorted by date"]
+  Sorted --> Routes["/blog posts and tags routes"]
+  Routes --> List["PostList component"]
 ```

@@ -42,11 +42,20 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  MockSpec["mock e2e specs"] --> Mock["mockLangGraphAPI"]
+  Mock --> Search["threads/search"]
+  Mock --> HistMsgs["threads/history + per-run messages"]
+  Search --> InfHooks["useInfiniteThreads"]
+  HistMsgs --> HistHooks["useThreadHistory"]
+  InfHooks --> Sentinel["chats-page-sentinel"]
+  Sentinel --> NextPage["next offset page"]
+  RealSpec["real-backend specs"] --> Reg["POST /api/v1/auth/register"]
+  Reg --> Seed["POST /api/test-only/seed-runs"]
+  Seed --> Gateway["real Gateway"]
+  Gateway --> ListRuns["runs list_by_thread newest-first"]
+  ListRuns --> Rebuild["useThreadHistory per-run rebuild"]
+  Rebuild --> Assert["assert ALPHA above OMEGA"]
+  RealSpec --> AuthMe["GET /api/v1/auth/me"]
+  AuthMe --> Gateway
 ```

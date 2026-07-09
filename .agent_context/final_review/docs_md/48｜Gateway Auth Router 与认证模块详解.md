@@ -46,10 +46,20 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Req[Incoming Request] --> Pub{_is_public path}
+  Pub -- yes --> Next[call_next route]
+  Pub -- no --> Int{valid internal token}
+  Int -- yes --> IntUser[get_internal_user]
+  Int -- no --> Cookie{access_token cookie}
+  Cookie -- missing --> Disabled{is_auth_disabled}
+  Cookie -- present --> Resolve[get_current_user_from_request strict JWT]
+  Resolve -- HTTPException --> Disabled
+  Resolve -- User --> Stamp
+  Disabled -- yes --> DisUser[get_auth_disabled_user]
+  Disabled -- no --> Unauthorized[401 NOT_AUTHENTICATED JSONResponse]
+  IntUser --> Stamp[set request.state.user and auth and auth_source]
+  DisUser --> Stamp
+  Stamp --> Ctx[set_current_user contextvar]
+  Ctx --> Next
+  Next --> Reset[reset_current_user in finally]
 ```

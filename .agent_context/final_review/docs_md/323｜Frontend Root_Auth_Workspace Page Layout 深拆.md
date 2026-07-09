@@ -42,10 +42,16 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Entry["getServerSideUser"] --> Static["static or auth-disabled?"]
+  Static -->|"yes"| Authed["tag authenticated"]
+  Static -->|"no"| Cookie["access_token cookie?"]
+  Cookie -->|"absent"| Setup["fetch /auth/setup-status"]
+  Setup -->|"needs_setup true"| SysReq["tag system_setup_required"]
+  Setup -->|"unreachable or false"| Unauth["tag unauthenticated"]
+  Cookie -->|"present"| Me["fetch /auth/me"]
+  Me -->|"200 needs_setup"| NeedsSetup["tag needs_setup"]
+  Me -->|"200 ok"| Authed
+  Me -->|"401 / 403"| Unauth
+  Me -->|"timeout / non-ok"| GwDown["tag gateway_unavailable"]
+  GW["getGatewayConfig throws"] --> CfgErr["tag config_error"]
 ```

@@ -38,10 +38,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Entry["generate_video"] --> Resolve["_resolve_provider"]
+  Resolve --> Decide{"provider"}
+  Decide -->|"minimax"| MM["_generate_video_minimax"]
+  Decide -->|"gemini"| Gem["_generate_video_gemini"]
+  MM --> MMPost["POST /v1/video_generation"]
+  MMPost --> MMPoll["_poll_video_task"]
+  MMPoll --> MMRet["_retrieve_file_url"]
+  MMRet --> MMDl["_download"]
+  Gem --> GemPost["POST predictLongRunning"]
+  GemPost --> GemPoll["poll operation done"]
+  GemPoll --> GemDl["download uri"]
+  MMDl --> Out["output mp4"]
+  GemDl --> Out
 ```

@@ -41,10 +41,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+    Item["pytest test item"] --> Gate{"is_blocking_io_item"}
+    Gate -- "no" --> Skip["yield ungated"]
+    Gate -- "yes" --> Mark{"allow_blocking_io marker"}
+    Mark -- "set" --> Skip
+    Mark -- "unset" --> Strict["detect_blocking_io_strict"]
+    Strict --> BB["BlockBuster scanned_modules app deerflow"]
+    BB --> Anchor["each anchor runs ainvoke / handler"]
+    Anchor --> Off["asyncio.to_thread offload"]
+    Off --> Loop["event loop stays free"]
+    Loop --> Detect{"sync IO in app/deerflow on loop"}
+    Detect -- "yes" --> Fail["BlockingError test fails"]
+    Detect -- "no" --> Pass["gate passes"]
+    Anchor -. "sqlite path" .-> CP["_async_checkpointer ensure_sqlite_parent_dir"]
+    Anchor -. "uploads scan" .-> UM["UploadsMiddleware abefore_agent run_in_executor"]
+    Anchor -. "ctx inject" .-> DM["DynamicContextMiddleware abefore_agent to_thread"]
+    Anchor -. "agent dir" .→ AG["create_agent_endpoint delete_agent to_thread"]
 ```

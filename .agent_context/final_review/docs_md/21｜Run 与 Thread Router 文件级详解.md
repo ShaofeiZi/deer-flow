@@ -62,11 +62,33 @@ POST /api/runs/stream
 | 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Client as LangGraph SDK
+    participant Router as runs or thread_runs router
+    participant StartRun as services.start_run
+    participant RunMgr as RunManager.create_or_reject
+    participant Task as run_agent background task
+    participant Bridge as StreamBridge
+    participant SSE as sse_consumer
+
+    Client->>Router: POST runs/stream
+    Router->>StartRun: body thread_id request
+    StartRun->>RunMgr: create_or_reject
+    alt ConflictError
+        RunMgr-->>StartRun: ConflictError
+        StartRun-->>Client: HTTP 409
+    else accepted
+        RunMgr-->>StartRun: RunRecord
+        StartRun->>Task: asyncio.create_task run_agent
+        StartRun-->>Router: record
+        Router-->>Client: StreamingResponse text/event-stream
+        Router->>SSE: sse_consumer bridge record
+        Task->>Bridge: publish events
+        Bridge->>SSE: subscribe entries
+        SSE-->>Client: SSE frames event and data
+        Task->>Bridge: END_SENTINEL
+        Bridge->>SSE: END_SENTINEL
+        SSE-->>Client: end frame
+    end
+    note over SSE,RunMgr: on client disconnect with on_disconnect cancel sse_consumer calls RunMgr.cancel
 ```

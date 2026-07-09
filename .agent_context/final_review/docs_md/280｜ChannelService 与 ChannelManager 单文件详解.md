@@ -41,10 +41,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Bus["MessageBus.get_inbound"] --> Handle["_handle_message"]
+  Handle --> Type{msg_type}
+  Type -->|COMMAND| Cmd["_handle_command"]
+  Type -->|CHAT| Chat["_handle_chat"]
+  Cmd --> Slash["_resolve_slash_skill_command"]
+  Slash -->|route_to_chat| Chat
+  Chat --> Thread["store.get_thread_id"]
+  Thread -->|none| Create["client.threads.create"]
+  Create --> Ingest["_ingest_inbound_files"]
+  Thread -->|reuse| Ingest
+  Ingest --> Run["runs.wait or runs.stream"]
+  Run --> Busy{thread_busy}
+  Busy -->|ConflictError| SendErr["_send_error"]
+  Busy -->|ok| Deliver["_prepare_artifact_delivery"]
+  Deliver --> Pub["bus.publish_outbound"]
 ```

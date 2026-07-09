@@ -43,10 +43,35 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  ChatSpec["chat.spec.ts"]
+  AgentSpec["agent-chat.spec.ts"]
+  SideSpec["sidebar.spec.ts"]
+  ArtSpec["artifact-preview.spec.ts"]
+  InitSpec["chat-thread-init-ordering.spec.ts"]
+  ChatRoute["/workspace/chats/new"]
+  AgentRoute["/workspace/agents"]
+  AgentChatRoute["/workspace/agents/test-agent/chats/new"]
+  ThreadRoute["/workspace/chats/threadId"]
+  MockAPI["mockLangGraphAPI in utils/mock-api.ts"]
+  EP1["/api/langgraph/threads"]
+  EP2["/api/langgraph/threads/*/runs/stream"]
+  Assert["Playwright expect toHaveURL and toBeVisible"]
+  CI["CI e2e job"]
+
+  ChatSpec --> ChatRoute
+  AgentSpec --> AgentRoute
+  AgentSpec --> AgentChatRoute
+  SideSpec --> ChatRoute
+  ArtSpec --> ThreadRoute
+  InitSpec --> ChatRoute
+  ChatRoute --> MockAPI
+  AgentRoute --> MockAPI
+  AgentChatRoute --> MockAPI
+  ThreadRoute --> MockAPI
+  MockAPI --> EP1
+  MockAPI --> EP2
+  ChatRoute --> Assert
+  ThreadRoute --> Assert
+  AgentRoute --> Assert
+  Assert --> CI
 ```

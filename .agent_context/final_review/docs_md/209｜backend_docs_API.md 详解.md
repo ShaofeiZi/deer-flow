@@ -41,11 +41,29 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant Client
+  participant Auth as AuthMiddleware
+  participant CSRF as CSRFMiddleware
+  participant Handler as stream_run
+  participant StartRun as start_run
+  participant RunMgr as RunManager
+  participant Task as run_agent task
+  participant Bridge as StreamBridge
+  participant Consumer as sse_consumer
+
+  Client->>Auth: POST runs/stream
+  Auth->>CSRF: user context
+  CSRF->>Handler: csrf ok
+  Handler->>StartRun: body thread_id
+  StartRun->>StartRun: check_access ownership
+  StartRun->>RunMgr: create_or_reject
+  RunMgr-->>StartRun: RunRecord
+  StartRun->>StartRun: build_run_config
+  StartRun->>Task: create_task run_agent
+  Handler->>Consumer: StreamingResponse
+  Task->>Bridge: publish events
+  Bridge->>Consumer: values messages end
+  Consumer->>Client: SSE frames
+  Consumer->>RunMgr: cancel on disconnect
 ```

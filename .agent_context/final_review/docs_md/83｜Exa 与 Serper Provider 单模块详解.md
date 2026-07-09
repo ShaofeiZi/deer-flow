@@ -40,10 +40,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  ExaSearch["exa web_search_tool"] --> ExaClient["_get_exa_client api_key"]
+  ExaSearch --> ExaCfg["get_tool_config max_results search_type"]
+  ExaClient --> ExaSDK["Exa.search highlights"]
+  ExaCfg --> ExaSDK
+  ExaSDK --> ExaNorm["normalize title url highlights"]
+  ExaNorm --> ExaOut["json.dumps return"]
+  ExaFetch["exa web_fetch_tool"] --> ExaGet["Exa.get_contents text 4096 markdown"]
+  SerperSearch["serper web_search_tool"] --> SerperKey["_get_api_key"]
+  SerperKey --> KeySrc["config api_key or SERPER_API_KEY env"]
+  KeySrc --> NoKey["no key warn once JSON error"]
+  KeySrc --> SerperPost["httpx POST google.serper.dev/search num"]
+  SerperPost --> Organic["organic slice max_results"]
+  Organic --> SerperNorm["normalize title url snippet"]
+  SerperNorm --> SerperOut["json.dumps return"]
 ```

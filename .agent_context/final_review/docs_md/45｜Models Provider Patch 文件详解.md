@@ -42,11 +42,21 @@ flowchart TD
 | 阅读路径 | 阅读路径：先确认它在系统链路中的上游和下游，再看关键函数。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Agent as leadAgent
+    participant Factory as create_chat_model
+    participant Patch as patched provider
+    participant Base as BaseChatModel
+    participant API as provider gateway
+
+    Agent->>Factory: name and thinking_enabled
+    Factory->>Patch: model_class with merged settings
+    Agent->>Patch: invoke multi-turn messages
+    Patch->>Base: call base _get_request_payload
+    Base-->>Patch: payload drops thought_signature and reasoning_content
+    Patch->>Patch: restore_assistant_payloads or reasoning_split or OAuth billing
+    Patch->>API: POST repaired payload
+    API-->>Patch: response with reasoning_details and signatures
+    Patch-->>Agent: AIMessage additional_kwargs preserved
+    Note over Agent,API: next turn reuses preserved fields
 ```

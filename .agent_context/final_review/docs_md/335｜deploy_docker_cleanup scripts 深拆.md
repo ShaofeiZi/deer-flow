@@ -40,10 +40,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Cfg["config.yaml sandbox.use + provisioner_url"] --> Detect["detect_sandbox_mode"]
+  Detect --> Mode{"sandbox mode"}
+  Mode -->|local| BaseSvc["frontend gateway nginx"]
+  Mode -->|aio| BaseSvc
+  Mode -->|provisioner| ProvSvc["frontend gateway nginx provisioner"]
+  DeployStart["deploy.sh start"] --> ComposeProd["compose -p deer-flow docker-compose.yaml"]
+  DockerStart["docker.sh start"] --> ComposeDev["compose -p deer-flow-dev docker-compose-dev.yaml"]
+  ComposeProd --> BaseSvc
+  ComposeProd --> ProvSvc
+  ComposeDev --> BaseSvc
+  ComposeDev --> ProvSvc
+  DockerStop["docker.sh stop"] --> ComposeDown["compose down"]
+  ComposeDown --> Cleanup["cleanup-containers.sh deer-flow-sandbox"]
+  Cleanup --> CleanDocker["cleanup_docker"]
+  Cleanup --> CleanApple["cleanup_apple_container"]
 ```

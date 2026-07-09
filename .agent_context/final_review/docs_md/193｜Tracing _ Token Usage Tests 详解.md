@@ -41,11 +41,29 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant LLM as AIMessage with usage_metadata
+    participant Task as task tool
+    participant Cache as pop_cached_subagent_usage
+    participant MW as TokenUsageMiddleware.after_model
+    participant Stream as DeerFlowClient.stream
+    participant Router as GET /api/threads/{thread_id}/token-usage
+    participant Store as RunStore.aggregate_tokens_by_thread
+
+    LLM->>Task: dispatch task tool_call
+    Task->>Cache: cache subagent usage by tool_call_id
+    Task-->>LLM: ToolMessage result
+    LLM->>MW: after_model state with messages
+    MW->>Cache: pop_cached_subagent_usage tool_call_id
+    Cache-->>MW: subagent usage dict
+    MW->>MW: merge usage into dispatch AIMessage.usage_metadata
+    MW->>MW: build token_usage_attribution actions
+    MW-->>LLM: updated AIMessage with attribution
+    LLM->>Stream: stream chunks
+    Stream->>Stream: _account_usage accumulates cumulative_usage
+    Stream-->>Stream: end event usage totals
+    Stream->>Store: persist run token totals
+    Router->>Store: aggregate_tokens_by_thread thread_id
+    Store-->>Router: by_model and by_caller totals
+    Router-->>Router: ThreadTokenUsageResponse
 ```

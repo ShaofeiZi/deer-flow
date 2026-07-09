@@ -49,10 +49,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Hook[wrap_model_call / awrap_model_call] --> Prep[_prepare_model_request]
+  Prep --> Find[_find_activation_target]
+  Find --> Dedup{already activated for target?}
+  Dedup -->|yes| Skip[return None - handler unchanged]
+  Dedup -->|no| Resolve[_resolve_activation]
+  Resolve --> Checks{skill name/enabled/available?}
+  Checks -->|fail| Fail[AIMessage failure_message]
+  Checks -->|ok| ResolvePath[resolve_slash_skill]
+  ResolvePath -->|None| Fail
+  ResolvePath -->|resolved| Read[_read_skill_content SKILL.md within skills root]
+  Read -->|OSError or ValueError| Fail
+  Read -->|ok| Audit[_record_activation sha256 run_journal]
+  Audit --> Reminder[_build_activation_reminder xml]
+  Reminder --> Insert[insert hidden HumanMessage at target_index]
+  Insert --> Handler[handler prepared ModelRequest]
 ```

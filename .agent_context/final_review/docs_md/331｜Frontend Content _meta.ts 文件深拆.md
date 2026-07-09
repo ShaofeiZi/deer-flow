@@ -41,11 +41,17 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  Req["docs request"] --> NC["next.config.js i18n"]
+  NC -->|"en"| EnRoot["content/en/_meta.ts"]
+  NC -->|"zh"| ZhRoot["content/zh/_meta.ts"]
+  EnRoot --> Intro["introduction/_meta.ts"]
+  EnRoot --> Harness["harness/_meta.ts"]
+  EnRoot --> App["application/_meta.ts"]
+  EnRoot --> Tut["tutorials/_meta.ts"]
+  EnRoot --> Ref["reference/_meta.ts"]
+  EnRoot --> Pages["workspace blog login setup page"]
+  EnRoot --> PostsPg["posts page"]
+  PostsPg --> Weekly["posts/_meta.ts weekly"]
+  ZhRoot --> ZhMirror["zh mirrors en tree"]
 ```

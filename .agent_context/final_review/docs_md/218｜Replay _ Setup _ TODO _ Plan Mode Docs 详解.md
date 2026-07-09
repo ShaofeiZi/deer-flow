@@ -38,11 +38,17 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+  [*] --> PENDING : execute_async prompt
+  PENDING --> RUNNING : scheduler submits run_task
+  RUNNING --> RUNNING : task_running SSE writer
+  RUNNING --> COMPLETED : result.result returned
+  RUNNING --> FAILED : result.error returned
+  RUNNING --> CANCELLED : request_cancel_background_task
+  RUNNING --> TIMED_OUT : poll_count exceeds max_poll_count
+  RUNNING --> CANCELLED : CancelledError shielded await
+  COMPLETED --> [*] : cleanup_background_task
+  FAILED --> [*] : cleanup_background_task
+  CANCELLED --> [*] : _is_subagent_terminal then cleanup
+  TIMED_OUT --> [*] : cleanup_background_task
 ```

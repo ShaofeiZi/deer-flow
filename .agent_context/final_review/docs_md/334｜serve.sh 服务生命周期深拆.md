@@ -42,10 +42,27 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Args["arg parse --dev --prod --daemon --stop"]
+  Args --> Action{ACTION}
+  Action -->|--stop --restart| Stop["stop_all"]
+  Stop --> Reclaim["_kill_repo_port 8001 3000 2026"]
+  Stop --> Kill["_kill_repo_processes uvicorn next nginx"]
+  Stop --> Cln["cleanup-containers.sh"]
+  Action -->|--dev --prod| StopAll["stop_all then restart"]
+  StopAll --> Config{"config check config.yaml"}
+  Config -->|"missing"| ExitFail["exit 1 run make setup"]
+  Config -->|found| Upgrade["config-upgrade.sh"]
+  Upgrade --> Extras["detect_uv_extras.py"]
+  Extras --> Deps["uv sync backend / pnpm install frontend"]
+  Deps --> Skip{"SKIP_INSTALL"}
+  Skip -->|true| Start
+  Skip -->|false| Start["run_service loop"]
+  Start --> GW["Gateway uvicorn app.gateway.app port 8001"]
+  Start --> FE["Frontend pnpm dev or preview port 3000"]
+  Start --> NX["Nginx nginx.local.conf port 2026"]
+  GW --> Wait["wait-for-port.sh"]
+  FE --> Wait
+  NX --> Wait
+  Wait --> Ready["ready localhost 2026"]
+  NX --> Route["Nginx routes /api to Gateway and / to Frontend"]
 ```

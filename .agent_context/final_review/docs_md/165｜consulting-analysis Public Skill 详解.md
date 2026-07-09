@@ -38,10 +38,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Sub["research subject"] --> P1["Phase 1 SKILL.md"]
+  P1 --> Skel["chapter skeleton + frameworks"]
+  Skel --> DR["data requirements P0 P1 P2"]
+  DR --> VP["visualization plan"]
+  VP --> AF["Analysis Framework"]
+  AF --> Coll["deep-research data-analysis web search"]
+  Coll --> DP["Data Package"]
+  DP --> P2["Phase 2 SKILL.md"]
+  AF --> P2
+  P2 --> Chart["Step 2.3 chart generation"]
+  Chart --> Write["Step 2.4 write narrative"]
+  Write --> Report["final consulting report"]
+  Report --> Ref["GB/T 7714 references"]
 ```

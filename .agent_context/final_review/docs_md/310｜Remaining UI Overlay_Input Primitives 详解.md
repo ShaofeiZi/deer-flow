@@ -41,11 +41,42 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  Dialog["dialog.tsx"]
+  Sheet["sheet.tsx"]
+  Tooltip["tooltip.tsx"]
+  Command["command.tsx"]
+  InputGroup["input-group.tsx"]
+  ButtonGroup["button-group.tsx"]
+
+  RadixDialog["@radix-ui/react-dialog"]
+  RadixTooltip["@radix-ui/react-tooltip"]
+  Cmdk["cmdk"]
+  Utils["lib/utils cn"]
+  CVA["class-variance-authority"]
+
+  Button["button.tsx"]
+  Input["input.tsx"]
+  Textarea["textarea.tsx"]
+  Separator["separator.tsx"]
+  Slot["@radix-ui/react-slot"]
+
+  Dialog --> RadixDialog
+  Dialog --> Utils
+  Sheet --> RadixDialog
+  Sheet --> Utils
+  Tooltip --> RadixTooltip
+  Tooltip --> Utils
+  Command --> Cmdk
+  Command --> Dialog
+  Command --> Utils
+  InputGroup --> Button
+  InputGroup --> Input
+  InputGroup --> Textarea
+  InputGroup --> Utils
+  InputGroup --> CVA
+  ButtonGroup --> Separator
+  ButtonGroup --> Utils
+  ButtonGroup --> CVA
+  ButtonGroup --> Slot
 ```

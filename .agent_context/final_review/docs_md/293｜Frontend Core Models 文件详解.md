@@ -37,11 +37,29 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant UI as InputBox component
+  participant Hook as useModels hook
+  participant API as loadModels
+  participant SM as isStaticWebsiteOnly
+  participant BE as getBackendBaseURL/api/models
+  participant Mock as mock/api/models route
+  participant TU as useThreadTokenUsage
+  UI->>Hook: useModels enabled
+  Hook->>API: queryFn loadModels
+  API->>SM: check static mode
+  alt static website only
+    SM-->>API: true
+    API-->>Hook: STATIC_MODELS_RESPONSE empty
+  else normal or mock
+    API->>BE: GET backendBaseURL/api/models
+    BE-->>API: ModelsResponse json
+    API-->>Hook: models + token_usage
+  end
+  Note over Hook,UI: models drives selectedModel fallback
+  Hook-->>UI: models array
+  UI->>UI: resolve supports_thinking and mode
+  Hook-->>UI: tokenUsageEnabled flag
+  UI->>TU: enabled equals tokenUsageEnabled and not isMock
+  TU-->>UI: thread token usage data
 ```

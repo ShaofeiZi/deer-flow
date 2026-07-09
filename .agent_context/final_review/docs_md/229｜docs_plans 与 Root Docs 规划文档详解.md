@@ -40,10 +40,54 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  subgraph RouteLayer ["Route layer"]
+    Page["page.tsx chat route"]
+  end
+  subgraph BizLayer ["Business components"]
+    UseThreadChat["useThreadChat"]
+    ChatBox["ChatBox"]
+    MessageList["MessageList"]
+    InputBox["InputBox"]
+  end
+  subgraph HooksLayer ["Core hooks"]
+    UseThreadStream["useThreadStream"]
+    UseThreadHistory["useThreadHistory"]
+    UseThreadTokenUsage["useThreadTokenUsage"]
+  end
+  subgraph ApiLayer ["Core API client"]
+    GetAPIClient["getAPIClient"]
+    FetchThreadTokenUsage["fetchThreadTokenUsage"]
+    LangGraphClient["LangGraph SDK client"]
+  end
+  subgraph InfraLayer ["Fetcher and config"]
+    Fetcher["fetcher.ts fetch + CSRF"]
+    Config["getBackendBaseURL + getLangGraphBaseURL"]
+  end
+  subgraph BackendLayer ["Backend"]
+    Gateway["gateway + LangGraph server"]
+  end
+  QueryClient["QueryClientProvider"]
+
+  Page --> UseThreadChat
+  Page --> ChatBox
+  Page --> MessageList
+  Page --> InputBox
+  Page --> UseThreadStream
+  Page --> UseThreadTokenUsage
+  InputBox --> UseThreadStream
+  UseThreadStream --> GetAPIClient
+  UseThreadStream --> UseThreadHistory
+  UseThreadHistory --> Fetcher
+  UseThreadHistory --> Config
+  UseThreadTokenUsage --> FetchThreadTokenUsage
+  FetchThreadTokenUsage --> Fetcher
+  FetchThreadTokenUsage --> Config
+  GetAPIClient --> LangGraphClient
+  LangGraphClient --> Config
+  LangGraphClient --> Fetcher
+  LangGraphClient --> Gateway
+  Fetcher --> Gateway
+  QueryClient -.-> UseThreadStream
+  QueryClient -.-> UseThreadHistory
+  QueryClient -.-> UseThreadTokenUsage
 ```

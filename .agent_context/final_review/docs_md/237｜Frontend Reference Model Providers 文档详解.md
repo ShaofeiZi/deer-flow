@@ -38,11 +38,17 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  Route["app/workspace/chats page"] --> Hook["useModels core/models/hooks"]
+  RouteAgent["app/workspace/agents page"] --> Hook
+  InputBox["components/workspace input-box"] --> Hook
+  Hook -->|"useQuery queryKey models"| API["loadModels core/models/api"]
+  API --> Static{"isStaticWebsiteOnly"}
+  Static -->|"true"| Empty["STATIC_MODELS_RESPONSE"]
+  Static -->|"false"| Fetch["fetch getBackendBaseURL /api/models"]
+  Fetch --> Parse["ModelsResponse core/models/types"]
+  Empty --> Parse
+  Parse -->|"models supports_thinking token_usage"| InputBox
+  Parse -->|"tokenUsageEnabled"| Route
+  Parse -->|"tokenUsageEnabled"| RouteAgent
 ```

@@ -39,10 +39,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  A["prompt-input.tsx"] --> B["splitUnsupportedUploadFiles"]
+  B --> C["accepted File list"]
+  C --> D["threads/hooks submit"]
+  D --> E["promptInputFilePartToFile"]
+  E --> F["wrap browser File"]
+  E --> G["fetch url to blob"]
+  G --> H["new File from blob"]
+  F --> I["uploadFiles"]
+  H --> I
+  I --> J["api/fetcher POST CSRF"]
+  J --> K["/api/threads/id/uploads"]
+  K --> L["UploadResponse files"]
+  L --> M["virtual_path to optimistic msg"]
 ```

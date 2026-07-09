@@ -39,11 +39,14 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+  [*] --> Loading: ChatsPage mount
+  Loading --> Browsing: first page returned
+  Browsing --> Fetching: sentinel intersect hasNextPage
+  Fetching --> Browsing: next page merged
+  Browsing --> Exhausted: lastPage under pageSize
+  Exhausted --> [*]: hasNextPage false
+  Browsing --> Searching: search input nonEmpty
+  Searching --> Fetching: Load more button
+  Searching --> Browsing: search cleared
 ```

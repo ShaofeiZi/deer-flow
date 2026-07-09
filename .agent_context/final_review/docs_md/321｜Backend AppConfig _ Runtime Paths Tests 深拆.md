@@ -38,10 +38,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Env["DEER_FLOW_CONFIG_PATH"] --> AppConfigResolve["AppConfig.resolve_config_path"]
+  ProjRoot["project_root cwd or env"] --> AppConfigResolve
+  Legacy["legacy backend/repo root"] --> AppConfigResolve
+  AppConfigResolve --> FromFile["AppConfig.from_file"]
+  FromFile --> CheckVer["_check_config_version"]
+  CheckVer --> Warn["logger warning if outdated"]
+  FromFile --> ApplySingleton["_apply_singleton_configs"]
+  ApplySingleton --> LoadTitle["load_title_config"]
+  ApplySingleton --> LoadMemory["load_memory_config"]
+  ApplySingleton --> LoadGuard["load_guardrails_config"]
+  ApplySingleton --> LoadCheck["load_checkpointer_config"]
+  LoadCheck --> ResetRuntime["reset_checkpointer reset_store"]
+  Caller["get_app_config"] --> Ctx["_current_app_config ContextVar"]
+  Caller --> Mtime["_app_config_path mtime check"]
+  Mtime --> Reload["_load_and_cache_app_config"]
+  Reload --> FromFile
 ```

@@ -42,11 +42,28 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  Utils["cn in lib/utils"] --> Button
+  Utils --> Input
+  Utils --> Textarea
+  Utils --> Switch
+  Utils --> Toggle
+  Utils --> InputGroup
+  Utils --> ButtonGroup
+  CVA["cva buttonVariants"] --> Button
+  CVA2["cva toggleVariants"] --> Toggle
+  Toggle -- "exports toggleVariants" --> ToggleGroup
+  ToggleGroup -- "ToggleGroupContext" --> ToggleGroupItem
+  Button -- "asChild Slot" --> ConfettiButton
+  Button --> InputGroupButton
+  Input --> InputGroupInput
+  Textarea --> InputGroupTextarea
+  InputGroupButton --> InputGroup
+  InputGroupInput --> InputGroup
+  InputGroupTextarea --> InputGroup
+  Separator --> ButtonGroupSeparator
+  ButtonGroupSeparator --> ButtonGroup
+  SwitchRoot["@radix Switch.Root"] --> Switch
+  ToggleRoot["@radix Toggle.Root"] --> Toggle
+  ToggleGroupRoot["@radix ToggleGroup.Root"] --> ToggleGroup
 ```

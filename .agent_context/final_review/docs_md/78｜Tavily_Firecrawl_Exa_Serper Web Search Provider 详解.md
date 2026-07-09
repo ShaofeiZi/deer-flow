@@ -39,10 +39,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Cfg["config.yaml tools.use"] --> GAT["get_available_tools"]
+  GAT --> RV["resolve_variable cfg.use BaseTool"]
+  RV --> T["Tavily tools web_search_tool"]
+  RV --> F["Firecrawl tools web_search_tool"]
+  RV --> E["Exa tools web_search_tool"]
+  RV --> S["Serper tools web_search_tool"]
+  T --> TC["TavilyClient search max_results"]
+  F --> FC["FirecrawlApp search limit"]
+  E --> EC["Exa search highlights"]
+  S --> SC["httpx.post google.serper.dev"]
+  TC --> N["normalize title url snippet"]
+  FC --> N
+  EC --> N
+  SC --> N2["normalize organic field"]
+  N --> Out["ToolMessage JSON to agent"]
+  N2 --> Out
 ```

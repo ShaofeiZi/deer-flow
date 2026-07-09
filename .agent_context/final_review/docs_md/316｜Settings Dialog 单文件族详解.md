@@ -38,10 +38,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  CmdPalette["CommandPalette Cmd-Comma"] --> Barrel["settings/index.ts barrel"]
+  NavMenu["WorkspaceNavMenu dropdown"] --> Barrel
+  Barrel --> Dialog["SettingsDialog"]
+  Dialog --> Sync["useEffect sync on open"]
+  Sync --> Active["activeSection state"]
+  Active --> Nav["nav buttons setActiveSection"]
+  Nav -->|click| Active
+  Active --> Switch{"render by section"}
+  Switch -->|about| AboutPage["AboutSettingsPage"]
+  AboutPage --> AboutMd["aboutMarkdown"]
+  Switch -->|skills| SkillPage["SkillSettingsPage"]
+  SkillPage --> Section["SettingsSection wrapper"]
+  Switch -->|other| Pages["Account/Appearance/Memory/Tool/Notification"]
+  Pages --> Section
+  SkillPage -->|onClose| Dialog
 ```

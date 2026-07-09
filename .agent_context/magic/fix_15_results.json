@@ -1,0 +1,114 @@
+[
+  {
+    "file": "146｜github-deep-research Public Skill 详解",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  },
+  {
+    "file": "107｜UI Navigation/Overlay Primitives 详解",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  },
+  {
+    "file": "170｜Backend Sandbox/MCP/Memory Tests 分类详解",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  },
+  {
+    "file": "114｜AI Elements Node、Edge、Checkpoint 图元素详解",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  },
+  {
+    "file": "115｜UI Form Primitives：Button、Input、Textarea、Switch、Toggle 详解",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  },
+  {
+    "file": "149｜frontend-design Public Skill 详解",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  },
+  {
+    "file": "178｜Frontend E2E Chat/Sidebar/Artifacts Specs 详解",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  },
+  {
+    "file": "227｜Frontend Content Introduction/Harness 文档分类详解",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  },
+  {
+    "file": "231｜Frontend Content Harness / Reference Docs 详解",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  },
+  {
+    "file": "247｜Frontend Core Blog 与 I18n 细节详解",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  },
+  {
+    "file": "284｜Frontend Core Uploads / Agents / Notification 详解",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  },
+  {
+    "file": "310｜Remaining UI Overlay/Input Primitives 详解",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  },
+  {
+    "file": "330｜Frontend Landing/Blog/Docs Route 文件深拆",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  },
+  {
+    "file": "344｜Landing CaseStudy / Skills / Sandbox Sections 详解",
+    "status": "failed",
+    "warnings": [
+      "degrade_code=2107,msg=Whiteboard content parse failed. Check the whiteboard content format",
+      "degrade_code=1003,msg=Instruction produced empty content after transform. Check that the instruction content is complete and non-empty"
+    ]
+  }
+]

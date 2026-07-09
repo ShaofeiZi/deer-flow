@@ -41,10 +41,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Base["base node 22 alpine"]
+  Base --> Pnpm["corepack pnpm 10.26.2"]
+  Pnpm --> Copy["COPY frontend"]
+  Copy --> Dev["dev stage"]
+  Copy --> Builder["builder stage"]
+  Dev --> DevInstall["pnpm install frozen-lockfile"]
+  DevInstall --> DevRun["EXPOSE 3000 pnpm dev"]
+  Builder --> BldInstall["pnpm install frozen-lockfile"]
+  BldInstall --> BldBuild["SKIP_ENV_VALIDATION pnpm build"]
+  BldBuild --> Prod["prod stage"]
+  Prod --> ProdCopy["COPY frontend from builder"]
+  ProdCopy --> ProdRun["CMD pnpm start"]
+  MkStatic["Makefile build-static"] --> EnvCfg["NEXT_CONFIG_BUILD_OUTPUT standalone"]
+  EnvCfg --> NextCfg["next.config.js"]
+  NextCfg --> OutStd["output standalone"]
 ```

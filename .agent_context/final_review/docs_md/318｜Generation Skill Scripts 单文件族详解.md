@@ -38,10 +38,23 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  CLI["__main__ argparse"] --> Entry["generate_image music video podcast ppt"]
+  Entry --> ReadJSON["read prompt or spec JSON"]
+  ReadJSON --> Resolve["_resolve_provider"]
+  ReadJSON -->|"music minimax only"| MM["MiniMax API"]
+  Resolve -->|"override or fallback"| MM
+  Resolve -->|"existing creds"| Native["Gemini or Volcengine"]
+  MM -->|"video"| Poll["_poll_video_task retrieve"]
+  MM -->|"podcast"| TTS["tts_node ThreadPoolExecutor"]
+  Native -->|"podcast"| TTS
+  Native -->|"image video"| GenAPI["Gemini generateContent predictLongRunning"]
+  MM -->|"image music"| Decode["base64 hex decode"]
+  TTS --> Mix["mix_audio"]
+  Poll --> DL["_download"]
+  Decode --> Write["_ensure_output_dir output_file"]
+  Mix --> Write
+  DL --> Write
+  GenAPI --> Write
+  ReadJSON -->|"ppt local"| Pptx["pptx Presentation add_picture"]
+  Pptx --> Write
 ```

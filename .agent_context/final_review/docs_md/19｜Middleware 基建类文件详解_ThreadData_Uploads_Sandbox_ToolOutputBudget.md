@@ -53,10 +53,18 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Tool[handler returns ToolMessage] --> Needs[_needs_budget pre-scan]
+  Needs -->|exempt or under trigger| Skip[return original ToolMessage]
+  Needs -->|over trigger| Resolve[_resolve_outputs_path and _resolve_sandbox]
+  Resolve --> Branch{sandbox resolved}
+  Branch -->|uses_thread_data_mounts| Host[_externalize to host outputs_path]
+  Branch -->|remote sandbox| SB[_externalize_to_sandbox write_file]
+  Branch -->|outputs_path only| Host
+  Branch -->|none| Fallback[_build_fallback]
+  Host --> VP{virtual_path ok}
+  SB --> VP
+  VP -->|yes| Preview[_build_preview head tail read_file ref]
+  VP -->|no| Fallback
+  Fallback --> Patch[_patch_tool_message content]
+  Preview --> Patch
 ```

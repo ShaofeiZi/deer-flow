@@ -1,0 +1,485 @@
+{
+  "01｜DeerFlow 整体架构与分层总览.md": {
+    "token": "TFY8df1x5o53mixHM3gmqNqlyce",
+    "block_id": "doxcnsJFVLjdQlbggdKXteM1MCg",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "02｜Gateway 与 LangGraph 运行时详解.md": {
+    "token": "Dcvkdjf3KopJmsxZa9QmEQPWyic",
+    "block_id": "doxcnMmESGvcf2oMmCOiILGDrmf",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1769
+  },
+  "03｜Lead Agent_Prompt_Tools 与 Middleware 详解.md": {
+    "token": "WbumdDbSCoTmW4xIrCsmpOIaymd",
+    "block_id": "doxcnvQ3nlLlNLeINE8Rl1p5vi9",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1776
+  },
+  "04｜Tools_Sandbox_Uploads 与 Artifacts 详解.md": {
+    "token": "ZOtCdVzKjoa3lAx3p92ms1eMyge",
+    "block_id": "doxcnpm84NWHTgx4mhEwfDBKDdg",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1782
+  },
+  "05｜Skills_MCP 与 Memory 详解.md": {
+    "token": "U50Ldy2sxoHbOAxo58vmNMUiyef",
+    "block_id": "doxcn7yQgzWxx8bvBjY9dFg2Idc",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1775
+  },
+  "06｜Frontend Workspace 与 Chat 主链路详解.md": {
+    "token": "IvEydJu3Poud6vx4mR0mThL1y4f",
+    "block_id": "doxcne63YophtnGzBoEJpkFM2Le",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1786
+  },
+  "07｜Frontend Settings_Models_Artifacts 数据流详解.md": {
+    "token": "JFD3dRkmvoRYgHxlJD1mbEUUyeb",
+    "block_id": "doxcnrkdwQShTHTuoyAAgkjDYKf",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1883
+  },
+  "08｜配置_部署_测试与排障详解.md": {
+    "token": "XyAFdSxNooUswXxcVx8mbR7iyqg",
+    "block_id": "doxcnFksAfWGFcJV4eLe9Ais4ne",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1628
+  },
+  "09｜Auth_CSRF_权限与 IM Channels 详解.md": {
+    "token": "KnQBdOROXoOE37xAKPdmljJJyHd",
+    "block_id": "doxcn2mJprXtha3pxSSo3ltB4zc",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1757
+  },
+  "10｜Models_Tracing_Persistence 与 Token Usage 详解.md": {
+    "token": "RUtPdneNLoPyI0x5ksKmblLJynd",
+    "block_id": "doxcnEo6qFCa9VKOHM2McjerP9e",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1759
+  },
+  "11｜Gateway Routers API 模块逐项详解.md": {
+    "token": "ObtfdmyjXo7OYpxM0i1mnRVZyAh",
+    "block_id": "doxcnM6kiMJbyzWwY5QEa1jAehd",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1647
+  },
+  "12｜Runtime RunManager_StreamBridge_Journal 详解.md": {
+    "token": "R7HYdJ5PXoiOdgxbpJfmMYDfyRb",
+    "block_id": "doxcnjbitKPNO4LuDRzh9UpLkuf",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1776
+  },
+  "13｜Backend Middleware 模块逐项详解.md": {
+    "token": "FKvZdX732osfBNxyscOmHFkgydd",
+    "block_id": "doxcnY2S876mBBxHBR5NGa9tIM9",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1731
+  },
+  "14｜Frontend Core Hooks 与 UI 模块逐项详解.md": {
+    "token": "W0cHd2o13oeVMSx2ucomr8N7yqc",
+    "block_id": "doxcnKUftUwnUewc29ixRp4X8Ze",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1652
+  },
+  "15｜Config_Paths 与 Hot Reload 边界详解.md": {
+    "token": "DTU7dQ6SiopsQDxfJqZmSTVWyag",
+    "block_id": "doxcnkRTIx36ucTAATxEvQ3gowd",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1766
+  },
+  "16｜Subagents_Task Tool 与并发执行详解.md": {
+    "token": "T2nWdcV6OoO2xBxBjB2mBIFOyJd",
+    "block_id": "doxcnbzpGJDX0A2anvNeGOUAsGh",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1705
+  },
+  "17｜Model Provider Factory 与模型适配详解.md": {
+    "token": "GHiydyXRiof4QWxhlrcm8Y8MyAe",
+    "block_id": "doxcnpKBpnYIdQJ1u76jv84tKte",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1707
+  },
+  "18｜Persistence_Database_ThreadMeta 与 Feedback 详解.md": {
+    "token": "AEwWdPBDGovKumxTbd3mDiFfywc",
+    "block_id": "doxcnMiuBRzv5TTsf8lq4q2Bjvg",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1653
+  },
+  "19｜Middleware 基建类文件详解_ThreadData_Uploads_Sandbox_ToolOutputBudget.md": {
+    "token": "Dg0idIHMcovbQWxrpKjmEwT3yyh",
+    "block_id": "doxcnHdQ64PgsmeyF3bimvSib8e",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1830
+  },
+  "20｜Middleware 上下文与 UX 类文件详解_Dynamic_Skill_Summary_Todo_Title_Memory.md": {
+    "token": "JcBLdKkKro44LfxcRmjmkANvypd",
+    "block_id": "doxcnQW3pt2aoCpYGfLRSiJvaqb",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "21｜Run 与 Thread Router 文件级详解.md": {
+    "token": "XBu1d292ioMiS1xPPgGmIfayybg",
+    "block_id": "doxcnPwrt8A7a82biUjxHAzrWfg",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "22｜管理类 Router 文件级详解_Models_MCP_Skills_Memory_Agents.md": {
+    "token": "XgSYdKk4goj6hXxiChvmPQX4yPc",
+    "block_id": "doxcn5GqQ41CLBhe56vzOQqUwnK",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "23｜文件类 Router 详解_Uploads_Artifacts_Feedback_Suggestions.md": {
+    "token": "Ms9CdobALoYwXxxIolSmjnYhydh",
+    "block_id": "doxcnsWcb8ZKUkqmagYBBywJNWc",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "24｜ThreadDataMiddleware 单文件详解.md": {
+    "token": "UvKWdlU67ov47kx6ygsmR4FkyKd",
+    "block_id": "doxcnSVaO86QOEz9r9vSIITZzuE",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "25｜UploadsMiddleware 单文件详解.md": {
+    "token": "IiQ9dfvfUoPcXLxr8JTmgS5nyKb",
+    "block_id": "doxcn4tfaTaGe3vdX95tZCEccIc",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "26｜SandboxMiddleware 单文件详解.md": {
+    "token": "ZTBedtbq1owHuuxfEj1mj6zny4J",
+    "block_id": "doxcnLvvFnwVnqLPqihBXN6L8zh",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "27｜ToolOutputBudgetMiddleware 单文件详解.md": {
+    "token": "VEKEdbAY1o3fUTxJXNWmqtw9yke",
+    "block_id": "doxcnQB1WXcEgZBs9FHPuJp5oWf",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "28｜DynamicContextMiddleware 单文件详解.md": {
+    "token": "WI9ddl8N4ozZ59xVObim5745yOe",
+    "block_id": "doxcnsxCwB25iBb3WLulwfNqKwc",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "29｜SkillActivationMiddleware 单文件详解.md": {
+    "token": "Wqntdu46NobRZ6xXj1Jm07u2y3c",
+    "block_id": "doxcnsLZbCns0l2KYLavyJ1mKWg",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "30｜Todo_Title_Memory Middleware 文件详解.md": {
+    "token": "TwFzdZemFoTVJOxJ2pAmaGRkyJX",
+    "block_id": "doxcn4siRvDgzmCPtAVeffMsKec",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "31｜LLMErrorHandlingMiddleware 单文件详解.md": {
+    "token": "YFlDdZ5uLoCidrxeQJ6mzqhfyUc",
+    "block_id": "doxcnHl4ldW3x2WSClXoFDJBMlf",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "32｜LoopDetectionMiddleware 单文件详解.md": {
+    "token": "B0EAdEvMoo9NCDxwUHLm5GMqyUf",
+    "block_id": "doxcnRrZMZuull7MMf7uLF6Ns8f",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "33｜SandboxAuditMiddleware 单文件详解.md": {
+    "token": "JH1VdeODuo4gavxMsiCmIJ5cyih",
+    "block_id": "doxcn9pfmyFIxxbTNBDoTMstkDb",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "34｜DeferredToolFilterMiddleware 单文件详解.md": {
+    "token": "Bh2wdOJ4eoYqolxDDfnmSgNtyec",
+    "block_id": "doxcnMo4wBV5amR4K4jVZCtrWVe",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "35｜SafetyFinishReasonMiddleware 单文件详解.md": {
+    "token": "AqFBdegF4osKOsx759OmqUGfyGd",
+    "block_id": "doxcngT0lzqHUSzFGDDdqnV1GJf",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1732
+  },
+  "36｜ViewImage_DanglingToolCall_SubagentLimit_TokenUsage Middleware 详解.md": {
+    "token": "FGBSd60wYoPStFxTn1wmos4Iyhd",
+    "block_id": "doxcngvaAaE9SxMySyOWCpSDIpd",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1545
+  },
+  "37｜Sandbox Tools 单文件详解_bash_ls_glob_grep_read_write_str_replace.md": {
+    "token": "SmrFdFwMYoZ1rSxcEWRm3aTSyVc",
+    "block_id": "doxcnn57ngJUuSipiHoGT7dZJlf",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1545
+  },
+  "38｜LocalSandbox 与 AioSandbox Provider 详解.md": {
+    "token": "DujDdwq1uoWq1lxzFJ6m3ACSyYc",
+    "block_id": "doxcnKsODlDcY3OgQLuM7fwxCDe",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1686
+  },
+  "39｜MCP Cache_Session Pool 与 OAuth 详解.md": {
+    "token": "RRlAdJ5QeoVOVmxAd5AmHF9Wycf",
+    "block_id": "doxcnonB1y6Kn5YmrqqdH0Vtqdh",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1686
+  },
+  "40｜Memory Queue_Updater_Storage 单文件详解.md": {
+    "token": "LEsJdNSIWoaRpUxxcxCms3S9ykd",
+    "block_id": "doxcnq6aqdYiAJ5Jw55MSTWyZTf",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1686
+  },
+  "41｜Skills Parser_Installer_Security Scanner 详解.md": {
+    "token": "KeIZd79ZSo4Ye5xMo6mmxI3ayif",
+    "block_id": "doxcnWofNvpV8d1cncjM0ZHVY1f",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1914
+  },
+  "42｜Frontend useThreadStream 单文件详解.md": {
+    "token": "FAKHdFdrxoDN17x6L2pmRh8LyLh",
+    "block_id": "doxcn4QYomVJaJNTFISdgePAE8s",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "43｜Frontend Message Utils 与 Artifacts Hooks 详解.md": {
+    "token": "LKNFdYQDFob1Pnxz0nTmHIRDy5b",
+    "block_id": "doxcn2dwE7GSzcQWHKmdX2b5o6e",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1545
+  },
+  "44｜Config 配置类目录详解.md": {
+    "token": "KkxxdGMdMoQL7xxJ68KmYRXNy5d",
+    "block_id": "doxcnSQvkBVnzEg1k3cxbCc1Obb",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1545
+  },
+  "45｜Models Provider Patch 文件详解.md": {
+    "token": "Px9jdtsoToG0dGxxvrqmwjAayYd",
+    "block_id": "doxcni9IDez4Xy1CXX2vWzUteor",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1545
+  },
+  "46｜Persistence Repository 文件详解.md": {
+    "token": "P0iPdScRBooiWtxzMALmUoEGyNd",
+    "block_id": "doxcnevocjNZd7UlHjobMBXn1kb",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "47｜Frontend Settings 页面文件详解.md": {
+    "token": "YBAWdQHf5o5XE0xFWanm7TZJyua",
+    "block_id": "doxcnitFkxzxPdbFS4MAVco1Kng",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1985
+  },
+  "48｜Gateway Auth Router 与认证模块详解.md": {
+    "token": "RIpxddfV7oVl1pxsy2wmbgxty5f",
+    "block_id": "doxcn4xxtm4lqPVynKzzJIPCuyf",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "49｜Gateway MCP_Skills_Memory Router 深入详解.md": {
+    "token": "GvzAdygTVoxdSkx5ccJmq0LLyei",
+    "block_id": "doxcnRm97kP9CZIFUIyxwrIdA0b",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1852
+  },
+  "50｜Frontend ChatPage 与 InputBox 文件详解.md": {
+    "token": "YZrtddBLUoi6dHxaE9qmtkUeyag",
+    "block_id": "doxcnBKFlBySaRJU0NsadHBvXhb",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 2026
+  },
+  "51｜thread_runs.py Router 单文件详解.md": {
+    "token": "BCeodzVdFoTfd2xYV7zmbv9ey2g",
+    "block_id": "doxcn7CzcRlv34V5p0tTRU8Dlad",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "52｜threads.py Router 单文件详解.md": {
+    "token": "G6g2dsCTJoC7I5xBSvymxpYGyDh",
+    "block_id": "doxcncp0QFRRnUI1RKPE9Psjxaf",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "53｜uploads.py Router 单文件详解.md": {
+    "token": "KRkUdNbBTogsdVxvGYomgrhbymh",
+    "block_id": "doxcnpEhllFqE2dFAzwd3qjMMrg",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "54｜artifacts.py Router 单文件详解.md": {
+    "token": "LfAcdzwGoovGBKxt2Y3muPMFyRe",
+    "block_id": "doxcnq7o0NHcFVIt5HVhvMVHCoe",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "55｜skills.py Router 单文件详解.md": {
+    "token": "QnVXd93l7oRHrYxKiMrmy1R1yqd",
+    "block_id": "doxcnzZxxEAnJehJeikAoLWMwOc",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "56｜memory.py Router 单文件详解.md": {
+    "token": "YhEfdVXOYoljEFxq2aWmD2UZyCf",
+    "block_id": "doxcn3bKkYRVAW1veXyI3WYoPbc",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "58｜Frontend Message Components 单文件详解.md": {
+    "token": "Pj9cdb03Ro5PKWxWuPOmQCk9ysd",
+    "block_id": "doxcnzwokK5Oheuju9M6uy0Woqd",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "59｜Frontend Artifact Components 单文件详解.md": {
+    "token": "NcqBdQyhgomSFNxnWvYmL4KFyrv",
+    "block_id": "doxcn6Hhn4wV905FRCtBT3jtcee",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "60｜Frontend Sidebar 与 Navigation 组件详解.md": {
+    "token": "QHtJdUR0no3wkdxcY1Zm5WYNyPg",
+    "block_id": "doxcnkb53tikSf0Z76Q96kNWqKc",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1849
+  },
+  "61｜auth.py Router 单文件详解.md": {
+    "token": "AmL1d7za4oPMylxMcZ8mHcjtyyg",
+    "block_id": "doxcnNSgVywFF3SAVP0tgbcHFze",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "62｜agents.py Router 单文件详解.md": {
+    "token": "FgmQddXpfogJd2xoPJUmcxubytf",
+    "block_id": "doxcn26MGpvIH8ZrGLpo5rDHrcd",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "63｜feedback_suggestions_channels Router 详解.md": {
+    "token": "EemWdDNmiovWWlxz6Y3mqSt7y6e",
+    "block_id": "doxcnLKdVyfyGynkyvn0sBpBBj7",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "64｜Frontend API Client 与 Fetcher 详解.md": {
+    "token": "Vdnzdq4HfoAl4pxJk1VmQnpAyGg",
+    "block_id": "doxcnAOcIxow6iBSoEdSJIsc6pc",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "65｜Frontend Core Settings_Models_MCP_Skills_Memory API 层详解.md": {
+    "token": "Xfm2d6pOMotWZixrSDcm22bsyic",
+    "block_id": "doxcnEpizCiLApw5ObSwkbyeh5b",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "66｜Frontend Uploads_Notification_Tasks Core 详解.md": {
+    "token": "IdEZdZcDeoADdIxMfjWmETbEyLb",
+    "block_id": "doxcnAM4ZpiFfFVla5j3bTt8Jnf",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1559
+  },
+  "67｜Frontend Agents_Blog_I18n_Static Mode 模块详解.md": {
+    "token": "GZsrdYiLLoT05sxERhNmH1v1ycb",
+    "block_id": "doxcn6OZhbo2uNgtvtjhpR0sPge",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1545
+  },
+  "68｜Channels Service 与 ChannelManager 详解.md": {
+    "token": "EH0IdtUGuoPKQfxql2UmiuiGylu",
+    "block_id": "doxcn9JIncALXAPMC078mM8AU7g",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 2072
+  },
+  "69｜Feishu_Slack_Telegram_WeCom_DingTalk_Wechat Channel 详解.md": {
+    "token": "R63yd6XPyoTIaCxrHgKmzacOyoh",
+    "block_id": "doxcnR63j8BaS1BimaMeH3TFWOg",
+    "body_head": "flowchart TD\n  A[设计目的] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1545
+  },
+  "DeerFlow 2.0 源码分层详解_章节目录.md": {
+    "token": "OOKTdDOiRokb7wx2rFRmQShcyrI",
+    "block_id": "doxcnFoYPcabOgxLfVad12eQ5pc",
+    "body_head": "flowchart TD\n  A[设计动机] --&gt; B[模块职责]\n  ",
+    "status": "ok",
+    "raw_len": 1634
+  }
+}

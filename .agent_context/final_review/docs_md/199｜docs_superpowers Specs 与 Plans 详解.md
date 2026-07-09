@@ -38,11 +38,26 @@ flowchart TD
 | 阅读路径 | 阅读路径：从 URL/API 入口往内追 service，再看数据落到哪里。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+  participant FE as api.ts fetcher
+  participant MW as AuthMiddleware / CSRFMiddleware
+  participant R as routers/thread_runs
+  participant AZ as authz require_permission
+  participant S as services.start_run
+  participant RM as RunManager
+  participant RA as run_agent task
+  participant BR as StreamBridge
+
+  FE->>MW: POST api threads runs stream
+  MW->>R: auth user csrf ok
+  R->>AZ: runs create owner check
+  AZ->>R: access granted
+  R->>S: start_run body thread_id
+  S->>RM: create_or_reject thread_id
+  S->>RA: asyncio.create_task run_agent
+  RA->>BR: publish run events
+  R->>BR: sse_consumer subscribe
+  BR-->>R: SSE frames format_sse
+  R-->>FE: StreamingResponse text event-stream
+  Note over FE,BR: disconnect RunManager cancel or continue
 ```

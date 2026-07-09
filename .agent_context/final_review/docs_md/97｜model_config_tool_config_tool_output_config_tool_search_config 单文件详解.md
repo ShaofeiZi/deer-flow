@@ -40,10 +40,31 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  AppConfig["AppConfig"]
+  ModelConfig["ModelConfig"]
+  ToolConfig["ToolConfig"]
+  ToolOutputConfig["ToolOutputConfig"]
+  ToolSearchConfig["ToolSearchConfig"]
+
+  AppConfig --> ModelConfig
+  AppConfig --> ToolConfig
+  AppConfig --> ToolOutputConfig
+  AppConfig --> ToolSearchConfig
+
+  ModelConfig -->|"model name + use + capabilities"| ModelFactory["model factory"]
+  ToolConfig -->|"name + group + use"| ToolRegistry["tool registry"]
+
+  ToolSearchConfig -->|"enabled=true"| AssembleDeferred["assemble_deferred_tools"]
+  AssembleDeferred --> DeferredCatalog["DeferredToolCatalog"]
+  AssembleDeferred --> ToolSearchTool["tool_search tool"]
+  DeferredCatalog -->|"deferred_names + catalog_hash"| FilterMW["DeferredToolFilterMiddleware"]
+  ToolSearchTool -->|"Command promotes names"| PromotedState["state.promoted"]
+  PromotedState --> FilterMW
+  FilterMW -->|"hides schema until promoted"| ModelFactory
+
+  ToolOutputConfig -->|"threshold + preview chars"| BudgetMW["ToolOutputBudgetMiddleware"]
+  BudgetMW -->|"len over threshold"| Externalize["_externalize to disk"]
+  BudgetMW -->|"disk unavailable"| Fallback["_build_fallback truncate"]
+  Externalize -->|"preview + file ref"| ModelFactory
+  Fallback -->|"head + tail"| ModelFactory
 ```

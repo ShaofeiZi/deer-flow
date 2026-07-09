@@ -38,11 +38,27 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Client
+    participant Router as skills-router
+    participant Storage as LocalSkillStorage
+    participant Parser as parse_skill_file
+    participant Config as ExtensionsConfig
+    participant Cache as prompt-cache-refresh
+
+    Client->>Router: PUT /api/skills/name enabled
+    Router->>Storage: load_skills enabled_only false
+    Storage->>Storage: _iter_skill_files public custom
+    Storage->>Parser: parse_skill_file SKILL.md
+    Parser-->>Storage: Skill with category
+    Storage->>Config: from_file is_skill_enabled
+    Config-->>Storage: enabled bool
+    Storage-->>Router: skills list
+    Router->>Config: get_extensions_config
+    Router->>Config: write extensions_config.json
+    Router->>Config: reload_extensions_config
+    Router->>Cache: refresh_skills_system_prompt_cache
+    Router->>Storage: load_skills reload
+    Storage-->>Router: updated skill
+    Router-->>Client: SkillResponse
 ```

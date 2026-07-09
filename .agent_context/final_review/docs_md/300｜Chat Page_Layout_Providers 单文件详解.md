@@ -39,11 +39,31 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Page as ChatPage
+    participant Chat as useThreadChat
+    participant Stream as useThreadStream
+    participant SDK as useStream SDK
+    participant Cache as queryClient cache
+    participant List as ChatsPage list
+
+    Page->>Chat: reads thread_id path
+    Chat-->>Page: threadId isNewThread isMock
+    Page->>Stream: useThreadStream threadId context
+    Page->>Stream: sendMessage threadId message
+    Stream->>Stream: set optimistic messages
+    Stream->>SDK: thread.submit messages context
+    SDK-->>Stream: onCreated meta
+    Stream->>Cache: upsertThread search infinite
+    Cache-->>List: new thread appears
+    Stream-->>Page: onStart createdThreadId
+    Page->>Page: history.replaceState setThreadId
+    SDK-->>Stream: onUpdateEvent title
+    Stream->>Cache: mapInfiniteThreadsCache title
+    SDK-->>Stream: onCustomEvent task_running
+    Stream->>Stream: updateSubtask latestMessage
+    SDK-->>Stream: onFinish state
+    Stream->>Cache: invalidateQueries threads
+    Stream-->>Page: onFinish state values
+    Page->>Page: showNotification if hidden
 ```

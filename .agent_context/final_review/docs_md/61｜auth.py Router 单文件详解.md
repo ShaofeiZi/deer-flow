@@ -52,11 +52,12 @@ sequenceDiagram
 | 阅读路径 | 先看上游输入，再看核心函数，最后看下游输出和测试验证。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+  [*] --> NoRecord
+  NoRecord --> Tracked: login_local fail
+  Tracked --> Tracked: fail again count under 5
+  Tracked --> Locked: 5th fail lock 300s
+  Tracked --> NoRecord: login_local success
+  Locked --> Locked: request 429 within lock
+  Locked --> NoRecord: lock_until passed evict
 ```

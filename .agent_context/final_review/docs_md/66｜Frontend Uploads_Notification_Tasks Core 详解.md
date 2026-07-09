@@ -51,10 +51,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  TM[ToolMessage content] --> Parse[parseSubtaskResult]
+  Parse --> Struct[readStructuredStatus]
+  Struct --> Has{subagent_status stamped}
+  Has -->|no| FromText[parseFromText]
+  Has -->|yes| Map[STRUCTURED_STATUS_TO_SUBTASK]
+  Map --> Mapped[mapped to completed or failed]
+  FromText --> Prefix{prefix match}
+  Prefix -->|SUCCESS_PREFIX| Completed[completed]
+  Prefix -->|FAILURE/TIMEOUT/CANCELLED/ERROR| Failed[failed]
+  Prefix -->|no match| InProg[in_progress]
+  Mapped --> Update[useUpdateSubtask]
+  Completed --> Update
+  Failed --> Update
+  InProg --> Update
+  Update --> Card[Subtask card pill]
 ```

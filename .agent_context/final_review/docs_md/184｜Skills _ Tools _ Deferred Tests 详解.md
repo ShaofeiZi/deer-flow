@@ -44,11 +44,34 @@ flowchart TD
 | 阅读路径 | 先看入口命令，再看脚本调用链，最后看测试或日志如何证明行为。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant Build as build_deferred_tool_setup
+    participant Cat as DeferredToolCatalog
+    participant MW as DeferredToolFilterMiddleware
+    participant Model as Model bind_tools
+    participant TS as tool_search closure
+    participant State as ThreadState.promoted
+    participant TN as ToolNode
+
+    Build->>Cat: collect is_mcp_tool survivors
+    Cat-->>Build: catalog.hash + names
+    Build-->>MW: deferred_names + catalog_hash
+
+    Note over MW,Model: Turn 1 hidden schemas
+    MW->>MW: _hidden = deferred - promoted
+    MW->>Model: wrap_model_call drops deferred schemas
+    Model->>TS: tool_call query select:mcp_calc
+    TS->>Cat: catalog.search query
+    Cat-->>TS: matched tools
+    TS->>State: Command update promoted names + hash
+    TS-->>Model: ToolMessage with full schemas
+
+    Note over MW,Model: Turn 2 promoted visible
+    State->>MW: merge_promoted hash-scoped
+    MW->>MW: _promoted matches catalog_hash
+    MW->>Model: mcp_calc now bound unsearched stays hidden
+
+    Model->>TN: direct call to hidden deferred tool
+    TN->>MW: wrap_tool_call
+    MW-->>TN: error ToolMessage deferred not promoted
 ```

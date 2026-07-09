@@ -39,10 +39,19 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Start["chat.sh argv"] --> Health["GET gateway /health"]
+  Health --> Check{"HTTP ok?"}
+  Check -->|"no"| Fail["exit 1 unreachable"]
+  Check -->|"yes"| Thread{"THREAD_ID set?"}
+  Thread -->|"no"| Create["POST /threads create thread"]
+  Thread -->|"yes"| Build
+  Create --> Build["build CONTEXT by MODE flash standard pro ultra"]
+  Build --> Body["BODY assistant_id lead_agent stream_mode values messages-tuple"]
+  Body --> Stream["POST /threads/id/runs/stream"]
+  Stream --> SSE["SSE saved to tmpfile"]
+  SSE --> Parse["python3 parse last values event"]
+  Parse --> Extract["extract_response_text ask_clarification or AI"]
+  Extract --> Artifacts["extract_artifacts present_files tool_calls"]
+  Artifacts --> Urls["build artifact_url gateway api threads artifacts"]
+  Urls --> Print["print response text plus artifact URLs"]
 ```

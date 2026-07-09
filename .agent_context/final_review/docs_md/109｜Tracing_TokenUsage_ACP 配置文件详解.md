@@ -44,10 +44,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  CY["config.yaml"] --> AC["AppConfig.from_file"]
+  AC --> APL["_apply_singleton_configs"]
+  APL --> AAL["load_agents_api_config_from_dict"]
+  APL --> ACL["load_acp_config_from_dict"]
+  AC --> TU["token_usage field"]
+  AAL --> AAS["_agents_api_config singleton"]
+  ACL --> ACS["_acp_agents singleton"]
+  AAS --> ROUT["routers/agents.py gate"]
+  ACS --> TOOL["tools/tools.py inject tool"]
+  ENV["LANGSMITH/LANGFUSE env"] --> TC["get_tracing_config"]
+  TC --> TR["TracingConfig singleton"]
+  TR --> TF["tracing/factory.py"]
+  TU --> USE["models.py + client.py"]
 ```

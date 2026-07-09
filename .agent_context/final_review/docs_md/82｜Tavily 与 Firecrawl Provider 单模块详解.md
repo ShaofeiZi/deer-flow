@@ -42,10 +42,25 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Cfg["AppConfig tools use field"] --> Resolve["resolve_variable BaseTool"]
+  Resolve --> TS["tavily web_search_tool"]
+  Resolve --> TF["tavily web_fetch_tool"]
+  Resolve --> FS["firecrawl web_search_tool"]
+  Resolve --> FF["firecrawl web_fetch_tool"]
+
+  TS --> TC["_get_tavily_client api_key"]
+  TC --> TSearch["TavilyClient.search max_results"]
+  TSearch --> TN["normalize title url snippet JSON"]
+
+  TF --> TC
+  TC --> TExtract["TavilyClient.extract"]
+  TExtract --> TRet["title plus raw_content 4096"]
+
+  FS --> FC["_get_firecrawl_client api_key"]
+  FC --> FSearch["FirecrawlApp.search limit"]
+  FSearch --> FN["normalize result.web JSON"]
+
+  FF --> FC
+  FC --> FScrape["FirecrawlApp.scrape markdown"]
+  FScrape --> FRet["title plus markdown 4096"]
 ```

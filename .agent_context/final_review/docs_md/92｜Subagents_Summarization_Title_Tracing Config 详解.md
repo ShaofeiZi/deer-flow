@@ -42,11 +42,25 @@ flowchart TD
 | 阅读路径 | 先看配置默认值，再看它在哪个 middleware 或 factory 被消费，最后用 run events/token usage/tracing 后端验证实际效果。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  YAML["config.yaml"] --> APP["AppConfig.from_file"]
+  APP -->|"load_*_from_dict"| SING["singleton configs"]
+
+  SING --> SUB["subagents_config"]
+  SING --> SUM["summarization_config"]
+  SING --> TIT["title_config"]
+  SING --> TRC["tracing_config"]
+  SING --> TOK["token_usage_config"]
+
+  SUB -->|"get_subagent_config"| REG["subagents/registry"]
+  SUM --> MW["build_middlewares"]
+  TOK --> MW
+  TIT --> MW
+  MW --> SUMM["DeerFlowSummarizationMiddleware"]
+  MW --> TOKM["TokenUsageMiddleware"]
+  MW --> TITM["TitleMiddleware"]
+
+  TRC -->|"build_tracing_callbacks"| FAC["tracing/factory"]
+  FAC -->|"callbacks"| MFACT["models/factory.create_chat_model"]
+  FAC -->|"graph callbacks"| ROOT["lead_agent/agent graph root"]
 ```

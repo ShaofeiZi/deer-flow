@@ -40,11 +40,15 @@ flowchart TD
 | 阅读路径 | 先看入口命令，再看脚本调用链，最后看测试或日志如何证明行为。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+  [*] --> WarmPool: _reconcile_orphans adopts list_running
+  [*] --> Active: _create_sandbox then wait_for_sandbox_ready
+  WarmPool --> Active: _reclaim_warm_pool_sandbox on acquire
+  Active --> Active: _reuse_in_process_sandbox on acquire
+  Active --> WarmPool: release parks container
+  Active --> Destroyed: destroy or _drop_unhealthy_sandbox
+  WarmPool --> Destroyed: _evict_oldest_warm or idle checker
+  Destroyed --> [*]: _backend.destroy stops container
+  note right of WarmPool: test_sandbox_orphan_reconciliation
+  note right of Active: test_aio_sandbox_provider test_aio_sandbox_readiness
 ```

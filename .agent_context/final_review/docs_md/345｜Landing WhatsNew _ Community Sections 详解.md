@@ -40,10 +40,26 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Page["app/page.tsx LandingPage"]
+  WhatsNew["whats-new-section"]
+  Community["community-section"]
+  Section["section.tsx"]
+  Bento["ui/magic-bento"]
+  Features["features BentoCardProps"]
+  Aurora["ui/aurora-text"]
+  Button["ui/button"]
+  Link["next/link GitHub"]
+  Radix["radix GitHubLogoIcon"]
+
+  Page --> WhatsNew
+  Page --> Community
+  WhatsNew --> Section
+  WhatsNew --> Bento
+  WhatsNew --> Features
+  Bento --> Features
+  Community --> Section
+  Community --> Aurora
+  Community --> Button
+  Community --> Radix
+  Button --> Link
 ```

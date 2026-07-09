@@ -73,10 +73,21 @@ stateDiagram-v2
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  TT[task_tool] -->|execute_async| EA[execute_async]
+  EA -->|store PENDING| BT[_background_tasks]
+  EA -->|submit run_task| SP[scheduler_pool ThreadPool 3]
+  SP -->|submit coro| IL[isolated_subagent_loop]
+  IL -->|runs| AX[_aexecute]
+  AX -->|agent.astream| AG[agent.astream]
+  AX -->|checks each chunk| CE[cancel_event]
+  AX -->|try_set_terminal| BT
+  TT -->|poll every 5s| GR[get_background_task_result]
+  GR -->|reads| BT
+  TT -->|status change| WR[writer SSE events]
+  TT -->|terminal| CB[cleanup_background_task]
+  CB -->|removes entry| BT
+  TT -->|poll timeout| RC[request_cancel_background_task]
+  RC -->|sets| CE
+  TT -->|poll timeout| DC[deferred_cleanup task]
+  DC -->|poll then| CB
 ```

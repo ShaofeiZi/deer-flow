@@ -39,10 +39,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  LabelsYml[".github/labels.yml"] --> Script["scripts/sync_labels.py"]
+  LabelSync["label-sync.yml push or dispatch"] --> Script
+  Script --> GhCreate["gh label create --force"]
+  GhCreate --> GHLabels["GitHub labels update-only"]
+
+  TriageEvents["pull_request_target / review / issues events"] --> Triage["triage.yml"]
+  Triage --> PrLabels["pr-labels job area/size/risk"]
+  Triage --> Reviewing["reviewing job on maintainer review"]
+  Triage --> IssueTriage["issue-triage job needs-triage"]
+  PrLabels --> PrState["PR labels reconciled live"]
+  Reviewing --> PrState
+  IssueTriage --> IssueState["issue needs-triage label"]
+
+  TagPush["push tag v*"] --> Container["container.yaml"]
+  Container --> BackendImg["ghcr.io repo-backend backend/Dockerfile"]
+  Container --> FrontendImg["ghcr.io repo-frontend frontend/Dockerfile"]
 ```

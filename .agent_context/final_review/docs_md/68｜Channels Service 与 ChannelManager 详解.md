@@ -48,10 +48,23 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Bus[MessageBus get_inbound] --> Loop[dispatch_loop]
+  Loop --> Chat[_handle_message]
+  Chat --> GetTid[ChannelStore get_thread_id]
+  GetTid --> HasTid{thread_id exists}
+  HasTid -->|no| Create[LangGraph client threads.create]
+  Create --> SetTid[ChannelStore set_thread_id]
+  HasTid -->|yes| Resolve[_resolve_run_params]
+  SetTid --> Resolve
+  Resolve --> Ingest[_ingest_inbound_files]
+  Ingest --> Stream{supports_streaming feishu wecom}
+  Stream -->|yes| RunsStream[client runs.stream]
+  RunsStream --> Chunks[stream chunks]
+  Chunks --> OutPartial[OutboundMessage is_final false]
+  Stream -->|no| RunsWait[client runs.wait reject]
+  RunsWait --> FinalResult[final result]
+  FinalResult --> OutFinal
+  OutPartial --> OutFinal[OutboundMessage is_final true]
+  OutFinal --> Extract[_extract_response_text]
+  Extract --> ChannelSend[Channel.send text then send_file]
 ```

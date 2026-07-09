@@ -44,11 +44,23 @@ flowchart TD
 | 阅读路径 | 阅读路径：先找 route，再找 hook 数据源，最后看组件消费。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+stateDiagram-v2
+    [*] --> getServerSideUser
+    getServerSideUser --> Authenticated : isStaticWebsiteOnly
+    getServerSideUser --> Authenticated : isAuthDisabledMode
+    getServerSideUser --> ConfigError : getGatewayConfig throws
+    getServerSideUser --> NoCookie : no access_token
+    getServerSideUser --> HasCookie : has access_token
+    NoCookie --> SystemSetupRequired : setup-status needs_setup
+    NoCookie --> Unauthenticated : setup-status ok no setup
+    HasCookie --> NeedsSetup : auth/me needs_setup true
+    HasCookie --> Authenticated : auth/me ok
+    HasCookie --> Unauthenticated : 401 or 403
+    HasCookie --> GatewayUnavailable : malformed or fetch error
+    Authenticated --> WorkspaceRedirect : redirect /workspace
+    NeedsSetup --> RenderSetup : AuthProvider with user
+    SystemSetupRequired --> RenderLogin : AuthProvider null
+    Unauthenticated --> RenderLogin : AuthProvider null
+    GatewayUnavailable --> OfflineFallback : GatewayOfflineFallback banner
+    ConfigError --> [*] : throw Error
 ```

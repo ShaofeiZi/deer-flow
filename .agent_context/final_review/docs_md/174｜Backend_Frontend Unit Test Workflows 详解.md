@@ -41,11 +41,30 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  Trigger["push to main / PR opened"] --> DraftGate{"PR not draft"}
+  DraftGate -- "false" --> Skip["job skipped"]
+  DraftGate -- "true" --> BJob["backend-unit-tests job"]
+  DraftGate -- "true" --> FJob["frontend-unit-tests job"]
+  Trigger --> LJob["lint-check workflow"]
+
+  BJob --> UvSync["uv sync --group dev"]
+  UvSync --> DevDeps["dev group pyproject - pytest blockbuster ruff"]
+  DevDeps --> BMake["backend make test"]
+  BMake --> Pytest["uv run pytest tests -v"]
+
+  FJob --> Corepack["corepack pnpm 10.26.2"]
+  Corepack --> PnpmInst["pnpm install --frozen-lockfile"]
+  PnpmInst --> FMake["frontend make test"]
+  FMake --> Vitest["vitest run"]
+  Vitest --> VitestCfg["vitest.config.ts - tests/unit"]
+
+  LJob --> LintBe["lint-backend make lint"]
+  LJob --> LintFe["lint-frontend format lint typecheck build"]
+  LintBe --> Ruff["ruff check + ruff format --check"]
+
+  Pytest --> Check["GitHub required check"]
+  Vitest --> Check
+  Ruff --> Check
+  LintFe --> Check
 ```

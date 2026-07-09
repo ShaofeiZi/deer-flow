@@ -40,11 +40,37 @@ flowchart TD
 | 阅读路径 | 阅读路径：从 URL/API 入口往内追 service，再看数据落到哪里。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant FE as frontend uploads/api.ts uploadFiles
+    participant R as routers/uploads.py upload_files
+    participant Mgr as uploads/manager.py
+    participant FC as utils/file_conversion.py
+    participant SBX as sandbox_provider sandbox.update_file
+    participant UM as UploadsMiddleware before_agent
+
+    FE->>R: POST /api/threads/{id}/uploads FormData files
+    R->>R: _get_upload_limits checks max_files max_file_size max_total_size
+    R->>Mgr: ensure_uploads_dir thread_id
+    Mgr-->>R: uploads_dir Path
+    loop each UploadFile
+        R->>Mgr: normalize_filename then claim_unique_filename
+        R->>Mgr: _write_upload_file_with_limits streams 8192B chunks O_NOFOLLOW 0o600
+        R->>Mgr: upload_virtual_path upload_artifact_url
+        opt auto_convert_documents enabled and ext in CONVERTIBLE_EXTENSIONS
+            R->>FC: convert_file_to_markdown file_path
+            FC-->>R: md_path markdown_virtual_path
+        end
+    end
+    R->>R: _make_file_sandbox_readable on written_paths
+    opt not thread_data_mounts
+        R->>SBX: _make_file_sandbox_writable then update_file virtual_path bytes
+    end
+    R-->>FE: UploadResponse files skipped_files
+
+    Note over UM: later agent run reuses stored files
+    UM->>Mgr: sandbox_uploads_dir scans historical files
+    UM->>FC: extract_outline sibling .md per file
+    UM->>UM: _files_from_kwargs reads additional_kwargs.files
+    UM->>UM: _create_files_message wraps uploaded_files block
+    UM-->>UM: prepends block to last HumanMessage content
 ```

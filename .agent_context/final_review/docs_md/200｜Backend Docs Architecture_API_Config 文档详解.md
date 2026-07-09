@@ -40,11 +40,32 @@ flowchart TD
 | 阅读路径 | 阅读路径：按输入、执行步骤、输出证据三段看。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+sequenceDiagram
+    participant C as Client
+    participant N as Nginx 2026
+    participant AM as AuthMiddleware
+    participant CM as CSRFMiddleware
+    participant TR as thread_runs.py
+    participant SV as services.start_run
+    participant RC as get_run_context
+    participant RM as RunManager
+    participant RA as run_agent
+    participant BR as StreamBridge
+    C->>N: POST /api/langgraph/threads/id/runs/stream
+    N->>AM: rewrite to /api/threads/id/runs
+    AM->>CM: AuthMiddleware pass
+    CM->>TR: CSRFMiddleware pass
+    TR->>SV: create run
+    SV->>RC: get_run_context
+    RC->>RM: checkpointer store run_manager
+    SV->>RM: create_or_reject
+    RM-->>SV: RunRecord
+    SV->>RA: asyncio.create_task make_lead_agent
+    RA->>BR: publish SSE events
+    TR->>BR: sse_consumer subscribe
+    BR-->>TR: values messages-tuple
+    BR-->>TR: HEARTBEAT_SENTINEL
+    BR-->>TR: END_SENTINEL
+    TR-->>C: format_sse frames
+    Note over C,TR: on_disconnect cancel calls run_mgr.cancel
 ```

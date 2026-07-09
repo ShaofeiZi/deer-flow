@@ -46,10 +46,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Page["blog page.tsx"] --> I18n["getI18n server"]
+  I18n --> Pref["getPreferredBlogLang"]
+  Page --> All["getAllPosts"]
+  All --> En["getPageMap en posts"]
+  All --> Zh["getPageMap zh posts"]
+  En --> Coll["collectLocalizedBlogPosts"]
+  Zh --> Coll
+  Coll --> Merge["mergePostsBySlug"]
+  Merge --> Sel["selectPreferredLanguage"]
+  Sel --> Posts["merged BlogPost list"]
+  Posts --> Idx["getBlogIndexData"]
+  Page --> Mdx["loadBlogPage importPage"]
+  Idx --> Sidebar["pageMap sidebar"]
 ```

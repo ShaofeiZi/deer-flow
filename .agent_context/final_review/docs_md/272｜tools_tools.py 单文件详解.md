@@ -41,10 +41,30 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Start["get_available_tools groups, subagent_enabled, app_config"] --> Resolve["get_app_config / AppConfig"]
+  Resolve --> Filter["filter config.tools by groups"]
+  Filter --> Bash{"is_host_bash_allowed?"}
+  Bash -- "False" --> Strip["drop host-bash via _is_host_bash_tool"]
+  Bash -- "True" --> Load["resolve_variable cfg.use to BaseTool"]
+  Strip --> Load
+  Load --> Warn["warn cfg.name vs tool.name mismatch"]
+  Warn --> Sync1["_ensure_sync_invocable_tool"]
+  Sync1 --> Builtin["BUILTIN_TOOLS"]
+  Builtin --> Skill{"skill_evolution.enabled?"}
+  Skill -- "True" --> AddSkill["skill_manage_tool"]
+  Skill -- "False" --> Sub{"subagent_enabled?"}
+  AddSkill --> Sub
+  Sub -- "True" --> AddTask["SUBAGENT_TOOLS = task_tool"]
+  Sub -- "False" --> Vision{"model.supports_vision?"}
+  AddTask --> Vision
+  Vision -- "True" --> AddView["view_image_tool"]
+  Vision -- "False" --> MCP{"include_mcp?"}
+  AddView --> MCP
+  MCP -- "True" --> Cached["get_cached_mcp_tools + tag_mcp_tool"]
+  MCP -- "False" --> ACP{"acp_agents?"}
+  Cached --> ACP
+  ACP -- "True" --> AddACP["build_invoke_acp_agent_tool"]
+  ACP -- "False" --> Dedup
+  AddACP --> Dedup["dedup by t.name, config wins"]
+  Dedup --> Return["return unique_tools"]
 ```

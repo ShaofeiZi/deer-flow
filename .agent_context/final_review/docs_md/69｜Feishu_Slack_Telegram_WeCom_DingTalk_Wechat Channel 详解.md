@@ -47,10 +47,22 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[模块职责]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  Svc[ChannelService.start] --> Loop[ChannelManager._dispatch_loop]
+  Svc --> Chan[Channel.start - feishu slack discord telegram wecom dingtalk wechat]
+  Chan -->|publish_inbound| Bus[MessageBus inbound queue]
+  Bus --> Loop
+  Loop --> Hdr[_handle_message semaphore]
+  Hdr -->|COMMAND| Cmd[_handle_command - new status models memory help]
+  Hdr -->|CHAT| Chat[_handle_chat]
+  Chat --> Store[ChannelStore get or create thread]
+  Store --> Files[receive_file and ingest_inbound_files]
+  Files --> Stream{_channel_supports_streaming}
+  Stream -->|feishu wecom| WaitS[runs.stream]
+  Stream -->|others| WaitW[runs.wait]
+  WaitS --> Prep[extract response text and artifacts]
+  WaitW --> Prep
+  Prep -->|publish_outbound| Out[MessageBus outbound]
+  Cmd --> Out
+  Out --> CB[Channel._on_outbound]
+  CB --> Send[send and send_file to platform]
 ```

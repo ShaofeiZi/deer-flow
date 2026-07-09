@@ -38,10 +38,25 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+  A["SKILL.md workflow"] --> B["Step1 chart selection"]
+  B --> C{"data feature"}
+  C -->|"time series"| D1["generate_line_chart"]
+  C -->|"comparison"| D2["generate_bar_chart"]
+  C -->|"map"| D3["generate_district_map"]
+  C -->|"other 23 tools"| D4["generate_*_chart"]
+  D1 --> E["Step2 read references/tool.md"]
+  D2 --> E
+  D3 --> E
+  D4 --> E
+  E --> F["build args payload"]
+  F --> G["node scripts/generate.js"]
+  G --> H["main parse spec"]
+  H --> I["CHART_TYPE_MAP tool lookup"]
+  I --> J{"isMapChartTool"}
+  J -->|"no"| K["generateChartUrl"]
+  J -->|"yes"| L["generateMap + SERVICE_ID"]
+  K --> M["httpPost gpt-vis"]
+  L --> M
+  M --> N["data.resultObj"]
+  N --> O["return image URL and args"]
 ```

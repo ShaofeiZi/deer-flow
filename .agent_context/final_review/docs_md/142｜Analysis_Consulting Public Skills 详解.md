@@ -37,11 +37,22 @@ flowchart TD
 | 阅读路径 | 先读 skill frontmatter 和触发场景，再读正文 workflow，最后检查 references/templates/scripts 是否支撑描述。 |
 
 ```mermaid
-flowchart TD
-  A[设计目的] --> B[解决的问题]
-  B --> C[收益]
-  B --> D[代价]
-  C --> E[重点代码]
-  D --> E
-  E --> F[阅读路径]
+flowchart LR
+  SM["surprise-me SKILL.md"] -->|"discover skills"| CA1["consulting-analysis Phase 1"]
+  CA1 -->|"data requirements"| DA["analyze.py"]
+  DA --> INS["action inspect"]
+  DA --> QRY["action query"]
+  DA --> SUM["action summary"]
+  DA -.->|"SHA256 cache"| DDB["DuckDB cache"]
+  INS --> DS["Data Summary"]
+  QRY --> DS
+  SUM --> DS
+  CA1 -->|"viz plan"| CV["generate.js"]
+  CV --> REF["references specs"]
+  CV -->|"HTTP POST"| GV["gpt-vis"]
+  GV --> URL["chart image URL"]
+  DS --> PKG["Data Package"]
+  URL --> PKG
+  PKG --> CA2["consulting-analysis Phase 2"]
+  CA2 --> RPT["final report MD"]
 ```
